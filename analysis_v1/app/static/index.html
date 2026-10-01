@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CourtVision 历史 NBA 数据分析与赛后复盘本地应用">
+  <title>CourtVision | Evidence Arena</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <div class="arena-lights" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="CourtVision 首页">
+      <span class="brand-mark">CV</span>
+      <span><strong>COURTVISION</strong><small>EVIDENCE ARENA / V1</small></span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav">菜单</button>
+    <nav id="main-nav" aria-label="主导航">
+      <a href="#home">首页</a>
+      <a href="#overview">数据总览</a>
+      <a href="#predictions">预测与误差</a>
+      <a href="#bad-cases">Bad Case</a>
+      <a href="#series">旗舰案例</a>
+      <a href="#methodology">方法与可信度</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="page active" id="home" data-page="home">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">HISTORICAL HOLDOUT / LOCAL DEMO</p>
+          <h1>让每个结论<br><em>回到证据席。</em></h1>
+          <p class="lede">CourtVision 把比赛、球队状态、冻结预测、市场基准和赛后误差放进同一条可追溯分析链，服务篮球内容创作者的选题、证据整理与复盘。</p>
+          <div class="hero-actions">
+            <a class="primary-action" href="#predictions">查看预测误差</a>
+            <a class="text-action" href="#methodology">先看限制</a>
+          </div>
+        </div>
+        <div class="scoreboard" aria-label="CourtVision 核心数据范围">
+          <div class="scoreboard-head"><span>DATA CLOCK</span><span class="live-dot">FIXED</span></div>
+          <div class="score-row">
+            <div><span class="score-label">HISTORICAL GAMES</span><strong id="hero-games">15,472</strong></div>
+            <div class="shot-clock"><span>SQL</span><strong>16</strong><small>QUERIES</small></div>
+          </div>
+          <div class="score-meta">
+            <span><b id="hero-seasons">12</b> SEASONS</span>
+            <span><b id="hero-predictions">1,322</b> HOLDOUTS</span>
+            <span><b>0</b> LIVE CLAIMS</span>
+          </div>
+          <div class="possession-rail"><span>GAMES</span><i style="--progress:100%"></i><span>ERRORS</span></div>
+        </div>
+      </div>
+
+      <div class="truth-strip" role="note">
+        <strong>当前证据状态</strong>
+        <span>历史固定数据</span>
+        <span>没有真实新赛季前向验证</span>
+        <span>市场仅作基准</span>
+        <span>不提供投注建议</span>
+      </div>
+
+      <div class="module-grid">
+        <a class="module-card court-lines" href="#overview"><span>比赛与球队</span><strong>数据总览</strong><p>12 个赛季的比赛量、主客场、得失分和滚动状态。</p></a>
+        <a class="module-card" href="#predictions"><span>冻结测试季</span><strong>误差分析</strong><p>准确率、Log Loss、分差与总分尾部误差。</p></a>
+        <a class="module-card" href="#bad-cases"><span>赛后复核</span><strong>Bad Case</strong><p>把最难解释的比赛送入透明人工复核队列。</p></a>
+        <a class="module-card" href="#methodology"><span>可信度门槛</span><strong>方法与限制</strong><p>明确赛前与赛后字段、样本量和市场时间缺口。</p></a>
+      </div>
+    </section>
+
+    <section class="page" id="overview" data-page="overview">
+      <div class="section-head">
+        <div><p class="eyebrow">LEAGUE ROOM</p><h2>NBA 数据总览</h2></div>
+        <p>观察历史覆盖与球队描述性表现。跨赛季聚合包含阵容、规则和联盟环境变化。</p>
+      </div>
+      <div class="filter-bar">
+        <label>高亮赛季<select id="season-select"></select></label>
+        <label>球队<select id="team-select"></select></label>
+      </div>
+      <div class="metric-row" id="overview-metrics"></div>
+      <div class="analysis-grid">
+        <article class="panel wide"><div class="panel-head"><h3>赛季比赛覆盖</h3><span>已完成比赛</span></div><div id="season-chart" class="bar-chart"></div></article>
+        <article class="panel"><div class="panel-head"><h3>球队档案</h3><span id="team-context">全历史</span></div><div id="team-profile"></div></article>
+        <article class="panel"><div class="panel-head"><h3>最新滚动状态</h3><span>含当前比赛的赛后窗口</span></div><div id="recent-form"></div></article>
+      </div>
+    </section>
+
+    <section class="page" id="predictions" data-page="predictions">
+      <div class="section-head">
+        <div><p class="eyebrow">MODEL REVIEW</p><h2>预测与误差分析</h2></div>
+        <p>评估对象是 2025 赛季冻结历史测试集。预测记录没有真实生成时间与 feature cutoff。</p>
+      </div>
+      <div class="metric-row" id="model-metrics"></div>
+      <div class="analysis-grid">
+        <article class="panel wide"><div class="panel-head"><h3>置信度与实际准确率</h3><span>样本量随柱展示</span></div><div id="confidence-chart" class="confidence-chart"></div></article>
+        <article class="panel"><div class="panel-head"><h3>分差误差</h3><span>MAE</span></div><div id="margin-error"></div></article>
+        <article class="panel"><div class="panel-head"><h3>总分误差</h3><span>MAE</span></div><div id="total-error"></div></article>
+        <article class="panel wide"><div class="panel-head"><h3>滚动赛季稳定性</h3><span>锁定配置</span></div><div id="stability-table" class="data-table-wrap"></div></article>
+        <article class="panel"><div class="panel-head"><h3>市场同样本对照</h3><span>1,322 场</span></div><div id="market-card"></div></article>
+      </div>
+    </section>
+
+    <section class="page" id="bad-cases" data-page="bad-cases">
+      <div class="section-head">
+        <div><p class="eyebrow">POSTGAME FILM ROOM</p><h2>Bad Case 浏览</h2></div>
+        <p>排名负责发现问题，无法自动证明原因。任何伤病、轮换、战术或疲劳解释都需要额外来源。</p>
+      </div>
+      <div class="filter-bar"><label>排序维度<select id="badcase-sort"><option value="margin">分差误差</option><option value="total">总分误差</option><option value="win">胜负 Log Loss</option></select></label></div>
+      <div id="badcase-grid" class="badcase-grid"></div>
+    </section>
+
+    <section class="page" id="series" data-page="series">
+      <div class="section-head">
+        <div><p class="eyebrow">FLAGSHIP CASE</p><h2>湖人对火箭系列赛证据包</h2></div>
+        <p>页面只呈现已核验记录，并将赛前已知、临场新增和赛后才知道的信息分层。</p>
+      </div>
+      <div id="series-content" class="series-content"></div>
+    </section>
+
+    <section class="page" id="methodology" data-page="methodology">
+      <div class="section-head">
+        <div><p class="eyebrow">TRUST PROTOCOL</p><h2>方法与可信度</h2></div>
+        <p>可信度来自时间边界、数据质量、同样本比较和反例记录。界面完成度不能替代这些门槛。</p>
+      </div>
+      <div class="method-grid">
+        <article><span class="method-id">PRE</span><h3>赛前可用</h3><p>Elo、休息天数和 rolling 特征已通过目标场 shift 与时间切分守卫。历史预测记录仍缺少持久化生成时间。</p></article>
+        <article><span class="method-id post">POST</span><h3>赛后才出现</h3><p>比分、胜负、绝对误差、Bad Case 排名和人工复核分数只用于赛后分析。</p></article>
+        <article><span class="method-id market">MKT</span><h3>市场基准</h3><p>盘口没有可靠 capture timestamp 或 opening/closing 标签。页面不把分歧解释成价值。</p></article>
+        <article><span class="method-id infra">DB</span><h3>当前运行底座</h3><p id="backend-note">SQLite fallback。DuckDB 依赖本轮下载受阻，相关构建入口已保留。</p></article>
+      </div>
+      <article class="panel warning-panel"><div class="panel-head"><h3>仍存在的质量警告</h3><span>非阻断</span></div><div id="quality-list"></div></article>
+      <article class="panel limits-panel"><div class="panel-head"><h3>不可越过的表述边界</h3><span>V1</span></div><ul id="limit-list"></ul></article>
+    </section>
+  </main>
+
+  <footer><span>COURTVISION V1 / PRIVATE LOCAL RESEARCH</span><span>数据权利与前向时间语义仍是公开发布门槛</span></footer>
+  <div id="error-banner" role="alert" hidden>应用数据未加载。请先运行 export_app_data.py。</div>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+# Local credentials
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+
+# Datasets, databases, models, and local state
+/data/raw/
+/data/processed/
+/v2/data/
+*.sqlite
+*.sqlite3
+*.db
+*.db-*
+*.parquet
+*.pkl
+*.joblib
+*.bin
+
+# Runtime outputs, requests, traces, and logs
+/output/
+/outputs/
+**/output/
+**/outputs/
+**/agent_runs/
+**/snapshots/
+**/checkpoints/
+**/calls/
+*.log
+*.xml
+
+# Browser captures and unreviewed visual assets
+.playwright-cli/
+docs/qa/
+**/screenshots/
+v2/frontend/static/logos/

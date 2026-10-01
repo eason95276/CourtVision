@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="第25秒，看见比分之外。NBA 赛前预测与比赛理解。"
+    />
+    <meta name="color-scheme" content="dark" />
+    <title>第25秒 · 看见比分之外</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="product.css" />
+    <link rel="stylesheet" href="editorial.css" />
+    <link rel="stylesheet" href="final.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到主要内容</a>
+    <div class="brand-intro" id="brand-intro" aria-hidden="true">
+      <div class="intro-number"><span>24</span><span>25</span></div>
+      <strong>第25秒</strong>
+      <p>看见比分之外</p>
+    </div>
+    <div class="atmosphere" aria-hidden="true">
+      <i class="away-glow"></i><i class="home-glow"></i
+      ><span class="court-line"></span>
+    </div>
+
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="第25秒 首页">
+        <span class="brand-mark" aria-hidden="true">25</span>
+        <span class="brand-divider" aria-hidden="true"></span>
+        <strong>第25秒</strong>
+        <small class="brand-slogan">看见比分之外</small>
+      </a>
+      <div class="topbar-actions">
+        <a class="nav-current" href="#home">比赛</a>
+        <label class="team-picker" for="favorite-team">
+          <span>我的主队</span>
+          <select
+            id="favorite-team"
+            aria-label="我的主队"
+            aria-describedby="favorite-hint"
+          >
+            <option value="">暂不选择</option>
+          </select>
+        </label>
+        <span id="favorite-hint" class="sr-only"
+          >选择后只会轻量改变强调色，并优先显示主队比赛。</span
+        >
+      </div>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <section
+        class="view is-active"
+        id="home-view"
+        aria-labelledby="home-title"
+      >
+        <div class="home-hero">
+          <h1 id="home-title" class="sr-only">第25秒 NBA 比赛分析</h1>
+          <div class="home-intro">
+            <p>比赛日</p>
+            <p id="coverage-note" class="coverage-note"></p>
+          </div>
+        </div>
+
+        <div class="section-toolbar">
+          <div>
+            <p class="section-kicker">NBA · 赛前</p>
+            <h2>接下来的比赛</h2>
+          </div>
+          <div
+            id="date-filters"
+            class="segmented"
+            role="group"
+            aria-label="按比赛日筛选"
+          ></div>
+        </div>
+
+        <div id="games-grid" class="games-grid" aria-live="polite"></div>
+        <div id="games-empty" class="empty-state" hidden>
+          <strong>这个比赛日还没有可展示的预测</strong>
+          <p>赛程仍会保留，预测快照可用后再显示。</p>
+        </div>
+        <p id="product-notice" class="product-notice" role="note"></p>
+      </section>
+
+      <section
+        class="view"
+        id="detail-view"
+        aria-labelledby="detail-title"
+        hidden
+      >
+        <div class="match-environment" aria-hidden="true">
+          <span class="match-field match-field-away"></span>
+          <span class="match-field match-field-home"></span>
+          <span class="match-environment-court"></span>
+        </div>
+        <h1 id="detail-title" class="sr-only">比赛详情</h1>
+        <a class="back-link" href="#home" id="back-home">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m14.5 5-7 7 7 7" />
+          </svg>
+          返回比赛
+        </a>
+
+        <article class="match-hero">
+          <div class="match-meta">
+            <span id="detail-time"></span><span id="detail-status"></span
+            ><span id="prediction-updated" hidden></span>
+          </div>
+          <div class="matchup-stage">
+            <div class="team-stage" id="away-team"></div>
+            <div class="prediction-focus">
+              <p>预测</p>
+              <strong id="predicted-winner"></strong>
+              <div
+                class="probability-lens"
+                id="probability-lens"
+                aria-label="预测胜率"
+              >
+                <span id="predicted-probability"></span>
+              </div>
+              <small>胜率</small>
+            </div>
+            <div class="team-stage" id="home-team"></div>
+          </div>
+          <div class="primary-numbers">
+            <div>
+              <span>预计分差</span><strong id="expected-margin"></strong>
+            </div>
+            <div class="quiet-number">
+              <span>预计总分</span><strong id="expected-total"></strong>
+            </div>
+          </div>
+          <div id="hero-market" class="hero-market"></div>
+        </article>
+        <aside id="baseline-note" class="baseline-note" hidden></aside>
+        <button class="ai-action" id="ai-analysis" type="button">
+          <span class="analyst-symbol" aria-hidden="true">24 → 25</span
+          ><span
+            ><strong>阅读第25秒分析</strong
+            ><small>从数据进入这场比赛的判断</small></span
+          >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m9 6 6 6-6 6" />
+          </svg>
+        </button>
+
+        <section
+          class="detail-section matchup-history-section"
+          id="matchup-history-section"
+          aria-labelledby="matchup-history-title"
+          hidden
+        >
+          <div class="section-title">
+            <div>
+              <p>直接交锋</p>
+              <h2 id="matchup-history-title">上次他们怎么打</h2>
+            </div>
+          </div>
+          <div id="matchup-history" class="matchup-history-content"></div>
+        </section>
+
+        <section
+          class="detail-section intelligence-section"
+          aria-labelledby="intelligence-title"
+        >
+          <div class="section-title">
+            <div>
+              <p>比赛开始前</p>
+              <h2 id="intelligence-title">赛前情报</h2>
+            </div>
+          </div>
+          <div class="intelligence-grid">
+            <article class="context-card" id="lineup-context"></article>
+            <article class="context-card" id="injury-context"></article>
+            <article class="context-card" id="schedule-context"></article>
+          </div>
+        </section>
+
+        <section
+          class="detail-section factors-section"
+          aria-labelledby="factors-title"
+        >
+          <div class="section-title">
+            <div>
+              <p>赛前数据线索</p>
+              <h2 id="factors-title">赛前看点</h2>
+            </div>
+          </div>
+          <div id="key-factors" class="factor-list"></div>
+        </section>
+
+        <section
+          class="detail-section relationship-section"
+          aria-labelledby="relationship-title"
+        >
+          <div class="section-title">
+            <div>
+              <p>当前判断</p>
+              <h2 id="relationship-title">第25秒预测</h2>
+            </div>
+          </div>
+          <div id="prediction-relationship" class="relationship-flow"></div>
+        </section>
+
+        <section
+          class="detail-section players-section"
+          aria-labelledby="players-title"
+        >
+          <div class="section-title">
+            <div>
+              <p>谁最可能改变比赛</p>
+              <h2 id="players-title">关键球员</h2>
+            </div>
+          </div>
+          <div id="key-players" class="player-grid"></div>
+        </section>
+
+        <section
+          class="detail-section team-data-section"
+          aria-labelledby="team-data-title"
+        >
+          <div class="section-title">
+            <div>
+              <p>球队面貌</p>
+              <h2 id="team-data-title">核心数据</h2>
+            </div>
+          </div>
+          <div id="team-data" class="team-data-grid"></div>
+        </section>
+
+        <section
+          class="detail-section roster-section"
+          aria-labelledby="roster-title"
+        >
+          <div class="section-title">
+            <div>
+              <p>球队官方页面记录</p>
+              <h2 id="roster-title">完整名单</h2>
+            </div>
+          </div>
+          <p id="roster-notice" class="factor-boundary"></p>
+          <div id="roster-context" class="roster-grid"></div>
+        </section>
+
+        <section class="detail-section postgame-entry" id="postgame-entry">
+          <div><p>预测之后</p><h2>赛后复盘</h2></div>
+          <p id="postgame-copy">比赛结束后，这里将回看赛前判断对了什么、错了什么。</p>
+          <button type="button" disabled>等待比赛结束</button>
+        </section>
+
+        <details class="technical-details">
+          <summary>方法与数据说明</summary>
+          <div id="technical-content"></div>
+        </details>
+      </section>
+
+      <section id="app-error" class="empty-state app-error" hidden role="alert">
+        <strong>页面数据没有加载成功</strong>
+        <p>请通过本地服务器打开页面，并重新刷新。</p>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <span>25｜第25秒</span><span>看见比分之外</span>
+    </footer>
+
+    <div class="sheet-layer" id="ai-sheet" hidden>
+      <button
+        class="sheet-backdrop"
+        type="button"
+        aria-label="返回比赛"
+      ></button>
+      <section
+        class="analysis-sheet"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="sheet-title"
+        tabindex="-1"
+      >
+        <div class="sheet-handle" aria-hidden="true"></div>
+        <header>
+          <div>
+            <p>25｜第25秒</p>
+            <h2 id="sheet-title">比赛分析</h2>
+            <small id="sheet-matchup"></small>
+          </div>
+          <button
+            class="icon-button"
+            id="close-sheet"
+            type="button"
+            aria-label="关闭"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m6 6 12 12M18 6 6 18" />
+            </svg>
+          </button>
+        </header>
+        <div
+          id="sheet-content"
+          class="sheet-content"
+          aria-live="polite"
+          aria-busy="false"
+        ></div>
+      </section>
+    </div>
+
+    <script src="app.js" defer></script>
+    <script src="editorial.js" defer></script>
+  </body>
+</html>
