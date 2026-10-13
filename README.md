@@ -12,7 +12,7 @@ The website reuses the real product frontend. Generation stays local, not on vis
 clicks. 中文 NBA 分析产品，配套可追溯评测工程；胜负、让分和大小分分开解释，
 缺失信息保持未知，失败和修复尝试不被成功案例掩盖。
 
-![CourtVision product](docs/images/product-desktop.png)
+![CourtVision product — actual public deployment](docs/images/live-product-desktop.png)
 
 ## Architecture
 
