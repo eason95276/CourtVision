@@ -1,0 +1,11 @@
+{
+  "seed": 20261012,
+  "representative": 240,
+  "challenge": 60,
+  "total": 300,
+  "phase_definition": "Mean of the two teams' observed current-season games before target, plus 1: early <=20, mid >20 and <=60, late >60. Observed archive ordinal, not an official ordinal.",
+  "outcome_strata": "Sampling backend only: abs margin <=5 / <=14 / >14; never model-visible.",
+  "performance_independent": true,
+  "model_outputs_consulted": false,
+  "risk_anchors": 0
+}

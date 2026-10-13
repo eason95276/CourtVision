@@ -504,12 +504,21 @@ main {
 .prediction-focus > small {
   color: var(--tertiary);
 }
+.primary-judgment {
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+}
+.primary-judgment-title {
+  margin: 0 0 9px;
+  color: var(--tertiary);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-align: center;
+}
 .primary-numbers {
   display: flex;
   justify-content: center;
   gap: 48px;
-  border-top: 1px solid var(--line);
-  padding-top: 16px;
 }
 .primary-numbers > div {
   display: flex;
@@ -1237,7 +1246,6 @@ details[open] > summary:after {
   }
   .primary-numbers {
     gap: 20px;
-    padding-top: 15px;
   }
   .primary-numbers > div {
     display: block;
@@ -1379,3 +1387,9 @@ details[open] > summary:after {
     --tertiary: #c3c8d0;
   }
 }
+
+.player-grid.is-single-side { grid-template-columns: minmax(0, 1fr); }
+#injury-context details { padding: 6px 0; border-top: 1px solid var(--line); }
+#injury-context summary { min-height: 44px; display: list-item; padding: 10px 0; cursor: pointer; line-height: 1.5; }
+#injury-context details p { overflow-wrap: anywhere; }
+#injury-context details a { display: inline-block; padding: 8px 0; }

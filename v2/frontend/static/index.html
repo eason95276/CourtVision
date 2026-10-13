@@ -80,10 +80,20 @@
 
         <div id="games-grid" class="games-grid" aria-live="polite"></div>
         <div id="games-empty" class="empty-state" hidden>
-          <strong>这个比赛日还没有可展示的预测</strong>
-          <p>赛程仍会保留，预测快照可用后再显示。</p>
+          <strong>这个比赛日暂无比赛</strong>
+          <p>今天和明天的赛程会分开显示；预测仅显示已正式发布的版本。</p>
         </div>
         <p id="product-notice" class="product-notice" role="note"></p>
+        <section id="recent-result-section" class="recent-result-section" hidden
+          aria-labelledby="recent-result-title">
+          <div class="section-toolbar">
+            <div>
+              <p class="section-kicker">上一比赛日 · 已结束</p>
+              <h2 id="recent-result-title">最近赛果</h2>
+            </div>
+          </div>
+          <div id="recent-result-grid" class="games-grid"></div>
+        </section>
       </section>
 
       <section
@@ -113,7 +123,7 @@
           <div class="matchup-stage">
             <div class="team-stage" id="away-team"></div>
             <div class="prediction-focus">
-              <p>预测</p>
+              <p>赛前预测</p>
               <strong id="predicted-winner"></strong>
               <div
                 class="probability-lens"
@@ -126,15 +136,19 @@
             </div>
             <div class="team-stage" id="home-team"></div>
           </div>
-          <div class="primary-numbers">
-            <div>
-              <span>预计分差</span><strong id="expected-margin"></strong>
-            </div>
-            <div class="quiet-number">
-              <span>预计总分</span><strong id="expected-total"></strong>
+          <div class="primary-judgment">
+            <p class="primary-judgment-title" id="primary-judgment-title">第25秒判断</p>
+            <div class="primary-numbers">
+              <div>
+                <span>分差</span><strong id="expected-margin"></strong>
+              </div>
+              <div class="quiet-number">
+                <span>总分</span><strong id="expected-total"></strong>
+              </div>
             </div>
           </div>
           <div id="hero-market" class="hero-market"></div>
+          <div id="hero-market-source" class="market-reference-source" hidden></div>
         </article>
         <aside id="baseline-note" class="baseline-note" hidden></aside>
         <button class="ai-action" id="ai-analysis" type="button">
@@ -156,8 +170,7 @@
         >
           <div class="section-title">
             <div>
-              <p>直接交锋</p>
-              <h2 id="matchup-history-title">上次他们怎么打</h2>
+              <h2 id="matchup-history-title">历史交锋</h2>
             </div>
           </div>
           <div id="matchup-history" class="matchup-history-content"></div>
@@ -169,7 +182,6 @@
         >
           <div class="section-title">
             <div>
-              <p>比赛开始前</p>
               <h2 id="intelligence-title">赛前情报</h2>
             </div>
           </div>
@@ -182,6 +194,7 @@
 
         <section
           class="detail-section factors-section"
+          id="factors-section"
           aria-labelledby="factors-title"
         >
           <div class="section-title">
@@ -191,19 +204,6 @@
             </div>
           </div>
           <div id="key-factors" class="factor-list"></div>
-        </section>
-
-        <section
-          class="detail-section relationship-section"
-          aria-labelledby="relationship-title"
-        >
-          <div class="section-title">
-            <div>
-              <p>当前判断</p>
-              <h2 id="relationship-title">第25秒预测</h2>
-            </div>
-          </div>
-          <div id="prediction-relationship" class="relationship-flow"></div>
         </section>
 
         <section
@@ -225,30 +225,19 @@
         >
           <div class="section-title">
             <div>
-              <p>球队面貌</p>
               <h2 id="team-data-title">核心数据</h2>
             </div>
           </div>
           <div id="team-data" class="team-data-grid"></div>
         </section>
 
-        <section
-          class="detail-section roster-section"
-          aria-labelledby="roster-title"
-        >
-          <div class="section-title">
-            <div>
-              <p>球队官方页面记录</p>
-              <h2 id="roster-title">完整名单</h2>
-            </div>
-          </div>
-          <p id="roster-notice" class="factor-boundary"></p>
-          <div id="roster-context" class="roster-grid"></div>
-        </section>
-
         <section class="detail-section postgame-entry" id="postgame-entry">
           <div><p>预测之后</p><h2>赛后复盘</h2></div>
-          <p id="postgame-copy">比赛结束后，这里将回看赛前判断对了什么、错了什么。</p>
+          <div class="postgame-entry-summary">
+            <strong id="postgame-score" hidden></strong>
+            <p id="postgame-copy">比赛结束后，这里将回看赛前判断对了什么、错了什么。</p>
+            <p id="postgame-preview" hidden></p>
+          </div>
           <button type="button" disabled>等待比赛结束</button>
         </section>
 

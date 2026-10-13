@@ -14,11 +14,13 @@ from urllib.request import urlopen
 import pytest
 
 from v2.pregame_system.prediction_versions import PredictionVersionStore
+from v2.pregame_system.editorial_test_helpers import protocol_trace
 
 from . import analysis_service, server
 from .analysis_service import SavedGameAnalysisService
 from .export_data import STATIC_ROOT, build_app_data
 from .prediction_version_service import PredictionVersionService
+from .test_pregame_scheduler import no_external_services  # autouse: only loopback HTTP is allowed
 
 
 NODE_FRONTEND_PROBE = r"""
@@ -37,7 +39,8 @@ const functions = names.map((name) => {
 });
 const state = {
   data: {games: [game]}, currentAnalyses: new Map(),
-  predictionStates: new Map(), aiFailures: new Set(),
+  predictionStates: new Map(), factViews: new Map(), aiFailures: new Set(),
+  editorialOverlays: new Map(), marketCache: new Map(), marketFetchedAt: new Map(),
 };
 const context = vm.createContext({
   state,
@@ -51,6 +54,7 @@ const postPrediction = context.activePrediction(game);
 const postArticle = state.currentAnalyses.get(game.id)?.judgment?.analysis_article;
 state.currentAnalyses.clear();
 state.predictionStates.clear();
+state.factViews.clear();
 (async () => {
   await context.loadCurrentAnalyses();
   const restored = state.currentAnalyses.get(game.id);
@@ -69,6 +73,10 @@ state.predictionStates.clear();
     version_id: 'other-version', version: {...version, version_id: 'other-version', game_id: 'other-game'}};
   const lowerAccepted = context.acceptPredictionSelection(game.id, lowerRevision);
   const incompatiblePostAccepted = context.acceptPredictionSelection(game.id, fakeNewer);
+  const badFactView = {...selection, fact_view: {...selection.fact_view, source_payload_sha256: '0'.repeat(64)}};
+  const badFactViewVersionAccepted = context.acceptPredictionSelection(game.id, badFactView);
+  const badFactViewIgnored = !state.factViews.has(game.id);
+  context.acceptPredictionSelection(game.id, selection);
   console.log(JSON.stringify({
     postAccepted, postVersionId: postPrediction?.version_id, postArticle,
     restoredVersionId: restored?.version_id,
@@ -78,6 +86,10 @@ state.predictionStates.clear();
     displayedMargin: displayed?.expected_home_margin,
     displayedTotal: displayed?.expected_total,
     selectionVersionId: state.predictionStates.get(game.id)?.version_id,
+    factViewVersionId: state.factViews.get(game.id)?.version_id,
+    factViewOrigin: state.factViews.get(game.id)?.origin,
+    factViewHash: state.factViews.get(game.id)?.source_payload_sha256,
+    badFactViewVersionAccepted, badFactViewIgnored,
     oldCompatible: context.analysisCompatible(game, old),
     oldStoredCompatible: context.analysisCompatible(game, oldStored),
     badCutoffCompatible: context.analysisCompatible(game, badCutoff),
@@ -100,16 +112,31 @@ class OfflineTwoStageAnalyst:
         class Judgment:
             def model_dump(self):
                 return {
+                    "winner_lean": "home", "side_lean": "no_lean", "total_lean": "no_lean",
+                    "confidence": "low", "supporting_evidence_ids": [], "conflicting_evidence_ids": [],
+                    "baseline_agreement": {"pure": "agree", "market": "not_applicable", "residual": "not_applicable"},
+                    "subjective_rationale": "Offline fixture judgment.",
+                    "pregame_story": {"title": "Offline fixture", "statement": "Offline fixture story.",
+                        "classification": "subjective_analysis", "evidence_ids": []},
+                    "watch_themes": [
+                        {"title": "Offline theme one", "statement": "Offline fixture theme.",
+                         "classification": "subjective_analysis", "evidence_ids": []},
+                        {"title": "Offline theme two", "statement": "Another fixture theme.",
+                         "classification": "subjective_analysis", "evidence_ids": []}],
                     "final_prediction": {
-                        "winner_side": "home", "win_probability": 0.615,
-                        "expected_margin": 5.5, "expected_total": 222.5,
+                        "winner_side": "home", "win_probability": 0.62,
+                        "expected_margin": 6.0, "expected_total": 222.5,
                         "evidence_ids": [],
                     },
+                    "analysis_article_evidence_ids": [],
                     "analysis_article": "Two-stage editorial article tied to this version.",
+                    "classification": "subjective_analyst_judgment",
                 }
 
         self.clock[0] += timedelta(seconds=1)
-        return Judgment(), {"status": "success", "forecast_audit_path": "offline-two-stage-trace"}
+        judgment = Judgment()
+        return judgment, {"status": "success", "forecast_audit_path": "offline-two-stage-trace",
+                          **protocol_trace(judgment.model_dump(), context)}
 
 
 class OfflineSavedGameAnalysisService(SavedGameAnalysisService):
@@ -125,7 +152,26 @@ def test_two_stage_publish_get_and_frontend_refresh_restore_same_version(tmp_pat
 
     data = build_app_data()
     game = next(item for item in data["games"] if item["id"] == "espn:401909089")
-    clock = [datetime(2026, 10, 1, tzinfo=timezone.utc)]
+    game["fact_context"] = {
+        "schema_version": "pregame-fact-context-v1", "game_id": game["id"],
+        "feature_cutoff": "2026-10-19T00:00:00+00:00",
+        "team_form": {
+            "home": {"status": "complete", "requested_games": 15, "observed_games": 15,
+                "game_ids": [f"home-{i}" for i in range(15)], "season_counts": {"2025": 15},
+                "competition_counts": {"regular_season": 15}, "first_game_date": "2026-03-01",
+                "last_game_date": "2026-04-10", "date_timezone": "America/New_York", "metrics": {}},
+            "away": {"status": "unavailable", "requested_games": 15, "observed_games": 0,
+                "game_ids": [], "season_counts": {}, "competition_counts": {}, "first_game_date": None,
+                "last_game_date": None, "date_timezone": "America/New_York", "metrics": {}},
+        },
+        "schedule": {
+            "home": {"status": "unavailable", "reason": "no_cutoff_eligible_schedule_evidence",
+                "basis": None, "back_to_back": None, "source_refs": []},
+            "away": {"status": "unavailable", "reason": "no_cutoff_eligible_schedule_evidence",
+                "basis": None, "back_to_back": None, "source_refs": []},
+        },
+    }
+    clock = [datetime(2026, 10, 20, tzinfo=timezone.utc)]
     assert datetime.fromisoformat(game["tipoff"].replace("Z", "+00:00")) > clock[0]
     monkeypatch.setattr(analysis_service, "now", lambda: clock[0].isoformat())
     database = tmp_path / "prediction_versions.sqlite"
@@ -166,20 +212,25 @@ def test_two_stage_publish_get_and_frontend_refresh_restore_same_version(tmp_pat
     assert selection["status"] == "current"
     assert selection["version_id"] == posted["version_id"]
     assert selection["version"]["payload_sha256"] == posted["version"]["payload_sha256"]
+    assert selection["fact_view"]["origin"] == "new_frozen"
+    assert selection["fact_view"]["version_id"] == posted["version_id"]
+    assert selection["fact_view"]["source_payload_sha256"] == posted["version"]["payload_sha256"]
     assert locked["predictions"][game["id"]]["status"] == "locked"
     assert locked["predictions"][game["id"]]["version_id"] == posted["version_id"]
 
     probe = subprocess.run(
         ["node", "-e", NODE_FRONTEND_PROBE, str(STATIC_ROOT / "app.js")],
         input=json.dumps({"game": copy.deepcopy(game), "response": current}, ensure_ascii=True),
-        text=True, encoding="utf-8", capture_output=True, timeout=20, check=True,
+        text=True, encoding="utf-8", capture_output=True, timeout=20, check=False,
     )
+    assert probe.returncode == 0, probe.stderr
     browser = json.loads(probe.stdout)
     locked_probe = subprocess.run(
         ["node", "-e", NODE_FRONTEND_PROBE, str(STATIC_ROOT / "app.js")],
         input=json.dumps({"game": copy.deepcopy(game), "response": locked}, ensure_ascii=True),
-        text=True, encoding="utf-8", capture_output=True, timeout=20, check=True,
+        text=True, encoding="utf-8", capture_output=True, timeout=20, check=False,
     )
+    assert locked_probe.returncode == 0, locked_probe.stderr
     locked_browser = json.loads(locked_probe.stdout)
     final = posted["version"]["judgment"]["final_prediction"]
     article = posted["version"]["judgment"]["analysis_article"]
@@ -188,6 +239,11 @@ def test_two_stage_publish_get_and_frontend_refresh_restore_same_version(tmp_pat
     assert browser["postArticle"] == article
     assert browser["restoredVersionId"] == posted["version_id"]
     assert browser["selectionVersionId"] == posted["version_id"]
+    assert browser["factViewVersionId"] == posted["version_id"]
+    assert browser["factViewOrigin"] == "new_frozen"
+    assert browser["factViewHash"] == posted["version"]["payload_sha256"]
+    assert browser["badFactViewVersionAccepted"] is True
+    assert browser["badFactViewIgnored"] is True
     assert browser["displayedVersionId"] == posted["version_id"]
     assert browser["restoredArticle"] == article
     assert browser["displayedProbability"] == final["win_probability"]

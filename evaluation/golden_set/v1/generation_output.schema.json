@@ -1,0 +1,12 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "type":"object",
+  "required":["sample_id","stage","dataset_revision","golden_set_revision","generation_revision","input_hash","prompt_hash","skill_hashes","generation_parameters","model_metadata","created_at","output","output_sha256","network_access","tools_used","research_used"],
+  "properties":{
+    "sample_id":{"type":"string"},"stage":{"enum":["pregame","postgame"]},"dataset_revision":{"type":"string"},"golden_set_revision":{"type":"string"},"generation_revision":{"type":"string"},
+    "input_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"},"prompt_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"},"skill_hashes":{"type":"object"},"generation_parameters":{"type":"object"},
+    "model_metadata":{"type":"object","required":["model_id","model_revision","backend","finish_reason","token_usage"],"properties":{"model_id":{"type":"string","minLength":1},"model_revision":{"type":"string","minLength":1},"backend":{"type":"string"},"finish_reason":{"type":["string","null"]},"token_usage":{"type":["object","null"]}},"additionalProperties":true},
+    "created_at":{"type":"string","format":"date-time"},"output":{"type":"object","required":["article"],"properties":{"article":{"type":"string","minLength":1}},"additionalProperties":true},
+    "output_sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},"network_access":{"const":false},"tools_used":{"type":"array","maxItems":0},"research_used":{"const":false}
+  },"additionalProperties":false
+}

@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from v2.pregame_system.storage import clean, content_hash, now, save
+from v2.pregame_system.ats import spread_comparison_for_version, settle_ats
 
 
 def _read(value: str | Path | dict[str, Any] | None) -> dict[str, Any] | None:
@@ -84,6 +85,53 @@ def _market_actual(market: dict[str, Any] | None, game: dict[str, Any]) -> dict:
     return result
 
 
+def _frozen_prediction_market(official: dict[str, Any] | None) -> dict[str, Any] | None:
+    """Read only the quote frozen with this Prediction Version; never fetch a new line."""
+    if not isinstance(official, dict):
+        return None
+    collection = official.get("market_collection") or {}
+    reference = collection.get("public_market_reference") if isinstance(collection, dict) else None
+    if not isinstance(reference, dict):
+        reference = official.get("public_market_reference")
+    if not isinstance(reference, dict):
+        reference = (official.get("model_layers") or {}).get("market_benchmark")
+    if not isinstance(reference, dict):
+        return None
+    market = clean(reference)
+    if market.get("expected_home_margin") is None:
+        value = market.get("market_expected_home_margin", market.get("market_expected_margin"))
+        if isinstance(value, (int, float)) and not isinstance(value, bool):
+            market["expected_home_margin"] = float(value)
+    if market.get("home_spread") is None and isinstance(market.get("expected_home_margin"), (int, float)):
+        market["home_spread"] = -float(market["expected_home_margin"])
+    if market.get("away_spread") is None and isinstance(market.get("home_spread"), (int, float)):
+        market["away_spread"] = -float(market["home_spread"])
+    if market.get("total") is None and market.get("market_total") is not None:
+        market["total"] = market["market_total"]
+    return market
+
+
+def _settled_spread_review(official: dict[str, Any] | None, game: dict[str, Any]) -> dict[str, Any]:
+    if not official or not official.get("version_id"):
+        return {"schema_version": "postgame-ats-v1", "status": "unavailable",
+                "reason": "published_prediction_version_missing",
+                "independent": settle_ats(None, game.get("actual_home_margin")),
+                "final": settle_ats(None, game.get("actual_home_margin"))}
+    comparison = spread_comparison_for_version(official)
+    actual_margin = game.get("actual_home_margin")
+    return {
+        "schema_version": "postgame-ats-v1",
+        "status": comparison.get("status", "unavailable"),
+        "market": comparison.get("market"),
+        "independent": {**comparison.get("independent", {}),
+                        "settlement": settle_ats(comparison.get("independent"), actual_margin,
+                                                  comparison.get("market"))},
+        "final": {**comparison.get("final", {}),
+                  "settlement": settle_ats(comparison.get("final"), actual_margin,
+                                           comparison.get("market"))},
+    }
+
+
 def _prediction_review(
     bundle: dict[str, Any],
     official: dict[str, Any] | None,
@@ -117,7 +165,23 @@ def _prediction_review(
                 raise ValueError("pregame_feature_snapshot_hash_mismatch")
             return clean(inputs.get("features")), str(path)
         return None, None
-    if official:
+    if official and official.get('version_id') and official.get('judgment',{}).get('final_prediction'):
+        if official.get('game_id') not in valid_ids:raise ValueError('prediction_identity_mismatch')
+        value=official['judgment']['final_prediction']
+        sign=1 if value['winner_side']=='home' else -1
+        public=_prediction_values({**value,'expected_margin':sign*value['expected_margin'],
+            'win_probability':value['win_probability'] if sign==1 else 1-value['win_probability']})
+        basketball=_prediction_values((official.get('model_layers')or{}).get('pure_prediction'))
+        informed=None
+        market=_frozen_prediction_market(official)
+        source_type='published_prediction_version'
+        fallback=False
+        source_hash=official['payload_sha256']
+        market_usage={'status':'available' if market else 'unavailable','prediction_version_id':official['version_id'],
+            'stage':official['stage'],'source':'prediction_version_frozen_market_snapshot' if market else None}
+        prediction_snapshot={'version_id':official['version_id'],'stage':official['stage'],'cutoff':official['input_cutoff_at']}
+        pregame_features=feature_input_path=None
+    elif official:
         if official.get("game_id") not in valid_ids:
             raise ValueError("prediction_identity_mismatch")
         report = official.get("report") or {}
@@ -199,6 +263,7 @@ def _prediction_review(
         else None,
         "market_usage": clean(market_usage),
         "market_actual_comparison": _market_actual(market, game),
+        "spread_prediction_review": _settled_spread_review(official, game),
         "historical_direction_evaluation": clean(audit.get("direction_evaluation")) if audit else None,
     }
 

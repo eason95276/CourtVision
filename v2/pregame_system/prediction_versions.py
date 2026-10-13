@@ -180,6 +180,9 @@ class PredictionVersionStore:
         return payload
 
     def _ensure_state(self, db: sqlite3.Connection, identity: dict[str, Any]) -> sqlite3.Row:
+        columns = {row[1] for row in db.execute("PRAGMA table_info(game_prediction_state)")}
+        if "schedule_revision" not in columns:
+            db.execute("ALTER TABLE game_prediction_state ADD COLUMN schedule_revision INTEGER NOT NULL DEFAULT 1")
         db.execute(
             "INSERT OR IGNORE INTO game_prediction_state(game_id, game_identity_json) VALUES(?, ?)",
             (identity["game_id"], _json(identity)),
@@ -207,13 +210,15 @@ class PredictionVersionStore:
             db.execute("BEGIN IMMEDIATE")
             try:
                 state = self._ensure_state(db, identity)
-                if state["locked_version_id"] is not None:
+                if state["locked_at"] is not None:
                     raise VersionStoreError("pregame_generation_locked")
                 existing = db.execute(
                     "SELECT * FROM prediction_versions WHERE game_id=? AND request_id=?",
                     (identity["game_id"], request_id),
                 ).fetchone()
                 if existing is not None:
+                    if json.loads(existing["payload_json"]).get("schedule_revision", 1) != state["schedule_revision"]:
+                        raise VersionStoreError("schedule_revision_changed")
                     db.execute("COMMIT")
                     return {"request_id": request_id, "request_seq": int(existing["request_seq"]),
                             "game_identity": identity, "requested_at": existing["requested_at"],
@@ -230,7 +235,7 @@ class PredictionVersionStore:
         finally:
             db.close()
         return {"request_id": request_id, "request_seq": seq, "game_identity": identity,
-                "requested_at": _utc(now)}
+                "requested_at": _utc(now), "schedule_revision": int(state["schedule_revision"])}
 
     def assert_request_open(self, game: dict[str, Any], request: dict[str, Any]) -> None:
         identity, tipoff = self._validate_game(game)
@@ -241,17 +246,23 @@ class PredictionVersionStore:
         db = self.connect()
         try:
             state = db.execute(
-                "SELECT game_identity_json, locked_version_id FROM game_prediction_state WHERE game_id=?",
+                "SELECT * FROM game_prediction_state WHERE game_id=?",
                 (identity["game_id"],),
             ).fetchone()
         finally:
             db.close()
         if state is not None:
             self._assert_same_identity(state["game_identity_json"], identity)
-            if state["locked_version_id"] is not None:
+            if "schedule_revision" in state.keys() and state["schedule_revision"] != request.get("schedule_revision", 1):
+                raise VersionStoreError("schedule_revision_changed")
+            if state["locked_at"] is not None:
                 raise VersionStoreError("pregame_generation_locked")
 
-    def publish(self, game: dict[str, Any], request: dict[str, Any], payload: dict[str, Any]) -> dict[str, Any]:
+    def publish(self, game: dict[str, Any], request: dict[str, Any], payload: dict[str, Any],
+                *, generation_claim: dict[str, Any] | None = None) -> dict[str, Any]:
+        # Validate and insert one independent candidate, even if a caller changes
+        # nested fields while publication waits for the database writer lock.
+        payload = json.loads(_json(payload))
         identity, tipoff = self._validate_game(game)
         if identity != request.get("game_identity") or identity != payload.get("game_identity"):
             raise VersionStoreError("identity_mismatch")
@@ -280,9 +291,31 @@ class PredictionVersionStore:
         except Exception as exc:
             raise VersionStoreError("product_prediction_invalid") from exc
 
+        # ATS is a separate deterministic comparison bound to this exact
+        # Prediction Version market snapshot. Existing published rows are never
+        # migrated or rewritten; new rows receive an additive nested contract.
+        from .ats import spread_comparison_for_new_version
+        try:
+            payload["spread_comparison"] = spread_comparison_for_new_version(payload)
+        except Exception as exc:
+            raise VersionStoreError("spread_comparison_invalid:" + str(exc)) from exc
+
+        # New rows use the current required factual publication checks. Existing
+        # immutable rows retain their original payload and remain readable.
+        from .editorial_contract import verify_publication_receipt
+
+        try:
+            verify_publication_receipt(payload)
+        except ValueError as exc:
+            raise VersionStoreError(str(exc)) from exc
+
         version_id = str(uuid.uuid4())
         body = {**payload, "schema_version": VERSION_SCHEMA, "version_id": version_id,
-                "request_seq": int(request["request_seq"]), "published_at": _utc(now)}
+                "request_seq": int(request["request_seq"]), "published_at": _utc(now),
+                "schedule_revision": request.get("schedule_revision", 1)}
+        body["spread_comparison"]["prediction_version_id"] = version_id
+        if payload.get("schedule_revision", body["schedule_revision"]) != body["schedule_revision"]:
+            raise VersionStoreError("schedule_revision_changed")
         payload_text = _json(body)
         payload_hash = hashlib.sha256(payload_text.encode("utf-8")).hexdigest()
         db = self.connect()
@@ -290,19 +323,29 @@ class PredictionVersionStore:
             db.execute("BEGIN IMMEDIATE")
             try:
                 state = self._ensure_state(db, identity)
-                if state["locked_version_id"] is not None:
+                if state["schedule_revision"] != request.get("schedule_revision", 1):
+                    raise VersionStoreError("schedule_revision_changed")
+                if state["locked_at"] is not None:
                     raise VersionStoreError("pregame_generation_locked")
                 prior = None
                 if state["current_version_id"] is not None:
                     prior = db.execute(
-                        "SELECT request_seq FROM prediction_versions WHERE game_id=? AND version_id=?",
+                        "SELECT request_seq,payload_json,version_id FROM prediction_versions WHERE game_id=? AND version_id=?",
                         (identity["game_id"], state["current_version_id"]),
                     ).fetchone()
                 if prior is not None and int(request["request_seq"]) <= int(prior["request_seq"]):
                     raise VersionStoreError("stale_request_seq")
+                from .generation_tasks import STAGE_RANK, assert_publication_claim
+                if prior is not None:
+                    prior_stage = json.loads(prior["payload_json"]).get("stage")
+                    if STAGE_RANK.get(payload.get("stage"), 0) < STAGE_RANK.get(prior_stage, 0):
+                        raise VersionStoreError("prediction_stage_regression")
                 now = _clock_instant(self.clock)
                 if now >= tipoff or game.get("status") != "scheduled":
                     raise VersionStoreError("pregame_generation_closed")
+                if generation_claim is not None:
+                    assert_publication_claim(db, generation_claim, payload, now)
+                    body["previous_successful_version_id"] = prior["version_id"] if prior else None
                 published_at = _utc(now)
                 body["published_at"] = published_at
                 payload_text = _json(body)
@@ -320,6 +363,14 @@ class PredictionVersionStore:
                     "UPDATE game_prediction_state SET current_version_id=?, state_revision=? WHERE game_id=?",
                     (version_id, revision, identity["game_id"]),
                 )
+                completed_at = _clock_instant(self.clock)
+                if completed_at >= tipoff or game.get("status") != "scheduled":
+                    raise VersionStoreError("pregame_generation_closed")
+                if generation_claim is not None:
+                    assert_publication_claim(db, generation_claim, payload, completed_at)
+                    db.execute("""UPDATE generation_tasks SET status='succeeded',published_version_id=?,
+                        finished_at=?,last_error=NULL,owner_token=NULL,lease_until=NULL WHERE task_id=?""",
+                        (version_id, published_at, generation_claim["task_id"]))
                 db.execute("COMMIT")
             except sqlite3.IntegrityError:
                 db.execute("ROLLBACK")
@@ -396,5 +447,6 @@ class PredictionVersionStore:
                 "version_id": selected["version_id"] if selected else None,
                 "state_revision": int(state["state_revision"]), "locked_at": state["locked_at"],
                 "lock_reason": state["lock_reason"],
-                "game_identity": identity}
+                "game_identity": identity,
+                "schedule_revision": int(state["schedule_revision"]) if "schedule_revision" in state.keys() else 1}
 

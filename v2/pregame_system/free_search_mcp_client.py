@@ -15,16 +15,43 @@ import os
 import shutil
 import subprocess
 import sys
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Any
 
 
 PACKAGE_SPEC = "free-search-mcp==0.11.0"
+PARSER_SPEC = "selectolax==0.4.13"  # 0.11.0 imports the pre-1.0 Modest parser.
 DEFAULT_ENGINE = "anysearch"
 
 
 class FreeSearchMCPError(RuntimeError):
     """Raised when the local MCP bridge cannot return a valid response."""
+    def __init__(self, message, **details):
+        super().__init__(message)
+        self.details = details
+
+
+def redact(message):
+    value = str(message or "")
+    for key, secret in os.environ.items():
+        if secret and ("API_KEY" in key or key.endswith("_TOKEN")):
+            value = value.replace(secret, "[REDACTED]")
+    return value
+
+
+def error_diagnostic(exc, *, operation, url=None, provider="free-search-mcp"):
+    details = dict(getattr(exc, "details", {}) or {})
+    if "failure_kind" not in details:
+        details["failure_kind"] = ("timeout" if isinstance(exc,(TimeoutError,subprocess.TimeoutExpired))
+            else "http" if getattr(exc,"code",None) else "connection" if isinstance(exc,(ConnectionError,OSError))
+            else "protocol" if isinstance(exc,(ValueError,TypeError)) else "provider")
+    details.setdefault("exit_code",None)
+    details.setdefault("stderr",None)
+    if getattr(exc,"code",None):details["http_status"]=exc.code
+    return {**details, "operation": operation, "url": url, "provider": provider,
+            "exception_type": type(exc).__name__, "message": redact(exc)[:2000],
+            "cause": redact(exc.__cause__)[:1200] if exc.__cause__ else None}
 
 
 def _search_arguments(payload: dict[str, Any]) -> dict[str, Any]:
@@ -52,6 +79,7 @@ def _normalize_result(data: dict[str, Any]) -> dict[str, Any]:
                 "score": item.get("score"),
                 "published_date": item.get("published_date"),
                 "engines": item.get("engines") or [],
+                "provider_temporal_metadata": {k:item[k] for k in ("published_at","published_date","datePublished","updated_at","dateModified","date","timestamp") if k in item},
             }
         )
     return {
@@ -77,6 +105,9 @@ def _normalize_fetch(data: dict[str, Any]) -> dict[str, Any]:
         "method": data.get("method"),
         "truncated": data.get("truncated"),
         "provider": "free-search-mcp",
+        **{k:data[k] for k in ("published_at","updated_at","datePublished","dateModified","date_published","updated_date","date","timestamp","timestamp_type") if k in data},
+        **({"errors": data.get("errors") or {"fetch": data.get("error")}}
+           if data.get("errors") or data.get("error") else {}),
     }
 
 
@@ -132,16 +163,22 @@ async def _bridge_search(payloads: list[dict[str, Any]]) -> list[dict[str, Any]]
                     data = _tool_payload(result)
                     if result.is_error or not isinstance(data, dict):
                         return {
+                            "url": payload.get("url") if operation == "fetch" else None,
                             "results": [],
                             "provider": "free-search-mcp",
                             "errors": {"mcp": "tool_error_or_invalid_result"},
+                            "diagnostic": {"operation": operation, "url": payload.get("url"),
+                                "provider": "free-search-mcp", "failure_kind": "protocol",
+                                "message": redact(" ".join(str(getattr(b, "text", "")) for b in result.content or []))[:2000]},
                         }
                     return _normalize_fetch(data) if operation == "fetch" else _normalize_result(data)
                 except Exception as exc:
                     return {
+                        "url": payload.get("url") if payload.get("operation") == "fetch" else None,
                         "results": [],
                         "provider": "free-search-mcp",
                         "errors": {"mcp": type(exc).__name__},
+                        "diagnostic": error_diagnostic(exc, operation=payload.get("operation", "search"), url=payload.get("url")),
                     }
 
             output = list(await asyncio.gather(*(call_one(payload) for payload in payloads)))
@@ -188,6 +225,8 @@ class FreeSearchMCPTransport:
             "--quiet",
             "--with",
             self.package_spec,
+            "--with",
+            PARSER_SPEC,
             "python",
             "-m",
             "v2.pregame_system.free_search_mcp_client",
@@ -204,16 +243,24 @@ class FreeSearchMCPTransport:
                 env={**os.environ, "PYTHONIOENCODING": "utf-8"},
             )
         except subprocess.TimeoutExpired as exc:
-            raise FreeSearchMCPError("free_search_mcp_timeout") from exc
+            raise FreeSearchMCPError("free_search_mcp_timeout", failure_kind="timeout",
+                timeout_seconds=self.timeout_seconds, exit_code=None,
+                stdout=redact((exc.stdout or b"").decode("utf-8", errors="replace"))[-2000:],
+                stderr=redact((exc.stderr or b"").decode("utf-8", errors="replace"))[-4000:]) from exc
         if completed.returncode != 0:
-            detail = completed.stderr.decode("utf-8", errors="replace")[-400:].replace("\n", " ")
-            raise FreeSearchMCPError(f"free_search_mcp_process_failed:{detail}")
+            detail = redact(completed.stderr.decode("utf-8", errors="replace"))[-4000:]
+            raise FreeSearchMCPError(f"free_search_mcp_process_failed:{detail}", failure_kind="process_exit",
+                exit_code=completed.returncode, stderr=detail,
+                stdout=redact(completed.stdout.decode("utf-8", errors="replace"))[-2000:])
         try:
             responses = json.loads(completed.stdout.decode("utf-8"))
         except (UnicodeDecodeError, json.JSONDecodeError) as exc:
-            raise FreeSearchMCPError("free_search_mcp_invalid_json") from exc
+            raise FreeSearchMCPError("free_search_mcp_invalid_json", failure_kind="protocol",
+                exit_code=completed.returncode, stderr=redact(completed.stderr.decode("utf-8",errors="replace"))[-2000:],
+                stdout=redact(completed.stdout.decode("utf-8",errors="replace"))[-2000:]) from exc
         if not isinstance(responses, list) or len(responses) != len(payloads):
-            raise FreeSearchMCPError("free_search_mcp_response_count_mismatch")
+            raise FreeSearchMCPError("free_search_mcp_response_count_mismatch", failure_kind="protocol",
+                                    exit_code=completed.returncode, expected_count=len(payloads), actual_count=len(responses) if isinstance(responses,list) else None)
         return responses
 
     def search_many(self, payloads: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -221,9 +268,17 @@ class FreeSearchMCPTransport:
 
     def fetch_many(self, urls: list[str]) -> list[dict[str, Any]]:
         unique = list(dict.fromkeys(str(url) for url in urls if url))
-        return self._run_many(
-            [{"operation": "fetch", "url": url, "render": "http"} for url in unique]
-        )
+        def fetch_one(url):
+            try:
+                return self._run_many([{"operation": "fetch", "url": url, "render": "http", "force_refresh": True}])[0]
+            except Exception as exc:
+                return {"url": url, "content": "", "provider": "free-search-mcp",
+                        "errors": {"fetch": type(exc).__name__},
+                        "diagnostic": error_diagnostic(exc, operation="fetch", url=url)}
+        # Each URL owns its timeout/process; a slow or broken source cannot
+        # discard successful responses from the same requested batch.
+        with ThreadPoolExecutor(max_workers=min(4, max(1,len(unique)))) as pool:
+            return list(pool.map(fetch_one, unique))
 
     def __call__(self, payload: dict[str, Any]) -> dict[str, Any]:
         return self.search_many([payload])[0]

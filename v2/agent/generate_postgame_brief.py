@@ -163,7 +163,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     if not args.game_id:
         parser.error(
             "缺少 --game-id。示例：python v2/agent/generate_postgame_brief.py "
-            "--game-id GAME_ID"
+            "--game-id 0022500564"
         )
     return args
 
@@ -1481,4 +1481,3 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

@@ -145,6 +145,19 @@ def test_focus_adds_only_one_game_bound_query(tmp_path):
     assert "LeBron James signing official" in queries[-1][1]
 
 
+def test_analysis_questions_add_game_bound_queries_without_changing_category_scope(tmp_path):
+    queries = PregameWebSearch(tmp_path, transport=lambda _: {"results": []}).queries(
+        {**GAME, "registered_game": True, "status": "scheduled", "game_type": "regular_season", "season_start": 2026},
+        {"game_story"},
+        analysis_questions=[{"id": "q1", "priority": "core", "category": "game_story",
+            "question": "How will the Knicks defend Philadelphia's primary pick-and-roll?"}],
+    )
+    targeted = [row for row in queries if "primary pick-and-roll" in row[1]]
+    assert len(targeted) == 1
+    assert targeted[0][0] == "game_story"
+    assert all(category == "game_story" for category, _ in queries)
+
+
 def test_naive_published_time_is_treated_as_utc(tmp_path):
     def transport(payload):
         return {

@@ -1,0 +1,2400 @@
+{
+  "created_at": "2026-10-12T23:44:33.428997+00:00",
+  "status": "FINALIZED",
+  "generation_revision": "golden-pregame-system-final-v1",
+  "dataset_revision": "historical-final-pregame-golden20-v1",
+  "golden_set_revision": "golden-set-v1-4b0c7cfdf4032d8aba43",
+  "generation": {
+    "n": 20,
+    "provider_success": 20,
+    "parse_success": 18,
+    "raw_schema_success": 7,
+    "forecast_accepted": 15,
+    "editorial_accepted": 15,
+    "e2e_success": 15,
+    "e2e_failure": 5,
+    "qualified_e2e_success": 14,
+    "qualified_e2e_failure": 6,
+    "qualification": {
+      "n": 20,
+      "raw_e2e": 15,
+      "qualified_e2e": 14,
+      "rows": [
+        {
+          "sample_id": "cb-0050013765f1198cade4",
+          "raw_chain_status": "SUCCEEDED",
+          "qualified_e2e": false,
+          "qualification_error": "ValueError:independent_output_invents_market_context",
+          "original_manifest_hash": "31c2339e9d6ac916e5528965e7f02bce0a50031bfbd07e2e2c22c97455c5ea12"
+        },
+        {
+          "sample_id": "cb-038cda1442c3fec5b619",
+          "raw_chain_status": "FAILED",
+          "qualified_e2e": false,
+          "qualification_error": null,
+          "original_manifest_hash": "29965b5f75808d46bea7f05e1a0ecef4747850f90612416b983cc4e2d5972001"
+        },
+        {
+          "sample_id": "cb-10c3baf5823776e51d36",
+          "raw_chain_status": "SUCCEEDED",
+          "qualified_e2e": true,
+          "qualification_error": null,
+          "original_manifest_hash": "167267722264c152674440c38d151f859b4e17f9915bed672f758081c0c09526"
+        },
+        {
+          "sample_id": "cb-19e720acf3c06a505359",
+          "raw_chain_status": "SUCCEEDED",
+          "qualified_e2e": true,
+          "qualification_error": null,
+          "original_manifest_hash": "322bf8f41c5959656a5e2baa86df67815f51ca79889d1def26215e3bc82520ce"
+        },
+        {
+          "sample_id": "cb-1ec5f13a90ab5b7b9770",
+          "raw_chain_status": "FAILED",
+          "qualified_e2e": false,
+          "qualification_error": null,
+          "original_manifest_hash": "773f288fd9ed43e95a227841b258926648bbd67f6b51bcf106c65d49d836e306"
+        },
+        {
+          "sample_id": "cb-24f254e206cf8ac93441",
+          "raw_chain_status": "FAILED",
+          "qualified_e2e": false,
+          "qualification_error": null,
+          "original_manifest_hash": "0332b0dcbcb8a66f1c113753ef9f35794755ab5620b1551dfd1053ae0090cad6"
+        },
+        {
+          "sample_id": "cb-427eb4078eb315746e1d",
+          "raw_chain_status": "SUCCEEDED",
+          "qualified_e2e": true,
+          "qualification_error": null,
+          "original_manifest_hash": "ccf909d6252e04a835e842dd51ed49c526de91c7f77382ee3829476b3e1f26d1"
+        },
+        {
+          "sample_id": "cb-48bf103796cbdb608d2a",
+          "raw_chain_status": "SUCCEEDED",
+          "qualified_e2e": true,
+          "qualification_error": null,
+          "original_manifest_hash": "5b837cf5b24e1eadd4eccdb3228f6f91022f74bc710162c4ef30d35a6c5d9fae"
+        },
+        {
+          "sample_id": "cb-499cfbcd227e806011ca",
+          "raw_chain_status": "FAILED",
+          "qualified_e2e": false,
+          "qualification_error": null,
+          "original_manifest_hash": "d05c743a0d82c66c4a7e3627fab099637f93fbc7a7569c2666caadcd5e780b3e"
+        },
+        {
+          "sample_id": "cb-4ab1946f6056ffcaa899",
+          "raw_chain_status": "SUCCEEDED",
+          "qualified_e2e": true,
+          "qualification_error": null,
+          "original_manifest_hash": "06d348765dec9b1c7c7865dc7a7b9115f6f971d68e29d9c9183512eca066126c"
+        },
+        {
+          "sample_id": "cb-50cb03dbe1ca9afd92d5",
+          "raw_chain_status": "SUCCEEDED",
+          "qualified_e2e": true,
+          "qualification_error": null,
+          "original_manifest_hash": "1dc024d56dbdfacdbcfcd9322ecfe5777aa82db886728a582f080ca462753d41"
+        },
+        {
+          "sample_id": "cb-5ace4c7e6cd116400319",
+          "raw_chain_status": "SUCCEEDED",
+          "qualified_e2e": true,
+          "qualification_error": null,
+          "original_manifest_hash": "7dac12b1f274dde7d9d32e796297b0ee334192521ec7b25a4af9edd6f49981af"
+        },
+        {
+          "sample_id": "cb-7532403d01375366b5ca",
+          "raw_chain_status": "SUCCEEDED",
+          "qualified_e2e": true,
+          "qualification_error": null,
+          "original_manifest_hash": "ad312a9fd788e3de176996e2075a8c6ef52adf188c8b19d0ec2e57e0e0347fb8"
+        },
+        {
+          "sample_id": "cb-81230fbcb2ac2ef34460",
+          "raw_chain_status": "FAILED",
+          "qualified_e2e": false,
+          "qualification_error": null,
+          "original_manifest_hash": "cf3ecb2968f1d036a139eefb523fff207723c593165e411a4302ee33c69a8ea2"
+        },
+        {
+          "sample_id": "cb-88839c5ab75fe7c124ea",
+          "raw_chain_status": "SUCCEEDED",
+          "qualified_e2e": true,
+          "qualification_error": null,
+          "original_manifest_hash": "fb565b770313145282986c3ea37760d0e992140a577d9f7ab1d9de3fcdf6b86f"
+        },
+        {
+          "sample_id": "cb-8dbb8b0355535fbe549d",
+          "raw_chain_status": "SUCCEEDED",
+          "qualified_e2e": true,
+          "qualification_error": null,
+          "original_manifest_hash": "904d806d83c5d0a9dd61d44dd4abb857d8666577be2bd57bec58d28c668c7d0c"
+        },
+        {
+          "sample_id": "cb-aaf94d5c67204b31fcb4",
+          "raw_chain_status": "SUCCEEDED",
+          "qualified_e2e": true,
+          "qualification_error": null,
+          "original_manifest_hash": "52e9b77d50ab11c388c13fe31567a95af83db75a930d19537435de3a27bdec6f"
+        },
+        {
+          "sample_id": "cb-c55e9597dfab8e9de493",
+          "raw_chain_status": "SUCCEEDED",
+          "qualified_e2e": true,
+          "qualification_error": null,
+          "original_manifest_hash": "81dbfdf19df4cf83590b1eb46815f7e93325982ed94c2ce4c7d423714137017f"
+        },
+        {
+          "sample_id": "cb-de144ece26ed0f6e37a5",
+          "raw_chain_status": "SUCCEEDED",
+          "qualified_e2e": true,
+          "qualification_error": null,
+          "original_manifest_hash": "2f855ff651f3d6e12727f744e52be419f89f278f2baa4e3dfc9f3ad74fe8f3de"
+        },
+        {
+          "sample_id": "cb-e157f23a83e8881fa1f0",
+          "raw_chain_status": "SUCCEEDED",
+          "qualified_e2e": true,
+          "qualification_error": null,
+          "original_manifest_hash": "45cc46b74d6f74c9834e1310a6b293fc45091c57bb90c2e2afaadf5b99a45585"
+        }
+      ],
+      "model_calls": 0,
+      "raw_artifacts_unchanged": true,
+      "known_guard_false_positive": "No market or Pure baseline was provided... is an absence disclosure, not an observed market assertion; production guard is unchanged."
+    },
+    "repair_triggered": 5,
+    "repair_recovered": 2,
+    "component_attempts": {
+      "forecast": 20,
+      "repair": 5,
+      "market_review": 15,
+      "editorial": 15
+    },
+    "total_component_calls": 55,
+    "failure_stages": {
+      "SUCCEEDED": 15,
+      "FORECAST": 5
+    },
+    "token_usage": {
+      "prompt_tokens": 3219133,
+      "completion_tokens": 73363,
+      "total_tokens": 3292496,
+      "prompt_cache_hit_tokens": 175104,
+      "prompt_cache_miss_tokens": 3044029
+    },
+    "latency_p50": 9.844
+  },
+  "data": {
+    "n": 20,
+    "market": {
+      "n": 20,
+      "spread": 20,
+      "total": 20,
+      "both": 20,
+      "missing": [],
+      "policy": "historical reference with unknown open/close; not timestamped production quote"
+    },
+    "injury_status": {
+      "COMPLETE": 19,
+      "PARTIAL": 1
+    },
+    "injury_rows": 238,
+    "research_sources": 19,
+    "research_games": 13,
+    "lineup_basis_teams": {
+      "unknown": 28,
+      "confirmed_before_cutoff": 2,
+      "source_expected": 10
+    }
+  },
+  "deepeval": {
+    "revision": "golden-pregame-system-final-v1",
+    "n_records": 20,
+    "checks": 160,
+    "sdk_version": "4.2.8",
+    "real_sdk_evaluate_called": true,
+    "passes": {
+      "execution_success": 14,
+      "parse_success": 18,
+      "evidence_validity": 15,
+      "temporal_integrity": 20,
+      "ground_truth_isolation": 20,
+      "context_binding": 20,
+      "output_contract_validity": 14,
+      "schema_compliance": 7
+    },
+    "failures": {
+      "execution_success": 6,
+      "parse_success": 2,
+      "schema_compliance": 13,
+      "evidence_validity": 5,
+      "temporal_integrity": 0,
+      "ground_truth_isolation": 0,
+      "context_binding": 0,
+      "output_contract_validity": 6
+    },
+    "total_property_passed": 128,
+    "total_property_failed": 32,
+    "rows": [
+      {
+        "sample_id": "cb-c55e9597dfab8e9de493",
+        "metrics": [
+          {
+            "name": "execution_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "execution_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "parse_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "parse_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "schema_compliance",
+            "score": 0.0,
+            "success": false,
+            "reason": "schema_compliance receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "evidence_validity",
+            "score": 1.0,
+            "success": true,
+            "reason": "evidence_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "temporal_integrity",
+            "score": 1.0,
+            "success": true,
+            "reason": "temporal_integrity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "ground_truth_isolation",
+            "score": 1.0,
+            "success": true,
+            "reason": "ground_truth_isolation receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "context_binding",
+            "score": 1.0,
+            "success": true,
+            "reason": "context_binding receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "output_contract_validity",
+            "score": 1.0,
+            "success": true,
+            "reason": "output_contract_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          }
+        ]
+      },
+      {
+        "sample_id": "cb-10c3baf5823776e51d36",
+        "metrics": [
+          {
+            "name": "execution_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "execution_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "parse_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "parse_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "schema_compliance",
+            "score": 1.0,
+            "success": true,
+            "reason": "schema_compliance receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "evidence_validity",
+            "score": 1.0,
+            "success": true,
+            "reason": "evidence_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "temporal_integrity",
+            "score": 1.0,
+            "success": true,
+            "reason": "temporal_integrity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "ground_truth_isolation",
+            "score": 1.0,
+            "success": true,
+            "reason": "ground_truth_isolation receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "context_binding",
+            "score": 1.0,
+            "success": true,
+            "reason": "context_binding receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "output_contract_validity",
+            "score": 1.0,
+            "success": true,
+            "reason": "output_contract_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          }
+        ]
+      },
+      {
+        "sample_id": "cb-427eb4078eb315746e1d",
+        "metrics": [
+          {
+            "name": "execution_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "execution_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "parse_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "parse_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "schema_compliance",
+            "score": 0.0,
+            "success": false,
+            "reason": "schema_compliance receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "evidence_validity",
+            "score": 1.0,
+            "success": true,
+            "reason": "evidence_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "temporal_integrity",
+            "score": 1.0,
+            "success": true,
+            "reason": "temporal_integrity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "ground_truth_isolation",
+            "score": 1.0,
+            "success": true,
+            "reason": "ground_truth_isolation receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "context_binding",
+            "score": 1.0,
+            "success": true,
+            "reason": "context_binding receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "output_contract_validity",
+            "score": 1.0,
+            "success": true,
+            "reason": "output_contract_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          }
+        ]
+      },
+      {
+        "sample_id": "cb-19e720acf3c06a505359",
+        "metrics": [
+          {
+            "name": "execution_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "execution_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "parse_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "parse_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "schema_compliance",
+            "score": 1.0,
+            "success": true,
+            "reason": "schema_compliance receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "evidence_validity",
+            "score": 1.0,
+            "success": true,
+            "reason": "evidence_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "temporal_integrity",
+            "score": 1.0,
+            "success": true,
+            "reason": "temporal_integrity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "ground_truth_isolation",
+            "score": 1.0,
+            "success": true,
+            "reason": "ground_truth_isolation receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "context_binding",
+            "score": 1.0,
+            "success": true,
+            "reason": "context_binding receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "output_contract_validity",
+            "score": 1.0,
+            "success": true,
+            "reason": "output_contract_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          }
+        ]
+      },
+      {
+        "sample_id": "cb-24f254e206cf8ac93441",
+        "metrics": [
+          {
+            "name": "execution_success",
+            "score": 0.0,
+            "success": false,
+            "reason": "execution_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "parse_success",
+            "score": 0.0,
+            "success": false,
+            "reason": "parse_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "schema_compliance",
+            "score": 0.0,
+            "success": false,
+            "reason": "schema_compliance receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "evidence_validity",
+            "score": 0.0,
+            "success": false,
+            "reason": "evidence_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "temporal_integrity",
+            "score": 1.0,
+            "success": true,
+            "reason": "temporal_integrity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "ground_truth_isolation",
+            "score": 1.0,
+            "success": true,
+            "reason": "ground_truth_isolation receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "context_binding",
+            "score": 1.0,
+            "success": true,
+            "reason": "context_binding receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "output_contract_validity",
+            "score": 0.0,
+            "success": false,
+            "reason": "output_contract_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          }
+        ]
+      },
+      {
+        "sample_id": "cb-aaf94d5c67204b31fcb4",
+        "metrics": [
+          {
+            "name": "execution_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "execution_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "parse_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "parse_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "schema_compliance",
+            "score": 0.0,
+            "success": false,
+            "reason": "schema_compliance receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "evidence_validity",
+            "score": 1.0,
+            "success": true,
+            "reason": "evidence_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "temporal_integrity",
+            "score": 1.0,
+            "success": true,
+            "reason": "temporal_integrity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "ground_truth_isolation",
+            "score": 1.0,
+            "success": true,
+            "reason": "ground_truth_isolation receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "context_binding",
+            "score": 1.0,
+            "success": true,
+            "reason": "context_binding receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "output_contract_validity",
+            "score": 1.0,
+            "success": true,
+            "reason": "output_contract_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          }
+        ]
+      },
+      {
+        "sample_id": "cb-0050013765f1198cade4",
+        "metrics": [
+          {
+            "name": "execution_success",
+            "score": 0.0,
+            "success": false,
+            "reason": "execution_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "parse_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "parse_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "schema_compliance",
+            "score": 1.0,
+            "success": true,
+            "reason": "schema_compliance receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "evidence_validity",
+            "score": 1.0,
+            "success": true,
+            "reason": "evidence_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "temporal_integrity",
+            "score": 1.0,
+            "success": true,
+            "reason": "temporal_integrity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "ground_truth_isolation",
+            "score": 1.0,
+            "success": true,
+            "reason": "ground_truth_isolation receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "context_binding",
+            "score": 1.0,
+            "success": true,
+            "reason": "context_binding receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "output_contract_validity",
+            "score": 0.0,
+            "success": false,
+            "reason": "output_contract_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          }
+        ]
+      },
+      {
+        "sample_id": "cb-88839c5ab75fe7c124ea",
+        "metrics": [
+          {
+            "name": "execution_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "execution_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "parse_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "parse_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "schema_compliance",
+            "score": 1.0,
+            "success": true,
+            "reason": "schema_compliance receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "evidence_validity",
+            "score": 1.0,
+            "success": true,
+            "reason": "evidence_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "temporal_integrity",
+            "score": 1.0,
+            "success": true,
+            "reason": "temporal_integrity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "ground_truth_isolation",
+            "score": 1.0,
+            "success": true,
+            "reason": "ground_truth_isolation receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "context_binding",
+            "score": 1.0,
+            "success": true,
+            "reason": "context_binding receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "output_contract_validity",
+            "score": 1.0,
+            "success": true,
+            "reason": "output_contract_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          }
+        ]
+      },
+      {
+        "sample_id": "cb-e157f23a83e8881fa1f0",
+        "metrics": [
+          {
+            "name": "execution_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "execution_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "parse_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "parse_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "schema_compliance",
+            "score": 0.0,
+            "success": false,
+            "reason": "schema_compliance receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "evidence_validity",
+            "score": 1.0,
+            "success": true,
+            "reason": "evidence_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "temporal_integrity",
+            "score": 1.0,
+            "success": true,
+            "reason": "temporal_integrity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "ground_truth_isolation",
+            "score": 1.0,
+            "success": true,
+            "reason": "ground_truth_isolation receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "context_binding",
+            "score": 1.0,
+            "success": true,
+            "reason": "context_binding receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "output_contract_validity",
+            "score": 1.0,
+            "success": true,
+            "reason": "output_contract_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          }
+        ]
+      },
+      {
+        "sample_id": "cb-5ace4c7e6cd116400319",
+        "metrics": [
+          {
+            "name": "execution_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "execution_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "parse_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "parse_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "schema_compliance",
+            "score": 1.0,
+            "success": true,
+            "reason": "schema_compliance receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "evidence_validity",
+            "score": 1.0,
+            "success": true,
+            "reason": "evidence_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "temporal_integrity",
+            "score": 1.0,
+            "success": true,
+            "reason": "temporal_integrity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "ground_truth_isolation",
+            "score": 1.0,
+            "success": true,
+            "reason": "ground_truth_isolation receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "context_binding",
+            "score": 1.0,
+            "success": true,
+            "reason": "context_binding receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "output_contract_validity",
+            "score": 1.0,
+            "success": true,
+            "reason": "output_contract_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          }
+        ]
+      },
+      {
+        "sample_id": "cb-50cb03dbe1ca9afd92d5",
+        "metrics": [
+          {
+            "name": "execution_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "execution_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "parse_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "parse_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "schema_compliance",
+            "score": 0.0,
+            "success": false,
+            "reason": "schema_compliance receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "evidence_validity",
+            "score": 1.0,
+            "success": true,
+            "reason": "evidence_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "temporal_integrity",
+            "score": 1.0,
+            "success": true,
+            "reason": "temporal_integrity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "ground_truth_isolation",
+            "score": 1.0,
+            "success": true,
+            "reason": "ground_truth_isolation receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "context_binding",
+            "score": 1.0,
+            "success": true,
+            "reason": "context_binding receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "output_contract_validity",
+            "score": 1.0,
+            "success": true,
+            "reason": "output_contract_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          }
+        ]
+      },
+      {
+        "sample_id": "cb-48bf103796cbdb608d2a",
+        "metrics": [
+          {
+            "name": "execution_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "execution_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "parse_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "parse_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "schema_compliance",
+            "score": 1.0,
+            "success": true,
+            "reason": "schema_compliance receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "evidence_validity",
+            "score": 1.0,
+            "success": true,
+            "reason": "evidence_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "temporal_integrity",
+            "score": 1.0,
+            "success": true,
+            "reason": "temporal_integrity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "ground_truth_isolation",
+            "score": 1.0,
+            "success": true,
+            "reason": "ground_truth_isolation receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "context_binding",
+            "score": 1.0,
+            "success": true,
+            "reason": "context_binding receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "output_contract_validity",
+            "score": 1.0,
+            "success": true,
+            "reason": "output_contract_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          }
+        ]
+      },
+      {
+        "sample_id": "cb-4ab1946f6056ffcaa899",
+        "metrics": [
+          {
+            "name": "execution_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "execution_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "parse_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "parse_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "schema_compliance",
+            "score": 0.0,
+            "success": false,
+            "reason": "schema_compliance receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "evidence_validity",
+            "score": 1.0,
+            "success": true,
+            "reason": "evidence_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "temporal_integrity",
+            "score": 1.0,
+            "success": true,
+            "reason": "temporal_integrity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "ground_truth_isolation",
+            "score": 1.0,
+            "success": true,
+            "reason": "ground_truth_isolation receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "context_binding",
+            "score": 1.0,
+            "success": true,
+            "reason": "context_binding receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "output_contract_validity",
+            "score": 1.0,
+            "success": true,
+            "reason": "output_contract_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          }
+        ]
+      },
+      {
+        "sample_id": "cb-8dbb8b0355535fbe549d",
+        "metrics": [
+          {
+            "name": "execution_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "execution_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "parse_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "parse_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "schema_compliance",
+            "score": 0.0,
+            "success": false,
+            "reason": "schema_compliance receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "evidence_validity",
+            "score": 1.0,
+            "success": true,
+            "reason": "evidence_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "temporal_integrity",
+            "score": 1.0,
+            "success": true,
+            "reason": "temporal_integrity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "ground_truth_isolation",
+            "score": 1.0,
+            "success": true,
+            "reason": "ground_truth_isolation receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "context_binding",
+            "score": 1.0,
+            "success": true,
+            "reason": "context_binding receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "output_contract_validity",
+            "score": 1.0,
+            "success": true,
+            "reason": "output_contract_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          }
+        ]
+      },
+      {
+        "sample_id": "cb-de144ece26ed0f6e37a5",
+        "metrics": [
+          {
+            "name": "execution_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "execution_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "parse_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "parse_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "schema_compliance",
+            "score": 0.0,
+            "success": false,
+            "reason": "schema_compliance receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "evidence_validity",
+            "score": 1.0,
+            "success": true,
+            "reason": "evidence_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "temporal_integrity",
+            "score": 1.0,
+            "success": true,
+            "reason": "temporal_integrity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "ground_truth_isolation",
+            "score": 1.0,
+            "success": true,
+            "reason": "ground_truth_isolation receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "context_binding",
+            "score": 1.0,
+            "success": true,
+            "reason": "context_binding receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "output_contract_validity",
+            "score": 1.0,
+            "success": true,
+            "reason": "output_contract_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          }
+        ]
+      },
+      {
+        "sample_id": "cb-499cfbcd227e806011ca",
+        "metrics": [
+          {
+            "name": "execution_success",
+            "score": 0.0,
+            "success": false,
+            "reason": "execution_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "parse_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "parse_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "schema_compliance",
+            "score": 0.0,
+            "success": false,
+            "reason": "schema_compliance receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "evidence_validity",
+            "score": 0.0,
+            "success": false,
+            "reason": "evidence_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "temporal_integrity",
+            "score": 1.0,
+            "success": true,
+            "reason": "temporal_integrity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "ground_truth_isolation",
+            "score": 1.0,
+            "success": true,
+            "reason": "ground_truth_isolation receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "context_binding",
+            "score": 1.0,
+            "success": true,
+            "reason": "context_binding receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "output_contract_validity",
+            "score": 0.0,
+            "success": false,
+            "reason": "output_contract_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          }
+        ]
+      },
+      {
+        "sample_id": "cb-7532403d01375366b5ca",
+        "metrics": [
+          {
+            "name": "execution_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "execution_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "parse_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "parse_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "schema_compliance",
+            "score": 1.0,
+            "success": true,
+            "reason": "schema_compliance receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "evidence_validity",
+            "score": 1.0,
+            "success": true,
+            "reason": "evidence_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "temporal_integrity",
+            "score": 1.0,
+            "success": true,
+            "reason": "temporal_integrity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "ground_truth_isolation",
+            "score": 1.0,
+            "success": true,
+            "reason": "ground_truth_isolation receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "context_binding",
+            "score": 1.0,
+            "success": true,
+            "reason": "context_binding receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "output_contract_validity",
+            "score": 1.0,
+            "success": true,
+            "reason": "output_contract_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          }
+        ]
+      },
+      {
+        "sample_id": "cb-1ec5f13a90ab5b7b9770",
+        "metrics": [
+          {
+            "name": "execution_success",
+            "score": 0.0,
+            "success": false,
+            "reason": "execution_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "parse_success",
+            "score": 0.0,
+            "success": false,
+            "reason": "parse_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "schema_compliance",
+            "score": 0.0,
+            "success": false,
+            "reason": "schema_compliance receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "evidence_validity",
+            "score": 0.0,
+            "success": false,
+            "reason": "evidence_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "temporal_integrity",
+            "score": 1.0,
+            "success": true,
+            "reason": "temporal_integrity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "ground_truth_isolation",
+            "score": 1.0,
+            "success": true,
+            "reason": "ground_truth_isolation receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "context_binding",
+            "score": 1.0,
+            "success": true,
+            "reason": "context_binding receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "output_contract_validity",
+            "score": 0.0,
+            "success": false,
+            "reason": "output_contract_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          }
+        ]
+      },
+      {
+        "sample_id": "cb-81230fbcb2ac2ef34460",
+        "metrics": [
+          {
+            "name": "execution_success",
+            "score": 0.0,
+            "success": false,
+            "reason": "execution_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "parse_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "parse_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "schema_compliance",
+            "score": 0.0,
+            "success": false,
+            "reason": "schema_compliance receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "evidence_validity",
+            "score": 0.0,
+            "success": false,
+            "reason": "evidence_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "temporal_integrity",
+            "score": 1.0,
+            "success": true,
+            "reason": "temporal_integrity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "ground_truth_isolation",
+            "score": 1.0,
+            "success": true,
+            "reason": "ground_truth_isolation receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "context_binding",
+            "score": 1.0,
+            "success": true,
+            "reason": "context_binding receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "output_contract_validity",
+            "score": 0.0,
+            "success": false,
+            "reason": "output_contract_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          }
+        ]
+      },
+      {
+        "sample_id": "cb-038cda1442c3fec5b619",
+        "metrics": [
+          {
+            "name": "execution_success",
+            "score": 0.0,
+            "success": false,
+            "reason": "execution_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "parse_success",
+            "score": 1.0,
+            "success": true,
+            "reason": "parse_success receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "schema_compliance",
+            "score": 0.0,
+            "success": false,
+            "reason": "schema_compliance receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "evidence_validity",
+            "score": 0.0,
+            "success": false,
+            "reason": "evidence_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "temporal_integrity",
+            "score": 1.0,
+            "success": true,
+            "reason": "temporal_integrity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "ground_truth_isolation",
+            "score": 1.0,
+            "success": true,
+            "reason": "ground_truth_isolation receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "context_binding",
+            "score": 1.0,
+            "success": true,
+            "reason": "context_binding receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          },
+          {
+            "name": "output_contract_validity",
+            "score": 0.0,
+            "success": false,
+            "reason": "output_contract_validity receipt check, not semantic quality or strict historical PIT certification",
+            "error": null
+          }
+        ]
+      }
+    ],
+    "judge_calls": 0,
+    "network_blocked": true,
+    "definitions": {
+      "execution_success": "Binary bounded receipt/property check; see checks() and per-record results.",
+      "parse_success": "Binary bounded receipt/property check; see checks() and per-record results.",
+      "schema_compliance": "Binary bounded receipt/property check; see checks() and per-record results.",
+      "evidence_validity": "Binary bounded receipt/property check; see checks() and per-record results.",
+      "temporal_integrity": "Binary bounded receipt/property check; see checks() and per-record results.",
+      "ground_truth_isolation": "Binary bounded receipt/property check; see checks() and per-record results.",
+      "context_binding": "Binary bounded receipt/property check; see checks() and per-record results.",
+      "output_contract_validity": "Binary bounded receipt/property check; see checks() and per-record results."
+    },
+    "content_quality_not_measured": true
+  },
+  "judge_pro_diagnostic": {
+    "attempts": 15,
+    "provider_success": 10,
+    "parse_success": 5,
+    "schema_only_valid": 5,
+    "accepted_labels": 0,
+    "rows": [
+      {
+        "sample_id": "cb-0050013765f1198cade4",
+        "provider": "SUCCEEDED",
+        "parse": "FAILED",
+        "raw_schema_status": "NOT_RUN",
+        "schema_only_replay": false,
+        "literal_quote_status": "NOT_RUN",
+        "error": {
+          "type": "JSONDecodeError",
+          "message": "Expecting ',' delimiter: line 24 column 63 (char 2182)"
+        },
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge\\cb-0050013765f1198cade4\\artifact.json"
+      },
+      {
+        "sample_id": "cb-10c3baf5823776e51d36",
+        "provider": "SUCCEEDED",
+        "parse": "PASSED",
+        "raw_schema_status": "FAILED",
+        "schema_only_replay": true,
+        "literal_quote_status": "FAILED",
+        "error": {
+          "type": "ValueError",
+          "message": "judge_quote_not_in_editorial"
+        },
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge\\cb-10c3baf5823776e51d36\\artifact.json"
+      },
+      {
+        "sample_id": "cb-19e720acf3c06a505359",
+        "provider": "SUCCEEDED",
+        "parse": "PASSED",
+        "raw_schema_status": "FAILED",
+        "schema_only_replay": true,
+        "literal_quote_status": "FAILED",
+        "error": {
+          "type": "ValueError",
+          "message": "judge_quote_not_in_editorial"
+        },
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge\\cb-19e720acf3c06a505359\\artifact.json"
+      },
+      {
+        "sample_id": "cb-427eb4078eb315746e1d",
+        "provider": "SUCCEEDED",
+        "parse": "FAILED",
+        "raw_schema_status": "NOT_RUN",
+        "schema_only_replay": false,
+        "literal_quote_status": "NOT_RUN",
+        "error": {
+          "type": "JSONDecodeError",
+          "message": "Expecting ',' delimiter: line 63 column 90 (char 3640)"
+        },
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge\\cb-427eb4078eb315746e1d\\artifact.json"
+      },
+      {
+        "sample_id": "cb-48bf103796cbdb608d2a",
+        "provider": "FAILED",
+        "parse": "NOT_RUN",
+        "raw_schema_status": "NOT_RUN",
+        "schema_only_replay": false,
+        "literal_quote_status": "NOT_RUN",
+        "error": {
+          "type": "ValueError",
+          "message": "provider_http_402"
+        },
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge\\cb-48bf103796cbdb608d2a\\artifact.json"
+      },
+      {
+        "sample_id": "cb-4ab1946f6056ffcaa899",
+        "provider": "FAILED",
+        "parse": "NOT_RUN",
+        "raw_schema_status": "NOT_RUN",
+        "schema_only_replay": false,
+        "literal_quote_status": "NOT_RUN",
+        "error": {
+          "type": "ValueError",
+          "message": "provider_http_402"
+        },
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge\\cb-4ab1946f6056ffcaa899\\artifact.json"
+      },
+      {
+        "sample_id": "cb-50cb03dbe1ca9afd92d5",
+        "provider": "SUCCEEDED",
+        "parse": "PASSED",
+        "raw_schema_status": "FAILED",
+        "schema_only_replay": true,
+        "literal_quote_status": "FAILED",
+        "error": {
+          "type": "ValueError",
+          "message": "judge_quote_not_in_editorial"
+        },
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge\\cb-50cb03dbe1ca9afd92d5\\artifact.json"
+      },
+      {
+        "sample_id": "cb-5ace4c7e6cd116400319",
+        "provider": "SUCCEEDED",
+        "parse": "FAILED",
+        "raw_schema_status": "NOT_RUN",
+        "schema_only_replay": false,
+        "literal_quote_status": "NOT_RUN",
+        "error": {
+          "type": "JSONDecodeError",
+          "message": "Expecting property name enclosed in double quotes: line 47 column 1 (char 2254)"
+        },
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge\\cb-5ace4c7e6cd116400319\\artifact.json"
+      },
+      {
+        "sample_id": "cb-7532403d01375366b5ca",
+        "provider": "FAILED",
+        "parse": "NOT_RUN",
+        "raw_schema_status": "NOT_RUN",
+        "schema_only_replay": false,
+        "literal_quote_status": "NOT_RUN",
+        "error": {
+          "type": "ValueError",
+          "message": "provider_http_402"
+        },
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge\\cb-7532403d01375366b5ca\\artifact.json"
+      },
+      {
+        "sample_id": "cb-88839c5ab75fe7c124ea",
+        "provider": "SUCCEEDED",
+        "parse": "FAILED",
+        "raw_schema_status": "NOT_RUN",
+        "schema_only_replay": false,
+        "literal_quote_status": "NOT_RUN",
+        "error": {
+          "type": "JSONDecodeError",
+          "message": "Unterminated string starting at: line 43 column 16 (char 1579)"
+        },
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge\\cb-88839c5ab75fe7c124ea\\artifact.json"
+      },
+      {
+        "sample_id": "cb-8dbb8b0355535fbe549d",
+        "provider": "FAILED",
+        "parse": "NOT_RUN",
+        "raw_schema_status": "NOT_RUN",
+        "schema_only_replay": false,
+        "literal_quote_status": "NOT_RUN",
+        "error": {
+          "type": "ValueError",
+          "message": "provider_http_402"
+        },
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge\\cb-8dbb8b0355535fbe549d\\artifact.json"
+      },
+      {
+        "sample_id": "cb-aaf94d5c67204b31fcb4",
+        "provider": "SUCCEEDED",
+        "parse": "FAILED",
+        "raw_schema_status": "NOT_RUN",
+        "schema_only_replay": false,
+        "literal_quote_status": "NOT_RUN",
+        "error": {
+          "type": "JSONDecodeError",
+          "message": "Expecting value: line 45 column 27 (char 2014)"
+        },
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge\\cb-aaf94d5c67204b31fcb4\\artifact.json"
+      },
+      {
+        "sample_id": "cb-c55e9597dfab8e9de493",
+        "provider": "SUCCEEDED",
+        "parse": "PASSED",
+        "raw_schema_status": "FAILED",
+        "schema_only_replay": true,
+        "literal_quote_status": "FAILED",
+        "error": {
+          "type": "ValueError",
+          "message": "judge_quote_not_in_editorial"
+        },
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge\\cb-c55e9597dfab8e9de493\\artifact.json"
+      },
+      {
+        "sample_id": "cb-de144ece26ed0f6e37a5",
+        "provider": "FAILED",
+        "parse": "NOT_RUN",
+        "raw_schema_status": "NOT_RUN",
+        "schema_only_replay": false,
+        "literal_quote_status": "NOT_RUN",
+        "error": {
+          "type": "ValueError",
+          "message": "provider_http_402"
+        },
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge\\cb-de144ece26ed0f6e37a5\\artifact.json"
+      },
+      {
+        "sample_id": "cb-e157f23a83e8881fa1f0",
+        "provider": "SUCCEEDED",
+        "parse": "PASSED",
+        "raw_schema_status": "FAILED",
+        "schema_only_replay": true,
+        "literal_quote_status": "FAILED",
+        "error": {
+          "type": "ValueError",
+          "message": "judge_quote_not_in_editorial"
+        },
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge\\cb-e157f23a83e8881fa1f0\\artifact.json"
+      }
+    ],
+    "no_scores_pooled_across_judge_revisions": true,
+    "provisional_schema_replay_not_accepted_labels": true
+  },
+  "judge_final_failed_provider_attempt": {
+    "attempts": 1,
+    "provider_success": 0,
+    "parse_success": 0,
+    "schema_only_valid": 0,
+    "accepted_labels": 0,
+    "rows": [
+      {
+        "sample_id": "cb-c55e9597dfab8e9de493",
+        "provider": "FAILED",
+        "parse": "NOT_RUN",
+        "raw_schema_status": "NOT_RUN",
+        "schema_only_replay": false,
+        "literal_quote_status": "NOT_RUN",
+        "error": {
+          "type": "ValueError",
+          "message": "provider_http_402"
+        },
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge-final-v1\\cb-c55e9597dfab8e9de493\\artifact.json"
+      }
+    ],
+    "no_scores_pooled_across_judge_revisions": true,
+    "provisional_schema_replay_not_accepted_labels": true
+  },
+  "judge_final": {
+    "attempts": 14,
+    "provider_success": 14,
+    "parse_success": 14,
+    "schema_only_valid": 14,
+    "accepted_labels": 14,
+    "rows": [
+      {
+        "sample_id": "cb-10c3baf5823776e51d36",
+        "provider": "SUCCEEDED",
+        "parse": "PASSED",
+        "raw_schema_status": "PASSED",
+        "schema_only_replay": true,
+        "literal_quote_status": "PASSED",
+        "error": null,
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge-final-v1-provider-recovery-01\\cb-10c3baf5823776e51d36\\artifact.json"
+      },
+      {
+        "sample_id": "cb-19e720acf3c06a505359",
+        "provider": "SUCCEEDED",
+        "parse": "PASSED",
+        "raw_schema_status": "PASSED",
+        "schema_only_replay": true,
+        "literal_quote_status": "PASSED",
+        "error": null,
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge-final-v1-provider-recovery-01\\cb-19e720acf3c06a505359\\artifact.json"
+      },
+      {
+        "sample_id": "cb-427eb4078eb315746e1d",
+        "provider": "SUCCEEDED",
+        "parse": "PASSED",
+        "raw_schema_status": "PASSED",
+        "schema_only_replay": true,
+        "literal_quote_status": "PASSED",
+        "error": null,
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge-final-v1-provider-recovery-01\\cb-427eb4078eb315746e1d\\artifact.json"
+      },
+      {
+        "sample_id": "cb-48bf103796cbdb608d2a",
+        "provider": "SUCCEEDED",
+        "parse": "PASSED",
+        "raw_schema_status": "PASSED",
+        "schema_only_replay": true,
+        "literal_quote_status": "PASSED",
+        "error": null,
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge-final-v1-provider-recovery-01\\cb-48bf103796cbdb608d2a\\artifact.json"
+      },
+      {
+        "sample_id": "cb-4ab1946f6056ffcaa899",
+        "provider": "SUCCEEDED",
+        "parse": "PASSED",
+        "raw_schema_status": "PASSED",
+        "schema_only_replay": true,
+        "literal_quote_status": "PASSED",
+        "error": null,
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge-final-v1-provider-recovery-01\\cb-4ab1946f6056ffcaa899\\artifact.json"
+      },
+      {
+        "sample_id": "cb-50cb03dbe1ca9afd92d5",
+        "provider": "SUCCEEDED",
+        "parse": "PASSED",
+        "raw_schema_status": "PASSED",
+        "schema_only_replay": true,
+        "literal_quote_status": "PASSED",
+        "error": null,
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge-final-v1-provider-recovery-01\\cb-50cb03dbe1ca9afd92d5\\artifact.json"
+      },
+      {
+        "sample_id": "cb-5ace4c7e6cd116400319",
+        "provider": "SUCCEEDED",
+        "parse": "PASSED",
+        "raw_schema_status": "PASSED",
+        "schema_only_replay": true,
+        "literal_quote_status": "PASSED",
+        "error": null,
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge-final-v1-provider-recovery-01\\cb-5ace4c7e6cd116400319\\artifact.json"
+      },
+      {
+        "sample_id": "cb-7532403d01375366b5ca",
+        "provider": "SUCCEEDED",
+        "parse": "PASSED",
+        "raw_schema_status": "PASSED",
+        "schema_only_replay": true,
+        "literal_quote_status": "PASSED",
+        "error": null,
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge-final-v1-provider-recovery-01\\cb-7532403d01375366b5ca\\artifact.json"
+      },
+      {
+        "sample_id": "cb-88839c5ab75fe7c124ea",
+        "provider": "SUCCEEDED",
+        "parse": "PASSED",
+        "raw_schema_status": "PASSED",
+        "schema_only_replay": true,
+        "literal_quote_status": "PASSED",
+        "error": null,
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge-final-v1-provider-recovery-01\\cb-88839c5ab75fe7c124ea\\artifact.json"
+      },
+      {
+        "sample_id": "cb-8dbb8b0355535fbe549d",
+        "provider": "SUCCEEDED",
+        "parse": "PASSED",
+        "raw_schema_status": "PASSED",
+        "schema_only_replay": true,
+        "literal_quote_status": "PASSED",
+        "error": null,
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge-final-v1-provider-recovery-01\\cb-8dbb8b0355535fbe549d\\artifact.json"
+      },
+      {
+        "sample_id": "cb-aaf94d5c67204b31fcb4",
+        "provider": "SUCCEEDED",
+        "parse": "PASSED",
+        "raw_schema_status": "PASSED",
+        "schema_only_replay": true,
+        "literal_quote_status": "PASSED",
+        "error": null,
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge-final-v1-provider-recovery-01\\cb-aaf94d5c67204b31fcb4\\artifact.json"
+      },
+      {
+        "sample_id": "cb-c55e9597dfab8e9de493",
+        "provider": "SUCCEEDED",
+        "parse": "PASSED",
+        "raw_schema_status": "PASSED",
+        "schema_only_replay": true,
+        "literal_quote_status": "PASSED",
+        "error": null,
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge-final-v1-provider-recovery-01\\cb-c55e9597dfab8e9de493\\artifact.json"
+      },
+      {
+        "sample_id": "cb-de144ece26ed0f6e37a5",
+        "provider": "SUCCEEDED",
+        "parse": "PASSED",
+        "raw_schema_status": "PASSED",
+        "schema_only_replay": true,
+        "literal_quote_status": "PASSED",
+        "error": null,
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge-final-v1-provider-recovery-01\\cb-de144ece26ed0f6e37a5\\artifact.json"
+      },
+      {
+        "sample_id": "cb-e157f23a83e8881fa1f0",
+        "provider": "SUCCEEDED",
+        "parse": "PASSED",
+        "raw_schema_status": "PASSED",
+        "schema_only_replay": true,
+        "literal_quote_status": "PASSED",
+        "error": null,
+        "artifact_path": "evaluation\\finalization\\artifacts\\golden-pregame-system-final-v1\\judge-final-v1-provider-recovery-01\\cb-e157f23a83e8881fa1f0\\artifact.json"
+      }
+    ],
+    "no_scores_pooled_across_judge_revisions": true,
+    "provisional_schema_replay_not_accepted_labels": true
+  },
+  "judge_summary": {
+    "revision": "judge-final-v1",
+    "recovery_run": "provider-recovery-01",
+    "model": "deepseek-v4-flash",
+    "thinking": "disabled",
+    "temperature": 0.1,
+    "max_tokens": 3500,
+    "n_golden": 20,
+    "n_qualified_generation": 14,
+    "n_judge_attempted": 14,
+    "n_accepted_labels": 14,
+    "provider_success": 14,
+    "parse_success": 14,
+    "schema_success": 14,
+    "quote_exact_pass": 14,
+    "quote_warnings": 0,
+    "hard_gates": {
+      "temporal_leakage": {
+        "PASS": 14,
+        "FAIL": 0,
+        "NA": 0,
+        "n_labels": 14
+      },
+      "factual_consistency": {
+        "PASS": 14,
+        "FAIL": 0,
+        "NA": 0,
+        "n_labels": 14
+      },
+      "unsupported_factual_claim": {
+        "PASS": 14,
+        "FAIL": 0,
+        "NA": 0,
+        "n_labels": 14
+      },
+      "identity_confusion": {
+        "PASS": 14,
+        "FAIL": 0,
+        "NA": 0,
+        "n_labels": 14
+      },
+      "quantitative_or_logic_error": {
+        "PASS": 14,
+        "FAIL": 0,
+        "NA": 0,
+        "n_labels": 14
+      }
+    },
+    "soft_metrics": {
+      "context_grounding": {
+        "n": 14,
+        "mean": 4.6429,
+        "median": 5.0,
+        "distribution": {
+          "5": 9,
+          "4": 5
+        }
+      },
+      "matchup_specificity": {
+        "n": 14,
+        "mean": 4.7143,
+        "median": 5.0,
+        "distribution": {
+          "5": 10,
+          "4": 4
+        }
+      },
+      "reasoning_coherence": {
+        "n": 14,
+        "mean": 4.2143,
+        "median": 4.0,
+        "distribution": {
+          "5": 3,
+          "4": 11
+        }
+      },
+      "uncertainty_handling": {
+        "n": 14,
+        "mean": 4,
+        "median": 4.0,
+        "distribution": {
+          "4": 12,
+          "5": 1,
+          "3": 1
+        }
+      },
+      "conclusion_clarity": {
+        "n": 14,
+        "mean": 4.9286,
+        "median": 5.0,
+        "distribution": {
+          "5": 13,
+          "4": 1
+        }
+      },
+      "information_density": {
+        "n": 14,
+        "mean": 4,
+        "median": 4.0,
+        "distribution": {
+          "4": 14
+        }
+      }
+    },
+    "error_tags": {
+      "redundant_output": 3
+    },
+    "no_hard_fail_count": 14,
+    "not_overall_quality_pass_threshold": true,
+    "execution_fail_or_hold_content_NA": 6,
+    "failures": [],
+    "source_index_hash": "b3ec67a891f51bd78119f2b868dfdc143da43bb9384f992919c1f174432239c2",
+    "model_calls": 0,
+    "human_labels": 0,
+    "human_judge_agreement": null,
+    "limitations": [
+      "Same provider/model family as generator; uncalibrated.",
+      "Scores conditional on14 gate-qualified generations, not20 or300.",
+      "Pro diagnostic scores excluded; no best-of-N."
+    ]
+  },
+  "human": {
+    "human_eval_ready": true,
+    "prepared_articles": 14,
+    "live_tasks": 1,
+    "annotations": 0,
+    "workspace": {
+      "project_id": 1,
+      "port": 8686,
+      "url": "http://127.0.0.1:8686/projects/1/data"
+    },
+    "rubric_path": "evaluation/golden_set/v1/rubric.json",
+    "protocol": "chronological blind, one new task after current annotation; intermediate Forecast and Judge labels excluded",
+    "qualification_hash": "f9e98e8deb886124b63a84a81972c5675fe2015b9dfa61b2567fa52bdf6a9d08",
+    "raw_articles": 15
+  },
+  "bad_case_event_groups": 87,
+  "bad_case_taxonomy": {
+    "OTHER_UNATTRIBUTED": 39,
+    "VALIDATOR": 5,
+    "REPAIR": 6,
+    "EVALUATION_ADAPTER": 14,
+    "SCHEMA": 12,
+    "MODEL_GENERATION": 3,
+    "PROMPT_CONTRACT": 8
+  },
+  "regression": {
+    "n": 47,
+    "passed": 47,
+    "failed": 0,
+    "skipped": 0,
+    "target": "replay pinned V4 archived acceptance/rejection contracts; not new Final E2E or repaired basketball reasoning",
+    "rows": [
+      {
+        "case_id": "bad-97177c3b73ece406c6ae8144",
+        "observed": "REPLAY_ACCEPTED",
+        "expected": "REPLAY_ACCEPTED",
+        "pass": true,
+        "error": null
+      },
+      {
+        "case_id": "bad-b9dbabb31d69e5746232817d",
+        "observed": "REPLAY_ACCEPTED",
+        "expected": "REPLAY_ACCEPTED",
+        "pass": true,
+        "error": null
+      },
+      {
+        "case_id": "bad-71564fecf7554fd52a00cced",
+        "observed": "REPLAY_ACCEPTED",
+        "expected": "REPLAY_ACCEPTED",
+        "pass": true,
+        "error": null
+      },
+      {
+        "case_id": "bad-22555c59a4c72b2dac6585d4",
+        "observed": "REPLAY_ACCEPTED",
+        "expected": "REPLAY_ACCEPTED",
+        "pass": true,
+        "error": null
+      },
+      {
+        "case_id": "bad-c954c0777486d6c4cdcb51cc",
+        "observed": "REPLAY_ACCEPTED",
+        "expected": "REPLAY_ACCEPTED",
+        "pass": true,
+        "error": null
+      },
+      {
+        "case_id": "bad-146942689bdb93caa53fbc57",
+        "observed": "REPLAY_ACCEPTED",
+        "expected": "REPLAY_ACCEPTED",
+        "pass": true,
+        "error": null
+      },
+      {
+        "case_id": "bad-c51d9f79dafc59ff68d3ce9f",
+        "observed": "REPLAY_ACCEPTED",
+        "expected": "REPLAY_ACCEPTED",
+        "pass": true,
+        "error": null
+      },
+      {
+        "case_id": "bad-9d3bf8543a1361a687813be4",
+        "observed": "REPLAY_ACCEPTED",
+        "expected": "REPLAY_ACCEPTED",
+        "pass": true,
+        "error": null
+      },
+      {
+        "case_id": "bad-541e1888b6fade079964d7e8",
+        "observed": "REPLAY_ACCEPTED",
+        "expected": "REPLAY_ACCEPTED",
+        "pass": true,
+        "error": null
+      },
+      {
+        "case_id": "bad-aaa63180ece0dbc52b07174c",
+        "observed": "REPLAY_REJECTED",
+        "expected": "REPLAY_REJECTED",
+        "pass": true,
+        "error": "Raw JSON unavailable; retained failure, no salvage."
+      },
+      {
+        "case_id": "bad-dbfb0d28fde8a7a33817ab89",
+        "observed": "REPLAY_ACCEPTED",
+        "expected": "REPLAY_ACCEPTED",
+        "pass": true,
+        "error": null
+      },
+      {
+        "case_id": "bad-0574a5ccdedd086e14214576",
+        "observed": "REPLAY_ACCEPTED",
+        "expected": "REPLAY_ACCEPTED",
+        "pass": true,
+        "error": null
+      },
+      {
+        "case_id": "bad-59d3adff2c72a899f25c4e9e",
+        "observed": "REPLAY_ACCEPTED",
+        "expected": "REPLAY_ACCEPTED",
+        "pass": true,
+        "error": null
+      },
+      {
+        "case_id": "bad-a6c6484ca7774f5c30e8eddc",
+        "observed": "REPLAY_ACCEPTED",
+        "expected": "REPLAY_ACCEPTED",
+        "pass": true,
+        "error": null
+      },
+      {
+        "case_id": "bad-32f3b3e0a6f50ee88172b133",
+        "observed": "REPLAY_ACCEPTED",
+        "expected": "REPLAY_ACCEPTED",
+        "pass": true,
+        "error": null
+      },
+      {
+        "case_id": "bad-1de9577aa7205b17f3eec8d9",
+        "observed": "REPLAY_ACCEPTED",
+        "expected": "REPLAY_ACCEPTED",
+        "pass": true,
+        "error": null
+      },
+      {
+        "case_id": "bad-ba065f3ce35ae0f18fdd385d",
+        "observed": "REPLAY_ACCEPTED",
+        "expected": "REPLAY_ACCEPTED",
+        "pass": true,
+        "error": null
+      },
+      {
+        "case_id": "bad-f721319efbd5b6c2115c1eac",
+        "observed": "REPLAY_ACCEPTED",
+        "expected": "REPLAY_ACCEPTED",
+        "pass": true,
+        "error": null
+      },
+      {
+        "case_id": "bad-544915b2f3f507f76901c19a",
+        "observed": "REPLAY_ACCEPTED",
+        "expected": "REPLAY_ACCEPTED",
+        "pass": true,
+        "error": null
+      },
+      {
+        "case_id": "bad-ce6a5a0f3ac778683d3e5e46",
+        "observed": "REPLAY_ACCEPTED",
+        "expected": "REPLAY_ACCEPTED",
+        "pass": true,
+        "error": null
+      },
+      {
+        "case_id": "bad-7d8ec7f3f446604f4295aaea",
+        "observed": "REPLAY_ACCEPTED",
+        "expected": "REPLAY_ACCEPTED",
+        "pass": true,
+        "error": null
+      },
+      {
+        "case_id": "bad-5c5f472f2eeeb28fe0502878",
+        "observed": "REPLAY_REJECTED",
+        "expected": "REPLAY_REJECTED",
+        "pass": true,
+        "error": "ValidationError:\"Denver's observed net rating (+11.0) and recent form (+14.4 net over five games) plus home court give it a clear edge over a Miami team whose recent-5 net is only +3.6. The historical head-to-head (9-1 Denver) reinforces the matchup, but w"
+      },
+      {
+        "case_id": "bad-7c8af97e16987013879a9703",
+        "observed": "REPLAY_REJECTED",
+        "expected": "REPLAY_REJECTED",
+        "pass": true,
+        "error": "ValueError:independent_output_invents_market_context"
+      },
+      {
+        "case_id": "bad-3a669dd7d2c1616a9cd0d87d",
+        "observed": "REPLAY_REJECTED",
+        "expected": "REPLAY_REJECTED",
+        "pass": true,
+        "error": "ValueError:independent_output_invents_market_context"
+      },
+      {
+        "case_id": "bad-6ad726a69a89c22afe4e2072",
+        "observed": "REPLAY_REJECTED",
+        "expected": "REPLAY_REJECTED",
+        "pass": true,
+        "error": "ValidationError:\"Detroit's historical rotation features a high-usage lead guard and a productive interior big, while Orlando's recent scoring has been driven by its wing and guard group. The ability of each side to impose its preferred style will shape the"
+      },
+      {
+        "case_id": "bad-e0a9f25039beed8be7ccd2bd",
+        "observed": "REPLAY_ACCEPTED",
+        "expected": "REPLAY_ACCEPTED",
+        "pass": true,
+        "error": null
+      },
+      {
+        "case_id": "bad-afaf983a0689021bf854ae27",
+        "observed": "REPLAY_ACCEPTED",
+        "expected": "REPLAY_ACCEPTED",
+        "pass": true,
+        "error": null
+      },
+      {
+        "case_id": "bad-4a21b85352f636b69af36a74",
+        "observed": "REPLAY_REJECTED",
+        "expected": "REPLAY_REJECTED",
+        "pass": true,
+        "error": "ValidationError:'historical.away.6609' is not one of ['context.head_to_head', 'context.injury', 'context.known_missing_information', 'context.matchup', 'context.schedule_context', 'context.team_a', 'context.team_b', 'historical.away.049b5e03c57e', 'histori"
+      },
+      {
+        "case_id": "bad-e545cddfd557c915474ad3d9",
+        "observed": "REPLAY_REJECTED",
+        "expected": "REPLAY_REJECTED",
+        "pass": true,
+        "error": "ValidationError:\"Phoenix has a modest home edge supported by a slightly better full-season net rating and an 8-2 head-to-head record over the last 10 meetings, but Philadelphia's stronger recent-5 form and the unknown availability of key players keep this "
+      },
+      {
+        "case_id": "bad-ca8b675c2b3177f52986ed3e",
+        "observed": "REPLAY_REJECTED",
+        "expected": "REPLAY_REJECTED",
+        "pass": true,
+        "error": "ValidationError:\"Oklahoma City should control the game from the start, using its elite defense to force Milwaukee into contested jumpers and turnovers. SGA and Holmgren should lead a balanced attack, while Milwaukee relies on Rollins and Kuzma for creation"
+      },
+      {
+        "case_id": "bad-b1c99d0d6681d035bbb3bb2a",
+        "observed": "REPLAY_ACCEPTED",
+        "expected": "REPLAY_ACCEPTED",
+        "pass": true,
+        "error": null
+      },
+      {
+        "case_id": "bad-65388d54862db7a96974bbf5",
+        "observed": "REPLAY_REJECTED",
+        "expected": "REPLAY_REJECTED",
+        "pass": true,
+        "error": "ValidationError:\"Portland, better rested and healthier by historical observation, controls the game from the middle of the first quarter. Indiana's back-to-back legs and poor defense allow Portland to build a double-digit lead by halftime. Indiana gets som"
+      },
+      {
+        "case_id": "bad-eb5fbfdd3818b235c74e1f29",
+        "observed": "REPLAY_REJECTED",
+        "expected": "REPLAY_REJECTED",
+        "pass": true,
+        "error": "ValidationError:\"Cleveland is the clearly stronger side by season-long and recent form, and Utah's defense has been especially vulnerable over the last five games. The road team should control the game and win by a comfortable margin, though the absence of"
+      },
+      {
+        "case_id": "bad-eca02c47d158165a35e53a81",
+        "observed": "REPLAY_REJECTED",
+        "expected": "REPLAY_REJECTED",
+        "pass": true,
+        "error": "ValidationError:\"Can Chicago's high-pace, high-scoring recent form keep this close against a far stronger San Antonio team, or will the Spurs' talent and recent dominance produce a comfortable home win?\" is too long\n\nFailed validating 'maxLength' in schema"
+      },
+      {
+        "case_id": "bad-38d51d2f61fe3bd1dfff0a61",
+        "observed": "REPLAY_REJECTED",
+        "expected": "REPLAY_REJECTED",
+        "pass": true,
+        "error": "ValidationError:'historical.away.0c6be9499402' is not one of ['context.head_to_head', 'context.injury', 'context.known_missing_information', 'context.matchup', 'context.schedule_context', 'context.team_a', 'context.team_b', 'historical.away.02f6e9a9ca11', "
+      },
+      {
+        "case_id": "bad-3dde5aaf0bb0bb26366d07dd",
+        "observed": "REPLAY_ACCEPTED",
+        "expected": "REPLAY_ACCEPTED",
+        "pass": true,
+        "error": null
+      },
+      {
+        "case_id": "bad-510cf3f120a07ff13a7f845f",
+        "observed": "REPLAY_ACCEPTED",
+        "expected": "REPLAY_ACCEPTED",
+        "pass": true,
+        "error": null
+      },
+      {
+        "case_id": "bad-a73a5ead00c4edf8c21d32b2",
+        "observed": "REPLAY_ACCEPTED",
+        "expected": "REPLAY_ACCEPTED",
+        "pass": true,
+        "error": null
+      },
+      {
+        "case_id": "bad-e1e865f0e531640d5effb6dd",
+        "observed": "REPLAY_ACCEPTED",
+        "expected": "REPLAY_ACCEPTED",
+        "pass": true,
+        "error": null
+      },
+      {
+        "case_id": "bad-46aaee7eb7b63cc21f352885",
+        "observed": "REPLAY_REJECTED",
+        "expected": "REPLAY_REJECTED",
+        "pass": true,
+        "error": "ValidationError:'historical.home.4065731' is not one of ['context.head_to_head', 'context.injury', 'context.known_missing_information', 'context.matchup', 'context.schedule_context', 'context.team_a', 'context.team_b', 'historical.away.23898c643a5b', 'hist"
+      },
+      {
+        "case_id": "bad-956fc364b6c78d7afe60855b",
+        "observed": "REPLAY_REJECTED",
+        "expected": "REPLAY_REJECTED",
+        "pass": true,
+        "error": "ValueError:unknown_evidence_not_resolved"
+      },
+      {
+        "case_id": "bad-7dcad729c72024671f872733",
+        "observed": "REPLAY_REJECTED",
+        "expected": "REPLAY_REJECTED",
+        "pass": true,
+        "error": "Raw JSON unavailable; retained failure, no salvage."
+      },
+      {
+        "case_id": "bad-78d6c64b5b65eef0537db106",
+        "observed": "REPLAY_REJECTED",
+        "expected": "REPLAY_REJECTED",
+        "pass": true,
+        "error": "ValidationError:Additional properties are not allowed ('maxItems' was unexpected)\n\nFailed validating 'additionalProperties' in schema['properties']['analysis_core']['properties']['flip_conditions']['items']:\n    {'additionalProperties': False,\n     'proper"
+      },
+      {
+        "case_id": "bad-360fee7bb875e918920b0ba7",
+        "observed": "REPLAY_REJECTED",
+        "expected": "REPLAY_REJECTED",
+        "pass": true,
+        "error": "ValidationError:Additional properties are not allowed ('judgment_effect_note' was unexpected)\n\nFailed validating 'additionalProperties' in schema['properties']['analysis_core']['properties']['flip_conditions']['items']:\n    {'additionalProperties': False,\n"
+      },
+      {
+        "case_id": "bad-a683fa6073b4a29edb33b585",
+        "observed": "REPLAY_REJECTED",
+        "expected": "REPLAY_REJECTED",
+        "pass": true,
+        "error": "ValidationError:'historical.home.4065731' is not one of ['context.head_to_head', 'context.injury', 'context.known_missing_information', 'context.matchup', 'context.schedule_context', 'context.team_a', 'context.team_b', 'historical.away.23898c643a5b', 'hist"
+      },
+      {
+        "case_id": "bad-f6304cf5c9eb2ad04cf53726",
+        "observed": "REPLAY_REJECTED",
+        "expected": "REPLAY_REJECTED",
+        "pass": true,
+        "error": "Raw JSON unavailable; retained failure, no salvage."
+      },
+      {
+        "case_id": "bad-25357f6ebb9827e35036bf64",
+        "observed": "REPLAY_REJECTED",
+        "expected": "REPLAY_REJECTED",
+        "pass": true,
+        "error": "ValidationError:'historical.away.d4066320' is not one of ['context.head_to_head', 'context.injury', 'context.known_missing_information', 'context.matchup', 'context.schedule_context', 'context.team_a', 'context.team_b', 'historical.away.00bde50aae36', 'his"
+      }
+    ]
+  },
+  "phoenix": {
+    "final_receipts": 85,
+    "final_persisted": 85,
+    "missing_or_errors": [],
+    "historical_reported_spans": 138,
+    "historical_reopened_receipt_count": 138,
+    "historical_reverified_persisted": 138,
+    "historical_reported_model_calls": 98,
+    "historical_reported_acceptance_spans": 40,
+    "production_monitoring": false
+  },
+  "tests": {
+    "tests": 68,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 68
+  },
+  "syntax_files": [
+    "balance_check.py",
+    "common.py",
+    "contracts.py",
+    "data.py",
+    "enrich.py",
+    "evaluate.py",
+    "finish.py",
+    "human.py",
+    "judge.py",
+    "judge_final.py",
+    "judge_results.py",
+    "qualification.py",
+    "resume_judge.py",
+    "run.py",
+    "services.py",
+    "test_assets.py",
+    "test_finalization.py",
+    "test_judge_recovery.py",
+    "test_judge_tools.py",
+    "verify_closeout.py",
+    "__init__.py"
+  ],
+  "diff_check": "PASSED",
+  "protection": {
+    "protected_original_files": 17351,
+    "drift": [],
+    "published_payloads_unchanged": true,
+    "prediction_versions": 5,
+    "postgame_versions": 7
+  },
+  "baseline_v1_e2e": 0,
+  "v4_e2e": 14,
+  "comparison_causal": false,
+  "human_labels": 0,
+  "human_judge_agreement": null,
+  "blockers": [],
+  "production_modified": false,
+  "commit": false,
+  "push": false
+}

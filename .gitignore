@@ -40,9 +40,18 @@ __pycache__/
 **/calls/
 *.log
 *.xml
+!evaluation/golden_set/v1/pregame_config.xml
+!evaluation/golden_set/v1/postgame_config.xml
 
 # Browser captures and unreviewed visual assets
 .playwright-cli/
 docs/qa/
 **/screenshots/
 v2/frontend/static/logos/
+_site/
+node_modules/
+evaluation/**/browser_state/
+evaluation/**/services/
+evaluation/**/contexts/
+evaluation/**/ground_truth/
+evaluation/**/private/

@@ -5,6 +5,7 @@ import hashlib
 import json
 import os
 import re
+import ipaddress
 import urllib.request
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -27,6 +28,8 @@ TRUSTED_DOMAINS = (
 # Public market pages are a display-only fallback. They are deliberately kept
 # separate from the bookmaker allowlist used by the numeric prediction path.
 MARKET_DOMAINS = (
+    "sports.yahoo.com",
+    "actionnetwork.com",
     "fanduel.com",
     "betmgm.com",
     "foxsports.com",
@@ -36,6 +39,8 @@ MARKET_DOMAINS = (
     "espn.com",
 )
 MARKET_SOURCE_TIER = {
+    "sports.yahoo.com": 2,
+    "actionnetwork.com": 2,
     "fanduel.com": 1,
     "betmgm.com": 1,
     "foxsports.com": 2,
@@ -49,6 +54,17 @@ ALLOWED_FOCUS_CATEGORIES = frozenset({"availability", "lineup", "roster_news", "
 
 def _host(url: str) -> str:
     return (urlparse(url).hostname or "").casefold().removeprefix("www.")
+
+
+def _public_discovery_url(url):
+    parsed = urlparse(url)
+    host = parsed.hostname or ""
+    if parsed.scheme != "https" or not host or parsed.username or parsed.password or host in {"localhost"} or host.endswith((".local", ".internal")):
+        return False
+    try:
+        return ipaddress.ip_address(host).is_global
+    except ValueError:
+        return "." in host
 
 
 def _trusted(url: str) -> bool:
@@ -149,6 +165,35 @@ def _totals(text: str) -> list[float]:
     return values
 
 
+def _prose_home_spread(content, game):
+    """Explicit team favorites/underdog prose, not author predictions or scores."""
+    candidates=[]
+    for side in ('home','away'):
+        aliases=_team_aliases(game,side)
+        pattern=r'(?<![A-Za-z])(?:'+'|'.join(re.escape(a)for a in aliases)+r')(?![A-Za-z])[^\n.!?]{0,55}?\b(\d{1,2}(?:\.\d+)?)\s*[- ]point\s+(?:[\"\x27]?home[\"\x27]?\s+)?(favorites?|favourites?|underdogs?)\b'
+        for match in re.finditer(pattern,content,re.I):
+            around=content[max(0,match.start()-10):match.end()+80]
+            if not re.search(r'spread|handicap',around,re.I):continue
+            sentence_start=max(content.rfind('\n',0,match.start()),content.rfind('.',0,match.start()),content.rfind('!',0,match.start()))+1
+            if re.search(r'predict|expect|project|would|could|should|if\b',content[sentence_start:match.end()],re.I):continue
+            points=float(match.group(1))
+            if not 0<points<=40:continue
+            own=points if match.group(2).lower().startswith('underdog') else -points
+            candidates.append(own if side=='home' else -own)
+    return candidates[0]if candidates and len(set(candidates))==1 else None
+
+
+def _prose_moneyline(content,game,side):
+    aliases=set(_team_aliases(game,side));other=set(_team_aliases(game,'away'if side=='home'else'home'))
+    for s,destination in ((side,aliases),('away'if side=='home'else'home',other)):
+        name=game.get(s+'_team')or game.get(s+'_team_name')or''
+        if len(name.split())>1:destination.add(' '.join(name.split()[:-1]))
+    aliases-=other
+    pattern=r'(?<![A-Za-z])(?:'+'|'.join(re.escape(a)for a in sorted(aliases,key=len,reverse=True))+r')(?![A-Za-z])[^\n.!?]{0,45}?([+-]\d{3,4})(?:\s+moneyline|\s+(?:underdog|favorite|favourite))'
+    values=[float(m.group(1))for m in re.finditer(pattern,content,re.I)]
+    return values[0]if values and len(set(values))==1 else None
+
+
 def _mentions_game_date(
     text: str,
     game: dict[str, Any],
@@ -238,16 +283,19 @@ def parse_public_market_reference(
     # A complete paired spread and a total from the same page are required.
     # Generic multi-game boards otherwise let a preceding game's total bind to
     # the target matchup merely because both team names appear later on page.
-    if pair is None or not total_values:
+    prose_spread=_prose_home_spread(content,game)if pair is None else None
+    if (pair is None and prose_spread is None) or not total_values:
         return None
-    home_spread = pair[1]
+    home_spread = pair[1]if pair is not None else prose_spread
     return {
         "status": "available",
         "usage": "display_only_public_market_reference",
         "eligible_prediction_input": False,
         "perspective": "home",
         "home_spread": home_spread,
-        "away_spread": pair[0],
+        "away_spread": pair[0]if pair is not None else -home_spread,
+        "home_moneyline": _prose_moneyline(content,game,'home'),
+        "away_moneyline": _prose_moneyline(content,game,'away'),
         "expected_home_margin": -home_spread if home_spread is not None else None,
         "total": total_values[0] if total_values else None,
         "source_title": title[:300],
@@ -297,6 +345,13 @@ class PregameWebSearch:
         self.transport = transport
         self.replay_transport = replay_transport
         self.local_transport = local_transport or FreeSearchMCPTransport()
+        from .source_body_fetch import SourceBodyFetcher
+        self.body_fetcher = SourceBodyFetcher(self.local_transport) if isinstance(self.local_transport,FreeSearchMCPTransport) else None
+
+    def fetch_bodies(self,urls,*,budget_seconds=60):
+        if self.body_fetcher is not None:
+            return self.body_fetcher.fetch_many(urls,budget_seconds=budget_seconds)
+        return self.local_transport.fetch_many(urls)
 
     @staticmethod
     def _tavily_transport(payload: dict[str, Any]) -> dict[str, Any]:
@@ -353,9 +408,47 @@ class PregameWebSearch:
         game: dict[str, Any],
         categories: set[str] | None = None,
         focus: tuple[str, str] | None = None,
+        analysis_questions: list[dict[str, Any]] | None = None,
     ) -> list[tuple[str, str]]:
         away = self._team_name(game, "away")
         home = self._team_name(game, "home")
+        if game.get("registered_game") and game.get("status") == "scheduled":
+            from .agent import TEAM_NAMES
+            from zoneinfo import ZoneInfo
+            date = self._date(game["scheduled_tipoff"]).astimezone(ZoneInfo("America/New_York")).date().isoformat()
+            year = int(game.get("season_start") or date[:4])
+            phase = "preseason" if game.get("game_type") == "preseason" else "pregame"
+            en = f"{away} {home} {year}-{str(year+1)[-2:]} {phase} {date}"
+            zh = f"{TEAM_NAMES[game['away_team_id']]} {TEAM_NAMES[game['home_team_id']]} {year}-{year+1} {date} {'季前赛' if phase=='preseason' else '赛前'}"
+            topics = {"availability": ("injury status minutes restriction practice update", "伤病 出战 缺阵 限时 训练"),
+                "lineup": ("projected confirmed starters rotation coach comments", "预计首发 确认首发 轮换 教练采访"),
+                "roster_news": ("current roster personnel changes training camp", "当前名单 人员变动 训练营"),
+                "game_story": ("preview recent coach interview matchup", "赛前看点 教练采访 对位"),
+                "market": ("odds spread total", "让分 总分 盘口")}
+            if phase == "preseason":
+                topics.update(availability=("preseason core players playing tonight expected minutes coach preseason usage plan", "季前赛 核心出场 预计分钟 教练计划"),
+                    lineup=("preseason projected starters training camp depth chart rotation bench competition", "季前赛 预计首发 训练营 轮换 替补竞争"),
+                    roster_news=("offseason major trades acquisitions new core training camp current roster", "休赛期 重大交易 新援 核心组合 当前名单"),
+                    game_story=("preseason coach interview practice experimental lineups frontcourt matchup", "季前赛 教练采访 训练 试阵容 对位"))
+            rows = [(category, f"{prefix} {words}") for category, terms in topics.items()
+                    if categories is None or category in categories
+                    for prefix, words in ((en, terms[0]), (zh, terms[1]))]
+            if categories is None or "roster_news" in categories:
+                rows.extend([("roster_news", f"{zh} site:zhibo8.com 伤病 名单 教练"),
+                             ("roster_news", f"{zh} site:hupu.com 伤病 名单 教练")])
+                if phase == "preseason":
+                    rows.extend(("roster_news", f"{team} {year} offseason acquired trade current roster training camp")
+                                for team in (away, home))
+                    rows.extend(("roster_news", f"{team} official current roster {year}-{str(year+1)[-2:]}")
+                                for team in (away, home))
+            if focus and focus[0] in (categories or ALLOWED_FOCUS_CATEGORIES):
+                rows.append((focus[0], f"{en} {focus[1]}"))
+            for question in analysis_questions or []:
+                category = str(question.get("category") or "")
+                text = " ".join(str(question.get("question") or "").split())
+                if text and category in ALLOWED_FOCUS_CATEGORIES and (categories is None or category in categories):
+                    rows.append((category, f"{en} {text[:220]}"))
+            return rows
         matchup = f"{away} vs {home} NBA"
         raw_tipoff = str(game.get("scheduled_tipoff") or "")
         game_date = raw_tipoff[:10]
@@ -396,6 +489,11 @@ class PregameWebSearch:
                 focus[0],
                 f"{away} {home} {game_date[:4]} {focus[1].strip()} NBA",
             ))
+        for question in analysis_questions or []:
+            category = str(question.get("category") or "")
+            text = " ".join(str(question.get("question") or "").split())
+            if text and category in ALLOWED_FOCUS_CATEGORIES and (categories is None or category in categories):
+                candidates.append((category, f"{away} {home} {game_date[:4]} {text[:220]} NBA"))
         return [item for item in candidates if categories is None or item[0] in categories]
 
     def _batch_responses(
@@ -472,6 +570,7 @@ class PregameWebSearch:
         replay: bool = False,
         categories: set[str] | None = None,
         focus: tuple[str, str] | None = None,
+        analysis_questions: list[dict[str, Any]] | None = None,
     ) -> dict[str, Any]:
         cutoff_dt = self._date(cutoff)
         if cutoff_dt is None:
@@ -482,7 +581,7 @@ class PregameWebSearch:
         response_hashes: list[str] = []
         captured_at = now()
         captured_dt = self._date(captured_at)
-        query_rows = self.queries(game, categories, focus)
+        query_rows = self.queries(game, categories, focus, analysis_questions)
         payloads: list[dict[str, Any]] = []
         for category, query in query_rows:
             is_market = category == "market"
@@ -495,11 +594,15 @@ class PregameWebSearch:
                 "include_raw_content": False,
                 "include_domains": list(MARKET_DOMAINS if is_market else TRUSTED_DOMAINS),
             }
+            if game.get("registered_game") and not replay and not is_market:
+                payload.pop("include_domains", None)  # Broad discovery, not broad fact acceptance.
             if replay:
                 payload["end_date"] = cutoff_dt.date().isoformat()
             payloads.append(payload)
 
         responses, providers, batch_error = self._batch_responses(payloads, replay=replay)
+        discovery = bool(game.get("registered_game") and not replay)
+        candidates = []
         for (category, query), payload, response, provider in zip(
             query_rows, payloads, responses, providers, strict=True
         ):
@@ -523,6 +626,27 @@ class PregameWebSearch:
                     title = str(result.get("title") or "")
                     content = str(result.get("content") or "")
                     combined = f"{title}\n{content}"
+                    if discovery:
+                        from .agent import TEAM_NAMES
+                        mentions_team = (_mentions(combined, away_aliases) or _mentions(combined, home_aliases)
+                            or any(TEAM_NAMES[game[f'{side}_team_id']] in combined for side in ('home','away')))
+                        if _public_discovery_url(url) and title and mentions_team:
+                            ident = (category, url)
+                            item = {"id": content_hash({"category": category, "url": url, "cutoff": cutoff}),
+                                "category": category, "url": url, "title": title, "domain": _host(url),
+                                "snippet": content[:1600], "published_at": result.get("published_date"),
+                                "captured_at": now(), "search_provider": current_provider,
+                                "eligible_for_fact": False, "discovery_only": True,
+                                "verification_status": "search_snippet_requires_fetch", "discovered_via": query}
+                            item["provider_temporal_metadata"]=result.get("provider_temporal_metadata") or {}
+                            candidates.append(item)
+                            if ident not in seen_records:
+                                records.append(item); seen_records.add(ident); accepted_count += 1
+                        else:
+                            candidates.append({"category": category, "url": url, "title": title,
+                                "snippet": content[:1600], "rejection_reason": "identity_or_url_unverified", "discovered_via": query})
+                            rejected_count += 1
+                        continue
                     raw_published = result.get("published_date")
                     if replay and raw_published and not self._has_precise_zoned_time(str(raw_published)):
                         rejected_count += 1
@@ -676,6 +800,7 @@ class PregameWebSearch:
                     "accepted": accepted,
                     "rejected": rejected,
                     "attempts": attempts,
+                    "accepted_semantics": "retained_discovery_candidates" if discovery else "accepted_evidence",
                 }
             )
 
@@ -706,4 +831,12 @@ class PregameWebSearch:
         )
         folder.mkdir(parents=True, exist_ok=False)
         save(folder / "evidence.json", artifact)
+        if discovery:
+            artifact["live_registered"] = True
+            artifact["game"] = dict(game)
+            artifact["policy"] = "broad discovery only; no snippet is a fact; fetched source identity/time/provenance verification is required"
+            save(folder / "discovery_receipt.json", {"queried_at": captured_at, "cutoff": cutoff,
+                "queries": payloads, "providers": providers, "candidates": candidates,
+                "raw_responses": responses, "roles": "discovery only; fetched verification required"})
+            artifact["discovery_receipt_path"] = str(folder / "discovery_receipt.json")
         return artifact

@@ -152,7 +152,6 @@ def select_key_factors(report: dict[str, Any], game: dict[str, Any]) -> list[dic
     candidates = [
         ("net_rating_roll15", "近期攻防表现差异", "rating", 3.0),
         ("win_rate_roll15", "近期战绩差异", "percent", 2 / 15),
-        ("rest_days", "休息条件差异", "days", 1.0),
     ]
     return [factor for key, label, kind, threshold in candidates
             if (factor := comparison_factor(report, game, key, label, kind, threshold)) is not None][:3]
@@ -165,13 +164,23 @@ def normalize_availability(report: dict[str, Any]) -> dict[str, Any]:
     records = availability.get("records") or []
     return {
         "status": "available" if records else "unavailable",
-        "message": f"已连接 {len(records)} 条有时间边界的球员状态。" if records else "当前没有可展示的合格记录。",
+        "message": f"已连接 {len(records)} 条球员状态。" if records else "当前没有可展示的合格记录。",
+        **{key: availability[key] for key in (
+            "source_url", "url", "source_published_at", "source_published_at_utc", "published_at",
+            "captured_at", "captured_at_utc", "source_cutoff", "cutoff_time_utc", "cutoff_time", "cutoff", "source",
+            "raw_path", "raw_sha256",
+        ) if key in availability},
         "records": [
             {
                 "player": row.get("player_name"),
                 "team_id": row.get("team_id"),
                 "status": row.get("availability_status") or row.get("status"),
                 "reason": row.get("reason"),
+                **{key: row[key] for key in (
+                    "player_id", "person_id", "player_name", "game_id", "source_url", "url",
+                    "source_published_at", "published_at", "captured_at", "source_cutoff", "cutoff_time_utc",
+                    "raw_path", "raw_sha256",
+                ) if key in row},
             }
             for row in records[:8]
         ],
@@ -213,6 +222,12 @@ def normalize_game(
     prediction = report.get("official_numeric_prediction") or report.get("prediction")
     market = report.get("market_benchmark")
     residual = report.get("residual_prediction")
+    from v2.pregame_system.fact_context import valid_fact_context
+    fact_context = valid_fact_context(
+        report.get("fact_context"), str(game.get("game_id", schedule.get("game_id", ""))),
+        (report.get("snapshot") or {}).get("cutoff"),
+        game.get("scheduled_tipoff", schedule.get("scheduled_tipoff")),
+    )
     pure_source = next((key for key in ("pure_prediction", "basketball_only_prediction") if report.get(key)), None)
     pure = report.get(pure_source) if pure_source else None
     if pure is None and report.get("prediction_method") == "pure_basketball_fallback" and market is None and residual is None:
@@ -278,17 +293,30 @@ def normalize_game(
                 },
             },
             "schedule": {
-                "home_rest_days": value(report, "home_rest_days"),
-                "away_rest_days": value(report, "away_rest_days"),
-                "home_back_to_back": value(report, "home_back_to_back"),
-                "away_back_to_back": value(report, "away_back_to_back"),
+                # These compatibility keys are no longer populated from capped
+                # model features. Only the separately frozen fact context can
+                # support a schedule statement.
+                "home_rest_days": None,
+                "away_rest_days": None,
+                "home_back_to_back": ((fact_context or {}).get("schedule", {}).get("home") or {}).get("back_to_back"),
+                "away_back_to_back": ((fact_context or {}).get("schedule", {}).get("away") or {}).get("back_to_back"),
+                "home": (((fact_context or {}).get("schedule") or {}).get("home") or {
+                    "status": "unavailable", "reason": "no_verified_fact_context", "basis": None,
+                    "back_to_back": None, "source_refs": []}),
+                "away": (((fact_context or {}).get("schedule") or {}).get("away") or {
+                    "status": "unavailable", "reason": "no_verified_fact_context", "basis": None,
+                    "back_to_back": None, "source_refs": []}),
             },
         },
+        "fact_context": fact_context,
         "missing": missing,
         "technical": {
             "prediction_method": report.get("prediction_method") or "saved_pure_prediction",
             "model_version": (report.get("snapshot") or {}).get("model_version"),
+            "runtime_mode": (report.get("snapshot") or {}).get("runtime_mode"),
+            "runtime_asset_identity": (report.get("snapshot") or {}).get("runtime_asset_identity"),
             "cutoff": (report.get("snapshot") or {}).get("cutoff"),
+            "fact_context_cutoff": (fact_context or {}).get("feature_cutoff"),
             "official_final": bool((report.get("snapshot") or {}).get("official_prediction")),
             "source_label": "开发期赛前预测快照",
         },

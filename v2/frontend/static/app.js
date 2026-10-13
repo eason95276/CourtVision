@@ -8,9 +8,15 @@ const state = {
   aiFailures: new Set(),
   aiPending: false,
   currentAnalyses: new Map(),
+  editorialOverlays: new Map(),
   predictionStates: new Map(),
+  factViews: new Map(),
   marketCache: new Map(),
   marketPending: new Map(),
+  marketFetchedAt: new Map(),
+  gameLoads: new Map(),
+  refreshTimer: null,
+  currentChinaDay: null,
 };
 
 const LOCAL_LOGO_TEAMS = new Set([
@@ -53,7 +59,7 @@ const byId = (id) => document.getElementById(id);
 const text = (tag, value, className) => {
   const node = document.createElement(tag);
   if (className) node.className = className;
-  node.textContent = value;
+  node.textContent = playerDisplayCopy(value);
   return node;
 };
 const number = (value, digits = 1) =>
@@ -76,6 +82,8 @@ function activePrediction(game) {
   const payload = state.currentAnalyses.get(game.id);
   const final = payload?.judgment?.final_prediction;
   if (!final || !["home", "away"].includes(final.winner_side)) {
+    if (game.schedule_catalog_fact) return null;
+    if (game.registered_game || !game.prediction || game.prediction.available === false) return null;
     return { ...game.prediction, updated_at: null, composite: false };
   }
   const winner = game[final.winner_side];
@@ -95,13 +103,31 @@ function activePrediction(game) {
 
 function acceptPredictionSelection(gameId, selection) {
   if (!selection || selection.game_id !== gameId) return false;
+  const game = state.data?.games.find((item) => item.id === gameId);
   if (selection.version) {
-    const game = state.data?.games.find((item) => item.id === gameId);
     if (
       !game ||
       selection.version_id !== selection.version.version_id ||
       !analysisCompatible(game, selection.version)
     ) return false;
+  }
+  const factView = selection.fact_view;
+  const version = selection.version;
+  let compatibleFactView = Boolean(
+    factView && version &&
+    factView.schema_version === "pregame-fact-view-v1" &&
+    factView.game_id === gameId &&
+    factView.version_id === selection.version_id &&
+    factView.source_payload_sha256 === version.payload_sha256 &&
+    factView.context?.schema_version === "pregame-fact-context-v1" &&
+    factView.context?.game_id === gameId
+  );
+  if (compatibleFactView && factView.context.feature_cutoff) {
+    const factCutoff = Date.parse(factView.context.feature_cutoff);
+    const inputCutoff = Date.parse(version.input_cutoff_at || "");
+    const tipoff = Date.parse(game?.tipoff || "");
+    compatibleFactView = Number.isFinite(factCutoff) && Number.isFinite(inputCutoff) &&
+      Number.isFinite(tipoff) && factCutoff <= inputCutoff && factCutoff < tipoff;
   }
   const previous = state.predictionStates.get(gameId);
   const revision = Number(selection.state_revision ?? 0);
@@ -114,11 +140,31 @@ function acceptPredictionSelection(gameId, selection) {
     previous.version_id !== selection.version_id
   ) return false;
   state.predictionStates.set(gameId, selection);
+  const editorial = selection.display_projection?.portfolio_editorial;
+  if (version && editorial?.schema_version === "portfolio-editorial-v1" &&
+      editorial.base_prediction_version_id === version.version_id &&
+      editorial.base_prediction_payload_sha256 === version.payload_sha256 &&
+      editorial.editorial && typeof editorial.editorial.analysis_article === "string") {
+    state.editorialOverlays.set(gameId, {
+      basePredictionVersionId: editorial.base_prediction_version_id,
+      editorial: editorial.editorial,
+    });
+  } else {
+    state.editorialOverlays.delete(gameId);
+  }
+  if (compatibleFactView) state.factViews.set(gameId, factView);
+  else state.factViews.delete(gameId);
+  if (previous?.version_id && previous.version_id !== selection.version_id) {
+    state.marketCache.delete(gameId); state.marketFetchedAt.delete(gameId);
+  }
   if (selection.version?.judgment?.final_prediction) {
     state.currentAnalyses.set(gameId, selection.version);
     state.aiFailures.delete(gameId);
   } else {
     state.currentAnalyses.delete(gameId);
+  }
+  if (state.activeGame?.id === gameId && typeof renderDetail === "function") {
+    renderDetail(state.activeGame);
   }
   return true;
 }
@@ -132,6 +178,7 @@ function analysisCompatible(game, payload) {
     "two-stage-forecast-v1",
   ].includes(payload.analysis_contract_version)) return false;
   if (payload.game_id !== game.id) return false;
+  if (Number(payload.schedule_revision ?? 1) !== Number(game.schedule_revision ?? 1)) return false;
   const identity = payload.game_identity;
   if (!identity) return false;
   if (identity.game_id !== game.id) return false;
@@ -198,10 +245,27 @@ function displayClock(value) {
 }
 
 function statusLabel(game) {
-  if (game.status === "scheduled") return "未开始";
-  if (game.status === "in") return "进行中";
-  if (game.status === "post") return "已结束";
+  if (game.status === "scheduled") {
+    const tipoff = Date.parse(game.tipoff || "");
+    return Number.isFinite(tipoff) && tipoff <= Date.now() ? "赛况待更新" : "未开始";
+  }
+  if (["in", "in_progress", "live"].includes(game.status)) return "进行中";
+  if (["post", "final", "completed", "finished"].includes(game.status)) return "已结束";
+  if (["cancelled", "canceled"].includes(game.status)) return "已取消";
+  if (["postponed", "suspended"].includes(game.status)) return "已改期";
   return game.status || "状态未知";
+}
+
+function hasVisibleScore(game) {
+  return ["in", "in_progress", "live", "post", "final", "completed", "finished"].includes(game.status) &&
+    game.home?.score !== null && game.home?.score !== undefined &&
+    game.away?.score !== null && game.away?.score !== undefined &&
+    Number.isFinite(Number(game.home.score)) && Number.isFinite(Number(game.away.score));
+}
+
+function scoreText(value) {
+  const score = Number(value);
+  return Number.isInteger(score) ? String(score) : number(score);
 }
 
 function safeFavorite() {
@@ -295,20 +359,22 @@ function setupFavoritePicker() {
 }
 
 function setupDateFilters() {
-  const dates = [
-    ...new Set(state.data.games.map((game) => chinaDateKey(game.tipoff))),
-  ];
+  const today = state.data.schedule_window?.today || chinaDateKey(new Date());
+  const tomorrow = state.data.schedule_window?.tomorrow || chinaDateKey(new Date(Date.parse(`${today}T12:00:00+08:00`) + 86400000));
+  state.todayDate = today;
+  state.tomorrowDate = tomorrow;
+  const dates = [today, tomorrow];
   state.selectedDate =
     state.selectedDate && dates.includes(state.selectedDate)
       ? state.selectedDate
-      : dates[0];
+      : today;
   const container = byId("date-filters");
   container.replaceChildren();
-  dates.forEach((date) => {
-    const sample = state.data.games.find(
-      (game) => chinaDateKey(game.tipoff) === date,
-    );
-    const button = text("button", displayDate(sample.tipoff, false));
+  dates.forEach((date, index) => {
+    const button = document.createElement("button");
+    button.append(text("span", index === 0 ? "今天" : "明天"));
+    button.append(text("small", displayDate(`${date}T12:00:00+08:00`, false)));
+    button.className = "date-filter-button";
     button.type = "button";
     button.dataset.date = date;
     button.setAttribute("aria-pressed", String(date === state.selectedDate));
@@ -336,13 +402,14 @@ function cardTeam(team) {
 }
 
 function playerName(player) {
-  if (typeof player === "string") return player;
+  if (typeof player === "string") return analystCopy(player);
   const canonical = player?.name || "";
   return (
     (player?.display_name && player.display_name !== canonical
       ? player.display_name
       : null) ||
     PLAYER_DISPLAY_NAMES[canonical] ||
+    state.activeGame?.player_display_names?.find((p) => p.canonical_name_en === canonical)?.display_name_zh ||
     canonical ||
     "球员"
   );
@@ -393,18 +460,25 @@ function gameCard(game, index) {
 
   const prediction = document.createElement("div");
   prediction.className = "card-prediction";
-  if (active && predicted) {
+  if (hasVisibleScore(game)) {
+    const final = ["post", "final", "completed", "finished"].includes(game.status);
+    prediction.classList.add("score-prediction");
+    prediction.append(
+      text("p", final ? "最终比分" : "当前比分"),
+      text("strong", `${scoreText(game.away.score)} — ${scoreText(game.home.score)}`, "card-score"),
+    );
+  } else if (active && predicted) {
     const copy = document.createElement("p");
     copy.append("预测：", text("strong", predicted.name_zh));
     prediction.append(copy, text("span", percent(active.winner_probability), "card-probability"));
   } else {
-    prediction.append(text("p", "第25秒判断暂不可用", "prediction-unavailable"));
+    prediction.append(text("p", game.registered_game ? "尚无正式赛前分析" : "尚无正式预测", "prediction-unavailable"));
   }
 
   const insights = document.createElement("ul");
   insights.className = "card-insights";
   insights.append(
-    text("li", active ? marginLabel(game) : "赛前判断尚未生成"),
+    text("li", active ? marginLabel(game) : hasVisibleScore(game) ? `比赛状态：${statusLabel(game)}` : "赛前判断尚未发布"),
     text(
       "li",
       active?.updated_at
@@ -413,7 +487,7 @@ function gameCard(game, index) {
           ? "比赛已开始，未保存赛前判断"
           : game.roster_notice
           ? "近期数据包含上赛季比赛"
-          : "当前最新预测",
+          : game.registered_game ? "真实赛程" : "官方赛程",
     ),
   );
   inner.append(top, matchup, prediction, insights);
@@ -425,6 +499,7 @@ function renderGames() {
   const grid = byId("games-grid");
   grid.replaceChildren();
   const games = state.data.games
+    .filter((game) => game.homepage_visible !== false)
     .filter((game) => chinaDateKey(game.tipoff) === state.selectedDate)
     .sort((a, b) => {
       const aFavorite =
@@ -446,11 +521,20 @@ function renderHome() {
   if (!state.data) return;
   setupDateFilters();
   renderGames();
-  const coverage = state.data.coverage;
-  byId("coverage-note").textContent =
-    `${coverage.games_with_saved_prediction} 场比赛已准备 · 北京时间`;
-  byId("product-notice").textContent =
-    "当前展示开发期赛前预测快照，预测以页面标注的数据截止时间为准。";
+  const window = state.data.schedule_window || {};
+  const statusCopy = {
+    ready: `${window.today_count || 0} 场今天 · ${window.tomorrow_count || 0} 场明天 · 北京时间`,
+    empty: "赛程已同步 · 今天与明天暂无比赛 · 北京时间",
+    stale: "赛程同步未完成或暂时失败，先显示本地已有赛程 · 北京时间",
+    unavailable: "赛程暂不可用，等待本地同步 · 北京时间",
+  };
+  byId("coverage-note").textContent = statusCopy[window.status] || "赛程状态暂不可用 · 北京时间";
+  byId("product-notice").textContent = "比分与赛程独立更新；预测只显示已正式发布的第25秒判断。";
+  const emptyTitle = byId("games-empty").querySelector("strong");
+  if (window.status === "empty") emptyTitle.textContent = "今天与明天暂无比赛";
+  else if (window.status === "stale") emptyTitle.textContent = "暂时无法确认今天或明天的赛程";
+  else if (window.status === "unavailable") emptyTitle.textContent = "赛程尚未同步";
+  else emptyTitle.textContent = "这个比赛日暂无比赛";
 }
 
 function stageTeam(team) {
@@ -472,140 +556,212 @@ function marginLabel(game) {
   return `预计${team.name_zh}赢 ${number(value)} 分`;
 }
 
-function seasonPhaseCopy(game) {
-  const phase = game.season_phase?.phase;
-  const labels = {
-    opening_night: "下方近 15 场来自上赛季末段，可能包含季后赛",
-    very_early: "下方近 15 场混合了本赛季与上赛季比赛，本季样本仍少",
-    early_sample: "下方近 15 场跨越两个赛季，本季近 5 场见上方对照",
-    comparison_ready: "下方近 15 场跨越两个赛季，本季近 10 场见上方对照",
-    current_season: "下方为本赛季近 15 场表现",
+function compactWinnerMarginLabel(game) {
+  const prediction = activePrediction(game);
+  if (!prediction) return "暂不可用";
+  const margin = Number(prediction.expected_home_margin);
+  const team = teamById(game, prediction.winner_team_id);
+  const value = Math.max(0.5, Math.round(Math.abs(margin) * 2) / 2);
+  return `${team.name_zh} +${number(value)}`;
+}
+
+function displayedStoryTitle(payload) {
+  return displayedJudgment(payload)?.pregame_story?.title;
+}
+
+function displayedJudgment(payload) {
+  const judgment = payload?.judgment || {};
+  const overlay = state.editorialOverlays.get(payload?.game_id);
+  if (!overlay || overlay.basePredictionVersionId !== payload?.version_id) return judgment;
+  const editorial = overlay.editorial || {};
+  return {
+    ...judgment,
+    pregame_story: editorial.pregame_story || judgment.pregame_story,
+    analysis_article: editorial.analysis_article ?? judgment.analysis_article,
+    watch_themes: editorial.watch_themes ?? judgment.watch_themes,
+    player_analysis: editorial.player_analysis ?? judgment.player_analysis,
   };
-  return labels[phase] || "近期球队数据的赛季构成暂未核实";
 }
 
-function renderSeasonFormComparison(game, container) {
-  const phase = game.season_phase?.phase;
-  const window = phase === "early_sample" ? "current_last5" :
-    phase === "comparison_ready" ? "current_last10" : null;
-  const required = phase === "early_sample" ? 5 : 10;
-  if (!window || game.season_form?.status !== "available") return;
-  const teams = game.season_form.teams || {};
-  if (["away", "home"].some((side) =>
-    (teams[side]?.[window]?.games || 0) < required ||
-    (teams[side]?.previous_last10?.games || 0) < 10
-  )) return;
-  const compare = document.createElement("div");
-  compare.className = "season-form-comparison";
-  compare.append(text("h3", `本赛季近 ${required} 场 · 上赛季末 10 场`));
-  ["away", "home"].forEach((side) => {
-    const current = teams[side][window];
-    const previous = teams[side].previous_last10;
+function sourceCalendarDate(value) {
+  const match = String(value || "").match(/^(\d{4})-(\d{2})-(\d{2})/);
+  return match ? `${match[1]}/${match[2]}/${match[3]}` : "日期待核";
+}
+
+function matchupScore(value) {
+  if (value === null || value === undefined || value === "") return null;
+  const score = Number(value);
+  // A full NBA game cannot finish at zero points; legacy imports that used
+  // zero as a missing-value default are therefore rendered as unavailable.
+  return Number.isFinite(score) && score > 0 ? score : null;
+}
+
+function matchupCompetition(meeting) {
+  const explicit = String(meeting?.game_type || meeting?.season_type || meeting?.competition || "").toLowerCase();
+  if (/play.?in|附加赛/.test(explicit)) return "附加赛";
+  if (/playoff|季后赛/.test(explicit) || meeting?.is_playoffs === true || meeting?.is_playoffs === 1) return "季后赛";
+  if (/regular[_ -]?season|常规赛/.test(explicit)) return "常规赛";
+  if (/preseason|季前赛/.test(explicit)) return "季前赛";
+  if (/all.?star|全明星/.test(explicit)) return "全明星赛";
+
+  // NBA's official 10-digit game ID encodes competition type in its prefix.
+  const officialGameId = String(meeting?.game_id || "");
+  if (/^001\d{7}$/.test(officialGameId)) return "季前赛";
+  if (/^002\d{7}$/.test(officialGameId)) return "常规赛";
+  if (/^003\d{7}$/.test(officialGameId)) return "全明星赛";
+  if (/^004\d{7}$/.test(officialGameId)) return "季后赛";
+  if (/^005\d{7}$/.test(officialGameId)) return "附加赛";
+
+  const explicitCompetition = String(meeting?.competition || "").trim();
+  return explicitCompetition && !/unknown|待核|未知/i.test(explicitCompetition)
+    ? explicitCompetition
+    : null;
+}
+
+function frozenMeetings(game) {
+  const homeId = Number(game.home.id);
+  const awayId = Number(game.away.id);
+  return [...(game.matchup_history?.meetings || [])]
+    .filter((meeting) => {
+      const historicalHome = Number(meeting.home_team_id);
+      const historicalAway = Number(meeting.away_team_id);
+      return historicalHome !== historicalAway &&
+        ((historicalHome === homeId && historicalAway === awayId) ||
+         (historicalHome === awayId && historicalAway === homeId));
+    })
+    .sort((left, right) => String(left.played_at || "").localeCompare(String(right.played_at || "")))
+    .map((meeting) => {
+      const homeScore = matchupScore(meeting.home_score);
+      const awayScore = matchupScore(meeting.away_score);
+      const currentHomeScore = Number(meeting.home_team_id) === homeId ? homeScore : awayScore;
+      const currentAwayScore = Number(meeting.away_team_id) === awayId ? awayScore : homeScore;
+      const winnerTeamId = homeScore === null || awayScore === null
+        ? null
+        : Number(meeting.home_team_id) === homeId
+          ? (homeScore > awayScore ? homeId : awayId)
+          : (homeScore > awayScore ? awayId : homeId);
+      return {
+        ...meeting,
+        home_team_id: Number(meeting.home_team_id),
+        away_team_id: Number(meeting.away_team_id),
+        home_score: homeScore,
+        away_score: awayScore,
+        current_home_score: currentHomeScore,
+        current_away_score: currentAwayScore,
+        winner_team_id: winnerTeamId,
+        score_complete: homeScore !== null && awayScore !== null,
+        competition_label: matchupCompetition(meeting),
+      };
+    });
+}
+
+function renderMatchupWindow(game, rows, requestedGames) {
+  const complete = rows.filter((meeting) => meeting.score_complete);
+  const window = document.createElement("article");
+  window.className = "matchup-window";
+  window.dataset.sampleGames = String(rows.length);
+  window.append(text("h3", `近${requestedGames}场`));
+  const teams = document.createElement("div");
+  teams.className = "matchup-window-teams";
+  for (const team of [game.away, game.home]) {
+    const wins = complete.filter((meeting) => meeting.winner_team_id === Number(team.id)).length;
+    const losses = complete.length - wins;
+    const points = complete.reduce((sum, meeting) => sum +
+      (Number(team.id) === Number(game.home.id) ? meeting.current_home_score : meeting.current_away_score), 0);
     const row = document.createElement("div");
+    row.className = "matchup-window-team";
     row.append(
-      text("strong", game[side].name_zh),
-      text(
-        "span",
-        `本季胜率 ${percent(current.win_rate)}、场均净胜 ${number(current.point_margin_per_game)} 分`,
-      ),
-      text(
-        "span",
-        `上季胜率 ${percent(previous.win_rate)}、场均净胜 ${number(previous.point_margin_per_game)} 分`,
-      ),
+      text("strong", team.name_zh),
+      text("span", complete.length ? `${wins}胜${losses}负 · 场均得分 ${number(points / complete.length)}` : "胜负与场均得分暂不可用"),
     );
-    compare.append(row);
-  });
-  container.append(compare);
-}
-
-function matchupMetricValue(metric, value) {
-  if (value == null) return "暂不可用";
-  return metric === "three_pct" ? percent(value) : number(value);
+    teams.append(row);
+  }
+  window.append(teams);
+  return window;
 }
 
 function renderMatchupHistory(game) {
   const section = byId("matchup-history-section");
   const container = byId("matchup-history");
-  const history = game.matchup_history || {};
-  const relevant = ["high", "medium"].includes(history.matchup_relevance);
-  section.hidden = !relevant || history.status !== "available";
+  const meetings = frozenMeetings(game);
   container.replaceChildren();
-  if (section.hidden) return;
-  const series = history.series_summary;
-  const recent = history.most_recent_meeting;
-  const lead = document.createElement("div");
-  lead.className = "matchup-history-lead";
-  if (series) {
-    const winner = teamById(game, series.winner_team_id);
-    const loser = winner.id === game.home.id ? game.away : game.home;
-    const averageMargin = series.team_summaries?.[String(winner.id)]?.average_margin;
-    lead.append(
-      text("span", "上赛季季后赛"),
-      text(
-        "h3",
-        `${winner.name_zh} ${series.wins[String(winner.id)]} 比 ${series.wins[String(loser.id)]} ${loser.name_zh}`,
-      ),
-      text(
-        "p",
-        averageMargin == null
-          ? `系列赛共 ${series.games} 场。`
-          : `系列赛共 ${series.games} 场，${winner.name_zh}场均净胜 ${number(Math.abs(averageMargin))} 分。`,
-      ),
-    );
-  } else if (recent) {
-    const winner = teamById(game, recent.winner_team_id);
-    const currentAwayScore =
-      recent.away_team_id === game.away.id ? recent.away_score : recent.home_score;
-    const currentHomeScore =
-      recent.home_team_id === game.home.id ? recent.home_score : recent.away_score;
-    lead.append(
-      text("span", "最近一次交锋"),
-      text("h3", `${winner.name_zh}取胜`),
-      text("p", `${game.away.name_zh} ${currentAwayScore} · ${game.home.name_zh} ${currentHomeScore}`),
-    );
+  section.hidden = false;
+  section.classList.toggle("is-empty", meetings.length === 0);
+  if (!meetings.length) {
+    container.append(text("p", "暂无可用的历史交锋记录。", "matchup-history-empty"));
+    return;
   }
-  container.append(lead);
-  const factors = document.createElement("div");
-  factors.className = "matchup-history-factors";
-  (series?.deterministic_factors || []).slice(0, 3).forEach((factor) => {
-    const row = document.createElement("div");
-    row.append(
-      text("span", factor.label),
-      text(
-        "strong",
-        `${game.away.name_zh} ${matchupMetricValue(factor.metric, factor.away_value)} · ${game.home.name_zh} ${matchupMetricValue(factor.metric, factor.home_value)}`,
-      ),
-    );
-    factors.append(row);
+
+  const summaries = document.createElement("div");
+  summaries.className = "matchup-history-summaries";
+  [5, 10].forEach((requestedGames) => {
+    summaries.append(renderMatchupWindow(game, meetings.slice(-requestedGames), requestedGames));
   });
-  if (factors.childElementCount) container.append(factors);
+  container.append(summaries);
+
+  const table = document.createElement("table");
+  table.className = "matchup-history-table";
+  const hasCompetition = meetings.some((meeting) => Boolean(meeting.competition_label));
+  table.classList.toggle("has-competition", hasCompetition);
+  const header = document.createElement("thead");
+  const headerRow = document.createElement("tr");
+  const columns = ["日期", ...(hasCompetition ? ["赛事"] : []), "客队", "比分", "主队"];
+  columns.forEach((label) => {
+    const cell = text("th", label);
+    cell.scope = "col";
+    headerRow.append(cell);
+  });
+  header.append(headerRow);
+  const body = document.createElement("tbody");
+  meetings.slice().reverse().forEach((meeting) => {
+    const row = document.createElement("tr");
+    row.append(text("td", sourceCalendarDate(meeting.played_at)));
+    if (hasCompetition) {
+      row.append(text("td", meeting.competition_label || "", "matchup-competition"));
+    }
+    const awayTeamCell = text("td", teamById(game, meeting.away_team_id).name_zh, "matchup-team");
+    if (meeting.winner_team_id === meeting.away_team_id) awayTeamCell.classList.add("matchup-winner-team");
+    row.append(awayTeamCell);
+
+    const scoreCell = text("td", "", "matchup-score");
+    if (meeting.score_complete) {
+      const awayScore = text("span", String(meeting.away_score));
+      const homeScore = text("span", String(meeting.home_score));
+      if (meeting.winner_team_id === meeting.away_team_id) awayScore.classList.add("matchup-winner-score");
+      if (meeting.winner_team_id === meeting.home_team_id) homeScore.classList.add("matchup-winner-score");
+      scoreCell.append(awayScore, document.createTextNode("–"), homeScore);
+    } else {
+      scoreCell.textContent = "比分暂缺";
+    }
+    row.append(scoreCell);
+
+    const homeTeamCell = text("td", teamById(game, meeting.home_team_id).name_zh, "matchup-team");
+    if (meeting.winner_team_id === meeting.home_team_id) homeTeamCell.classList.add("matchup-winner-team");
+    row.append(homeTeamCell);
+    body.append(row);
+  });
+  table.append(header, body);
+  const wrapper = document.createElement("div");
+  wrapper.className = "matchup-history-table-wrap";
+  wrapper.append(table);
+  container.append(wrapper);
 }
 
 function renderFactors(game, themes = null, status = "idle") {
+  const section = byId("factors-section");
   const container = byId("key-factors");
   container.replaceChildren();
   const items = themes || [];
+  section.hidden = items.length === 0;
+  if (!items.length) return;
   container.style.setProperty(
     "--factor-count",
-    Math.max(1, items.length),
+    items.length,
   );
-  if (!items.length) {
-    container.append(
-      text(
-        "p",
-        status === "unavailable"
-          ? "第25秒分析暂不可用"
-          : "生成第25秒分析后查看本场赛前看点",
-        "factor-empty",
-      ),
-    );
-    return;
-  }
-  items.forEach((factor, index) => {
+  items.forEach((factor) => {
     const card = document.createElement("article");
     card.className = "factor-card";
     card.append(
-      text("span", `0${index + 1}`),
       text("h3", analystCopy(factor.title)),
       text("p", analystCopy(factor.statement)),
     );
@@ -637,64 +793,19 @@ function renderPregameStory(story = null, status = "idle") {
 
 function renderProductAnalysis(payload) {
   if (!state.activeGame || !payload?.judgment) return;
-  const judgment = payload.judgment;
-  renderPregameStory(judgment.pregame_story || null, "success");
+  const judgment = displayedJudgment(payload);
+  const story = judgment.pregame_story
+    ? { ...judgment.pregame_story, title: displayedStoryTitle(payload) }
+    : null;
+  renderPregameStory(story, "success");
   renderFactors(state.activeGame, judgment.watch_themes || [], "success");
-  renderRelationship(
-    state.activeGame,
-    judgment.prediction_perspective || null,
-    "success",
-  );
   renderKeyPlayers(state.activeGame, judgment.player_analysis || [], "success");
 }
 
 function renderProductAnalysisState(game, status = "idle") {
   renderPregameStory(null, status);
   renderFactors(game, null, status);
-  renderRelationship(game, null, status);
   renderKeyPlayers(game, null, status);
-}
-
-function relationshipStep(label, title, strong, description, missing = false) {
-  const node = document.createElement("article");
-  node.className = `relationship-step${missing ? " missing" : ""}`;
-  node.append(
-    text("span", label),
-    text("h3", title),
-    text("strong", strong),
-    text("p", description),
-  );
-  return node;
-}
-
-function winnerForProbability(game, homeProbability) {
-  const home = Number(homeProbability) >= 0.5;
-  return {
-    team: home ? game.home : game.away,
-    probability: home ? Number(homeProbability) : 1 - Number(homeProbability),
-  };
-}
-
-function renderRelationship(game, perspective = null, status = "idle") {
-  const current = activePrediction(game);
-  const container = byId("prediction-relationship");
-  if (!current) {
-    container.replaceChildren(
-      relationshipStep("当前状态", "赛前判断暂不可用", "等待有效版本", "比赛已开始，且没有可锁定的赛前版本。", true),
-    );
-    return;
-  }
-  const winner = teamById(game, current.winner_team_id);
-  const steps = [
-    relationshipStep(
-      "当前最新预测",
-      `${winner.name_zh}胜`,
-      `${winner.name_zh} ${percent(current.winner_probability)}`,
-      `${marginLabel(game)} · 预计总分 ${number(current.expected_total)}${current.updated_at ? ` · 更新于 ${displayClock(current.updated_at)}` : ""}`,
-    ),
-  ];
-  container.style.setProperty("--step-count", steps.length);
-  container.replaceChildren(...steps);
 }
 
 function contextStat(label, value) {
@@ -718,6 +829,7 @@ function spreadLabel(game, homeSpread) {
 }
 
 function renderMarket(game) {
+  const version = state.currentAnalyses.get(game.id);
   const market = game.background?.market;
   const card = byId("market-context");
   if (card) {
@@ -735,6 +847,8 @@ function renderMarket(game) {
     }
   }
   const hero = byId("hero-market");
+  const marketSource = byId("hero-market-source");
+  marketSource.replaceChildren(); marketSource.hidden = true;
   hero.replaceChildren(
     text("span", "市场参考"),
     text(
@@ -745,18 +859,54 @@ function renderMarket(game) {
     ),
   );
   if (!market) {
+    if (version?.public_market_reference) {
+      renderPublicMarketReference(version.public_market_reference);
+      return;
+    }
     if (state.marketCache.has(game.id)) {
       const reference = state.marketCache.get(game.id);
       if (reference) renderPublicMarketReference(reference);
+      const age = Date.now() - (state.marketFetchedAt.get(game.id) || 0);
+      if (age > (reference ? 1200000 : 600000)) requestPublicMarketReference(game);
     } else {
       requestPublicMarketReference(game);
     }
+  }
+  appendMarketJudgment(game);
+}
+
+function appendMarketJudgment(game) {
+  const host = byId("hero-market-source");
+  host.querySelector(".market-judgment")?.remove();
+  const selected = state.predictionStates.get(game.id);
+  const version = state.currentAnalyses.get(game.id);
+  const projection = selected?.display_projection;
+  if (!version || projection?.version_id !== version.version_id) return;
+  const interpretation = projection.market_interpretation;
+  if (!interpretation) return;
+  const block = document.createElement("div");
+  block.className = "market-judgment";
+  const spread = interpretation.spread;
+  if (spread?.status === "available" && ["home", "away"].includes(spread.ats_lean) &&
+      Number.isFinite(spread.ats_lean_reference?.line)) {
+    block.append(contextStat("第25秒让分判断",
+      game[spread.ats_lean].name_zh + " " + signedNumber(spread.ats_lean_reference.line)));
+  }
+  const total = interpretation.total;
+  if (total?.status === "available" && ["over", "under", "aligned"].includes(total.total_lean)) {
+    block.append(contextStat("第25秒大小分判断", {over:"大分", under:"小分", aligned:"与市场一致"}[total.total_lean]));
+  }
+  if (block.childElementCount) {
+    host.hidden = false;
+    host.prepend(block);
   }
 }
 
 function renderPublicMarketReference(reference) {
   if (!reference || state.activeGame?.background?.market) return;
-  const heading = reference.market_stage === "early" ? "公开早盘参考" : "公开市场参考";
+  reference = state.currentAnalyses.get(state.activeGame.id)?.public_market_reference || reference;
+  const historical = ["historical_backfill", "historical_archive"].includes(reference.reference_kind) || state.activeGame.status === "final";
+  const heading = historical ? "赛前市场参考" : reference.market_stage === "early" ? "公开早盘参考" : "公开市场参考";
   const card = byId("market-context");
   if (card) {
     card.replaceChildren(
@@ -783,12 +933,24 @@ function renderPublicMarketReference(reference) {
     text("span", heading),
     text("strong", parts.join(" · ") || "来源已找到，具体数字暂未可靠提取"),
   );
-  const current = state.currentAnalyses.get(state.activeGame.id)?.judgment;
-  renderRelationship(
-    state.activeGame,
-    current?.prediction_perspective || null,
-    state.aiFailures.has(state.activeGame.id) ? "unavailable" : "idle",
-  );
+  const sourceHost = byId("hero-market-source");
+  sourceHost.replaceChildren(); sourceHost.hidden = false;
+  if (historical && reference.used_by_published_prediction === false) {
+    sourceHost.append(text("div", "赛后整理 · 未用于原预测"));
+  }
+  const details = document.createElement("details"); details.append(text("summary", "来源与时间"));
+  const link = text("a", reference.source_title || "查看盘口来源");
+  link.href = reference.source_url; link.target = "_blank"; link.rel = "noopener noreferrer"; details.append(link);
+  const showTime = (value) => !value ? "未知" : value.length === 10 ? value : new Date(value).toLocaleString("zh-CN", {timeZone:"Asia/Shanghai",month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"});
+  details.append(text("p", `抓取于 ${showTime(reference.captured_at)}${reference.published_at ? ` · 原文发布 ${showTime(reference.published_at)}` : ""}`));
+  if (reference.provider_archive_label) details.append(text("p", "供应商历史盘口字段，具体报价时点未核验"));
+  const prices = [];
+  for (const side of ["away", "home"]) {
+    if (reference[`${side}_moneyline`] != null) prices.push(`${state.activeGame[side].name_zh} ${reference[`${side}_moneyline`] > 0 ? "+" : ""}${reference[`${side}_moneyline`]}`);
+  }
+  if (prices.length) details.append(text("p", `Moneyline：${prices.join(" · ")}`));
+  sourceHost.append(details);
+  appendMarketJudgment(state.activeGame);
 }
 
 async function requestPublicMarketReference(game) {
@@ -797,127 +959,412 @@ async function requestPublicMarketReference(game) {
   if (card && state.activeGame?.id === game.id) {
     card.replaceChildren(
       text("h3", "市场参考"),
-      text("p", "正在查找可核验的公开早盘…", "context-missing"),
+      text("p", "正在获取市场参考…", "context-missing"),
     );
   }
-  const request = fetch("/api/market-reference", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ game_id: game.id }),
-  })
-    .then(async (response) => {
-      const payload = await response.json();
-      if (!response.ok) throw new Error(payload.message || "公开市场参考暂不可用");
-      const reference = payload.public_market_reference || null;
-      state.marketCache.set(game.id, reference);
-      if (state.activeGame?.id !== game.id) return;
-      if (reference) {
-        renderPublicMarketReference(reference);
-      } else {
-        renderMarket(game);
+  const request = (async () => {
+      for (let attempt=0;attempt<32;attempt++) {
+        const response = await fetch(`/api/market-reference?game_id=${encodeURIComponent(game.id)}`, { cache: "no-store" });
+        const payload = await response.json();
+        if (!response.ok) throw new Error(payload.message || "市场参考暂不可用");
+        const reference = payload.public_market_reference || null;
+        state.marketFetchedAt.set(game.id, Date.now());
+        if (reference) {
+          state.marketCache.set(game.id, reference);
+          if (state.activeGame?.id === game.id) renderPublicMarketReference(reference);
+        }
+        if (payload.status !== "fetching" && !payload.refreshing) {
+          state.marketCache.set(game.id, reference);
+          if (!reference && state.activeGame?.id === game.id) renderMarket(game);
+          return;
+        }
+        await new Promise(resolve => setTimeout(resolve,1500));
       }
-    })
+      if (!state.marketCache.has(game.id)) state.marketCache.set(game.id,null);
+      if (state.activeGame?.id === game.id) renderMarket(game);
+    })()
     .catch(() => {
+      state.marketFetchedAt.set(game.id, Date.now());
       state.marketCache.set(game.id, null);
       if (state.activeGame?.id === game.id) {
         renderMarket(game);
-        const current = state.currentAnalyses.get(game.id)?.judgment;
-        renderRelationship(
-          game,
-          current?.prediction_perspective || null,
-          state.aiFailures.has(game.id) ? "unavailable" : "idle",
-        );
       }
     })
     .finally(() => state.marketPending.delete(game.id));
   state.marketPending.set(game.id, request);
 }
 
-function starterRows(context) {
-  if (context?.confirmed_starters?.length) {
-    return { label: "确认首发", note: "", players: context.confirmed_starters };
-  }
-  if (context?.projected_starters?.length) {
-    return {
-      label: "预计首发",
-      note: "非官方确认",
-      players: context.projected_starters,
-    };
-  }
-  return null;
+function lineupNames(value) {
+  const players = Array.isArray(value) ? value : Array.isArray(value?.players) ? value.players : [];
+  return players.map((player) => typeof player === "string"
+    ? player.trim()
+    : String(player?.name || player?.player_name || "").trim());
 }
 
-function renderLineups(game) {
+function normalizedLineup(lineup) {
+  const basis = lineup?.basis;
+  if (!["confirmed", "source_expected", "agent_expected", "unavailable"].includes(basis)) return null;
+  const players = lineupNames(lineup);
+  const evidence_ids = Array.isArray(lineup?.evidence_ids) ? lineup.evidence_ids : [];
+  if (basis === "unavailable") return players.length === 0 ? { basis, players: [], evidence_ids } : null;
+  if (players.length !== 5 || players.some((name) => !name) || new Set(players).size !== 5) return null;
+  return { basis, players, evidence_ids, candidates: lineupNames(lineup.candidates || []) };
+}
+
+function versionPregamePlan(version) {
+  const plans = (Array.isArray(version?.editorial_material) ? version.editorial_material : [])
+    .map((item) => item?.pregame_plan)
+    .filter((plan) => plan && typeof plan === "object");
+  if (!plans.length) return { status: "missing", plan: null };
+  const signatures = plans.map((plan) => JSON.stringify((plan.lineups || [])
+    .map((row) => ({ side: row.side, basis: row.basis, players: lineupNames(row).sort(), candidates: lineupNames(row.candidates || []) }))
+    .sort((left, right) => String(left.side).localeCompare(String(right.side)))));
+  if (new Set(signatures).size > 1) return { status: "conflict", plan: null };
+  const plan = plans[0];
+  const sides = new Map();
+  for (const row of plan.lineups || []) {
+    if (!["home", "away"].includes(row.side) || sides.has(row.side)) return { status: "conflict", plan: null };
+    const normalized = normalizedLineup(row);
+    if (!normalized) return { status: "invalid", plan: null };
+    sides.set(row.side, normalized);
+  }
+  if (sides.size !== 2 || !sides.has("home") || !sides.has("away")) return { status: "invalid", plan: null };
+  return { status: "available", plan, sides };
+}
+
+function legacySnapshotLineup(context) {
+  const candidates = [];
+  const confirmed = context?.confirmed_starters;
+  if (lineupNames(confirmed).length) {
+    candidates.push({ basis: "legacy_confirmed", players: lineupNames(confirmed),
+      evidence_ids: confirmed?.evidence_ids || context?.confirmed_starters_evidence_ids || [], source: "snapshot" });
+  }
+  const projected = lineupNames(context?.projected_starters).length
+    ? context.projected_starters
+    : context?.current_rotation?.projected_starters;
+  if (lineupNames(projected).length) {
+    const basisValue = Array.isArray(projected) ? context?.projected_starters_basis : projected.basis;
+    const basis = ["source_expected", "agent_expected"].includes(basisValue) ? basisValue : "legacy_projected";
+    const evidence_ids = Array.isArray(projected?.evidence_ids) ? projected.evidence_ids :
+      Array.isArray(context?.projected_starters_evidence_ids) ? context.projected_starters_evidence_ids : [];
+    candidates.push({ basis, players: lineupNames(projected), evidence_ids, source: "snapshot" });
+  }
+  const unique = new Map(candidates.map((candidate) => [
+    JSON.stringify({ basis: candidate.basis, players: candidate.players.slice().sort() }), candidate,
+  ]));
+  if (unique.size > 1) return { status: "conflict", lineup: null };
+  const lineup = [...unique.values()][0];
+  if (!lineup) return { status: "missing", lineup: null };
+  if (lineup.players.length !== 5 || lineup.players.some((name) => !name) || new Set(lineup.players).size !== 5) {
+    return { status: "invalid", lineup: null };
+  }
+  return { status: "available", lineup };
+}
+
+function lineupEvidence(version, lineup) {
+  const evidence = version?.analyst_context?.objective_evidence || [];
+  const byId = new Map(evidence.filter((item) => item?.id).map((item) => [item.id, item]));
+  return (lineup.evidence_ids || []).map((id) => byId.get(id)).filter(Boolean);
+}
+
+function lineupIdentityVerified(game, version, side, name, refs) {
+  const teamContext = version?.input_snapshot?.roster_context?.teams?.[side] || {};
+  const roster = teamContext.official_team_roster || teamContext.current_team_roster;
+  const teamId = Number(game[side].id);
+  if (roster?.status === "available" &&
+      Number(teamContext.team_id ?? roster.team_id) === teamId &&
+      (roster.players || []).some((player) =>
+        String(player.name || player.player_name || "").trim() === name &&
+        (player.team_id == null || Number(player.team_id) === teamId))) return true;
+  return refs.some((item) => {
+    if (item.section !== "web_context") return false;
+    const value = item.value || {};
+    if (value.eligible_for_fact !== true || Number(value.team_id) !== teamId) return false;
+    const claim = String(value.claim_type || "");
+    if (["current_roster", "projected_starters", "confirmed_starter"].includes(claim)) {
+      return String(value.quote || "").includes(name);
+    }
+    if (value.temporal_scope !== "current_season_background" ||
+        !["primary", "professional"].includes(value.source_role) ||
+        /traded away|departed|left the|former|上赛季|离队/i.test(String(value.quote || ""))) return false;
+    return String(value.quote || "").includes(name) &&
+      (claim === "personnel_change" || claim === "role_background");
+  });
+}
+
+function officialStatusForPlayer(report, teamId, name, playerId = null) {
+  return (report?.records || []).find((record) => {
+    if (Number(record.teamId ?? record.team_id) !== Number(teamId)) return false;
+    if (playerId != null && record.player_id != null) return String(record.player_id) === String(playerId);
+    return playerNameAliases(record.player?.name || record.player?.player_name || record.player_name)
+      .some((candidate) => playerNameAliases(name).some((expected) => candidate.toLowerCase() === expected.toLowerCase()));
+  }) || null;
+}
+
+function lineupPlayerConfirmedOut(game, version, side, name, refs = [], officialReport = null) {
+  const report = officialReport || officialInjuryReportProjection(game, version);
+  return officialStatusForPlayer(report, game[side].id, name)?.status === "out";
+}
+
+function validPlanLineup(game, version, side, lineup, officialReport = null) {
+  if (!lineup || lineup.basis === "unavailable") return true;
+  const refs = lineupEvidence(version, lineup);
+  const sourceKind = lineup.basis === "confirmed" ? "confirmed_starter"
+    : lineup.basis === "source_expected" ? "projected_starters" : null;
+  return lineup.players.every((name) => {
+    if (!lineupIdentityVerified(game, version, side, name, refs) ||
+        lineupPlayerConfirmedOut(game, version, side, name, refs, officialReport)) return false;
+    if (!sourceKind) return true;
+    return refs.some((item) => item.section === "web_context" &&
+      item.value?.eligible_for_fact === true && Number(item.value?.team_id) === Number(game[side].id) &&
+      item.value?.claim_type === sourceKind && String(item.value?.quote || "").includes(name));
+  });
+}
+
+function confirmedLineupBasis(basis) {
+  return ["confirmed", "legacy_confirmed"].includes(basis);
+}
+
+function snapshotLineupForDisplay(context, game, version, side, officialReport) {
+  for (const [field,basis,refField] of [["confirmed_starters","confirmed","confirmed_starters_evidence_ids"],
+      ["projected_starters","source_expected","projected_starters_evidence_ids"]]) {
+    const value=context?.[field];
+    const lineup={basis,players:lineupNames(value),evidence_ids:value?.evidence_ids || context?.[refField] || []};
+    if (lineup.players.length===5 && new Set(lineup.players).size===5 &&
+        validPlanLineup(game,version,side,lineup,officialReport)) return {status:"available",lineup};
+  }
+  return legacySnapshotLineup(context);
+}
+
+function lineupReserveCandidates(game, version, side, lineup) {
+  const plan = versionPregamePlan(version).plan || {};
+  const rotation = version?.input_snapshot?.roster_context?.teams?.[side]?.current_rotation;
+  const usage = (plan.player_usage || []).filter(row => row.side === side && row.rationale &&
+    row.minutes_max > 0).map(row => ({name:row.player_name,evidence_ids:row.evidence_ids || []}));
+  const rotations = rotation?.status === "available" ? (rotation.lineup_candidates || []) : [];
+  return [
+    ...(lineup.candidates || []).map(name => ({name,evidence_ids:lineup.evidence_ids || []})),
+    ...usage,
+    ...rotations.filter(row => row.rationale || row.role).map(row => ({
+      name:row.player_name || row.name,evidence_ids:row.evidence_ids || rotation.evidence_ids || []})),
+  ].filter(row => row.name && lineupIdentityVerified(game,version,side,row.name,lineupEvidence(version,row)));
+}
+
+function renderLineups(game, version = null, selectedOfficialReport = null) {
   const card = byId("lineup-context");
-  card.replaceChildren(text("h3", "首发阵容"));
-  let any = false;
+  card.replaceChildren();
+  const title = text("h3", "预计首发");
+  card.append(title);
+  let lineups = null;
+  const planResult = versionPregamePlan(version);
+  if (["conflict", "invalid"].includes(planResult.status)) {
+    card.append(text("p", planResult.status === "conflict"
+      ? "同一版本的首发资料存在冲突，暂不展示。"
+      : "首发资料未通过完整性核对，暂不展示。", "context-missing"));
+    return;
+  }
+  if (planResult.status === "available") {
+    lineups = planResult.sides;
+    const snapshot = version?.input_snapshot?.roster_context?.teams || {};
+    const legacy = Object.fromEntries(["home", "away"].map((side) =>
+      [side, snapshotLineupForDisplay(snapshot[side],game,version,side,selectedOfficialReport)]));
+    for (const side of ["home", "away"]) {
+      const legacyLineup = legacy[side];
+      const planned = lineups.get(side);
+      if (legacyLineup.status === "conflict") {
+        card.append(text("p", "同一版本的首发资料存在冲突，暂不展示。", "context-missing"));
+        return;
+      }
+      if (legacyLineup.status === "available" && !confirmedLineupBasis(planned.basis)) {
+        const sourceBasis = confirmedLineupBasis(legacyLineup.lineup.basis) ? "confirmed"
+          : ["source_expected","agent_expected"].includes(legacyLineup.lineup.basis) ? legacyLineup.lineup.basis : null;
+        const sourced = sourceBasis ? {...legacyLineup.lineup,basis:sourceBasis} : null;
+        const priority={confirmed:3,source_expected:2,agent_expected:1,unavailable:0};
+        if (sourced && priority[sourceBasis]>priority[planned.basis] &&
+            validPlanLineup(game,version,side,sourced,selectedOfficialReport)) {
+          lineups.set(side,{...sourced,candidates:planned.candidates || []});
+          continue;
+        }
+      }
+    if (legacyLineup.status === "available" &&
+          (legacyLineup.lineup.players.slice().sort().join("\u0000") !== planned.players.slice().sort().join("\u0000") ||
+           (planned.basis !== "unavailable" && legacyLineup.lineup.basis !== "legacy_projected" &&
+            (legacyLineup.lineup.basis === "legacy_confirmed" ? "confirmed" : legacyLineup.lineup.basis) !== planned.basis))) {
+        card.append(text("p", "同一版本的首发资料存在冲突，暂不展示。", "context-missing"));
+        return;
+      }
+    }
+  } else if (version?.version_id) {
+    const teams = version.input_snapshot?.roster_context?.teams || {};
+    const legacy = Object.fromEntries(["home", "away"].map((side) =>
+      [side, snapshotLineupForDisplay(teams[side],game,version,side,selectedOfficialReport)]));
+    if (Object.values(legacy).some((item) => item.status === "conflict")) {
+      card.append(text("p", "同一版本的首发资料存在冲突，暂不展示。", "context-missing"));
+      return;
+    }
+    if (Object.values(legacy).every((item) => item.status === "missing")) {
+      card.append(text("p", "该版本未保存首发资料。", "context-missing"));
+      return;
+    }
+    lineups = new Map(Object.entries(legacy).map(([side, item]) => [side,
+      item.status === "available" ? item.lineup :
+        { basis: item.status === "missing" ? "missing" : "invalid", players: [] }]));
+  }
+
+  if (!version?.version_id || !lineups) {
+    card.append(text("p", "尚无已发布版本的首发资料。", "context-missing"));
+    return;
+  }
+  const officialReport = selectedOfficialReport || officialInjuryReportProjection(game, version);
+  lineups = new Map([...lineups].map(([side, lineup]) => {
+    const removedOut = (lineup.players || []).filter((name) =>
+      lineupPlayerConfirmedOut(game, version, side, name, [], officialReport));
+    const players = (lineup.players || []).filter((name) =>
+      !lineupPlayerConfirmedOut(game, version, side, name, [], officialReport));
+    const replacements = [];
+    if (removedOut.length) {
+      for (const candidate of lineupReserveCandidates(game,version,side,lineup)) {
+        if (players.includes(candidate.name) || lineupPlayerConfirmedOut(game,version,side,candidate.name,[],officialReport)) continue;
+        players.push(candidate.name);replacements.push(candidate.name);
+        if (players.length===5) break;
+      }
+    }
+    return [side, {
+      ...lineup,
+      basis: removedOut.length ? "agent_expected" : lineup.basis,
+      players,
+      replacements,
+      officialOutRemoved: removedOut,
+    }];
+  }));
+  const confirmedSides = ["away", "home"].filter((side) => {
+    const lineup = lineups.get(side);
+    return confirmedLineupBasis(lineup?.basis) && lineup.players?.length === 5 &&
+      validPlanLineup(game, version, side, lineup, officialReport);
+  });
+  const hasConfirmedLineup = confirmedSides.length > 0;
+  title.textContent = hasConfirmedLineup ? "首发阵容" : "预计首发";
+
   for (const side of ["away", "home"]) {
-    const lineup = starterRows(game.roster_context?.teams?.[side] || {});
-    if (!lineup) continue;
-    any = true;
+    const lineup = lineups.get(side);
+    if (lineup.basis === "invalid") {
+      card.append(text("p", `${game[side].name_zh}首发资料不完整，暂不展示。`, "context-missing"));
+      continue;
+    }
+    if (lineup.basis !== "unavailable" && lineup.basis !== "missing" && lineup.players.length > 0 &&
+        !validPlanLineup(game, version, side, lineup, officialReport)) {
+      card.append(text("p", "首发资料未通过身份或状态核对，暂不展示。", "context-missing"));
+      continue;
+    }
     const block = document.createElement("div");
     block.className = "lineup-team";
-    block.append(
-      text("strong", `${game[side].name_zh} · ${lineup.label}`),
-      lineup.note ? text("small", lineup.note) : document.createTextNode(""),
-      text("p", lineup.players.slice(0, 5).map(playerName).join("、")),
-    );
+    if (lineup.basis === "missing") {
+      block.append(text("strong", `${game[side].name_zh} · 首发资料待补`),
+        text("p", "该版本未保存首发资料。", "context-missing"));
+      card.append(block);
+      continue;
+    }
+    if (lineup.basis === "unavailable") {
+      block.append(text("strong", game[side].name_zh),
+        text("p", "暂无可用的预计首发信息。", "context-missing"));
+      card.append(block);
+      continue;
+    }
+    const isConfirmed = confirmedLineupBasis(lineup.basis) && lineup.players.length === 5 &&
+      !(lineup.officialOutRemoved || []).length;
+    const needsSideQualifier = hasConfirmedLineup && !isConfirmed &&
+      (["confirmed", "legacy_confirmed", "source_expected", "agent_expected", "legacy_projected"].includes(lineup.basis));
+    block.append(text("strong", needsSideQualifier
+      ? `${game[side].name_zh} · 预计首发`
+      : game[side].name_zh));
+    if (!isConfirmed && ["source_expected","agent_expected"].includes(lineup.basis)) {
+      block.append(text("small", lineup.basis === "source_expected" ? "来源预计" : "第25秒预计", "lineup-basis"));
+    }
+    if (lineup.players.length) {
+      const names = document.createElement("p");
+      names.className = "lineup-player-list";
+      lineup.players.forEach((name, index) => {
+        if (index) names.append(document.createTextNode("、"));
+        const identity = frozenRosterPlayer(game, version, game[side].id, name);
+        const player = identity || { name };
+        const item = document.createElement("span");
+        item.className = "lineup-player";
+        item.append(text("span", playerName(player)));
+        const availability = officialStatusForPlayer(officialReport, game[side].id, name,
+          player.player_id || player.id);
+        if (availability?.status && !["available", "active"].includes(availability.status)) {
+          item.append(text("small", availability.label, `lineup-player-status status-${availability.status}`));
+        }
+        names.append(item);
+      });
+      block.append(names);
+    }
+    if ((lineup.officialOutRemoved || []).length) {
+      block.append(text("p", lineup.players.length===5 ? "确认缺阵者已移除，按本版候选补位。" : "确认缺阵者已移除，预计首发信息不足。", "context-missing"));
+    } else if (!lineup.players.length) {
+      block.append(text("p", "暂无可用的预计首发信息。", "context-missing"));
+    }
     card.append(block);
   }
-  if (!any) card.append(text("p", "暂未公布", "context-missing"));
 }
 
-const KEY_PLAYER_PRIORITY = new Map([
-  ["LeBron James", 100], ["Tyrese Maxey", 95], ["Joel Embiid", 94],
-  ["Jalen Brunson", 100], ["Karl-Anthony Towns", 96],
-  ["Cade Cunningham", 100], ["Jalen Duren", 90],
-  ["Jayson Tatum", 100], ["Jaylen Brown", 96],
-  ["Shai Gilgeous-Alexander", 100], ["Jalen Williams", 94], ["Chet Holmgren", 92],
-  ["Victor Wembanyama", 100], ["Giannis Antetokounmpo", 100],
-  ["Trae Young", 100], ["Paolo Banchero", 100], ["Franz Wagner", 95],
-  ["Anthony Edwards", 100], ["Rudy Gobert", 90],
-  ["LaMelo Ball", 100], ["Brandon Miller", 92],
-  ["Scottie Barnes", 100], ["Immanuel Quickley", 92],
-  ["Coby White", 100], ["Bam Adebayo", 100], ["Tyler Herro", 95],
-  ["De'Aaron Fox", 100], ["Mikal Bridges", 96], ["OG Anunoby", 91],
-  ["Josh Hart", 88], ["Khris Middleton", 94], ["Jalen Johnson", 96],
-  ["Nic Claxton", 90],
-]);
+function frozenRoster(game, version, side) {
+  const team = version?.input_snapshot?.roster_context?.teams?.[side];
+  const roster = team?.official_team_roster || team?.current_team_roster;
+  return roster?.status === "available" && Number(team.team_id ?? roster.team_id) === Number(game[side].id)
+    ? (roster.players || []) : [];
+}
 
-function renderKeyPlayers(game, claims = null, status = "idle") {
+function renderKeyPlayers(game, claims = null, status = "idle", selectedOfficialReport = null) {
   const container = byId("key-players");
+  const section = container.closest(".players-section");
+  container.classList.remove("is-single-side");
   container.replaceChildren();
-  const claimByName = new Map((claims || []).map((claim) => [claim.player_name, claim]));
-  if (!claimByName.size) {
-    container.append(
-      text(
-        "p",
-        status === "unavailable"
-          ? "第25秒分析暂不可用"
-          : "生成第25秒分析后查看关键球员与对位",
-        "factor-empty",
-      ),
-    );
+  const version = state.currentAnalyses.get(game.id);
+  const entries = claims?.length ? claims : (displayedJudgment(version)?.player_analysis || []);
+  const officialReport = selectedOfficialReport || officialInjuryReportProjection(game, version);
+  if (!entries.length) {
+    section?.classList.add("is-empty");
+    container.append(text(
+      "p",
+      status === "success" ? "关键球员解读暂缺" : "尚无已发布分析",
+      "factor-empty",
+    ));
     return;
   }
   const selected = new Map();
   for (const side of ["away", "home"]) {
-    const players = [...(rosterFor(game, side)?.players || [])]
-      .filter((player) => claimByName.has(player.name))
-      .sort(
-        (a, b) =>
-          Number(claimByName.has(b.name)) - Number(claimByName.has(a.name)),
-      )
-      .slice(0, 3);
+    const roster = version ? frozenRoster(game, version, side) : (rosterFor(game, side)?.players || []);
+    const players = [];
+    const seen = new Set();
+    for (const claim of entries) {
+      const name = String(claim.player_name || "").trim();
+      const player = roster.find(candidate =>
+        String(candidate.name || candidate.player_name || "").trim() === name &&
+        (candidate.team_id == null || Number(candidate.team_id) === Number(game[side].id)));
+      if (!player) continue;
+      const key = availabilityPlayerKey(game[side].id, player);
+      if (seen.has(key)) continue;
+      seen.add(key);
+      const availability = officialStatusForPlayer(officialReport, game[side].id, name,
+        player.player_id || player.id);
+      if (availability?.status === "out") continue;
+      players.push({ player, claim, availability });
+      if (players.length === 3) break;
+    }
     selected.set(side, players);
   }
+  container.dataset.qualityWarnings = JSON.stringify([...selected].filter(([,players])=>players.length<3)
+    .map(([side,players])=>({code:"key_player_candidates_insufficient",version_id:version?.version_id,side,available:players.length})));
   if (![...selected.values()].some((players) => players.length)) {
-    container.append(
-      text("p", "当前名单已接入，关键球员将在第25秒分析中结合本场对位确定。", "factor-empty"),
-    );
+    section?.classList.add("is-empty");
+    container.append(text("p", "关键球员解读暂缺", "factor-empty"));
     return;
   }
+  section?.classList.remove("is-empty");
+  container.classList.toggle("is-single-side", [...selected.values()].filter(players => players.length).length === 1);
   for (const side of ["away", "home"]) {
+    if (!(selected.get(side) || []).length) continue;
     const group = document.createElement("article");
     group.className = `player-side player-side-${side}`;
     group.style.setProperty("--player-accent", game[side].accent);
@@ -930,66 +1377,105 @@ function renderKeyPlayers(game, claims = null, status = "idle") {
     group.append(header);
     const list = document.createElement("div");
     list.className = "player-side-list";
-    (selected.get(side) || []).forEach((player) => {
-      const claim = claimByName.get(player.name);
+    (selected.get(side) || []).forEach(({ player, claim, availability }) => {
       const entry = document.createElement("section");
       entry.className = "player-entry";
+      const heading = text("h4", playerName(player));
+      if (availability && !["available", "active"].includes(availability.status)) {
+        heading.append(text("span", availability.label, `player-availability-status status-${availability.status}`));
+      }
+      const statement = analystCopy(claim.statement);
+      const conditional = ["questionable", "doubtful", "game_time_decision", "day_to_day"].includes(availability?.status) &&
+        !/若|如果/.test(statement);
+      const conditionalMinutes = /\d+(?:\.\d+)?\s*(?:(?:到|[–—~-])\s*\d+(?:\.\d+)?\s*)?分钟/.test(statement) &&
+        !["available","active"].includes(availability?.status) && !/若|如果/.test(statement);
       entry.append(
-        text("h4", playerName(player)),
-        text(
-          "p",
-          claim
-            ? analystCopy(claim.statement)
-            : "当前官方名单中的核心球员，具体角色仍需结合首发与本场对位判断。",
-        ),
+        heading,
+        text("p", conditional || conditionalMinutes ? `若最终出场，${statement}` : statement),
       );
       list.append(entry);
     });
-    if (!list.childElementCount) {
-      list.append(text("p", "当前没有形成这一侧的球员对位判断。", "factor-empty"));
-    }
     group.append(list);
     container.append(group);
-    if (side === "away") {
+    if (side === "away" && (selected.get("home") || []).length) {
       const axis = document.createElement("div");
       axis.className = "matchup-axis";
       axis.setAttribute("aria-hidden", "true");
-      axis.append(text("span", "对位"), text("strong", "VS"));
+      axis.append(text("strong", "VS"));
       container.append(axis);
     }
   }
 }
 
-function dynamicTeamMetric(game) {
-  const home = game.background.recent_form.home;
-  const away = game.background.recent_form.away;
-  const candidates = [
-    ["three_pct_15", "三分命中率", 0.02, percent],
-    ["rebound_share_15", "篮板占比", 0.03, percent],
-    ["turnover_rate_15", "失误率", 0.02, percent],
-  ];
-  return candidates
-    .map(([key, label, threshold, formatter]) => ({
-      key,
-      label,
-      formatter,
-      strength:
-        home[key] == null || away[key] == null
-          ? 0
-          : Math.abs(Number(home[key]) - Number(away[key])) / threshold,
-    }))
-    .filter((item) => item.strength >= 1)
-    .sort((a, b) => b.strength - a.strength)[0];
+const TEAM_SEASON_METRICS = [
+  { key: "off_rating", label: "进攻效率", preference: "higher", description: "进攻效率数值较高" },
+  { key: "def_rating", label: "防守效率", preference: "lower", description: "防守效率数值较低" },
+  { key: "net_rating", label: "净效率", preference: "higher", description: "净效率数值较高" },
+  { key: "pace", label: "比赛节奏", preference: null },
+  { key: "three_pct", label: "三分命中率", preference: "higher", description: "三分命中率数值较高" },
+];
+
+function teamSeasonMetricDisplay(metric, value) {
+  if (value === null || value === undefined || !Number.isFinite(Number(value))) return "—";
+  const rounded = (Math.round(Number(value) * 10) / 10).toFixed(1);
+  return metric.key === "three_pct" ? `${rounded}%` : rounded;
+}
+
+function teamSeasonCompare(metric, awayValue, homeValue) {
+  if (!metric.preference || awayValue == null || homeValue == null ||
+      !Number.isFinite(Number(awayValue)) || !Number.isFinite(Number(homeValue)) ||
+      teamSeasonMetricDisplay(metric, awayValue) === teamSeasonMetricDisplay(metric, homeValue)) {
+    return { away: false, home: false };
+  }
+  const awayPreferred = metric.preference === "higher"
+    ? Number(awayValue) > Number(homeValue) : Number(awayValue) < Number(homeValue);
+  return { away: awayPreferred, home: !awayPreferred };
+}
+
+function comparisonValue(metric, value, emphasized) {
+  const cell = document.createElement("div");
+  cell.className = `comparison-value${emphasized ? " is-compared" : ""}`;
+  cell.append(text("strong", teamSeasonMetricDisplay(metric, value)));
+  return cell;
+}
+
+function renderTeamSeasonSummary(game, stats) {
+  const summary = document.createElement("p");
+  summary.className = "team-season-summary";
+  if (stats?.status === "unavailable") {
+    summary.textContent = "上赛季球队数据暂不可用。";
+    return summary;
+  }
+  const away = stats?.teams?.away?.metrics || {};
+  const home = stats?.teams?.home?.metrics || {};
+  const differences = [];
+  for (const metric of TEAM_SEASON_METRICS.filter(item => item.preference)) {
+    const awayValue = away[metric.key];
+    const homeValue = home[metric.key];
+    if (awayValue == null || homeValue == null ||
+        teamSeasonMetricDisplay(metric, awayValue) === teamSeasonMetricDisplay(metric, homeValue)) continue;
+    const winnerSide = teamSeasonCompare(metric, awayValue, homeValue).away ? "away" : "home";
+    differences.push(`${game[winnerSide].name_zh}${metric.description}`);
+  }
+  const paceAway = away.pace;
+  const paceHome = home.pace;
+  const paceLine = paceAway == null || paceHome == null
+    ? "Pace 暂缺。"
+    : Math.abs(Number(paceAway) - Number(paceHome)) < 0.05
+      ? "两队 Pace 数据接近。"
+      : `两队 Pace 相差 ${Math.abs(Number(paceAway) - Number(paceHome)).toFixed(1)} 回合/场，${game[Number(paceAway) > Number(paceHome) ? "away" : "home"].name_zh}的数据更快。`;
+  summary.textContent = `${differences.length ? `上赛季，${differences.join("；")}。` : "上赛季这几项核心数据数值接近。"} ${paceLine}`;
+  return summary;
 }
 
 function renderTeamData(game) {
   const container = byId("team-data");
+  const stats = game.previous_season_team_stats;
+  const teams = stats?.teams || {};
+  const awayData = teams.away?.metrics || {};
+  const homeData = teams.home?.metrics || {};
   container.replaceChildren();
-  renderSeasonFormComparison(game, container);
-  container.append(text("p", seasonPhaseCopy(game), "season-phase-note"));
-  const dynamic = dynamicTeamMetric(game);
-  const awayData = game.background.recent_form.away;
-  const homeData = game.background.recent_form.home;
+  container.append(text("p", stats?.season ? `上赛季（${stats.season}）` : "上赛季数据", "team-season-label"));
   const head = document.createElement("header");
   for (const side of ["away", "home"]) {
     const team = document.createElement("div");
@@ -999,117 +1485,346 @@ function renderTeamData(game) {
     head.append(team);
   }
   container.append(head);
-  const metrics = [
-    ["进攻效率", "off_rating_15", number],
-    ["防守效率", "def_rating_15", number],
-    ["净效率", "net_rating_15", number],
-    ["比赛节奏", "pace_15", number],
-  ];
-  if (dynamic) metrics.push([dynamic.label, dynamic.key, dynamic.formatter]);
   const rows = document.createElement("div");
   rows.className = "comparison-rows";
-  metrics.forEach(([label, key, formatter]) => {
+  TEAM_SEASON_METRICS.forEach(metric => {
     const row = document.createElement("div");
     row.className = "comparison-row";
+    const signals = teamSeasonCompare(metric, awayData[metric.key], homeData[metric.key]);
     row.append(
-      text("strong", available(awayData[key], formatter)),
-      text("span", label),
-      text("strong", available(homeData[key], formatter)),
+      comparisonValue(metric, awayData[metric.key], signals.away),
+      text("span", metric.label),
+      comparisonValue(metric, homeData[metric.key], signals.home),
     );
     rows.append(row);
   });
-  container.append(rows);
+  container.append(rows, renderTeamSeasonSummary(game, stats));
 }
 
-function pregameStatusSummary(game) {
-  const schedule = game.background.schedule || {};
-  const notes = [`${game.away.name_zh}客场挑战${game.home.name_zh}`];
-  if (game.season_phase?.phase === "opening_night") {
-    notes.push("双方都处于新赛季开局阶段");
+const PUBLIC_AVAILABILITY_LABELS = {
+  out: "确认缺阵",
+  inactive: "确认缺阵",
+  suspended: "停赛",
+  questionable: "出战成疑",
+  doubtful: "出战可能性较低",
+  probable: "大概率出战",
+  game_time_decision: "赛前决定",
+  day_to_day: "每日观察 · 本场待确认",
+  practice_absence: "缺席训练",
+  minutes_restriction: "出场时间受限",
+  available: "可出战",
+};
+
+function normalizeAvailabilityStatus(value) {
+  const key = String(value || "").trim().toLowerCase().replace(/[\s-]+/g, "_");
+  const aliases = {
+    gtd: "game_time_decision", game_time: "game_time_decision", game_time_call: "game_time_decision",
+    ruled_out: "out", confirmed_out: "out", full_go: "available", active: "available",
+    healthy: "available", restricted: "minutes_restriction", limited: "minutes_restriction",
+    missed: "practice_absence", missed_practice: "practice_absence", did_not_practice: "practice_absence",
+  };
+  return PUBLIC_AVAILABILITY_LABELS[key] ? key : aliases[key] || null;
+}
+
+function playerNameAliases(value) {
+  const name = String(value || "").trim();
+  return [...new Set([name, name.replace(/\s+(?:III|IV|II|Jr\.?|Sr\.?)$/i, "").trim()])].filter(Boolean);
+}
+
+function frozenRosterPlayer(game, version, teamId, name, playerId = null) {
+  const side = ["away", "home"].find((item) => Number(game[item].id) === Number(teamId));
+  if (!side) return null;
+  const roster = frozenRoster(game, version, side);
+  if (playerId != null) {
+    const byId = roster.find((player) => String(player.player_id || player.id || "") === String(playerId));
+    if (byId) return byId;
   }
-  if (schedule.away_back_to_back) notes.push(`${game.away.name_zh}背靠背作战`);
-  if (schedule.home_back_to_back) notes.push(`${game.home.name_zh}背靠背作战`);
-  if (
-    !schedule.away_back_to_back &&
-    !schedule.home_back_to_back &&
-    schedule.away_rest_days != null &&
-    schedule.home_rest_days != null
-  ) {
-    const gap = Number(schedule.away_rest_days) - Number(schedule.home_rest_days);
-    if (Math.abs(gap) >= 2) {
-      const rested = gap > 0 ? game.away : game.home;
-      notes.push(`${rested.name_zh}拥有更长休息时间`);
-    } else if (Math.abs(gap) < 0.5) {
-      notes.push("双方休息时间相同");
+  return roster.find((player) => playerNameAliases(player.name || player.player_name)
+    .some((alias) => playerNameAliases(name).some((candidate) => alias.toLowerCase() === candidate.toLowerCase()))) || null;
+}
+
+function injuryReasonZh(reason) {
+  const value = String(reason || "").trim();
+  if (!value) return "";
+  if (/[\u3400-\u9fff]/.test(value) && !/[A-Za-z]{2,}/.test(value)) return value;
+  const normalized = value.toLowerCase();
+  const injury = /sprain|扭伤/.test(normalized) ? "扭伤" :
+    /strain|拉伤/.test(normalized) ? "拉伤" : /soreness|pain|injur|伤/.test(normalized) ? "伤势" : "";
+  const part = /knee|patella|meniscus|acl|mcl/.test(normalized) ? "膝部" :
+    /ankle/.test(normalized) ? "脚踝" : /hamstring/.test(normalized) ? "腿筋" :
+    /calf/.test(normalized) ? "小腿" : /hip|groin/.test(normalized) ? "髋部/腹股沟" :
+    /back|spine/.test(normalized) ? "背部" : /shoulder/.test(normalized) ? "肩部" :
+    /wrist|hand|finger/.test(normalized) ? "手部" : /elbow/.test(normalized) ? "肘部" :
+    /foot|toe/.test(normalized) ? "足部" : "";
+  if (part) return `${part}${injury && injury !== "伤势" ? injury : "伤势"}`;
+  if (/illness|sick/.test(normalized)) return "生病";
+  return injury;
+}
+
+function strictReportTimestamp(value) {
+  const raw = String(value || "").trim();
+  if (!/[T ]\d{2}:\d{2}/.test(raw) || !/(?:Z|[+-]\d{2}:?\d{2})$/i.test(raw)) return null;
+  const timestamp = Date.parse(raw);
+  return Number.isFinite(timestamp) ? timestamp : null;
+}
+
+function availabilityPlayerKey(teamId, player) {
+  return `${teamId}:${String(player.player_id || player.id || player.name || player.player_name || "").toLowerCase()}`;
+}
+
+function officialReportStatus(record) {
+  const raw = String(record?.availability_status || record?.status || record?.injury_status || "").trim();
+  if (!raw) return null;
+  const status = normalizeAvailabilityStatus(raw);
+  const labels = {
+    out: "确认缺阵", questionable: "出战成疑", doubtful: "大概率缺阵", probable: "大概率出战",
+    game_time_decision: "赛前决定", day_to_day: "每日观察", inactive: "未激活", suspended: "停赛",
+  };
+  if (status === "available") return { status, label: "已确认正常出战" };
+  return { status: status || "other", label: labels[status] || `官方状态 · ${raw}` };
+}
+
+function officialReportSourceUrl(record, report) {
+  const candidates = [
+    record?.source_url, record?.report_url, record?.url, record?.source?.url,
+    report?.source_url, report?.report_url, report?.url, report?.source?.url,
+  ];
+  return candidates.map((value) => String(value || "").trim()).find((url) =>
+    /^https:\/\/ak-static\.cms\.nba\.com\/referee\/injury\/Injury-Report_\d{4}-\d{2}-\d{2}_[A-Za-z0-9_-]+\.pdf(?:[?#].*)?$/i.test(url)
+  ) || "";
+}
+
+function officialReportGameId(record, report) {
+  return record?.game_id || record?.nba_game_id || record?.target_game_id ||
+    report?.game_id || report?.nba_game_id || report?.target_game_id ||
+    record?.game_identity?.game_id || report?.game_identity?.game_id;
+}
+
+function officialInjuryReportProjection(game, version) {
+  const tipoff = Date.parse(game.tipoff || "");
+  if (!Number.isFinite(tipoff)) return { status: "unavailable", records: [], items: [] };
+  const roots = [
+    game.official_injury_report,
+    game.background?.official_injury_report,
+    game.background?.availability,
+    version?.official_injury_report,
+    version?.input_snapshot?.official_injury_report,
+    version?.input_snapshot?.background?.official_injury_report,
+    version?.input_snapshot?.background?.availability,
+  ].filter(Boolean);
+  const groups = new Map();
+  const addRecord = (report, record) => {
+    const sourceUrl = officialReportSourceUrl(record, report);
+    const gameId = officialReportGameId(record, report);
+    const gameIds = [game.id, game.nba_game_id].filter(Boolean).map(String);
+    const rawTime = record?.source_published_at || record?.report_published_at || record?.report_timestamp ||
+      record?.published_at || report?.source_published_at || report?.report_published_at ||
+      report?.report_timestamp || report?.published_at;
+    const timestamp = strictReportTimestamp(rawTime);
+    if (!sourceUrl || gameId == null || !gameIds.includes(String(gameId)) || !timestamp ||
+        timestamp > tipoff || timestamp > Date.now()) return;
+    const name = String(record?.player_name || record?.player || "").trim();
+    const teamId = Number(record?.team_id);
+    const status = officialReportStatus(record);
+    const hasPlayerStatus = Boolean(name && Number.isFinite(teamId) && status);
+    const reportPublished = ["available", "published", "success", "complete"].includes(
+      String(report?.status || report?.report_status || "").toLowerCase()
+    ) || report?.published === true;
+    if (!hasPlayerStatus && !reportPublished) return;
+    const key = `${sourceUrl}\u0000${timestamp}`;
+    if (!groups.has(key)) groups.set(key, { sourceUrl, timestamp, coverage: report.coverage || "complete", records: [] });
+    if (!hasPlayerStatus) return;
+    if (!name || !Number.isFinite(teamId) ||
+        ![Number(game.home.id), Number(game.away.id)].includes(teamId) || !status) return;
+    const rosterPlayer = frozenRosterPlayer(game, version, teamId, name,
+      record?.player_id || record?.person_id);
+    const player = rosterPlayer || {
+      name,
+      player_id: record?.player_id || record?.person_id || null,
+      display_name: (game.player_display_names || []).find((item) => item.canonical_name_en === name)?.display_name_zh,
+    };
+    groups.get(key).records.push({
+      key: availabilityPlayerKey(teamId, player), teamId, player, status: status.status, label: status.label,
+      reason: injuryReasonZh(record?.reason || record?.injury_reason), url: sourceUrl, timestamp,
+    });
+  };
+
+  for (const root of roots) {
+    const reports = Array.isArray(root) ? root : Array.isArray(root.reports) ? root.reports : [root];
+    for (const report of reports) {
+      const records = Array.isArray(report?.records) ? report.records : [];
+      if (records.length) records.forEach((record) => addRecord(report, record));
+      else addRecord(report, report);
     }
   }
-  return notes.join("，");
+  if (!groups.size) return { status: "unavailable", records: [], items: [] };
+
+  const latestTimestamp = Math.max(...[...groups.values()].map((group) => group.timestamp));
+  const latestGroups = [...groups.values()].filter((group) => group.timestamp === latestTimestamp);
+  const latestRecords = new Map();
+  for (const group of latestGroups) {
+    for (const candidate of group.records) {
+      const existing = latestRecords.get(candidate.key);
+      if (!existing) latestRecords.set(candidate.key, candidate);
+      else if (existing.status !== candidate.status || existing.reason !== candidate.reason) {
+        latestRecords.set(candidate.key, { ...existing, conflict: true });
+      }
+    }
+  }
+  const records = [...latestRecords.values()].filter((record) => !record.conflict);
+  const items = records.filter((record) => !["available", "active"].includes(record.status))
+    .sort((left, right) => {
+      const priority = { out: 0, doubtful: 1, questionable: 2, game_time_decision: 3, probable: 4 };
+      return (priority[left.status] ?? 5) - (priority[right.status] ?? 5) ||
+        ((left.teamId === Number(game.away.id) ? 0 : 1) - (right.teamId === Number(game.away.id) ? 0 : 1)) ||
+        left.player.name.localeCompare(right.player.name);
+    });
+  return { status: "published", coverage: latestGroups.every(group=>group.coverage==="complete") ? "complete" : "partial",
+    timestamp: latestTimestamp, sourceUrl: latestGroups[0]?.sourceUrl || "", records, items };
 }
 
-function renderContext(game) {
+function renderAvailabilityItem(container, item) {
+  const detail = document.createElement("details");
+  detail.className = `availability-entry availability-${item.status}${item.status === "probable" ? " is-low-priority" : ""}`;
+  detail.append(text("summary", `${playerName(item.player)} · ${item.label}${item.reason ? ` · ${item.reason}` : ""}`));
+  if (String(item.url || "").startsWith("https://")) {
+    const link = document.createElement("a");
+    link.href = item.url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "查看官方报告";
+    detail.append(link);
+  }
+  container.append(detail);
+}
+
+function seasonFormWindowRecord(window) {
+  const games = Number(window?.games);
+  const explicitWins = Number(window?.wins);
+  const explicitLosses = Number(window?.losses);
+  if (window?.status === "available" && Number.isInteger(games) && games > 0 &&
+      Number.isInteger(explicitWins) && Number.isInteger(explicitLosses) && explicitWins >= 0 &&
+      explicitLosses >= 0 && explicitWins + explicitLosses === games) {
+    return {games, wins: explicitWins, losses: explicitLosses};
+  }
+  const winRate = Number(window?.win_rate);
+  if (window?.status !== "available" || !Number.isInteger(games) || games < 1 ||
+      !Number.isFinite(winRate) || winRate < 0 || winRate > 1) return null;
+  const wins = Math.round(winRate * games);
+  if (Math.abs(wins / games - winRate) > 0.00001) return null;
+  return {games, wins, losses: games - wins};
+}
+
+function formWindowContainsTarget(window, game) {
+  const targetIds = [game.id, game.nba_game_id].filter(Boolean).map(String);
+  const gameIds = (window?.game_ids || []).map(String);
+  return targetIds.some((id) => gameIds.includes(id));
+}
+
+function recentStatusLines(game, version, side) {
+  const form = game.season_form;
+  const cutoff = Date.parse(form?.cutoff || version?.input_cutoff_at || game.technical?.cutoff || "");
+  const versionCutoff = Date.parse(version?.input_cutoff_at || game.technical?.cutoff || "");
+  const tipoff = Date.parse(game.tipoff || "");
+  if (!form || form.status !== "available" || !Number.isFinite(cutoff) || !Number.isFinite(tipoff) ||
+      cutoff > tipoff || (Number.isFinite(versionCutoff) && cutoff > versionCutoff) ||
+      (form.game_id && form.game_id !== game.id)) return ["赛前近期记录暂不可用"];
+
+  const team = form.teams?.[side];
+  if (!team) return ["赛前近期记录暂不可用"];
+  const currentGames = Number(team.current_season_games || 0);
+  const currentWindow = team.current_last5;
+  const includesTarget = formWindowContainsTarget(currentWindow, game) ||
+    formWindowContainsTarget({game_ids: team.current_season_game_ids}, game);
+  const currentRecord = includesTarget ? null : seasonFormWindowRecord(currentWindow);
+  if (currentGames > 0) {
+    const seasonRecord = includesTarget ? null : seasonFormWindowRecord({
+      status: "available", games: currentGames,
+      wins: team.current_season_record?.wins, losses: team.current_season_record?.losses,
+    });
+    const lines = [seasonRecord
+      ? `本季已赛${seasonRecord.games}场：${seasonRecord.wins}胜${seasonRecord.losses}负`
+      : currentRecord
+        ? `本季近${currentRecord.games}场：${currentRecord.wins}胜${currentRecord.losses}负`
+        : "本季近期战绩暂不可用"];
+    const last = team.last_result;
+    const lastTime = Date.parse(last?.played_at || "");
+    if (last && last.game_id !== game.id && Number.isFinite(lastTime) && lastTime < cutoff &&
+        Number.isFinite(Number(last.team_score)) && Number.isFinite(Number(last.opponent_score)) &&
+        last.opponent_name_zh) {
+      lines.push(`上一场：${number(last.team_score, 0)}–${number(last.opponent_score, 0)} ${last.opponent_name_zh}`);
+    }
+    const streakGames = Number(team.streak?.games);
+    if (!includesTarget && Number.isInteger(streakGames) && streakGames >= 2 && ["win", "loss"].includes(team.streak?.result)) {
+      lines.push(`当前${team.streak.result === "win" ? "连胜" : "连败"}${streakGames}场`);
+    }
+    return lines;
+  }
+  return ["本季暂无比赛记录"];
+}
+
+function renderRecentStatus(game, version, container) {
+  for (const side of ["away", "home"]) {
+    const team = document.createElement("div");
+    team.className = "recent-form-team";
+    team.append(text("strong", game[side].name_zh));
+    recentStatusLines(game, version, side).forEach((line) => team.append(text("p", line)));
+    container.append(team);
+  }
+}
+
+function renderContext(game, selectedVersion = null) {
   const injury = byId("injury-context");
   injury.replaceChildren(text("h3", "伤病与出战"));
-  if (game.background.availability.status === "available") {
-    injury.append(text("p", game.background.availability.message));
-    game.background.availability.records.slice(0, 3).forEach((row) => {
-      injury.append(
-        contextStat(row.player || "球员", row.status || "状态未知"),
-      );
-    });
-  } else {
-    injury.append(text("div", "暂无可靠信息", "context-missing"));
+  const version = selectedVersion || state.currentAnalyses.get(game.id);
+  const officialReport = officialInjuryReportProjection(game, version);
+  officialReport.items.forEach((item) => renderAvailabilityItem(injury, item));
+  if (officialReport.status !== "published") {
+    injury.append(text("p", "本场官方伤病报告暂未获取", "context-missing official-injury-empty"));
+  } else if (officialReport.coverage === "partial") {
+    injury.append(text("p", "部分球队状态尚未提交，当前只展示已公布信息。", "context-missing official-injury-empty"));
+  } else if (!officialReport.items.length) {
+    injury.append(text("p", "本场官方伤病报告中暂无异常状态", "context-missing official-injury-empty"));
   }
 
-  const schedule = byId("schedule-context");
-  schedule.replaceChildren(text("h3", "赛前状态"));
-  const scheduleData = game.background.schedule || {};
-  const statusNodes = [
-    text("p", pregameStatusSummary(game), "pregame-status-summary"),
-  ];
-  if (scheduleData.home_back_to_back || scheduleData.away_back_to_back) {
-    statusNodes.push(
-      contextStat(
-        `${game.home.name_zh} 背靠背`,
-        scheduleData.home_back_to_back ? "是" : "否",
-      ),
-      contextStat(
-        `${game.away.name_zh} 背靠背`,
-        scheduleData.away_back_to_back ? "是" : "否",
-      ),
-    );
-  } else if (
-    scheduleData.home_rest_days != null &&
-    scheduleData.away_rest_days != null &&
-    Math.abs(
-      Number(scheduleData.home_rest_days) - Number(scheduleData.away_rest_days),
-    ) >= 2
-  ) {
-    statusNodes.push(
-      contextStat(
-        `${game.home.name_zh} 休息`,
-        `${number(scheduleData.home_rest_days, 0)} 天`,
-      ),
-      contextStat(
-        `${game.away.name_zh} 休息`,
-        `${number(scheduleData.away_rest_days, 0)} 天`,
-      ),
-    );
-  }
-  schedule.append(...statusNodes);
+  const recent = byId("schedule-context");
+  recent.replaceChildren(text("h3", "近期状态"));
+  renderRecentStatus(game, version, recent);
   renderMarket(game);
-  renderLineups(game);
-  renderKeyPlayers(game);
+  renderLineups(game, selectedVersion, officialReport);
+  renderKeyPlayers(game, null, "idle", officialReport);
   renderTeamData(game);
 }
 
-function renderTechnical(game) {
+function formatCutoffForDisplay(value) {
+  const timestamp = Date.parse(value || "");
+  if (!Number.isFinite(timestamp)) return "未记录";
+  const formatted = new Intl.DateTimeFormat("zh-CN", {
+    timeZone: "Asia/Shanghai",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  }).format(new Date(timestamp));
+  return `${formatted} 北京时间`;
+}
+
+function renderTechnical(game, selectedVersion = state.currentAnalyses.get(game.id), selection = state.predictionStates.get(game.id)) {
   const container = byId("technical-content");
   container.replaceChildren();
+  const displayProjection = selection?.display_projection;
+  const frozenCutoffs = displayProjection?.version_id === selectedVersion?.version_id
+    ? displayProjection.cutoffs || {}
+    : {};
   const rows = [
     ["数据身份", game.id],
     ["预测状态", game.technical.source_label],
-    ["数据截止", game.technical.cutoff || "未记录"],
-    ["阵容与窗口说明截止", game.technical.roster_context_cutoff || "未记录"],
+    ["Prediction Version 输入截止", formatCutoffForDisplay(frozenCutoffs.input_cutoff_at)],
+    ["球队历史数据特征截止", formatCutoffForDisplay(frozenCutoffs.feature_cutoff_at)],
+    ["阵容与赛前情报上下文截止", formatCutoffForDisplay(frozenCutoffs.roster_context_cutoff_at)],
     ["赛程来源时间", game.source.schedule_captured_at || "未记录"],
   ];
   rows.forEach(([label, content]) => {
@@ -1162,139 +1877,56 @@ function renderTechnical(game) {
   container.append(advanced);
 }
 
-function renderRoster(game) {
-  const container = byId("roster-context");
-  container.replaceChildren();
-  byId("roster-notice").textContent =
-    "当前名单来自球队官方页面，完整名单默认折叠。";
-  for (const side of ["away", "home"]) {
-    const team = game[side],
-      context = game.roster_context?.teams?.[side] || {};
-    const roster = context.official_team_roster,
-      continuity = context.continuity || {},
-      cold = context.cold_start || {};
-    const card = document.createElement("article");
-    card.className = "context-card";
-    const head = document.createElement("div");
-    head.className = "roster-head";
-    head.append(
-      logo(team),
-      text("h3", team.name_zh),
-      text(
-        "small",
-        roster?.players ? `${roster.players.length} 名成员` : "名单待补充",
-      ),
-    );
-    card.append(head);
-    if (roster?.status === "available") {
-      const details = document.createElement("details");
-      const list = document.createElement("ul");
-      list.className = "roster-list";
-      const positions = {
-        Guard: "后卫",
-        Forward: "前锋",
-        Center: "中锋",
-        "Guard-Forward": "后卫 / 前锋",
-        "Forward-Guard": "前锋 / 后卫",
-        "Forward-Center": "前锋 / 中锋",
-        "Center-Forward": "中锋 / 前锋",
-        G: "后卫",
-        F: "前锋",
-        C: "中锋",
-      };
-      roster.players.forEach((player) => {
-        const row = text("li", playerName(player));
-        if (positions[player.position])
-          row.append(text("small", positions[player.position]));
-        list.append(row);
-      });
-      details.append(text("summary", "查看官方当前名单"), list);
-      card.append(details);
-      if (roster.source?.captured_at)
-        card.append(
-          text(
-            "p",
-            `名单来源：NBA 官方 · ${displayDate(roster.source.captured_at, false)}抓取`,
-            "roster-source",
-          ),
-        );
-    } else card.append(text("p", "暂无符合时间要求的官方名单。"));
-    if (cold.status === "available") {
-      for (const window of [5, 15]) {
-        const current = cold[`rolling_${window}_current_season_games`];
-        const previous = cold[`rolling_${window}_previous_season_games`];
-        const older = cold[`rolling_${window}_older_season_games`] || 0;
-        const row = document.createElement("div");
-        row.className = "window-row";
-        const labels = document.createElement("div");
-        labels.append(
-          text("span", `近 ${window} 场数据`),
-          text(
-            "span",
-            `本季 ${current ?? "未知"} · 上季 ${previous ?? "未知"}${older ? ` · 更早 ${older}` : ""}`,
-          ),
-        );
-        const track = document.createElement("div");
-        track.className = "window-track";
-        track.setAttribute("aria-hidden", "true");
-        const fill = document.createElement("i");
-        fill.style.width = `${(Number(previous || 0) / window) * 100}%`;
-        track.append(fill);
-        row.append(labels, track);
-        card.append(row);
-      }
-    }
-    if (continuity.status === "available") {
-      card.append(
-        contextStat(
-          "上赛季出场分钟保留",
-          available(continuity.retained_minutes_ratio, percent),
-        ),
-      );
-      const details = document.createElement("details");
-      details.append(
-        text("summary", "阵容连续性与名单差异"),
-        contextStat(
-          "上赛季分钟前八名保留",
-          `${continuity.top8_retained_count} / ${continuity.top8_count}`,
-        ),
-        contextStat(
-          "前八名保留分钟比例",
-          available(continuity.top8_retained_minutes_ratio, percent),
-        ),
-        text(
-          "p",
-          `当前列入、上赛季未在该队出场：${(continuity.newly_listed_players || []).map((p) => p.name).join("、") || "无"}`,
-        ),
-        text(
-          "p",
-          `上赛季出场、当前未列入：${(continuity.previous_participants_not_listed || []).map((p) => p.name).join("、") || "无"}`,
-        ),
-      );
-      card.append(details);
-    } else
-      card.append(
-        text(
-          "p",
-          "精确的上赛季球员分钟仍不完整，暂时无法量化阵容保留程度。",
-          "roster-source",
-        ),
-      );
-    container.append(card);
-  }
-}
 function renderPredictionDisplay(game) {
   const current = activePrediction(game);
+  const focusTitle = byId("prediction-focus")?.querySelector("p") || document.querySelector(".prediction-focus > p");
+  const judgmentTitle = byId("primary-judgment-title");
+  const probabilityLens = byId("probability-lens");
+  const probabilityLabel = document.querySelector(".prediction-focus > small");
+  const marginTitle = document.querySelector(".primary-numbers > div:first-child > span");
+  const totalTitle = document.querySelector(".primary-numbers > div:last-child > span");
+  const marginNode = byId("expected-margin");
+  const totalNode = byId("expected-total");
   if (!current) {
-    byId("predicted-winner").textContent = "暂不可用";
+    if (hasVisibleScore(game)) {
+      const homeScore = Number(game.home.score);
+      const awayScore = Number(game.away.score);
+      const final = ["post", "final", "completed", "finished"].includes(game.status);
+      const label = final ? "最终比分" : "当前比分";
+      if (focusTitle) focusTitle.textContent = label;
+      if (judgmentTitle) judgmentTitle.textContent = "比赛结果";
+      byId("predicted-winner").textContent = `${game.away.name_zh} ${scoreText(awayScore)} : ${scoreText(homeScore)} ${game.home.name_zh}`;
+      probabilityLens.hidden = true;
+      if (probabilityLabel) probabilityLabel.hidden = true;
+      byId("predicted-probability").textContent = "";
+      if (marginTitle) marginTitle.textContent = final ? "实际分差" : "当前分差";
+      if (totalTitle) totalTitle.textContent = final ? "实际总分" : "当前总分";
+      const winner = homeScore >= awayScore ? game.home : game.away;
+      marginNode.textContent = `${winner.name_zh} ${final ? "赢" : "领先"} ${scoreText(Math.abs(homeScore - awayScore))} 分`;
+      totalNode.textContent = scoreText(homeScore + awayScore);
+      byId("prediction-updated").hidden = true;
+      return;
+    }
+    if (focusTitle) focusTitle.textContent = "赛前预测";
+    if (judgmentTitle) judgmentTitle.textContent = "第25秒判断";
+    byId("predicted-winner").textContent = "尚无正式预测";
     byId("predicted-probability").textContent = "—";
-    byId("probability-lens").style.setProperty("--probability", "0%");
-    byId("expected-margin").textContent = "暂不可用";
-    byId("expected-total").textContent = "暂不可用";
+    probabilityLens.hidden = false;
+    probabilityLens.style.setProperty("--probability", "0%");
+    if (probabilityLabel) probabilityLabel.hidden = false;
+    if (marginTitle) marginTitle.textContent = "分差";
+    if (totalTitle) totalTitle.textContent = "总分";
+    marginNode.textContent = "暂不可用";
+    totalNode.textContent = "暂不可用";
     byId("prediction-updated").hidden = true;
-    renderRelationship(game);
     return;
   }
+  if (focusTitle) focusTitle.textContent = "赛前预测";
+  if (judgmentTitle) judgmentTitle.textContent = "第25秒判断";
+  probabilityLens.hidden = false;
+  if (probabilityLabel) probabilityLabel.hidden = false;
+  if (marginTitle) marginTitle.textContent = "分差";
+  if (totalTitle) totalTitle.textContent = "总分";
   const predicted = teamById(game, current.winner_team_id);
   byId("predicted-winner").textContent = predicted.name_zh;
   byId("predicted-probability").textContent = percent(current.winner_probability);
@@ -1302,17 +1934,48 @@ function renderPredictionDisplay(game) {
     "--probability",
     `${current.winner_probability * 100}%`,
   );
-  byId("expected-margin").textContent = marginLabel(game);
+  byId("expected-margin").textContent = compactWinnerMarginLabel(game);
   byId("expected-total").textContent = number(current.expected_total);
   const updated = byId("prediction-updated");
   updated.hidden = !current.updated_at;
   updated.textContent = current.updated_at
     ? `更新于 ${displayClock(current.updated_at)}`
     : "";
-  renderRelationship(game);
+}
+
+function hasSafeCurrentScheduleForm(game, version) {
+  const form = game?.season_form;
+  if (form?.source !== "schedule_catalog_final_games" || form.game_id !== game?.id) return false;
+  const cutoff = Date.parse(form.cutoff || "");
+  const tipoff = Date.parse(game.tipoff || "");
+  const versionCutoff = Date.parse(version?.input_cutoff_at || "");
+  return Number.isFinite(cutoff) && Number.isFinite(tipoff) && cutoff < tipoff &&
+    (!version?.input_cutoff_at || (Number.isFinite(versionCutoff) && cutoff <= versionCutoff));
 }
 
 function renderDetail(game) {
+  const selectedVersion = state.currentAnalyses.get(game.id);
+  const frozenInput = selectedVersion?.version_id ? selectedVersion.input_snapshot : null;
+  if (frozenInput && typeof frozenInput === "object") {
+    game = {
+      ...game,
+      background: frozenInput.background || {
+        schedule: {}, recent_form: {home: {}, away: {}},
+        availability: {status: "unavailable", records: []},
+      },
+      roster_context: Object.prototype.hasOwnProperty.call(frozenInput, "roster_context")
+        ? frozenInput.roster_context : null,
+      matchup_history: Object.prototype.hasOwnProperty.call(frozenInput, "matchup_history")
+        ? frozenInput.matchup_history : null,
+      season_form: hasSafeCurrentScheduleForm(game, selectedVersion)
+        ? game.season_form
+        : Object.prototype.hasOwnProperty.call(frozenInput, "season_form")
+          ? frozenInput.season_form : null,
+      fact_context: state.factViews.get(game.id)?.context || null,
+      technical: {...game.technical, ...(frozenInput.technical || {})},
+      source: frozenInput.source || game.source,
+    };
+  }
   state.activeGame = game;
   const currentPrediction = activePrediction(game);
   const detail = byId("detail-view");
@@ -1343,14 +2006,16 @@ function renderDetail(game) {
   document.documentElement.style.setProperty("--home-accent", game.home.accent);
   document.body.dataset.gameTheme = "active";
   byId("detail-time").textContent = displayDate(game.tipoff);
-  byId("detail-status").textContent = statusLabel(game);
+  const scoreStatus = hasVisibleScore(game)
+    ? `${["post", "final", "completed", "finished"].includes(game.status) ? " · 终场" : " · 当前比分"} ${scoreText(game.away.score)}-${scoreText(game.home.score)}`
+    : "";
+  byId("detail-status").textContent = `${game.game_type === "preseason" ? "季前赛 · " : ""}${statusLabel(game)}${scoreStatus}`;
   byId("away-team").replaceChildren(stageTeam(game.away));
   byId("home-team").replaceChildren(stageTeam(game.home));
   renderPredictionDisplay(game);
-  renderContext(game);
+  renderContext(game, selectedVersion);
   renderMatchupHistory(game);
-  renderRoster(game);
-  renderTechnical(game);
+  renderTechnical(game, selectedVersion, state.predictionStates.get(game.id));
   const cachedAnalysis = state.currentAnalyses.get(game.id);
   if (cachedAnalysis) renderProductAnalysis(cachedAnalysis);
   else
@@ -1361,19 +2026,40 @@ function renderDetail(game) {
   const locked = ["locked", "locked_unavailable", "schedule_changed"].includes(
     state.predictionStates.get(game.id)?.status,
   );
-  byId("ai-analysis").disabled = locked && !cachedAnalysis;
+  byId("ai-analysis").disabled = (locked || Boolean(game.generation_hold_reason)) && !cachedAnalysis;
   byId("ai-analysis").querySelector("strong").textContent =
     cachedAnalysis
     ? "继续阅读第25秒分析"
-    : locked ? "比赛已开始" : "阅读第25秒分析";
+    : locked ? "比赛已开始" : game.generation_hold_reason ? "尚无正式赛前分析" : "阅读第25秒分析";
   const postgame = byId("postgame-entry");
+  const oldPostgame = postgame.querySelector(".postgame-content");
+  if (oldPostgame && (oldPostgame.dataset.gameId !== game.id || oldPostgame.dataset.expectedVersionId !== game.postgame?.version_id)) oldPostgame.remove();
   const postButton = postgame.querySelector("button");
   const availablePostgame = game.postgame?.status === "available";
+  const pendingPostgame = game.postgame?.status === "pending";
+  const unavailableEditorial = game.postgame?.status === "editorial_unavailable";
   postButton.disabled = !availablePostgame;
-  postButton.textContent = availablePostgame ? "查看赛后复盘" : "等待比赛结束";
+  postButton.textContent = availablePostgame ? "查看赛后复盘"
+    : pendingPostgame ? "赛后复盘准备中"
+      : unavailableEditorial ? "复盘文章暂不可用"
+        : ["post", "final", "completed", "finished"].includes(game.status) ? "暂无可用复盘" : "等待比赛结束";
+  const postgameScore = byId("postgame-score");
+  postgameScore.hidden = !availablePostgame && !unavailableEditorial;
+  postgameScore.textContent = game.postgame?.score_text || "";
+  const postgamePreview = byId("postgame-preview");
+  postgamePreview.hidden = !availablePostgame;
+  postgamePreview.textContent = availablePostgame
+    ? [game.postgame?.prediction_summary, game.postgame?.market_summary].filter(Boolean).join("  ·  ")
+    : "";
   byId("postgame-copy").textContent = availablePostgame
-    ? "回看赛前核心判断，并与真实比赛结果逐项验证。"
-    : "比赛结束后，这里将回看赛前判断对了什么、错了什么。";
+    ? "回看赛前判断与真实赛果，再进入完整篮球复盘。"
+    : pendingPostgame
+      ? "比赛已经结束，赛果正在同步。"
+      : unavailableEditorial
+        ? "赛果已同步，完整复盘文章暂不可用。"
+      : ["post", "final", "completed", "finished"].includes(game.status)
+        ? "本场暂无已发布的赛后复盘。"
+      : "比赛结束后，这里将回看赛前判断对了什么、错了什么。";
   document.querySelector(".technical-details").open = false;
   document.title = `${game.away.name_zh} vs ${game.home.name_zh} · 第25秒`;
 }
@@ -1403,6 +2089,15 @@ function route() {
       byId("back-home").focus({ preventScroll: true });
       return;
     }
+    state.activeGame = null;
+    showView("home");
+    loadGameById(gameId).catch(() => {
+      const error = byId("app-error");
+      error.querySelector("strong").textContent = "没有找到这场比赛";
+      error.querySelector("p").textContent = "比赛详情暂时无法读取，请返回今天或明天的赛程。";
+      error.hidden = false;
+    });
+    return;
   }
   state.activeGame = null;
   delete document.body.dataset.gameTheme;
@@ -1416,6 +2111,27 @@ function route() {
   );
 }
 
+async function loadGameById(gameId) {
+  if (state.gameLoads.has(gameId)) return state.gameLoads.get(gameId);
+  const loading = (async () => {
+    const response = await fetch(`/api/game?game_id=${encodeURIComponent(gameId)}`, { cache: "no-store" });
+    const payload = await response.json();
+    if (!response.ok || payload.status !== "success" || payload.game?.id !== gameId) {
+      throw new Error("game_detail_unavailable");
+    }
+    const existing = state.data.games.findIndex((item) => item.id === gameId);
+    payload.game.homepage_visible = existing >= 0 ? state.data.games[existing].homepage_visible : false;
+    if (existing >= 0) state.data.games[existing] = payload.game;
+    else state.data.games.push(payload.game);
+    if (payload.prediction) acceptPredictionSelection(gameId, payload.prediction);
+    if (decodeURIComponent((location.hash || "").slice(6)) === gameId) route();
+    return payload.game;
+  })();
+  state.gameLoads.set(gameId, loading);
+  try { return await loading; }
+  finally { state.gameLoads.delete(gameId); }
+}
+
 function sheetState(title, message, loading = false) {
   const node = document.createElement("div");
   node.className = "sheet-state";
@@ -1423,6 +2139,13 @@ function sheetState(title, message, loading = false) {
   node.append(text("div", ""));
   node.lastElementChild.append(text("h3", title), text("p", message));
   return node;
+}
+
+function appendAnalysisRefreshNote(container, message) {
+  const note = text("p", message, "analysis-refresh-note");
+  const rail = container.querySelector(".analyst-verdict");
+  if (rail) rail.append(note);
+  else container.prepend(note);
 }
 
 function openSheet() {
@@ -1448,6 +2171,23 @@ function closeSheet() {
 }
 
 // Presentation-only glossary. Preserve the unmodified source in expandable text.
+function playerDisplayCopy(value) {
+  let result = String(value ?? "");
+  const catalog = state.currentAnalyses.get(state.activeGame?.id)?.input_snapshot?.player_display_names || state.activeGame?.player_display_names || [];
+  const aliases = new Map(catalog.map((row) => [row.canonical_name_en, row.display_name_zh]));
+  const counts = new Map();
+  catalog.forEach((row) => row.canonical_name_en.split(/\s+/).forEach((part) => {
+    if (part.length >= 5) counts.set(part, (counts.get(part) || 0) + 1);
+  }));
+  catalog.forEach((row) => row.canonical_name_en.split(/\s+/).forEach((part) => {
+    if (part.length >= 5 && counts.get(part) === 1) aliases.set(part, row.display_name_zh);
+  }));
+  [...aliases.entries()].sort(([a], [b]) => b.length - a.length).forEach(([raw, zh]) => {
+    result = result.replace(new RegExp(`(?<![A-Za-z])${raw.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?![A-Za-z])`, "g"), zh);
+  });
+  return result;
+}
+
 function analystCopy(value) {
   const terms = {
     "prediction_method=pure_basketball_fallback": "当前沿用纯篮球预测",
@@ -1500,7 +2240,7 @@ function analystCopy(value) {
     LeBron: "勒布朗·詹姆斯",
     KCP: "考德威尔-波普",
   };
-  let result = String(value || "");
+  let result = playerDisplayCopy(value);
   [...Object.entries(PLAYER_DISPLAY_NAMES), ...Object.entries(terms)]
     .sort(([left], [right]) => right.length - left.length)
     .forEach(([raw, readable]) => {
@@ -1731,11 +2471,11 @@ function renderLegacyJudgment(payload) {
     panels[2].append(sourceBlock);
   }
   renderPublicMarketReference(payload.public_market_reference);
-  renderKeyPlayers(state.activeGame, judgment.player_analysis);
+  renderKeyPlayers(state.activeGame, judgment.player_analysis, "success");
 }
 
 function renderJudgment(payload) {
-  const judgment = payload.judgment;
+  const judgment = displayedJudgment(payload);
   renderProductAnalysis(payload);
   renderPredictionDisplay(state.activeGame);
   renderGames();
@@ -1762,28 +2502,25 @@ function renderJudgment(payload) {
   );
   const refresh = text(
     "button",
-    locked ? "赛前判断已锁定" : "更新当前预测",
+    locked ? "赛前判断已锁定" : "刷新已发布分析",
     "analysis-refresh-button",
   );
   refresh.type = "button";
   refresh.disabled = locked;
   if (!locked) refresh.addEventListener("click", () => requestAiAnalysis(true));
   verdict.append(refresh);
-  container.replaceChildren(verdict);
-  const thesis = document.createElement("section");
-  thesis.className = "analysis-thesis";
-  thesis.append(
+  const shortReviewTitle =
+    displayedStoryTitle(payload) ||
+    judgment.core_question ||
+    `${state.activeGame.away.name_zh}对${state.activeGame.home.name_zh}`;
+  const shortReview = document.createElement("section");
+  shortReview.className = "analyst-short-review";
+  shortReview.append(
     text("p", "赛前短评", "verdict-label"),
-    text(
-      "h3",
-      analystCopy(
-        judgment.pregame_story?.title ||
-          judgment.core_question ||
-          `${state.activeGame.away.name_zh}对${state.activeGame.home.name_zh}`,
-      ),
-    ),
+    text("h4", analystCopy(shortReviewTitle), "analyst-short-review-title"),
   );
-  container.append(thesis);
+  verdict.append(shortReview);
+  container.replaceChildren(verdict);
   const article = document.createElement("article");
   article.className = "analysis-block analysis-article";
   analystCopy(judgment.analysis_article || "")
@@ -1828,7 +2565,7 @@ function renderJudgment(payload) {
     });
   container.append(sourceBlock);
   renderPublicMarketReference(payload.public_market_reference);
-  renderKeyPlayers(state.activeGame, judgment.player_analysis || []);
+  renderKeyPlayers(state.activeGame, judgment.player_analysis || [], "success");
 }
 
 function renderOfflineAnalysis(game, message) {
@@ -1850,25 +2587,14 @@ async function requestAiAnalysis(forceRefresh = false) {
   openSheet();
   const content = byId("sheet-content");
   const cached = state.currentAnalyses.get(gameId);
-  const selection = state.predictionStates.get(gameId);
-  const locked = ["locked", "locked_unavailable", "schedule_changed"].includes(selection?.status);
-  if (locked) {
-    if (cached) renderJudgment(cached);
-    else renderOfflineAnalysis(state.activeGame, "比赛已开始，当前没有可读取的赛前判断。");
-    return;
-  }
-  if (cached && !forceRefresh) {
-    renderJudgment(cached);
-    return;
-  }
   if (cached) {
     renderJudgment(cached);
-    content.prepend(text("p", "正在更新赛前信息…", "analysis-refresh-note"));
+    appendAnalysisRefreshNote(content, "正在读取已发布分析…");
   } else {
     content.replaceChildren(
       sheetState(
-        "正在整理证据",
-        "分析师正在结合球队表现、当前名单与预测形成判断。你可以先关闭面板，继续看比赛。",
+        "正在读取赛前分析",
+        "正在读取这场比赛当前已发布的报告。",
         true,
       ),
     );
@@ -1878,30 +2604,43 @@ async function requestAiAnalysis(forceRefresh = false) {
   state.aiPending = true;
   state.aiFailures.delete(gameId);
   button.disabled = true;
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 90000);
   try {
-    const response = await fetch("/api/ai-analysis", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ game_id: gameId, request_id: crypto.randomUUID() }),
-      signal: controller.signal,
-    });
+    const facts = await fetchScheduleWindow();
+    let freshGame = facts.games?.find((game) => game.id === gameId);
+    let directSelection = null;
+    if (!freshGame) {
+      const detailResponse = await fetch(`/api/game?game_id=${encodeURIComponent(gameId)}`, { cache: "no-store" });
+      const detailPayload = await detailResponse.json();
+      if (!detailResponse.ok || detailPayload.status !== "success" || detailPayload.game?.id !== gameId) {
+        throw new Error("没有找到当前比赛");
+      }
+      freshGame = detailPayload.game;
+      freshGame.homepage_visible = false;
+      directSelection = detailPayload.prediction;
+      facts.games.push(freshGame);
+    }
+    if (state.activeGame?.id !== gameId) return;
+    if (Number(freshGame.schedule_revision ?? 1) !== Number(state.activeGame.schedule_revision ?? 1)) {
+      state.currentAnalyses.delete(gameId);
+      state.factViews.delete(gameId);
+    }
+    state.data = facts;
+    state.activeGame = freshGame;
+    if (directSelection) acceptPredictionSelection(gameId, directSelection);
+    renderDetail(freshGame);
+    if (typeof readingHeader === "function") readingHeader(freshGame);
+    const response = await fetch("/api/current-analyses", { cache: "no-store" });
     const payload = await response.json();
-    if (payload.game_id === gameId && Number.isFinite(Number(payload.state_revision))) {
-      acceptPredictionSelection(gameId, payload);
+    if (!response.ok) throw new Error("报告读取失败");
+    if (payload.predictions?.[gameId]) {
+      acceptPredictionSelection(gameId, payload.predictions[gameId]);
     }
     const selected = state.currentAnalyses.get(gameId);
-    if (payload.update_status === "failed") {
-      if (selected) {
-        renderJudgment(selected);
-        content.prepend(text("p", "本次更新未完成，仍显示上一份成功判断。", "analysis-refresh-note"));
-        return;
-      }
-      throw new Error(payload.message || "AI 分析暂不可用");
+    if (state.activeGame?.id !== gameId) return;
+    if (!selected) {
+      renderOfflineAnalysis(state.activeGame, "当前没有已发布的赛前分析，请稍后查看。");
+      return;
     }
-    if (!response.ok || !selected)
-      throw new Error(payload.message || "AI 分析暂不可用");
     state.aiFailures.delete(gameId);
     if (state.activeGame?.id === gameId) {
       renderPredictionDisplay(state.activeGame);
@@ -1917,7 +2656,7 @@ async function requestAiAnalysis(forceRefresh = false) {
       );
       if (latest) {
         renderJudgment(latest);
-        if (!lockedNow) content.prepend(text("p", "本次更新未完成，仍显示上一份成功判断。", "analysis-refresh-note"));
+        if (!lockedNow) appendAnalysisRefreshNote(content, "读取未完成，仍显示上一份已发布分析。");
         return;
       }
       state.aiFailures.add(gameId);
@@ -1925,20 +2664,13 @@ async function requestAiAnalysis(forceRefresh = false) {
         renderOfflineAnalysis(state.activeGame, "比赛已开始，当前没有可读取的赛前判断。");
         return;
       }
-      const message =
-        error.name === "AbortError"
-          ? "这次生成用时较长，请稍后重试。"
-          : /Error|Exception|failed|fetch|JSON/i.test(error.message)
-            ? "本次分析未能完成，请稍后重试。"
-            : error.message;
-      renderOfflineAnalysis(state.activeGame, message);
+      renderOfflineAnalysis(state.activeGame, "暂时无法读取已发布分析，请稍后重试。");
       const retry = text("button", "重新尝试", "retry-button");
       retry.type = "button";
       retry.addEventListener("click", () => requestAiAnalysis(false));
       content.append(retry);
     }
   } finally {
-    clearTimeout(timeout);
     state.aiPending = false;
     content.setAttribute("aria-busy", "false");
     button.disabled = ["locked", "locked_unavailable", "schedule_changed"].includes(
@@ -1946,9 +2678,168 @@ async function requestAiAnalysis(forceRefresh = false) {
     ) && !state.currentAnalyses.has(gameId);
   }
 }
+
+function signedNumber(value) {
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric)) return "—";
+  return (numeric > 0 ? "+" : "") + number(numeric);
+}
+
+function postgameNumber(value) {
+  const formatted = number(value);
+  return formatted.endsWith(".0") ? formatted.slice(0, -2) : formatted;
+}
+
+function settlementLabel(value) {
+  return value === "win" ? "命中" : value === "push" ? "走盘" : value === "loss" ? "未命中" : "未结算";
+}
+
+function renderPostgameReader(postgame, game) {
+  const content = byId("sheet-content");
+  content.replaceChildren();
+  content.className = "sheet-content has-postgame";
+
+  const rail = document.createElement("aside");
+  rail.className = "postgame-reader-rail";
+  rail.append(text("p", "第25秒赛后复盘", "verdict-label"));
+  rail.append(text("h3", postgame.score?.text || postgame.title, "postgame-score-title"));
+
+  const prediction = postgame.prediction || {};
+  const forecastBlock = document.createElement("section");
+  forecastBlock.className = "postgame-rail-block";
+  forecastBlock.append(text("p", "赛前判断", "postgame-rail-label"));
+  forecastBlock.append(text(
+    "strong",
+    (prediction.winner_name || "赛前方向") + "胜" +
+      (prediction.winner_probability != null ? " · 胜率 " + percent(prediction.winner_probability) : ""),
+    "postgame-rail-winner",
+  ));
+  if (prediction.expected_winner_margin != null && prediction.actual_winner_margin != null) {
+    forecastBlock.append(text(
+      "p",
+      (prediction.winner_name || "预测方") + "预计赢 " +
+        postgameNumber(Math.abs(prediction.expected_winner_margin)) + " 分 · " +
+        (prediction.actual_winner_name || "实际胜方") + "实际赢 " +
+        postgameNumber(Math.abs(prediction.actual_winner_margin)) + " 分",
+    ));
+  }
+  if (prediction.expected_total != null && prediction.actual_total != null) {
+    forecastBlock.append(text(
+      "p",
+      "总分预计 " + postgameNumber(prediction.expected_total) + " · 实际 " + postgameNumber(prediction.actual_total),
+    ));
+  }
+  rail.append(forecastBlock);
+
+  const market = postgame.market_reference || {};
+  const marketBlock = document.createElement("section");
+  marketBlock.className = "postgame-rail-block postgame-market-block";
+  marketBlock.append(text("p", "公开早盘参考", "postgame-rail-label"));
+  if (market.status === "available") {
+    const homeName = market.home_team_name || game.home.name_zh;
+    const awayName = market.away_team_name || game.away.name_zh;
+    const lineText = market.home_spread == null ? "让分暂无"
+      : homeName + " " + signedNumber(market.home_spread);
+    const totalText = market.total == null ? "总分暂无" : "总分 " + postgameNumber(market.total);
+    marketBlock.append(text("p", lineText + " · " + totalText));
+    const spread = market.spread_review;
+    if (spread) {
+      const sideName = spread.lean_side === "home" ? homeName
+        : spread.lean_side === "away" ? awayName : "接近盘口";
+      const sideLine = spread.lean_line == null ? "" : " " + signedNumber(spread.lean_line);
+      marketBlock.append(text(
+        "p",
+        "让分方向 " + sideName + sideLine + " · " + settlementLabel(spread.settlement),
+        "postgame-settlement",
+      ));
+    }
+    if (market.total_review) {
+      const totalDirection = market.total_review.lean === "over" ? "大分"
+        : market.total_review.lean === "under" ? "小分" : "走盘";
+      marketBlock.append(text(
+        "p",
+        "总分方向 " + totalDirection + " · " + settlementLabel(market.total_review.settlement),
+        "postgame-settlement",
+      ));
+    }
+  } else {
+    marketBlock.append(text("p", "这场没有可用的赛前公开盘口参考。"));
+  }
+  rail.append(marketBlock);
+  const railReview = postgame.settlement_summary || postgame.short_review || "";
+  rail.append(text("p", railReview, "postgame-short-review"));
+
+  const article = document.createElement("article");
+  article.className = "postgame-reader-article analysis-block";
+  article.append(text("p", "终场复盘", "postgame-article-kicker"));
+  article.append(text("h1", postgame.title || "这场比赛怎么打成这样"));
+  String(postgame.article || "")
+    .split(/\n\s*\n/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean)
+    .forEach((paragraph) => article.append(text("p", paragraph)));
+
+  const sources = document.createElement("details");
+  sources.className = "postgame-reader-sources analysis-block";
+  sources.append(text("summary", "来源与数据"));
+  (postgame.sources || []).forEach((source) => {
+    if (typeof source.url !== "string" || !/^https:\/\//.test(source.url)) return;
+    const row = document.createElement("div");
+    row.className = "postgame-source-row";
+    row.append(text("span", source.label || "来源"));
+    const link = text("a", source.title || source.url);
+    link.href = source.url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    row.append(link);
+    if (source.captured_at) row.append(text("small", "抓取于 " + displayClock(source.captured_at)));
+    sources.append(row);
+  });
+  if (!sources.querySelector(".postgame-source-row")) {
+    sources.append(text("p", "当前没有可展开的来源链接。"));
+  }
+
+  content.append(rail, article, sources);
+  content.setAttribute("aria-busy", "false");
+  if (typeof readingHeader === "function") readingHeader(game, { mode: "postgame", prediction });
+  byId("sheet-title").textContent = "第25秒赛后复盘";
+}
+
+function showPostgameReaderState(title, message, loading = false) {
+  const content = byId("sheet-content");
+  content.className = "sheet-content";
+  content.replaceChildren(sheetState(title, message, loading));
+  content.setAttribute("aria-busy", String(loading));
+}
+
 function setupInteractions() {
   window.addEventListener("hashchange", route);
   byId("ai-analysis").addEventListener("click", () => requestAiAnalysis(false));
+  byId("postgame-entry").querySelector("button").addEventListener("click", async () => {
+    const game = state.activeGame;
+    if (!game?.postgame || game.postgame.status !== "available") return;
+    const gameId = game.id;
+    const expectedPostgameVersion = game.postgame.version_id;
+    openSheet({ mode: "postgame" });
+    byId("sheet-title").textContent = "第25秒赛后复盘";
+    showPostgameReaderState("正在读取赛后复盘", "正在载入已保存的比赛复盘。", true);
+    try {
+      const response = await fetch("/api/postgame?game_id=" + encodeURIComponent(gameId), { cache: "no-store" });
+      const payload = await response.json();
+      if (!response.ok || payload.status !== "available") throw new Error("postgame_unavailable");
+      if (state.activeGame?.id !== gameId ||
+          payload.postgame.game_id !== gameId ||
+          payload.postgame.version_id !== expectedPostgameVersion) {
+        throw new Error("postgame_identity_or_version_changed");
+      }
+      renderPostgameReader(payload.postgame, state.activeGame);
+    } catch {
+      if (state.activeGame?.id === gameId && !byId("ai-sheet").hidden) {
+        showPostgameReaderState("赛后复盘暂不可用", "这篇复盘暂时无法读取，请稍后重试。");
+        byId("sheet-title").textContent = "第25秒赛后复盘";
+      }
+    }
+  });
   byId("close-sheet").addEventListener("click", closeSheet);
   document
     .querySelector(".sheet-backdrop")
@@ -2001,16 +2892,60 @@ async function loadCurrentAnalyses() {
   }
 }
 
+async function fetchScheduleWindow() {
+  let response = await fetch("/api/schedule-window", { cache: "no-store" });
+  if (!response.ok) response = await fetch("/app_data.json", { cache: "no-store" });
+  if (!response.ok) throw new Error(`schedule_window_http_${response.status}`);
+  return response.json();
+}
+
+async function refreshScheduleWindow() {
+  if (!state.data || document.visibilityState === "hidden") return;
+  const activeId = state.activeGame?.id || null;
+  const priorActive = activeId ? state.data.games.find((game) => game.id === activeId) : null;
+  try {
+    const next = await fetchScheduleWindow();
+    if (!Array.isArray(next.games) || !Array.isArray(next.teams) || !next.schedule_window) return;
+    for (const oldGame of state.data.games) {
+      const replacement = next.games.find((game) => game.id === oldGame.id);
+      if (replacement && (replacement.tipoff !== oldGame.tipoff ||
+          replacement.home.id !== oldGame.home.id || replacement.away.id !== oldGame.away.id)) {
+        state.currentAnalyses.delete(oldGame.id);
+        state.editorialOverlays.delete(oldGame.id);
+        state.predictionStates.delete(oldGame.id);
+        state.factViews.delete(oldGame.id);
+      }
+    }
+    state.data = next;
+    if (activeId && !state.data.games.some((game) => game.id === activeId) && priorActive) {
+      priorActive.homepage_visible = false;
+      state.data.games.push(priorActive);
+    }
+    await loadCurrentAnalyses();
+    renderHome();
+    if (activeId) {
+      state.activeGame = state.data.games.find((game) => game.id === activeId) || priorActive;
+      if (state.activeGame) renderDetail(state.activeGame);
+    } else if ((location.hash || "#home") === "#home") {
+      route();
+    }
+  } catch (_) {
+    // A failed read leaves the last successful schedule in place; no generation or market fetch is started.
+  }
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   setupInteractions();
   try {
-    const response = await fetch("app_data.json", { cache: "no-store" });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    state.data = await response.json();
+    state.data = await fetchScheduleWindow();
     await loadCurrentAnalyses();
     setupFavoritePicker();
     renderHome();
     route();
+    state.refreshTimer = window.setInterval(refreshScheduleWindow, 60 * 1000);
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") refreshScheduleWindow();
+    });
   } catch (error) {
     console.error(error);
     byId("home-view").hidden = true;

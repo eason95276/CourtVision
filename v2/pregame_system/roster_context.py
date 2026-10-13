@@ -67,57 +67,9 @@ def normalize_nba_minutes(payload, team_id, season_start, source):
 
 
 def calculate_continuity(roster, minutes):
-    result = {'status': 'unavailable', 'retained_minutes_ratio': None,
-              'top8_retained_count': None, 'top8_retained_minutes_ratio': None,
-              'top8_count': None, 'roster_identity_coverage': None, 'minute_rows_coverage': None,
-              'roster_completeness': 'unknown', 'minute_season_completeness': 'unknown',
-              'newly_listed_players': None, 'previous_participants_not_listed': None,
-              'historical_top8': None, 'confirmed_starters': None, 'projected_starters': None,
-              'current_rotation': None, 'confirmed_transactions': None,
-              'reason': 'current_roster_or_previous_season_minutes_unavailable'}
-    if roster and roster.get('status') == 'available':
-        result['roster_identity_coverage'] = roster.get('coverage', {}).get('roster_identity_coverage')
-        result['roster_completeness'] = roster.get('coverage', {}).get('source_roster_completeness', 'unknown')
-    if minutes and minutes.get('status') == 'available':
-        result['minute_rows_coverage'] = minutes.get('coverage', {}).get('valid_minute_rows_ratio')
-        result['minute_season_completeness'] = minutes.get('coverage', {}).get('season_totals_completeness', 'unknown')
-    if not roster or not minutes or any(x.get('status') != 'available' for x in (roster, minutes)):
-        return result
-    if not roster.get('players') or not minutes.get('players'):
-        result['reason'] = 'empty_roster_or_minutes'
-        return result
-    if any(p.get('player_id') is None for p in roster['players']):
-        result['reason'] = 'unresolved_current_roster_identity'
-        return result
-    if (roster['team_id'] != minutes['team_id'] or roster['season_start'] != minutes['season_start'] + 1
-            or roster['id_namespace'] != minutes['id_namespace'] or minutes.get('per_mode') != 'Totals'):
-        result['reason'] = 'incompatible_team_season_or_player_identity'
-        return result
-    current = {str(p['player_id']): p for p in roster['players']}
-    previous = {str(p['player_id']): p for p in minutes['players']}
-    if len(current) != len(roster['players']) or len(previous) != len(minutes['players']):
-        result['reason'] = 'duplicate_player_identity'
-        return result
-    if any(not math.isfinite(p['minutes']) or p['minutes'] < 0 for p in previous.values()):
-        result['reason'] = 'invalid_minutes'
-        return result
-    total = sum(p['minutes'] for p in previous.values())
-    if not total:
-        result['reason'] = 'no_positive_minutes_denominator'
-        return result
-    ordered = sorted(previous.values(), key=lambda p: (-p['minutes'], str(p['player_id'])))[:8]
-    top_total = sum(p['minutes'] for p in ordered)
-    result.update(status='available', reason=None,
-                  retained_minutes_ratio=sum(p['minutes'] for pid, p in previous.items() if pid in current) / total,
-                  top8_retained_count=sum(str(p['player_id']) in current for p in ordered),
-                  top8_count=len(ordered),
-                  top8_retained_minutes_ratio=sum(p['minutes'] for p in ordered if str(p['player_id']) in current) / top_total,
-                  newly_listed_players=[p for pid, p in current.items() if pid not in previous],
-                  previous_participants_not_listed=[p for pid, p in previous.items() if pid not in current],
-                  historical_top8=ordered,
-                  change_semantics='membership versus previous-season participants; not confirmed transactions',
-                  rotation_semantics='previous-season team minutes ranking; not a current rotation or starting lineup')
-    return result
+    from .roster_continuity import calculate_continuity as _calculate_continuity
+
+    return _calculate_continuity(roster, minutes)
 
 
 def cold_start_context(game, games, cutoff, stats=None):
@@ -168,7 +120,7 @@ def eligible_snapshot(team_id, season_start, cutoff, root=CACHE):
                 continue
             if instant(record['captured_at']) > instant(cutoff):
                 continue
-            for key in ('roster', 'minutes', 'league_team_assignment', 'official_team_roster'):
+            for key in ('roster', 'minutes', 'league_team_assignment', 'official_team_roster', 'current_team_roster'):
                 source = (record.get(key) or {}).get('source')
                 if source:
                     if instant(source['captured_at']) > instant(cutoff) or digest(source['raw_path']) != source['sha256']:
@@ -193,7 +145,7 @@ def local_roster_context(game, cutoff, games, root=CACHE, stats=None):
     for side in ('home', 'away'):
         record = eligible_snapshot(int(game[f'{side}_team_id']), int(game['season_start']), cutoff, root)
         assignment = (record or {}).get('league_team_assignment')
-        official = (record or {}).get('official_team_roster')
+        official = (record or {}).get('official_team_roster') or (record or {}).get('current_team_roster')
         legacy = (record or {}).get('roster')
         if legacy and legacy.get('source', {}).get('source_type') == 'official_nba_web_next_data':
             assignment = assignment or legacy
@@ -203,7 +155,7 @@ def local_roster_context(game, cutoff, games, root=CACHE, stats=None):
                        'roster': official,
                        'official_team_roster': official,
                        'league_team_assignment': assignment,
-                       'roster_basis': 'official_team_roster' if official else 'unavailable',
+                       'roster_basis': official.get('roster_basis','official_team_roster') if official else 'unavailable',
                        'continuity': calculate_continuity(official, record.get('minutes')) if record else calculate_continuity(None, None),
                        'cold_start': cold[side], 'source_record': record,
                        'key_player_status': None, 'confirmed_starters': None,

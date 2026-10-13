@@ -5,12 +5,13 @@ import json
 import os
 import re
 import uuid
+import time
 from copy import deepcopy
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, create_model
+from pydantic import BaseModel, ConfigDict, Field
 
 from .storage import BASE, clean, content_hash, now, save
 from .skill_provenance import prompt_skill_hashes
@@ -63,6 +64,14 @@ class AnalysisClaim(BaseModel):
     evidence_ids: list[str] = Field(default_factory=list, max_length=6)
 
 
+class CentralThesisClaim(AnalysisClaim):
+    statement: str = Field(min_length=1, max_length=600)
+
+
+class KeyMatchupClaim(AnalysisClaim):
+    statement: str = Field(min_length=1, max_length=900)
+
+
 class PlayerAnalysis(AnalysisClaim):
     player_name: str = Field(min_length=1, max_length=100)
 
@@ -93,6 +102,14 @@ class FinalPrediction(BaseModel):
     evidence_ids: list[str] = Field(default_factory=list, max_length=12)
 
 
+class EditorialClaimBinding(BaseModel):
+    """Internal major-claim trace; no user-visible sentence-by-sentence citations."""
+    model_config = ConfigDict(extra="forbid")
+    statement: str = Field(min_length=1, max_length=500)
+    classification: Literal["FACT", "INFERENCE", "UNKNOWN", "CONDITIONAL"]
+    evidence_ids: list[str] = Field(min_length=1, max_length=8)
+
+
 class AnalystJudgment(BaseModel):
     # DeepSeek occasionally adds harmless top-level explanation fields even
     # under tool calling. Ignore those fields while keeping every persisted
@@ -114,20 +131,22 @@ class AnalystJudgment(BaseModel):
     unresolved_uncertainty: list[str] = Field(default_factory=list, max_length=4)
     baseline_agreement: dict[Literal["pure", "market", "residual"], Literal["agree", "disagree", "mixed", "not_applicable"]]
     subjective_rationale: str = Field(min_length=1, max_length=500)
+    central_thesis: CentralThesisClaim | None = None
     core_question: str | None = Field(default=None, max_length=220)
-    game_script: str | None = Field(default=None, max_length=500)
+    game_script: str | None = Field(default=None, max_length=800)
     model_risk: str | None = Field(default=None, max_length=500)
     pregame_story: EditorialStory | None = None
     watch_themes: list[WatchTheme] = Field(default_factory=list, max_length=4)
     prediction_perspective: PredictionPerspective | None = None
     final_prediction: FinalPrediction | None = None
-    analysis_article: str | None = Field(default=None, max_length=1600)
+    analysis_article: str | None = Field(default=None, max_length=2200)
     analysis_article_evidence_ids: list[str] = Field(default_factory=list, max_length=12)
+    editorial_claim_bindings: list[EditorialClaimBinding] = Field(default_factory=list, max_length=16)
     roster_analysis: list[AnalysisClaim] = Field(default_factory=list, max_length=2)
-    player_analysis: list[PlayerAnalysis] = Field(default_factory=list, max_length=5)
+    player_analysis: list[PlayerAnalysis] = Field(default_factory=list, max_length=10)
     cold_start_analysis: list[AnalysisClaim] = Field(default_factory=list, max_length=1)
     historical_data_relevance: list[AnalysisClaim] = Field(default_factory=list, max_length=1)
-    key_matchup_variables: list[AnalysisClaim] = Field(default_factory=list, max_length=2)
+    key_matchup_variables: list[KeyMatchupClaim] = Field(default_factory=list, max_length=3)
     supporting_evidence: list[AnalysisClaim] = Field(default_factory=list, max_length=2)
     conflicting_evidence: list[AnalysisClaim] = Field(default_factory=list, max_length=1)
     uncertainty: list[AnalysisClaim] = Field(default_factory=list, max_length=2)
@@ -151,15 +170,16 @@ class ProductAnalystOutput(BaseModel):
     ]
     subjective_rationale: str = Field(min_length=1, max_length=500)
     pregame_story: EditorialStory
-    watch_themes: list[WatchTheme] = Field(min_length=2, max_length=4)
+    watch_themes: list[WatchTheme] = Field(min_length=0, max_length=4)
     final_prediction: FinalPrediction
-    analysis_article: str = Field(min_length=400, max_length=1600)
-    analysis_article_evidence_ids: list[str] = Field(min_length=1, max_length=12)
-    player_analysis: list[PlayerAnalysis] = Field(default_factory=list, max_length=4)
+    analysis_article: str = Field(min_length=1, max_length=2200)
+    analysis_article_evidence_ids: list[str] = Field(default_factory=list, max_length=12)
+    editorial_claim_bindings: list[EditorialClaimBinding] = Field(default_factory=list, max_length=16)
+    player_analysis: list[PlayerAnalysis] = Field(default_factory=list, max_length=10)
     roster_analysis: list[AnalysisClaim] = Field(default_factory=list, max_length=1)
     cold_start_analysis: list[AnalysisClaim] = Field(default_factory=list, max_length=1)
     historical_data_relevance: list[AnalysisClaim] = Field(default_factory=list, max_length=1)
-    key_matchup_variables: list[AnalysisClaim] = Field(default_factory=list, max_length=2)
+    key_matchup_variables: list[KeyMatchupClaim] = Field(default_factory=list, max_length=3)
     supporting_evidence: list[AnalysisClaim] = Field(default_factory=list, max_length=2)
     conflicting_evidence: list[AnalysisClaim] = Field(default_factory=list, max_length=1)
     uncertainty: list[AnalysisClaim] = Field(default_factory=list, max_length=2)
@@ -175,9 +195,135 @@ def _source_summary(source: dict[str, Any] | None) -> dict[str, Any] | None:
         return None
     return clean({
         key: source.get(key)
-        for key in ("url", "captured_at", "sha256", "source_type", "parser_version", "status")
+        for key in ("url", "captured_at", "observed_at", "sha256", "source_type", "parser_version", "status")
         if source.get(key) is not None
     })
+
+
+def _compact_player_knowledge(value: dict[str, Any]) -> dict[str, Any]:
+    """Bound the writer DTO; the full source packet remains in input_snapshot."""
+    result = deepcopy(value)
+    teams = result.get("teams") or {}
+    if not any("previous_season_players" in team or "historical_team_leaders" in team for team in teams.values()):
+        return clean(result)
+    coverage = result.get("coverage") or {}
+    result["coverage"] = {key: coverage[key] for key in (
+        "status", "season", "season_type", "provider", "expected_games", "collected_games",
+        "player_game_rows", "coverage_ratio", "team_coverage", "cutoff",
+    ) if key in coverage}
+    if coverage.get("source"):
+        result["coverage"]["source"] = {key: coverage["source"][key] for key in (
+            "collection_time_min", "collection_time_max", "response_hash_count", "data_version",
+        ) if key in coverage["source"]}
+    metrics = ("points", "assists", "rebounds", "fga", "three_pa", "turnovers", "steals", "blocks")
+    summary_fields = ("games_played", "confirmed_dnp_games", "minutes_total", "minutes_per_appearance",
+                      "starts", "starter_observed_games", "team_minutes_share")
+    replacement_fields = ("player_id", "candidate_appearances_in_dnp_games", "average_minutes_in_dnp_games",
+                          "average_minutes_when_key_player_played", "minutes_difference")
+    history_fields = (*summary_fields, "minutes_precision", "minutes_rank", "points_total", "per_observed_game",
+                      "observed_games_by_statistic", "missing_games_by_statistic", "shooting_percentages")
+    top8_fields = ("player_id", "player_id_namespace", "player_name", "minutes_total", "currently_listed")
+    caveats = set()
+
+    def history(profile, *, leader=False):
+        if not profile:
+            return None
+        compact = {"summary": [profile.get(key) for key in summary_fields]}
+        if leader:
+            compact.update({key: profile[key] for key in ("player_id", "player_id_namespace", "player_name", "team_id") if key in profile})
+        precision = profile.get("minutes_precision") or {}
+        if precision.get("caveat"):
+            caveats.add(precision["caveat"])
+        if precision and not leader:
+            compact["minutes_precision"] = [precision.get("status"), precision.get("observed_minute_rows")]
+        if not leader and profile.get("team_ranks"):
+            ranks = profile["team_ranks"]
+            compact["minutes_rank"] = [ranks.get("minutes_rank"), (ranks.get("rank_denominators") or {}).get("minutes_rank")]
+        averages, samples, missing = [], [], []
+        for metric in metrics:
+            source = (profile.get("statistics") or {}).get(metric)
+            if not source:
+                averages.append(None)
+                samples.append(None)
+                missing.append(None)
+                continue
+            averages.append(source.get("per_observed_game", source.get("per_appearance")))
+            samples.append(source.get("observed_games"))
+            missing.append(source.get("missing_games"))
+            if metric == "points" and not leader and "total" in source:
+                compact["points_total"] = source["total"]
+        compact["per_observed_game"] = averages
+        compact["observed_games_by_statistic"] = samples
+        compact["missing_games_by_statistic"] = missing
+        shooting = profile.get("shooting_percentages") or {}
+        compact["shooting_percentages"] = [shooting.get(key) for key in ("field_goal", "three_point", "free_throw")]
+        row = [compact.get(key) for key in history_fields]
+        if leader:
+            return {**{key: compact[key] for key in ("player_id", "player_id_namespace", "player_name", "team_id") if key in compact}, "history": row}
+        return row
+
+    for team in teams.values():
+        if team.get("previous_team_top8_minutes"):
+            team["previous_team_top8_minutes"] = [[entry.get(key) for key in top8_fields] for entry in team["previous_team_top8_minutes"]]
+        if team.get("previous_season_players"):
+            team.pop("historical_team_leaders", None)  # Previous top-eight membership is retained separately below.
+        elif team.get("historical_team_leaders"):
+            team["historical_team_leaders"] = [history(profile, leader=True) for profile in team["historical_team_leaders"]]
+        continuity = team.get("continuity") or {}
+        team["continuity"] = {key: continuity[key] for key in (
+            "status", "reason", "retained_minutes_ratio", "top8_retained_count", "top8_retained_minutes_ratio",
+            "roster_identity_coverage", "minute_rows_coverage", "roster_completeness_caveat",
+            "retained_minutes_ratio_interpretation", "identity_crosswalk_unresolved_players",
+        ) if key in continuity}
+        players = []
+        for profile in team.get("previous_season_players") or []:
+            compact = {key: profile[key] for key in (
+                "player_id", "source_player_id", "player_name",
+                "previous_season_status", "previous_season_history_status", "current_availability",
+            ) if key in profile}
+            if profile.get("previous_season_history_reason"):
+                compact["previous_season_history_reason"] = profile["previous_season_history_reason"]
+            if profile.get("previous_season_history_status") == "available":
+                compact.pop("previous_season_status", None)  # Current/other-team stints below already state membership.
+            current = history(profile.get("current_team_last_season_stint"))
+            previous = history(profile.get("previous_season_total"))
+            stints = profile.get("previous_team_stints") or []
+            same_team = bool(current and previous and len(stints) == 1
+                             and stints[0].get("team_id") == profile.get("team_id"))
+            if same_team:
+                previous = {"same_as": "current_team_last_season_stint"}
+            compact["current_team_last_season_stint"] = current
+            compact["previous_season_total"] = previous
+            if not same_team:
+                compact["previous_team_stints"] = [
+                    [stint.get("team_id"), stint.get("games_played")] for stint in stints
+                ]
+            if profile.get("replacement_observations"):
+                compact["replacement_observations"] = [
+                    [observation.get(key) for key in replacement_fields] for observation in profile["replacement_observations"]
+                ]
+            players.append(compact)
+        if "previous_season_players" in team:
+            team["previous_season_players"] = players
+    if caveats:
+        result["minutes_precision_caveats"] = sorted(caveats)
+    result["replacement_observation_semantics"] = "descriptive historical association; not an injury cause or causal effect"
+    result["column_definitions"] = {
+        "history": list(history_fields),
+        "previous_team_top8_minutes": list(top8_fields),
+        "previous_team_stints": ["team_id", "games_played"],
+        "summary": list(summary_fields),
+        "per_observed_game": list(metrics),
+        "observed_games_by_statistic": list(metrics),
+        "missing_games_by_statistic": list(metrics),
+        "shooting_percentages": ["field_goal", "three_point", "free_throw"],
+        "minutes_precision": ["source_resolution", "observed_minute_rows"],
+        "minutes_rank": ["within_team_rank", "rank_denominator"],
+        "replacement_observations": list(replacement_fields),
+    }
+    result["id_namespaces"] = {"player_id": "NBA", "source_player_id": (result.get("coverage") or {}).get("provider")}
+    result["context_projection"] = "compact descriptors; full historical packet retained in input_snapshot"
+    return clean(result)
 
 
 def _compact_roster_context(value: dict[str, Any] | None) -> dict[str, Any] | None:
@@ -190,6 +336,14 @@ def _compact_roster_context(value: dict[str, Any] | None) -> dict[str, Any] | No
         "numeric_model_usage": value.get("numeric_model_usage"),
         "teams": {},
     }
+    if value.get("identity_preflight") is not None:
+        result["identity_preflight"] = clean(value["identity_preflight"])
+    if value.get("current_roster_identity_coverage") is not None:
+        result["current_roster_identity_coverage"] = clean(value["current_roster_identity_coverage"])
+    if value.get("player_knowledge_history_coverage") is not None:
+        result["player_knowledge_history_coverage"] = clean(value["player_knowledge_history_coverage"])
+    if value.get("player_knowledge") is not None:
+        result["player_knowledge"] = _compact_player_knowledge(value["player_knowledge"])
     cold_fields = (
         "status", "season_start", "current_season_games_observed", "current_season_games_confirmed",
         "current_season_coverage", "cold_start", "window_provenance",
@@ -203,12 +357,23 @@ def _compact_roster_context(value: dict[str, Any] | None) -> dict[str, Any] | No
         "projected_starters", "current_rotation", "confirmed_transactions",
     )
     for side, team in (value.get("teams") or {}).items():
-        official = (team or {}).get("official_team_roster") or (team or {}).get("roster")
+        basis = (team or {}).get("roster_basis")
+        official = (team or {}).get("official_team_roster")
+        current = (team or {}).get("current_team_roster")
+        legacy = (team or {}).get("roster")
+        if official is not None and basis not in (None, "official_team_roster"):
+            current, official = official, None
+        elif official is None and current is None and legacy is not None:
+            if basis in (None, "official_team_roster"):
+                official = legacy
+            else:
+                current = legacy
+        member_roster = official or current
         assignment = (team or {}).get("league_team_assignment")
         source_record = (team or {}).get("source_record") or {}
         players = [
             clean({key: player.get(key) for key in ("player_id", "name", "position", "number") if player.get(key) not in (None, "")})
-            for player in ((official or {}).get("players") or [])
+            for player in ((member_roster or {}).get("players") or [])
         ]
         assignment_names = {
             str(player.get("player_id")): player.get("name")
@@ -221,6 +386,8 @@ def _compact_roster_context(value: dict[str, Any] | None) -> dict[str, Any] | No
         ]
         cold = (team or {}).get("cold_start") or {}
         continuity = (team or {}).get("continuity") or {}
+        identity_coverage = (team or {}).get("current_roster_identity_coverage")
+        history_coverage = (team or {}).get("player_knowledge_history_coverage")
         result["teams"][side] = clean({
             "team_id": (team or {}).get("team_id"),
             "roster_basis": (team or {}).get("roster_basis"),
@@ -229,8 +396,20 @@ def _compact_roster_context(value: dict[str, Any] | None) -> dict[str, Any] | No
                 "players": players,
                 "player_count": len(players),
                 "coverage": (official or {}).get("coverage"),
+                "observed_at": (official or {}).get("observed_at"),
                 "source": _source_summary((official or {}).get("source")),
             } if official else None,
+            "current_team_roster": {
+                "status": (current or {}).get("status"),
+                "players": [clean({key: player.get(key) for key in ("player_id", "name", "position", "number")
+                                    if player.get(key) not in (None, "")}) for player in (current or {}).get("players", [])],
+                "player_count": len((current or {}).get("players") or []),
+                "roster_basis": (team or {}).get("roster_basis"),
+                "observed_at": (current or {}).get("observed_at"),
+                "source": _source_summary((current or {}).get("source")),
+            } if current else None,
+            "current_roster_identity_coverage": identity_coverage,
+            "player_knowledge_history_coverage": history_coverage,
             "league_assignment_cross_check": {
                 "status": (assignment or {}).get("status"),
                 "player_count": len((assignment or {}).get("players") or []),
@@ -316,7 +495,7 @@ def build_analyst_context(
         None,
     )
     core = {
-        "game": clean({k: game[k] for k in ("game_id", "home", "away", "home_team_id", "away_team_id", "date", "tipoff", "scheduled_tipoff", "cutoff") if k in game}) if game else None,
+        "game": clean({k: game[k] for k in ("game_id", "home", "away", "home_team_id", "away_team_id", "date", "tipoff", "scheduled_tipoff", "cutoff", "venue", "neutral_site", "game_type", "schedule_revision", "registered_game") if k in game}) if game else None,
         "analysis_request": analysis_request[:500] if analysis_request else None,
         "roster_context": roster_context,
         "matchup_history": matchup_history,
@@ -360,347 +539,43 @@ def build_analyst_context(
     return AnalystContext(**core, context_hash=content_hash(core))
 
 
-def validate_judgment(
-    judgment: AnalystJudgment | dict[str, Any], context: AnalystContext
-) -> AnalystJudgment:
+def validate_judgment(judgment: AnalystJudgment | dict[str, Any], context: AnalystContext) -> AnalystJudgment:
+    """Validate output shape, citation existence and numeric/policy boundaries."""
     value = AnalystJudgment.model_validate(judgment)
-    if set(value.baseline_agreement)!={'pure','market','residual'}:
-        raise ValueError('judgment_baseline_agreement_incomplete')
+    if set(value.baseline_agreement) != {"pure", "market", "residual"}:
+        raise ValueError("judgment_baseline_agreement_incomplete")
     allowed = {item["id"] for item in context.objective_evidence if item.get("id")}
-    claim_groups = (
-        value.roster_analysis,
-        value.player_analysis,
-        value.cold_start_analysis,
-        value.historical_data_relevance,
-        value.key_matchup_variables,
-        value.supporting_evidence,
-        value.conflicting_evidence,
-        value.uncertainty,
-        value.watch_themes,
-    )
-    claims = [claim for group in claim_groups for claim in group]
-    if value.pregame_story is not None:
-        claims.append(value.pregame_story)
-    if value.prediction_perspective is not None:
-        claims.append(value.prediction_perspective)
-    referenced = (
-        set(value.supporting_evidence_ids)
-        | set(value.conflicting_evidence_ids)
-        | {evidence_id for claim in claims for evidence_id in claim.evidence_ids}
+    groups = (value.roster_analysis, value.player_analysis, value.cold_start_analysis,
+              value.historical_data_relevance, value.key_matchup_variables, value.supporting_evidence,
+              value.conflicting_evidence, value.uncertainty, value.watch_themes)
+    claims = [claim for group in groups for claim in group]
+    claims += [c for c in (value.pregame_story, value.prediction_perspective, value.central_thesis) if c is not None]
+    referenced = (set(value.supporting_evidence_ids) | set(value.conflicting_evidence_ids)
+        | {i for claim in claims for i in claim.evidence_ids}
         | set(value.final_prediction.evidence_ids if value.final_prediction else [])
-        | set(value.analysis_article_evidence_ids)
-    )
+        | set(value.analysis_article_evidence_ids))
     if not referenced <= allowed:
         raise ValueError("unknown_judgment_evidence")
     if set(value.supporting_evidence_ids) & set(value.conflicting_evidence_ids):
         raise ValueError("judgment_evidence_role_conflict")
-    if len(value.domain_analysis_signals)!=len(set(value.domain_analysis_signals)):
-        raise ValueError('judgment_domain_signal_duplicate')
-    product_request = "第25秒赛前" in (context.analysis_request or "")
-    if product_request and (
-        value.pregame_story is None
-        or value.final_prediction is None
-        or value.analysis_article is None
-        or len(value.analysis_article) < 400
-        or not 2 <= len(value.watch_themes) <= 4
-    ):
-        raise ValueError("judgment_product_content_incomplete")
-    if product_request and any(
-        not claim.evidence_ids
-        for claim in [
-            value.pregame_story,
-            *value.watch_themes,
-        ]
-        if claim is not None
-    ):
-        raise ValueError("judgment_product_content_requires_evidence")
-    if product_request and not value.analysis_article_evidence_ids:
-        raise ValueError("judgment_article_requires_evidence")
-    if product_request and not value.final_prediction.evidence_ids:
-        raise ValueError("judgment_final_prediction_requires_evidence")
-    story_evidence_ids = {
-        str(item["id"])
-        for item in context.objective_evidence
-        if item.get("id")
-        and item.get("section") == "web_context"
-        and (item.get("value") or {}).get("category") == "game_story"
-    }
-    champion_story_ids = {
-        str(item["id"])
-        for item in context.objective_evidence
-        if item.get("id")
-        and item.get("section") == "web_context"
-        and (item.get("value") or {}).get("category") == "game_story"
-        and re.search(
-            r"champion|总冠军",
-            f"{(item.get('value') or {}).get('title') or ''} "
-            f"{(item.get('value') or {}).get('snippet') or ''}",
-            flags=re.IGNORECASE,
-        )
-    }
-    champion_story_ids.update(
-        str(item["id"])
-        for item in context.objective_evidence
-        if item.get("id") and item.get("section") == "season_form"
-        and any(
-            (team.get("previous_playoffs") or {}).get("championship_clinched") is True
-            for team in ((item.get("value") or {}).get("teams") or {}).values()
-        )
-    )
-    if (
-        product_request
-        and champion_story_ids
-        and re.search(r"冠军|卫冕|champion|defending", f"{value.pregame_story.title} {value.pregame_story.statement}", re.IGNORECASE)
-        and not champion_story_ids.intersection(value.pregame_story.evidence_ids)
-    ):
-        raise ValueError("judgment_story_ignores_verified_championship")
-    if product_request and (context.season_phase or {}).get("phase") == "opening_night":
-        historical_copy = " ".join(
-            [
-                value.analysis_article or "",
-                *(item.statement for item in value.watch_themes),
-            ]
-        )
-        for sentence in re.split(r"[。！？!?]", historical_copy):
-            if re.search(r"近\s*15\s*场", sentence) and "上赛季" not in sentence:
-                raise ValueError("opening_night_rolling_window_missing_previous_season_label")
-    if product_request and story_evidence_ids:
-        story_copy = f"{value.pregame_story.title} {value.pregame_story.statement}"
-        story_sources = " ".join(
-            f"{(item.get('value') or {}).get('title') or ''} "
-            f"{(item.get('value') or {}).get('snippet') or ''}"
-            for item in context.objective_evidence
-            if str(item.get("id")) in story_evidence_ids
-        )
-        if re.search(
-            r"戒指|ring ceremony|颁发.{0,6}冠军|冠军旗帜升起|旗帜升起|加冕夜",
-            story_copy,
-            flags=re.IGNORECASE,
-        ) and not re.search(
-            r"戒指|ring ceremony|championship rings?|banner ceremony|raise.{0,8}banner",
-            story_sources,
-            flags=re.IGNORECASE,
-        ):
-            raise ValueError("unsupported_championship_ceremony_claim")
-        if (
-            value.pregame_story.classification == "source_fact"
-            and re.search(r"复仇|雪耻|报仇|整个.{0,8}(?:夏天|休赛期).{0,8}研究|专门.{0,8}针对", story_copy)
-        ):
-            raise ValueError("subjective_motivation_labeled_as_fact")
-        if re.search(r"队史首冠|队史第一个总冠军", story_copy) and not re.search(
-            r"first[- ]ever championship|first championship in franchise history|队史首冠",
-            story_sources,
-            flags=re.IGNORECASE,
-        ):
-            raise ValueError("unsupported_franchise_first_championship_claim")
-    if product_request and value.winner_lean != value.final_prediction.winner_side:
-        raise ValueError("judgment_final_prediction_direction_mismatch")
-    if product_request:
-        public_product_prose = " ".join(
-            [
-                value.pregame_story.title,
-                value.pregame_story.statement,
-                *(part for item in value.watch_themes for part in (item.title, item.statement)),
-                value.analysis_article,
-            ]
-        )
-        series_totals = ((context.matchup_history or {}).get("series_summary") or {}).get("game_totals") or []
-        series_margins = ((context.matchup_history or {}).get("series_summary") or {}).get("game_margins") or []
-        if series_margins and min(series_margins) < 10 and re.search(
-            r"(?:[两二三四五六七]场|每场|全部|所有).{0,8}(?:没能|未能|没有|未曾).{0,12}(?:个位数|10分以内|十分以内)",
-            public_product_prose,
-        ):
-            raise ValueError("series_margin_claim_conflicts_with_scores")
-        if series_totals:
-            for match in re.finditer(r"总分.{0,8}(?:多在|大多|多数|通常).{0,5}(\d{3})(?:分)?上下", public_product_prose):
-                center = int(match.group(1))
-                if sum(abs(float(total) - center) <= 10 for total in series_totals) <= len(series_totals) / 2:
-                    raise ValueError("unsupported_series_total_generalization")
-        market_totals: list[float] = []
-        for item in context.objective_evidence:
-            source_value = item.get("value") or {}
-            market_value = (
-                source_value.get("market_reference") or {}
-                if item.get("section") == "web_context"
-                else source_value
-                if item.get("section") == "market"
-                else {}
-            )
-            try:
-                market_totals.append(float(market_value["total"]))
-            except (KeyError, TypeError, ValueError):
-                continue
-        if market_totals:
-            market_total = market_totals[0]
-            article = value.analysis_article
-            leans_over = re.search(r"(?:我|第25秒)?.{0,8}(?:偏向|倾向|看好).{0,3}大分", article)
-            leans_under = re.search(r"(?:我|第25秒)?.{0,8}(?:偏向|倾向|看好).{0,3}小分", article)
-            if value.final_prediction.expected_total < market_total and leans_over:
-                raise ValueError("judgment_total_lean_conflicts_with_final_prediction")
-            if value.final_prediction.expected_total > market_total and leans_under:
-                raise ValueError("judgment_total_lean_conflicts_with_final_prediction")
-    if product_request:
-        numeric_values = (
-            value.final_prediction.expected_margin,
-            value.final_prediction.expected_total,
-        )
-        if any(abs(item * 2 - round(item * 2)) > 1e-9 for item in numeric_values):
+    if len(value.domain_analysis_signals) != len(set(value.domain_analysis_signals)):
+        raise ValueError("judgment_domain_signal_duplicate")
+    product = "第25秒赛前" in (context.analysis_request or "")
+    if product:
+        if (value.pregame_story is None or value.final_prediction is None or not value.analysis_article
+                or not 0 <= len(value.watch_themes) <= 4):
+            raise ValueError("judgment_product_content_incomplete")
+        if value.winner_lean != value.final_prediction.winner_side:
+            raise ValueError("judgment_final_prediction_direction_mismatch")
+        if any(abs(n * 2-round(n * 2)) > 1e-9 for n in
+               (value.final_prediction.expected_margin, value.final_prediction.expected_total)):
             raise ValueError("judgment_final_prediction_not_half_point")
-        if abs(
-            value.final_prediction.win_probability * 100
-            - round(value.final_prediction.win_probability * 100)
-        ) > 1e-9:
+        if abs(value.final_prediction.win_probability*100-round(value.final_prediction.win_probability*100)) > 1e-9:
             raise ValueError("judgment_final_probability_not_whole_percent")
-    if any(
-        lean != "insufficient_evidence"
-        for lean in (value.winner_lean, value.side_lean, value.total_lean)
-    ) and not (
-        value.supporting_evidence_ids
-        or any(claim.evidence_ids for claim in value.supporting_evidence)
-    ):
-        raise ValueError("judgment_requires_supporting_evidence")
-    official_names = {
-        str(player.get("name"))
-        for team in ((context.roster_context or {}).get("teams") or {}).values()
-        for player in (((team or {}).get("official_team_roster") or {}).get("players") or [])
-        if player.get("name")
-    }
-    if official_names and any(item.player_name not in official_names for item in value.player_analysis):
-        raise ValueError("player_not_in_official_roster")
-    matchup_names = re.search(r"生成(.+?)对(.+?)的", context.analysis_request or "")
-    if matchup_names and context.roster_context:
-        team_rosters = {
-            side: {
-                str(player.get("name") or "").split()[-1].casefold()
-                for player in (((team or {}).get("official_team_roster") or {}).get("players") or [])
-                if player.get("name") and len(str(player["name"]).split()[-1]) >= 4
-            }
-            for side, team in ((context.roster_context.get("teams") or {}).items())
-        }
-        for side, team_name in (("away", matchup_names.group(1)), ("home", matchup_names.group(2))):
-            other_side = "home" if side == "away" else "away"
-            other_only = team_rosters.get(other_side, set()) - team_rosters.get(side, set())
-            for statement in [value.analysis_article or "", *(claim.statement for claim in claims)]:
-                for clause in re.split(r"[，,；;。！？!?]", statement):
-                    if not re.search(rf"{re.escape(team_name)}.{{0,8}}(?:官方|当前)?名单(?:里|中|上)", clause):
-                        continue
-                    if any(re.search(rf"(?<![A-Za-z]){re.escape(name)}(?![A-Za-z])", clause, re.IGNORECASE)
-                           for name in other_only):
-                        raise ValueError("player_attributed_to_wrong_team_roster")
-    prose = " ".join(
-        [
-            value.subjective_rationale,
-            value.core_question or "",
-            value.game_script or "",
-            value.model_risk or "",
-            value.pregame_story.statement if value.pregame_story else "",
-            value.prediction_perspective.statement if value.prediction_perspective else "",
-            *(item.statement for item in value.watch_themes),
-            value.analysis_article or "",
-            *value.unresolved_uncertainty,
-        ]
-    )
-    numeric_forecast = re.search(
-        r"(?:胜率|概率|分差|预计总分|预测总分|比分).{0,12}[-+]?\d+(?:\.\d+)?%?"
-        r"|[-+]?\d+(?:\.\d+)?%?.{0,12}(?:胜率|概率|分差|预计总分|预测总分|比分)",
-        prose,
-    )
-    if numeric_forecast and not product_request:
-        raise ValueError("judgment_exact_numeric_forecast_not_allowed")
-    blocked = ("下注", "投注金额", "bankroll", "bet amount", "expected return", "自动投注")
-    if any(term.casefold() in prose.casefold() for term in blocked):
+    # Product execution boundary, not a Chinese factuality classifier.
+    text = json.dumps(value.model_dump(), ensure_ascii=False).casefold()
+    if any(word in text for word in ("下注", "投注金额", "bankroll", "bet amount", "expected return", "自动投注")):
         raise ValueError("judgment_betting_execution_language")
-    prose_fields = [
-        value.subjective_rationale,
-        value.core_question or "",
-        value.game_script or "",
-        value.model_risk or "",
-        value.pregame_story.statement if value.pregame_story else "",
-        value.prediction_perspective.statement if value.prediction_perspective else "",
-        *(item.statement for item in value.watch_themes),
-        value.analysis_article or "",
-        *value.unresolved_uncertainty,
-    ]
-    all_claim_text = " ".join([*prose_fields, *(claim.statement for claim in claims)])
-    detailed_sections = {item.get("section") for item in context.objective_evidence}
-    if re.search(r"(?:从未|每场|全部|均未).{0,20}(?:最后[五5]分钟|决胜时刻|关键时刻)", all_claim_text) and not (
-        detailed_sections & {"historical_play_by_play", "historical_clutch"}
-    ):
-        raise ValueError("unsupported_series_game_flow_claim")
-    if re.search(r"(?:数字|数据).{0,12}(?:说明|体现).{0,24}出手质量", all_claim_text) and "shot_quality" not in detailed_sections:
-        raise ValueError("unsupported_shot_quality_inference")
-    negative_markers = (
-        "缺少", "缺失", "暂无", "无法确认", "未确认", "不知道", "不确定", "没有", "不可验证",
-        "不能", "不代表", "无确认", "无当前", "未知", "如果", "若", "假如",
-    )
-
-    def affirmative(text: str, pattern: str) -> bool:
-        # A later "unknown" must not erase an affirmative claim made before
-        # a comma in the same sentence.
-        clauses = [part.strip() for part in re.split(r"[。；;!?！？，,]", text) if part.strip()]
-        return any(
-            re.search(pattern, clause, flags=re.IGNORECASE)
-            and not any(marker in clause for marker in negative_markers)
-            and not re.search(r"无.{0,24}(?:证据|消息|依据|信息|公布)", clause)
-            for clause in clauses
-        )
-
-    evidence_category = {
-        str(item.get("id")): (
-            str((item.get("value") or {}).get("category"))
-            if item.get("section") == "web_context"
-            else "availability"
-            if item.get("section") == "availability"
-            else None
-        )
-        for item in context.objective_evidence
-        if item.get("id")
-    }
-
-    def has_category(ids: list[str], category: str) -> bool:
-        return any(evidence_category.get(item) == category for item in ids)
-
-    def require_fact_support(pattern: str, category: str, error: str) -> None:
-        for claim in claims:
-            if affirmative(claim.statement, pattern) and not has_category(claim.evidence_ids, category):
-                raise ValueError(error)
-        general_ids = [*value.supporting_evidence_ids, *value.conflicting_evidence_ids]
-        if any(affirmative(text, pattern) for text in prose_fields) and not has_category(general_ids, category):
-            raise ValueError(error)
-
-    attribution_pattern = (
-        r"(?:这是|这些|该项|该数据|该差异).{0,18}模型.{0,18}(?:主要|核心|直接).{0,10}(?:来源|依据|驱动|原因)"
-        r"|模型(?:主要|正是|直接)?(?:因为|基于|依据).{0,30}(?:给出|得出|预测)"
-        r"|模型.{0,36}(?:主要|核心|直接).{0,8}(?:来源|依据|驱动|原因)"
-        r"|(?:导致|驱动|决定).{0,12}模型(?:预测|判断|输出)"
-    )
-    if any(affirmative(text, attribution_pattern) for text in [*prose_fields, *(claim.statement for claim in claims)]):
-        raise ValueError("unsupported_model_attribution_claim")
-
-    require_fact_support(
-        r"(?:已经|已|确认|被)(?:.{0,8})(?:交易|加盟|离队)|(?:交易|加盟|离队)(?:事实|已确认)",
-        "roster_news",
-        "unsupported_transaction_claim",
-    )
-    require_fact_support(
-        r"(?:新援|新面孔|新名字|新组合|换血|纸面.{0,8}(?:提升|升级)|"
-        r"重组.{0,8}(?:球队|阵容|名单|费城)|全新.{0,8}(?:核心|名单|阵容|组合|进攻)|"
-        r"休赛期.{0,8}(?:补强|变动|引进)|补充.{0,8}(?:球员|后场|内线)|"
-        r"(?:后场|内线|轮换).{0,4}补充|新加入|新引入|"
-        r"补进.{0,8}(?:轮换|内线|后场|球员)|签下)",
-        "roster_news",
-        "unsupported_roster_change_claim",
-    )
-    require_fact_support(
-        r"(?:确认|预计|将|担任|作为)(?:.{0,10})首发|starting lineup|will start",
-        "lineup",
-        "unsupported_starter_claim",
-    )
-    require_fact_support(
-        r"(?:确认.{0,8}(?:伤停|缺阵|无法出战|出战成疑)|因伤|伤停|缺阵|出战成疑|questionable|ruled out|will miss)",
-        "availability",
-        "unsupported_availability_claim",
-    )
     return value
 
 
@@ -710,15 +585,20 @@ class EvidenceBoundAnalyst:
         root: str | Path | None = None,
         *,
         client=None,
-        max_calls: int = 4,
+        max_calls: int = 5,
         include_forecasting_skill: bool = False,
         forecast_client=None,
+        reviewer_client=None,
+        quality_review_enabled: bool = False,
     ):
         self.root = Path(root or BASE / "outputs/analyst_calls")
         self.client = client
-        self.max_calls = min(max(int(max_calls), 1), 4)
+        self.max_calls = min(max(int(max_calls), 1), 6)
         self.include_forecasting_skill = bool(include_forecasting_skill)
         self.forecast_client = forecast_client
+        self.reviewer_client = reviewer_client
+        self.quality_review_enabled = bool(quality_review_enabled or
+            os.environ.get("COURTVISION_EDITORIAL_QUALITY_REVIEW", "").strip() == "1")
 
     def _run_folder(self) -> Path:
         self.root.mkdir(parents=True, exist_ok=True)
@@ -733,7 +613,11 @@ class EvidenceBoundAnalyst:
         return folder
 
     def _used_calls(self) -> int:
-        return len(list(self.root.glob("*/attempt.json"))) + len(list(self.root.glob("*/forecast/*_request.json")))
+        legacy = 0
+        for path in self.root.glob("*/attempt.json"):
+            if json.loads(path.read_text(encoding="utf-8")).get("editorial_protocol") not in {
+                    "grounded-editorial-v2", "editorial-publication-v1"}: legacy += 1
+        return legacy + len(list(self.root.glob("*/forecast/*_request.json"))) + len(list(self.root.glob("*/editorial/*_request.json")))
 
     @staticmethod
     def _messages(
@@ -742,24 +626,22 @@ class EvidenceBoundAnalyst:
         from .editorial_skill import load_editorial_skill
 
         system = (
-            "你是第25秒的结构化赛前分析生成器。仅依据调用方传入的 AnalystContext 与 objective_evidence 处理本场比赛。"
-            "比赛身份、cutoff、球队和球员归属、来源时间与 evidence ID 以传入数据为准，"
-            "不得自行替换或补造，也不得把 cutoff 之后的信息写作赛前可得事实。"
-            "伤病、出战状态、首发、交易、采访、比赛结果、统计数字和市场报价等可核验事实，必须能由传入 evidence 支持。"
-            "不得把 Official Numeric Forecast 改写成新的 Official 数值；AI final_prediction 按独立字段返回。"
-            "final_prediction 按所绑定 schema 提供规定字段：winner_side 为 home/away，win_probability 为胜方获胜概率，"
-            "expected_margin 为胜方正分差，expected_total 为两队总分。"
-            "绑定 ProductAnalystOutput 时，分差和总分使用 0.5 分刻度，概率使用整数百分比。"
-            "所有 evidence IDs 必须来自本次 objective_evidence。联网来源和数据来源通过现有 sources/evidence 字段返回。"
-            "不得输出下注金额、投注执行或收益承诺。严格遵守调用方绑定的结构化输出 schema。"
+            "你是第25秒结构化分析输出器。使用本次提供的身份、cutoff和evidence，"
+            "只返回调用方schema；引用ID必须属于本次输入，不伪造来源或修改Official数值。"
+            "未提供模型解释不作归因。公开数字单位/方向遵守schema，不提供投注执行。"
+            "objective_evidence 中 roster_context 行是对顶层 roster_context 的引用；球员身份与历史摘要以顶层冻结资料为准，并引用该行 evidence ID。"
         )
-        system += (
-            "\n\n以下 Editorial Skill 仅用于赛前故事、看点、分析文章的选题和表达：\n"
-            + load_editorial_skill()
-        )
+        system += "\n\n" + load_editorial_skill()
+        prompt_context = context.model_dump()
+        roster = prompt_context.get("roster_context") or {}
+        for item in prompt_context.get("objective_evidence") or []:
+            if item.get("section") == "roster_context":
+                item["value"] = {"context_reference": "roster_context",
+                    "context_hash": content_hash(roster), "game_id": roster.get("game_id"),
+                    "cutoff": roster.get("cutoff")}
         return [
             {"role": "system", "content": system},
-            {"role": "user", "content": context.model_dump_json()},
+            {"role": "user", "content": json.dumps(prompt_context, ensure_ascii=False, separators=(",", ":"))},
         ]
 
     @staticmethod
@@ -835,58 +717,67 @@ class EvidenceBoundAnalyst:
         locked_forecast = _locked_forecast
         if self.include_forecasting_skill and locked_forecast is None:
             basketball, market, removed = prepare_analyst(context.model_dump())
-            if self._used_calls() + (3 if market["evidence"] else 2) > self.max_calls:
+            market_review_possible = bool(market["evidence"]) or getattr(self, "market_collector", None) is not None
+            # Reserve one additional V2 Independent call for the bounded
+            # schema-only repair. It is used only after a valid-JSON/schema error.
+            required_calls = 6 if market_review_possible else 4
+            if self._used_calls() + required_calls > self.max_calls:
                 raise ValueError("analyst_budget_cannot_cover_forecast_and_writer")
             locked_forecast = run_two_stage(basketball, market, folder / "forecast",
-                client=self.forecast_client or self.client, removed_paths=removed)
-        locked_numbers = None
+                client=self.forecast_client or self.client, removed_paths=removed,
+                market_collector=getattr(self,'market_collector',None),market_guard=getattr(self,'market_guard',None),
+                require_analysis_core=True)
+        collection=(locked_forecast or{}).get('market_collection')
+        if collection is not None and getattr(self,'market_guard',None) is not None:
+            self.market_guard()
+        final_frozen_at=None
+        if collection is not None:
+            final_frozen_at=now()
+            context.game={**context.game,'cutoff':final_frozen_at}
+            context.evidence_quality['public_market_reference_available']=bool(collection.get('evidence'))
+            for item in collection.get('evidence',[]):
+                context.objective_evidence.append({**item,'cutoff':final_frozen_at})
+                context.evidence_index[item['id']]={'section':item['section'],'source_type':item.get('kind','MarketSnapshot')}
+            context.context_hash=content_hash(context.model_dump(exclude={'context_hash'}))
+            save(folder/'context_after_market.json',context.model_dump())
         if locked_forecast is not None:
-            numbers = locked_forecast["final_prediction"]
-            allowed = {item["id"] for item in context.objective_evidence if item.get("id")}
-            ids = sorted({ref for item in locked_forecast["review"]["factors"]
-                          for ref in item["evidence_ids"] if ref in allowed})
-            locked_numbers = FinalPrediction(
-                winner_side=numbers["winner_side"], win_probability=numbers["win_probability"],
-                expected_margin=abs(numbers["expected_home_margin"]),
-                expected_total=numbers["expected_total"], evidence_ids=ids,
-            ).model_dump()
-            messages[0]["content"] += (
-                "\n本次只撰写和解释已完成两阶段预测的赛前分析。locked_final_prediction 是程序固定的最终数值。"
-                "输出 schema 不包含 final_prediction，程序会将已保存的预测绑定到报告。"
-                "文章中的预测方向和数字必须与它一致，不得生成另一份预测或擅自修改数值。"
-            )
-            user_payload = json.loads(messages[1]["content"])
-            user_payload["locked_final_prediction"] = locked_numbers
-            user_payload["forecast_basis"] = locked_forecast["review"]
-            messages[1]["content"] = json.dumps(user_payload, ensure_ascii=False)
-        if _correction:
-            messages.extend([
-                {"role": "assistant", "content": json.dumps(_correction["draft"], ensure_ascii=False)},
-                {"role": "user", "content": (
-                    f"上一稿未通过事实校验：{_correction['feedback']}。"
-                    "依据本次 AnalystContext 和有效 evidence ID 修正所指出的问题，返回符合原绑定 schema 的完整输出。"
-                    "继续遵守 cutoff、身份、来源与 Official 数值边界。此次只允许一轮修正。"
-                )},
-            ])
+            from .editorial_pipeline import run_editorial
+            from .editorial_skill import load_editorial_skill
+            save(folder / "attempt.json", {"created_at": now(), "context_hash": context.context_hash,
+                "editorial_protocol": "editorial-publication-v1", "model": "deepseek-v4-flash",
+                "skill_hashes": prompt_skill_hashes(load_editorial_skill()),
+                "forecast_audit_path": locked_forecast["audit_path"], "forecast_skill_hashes": locked_forecast["skill_hashes"],
+                "max_calls": self.max_calls, "automatic_retries": 0})
+            try:
+                judgment, trace = run_editorial(context, locked_forecast, folder / "editorial",
+                    writer_client=self.client, reviewer_client=self.reviewer_client,
+                    quality_review_enabled=self.quality_review_enabled,
+                    max_calls=min(4, self.max_calls-self._used_calls()))
+                saved_trace = {key: value for key, value in trace.items() if key != "spread_comparison"}
+                path = save(folder / "response.json", {"received_at": now(), "judgment": judgment, **saved_trace})
+                return AnalystJudgment.model_validate(judgment), {"status": "success", "path": str(path), **trace,
+                    **({'market_collection':collection,'final_input_frozen_at':final_frozen_at} if collection is not None else {}),
+                    "forecast_audit_path": locked_forecast["audit_path"], "forecast_skill_hashes": locked_forecast["skill_hashes"],
+                    "schema_repair_provenance": locked_forecast.get("schema_repair_provenance"),
+                    "spread_comparison": locked_forecast.get("spread_comparison")}
+            except Exception as exc:
+                save(folder / "failure.json", {"failed_at": now(), "error_type": type(exc).__name__, "message": str(exc)[:10000]})
+                raise
+        # Legacy non-Forecasting callers retain schema compatibility, but a new
+        # version still requires the separate factual publication receipt.
+        locked_numbers = None
+        from .editorial_contract import build_editorial_contract
+        editorial_contract = build_editorial_contract(context, locked_numbers)
+        messages[0]["content"] += "\n\n本次可写事实协议（仅作来源/类型/身份约束）：\n" + json.dumps(editorial_contract, ensure_ascii=False)
         output_schema = (
             ProductAnalystOutput
             if "第25秒赛前" in (context.analysis_request or "")
             else AnalystJudgment
         )
-        if locked_numbers is not None:
-            output_schema = create_model(
-                "ForecastLocked" + output_schema.__name__,
-                __config__=ConfigDict(extra="ignore"),
-                **{name: (field.annotation, deepcopy(field))
-                   for name, field in output_schema.model_fields.items() if name != "final_prediction"},
-            )
-
         def parse_output(payload):
             value = output_schema.model_validate(payload).model_dump()
-            if locked_numbers is not None:
-                value["final_prediction"] = deepcopy(locked_numbers)
-                value["winner_lean"] = locked_numbers["winner_side"]
             return AnalystJudgment.model_validate(value)
+        writer_token_budget = 6400 if (context.game or {}).get("registered_game") else 4800
         save(
             folder / "attempt.json",
             {
@@ -897,7 +788,7 @@ class EvidenceBoundAnalyst:
                 "model_source": "injected_test_client" if self.client is not None else "configured_transport",
                 "skill_hashes": prompt_skill_hashes(messages[0]["content"]),
                 "max_retries": 0,
-                "max_output_tokens": 4800,
+                "max_output_tokens": writer_token_budget,
                 "output_schema": output_schema.__name__,
                 "correction_of": _correction.get("path") if _correction else None,
                 "forecast_audit_path": locked_forecast["audit_path"] if locked_forecast else None,
@@ -905,9 +796,15 @@ class EvidenceBoundAnalyst:
             },
         )
         judgment = None
+        reply_start = time.perf_counter()
+        save(folder / "writer_request.json", {"created_at": now(), "model": "deepseek-v4-flash",
+            "messages": messages, "schema": output_schema.model_json_schema(), "context_hash": context.context_hash,
+            "input_characters": sum(len(message["content"]) for message in messages), "automatic_retries": 0})
         try:
             if self.client is not None:
                 payload, usage = self.client(messages, output_schema)
+                save(folder / "writer_raw_response.json", {"received_at": now(), "raw": clean(payload), "usage": clean(usage),
+                    "latency_seconds": time.perf_counter()-reply_start})
                 judgment = parse_output(payload)
                 raw = clean(payload)
             else:
@@ -922,17 +819,21 @@ class EvidenceBoundAnalyst:
                     base_url="https://api.deepseek.com",
                     max_retries=0,
                     timeout=40,
-                    max_tokens=4800,
+                    max_tokens=writer_token_budget,
                     temperature=0,
                     use_responses_api=False,
                     disabled_params={"parallel_tool_calls": None},
-                    extra_body={"thinking": {"type": "disabled"}, "max_tokens": 4800},
+                    extra_body={"thinking": {"type": "disabled"}, "max_tokens": writer_token_budget},
                 )
                 structured = llm.with_structured_output(
                     output_schema, method="function_calling", include_raw=True
                 )
                 result = structured.invoke(messages)
                 raw_message = result.get("raw")
+                save(folder / "writer_raw_response.json", {"received_at": now(),
+                    "raw": raw_message.model_dump(mode="json") if raw_message else None,
+                    "usage": (getattr(raw_message, "usage_metadata", None) or (raw_message.response_metadata or {}).get("token_usage", {})) if raw_message else {},
+                    "latency_seconds": time.perf_counter()-reply_start})
                 structured_repairs: list[str] = []
                 if not result.get("parsed"):
                     repaired, structured_repairs = self._repair_structured_args(raw_message)
@@ -962,7 +863,10 @@ class EvidenceBoundAnalyst:
                 )
             save(folder / "parsed_unvalidated.json", judgment.model_dump())
             judgment, style_repairs = self._repair_public_style(judgment)
+            from .editorial_contract import validate_editorial_boundaries
+            editorial_validation = validate_editorial_boundaries(judgment, context, locked_numbers=locked_numbers)
             judgment = validate_judgment(judgment, context)
+            save(folder / "editorial_validation.json", editorial_validation)
             response = {
                 "received_at": now(),
                 "context_hash": context.context_hash,
@@ -972,6 +876,8 @@ class EvidenceBoundAnalyst:
                 "structured_repairs": structured_repairs if self.client is None else [],
                 "style_repairs": style_repairs,
                 "forecast_workflow": locked_forecast,
+                "editorial_validation": editorial_validation,
+                "editorial_contract": editorial_contract,
             }
             response["response_hash"] = content_hash(response)
             path = save(folder / "response.json", response)
@@ -982,10 +888,15 @@ class EvidenceBoundAnalyst:
                 "response_hash": response["response_hash"],
                 "forecast_audit_path": locked_forecast["audit_path"] if locked_forecast else None,
                 "forecast_skill_hashes": locked_forecast["skill_hashes"] if locked_forecast else {},
+                "editorial_validation": editorial_validation,
+                "editorial_contract": editorial_contract,
             }
         except Exception as exc:
             key = os.environ.get("DEEPSEEK_API_KEY", "")
             message = str(exc).replace(key, "[REDACTED]")[:600] if key else str(exc)[:600]
+            validator_errors = getattr(exc, "errors", None)
+            if not isinstance(validator_errors, list):
+                validator_errors = [{"code": str(exc), "statement": None}]
             save(
                 folder / "failure.json",
                 {
@@ -993,25 +904,7 @@ class EvidenceBoundAnalyst:
                     "context_hash": context.context_hash,
                     "error_type": type(exc).__name__,
                     "message": message,
+                    "validator_errors": validator_errors,
                 },
             )
-            feedback = {
-                "unsupported_roster_change_claim": "当前名单没有证明人员新加入、补强、升级或新面孔，所有字段都应删除此类未经证实的表述",
-                "player_attributed_to_wrong_team_roster": "文中把对方名单中的球员写入本队名单，必须逐人核对 official_team_roster 的 home/away 归属",
-                "unsupported_series_total_generalization": "系列赛总分区间概括与实际逐场总分不符，应核对 game_totals 与 average_total",
-                "opening_night_rolling_window_missing_previous_season_label": "揭幕战的近15场来自上赛季，必须标明历史赛季",
-                "unsupported_series_game_flow_claim": "比分和场均数据不能证明整轮系列赛是否进入最后五分钟的关键时刻，没有逐回合证据就删除该断言",
-                "unsupported_shot_quality_inference": "现有命中率和球队统计未提供出手质量证据，不得将该推断表述为已核实事实",
-                "series_margin_claim_conflicts_with_scores": f"逐场分差为{((context.matchup_history or {}).get('series_summary') or {}).get('game_margins')}，其中包含个位数分差，不能声称每场都未能接近个位数",
-            }.get(str(exc))
-            if (
-                feedback and judgment is not None and _correction is None
-                and "第25秒赛前" in (context.analysis_request or "")
-                and self._used_calls() < self.max_calls
-            ):
-                corrected, trace = self.judge(context, _correction={
-                    "path": str(folder), "feedback": feedback, "draft": judgment.model_dump(),
-                }, _locked_forecast=locked_forecast)
-                trace["correction"] = {"previous_attempt": str(folder), "reason": str(exc), "attempts": 1}
-                return corrected, trace
             raise

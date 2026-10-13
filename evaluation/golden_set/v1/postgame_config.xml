@@ -1,0 +1,53 @@
+<View style="max-width:1080px;margin:auto;line-height:1.6;overflow-wrap:anywhere;">
+<Header value="固定资料 · 独立人工阅读"/>
+<Text name="stage_notice" value="$stage_notice"/>
+<Header value="Context"/>
+<Text name="context_summary" value="$context_summary"/>
+<Collapse><Panel value="展开完整Context（与模型可见文件完全一致）"><Text name="context" value="$context_json"/></Panel></Collapse>
+<Header value="冻结的赛前判断 / 关键假设"/>
+<Text name="pregame_basis" value="$pregame_basis_display"/>
+<Header value="最终赛果"/>
+<Text name="ground_truth" value="$ground_truth_display"/>
+<Collapse><Panel value="展开赛后箱分与允许证据"><Text name="postgame_evidence" value="$postgame_evidence_json"/></Panel></Collapse>
+<Header value="Model Output"/>
+<Text name="model_output" value="$model_output_display"/>
+<Header value="Hard Gates（事实边界，不计算Overall Pass）"/>
+<Header size="5" value="最终事实一致性 · final_fact_consistency"/>
+<Choices name="final_fact_consistency" toName="model_output" choice="single-radio" showInLine="true" required="true"><Choice value="PASS"/><Choice value="FAIL"/></Choices>
+<TextArea name="final_fact_consistency_evidence" toName="model_output" rows="2" placeholder="若FAIL请粘贴片段或简述原因；其余可留空"/>
+<Header size="5" value="编造比赛事件 · fabricated_game_event"/>
+<Choices name="fabricated_game_event" toName="model_output" choice="single-radio" showInLine="true" required="true"><Choice value="PASS"/><Choice value="FAIL"/></Choices>
+<TextArea name="fabricated_game_event_evidence" toName="model_output" rows="2" placeholder="若FAIL请粘贴片段或简述原因；其余可留空"/>
+<Header size="5" value="赛前赛后混淆 · pregame_postgame_fact_confusion"/>
+<Choices name="pregame_postgame_fact_confusion" toName="model_output" choice="single-radio" showInLine="true" required="true"><Choice value="PASS"/><Choice value="FAIL"/></Choices>
+<TextArea name="pregame_postgame_fact_confusion_evidence" toName="model_output" rows="2" placeholder="若FAIL请粘贴片段或简述原因；其余可留空"/>
+<Header size="5" value="结算错误 · incorrect_settlement_if_applicable"/>
+<Choices name="incorrect_settlement_if_applicable" toName="model_output" choice="single-radio" showInLine="true" required="true"><Choice value="PASS"/><Choice value="FAIL"/><Choice value="NA"/></Choices>
+<TextArea name="incorrect_settlement_if_applicable_evidence" toName="model_output" rows="2" placeholder="若FAIL请粘贴片段或简述原因；其余可留空"/>
+<Header size="5" value="无依据事实 · unsupported_factual_claim"/>
+<Choices name="unsupported_factual_claim" toName="model_output" choice="single-radio" showInLine="true" required="true"><Choice value="PASS"/><Choice value="FAIL"/></Choices>
+<TextArea name="unsupported_factual_claim_evidence" toName="model_output" rows="2" placeholder="若FAIL请粘贴片段或简述原因；其余可留空"/>
+<Header value="Soft Scores（1弱 / 3中 / 5强；2与4是中间档，不是Pass阈值）"/>
+<Header size="5" value="假设复盘 · assumption_review"/>
+<Header size="6" value="1 不回看原假设。 ｜ 3 对照了部分假设，但成立/失效解释一般。 ｜ 5 抓住关键假设，具体说明成立、失效或仍无法判断。"/>
+<Choices name="assumption_review" toName="model_output" choice="single-radio" showInLine="true" required="true"><Choice value="1"/><Choice value="2"/><Choice value="3"/><Choice value="4"/><Choice value="5"/></Choices>
+<Header size="5" value="差异归因 · error_attribution"/>
+<Header size="6" value="1 只说预测错了或找借口。 ｜ 3 提出合理原因，但机制/区分有限。 ｜ 5 理由具体、有证据、有边界，不把所有偏差归给单一因素。"/>
+<Choices name="error_attribution" toName="model_output" choice="single-radio" showInLine="true" required="true"><Choice value="1"/><Choice value="2"/><Choice value="3"/><Choice value="4"/><Choice value="5"/></Choices>
+<Header size="5" value="证据支撑 · evidence_support"/>
+<Header size="6" value="1 解释与证据脱节。 ｜ 3 有相关证据，部分结论支持较弱。 ｜ 5 每个重要解释用合适证据，说明证据不能证明的部分。"/>
+<Choices name="evidence_support" toName="model_output" choice="single-radio" showInLine="true" required="true"><Choice value="1"/><Choice value="2"/><Choice value="3"/><Choice value="4"/><Choice value="5"/></Choices>
+<Header size="5" value="事后偏见控制 · hindsight_discipline"/>
+<Header size="6" value="1 把结果写成赛前显而易见。 ｜ 3 基本尊重范围，但偶有倒推口吻。 ｜ 5 明确区分可预见变量和当时未知，不重写原判断。"/>
+<Choices name="hindsight_discipline" toName="model_output" choice="single-radio" showInLine="true" required="true"><Choice value="1"/><Choice value="2"/><Choice value="3"/><Choice value="4"/><Choice value="5"/></Choices>
+<Header size="5" value="学习价值 · learning_value"/>
+<Header size="6" value="1 只有泛泛总结。 ｜ 3 有启发，但条件或可验证性不清。 ｜ 5 提出具体、有限范围的后续假设或检查点。"/>
+<Choices name="learning_value" toName="model_output" choice="single-radio" showInLine="true" required="true"><Choice value="1"/><Choice value="2"/><Choice value="3"/><Choice value="4"/><Choice value="5"/></Choices>
+<Header size="5" value="清晰与密度 · clarity_and_density"/>
+<Header size="6" value="1 堆数据且主线不明。 ｜ 3 基本可读，有一些重复。 ｜ 5 重要机制与复盘结论易读、紧凑。"/>
+<Choices name="clarity_and_density" toName="model_output" choice="single-radio" showInLine="true" required="true"><Choice value="1"/><Choice value="2"/><Choice value="3"/><Choice value="4"/><Choice value="5"/></Choices>
+<Header value="Error Tags（可多选，没问题留空）"/>
+<Choices name="error_tags" toName="model_output" choice="multiple"><Choice value="wrong_final_fact"/><Choice value="fabricated_event"/><Choice value="weak_assumption_review"/><Choice value="weak_error_attribution"/><Choice value="hindsight_rewriting"/><Choice value="unsupported_causality"/><Choice value="data_dump"/><Choice value="unclear_learning"/><Choice value="redundant_output"/><Choice value="other"/></Choices>
+<Header value="Optional Note（仅重要问题时填写）"/>
+<TextArea name="annotator_note" toName="model_output" rows="3" placeholder="重要补充；不要求长评"/>
+</View>

@@ -171,9 +171,12 @@ route = function () {
   else update();
 };
 
-function readingHeader(game) {
+function readingHeader(game, options = {}) {
   const header = document.querySelector(".analysis-sheet > header");
   const sheet = document.querySelector(".analysis-sheet");
+  const mode = options.mode === "postgame" ? "postgame" : "pregame";
+  const frozen = options.prediction || activePrediction(game);
+  sheet.dataset.readerMode = mode;
   sheet.dataset.awayAbbr = game.away.abbreviation;
   sheet.dataset.homeAbbr = game.home.abbreviation;
   sheet.dataset.matchLabel = `${game.away.abbreviation}  /  ${game.home.abbreviation}`;
@@ -189,29 +192,34 @@ function readingHeader(game) {
     summary.append(team);
   }
   const forecast = document.createElement("div");
-  const current = activePrediction(game);
   forecast.className = "reading-forecast";
+  const winnerName = mode === "postgame"
+    ? options.prediction?.winner_name || (frozen?.winner_team_id ? teamById(game, frozen.winner_team_id).name_zh : null)
+    : frozen ? teamById(game, frozen.winner_team_id).name_zh : null;
   forecast.append(
     text(
       "span",
-      `当前预测 · ${teamById(game, current.winner_team_id).name_zh}`,
+      frozen
+        ? (mode === "postgame" ? "赛前预测 · " : "当前预测 · ") + (winnerName || "")
+        : "尚无已发布预测",
     ),
     text(
       "strong",
-      percent(current.winner_probability),
+      frozen ? percent(frozen.winner_probability) : "—",
       "reading-probability",
     ),
   );
   summary.append(forecast);
   header.insertBefore(summary, byId("close-sheet"));
+  header.querySelector("h2").textContent = mode === "postgame" ? "第25秒赛后复盘" : "第25秒分析";
 }
 
 const originalOpenSheet = openSheet;
-openSheet = function () {
+openSheet = function (options = {}) {
   if (!byId("ai-sheet").hidden) return;
   const trigger = document.activeElement;
   clearSharedElements();
-  readingHeader(state.activeGame);
+  readingHeader(state.activeGame, options);
   continueScene(() => {
     clearSharedElements();
     originalOpenSheet();

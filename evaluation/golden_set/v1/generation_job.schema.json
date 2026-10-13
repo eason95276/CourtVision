@@ -1,0 +1,12 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "type":"object",
+  "required":["sample_id","stage","dataset_revision","golden_set_revision","generation_revision","model_inputs","input_hash","prompt_hash","skill_hashes","parameters","tools","network_allowed","research_enabled","execution_ready","missing_prerequisites","output_path"],
+  "properties":{
+    "sample_id":{"type":"string"},"stage":{"enum":["pregame","postgame"]},"dataset_revision":{"type":"string"},"golden_set_revision":{"type":"string"},"generation_revision":{"type":"string"},
+    "model_inputs":{"type":"object"},"input_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"},"prompt_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "skill_hashes":{"type":"object","additionalProperties":{"type":"string","pattern":"^[a-f0-9]{64}$"}},"parameters":{"type":"object"},
+    "tools":{"type":"array","maxItems":0},"network_allowed":{"const":false},"research_enabled":{"const":false},"execution_ready":{"const":false},
+    "missing_prerequisites":{"type":"array","items":{"type":"string"}},"output_path":{"type":"string"}
+  },"additionalProperties":false
+}

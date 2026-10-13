@@ -1,0 +1,48 @@
+<View style="max-width:1080px;margin:auto;line-height:1.6;overflow-wrap:anywhere;">
+<Header value="固定资料 · 独立人工阅读"/>
+<Text name="stage_notice" value="$stage_notice"/>
+<Header value="Context"/>
+<Text name="context_summary" value="$context_summary"/>
+<Collapse><Panel value="展开完整Context（与模型可见文件完全一致）"><Text name="context" value="$context_json"/></Panel></Collapse>
+<Header value="Model Output"/>
+<Text name="model_output" value="$model_output_display"/>
+<Header value="Hard Gates（事实边界，不计算Overall Pass）"/>
+<Header size="5" value="时间泄漏 · temporal_leakage"/>
+<Choices name="temporal_leakage" toName="model_output" choice="single-radio" showInLine="true" required="true"><Choice value="PASS"/><Choice value="FAIL"/></Choices>
+<TextArea name="temporal_leakage_evidence" toName="model_output" rows="2" placeholder="若FAIL请粘贴片段或简述原因；其余可留空"/>
+<Header size="5" value="事实一致性 · factual_consistency"/>
+<Choices name="factual_consistency" toName="model_output" choice="single-radio" showInLine="true" required="true"><Choice value="PASS"/><Choice value="FAIL"/></Choices>
+<TextArea name="factual_consistency_evidence" toName="model_output" rows="2" placeholder="若FAIL请粘贴片段或简述原因；其余可留空"/>
+<Header size="5" value="无依据事实 · unsupported_factual_claim"/>
+<Choices name="unsupported_factual_claim" toName="model_output" choice="single-radio" showInLine="true" required="true"><Choice value="PASS"/><Choice value="FAIL"/></Choices>
+<TextArea name="unsupported_factual_claim_evidence" toName="model_output" rows="2" placeholder="若FAIL请粘贴片段或简述原因；其余可留空"/>
+<Header size="5" value="身份混淆 · identity_confusion"/>
+<Choices name="identity_confusion" toName="model_output" choice="single-radio" showInLine="true" required="true"><Choice value="PASS"/><Choice value="FAIL"/></Choices>
+<TextArea name="identity_confusion_evidence" toName="model_output" rows="2" placeholder="若FAIL请粘贴片段或简述原因；其余可留空"/>
+<Header size="5" value="数值或明确逻辑错误 · quantitative_or_logic_error"/>
+<Choices name="quantitative_or_logic_error" toName="model_output" choice="single-radio" showInLine="true" required="true"><Choice value="PASS"/><Choice value="FAIL"/><Choice value="NA"/></Choices>
+<TextArea name="quantitative_or_logic_error_evidence" toName="model_output" rows="2" placeholder="若FAIL请粘贴片段或简述原因；其余可留空"/>
+<Header value="Soft Scores（1弱 / 3中 / 5强；2与4是中间档，不是Pass阈值）"/>
+<Header size="5" value="Context利用 · context_grounding"/>
+<Header size="6" value="1 几乎不使用材料，主要是泛泛结论。 ｜ 3 用了相关材料，但与判断的连接一般。 ｜ 5 抓住关键材料，清楚解释它为什么影响判断。"/>
+<Choices name="context_grounding" toName="model_output" choice="single-radio" showInLine="true" required="true"><Choice value="1"/><Choice value="2"/><Choice value="3"/><Choice value="4"/><Choice value="5"/></Choices>
+<Header size="5" value="具体对位 · matchup_specificity"/>
+<Header size="6" value="1 换两队名字也基本成立。 ｜ 3 有一个具体对位，但互动展开有限。 ｜ 5 说明一方怎样攻击另一方、对手怎样回应。"/>
+<Choices name="matchup_specificity" toName="model_output" choice="single-radio" showInLine="true" required="true"><Choice value="1"/><Choice value="2"/><Choice value="3"/><Choice value="4"/><Choice value="5"/></Choices>
+<Header size="5" value="推理连贯 · reasoning_coherence"/>
+<Header size="6" value="1 跳步、互相矛盾或没有可理解的理由。 ｜ 3 主线合理，部分连接或主次较弱。 ｜ 5 关键理由层层相连，能区分独立因素和重复信号。"/>
+<Choices name="reasoning_coherence" toName="model_output" choice="single-radio" showInLine="true" required="true"><Choice value="1"/><Choice value="2"/><Choice value="3"/><Choice value="4"/><Choice value="5"/></Choices>
+<Header size="5" value="不确定性处理 · uncertainty_handling"/>
+<Header size="6" value="1 把缺失当确定，或因为有缺失就完全不分析。 ｜ 3 识别主要缺失，但对结论影响说明一般。 ｜ 5 边界自然且具体，仍给清楚、有条件的判断。"/>
+<Choices name="uncertainty_handling" toName="model_output" choice="single-radio" showInLine="true" required="true"><Choice value="1"/><Choice value="2"/><Choice value="3"/><Choice value="4"/><Choice value="5"/></Choices>
+<Header size="5" value="结论清楚 · conclusion_clarity"/>
+<Header size="6" value="1 读完仍不知道作者怎么看。 ｜ 3 有结论但散落或条件含混。 ｜ 5 判断明确，核心理由与可能改变判断的变量清楚。"/>
+<Choices name="conclusion_clarity" toName="model_output" choice="single-radio" showInLine="true" required="true"><Choice value="1"/><Choice value="2"/><Choice value="3"/><Choice value="4"/><Choice value="5"/></Choices>
+<Header size="5" value="信息密度 · information_density"/>
+<Header size="6" value="1 大量重复和通用句。 ｜ 3 整体有内容，但有明显可压缩部分。 ｜ 5 每段提供新价值，数据与描述都有作用。"/>
+<Choices name="information_density" toName="model_output" choice="single-radio" showInLine="true" required="true"><Choice value="1"/><Choice value="2"/><Choice value="3"/><Choice value="4"/><Choice value="5"/></Choices>
+<Header value="Error Tags（可多选，没问题留空）"/>
+<Choices name="error_tags" toName="model_output" choice="multiple"><Choice value="context_not_used"/><Choice value="generic_analysis"/><Choice value="unsupported_claim"/><Choice value="factual_error"/><Choice value="identity_error"/><Choice value="temporal_leakage"/><Choice value="uncertainty_understated"/><Choice value="uncertainty_overstated"/><Choice value="weak_reasoning"/><Choice value="contradictory_reasoning"/><Choice value="unclear_conclusion"/><Choice value="redundant_output"/><Choice value="other"/></Choices>
+<Header value="Optional Note（仅重要问题时填写）"/>
+<TextArea name="annotator_note" toName="model_output" rows="3" placeholder="重要补充；不要求长评"/>
+</View>

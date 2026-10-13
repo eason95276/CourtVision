@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CourtVision public read-only record V1",
+  "type": "object",
+  "required": ["contract_version", "game", "prediction", "postgame", "market", "publication", "public_sha256"],
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": {"const": "courtvision-public-v1"},
+    "game": {"type": "object", "required": ["id", "home", "away", "tipoff", "status"]},
+    "prediction": {"type": "object", "required": ["status", "version_id", "version", "state_revision"], "properties": {"version_id": {"type": ["string", "null"]}, "version": {"type": ["object", "null"]}}},
+    "postgame": {"type": "object", "required": ["status", "postgame"]},
+    "market": {"type": "object"},
+    "publication": {"type": "object", "required": ["exported_at", "mode", "source_prediction_version_id", "source_prediction_payload_sha256"]},
+    "public_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

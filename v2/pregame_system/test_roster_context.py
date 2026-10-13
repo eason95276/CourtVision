@@ -10,7 +10,7 @@ import pytest
 from .roster_context import (calculate_continuity, cold_start_context, eligible_snapshot,
                              local_roster_context, normalize_nba_minutes, normalize_nba_roster)
 from .refresh_roster import refresh
-from .storage import digest
+from .storage import digest, instant
 
 HOME, AWAY = 1610612765, 1610612738
 GAME = {'game_id': 'espn:fixture', 'home_team_id': HOME, 'away_team_id': AWAY,
@@ -218,24 +218,126 @@ def test_frontend_overlay_keeps_eight_saved_numeric_predictions():
         assert game['technical']['cutoff'] != game['technical']['roster_context_cutoff']
 
 
-def test_real_agent_report_receives_context_offline_without_numeric_adjustment(monkeypatch):
+def test_production_agent_report_receives_fixed_schedule_context_offline_without_numeric_adjustment(monkeypatch, tmp_path):
+    from . import agent as agent_module
+    from . import prediction as prediction_module
     from .agent import PregameAgent
-    from .storage import now
+    from .storage import digest
     def blocked(*args, **kwargs):
         raise AssertionError('no network or LLM permitted')
     monkeypatch.setattr('requests.Session.request', blocked)
+    run_index = {'value': 0}
+    def temp_run(folder):
+        run_index['value'] += 1
+        path = tmp_path / 'agent_test_runs' / f'{run_index["value"]}-{folder}'
+        path.mkdir(parents=True, exist_ok=False)
+        return path
+    monkeypatch.setattr(agent_module, 'new_run', temp_run)
+    monkeypatch.setattr(prediction_module, 'new_run', temp_run)
+
+    # Freeze the clock, schedule, and cutoff instead of depending on today's
+    # future-schedule cache or wall-clock time. The model and historical team
+    # files are the normal local runtime inputs.
+    monkeypatch.setattr(prediction_module, 'now', lambda: '2026-10-05T12:00:00+00:00')
+    cutoff = '2026-10-05T11:30:00+00:00'
+    game = {
+        'game_id': 'espn:401909088', 'home_team_id': HOME, 'away_team_id': AWAY,
+        'home_team': 'Detroit Pistons', 'away_team': 'Boston Celtics',
+        'scheduled_tipoff': '2026-10-20T19:00:00+00:00', 'status': 'scheduled',
+        'season_start': 2026, 'is_playoffs': 0, 'game_type': 'regular_season',
+        'source': {'url': 'fixture://phase1/offline-agent-game',
+                   'captured_at': '2026-09-18T16:21:13+00:00'},
+    }
+
+    roster_root = tmp_path / 'fixed_roster_context'
+    roster_snapshot_time = '2026-10-04T12:00:00+00:00'
+    for team_id, player_id, player_name in (
+            (HOME, '1630595', 'Cade Cunningham'), (AWAY, '1628369', 'Jayson Tatum')):
+        raw_path = roster_root / 'raw' / f'{team_id}.json'
+        raw_path.parent.mkdir(parents=True, exist_ok=True)
+        raw_path.write_text(json.dumps({'fixture_player': player_name}), encoding='utf-8')
+        source = {'url': f'fixture://phase1/roster/{team_id}', 'captured_at': roster_snapshot_time,
+                  'raw_path': str(raw_path), 'sha256': digest(raw_path),
+                  'source_type': 'offline_test_fixture'}
+        record = {
+            'team_id': team_id, 'season_start': 2026, 'captured_at': roster_snapshot_time,
+            'official_team_roster': {
+                'status': 'available', 'roster_basis': 'offline_test_fixture', 'team_id': team_id,
+                'players': [{'player_id': player_id, 'name': player_name, 'team_id': team_id}],
+                'source': source,
+            },
+        }
+        snapshot_path = roster_root / 'phase1-run' / 'teams' / f'{team_id}.json'
+        snapshot_path.parent.mkdir(parents=True, exist_ok=True)
+        snapshot_path.write_text(json.dumps(record), encoding='utf-8')
+
+    from . import roster_context as roster_context_module
+    local_roster_context_impl = roster_context_module.local_roster_context
+    def local_roster_fixture(game, cutoff, games, stats=None):
+        return local_roster_context_impl(game, cutoff, games, root=roster_root, stats=stats)
+    monkeypatch.setattr(roster_context_module, 'local_roster_context', local_roster_fixture)
+
     agent = PregameAgent()
     if agent.predictor.games.empty:
         pytest.skip('full historical prediction assets are outside the Demo runtime closure')
-    report, _ = agent.ask('阵容与赛季窗口开发自测', cutoff=now(),
-                          plan={'intent': 'report', 'game_id': 'espn:401909088'})
+    assert agent.predictor.predict.__globals__['now']() == '2026-10-05T12:00:00+00:00'
+    agent.schedule = [game]
+    agent.predictor.schedule = [game]
+    report, _ = agent.ask('阵容与赛季窗口开发自测', cutoff=cutoff,
+                          plan={'intent': 'report', 'game_id': 'espn:401909088'},
+                          allow_lookup=False, generate_judgment=False)
+    assert report['game']['game_id'] == game['game_id']
+    assert report['analyst_context'] is not None, {
+        'missing_data': report['missing_data'],
+        'prediction_trace': [row for row in report['trace'] if row.get('tool') == 'prediction'],
+    }
     context = report['analyst_context']['roster_context']
     assert context['game_id'] == report['roster_context']['game_id']
     assert 'source_record' not in context['teams']['home']
-    assert context['teams']['home']['official_team_roster']['players']
+    assert context['teams']['home']['official_team_roster'] is None
+    assert context['teams']['home']['current_team_roster']['players']
     assert context['numeric_model_usage'] is False
     assert context['teams']['home']['cold_start']['rolling_5_previous_season_games'] == 5
     assert context['teams']['home']['cold_start']['rolling_15_previous_season_games'] == 15
     assert report['prediction'] == report['official_numeric_prediction']
     assert report['analyst_judgment'] is None
     assert report['snapshot']['official_prediction'] is False
+
+
+def test_new_agent_report_freezes_fact_context_and_hides_capped_rest_from_fact_values(tmp_path, monkeypatch):
+    from .agent import PregameAgent
+
+    def blocked(*args, **kwargs):
+        raise AssertionError('no network or LLM permitted')
+
+    def temp_run(folder):
+        path = tmp_path / folder
+        path.mkdir(parents=True, exist_ok=True)
+        return path
+
+    monkeypatch.setattr('requests.Session.request', blocked)
+    monkeypatch.setattr('v2.pregame_system.agent.new_run', temp_run)
+    monkeypatch.setattr('v2.pregame_system.prediction.new_run', temp_run)
+    agent = PregameAgent()
+    if agent.predictor.games.empty:
+        pytest.skip('full historical prediction assets are outside the Demo runtime closure')
+    from v2.frontend.export_data import build_app_data
+    from v2.frontend.generation_input import registered_schedule_game
+    display_game = next(item for item in build_app_data()['games']
+                        if instant(item['tipoff']) > instant('2026-10-05T12:00:00+00:00'))
+    display_game['game_type'] = 'preseason'
+    target = registered_schedule_game(display_game)
+    agent.schedule = [target]
+    agent.predictor.schedule = [target]
+    report, _ = agent.ask(
+        'fact context offline integration', cutoff='2026-10-05T12:00:00+00:00',
+        plan={'intent': 'report', 'game_id': target['game_id']},
+        allow_lookup=False, generate_judgment=False,
+    )
+    assert report['fact_context']['schema_version'] == 'pregame-fact-context-v1', report['trace']
+    assert report['fact_context']['game_id'] == target['game_id']
+    assert report['fact_context']['feature_cutoff'] == '2026-10-05T12:00:00+00:00'
+    assert report['team_form']['values']
+    assert not any('rest_days' in key or 'back_to_back' in key
+                   for key in report['team_form']['values'])
+    assert set(report['fact_context']['schedule']) == {'home', 'away'}

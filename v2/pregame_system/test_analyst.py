@@ -1,3 +1,10 @@
+"""Analyst schema, evidence IDs, numeric boundaries and frozen-context wiring.
+
+The retired Chinese phrase validators and old full-product repair route do
+not certify prose. Independent review/repair protocol belongs to the editorial
+pipeline tests; fake clients below prove compatibility and persistence only,
+not real reviewer accuracy or the factuality of their supplied analysis.
+"""
 from __future__ import annotations
 
 import copy
@@ -207,7 +214,7 @@ def test_text_format_repair_preserves_editorial_wording_and_prediction():
     assert judgment.final_prediction.evidence_ids == []
 
 
-def test_product_request_requires_story_watch_themes_and_prediction_perspective():
+def test_product_request_still_requires_story_and_prediction():
     current = build_analyst_context(
         LAYERS,
         EVIDENCE,
@@ -219,10 +226,6 @@ def test_product_request_requires_story_watch_themes_and_prediction_perspective(
     with pytest.raises(ValueError, match="judgment_product_content_incomplete"):
         validate_judgment(payload, current)
     payload = judgment_payload()
-    payload["watch_themes"] = payload["watch_themes"][:1]
-    with pytest.raises(ValueError, match="judgment_product_content_incomplete"):
-        validate_judgment(payload, current)
-    payload = judgment_payload()
     payload["pregame_story"]["evidence_ids"] = ["evidence-prediction"]
     payload["prediction_perspective"]["evidence_ids"] = ["evidence-prediction"]
     payload["final_prediction"]["evidence_ids"] = ["evidence-prediction"]
@@ -230,6 +233,45 @@ def test_product_request_requires_story_watch_themes_and_prediction_perspective(
     for item in payload["watch_themes"]:
         item["evidence_ids"] = ["evidence-form"]
     assert validate_judgment(payload, current)
+
+
+@pytest.mark.parametrize("count", [0, 1, 2, 4])
+def test_product_watch_themes_accept_zero_through_four_without_changing_other_requirements(count):
+    current = build_analyst_context(
+        LAYERS,
+        EVIDENCE,
+        missing_data=[],
+        analysis_request="生成这场比赛的第25秒赛前内容。",
+    )
+    payload = judgment_payload()
+    source_themes = payload["watch_themes"]
+    payload["watch_themes"] = [copy.deepcopy(source_themes[index % len(source_themes)]) for index in range(count)]
+    payload["pregame_story"]["evidence_ids"] = ["evidence-prediction"]
+    payload["final_prediction"]["evidence_ids"] = ["evidence-prediction"]
+    payload["analysis_article_evidence_ids"] = ["evidence-prediction", "evidence-form"]
+    for item in payload["watch_themes"]:
+        item["evidence_ids"] = ["evidence-form"]
+    assert ProductAnalystOutput.model_validate(payload).model_dump()["watch_themes"] == payload["watch_themes"]
+    assert len(validate_judgment(payload, current).watch_themes) == count
+
+
+def test_product_watch_themes_still_reject_more_than_four():
+    payload = judgment_payload()
+    payload["watch_themes"] = payload["watch_themes"] * 3
+    with pytest.raises(ValueError):
+        ProductAnalystOutput.model_validate(payload)
+
+
+def test_product_and_persisted_judgment_schemas_allow_candidate_bench_for_three_players_per_team():
+    payload = judgment_payload()
+    payload["player_analysis"] = [{
+        "player_name": f"Fixture Player {index}",
+        "statement": "角色与本场对手的互动是这组测试中的说明文本。",
+        "classification": "subjective_analysis",
+        "evidence_ids": [],
+    } for index in range(8)]
+    assert len(ProductAnalystOutput.model_validate(payload).player_analysis) == 8
+    assert len(AnalystJudgment.model_validate(payload).player_analysis) == 8
 
 
 def test_product_prediction_requires_clear_direction_and_half_point_margin():
@@ -254,7 +296,7 @@ def test_product_prediction_requires_clear_direction_and_half_point_margin():
         validate_judgment(payload, current)
 
 
-def test_product_layer_mentions_are_editorial_choices_not_validation_errors():
+def test_legacy_schema_preserves_article_text_and_official_forecast():
     current = build_analyst_context(
         LAYERS,
         EVIDENCE,
@@ -272,222 +314,6 @@ def test_product_layer_mentions_are_editorial_choices_not_validation_errors():
     assert current.official_numeric_prediction == LAYERS["official_numeric_prediction"]
 
 
-def test_product_market_total_language_matches_final_prediction():
-    evidence = [
-        *EVIDENCE,
-        {
-            "id": "public-market",
-            "section": "web_context",
-            "kind": "Fact",
-            "value": {"market_reference": {"total": 233.5}},
-        },
-    ]
-    current = build_analyst_context(
-        LAYERS,
-        evidence,
-        missing_data=[],
-        analysis_request="生成这场比赛的第25秒赛前最终预测。",
-    )
-    payload = judgment_payload()
-    payload["pregame_story"]["evidence_ids"] = ["evidence-prediction"]
-    payload["final_prediction"]["evidence_ids"] = ["evidence-prediction", "public-market"]
-    payload["final_prediction"]["expected_total"] = 228.5
-    payload["analysis_article"] = ANALYSIS_ARTICLE + "综合判断后，我略微偏向大分。"
-    payload["analysis_article_evidence_ids"] = ["evidence-prediction", "public-market"]
-    for item in payload["watch_themes"]:
-        item["evidence_ids"] = ["evidence-form"]
-    with pytest.raises(
-        ValueError,
-        match="judgment_total_lean_conflicts_with_final_prediction",
-    ):
-        validate_judgment(payload, current)
-
-
-def test_series_total_generalization_must_match_actual_games():
-    evidence = [
-        *EVIDENCE,
-        {
-            "id": "series",
-            "section": "matchup_history",
-            "kind": "Fact",
-            "value": {
-                "matchup_relevance": "high",
-                "series_summary": {"game_totals": [235, 210, 202, 258], "average_total": 226.25, "game_margins": [39, 6, 14, 30]},
-            },
-        },
-    ]
-    current = build_analyst_context(
-        LAYERS,
-        evidence,
-        missing_data=[],
-        analysis_request="生成这场比赛的第25秒赛前最终预测。",
-    )
-    payload = judgment_payload()
-    payload["pregame_story"]["evidence_ids"] = ["series"]
-    payload["final_prediction"]["evidence_ids"] = ["series"]
-    payload["analysis_article_evidence_ids"] = ["series"]
-    for item in payload["watch_themes"]:
-        item["evidence_ids"] = ["series"]
-    payload["analysis_article"] = ANALYSIS_ARTICLE + "两队系列赛总分多在210分上下。"
-    with pytest.raises(ValueError, match="unsupported_series_total_generalization"):
-        validate_judgment(payload, current)
-    payload["analysis_article"] = ANALYSIS_ARTICLE + "两队系列赛四场平均总分226.25分。"
-    assert validate_judgment(payload, current)
-    payload["analysis_article"] = ANALYSIS_ARTICLE + "客队四场都没能把差距压到个位数以内。"
-    with pytest.raises(ValueError, match="series_margin_claim_conflicts_with_scores"):
-        validate_judgment(payload, current)
-
-
-def test_story_selection_is_free_but_claimed_facts_still_require_support():
-    evidence = [
-        *EVIDENCE,
-        {
-            "id": "story-champion",
-            "section": "web_context",
-            "kind": "Fact",
-            "value": {
-                "category": "game_story",
-                "title": "2026 NBA Champions",
-                "url": "https://www.nba.com/playoffs/2026/nba-finals",
-            },
-        },
-        {
-            "id": "story-meeting",
-            "section": "web_context",
-            "kind": "Fact",
-            "value": {
-                "category": "game_story",
-                "title": "Previous meeting",
-                "snippet": "The home team won 108-102.",
-                "url": "https://www.nba.com/game/example",
-            },
-        },
-    ]
-    current = build_analyst_context(
-        LAYERS,
-        evidence,
-        missing_data=[],
-        analysis_request="生成这场比赛的第25秒赛前最终预测。",
-    )
-    payload = judgment_payload()
-    payload["pregame_story"]["evidence_ids"] = ["evidence-prediction"]
-    payload["final_prediction"]["evidence_ids"] = ["evidence-prediction"]
-    payload["analysis_article_evidence_ids"] = ["evidence-prediction"]
-    for item in payload["watch_themes"]:
-        item["evidence_ids"] = ["evidence-form"]
-    assert validate_judgment(payload, current)
-
-    payload["pregame_story"]["evidence_ids"] = ["story-meeting"]
-    payload["pregame_story"]["statement"] = "卫冕冠军回到主场，迎来这场再次交锋。"
-    with pytest.raises(ValueError, match="judgment_story_ignores_verified_championship"):
-        validate_judgment(payload, current)
-
-    payload["pregame_story"]["evidence_ids"] = ["story-champion"]
-    payload["pregame_story"]["evidence_ids"] = ["evidence-form"]
-    payload["pregame_story"]["statement"] = "双方近15场状态是本次讨论的主题。"
-    assert validate_judgment(payload, current)
-
-    payload["pregame_story"] = {
-        "title": "冠军戒指之夜",
-        "statement": "卫冕冠军回到主场迎接新赛季。",
-        "classification": "source_fact",
-        "evidence_ids": ["story-champion"],
-    }
-    with pytest.raises(ValueError, match="unsupported_championship_ceremony_claim"):
-        validate_judgment(payload, current)
-
-    payload["pregame_story"] = {
-        "title": "费城归来复仇",
-        "statement": "76人回到花园争取扳回一场。",
-        "classification": "source_fact",
-        "evidence_ids": ["story-champion"],
-    }
-    with pytest.raises(ValueError, match="subjective_motivation_labeled_as_fact"):
-        validate_judgment(payload, current)
-
-    payload["pregame_story"] = {
-        "title": "再次相遇",
-        "statement": "76人整个夏天都在研究如何解决这组对位。",
-        "classification": "source_fact",
-        "evidence_ids": ["story-champion"],
-    }
-    with pytest.raises(ValueError, match="subjective_motivation_labeled_as_fact"):
-        validate_judgment(payload, current)
-
-    payload["pregame_story"] = {
-        "title": "队史首冠后的揭幕战",
-        "statement": "主队以冠军身份回到主场。",
-        "classification": "source_fact",
-        "evidence_ids": ["story-champion"],
-    }
-    with pytest.raises(ValueError, match="unsupported_franchise_first_championship_claim"):
-        validate_judgment(payload, current)
-
-    payload["pregame_story"] = {
-        "title": "卫冕冠军回到主场",
-        "statement": "冠军班底迎来新赛季主场首战，对手则要重新回答上次季后赛交锋留下的问题。",
-        "classification": "data_inference",
-        "evidence_ids": ["story-champion"],
-    }
-    payload["analysis_article"] = ANALYSIS_ARTICLE + "这不是普通比赛，而是证明自己的机会。"
-    assert validate_judgment(payload, current)
-    payload["analysis_article"] = ANALYSIS_ARTICLE + "冠军归来—新赛季开始。"
-    assert validate_judgment(payload, current)
-    payload["analysis_article"] = ANALYSIS_ARTICLE
-    assert validate_judgment(payload, current)
-
-
-def test_high_relevance_matchup_is_optional_but_history_time_label_is_required():
-    evidence = [
-        *EVIDENCE,
-        {
-            "id": "matchup-series",
-            "section": "matchup_history",
-            "kind": "Fact",
-            "value": {"status": "available", "matchup_relevance": "high", "series_summary": {"games": 4}},
-        },
-        {
-            "id": "season-phase",
-            "section": "season_phase",
-            "kind": "Fact",
-            "value": {"phase": "opening_night"},
-        },
-        {
-            "id": "champion-story",
-            "section": "web_context",
-            "kind": "Fact",
-            "value": {
-                "category": "game_story",
-                "title": "2026 NBA Champions",
-                "snippet": "The home team won the championship.",
-            },
-        },
-    ]
-    current = build_analyst_context(
-        LAYERS,
-        evidence,
-        missing_data=[],
-        analysis_request="生成这场比赛的第25秒赛前最终预测。",
-    )
-    payload = judgment_payload()
-    payload["pregame_story"]["evidence_ids"] = ["evidence-prediction"]
-    payload["final_prediction"]["evidence_ids"] = ["evidence-prediction"]
-    payload["analysis_article_evidence_ids"] = ["evidence-prediction", "matchup-series"]
-    for item in payload["watch_themes"]:
-        item["evidence_ids"] = ["evidence-form"]
-    assert validate_judgment(payload, current)
-
-    payload["pregame_story"]["evidence_ids"] = ["matchup-series"]
-    payload["analysis_article"] = ANALYSIS_ARTICLE + "近15场主队表现更稳定。"
-    with pytest.raises(
-        ValueError,
-        match="opening_night_rolling_window_missing_previous_season_label",
-    ):
-        validate_judgment(payload, current)
-    payload["analysis_article"] = ANALYSIS_ARTICLE + "上赛季近15场主队表现更稳定。"
-    assert validate_judgment(payload, current)
-
-
 def test_nested_analysis_evidence_is_validated(context):
     payload = judgment_payload()
     payload["roster_analysis"][0]["evidence_ids"] = ["invented"]
@@ -500,271 +326,6 @@ def test_structured_support_can_replace_legacy_support_id_list(context):
     payload["supporting_evidence_ids"] = []
     validated = validate_judgment(payload, context)
     assert validated.supporting_evidence[0].evidence_ids == ["evidence-prediction"]
-
-
-def test_missing_availability_cannot_be_turned_into_confirmed_injury(context):
-    payload = judgment_payload()
-    payload["player_analysis"] = [{
-        "player_name": "Known Player",
-        "statement": "Known Player 本场确认因伤缺阵。",
-        "classification": "subjective_analysis",
-        "evidence_ids": ["evidence-prediction"],
-    }]
-    with pytest.raises(ValueError, match="unsupported_availability_claim"):
-        validate_judgment(payload, context)
-
-
-@pytest.mark.parametrize("statement,error", [
-    ("系列赛里客队从未把比赛拖进最后五分钟。", "unsupported_series_game_flow_claim"),
-    ("这些数字说明的是四场里持续存在的出手质量差距。", "unsupported_shot_quality_inference"),
-])
-def test_box_score_cannot_prove_unobserved_game_flow_or_shot_quality(context, statement, error):
-    payload = judgment_payload()
-    payload["historical_data_relevance"][0]["statement"] = statement
-    with pytest.raises(ValueError, match=error):
-        validate_judgment(payload, context)
-
-
-def test_missing_availability_allows_clearly_hypothetical_game_variable(context):
-    payload = judgment_payload()
-    payload["player_analysis"] = [{
-        "player_name": "Known Player",
-        "statement": "如果核心球员缺阵，球队的持球组织会承受更大压力。",
-        "classification": "subjective_analysis",
-        "evidence_ids": ["evidence-prediction"],
-    }]
-    assert validate_judgment(payload, context)
-
-
-def test_roster_difference_cannot_be_stated_as_confirmed_transaction(context):
-    payload = judgment_payload()
-    payload["roster_analysis"][0]["statement"] = "该球员已经确认交易离队。"
-    with pytest.raises(ValueError, match="unsupported_transaction_claim"):
-        validate_judgment(payload, context)
-
-
-def test_current_roster_alone_cannot_be_called_an_all_new_core(context):
-    payload = judgment_payload()
-    payload["roster_analysis"][0]["statement"] = "球队带着全新的核心名单进入新赛季。"
-    with pytest.raises(ValueError, match="unsupported_roster_change_claim"):
-        validate_judgment(payload, context)
-
-
-def test_later_unknown_word_cannot_excuse_earlier_unsupported_upgrade_claim(context):
-    payload = judgment_payload()
-    payload["pregame_story"]["statement"] = (
-        "当前名单有几位新名字，纸面火力明显提升，但轮换默契仍是未知数。"
-    )
-    with pytest.raises(ValueError, match="unsupported_roster_change_claim"):
-        validate_judgment(payload, context)
-
-
-def test_current_roster_alone_cannot_support_new_arrival_wording(context):
-    payload = judgment_payload()
-    payload["analysis_article"] = ANALYSIS_ARTICLE + "球队新加入的持球点将改变进攻。"
-    with pytest.raises(ValueError, match="unsupported_roster_change_claim"):
-        validate_judgment(payload, context)
-
-
-def staged_forecast_client(messages, schema):
-    value = {"prediction": {"winner_side": "home", "win_probability": .58,
-        "expected_home_margin": 3.5, "expected_total": 228.5},
-        "factors": [{"classification": "inference", "evidence_ids": ["evidence-prediction"],
-            "effect": "home", "summary": "Basketball evidence supports the home direction."}], "uncertainties": []}
-    if schema.__name__ == "MarketReviewForecast":
-        value['factors'][0]['evidence_ids'].append('market.market_benchmark')
-        value.update(decision="keep", market_assessment="unclear", rationale="Retain the independently assessed game environment.")
-    return value, {}
-
-
-@pytest.mark.parametrize("remains_invalid", [False, True])
-@pytest.mark.parametrize("include_forecasting_skill", [False, True])
-def test_product_fact_correction_is_bounded_and_preserves_failed_draft(tmp_path, remains_invalid, include_forecasting_skill):
-    current = build_analyst_context(
-        LAYERS, EVIDENCE, missing_data=[], analysis_request="生成这场比赛的第25秒赛前最终预测。"
-    )
-    calls = []
-
-    def client(messages, schema):
-        calls.append(messages)
-        payload = judgment_payload()
-        payload["pregame_story"]["evidence_ids"] = ["evidence-prediction"]
-        payload["final_prediction"]["evidence_ids"] = ["evidence-prediction"]
-        payload["analysis_article_evidence_ids"] = ["evidence-prediction"]
-        for item in payload["watch_themes"]:
-            item["evidence_ids"] = ["evidence-form"]
-        if len(calls) == 1 or remains_invalid:
-            payload["analysis_article"] += "球队新加入的持球点将改变进攻。"
-        return payload, {}
-
-    analyst = EvidenceBoundAnalyst(root=tmp_path, client=client, max_calls=4,
-                                  include_forecasting_skill=include_forecasting_skill,
-                                  forecast_client=staged_forecast_client)
-    if remains_invalid:
-        with pytest.raises(ValueError, match="unsupported_roster_change_claim"):
-            analyst.judge(current)
-    else:
-        judgment, trace = analyst.judge(current)
-        assert judgment.analysis_article == ANALYSIS_ARTICLE
-        assert trace["correction"]["attempts"] == 1
-    assert len(calls) == 2
-    assert "当前名单没有证明" in calls[1][-1]["content"]
-    revision = calls[1][-1]["content"]
-    assert "schema" in revision and "evidence ID" in revision and "cutoff" in revision
-    assert "一轮修正" in revision
-    assert "系列赛分析" not in revision
-    assert "免责声明" not in revision
-    assert "篇幅" not in revision
-    for messages in calls:
-        system = messages[0]["content"]
-        assert "<editorial_skill " in system
-        assert "<forecasting_skill " not in system
-        if include_forecasting_skill:
-            assert "locked_final_prediction" in system
-        assert "<pregame_research_skill " not in system
-    assert list(tmp_path.glob("*/failure.json"))
-    assert len(list(tmp_path.glob("*/parsed_unvalidated.json"))) == 2
-    if include_forecasting_skill:
-        assert len(list(tmp_path.glob("*/forecast/*_request.json"))) == 2
-
-
-def test_writer_does_not_rewrite_or_retry_valid_editorial_choices(tmp_path):
-    current = build_analyst_context(
-        LAYERS, EVIDENCE, missing_data=[], analysis_request="生成这场比赛的第25秒赛前分析。"
-    )
-    payload = judgment_payload()
-    for claim in [payload["pregame_story"], *payload["watch_themes"], payload["final_prediction"]]:
-        claim["evidence_ids"] = ["evidence-prediction"]
-    payload["analysis_article_evidence_ids"] = ["evidence-prediction"]
-    payload["analysis_article"] += "模型也有不确定性。这不是结论，而是我的判断。比赛开始—等待结果。"
-    calls = []
-    def client(messages, schema):
-        calls.append(messages)
-        return payload, {}
-    judgment, trace = EvidenceBoundAnalyst(
-        root=tmp_path, client=client, include_forecasting_skill=True,
-        forecast_client=staged_forecast_client,
-    ).judge(current)
-    assert len(calls) == 1
-    assert judgment.analysis_article == payload["analysis_article"]
-    assert judgment.final_prediction.model_dump() == payload["final_prediction"]
-    assert "correction" not in trace
-    assert not list(tmp_path.glob("*/failure.json"))
-
-
-def test_web_fact_must_be_linked_to_the_specific_claim():
-    evidence = [
-        *EVIDENCE,
-        {
-            "id": "web-transaction",
-            "section": "web_context",
-            "kind": "Fact",
-            "value": {"category": "roster_news", "title": "Official transaction"},
-        },
-    ]
-    current = build_analyst_context(LAYERS, evidence, missing_data=[])
-    payload = judgment_payload()
-    payload["supporting_evidence_ids"].append("web-transaction")
-    payload["roster_analysis"][0] = {
-        "statement": "该球员已经确认交易加盟。",
-        "classification": "source_fact",
-        "evidence_ids": ["evidence-prediction"],
-    }
-    with pytest.raises(ValueError, match="unsupported_transaction_claim"):
-        validate_judgment(payload, current)
-    payload["roster_analysis"][0]["evidence_ids"].append("web-transaction")
-    assert validate_judgment(payload, current)
-
-
-def test_historical_minutes_cannot_be_stated_as_current_starter(context):
-    payload = judgment_payload()
-    payload["player_analysis"] = [{
-        "player_name": "Known Player",
-        "statement": "Known Player 将担任本场首发。",
-        "classification": "subjective_analysis",
-        "evidence_ids": ["evidence-prediction"],
-    }]
-    with pytest.raises(ValueError, match="unsupported_starter_claim"):
-        validate_judgment(payload, context)
-
-
-def test_explicitly_unknown_starter_language_is_allowed(context):
-    payload = judgment_payload()
-    payload["uncertainty"] = [{
-        "statement": "当前无确认首发证据，名单也不能证明其首发身份。",
-        "classification": "source_fact",
-        "evidence_ids": [],
-    }]
-    assert validate_judgment(payload, context)
-
-
-def test_missing_starter_evidence_is_not_mistaken_for_a_confirmed_lineup(context):
-    payload = judgment_payload()
-    payload["roster_analysis"][0]["statement"] = (
-        "双方均无伤病、出场状态与确认首发证据。"
-    )
-    assert validate_judgment(payload, context)
-
-
-def test_roster_confirmation_word_is_not_mistaken_for_injury_claim(context):
-    payload = judgment_payload()
-    payload["uncertainty"] = [{
-        "statement": "揭幕战最终名单未经确认，当前球员可用性状态也缺少来源。",
-        "classification": "source_fact",
-        "evidence_ids": [],
-    }]
-    assert validate_judgment(payload, context)
-
-
-def test_player_analysis_must_use_an_official_roster_name():
-    roster_value = {
-        "teams": {
-            "home": {"official_team_roster": {"players": [{"name": "Known Player"}]}},
-            "away": {"official_team_roster": {"players": []}},
-        }
-    }
-    evidence = [
-        {"id": "roster", "section": "roster_context", "kind": "Fact", "value": roster_value},
-        {"id": "prediction", "section": "prediction", "kind": "ModelForecast", "value": LAYERS},
-    ]
-    current = build_analyst_context(LAYERS, evidence, missing_data=[])
-    payload = judgment_payload()
-    payload["supporting_evidence_ids"] = ["prediction"]
-    payload["conflicting_evidence_ids"] = []
-    payload["roster_analysis"] = []
-    payload["historical_data_relevance"] = []
-    payload["supporting_evidence"] = []
-    payload["conflicting_evidence"] = []
-    payload["player_analysis"] = [{
-        "player_name": "Invented Player",
-        "statement": "该球员可能改变球队空间。",
-        "classification": "subjective_analysis",
-        "evidence_ids": ["roster"],
-    }]
-    with pytest.raises(ValueError, match="player_not_in_official_roster"):
-        validate_judgment(payload, current)
-
-
-def test_story_cannot_assign_an_opponent_player_to_current_roster():
-    roster_value = {
-        "teams": {
-            "home": {"official_team_roster": {"players": [{"name": "Andre Drummond"}]}},
-            "away": {"official_team_roster": {"players": [{"name": "Joel Embiid"}]}},
-        }
-    }
-    evidence = [
-        *EVIDENCE,
-        {"id": "roster", "section": "roster_context", "kind": "Fact", "value": roster_value},
-    ]
-    current = build_analyst_context(
-        LAYERS, evidence, missing_data=[], analysis_request="生成76人对尼克斯的常规分析"
-    )
-    payload = judgment_payload()
-    payload["watch_themes"][0]["statement"] = "76人当前名单里有Embiid、Drummond两名内线。"
-    with pytest.raises(ValueError, match="player_attributed_to_wrong_team_roster"):
-        validate_judgment(payload, current)
-    payload["watch_themes"][0]["statement"] = "76人当前名单里有Embiid。"
-    assert validate_judgment(payload, current)
 
 
 def test_unknown_supporting_evidence_is_rejected(context):
@@ -787,28 +348,6 @@ def test_product_generation_schema_excludes_legacy_rubric_sections():
         "model_risk",
         "unresolved_uncertainty",
     }
-
-
-def test_rolling_window_number_is_allowed_but_new_numeric_forecast_is_rejected(context):
-    payload = judgment_payload()
-    payload["subjective_rationale"] = "rolling 15 全部来自上赛季，因此只能作为历史基线。"
-    assert validate_judgment(payload, context)
-    payload["subjective_rationale"] = "我自行给出胜率 72%。"
-    with pytest.raises(ValueError, match="judgment_exact_numeric_forecast_not_allowed"):
-        validate_judgment(payload, context)
-    payload = judgment_payload()
-    payload["pregame_story"]["statement"] = "模型给出的胜率是 72%。"
-    with pytest.raises(ValueError, match="judgment_exact_numeric_forecast_not_allowed"):
-        validate_judgment(payload, context)
-
-
-def test_team_signal_cannot_be_rewritten_as_model_feature_attribution(context):
-    payload = judgment_payload()
-    payload["supporting_evidence"][0]["statement"] = (
-        "近期净效率差是模型给出主队高胜率的主要来源。"
-    )
-    with pytest.raises(ValueError, match="unsupported_model_attribution_claim"):
-        validate_judgment(payload, context)
 
 
 def test_domain_perspectives_separate_observation_and_missing_evidence(context):
@@ -835,7 +374,37 @@ def test_fake_structured_analyst_is_saved_and_evidence_checked(tmp_path, context
     assert "forecasting" not in attempt["skill_hashes"]
 
 
-def test_real_philadelphia_context_drives_roster_and_old_window_analysis(monkeypatch, tmp_path):
+def test_legacy_call_budget_exhaustion_stops_before_a_second_client_call(tmp_path, context):
+    calls = []
+
+    def client(messages, schema):
+        calls.append(schema.__name__)
+        return judgment_payload(), {}
+
+    analyst = EvidenceBoundAnalyst(root=tmp_path / "calls", client=client, max_calls=1)
+    analyst.judge(context)
+    with pytest.raises(ValueError, match="analyst_call_budget_exhausted"):
+        analyst.judge(context)
+    assert calls == ["AnalystJudgment"]
+    assert len(list((tmp_path / "calls").glob("*/attempt.json"))) == 1
+
+
+def test_two_stage_budget_guard_runs_before_forecast_writer_or_reviewer(tmp_path, context):
+    def forbidden_client(*args, **kwargs):
+        raise AssertionError("Insufficient budget must stop before any client call")
+
+    analyst = EvidenceBoundAnalyst(
+        root=tmp_path / "calls", client=forbidden_client,
+        forecast_client=forbidden_client, reviewer_client=forbidden_client,
+        max_calls=3, include_forecasting_skill=True,
+    )
+    with pytest.raises(ValueError, match="analyst_budget_cannot_cover_forecast_and_writer"):
+        analyst.judge(context)
+    assert not list((tmp_path / "calls").glob("*/forecast/*_request.json"))
+    assert not list((tmp_path / "calls").glob("*/editorial/*_request.json"))
+
+
+def test_saved_philadelphia_context_preserves_roster_old_windows_and_official(monkeypatch, tmp_path):
     from .analyst import AnalystContext
     from v2.frontend.analysis_service import SavedGameAnalysisService
     from v2.frontend.export_data import build_app_data
@@ -845,9 +414,11 @@ def test_real_philadelphia_context_drives_roster_and_old_window_analysis(monkeyp
 
     seen = {}
     def client(messages, schema):
+        # Supplied prose is a compatibility fixture, not a semantic-review result.
         current = AnalystContext.model_validate_json(messages[-1]["content"])
         seen["context"] = current
         roster_evidence = next(item for item in current.objective_evidence if item["section"] == "roster_context")
+        assert roster_evidence["value"]["context_reference"] == "roster_context"
         prediction_evidence = next(item for item in current.objective_evidence if item["section"] == "prediction")
         matchup_evidence = next(item for item in current.objective_evidence if item["section"] == "matchup_history")
         payload = judgment_payload()
@@ -997,7 +568,8 @@ def test_pregame_agent_persists_context_judgment_and_trace(tmp_path):
         return payload,{'prompt_tokens':10,'completion_tokens':5}
 
     analyst=EvidenceBoundAnalyst(root=tmp_path/'calls',client=client)
-    agent=PregameAgent(analyst=analyst)
+    from .prediction import Predictor
+    agent=PregameAgent(analyst=analyst,predictor=Predictor(runtime_root=BASE/'runtime_demo'))
     report,_=agent.ask(
         'structured analyst fixture',
         cutoff=demo['cutoff'],
@@ -1034,7 +606,8 @@ def test_real_pregame_agent_context_receives_all_four_legal_market_layers(tmp_pa
         'source':{'kind':'legal_market_fixture'},
     }
     save_live_market_snapshot(quote,root=tmp_path/'market')
-    agent=PregameAgent(schedule=[game],live_market_root=tmp_path/'market')
+    from .prediction import Predictor
+    agent=PregameAgent(schedule=[game],live_market_root=tmp_path/'market',predictor=Predictor(runtime_root=BASE/'runtime_demo'))
     report,_=agent.ask('four layer fixture',cutoff=demo['cutoff'],
         plan={'intent':'report','game_id':game['game_id']})
     assert report['prediction_method']=='market_residual_v1'
@@ -1087,7 +660,8 @@ def test_public_market_fallback_stays_out_of_numeric_prediction(monkeypatch):
                 }],
             }
 
-    agent=PregameAgent(web_searcher=Searcher())
+    from .prediction import Predictor
+    agent=PregameAgent(web_searcher=Searcher(),predictor=Predictor(runtime_root=BASE/'runtime_demo'))
     monkeypatch.setattr(agent,'market',lambda game,cutoff,replay=False:{
         'as_of_cutoff':None,
         'historical_reference':None,

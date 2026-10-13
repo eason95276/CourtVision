@@ -79,6 +79,7 @@ class Report(BaseModel):
     roster_context:dict|None=None
     web_context:dict|None=None
     public_market_reference:dict|None=None
+    fact_context:dict|None=None
     analysis:dict=Field(default_factory=dict)
     evidence:list[dict]=Field(default_factory=list)
     missing_data:list[dict]=Field(default_factory=list)
@@ -263,6 +264,13 @@ class PregameAgent:
                 row,groups,audit,_=self.predictor.prepare_features(s['game'],s['cutoff'],s['replay'])
                 computed.update(row=clean(row.iloc[0].to_dict()),audit=audit)
             return computed
+        def factual_history(audit):
+            result=copy.deepcopy(audit)
+            for side in ('home','away'):
+                if isinstance(result.get(side),dict):
+                    result[side].pop('scheduled_load_game_ids',None)
+                    result[side].pop('schedule_assumption',None)
+            return result
         def retrieve(name):
             if name=='roster_context':
                 from .roster_context import local_roster_context
@@ -270,10 +278,10 @@ class PregameAgent:
                                             stats=getattr(self.predictor,'stats',None))
             if name=='prediction':return self.predictor.predict(s['game'],s['cutoff'],replay=s['replay'])
             if name=='team_form':
-                f=features();return {'perspective':'explicit home and away','values':{k:v for k,v in f['row'].items() if (k.startswith('home_') or k.startswith('away_')) and ('roll' in k or 'rest_days' in k or 'back_to_back' in k)},'history':f['audit'],'rate_semantics':'V1 rolling per-game means; not pooled series percentages'}
+                f=features();return {'perspective':'explicit home and away','values':{k:v for k,v in f['row'].items() if (k.startswith('home_') or k.startswith('away_')) and 'roll' in k},'history':factual_history(f['audit']),'rate_semantics':'V1 rolling per-game means; not pooled series percentages'}
             if name=='matchup':
-                f=features();return {'values':{k:v for k,v in f['row'].items() if k.startswith(('matchup_','schedule_','cold_'))},
-                    'history':f['audit'],'rate_semantics':'pooled counts in trailing 15 games; interaction is statistical, not causal',
+                f=features();return {'values':{k:v for k,v in f['row'].items() if k.startswith('matchup_')},
+                    'history':factual_history(f['audit']),'rate_semantics':'pooled counts in trailing 15 games; interaction is statistical, not causal',
                     'model_usage':'consult snapshot model variant; candidate features may be rejected by ablation'}
             if name=='availability':
                 if self.predictor.demo_context:return None
@@ -300,6 +308,24 @@ class PregameAgent:
                 value=None;trace.append({'tool':name,'error_type':type(exc).__name__,'reason':str(exc)[:150]})
             data[name]=value;trace.append({'node':'retrieve','langchain_tool':name,'status':'available' if value is not None else 'missing'})
             if value is None:missing.append({'section':name,'reason':'no eligible local evidence'})
+        if 'team_form' in data and data.get('team_form') is not None:
+            try:
+                from .fact_context import build_fact_context
+                feature_data=features()
+                data['fact_context']=build_fact_context(
+                    s['game'],s['cutoff'],getattr(self.predictor,'games',None),
+                    getattr(self.predictor,'stats',None),feature_data['row'],self.schedule,
+                )
+            except (KeyError,TypeError,ValueError) as exc:
+                # Preserve the model row but fail closed for calendar/sample facts.
+                data['fact_context']={
+                    'schema_version':'pregame-fact-context-v1','game_id':s['game'].get('game_id'),
+                    'feature_cutoff':s['cutoff'],'team_form':{},
+                    'schedule':{side:{'status':'unavailable','reason':'fact_context_build_failed:'+str(exc)[:120],
+                                      'basis':None,'back_to_back':None,'source_refs':[]}
+                                for side in ('home','away')},
+                }
+                missing.append({'section':'fact_context','reason':'metadata_unavailable; original feature values retained'})
         return {'data':data,'missing':missing,'trace':trace}
 
     def market(self,game,cutoff,replay=False):
@@ -524,6 +550,7 @@ class PregameAgent:
            market_informed_prediction=data.get('prediction',{}).get('market_informed_prediction') if data.get('prediction') else None,
            market_usage=data.get('prediction',{}).get('market_usage') if data.get('prediction') else None,
            public_market_reference=public_market,
+           fact_context=data.get('fact_context'),
             **{k:data.get(k) for k in ['market','team_form','matchup','availability','roster_context','web_context']},
            evidence=evidence,sources=sources,missing_data=missing,
            analysis={'Fact':'数值、身份、来源和时间由受控工具生成，预测值另标 ModelForecast。',

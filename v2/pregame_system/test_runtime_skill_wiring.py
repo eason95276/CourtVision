@@ -140,9 +140,10 @@ def test_writer_skill_scope_order_and_web_default_only(tmp_path, monkeypatch):
     assert "forecasting marker" not in web_prompt
     assert "forecasting marker" in forecasting_skill.load_forecasting_skill()
     assert "cutoff" in web_prompt
-    assert "evidence ID" in web_prompt
-    assert "Official Numeric Forecast" in web_prompt
-    assert "final_prediction" in web_prompt
+    assert "evidence" in web_prompt and "引用ID" in web_prompt
+    assert "Official数值" in web_prompt
+    assert "调用方schema" in web_prompt
+    assert web_prompt.index("调用方schema") < web_prompt.index("<editorial_skill ")
 
     forecast_path.write_text("forecasting marker updated", encoding="utf-8")
     (editorial_dir / "SKILL.md").write_text("editorial marker updated", encoding="utf-8")
@@ -151,8 +152,8 @@ def test_writer_skill_scope_order_and_web_default_only(tmp_path, monkeypatch):
     assert "forecasting marker updated" not in updated_prompt
     assert "forecasting marker\n" not in updated_prompt
     assert "editorial marker updated" in updated_prompt
-    base = web_prompt.split("以下 Forecasting Skill", 1)[0]
-    for protocol in ("schema", "cutoff", "evidence", "Official", "winner_side", "0.5"):
+    base = web_prompt.split("<editorial_skill ", 1)[0]
+    for protocol in ("schema", "身份", "cutoff", "evidence", "引用ID", "Official数值", "数字单位/方向", "模型解释", "投注执行"):
         assert protocol in base
     for method in ("故事优先", "市场校验器", "400～600", "主线", "模型只是 baseline"):
         assert method not in base

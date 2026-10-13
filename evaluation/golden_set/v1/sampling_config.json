@@ -1,0 +1,33 @@
+{
+  "seed":20261010,
+  "parent_dataset_id":"controlled-cb-v1-6d788de247e93eaaedf4",
+  "season":"2025-26",
+  "game_type":"regular_season",
+  "total_games":20,
+  "representative":12,
+  "challenge":5,
+  "risk_anchor_max":3,
+  "transfer_missing_anchors_to_challenge":true,
+  "representative_phase_quota":{"early":3,"mid":6,"late":3},
+  "phase_definition":"Mean of the two teams' observed current-season games before target, plus 1: early <=20, mid >20 and <=60, late >60. Observed archive ordinal, not an official ordinal.",
+  "outcome_buckets":{"close_max_abs_margin":5,"medium_max_abs_margin":14,"blowout_min_abs_margin":15},
+  "team_cap":3,
+  "soft_unique_team_target":24,
+  "soft_representative_outcome_target":{"close":4,"medium":4,"blowout":4},
+  "challenge_features":{
+    "early_sparse_max_prior_games":4,
+    "record_recent_opposed_min_abs_win_pct_gap":0.2,
+    "similar_season_win_pct_max_gap":0.05,
+    "similar_recent_net_rating_max_gap":3,
+    "observed_rest_min_day_gap":2,
+    "mixed_starting_roles_min_players":3,
+    "mixed_starting_frequency_lower":0.2,
+    "mixed_starting_frequency_upper":0.8,
+    "mixed_starting_min_observations":5,
+    "previous_season_partial_max_team_n":79
+  },
+  "selection_trials":256,
+  "tie_break":"Fixed-seed random rank over sorted sample IDs; lexicographic selection ID tuple final tie-break",
+  "risk_policy":"Known non-market/non-injury generation/factuality/binding failure with explicit regular-season game identity only. Numerical prediction-error extremes are excluded: never sample based on which model forecast was wrong.",
+  "quality_pass_threshold":null
+}

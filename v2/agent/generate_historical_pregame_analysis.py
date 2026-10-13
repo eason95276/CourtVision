@@ -36,7 +36,7 @@ PLAYER_ROLE_EVIDENCE_PATH = (
     V2_DIR
     / "data"
     / "player_evidence"
-    / "GAME_ID_evidence_final_corrected"
+    / "0022500564_evidence_final_corrected"
     / "player_evidence.json"
 )
 PLAYER_ROLE_EVIDENCE_MANIFEST_PATH = (
@@ -3533,4 +3533,3 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

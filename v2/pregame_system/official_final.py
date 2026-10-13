@@ -13,6 +13,8 @@ from pathlib import Path
 from .agent import Report
 from .storage import BASE,instant,now,save,digest,content_hash
 
+FINAL_PREGAME_LEAD = timedelta(minutes=5)
+
 
 def validate_report(report,game,at):
     Report.model_validate(report)
@@ -137,7 +139,7 @@ class OfficialFinalizer:
             return dict(existing,document_hash=expected)
         matches=[g for g in self.agent.schedule if g['game_id']==game_id]
         if len(matches)!=1:raise ValueError('scheduled_game_not_unique')
-        game=matches[0];at=self.clock();tip=instant(game['scheduled_tipoff']);due=tip-timedelta(minutes=5)
+        game=matches[0];at=self.clock();tip=instant(game['scheduled_tipoff']);due=tip-FINAL_PREGAME_LEAD
         if instant(at)<due:return {'status':'not_due','game_id':game_id,'target_generation_time':due.isoformat()}
         if instant(at)>=tip or game.get('status')!='scheduled':raise ValueError('cannot_create_official_after_tipoff_or_cancellation')
         lock=path.with_suffix('.lock')

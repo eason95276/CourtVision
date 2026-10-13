@@ -6,6 +6,7 @@ then delegates language synthesis to the existing EvidenceBoundAnalyst.
 """
 from __future__ import annotations
 
+from copy import deepcopy
 import json
 import os
 from datetime import datetime, timedelta, timezone
@@ -156,11 +157,18 @@ def game_identity(game: dict[str, Any]) -> dict[str, Any]:
         "home_team": game["home"]["name"],
         "away_team": game["away"]["name"],
         "status": game.get("status"),
+        "registered_game": bool(game.get("registered_game")),
+        "game_type": game.get("game_type"),
+        "season_start": game.get("season_start", _instant(game["tipoff"]).year),
+        "research_stage": (game.get("generation_context") or {}).get("stage") or "EARLY_PREVIEW",
+        **{key: clean(game[key]) for key in ("venue", "neutral_site", "schedule_revision") if key in game},
     }
 
 
 def search_categories(game: dict[str, Any]) -> set[str]:
     categories: set[str] = {"game_story"}
+    if game.get("registered_game") and game.get("status") == "scheduled":
+        categories.update({"availability", "lineup", "roster_news"})
     if (game.get("background") or {}).get("availability", {}).get("status") != "available":
         categories.add("availability")
     teams = ((game.get("roster_context") or {}).get("teams") or {}).values()
@@ -178,6 +186,7 @@ def research_local_context(game: dict[str, Any]) -> dict[str, Any]:
     history = game.get("matchup_history") or {}
     form = game.get("season_form") or {}
     rosters = ((game.get("roster_context") or {}).get("teams") or {})
+    player_knowledge = (game.get("roster_context") or {}).get("player_knowledge") or {}
     return {
         "matchup_history": {
             "status": history.get("status"),
@@ -198,14 +207,27 @@ def research_local_context(game: dict[str, Any]) -> dict[str, Any]:
                 for side in ("away", "home")
             },
         },
-        "official_roster_names": {
+        "current_roster_names": {
             side: [
                 player["name"]
-                for player in (((rosters.get(side) or {}).get("official_team_roster") or {}).get("players") or [])
+                for player in (((rosters.get(side) or {}).get("official_team_roster")
+                                or (rosters.get(side) or {}).get("current_team_roster")
+                                or (rosters.get(side) or {}).get("roster") or {}).get("players") or [])
                 if player.get("name")
             ]
             for side in ("away", "home")
         },
+        "current_roster_identity_coverage": (game.get("roster_context") or {}).get("current_roster_identity_coverage"),
+        "player_knowledge_history_coverage": {
+            side: {"scope": "historical_player_record_match_only", **{
+                key: ((player_knowledge.get("teams") or {}).get(side) or {}).get(key)
+                for key in ("current_roster_player_count", "current_roster_match_count",
+                            "current_roster_identity_unresolved_count", "players_with_previous_season_stats")
+            }}
+            for side in ("away", "home")
+        },
+        "freshness_check_required": bool(game.get("registered_game") and game.get("status") == "scheduled"),
+        "game_type": game.get("game_type"),
     }
 
 
@@ -323,20 +345,117 @@ def _independent_prediction(game: dict[str, Any]) -> dict[str, Any]:
     return {"status": "unavailable", "reason": "Saved model output lacks independent-baseline provenance."}
 
 
+def _availability_as_of(game: dict[str, Any], cutoff: str) -> dict[str, Any]:
+    """Qualify shared availability before both player matching and general evidence."""
+    raw = (game.get("background") or {}).get("availability") or {}
+    cutoff_at = _instant(cutoff)
+    team_ids = {str((game.get(side) or {}).get("id")) for side in ("home", "away")}
+    source = raw.get("source") or {}
+    defaults = {
+        "source_url": raw.get("source_url") or raw.get("url") or source.get("source_url") or source.get("url"),
+        "source_published_at": raw.get("source_published_at") or raw.get("published_at") or raw.get("source_published_at_utc")
+                               or source.get("source_published_at") or source.get("published_at"),
+        "captured_at": raw.get("captured_at") or raw.get("captured_at_utc") or source.get("captured_at") or source.get("captured_at_utc"),
+        "source_cutoff": raw.get("source_cutoff") or raw.get("cutoff_time_utc") or raw.get("cutoff_time") or raw.get("cutoff"),
+        "raw_path": raw.get("raw_path") or source.get("raw_path"),
+        "raw_sha256": raw.get("raw_sha256") or source.get("raw_sha256"),
+    }
+    valid = []
+    if raw.get("status") == "available":
+        for row in raw.get("records") or []:
+            if not isinstance(row, dict) or str(row.get("team_id")) not in team_ids:
+                continue
+            if row.get("game_id") and row["game_id"] != game.get("id"):
+                continue
+            record = {**defaults, **row}
+            published = _strict_source_instant(record.get("source_published_at") or record.get("published_at"))
+            captured = _strict_source_instant(record.get("captured_at"))
+            if published is None or captured is None:
+                continue
+            if published > cutoff_at or captured > cutoff_at:
+                continue
+            valid.append(record)
+    return {
+        "status": "available" if valid else "unavailable", "records": valid,
+        "message": f"已连接 {len(valid)} 条合格球员状态。" if valid else "暂无可靠伤病与出战信息。",
+        "time_validation": {"cutoff": cutoff, "accepted_records": len(valid),
+                            "rejected_records": len(raw.get("records") or []) - len(valid)},
+    }
+
+
+def _scope_roster_inputs(game: dict[str, Any], cutoff: str) -> None:
+    """Do not expose wrong-team or future roster names to Research or the writer."""
+    context = game.get("roster_context") or {}
+    if context.get("teams"):
+        context["teams"] = {side: team for side, team in context["teams"].items() if side in {"home", "away"}}
+    for side, team in (context.get("teams") or {}).items():
+        team = team or {}
+        expected = (game.get(side) or {}).get("id") or game.get(f"{side}_team_id")
+        official = team.get("official_team_roster") or team.get("roster")
+        if not official:
+            continue
+        reason = None
+        try:
+            if official.get("status") != "available":
+                reason = "official_team_roster_unavailable"
+            elif expected is not None and any(int(value) != int(expected) for value in (
+                team.get("team_id"), official.get("team_id"),
+            ) if value is not None):
+                reason = "roster_team_identity_mismatch"
+            elif _strict_source_instant((official.get("source") or {}).get("captured_at")) is None:
+                reason = "roster_identity_or_capture_time_unverified"
+            elif _strict_source_instant((official.get("source") or {}).get("captured_at")) > _instant(cutoff):
+                reason = "roster_captured_after_cutoff"
+        except (TypeError, ValueError):
+            reason = "roster_identity_or_capture_time_unverified"
+        if reason:
+            context["teams"][side] = {
+                "team_id": expected, "roster_basis": "unavailable", "cold_start": team.get("cold_start"),
+                "official_team_roster": {"status": "unavailable", "players": [], "reason": reason},
+                "continuity": {"status": "unavailable", "reason": reason}, "missing": [reason],
+            }
+
+
 def _evidence(
     game: dict[str, Any],
     cutoff: str,
     web_context: dict[str, Any] | None,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
     opening_night = (game.get("season_phase") or {}).get("phase") == "opening_night"
-    schedule = dict((game.get("background") or {}).get("schedule") or {})
+    from v2.pregame_system.fact_context import valid_fact_context
+    fact_context = valid_fact_context(
+        game.get("fact_context"), game["id"], cutoff, game["tipoff"],
+    )
+    recent_form = deepcopy((game.get("background") or {}).get("recent_form"))
+    if isinstance(recent_form, dict) and fact_context:
+        for side in ("home", "away"):
+            metrics = ((fact_context.get("team_form") or {}).get(side) or {}).get("metrics") or {}
+            team_values = recent_form.get(side)
+            if not isinstance(team_values, dict):
+                continue
+            for metric, details in metrics.items():
+                if isinstance(details, dict) and details.get("validation") == "mismatch":
+                    team_values.pop(metric, None)
+    schedule = (fact_context or {}).get("schedule") or {
+        side: {"status": "unavailable", "reason": "no_verified_fact_context",
+               "basis": None, "back_to_back": None, "source_refs": []}
+        for side in ("home", "away")
+    }
+    season_phase = dict(game.get("season_phase") or {})
     if opening_night:
-        # These model features are capped at seven days. They do not describe
-        # the actual offseason break and must not become editorial facts.
-        schedule.pop("home_rest_days", None)
-        schedule.pop("away_rest_days", None)
-        schedule["season_opening"] = True
+        # Zero rows in this local history do not prove an official team or
+        # league opener. Keep the sample signal without making that claim.
+        season_phase.update(
+            phase="very_early", display_label="当前赛季本地样本为零",
+            primary_evidence="no_local_current_season_rows; league_opener_unverified",
+            global_opening_night_confirmed=False,
+        )
     sections = {
+        "game_identity": game_identity(game),
+        "model_facts": {"model_version": (game.get("technical") or {}).get("model_version"),
+            "runtime_asset_identity": {key: value for key, value in ((game.get("technical") or {}).get("runtime_asset_identity") or {}).items()
+                if key in {"runtime_mode", "model_version", "training_cutoff", "asset_identity_hash", "metadata_sha256", "model_hashes"}},
+            "model_explanation": {"status": "unavailable"}},
         "prediction": {
             "pure_prediction": _independent_prediction(game),
             "market_benchmark": game["relationship"].get("market"),
@@ -344,25 +463,29 @@ def _evidence(
             "residual_prediction": game["relationship"].get("residual"),
             "official_numeric_prediction": game["relationship"]["final"],
         },
-        "team_form": (
-            None if opening_night and (game.get("season_form") or {}).get("status") == "available"
-            else (game.get("background") or {}).get("recent_form")
-        ),
+        "team_form": recent_form,
         "matchup": {
             "schedule": schedule,
         },
+        "fact_context": fact_context,
         "roster_context": game.get("roster_context"),
         "matchup_history": game.get("matchup_history"),
         "season_form": game.get("season_form"),
-        "season_phase": game.get("season_phase"),
+        "season_phase": season_phase,
         "market": (game.get("background") or {}).get("market"),
     }
-    availability = (game.get("background") or {}).get("availability") or {}
+    availability = _availability_as_of(game, cutoff)
+    if not game.get("registered_game") and not game.get("venue"):
+        sections.pop("game_identity")  # Legacy contexts already carry their identity; no invented venue.
+    if not ((game.get("technical") or {}).get("runtime_asset_identity")):
+        sections.pop("model_facts")  # Do not manufacture training metadata for legacy saved reports.
     if availability.get("status") == "available":
         sections["availability"] = availability
     evidence: list[dict[str, Any]] = []
     sources: list[dict[str, Any]] = []
     missing: list[dict[str, Any]] = list(game.get("missing") or [])
+    if fact_context is None:
+        missing.append({"section": "fact_context", "reason": "no frozen context with matching identity and cutoff"})
     for section, value in sections.items():
         if value in (None, {}, []):
             continue
@@ -372,7 +495,7 @@ def _evidence(
         evidence.append(
             {
                 "id": evidence_id,
-                "kind": "ModelForecast" if section == "prediction" else "Fact",
+                "kind": "ModelForecast" if section == "prediction" else ("Context" if section == "fact_context" else "Fact"),
                 "section": section,
                 "game_id": game["id"],
                 "cutoff": cutoff,
@@ -400,6 +523,12 @@ def _evidence(
                 "published_at": record["published_at"],
                 "captured_at": record.get("captured_at"),
                 "category": record["category"],
+                "source_id": record.get("source_id"),
+                "claim_type": record.get("claim_type"),
+                "publication_precision": record.get("publication_precision"),
+                "temporal_confidence": record.get("temporal_confidence"),
+                "verified_by": record.get("verified_by"),
+                "discovered_via": record.get("discovered_via"),
             }
         )
     if not (game.get("background") or {}).get("market"):
@@ -461,13 +590,26 @@ class SavedGameAnalysisService:
         data: dict[str, Any],
         *,
         analyst: EvidenceBoundAnalyst | None = None,
+        display_name_store=None,
+        market_collector=None,
+        market_reference_store=None,
         searcher: PregameWebSearch | None = None,
         researcher: Any | None = None,
+        player_knowledge_store: Any | None = None,
+        require_research_success: bool = False,
     ):
         self.data = data
-        self.analyst = analyst or EvidenceBoundAnalyst(include_forecasting_skill=True)
+        self.analyst = analyst or EvidenceBoundAnalyst(include_forecasting_skill=True, max_calls=6)
+        self.display_name_store=display_name_store
         self.searcher = searcher
         self.researcher = researcher
+        self.player_knowledge_store = player_knowledge_store
+        self.require_research_success = require_research_success
+        self.market_collector=market_collector
+        self.market_reference_store=market_reference_store
+        if self.market_collector is None and isinstance(self.analyst,EvidenceBoundAnalyst) and self.analyst.include_forecasting_skill and self.analyst.client is None and self.analyst.forecast_client is None:
+            from v2.pregame_system.market_collector import BoundedMarketCollector
+            self.market_collector=BoundedMarketCollector()
 
     def analyze(
         self,
@@ -484,7 +626,12 @@ class SavedGameAnalysisService:
         if _instant(cutoff) >= _instant(original_game["tipoff"]):
             raise ValueError("cutoff_not_pregame")
         replay = original_game.get("status") != "scheduled"
-        game = historical_game_context(original_game, cutoff) if replay else original_game
+        game = deepcopy(original_game)
+        if replay:
+            game = historical_game_context(game, cutoff)
+        _scope_roster_inputs(game, cutoff)
+        game.setdefault("background", {})["availability"] = _availability_as_of(game, cutoff)
+        self._attach_player_knowledge(game, cutoff)
         web_context = None
         research_trace = None
         search_trace = {"status": "not_requested", "categories": []}
@@ -518,6 +665,8 @@ class SavedGameAnalysisService:
                     "tool_trace": research_trace,
                 }
             except Exception as exc:
+                if self.require_research_success:
+                    raise
                 try:
                     searcher = self.searcher or PregameWebSearch()
                     web_context = searcher.search(
@@ -540,18 +689,55 @@ class SavedGameAnalysisService:
                         "error_type": type(fallback_exc).__name__,
                         "research_error_type": type(exc).__name__,
                     }
+        if game.get("registered_game") and not replay and allow_lookup:
+            # Research started with a publication as-of bound; acquisition itself is later.
+            # Freeze the actual acquired input, never backdate captured_at to requested_at.
+            search_trace["research_requested_cutoff"] = cutoff
+            cutoff = now()
+            search_trace["input_cutoff_semantics"] = "actual post-research input freeze; publication searched as of request"
+        minimum = (web_context or {}).get("minimum_research")
+        if game.get("registered_game") and minimum is not None:
+            if not minimum.get("sufficient"):
+                raise ValueError("research_minimum_not_met:" + json.dumps(minimum.get("failure_detail"), ensure_ascii=False))
+            # Real capture is not backdated. Validate it against the acquired
+            # input cutoff; publication is additionally bounded by requested cutoff.
+            for record in (web_context or {}).get("records", []):
+                if record.get("eligible_for_fact"):
+                    captured = _strict_source_instant(record.get("captured_at"))
+                    if captured is None or captured > _instant(cutoff):
+                        raise ValueError("research_capture_outside_frozen_cutoff")
+        elif self.require_research_success and (not research_trace or research_trace.get("status") != "success"
+                or not any(r.get("eligible_for_fact") and r.get("temporal_scope") == "current_pregame"
+                           for r in (web_context or {}).get("records", []))):
+            raise ValueError("research_minimum_not_met:missing_verified_claim_package")
         web_context = merge_cached_public_market(web_context, game, cutoff=cutoff)
         if select_public_market_reference(web_context):
             search_trace["public_market_reference"] = "available"
         evidence, sources, missing = _evidence(game, cutoff, web_context)
+        if minimum:
+            # UNKNOWN is metadata, not an availability/lineup fact.
+            evidence.append({"id": content_hash(minimum), "kind": "Context", "section": "research_status",
+                             "game_id": game_id, "cutoff": cutoff, "value": clean(minimum)})
+            # Existing forecasting projection already carries missing_data.
+            # Keep UNKNOWN visible without modifying its numeric methodology.
+            missing.extend({"section": "research." + kind, "status": "UNKNOWN",
+                "reason": status["unknown_reason"], "last_checked": status["last_checked"],
+                "sources_checked": status["sources_checked"]}
+                for kind, status in minimum["coverage"].items()
+                if status["status"] == "UNKNOWN" and kind != "market_reference")
         public_market = select_public_market_reference(web_context)
+        players=[p for t in (game.get('roster_context')or{}).get('teams',{}).values()
+            for p in (t.get('official_team_roster')or t.get('current_team_roster')or t.get('roster')or{}).get('players',[])]
+        if players and self.display_name_store is not None:
+            game['player_display_names']=self.display_name_store.ensure(players)['names']
         matchup = f"{game['away']['name_zh']}对{game['home']['name_zh']}"
         context = build_analyst_context(
             prediction_layers(game),
             evidence,
             missing_data=missing,
             game={"game_id": game_id, "home": game["home"], "away": game["away"],
-                  "scheduled_tipoff": game.get("tipoff"), "cutoff": cutoff},
+                  "scheduled_tipoff": game.get("tipoff"), "cutoff": cutoff,
+                  **{key: clean(game[key]) for key in ("venue", "neutral_site", "schedule_revision", "game_type", "registered_game") if key in game}},
             analysis_request=(
                 f"生成{matchup}的第25秒赛前分析。使用本次 AnalystContext 与 objective_evidence，"
                 "生成 final_prediction，并严格遵守 ProductAnalystOutput schema、字段格式和 evidence ID 协议。"
@@ -560,7 +746,25 @@ class SavedGameAnalysisService:
         input_frozen_at = now()
         if before_writer is not None:
             before_writer()
+        if self.market_collector is not None:
+            def collect_market(game_context):
+                result=self.market_collector.collect(game_context)
+                if self.market_reference_store is not None and result.get('public_market_reference'):
+                    from v2.pregame_system.market_collector import market_game
+                    self.market_reference_store.save(market_game(game_context),result['public_market_reference'])
+                return result
+            self.analyst.market_collector=collect_market
+            self.analyst.market_guard=before_writer
         judgment, analyst_trace = self.analyst.judge(context)
+        collection=analyst_trace.get('market_collection')
+        if collection is not None:
+            search_trace['input_cutoff_semantics']='actual post-research and post-market input freeze'
+            cutoff=context.game['cutoff']
+            input_frozen_at=analyst_trace['final_input_frozen_at']
+            evidence=context.objective_evidence
+            sources.extend(s for s in collection.get('sources',[])if s['id']not in {old['id']for old in sources})
+            public_market=collection.get('public_market_reference') or public_market
+            game['public_market_reference']=public_market
         judgment_payload = judgment.model_dump()
         cited = judgment_evidence_ids(judgment_payload)
         return {
@@ -582,6 +786,8 @@ class SavedGameAnalysisService:
             "research": clean(web_context),
             "official_numeric_prediction": clean(game["relationship"]["final"]),
             "public_market_reference": public_market,
+            "market_collection": collection,
+            "spread_comparison": analyst_trace.get("spread_comparison"),
             "sources": clean(sources),
             "cited_sources": [source for source in sources if source["id"] in cited],
             "provenance": {
@@ -614,8 +820,84 @@ class SavedGameAnalysisService:
                 },
             },
             "search": search_trace,
-            "analyst_trace": analyst_trace,
+            "analyst_trace": {key: value for key, value in analyst_trace.items()
+                              if key != "spread_comparison"},
+            "publication_receipt": analyst_trace.get("publication_receipt"),
+            "editorial_projection": analyst_trace.get("editorial_projection"),
+            "editorial_material": analyst_trace.get("editorial_material"),
+            "quality_review": analyst_trace.get("quality_review"),
+            "quality_review_input_sha256": analyst_trace.get("quality_review_input_sha256"),
         }
+
+    def _attach_player_knowledge(self, game: dict[str, Any], cutoff: str) -> None:
+        """Attach compact prior-season facts without changing numerical forecasts."""
+        from v2.pregame_system.player_knowledge import PlayerKnowledgeStore
+
+        store = self.player_knowledge_store or PlayerKnowledgeStore()
+        availability = (game.get("background") or {}).get("availability") or {}
+        availability_source = availability.get("source") or {}
+        availability_provenance = {
+            "source_url": (
+                availability.get("source_url") or availability.get("url")
+                or availability_source.get("source_url") or availability_source.get("url")
+            ),
+            "source_published_at": (
+                availability.get("source_published_at") or availability.get("source_published_at_utc")
+                or availability.get("published_at") or availability_source.get("source_published_at")
+                or availability_source.get("published_at")
+            ),
+            "captured_at": (
+                availability.get("captured_at") or availability.get("captured_at_utc")
+                or availability_source.get("captured_at") or availability_source.get("captured_at_utc")
+            ),
+            "source_cutoff": (
+                availability.get("source_cutoff") or availability.get("cutoff_time_utc")
+                or availability.get("cutoff_time") or availability.get("cutoff")
+            ),
+        }
+        availability_records = []
+        if availability.get("status") == "available":
+            for record in availability.get("records") or []:
+                if not isinstance(record, dict):
+                    continue
+                enriched_record = dict(availability_provenance)
+                enriched_record.update(record)
+                availability_records.append(enriched_record)
+        try:
+            context = store.matchup_context(
+                game,
+                cutoff,
+                game.get("roster_context"),
+                availability_records=availability_records,
+            )
+        except Exception as exc:
+            context = {
+                "status": "unavailable",
+                "reason": "player_knowledge_load_failed",
+                "error_type": type(exc).__name__,
+                "season": None,
+                "cutoff": cutoff,
+                "teams": {},
+                "numeric_model_usage": False,
+            }
+        roster_context = deepcopy(game.get("roster_context") or {})
+        roster_context["player_knowledge"] = context
+        roster_context["player_knowledge_history_coverage"] = {
+            side: {
+                "status": ((context.get("teams") or {}).get(side) or {}).get("status", "unavailable"),
+                "current_roster_player_count": ((context.get("teams") or {}).get(side) or {}).get("current_roster_player_count"),
+                "matched_history_count": ((context.get("teams") or {}).get(side) or {}).get("current_roster_match_count"),
+                "unresolved_identity_count": ((context.get("teams") or {}).get(side) or {}).get("current_roster_identity_unresolved_count"),
+                "players_with_previous_season_stats": ((context.get("teams") or {}).get(side) or {}).get("players_with_previous_season_stats"),
+                "scope": "historical_player_record_match_only",
+            }
+            for side in ("away", "home")
+        }
+        for side in ("away", "home"):
+            if side in (roster_context.get("teams") or {}):
+                roster_context["teams"][side]["player_knowledge_history_coverage"] = \
+                    roster_context["player_knowledge_history_coverage"][side]
+        game["roster_context"] = roster_context
 
     @staticmethod
     def _attempt_path(path_value: Any) -> Path | None:

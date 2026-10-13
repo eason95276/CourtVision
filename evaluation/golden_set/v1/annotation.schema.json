@@ -1,0 +1,22 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "type":"object",
+  "required":["sample_id","stage","dataset_revision","golden_set_revision","rubric_revision","sampling_strata","annotator_a"],
+  "properties":{
+    "sample_id":{"type":"string"},"stage":{"enum":["pregame","postgame"]},"dataset_revision":{"type":"string"},
+    "golden_set_revision":{"type":"string"},"rubric_revision":{"type":"string"},"sampling_strata":{"type":"object"},
+    "annotator_a":{"$ref":"#/$defs/annotation"},"annotator_b":{"$ref":"#/$defs/annotation"},"adjudicated":{"$ref":"#/$defs/annotation"}
+  },
+  "additionalProperties":false,
+  "$defs":{
+    "annotation":{
+      "type":"object","required":["annotator_id","hard_gates","soft_metrics","error_tags","annotator_note"],
+      "properties":{
+        "annotator_id":{"type":"string"},"annotation_id":{"type":["string","integer"]},"created_at":{"type":"string"},
+        "hard_gates":{"type":"object","additionalProperties":{"type":"object","required":["value","evidence"],"properties":{"value":{"enum":["PASS","FAIL","NA"]},"evidence":{"type":["string","null"]}},"additionalProperties":false}},
+        "soft_metrics":{"type":"object","additionalProperties":{"type":"integer","minimum":1,"maximum":5}},
+        "error_tags":{"type":"array","items":{"type":"string"}},"annotator_note":{"type":["string","null"]}
+      },"additionalProperties":false
+    }
+  }
+}

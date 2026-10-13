@@ -90,14 +90,22 @@ def feature_row(game,cutoff,games,stats,schedule=None):
 
 
 class Predictor:
-    def __init__(self,production=None,experiment=None,runtime_root=None):
+    def __init__(self,production=None,experiment=None,runtime_root=None,*,require_production=False):
         from .runtime_assets import DEMO_ROOT, RuntimeAssetError, asset_error, verify_runtime_file
-        self.demo_context=None;self.runtime_root=None
-        if runtime_root is None and production is None:
+        from .production_runtime import configured_root, load_production, production_error
+        self.demo_context=None;self.runtime_root=None;self.runtime_asset_identity=None
+        use_production = require_production or production is not None or (runtime_root is None and configured_root() is not None)
+        if require_production and runtime_root is not None:
+            raise production_error('explicit Demo is not allowed for registered games')
+        if not use_production and runtime_root is None and production is None:
             try:production=latest('production','model.json')
             except ValueError:runtime_root=DEMO_ROOT
+            else:use_production=True
         try:
-            if runtime_root is not None:
+            if use_production:
+                (self.production,self.source_paths,self.metadata,self.games,self.stats,
+                 self.runtime_asset_identity)=load_production(production)
+            elif runtime_root is not None:
                 self.runtime_root=Path(runtime_root)
                 self.production=verify_runtime_file(self.runtime_root,'pure/model.json')
                 context_path=verify_runtime_file(self.runtime_root,'context.json')
@@ -106,8 +114,8 @@ class Predictor:
             else:
                 self.production=Path(production)
                 self.source_paths=[ROOT/'data/raw/Games.csv',ROOT/'data/raw/TeamStatistics.csv']
-            self.metadata=json.loads(self.production.read_text(encoding='utf8'))
-            for info in self.metadata['models'].values():
+            if not use_production:self.metadata=json.loads(self.production.read_text(encoding='utf8'))
+            for info in ([] if use_production else self.metadata['models'].values()):
                 path=Path(info['path'])
                 if not path.is_absolute():path=self.production.parent/path
                 if self.runtime_root:
@@ -116,12 +124,13 @@ class Predictor:
                 info['path']=str(path.resolve())
             if self.demo_context:
                 self.games=pd.DataFrame();self.stats=pd.DataFrame()
-            else:self.games,self.stats=history()
+            elif not use_production:self.games,self.stats=history()
         except RuntimeAssetError:
             raise
         except (OSError,ValueError,KeyError,TypeError) as exc:
             raise asset_error(str(exc)) from exc
         self.experiment=Path(experiment) if experiment else None
+        self.runtime_mode='DEMO' if self.demo_context is not None else 'PRODUCTION'
         self._replays={}
         self.schedule=[]
 
@@ -187,7 +196,13 @@ class Predictor:
                 'feature_version':{'adapter_sha256':digest(Path(__file__)),
                     'v2_features_sha256':digest(BASE/'features.py'),'v1_features_sha256':digest(ROOT/'src/courtvision/features.py')},
                 'source_hashes':{str(p):digest(p) for p in self.source_paths}}
+        if self.runtime_asset_identity and any(
+                inputs['source_hashes'][str(p)] != self.runtime_asset_identity['data_sources'][p.name]['sha256']
+                for p in self.source_paths):
+            raise ValueError('production_history_asset_changed_after_loading')
         inputs['feature_schema_hash']=content_hash({k:list(v) for k,v in used.items()})
+        inputs['runtime_mode']=self.runtime_mode
+        inputs['runtime_asset_identity']=self.runtime_asset_identity
         snapshot={'snapshot_id':None,'purpose':'audit_eval','official_prediction':False,'cutoff':cutoff,'generated_at':generated,
           'historical_replay':replay,'originally_captured_forecast':False if replay else True,
           'model_version':meta['version'],'training_cutoff':meta['training_cutoff'],
@@ -197,6 +212,7 @@ class Predictor:
           'generation_context':{'availability_adjustment':None,'long_absence_second_discount':False,
               'future_scheduled_load_used_without_future_results':any(audit[s].get('scheduled_load_game_ids') for s in ['home','away'])},
           'historical_source_semantics':'retrospectively acquired boxscores; dates before cutoff ET date; before noon also withhold yesterday; no original ingestion-time or per-row publication-time proof'}
+        snapshot.update(runtime_mode=self.runtime_mode,runtime_asset_identity=self.runtime_asset_identity)
         if self.demo_context:
             snapshot.update(demo_runtime=True,originally_captured_forecast=False,purpose='offline_demo',
                 historical_source_semantics='frozen real pregame features; simulated demo clock; never an official publication')

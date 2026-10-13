@@ -11,10 +11,15 @@ from courtvision.data import load_games, load_team_statistics
 from courtvision.features import build_game_dataset, add_derived_team_stats
 
 
-def history():
-    games = load_games(ROOT/'data/raw/Games.csv')
+def history(games_path=None, stats_path=None):
+    if games_path is None or stats_path is None:
+        from .production_runtime import configured_root
+        root = configured_root() or ROOT
+        games_path = games_path or root/'data/raw/Games.csv'
+        stats_path = stats_path or root/'data/raw/TeamStatistics.csv'
+    games = load_games(games_path)
     keys={(r.game_id,int(t)) for r in games.itertuples() for t in [r.home_team_id,r.away_team_id]}
-    stats = load_team_statistics(ROOT/'data/raw/TeamStatistics.csv', eligible_game_ids=set(games.game_id),eligible_team_keys=keys)
+    stats = load_team_statistics(stats_path, eligible_game_ids=set(games.game_id),eligible_team_keys=keys)
     # A date-only cutoff is intentionally conservative; V1's shift is equivalent
     # only if no team plays twice on a calendar date.
     if stats.assign(day=stats.game_date.dt.normalize()).duplicated(['team_id','day']).any():
