@@ -39,6 +39,10 @@ still need private assets; static display has no such dependency.
 Screenshots: `docs/images/` (actual browser captures). Public HTTPS deployment requires
 its own final check, recorded separately in the final release receipt.
 
+First GitHub build stopped at contract test collection because the minimal CI
+dependency list omitted Pydantic. Pydantic2 was added explicitly; no production
+model/schema behavior or test expectation was changed. The failed run is retained.
+
 ## Source protections
 
 Original published5 Prediction and7 Postgame payloads are not rewritten. Public
