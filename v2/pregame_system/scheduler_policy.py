@@ -29,6 +29,12 @@ def normalized_policy(value=None):
             raise VersionStoreError("explicit_preheat_reason_and_48_72_hours_required")
         if result["preheat_start"]:
             _instant(result["preheat_start"], "preheat_start")
+    if value.get('lifecycle')=='early-final-v1':
+        requested=value.get('early_requested_at')
+        _instant(requested,'early_requested_at')
+        result.update(lifecycle='early-final-v1',early_requested_at=requested,
+            prefer_off_peak=value.get('prefer_off_peak',True),price_holidays=value.get('price_holidays',[]))
+        if not isinstance(result['prefer_off_peak'],bool):raise VersionStoreError('off_peak_flag_invalid')
     result["policy_identity"] = POLICY_VERSION + ":" + content_hash(result)[:16]
     return result
 
@@ -36,6 +42,10 @@ def normalized_policy(value=None):
 def window_start(game, policy):
     tip = _instant(game.get("tipoff") or game["scheduled_tipoff"], "scheduled_tipoff")
     normal = datetime.combine(tip.astimezone(CHINA).date() - timedelta(days=1), time(), CHINA)
+    if policy.get('lifecycle')=='early-final-v1':
+        start=_instant(policy['early_requested_at'],'early_requested_at')
+        if start>=tip-timedelta(minutes=20):raise VersionStoreError('early_start_must_precede_final_window')
+        return start,normal,'two_stage_window'
     if policy["preheat_enabled"]:
         start = (_instant(policy["preheat_start"], "preheat_start") if policy["preheat_start"]
                  else tip - timedelta(hours=policy["preheat_lead_hours"]))
@@ -124,6 +134,11 @@ class SchedulerPolicyPlanner:
             window_start(game, policy)
             old = normalized_policy(json.loads(state["policy_config_json"]))
             if old != policy or not policy["report_enabled"]:
+                if policy.get('lifecycle')=='early-final-v1':
+                    for prior in db.execute("SELECT task_id,status,last_error,attempt_count,metadata_json FROM generation_tasks WHERE game_id=? AND policy_version=? AND status IN ('pending','failed','running')",(game_id,POLICY_VERSION)).fetchall():
+                        metadata=json.loads(prior['metadata_json'])
+                        metadata.setdefault('policy_transition_history',[]).append({'at':_utc(at),'previous_status':prior['status'],'previous_error':prior['last_error'],'attempt_count':prior['attempt_count']})
+                        db.execute('UPDATE generation_tasks SET metadata_json=? WHERE task_id=?',(_json(metadata),prior['task_id']))
                 db.execute("""UPDATE generation_tasks SET status='cancelled',last_error='policy_configuration_changed',
                     finished_at=?,owner_token=NULL,lease_until=NULL WHERE game_id=? AND policy_version=?
                     AND status IN ('pending','failed','running')""", (_utc(at), game_id, POLICY_VERSION))
@@ -147,6 +162,9 @@ class SchedulerPolicyPlanner:
             tip = _instant(game["tipoff"], "scheduled_tipoff")
             if state["locked_at"] or at >= tip or game.get("status") != "scheduled" or registered.get("generation_hold_reason") or not policy["report_enabled"]:
                 return []
+            if policy.get('lifecycle')=='early-final-v1':
+                from .two_stage_lifecycle import plan
+                return plan(self,db,game,state,policy,at)
             start, normal_start, kind = window_start(game, policy)
             if at < start and not policy["preheat_enabled"]:
                 return []
@@ -193,6 +211,8 @@ class SchedulerPolicyPlanner:
         planned = self.plan_game(game)
         if not planned:
             return {"status": "outside_report_window", "task": None}
+        if (game.get('policy_config')or{}).get('lifecycle')=='early-final-v1':
+            return {'status':'deferred_to_final','task':next(task for task in planned if task['stage']=='FINAL_PREGAME')}
         tip = _instant(game["tipoff"], "scheduled_tipoff")
         with self.tasks.transaction() as db:
             state = self.tasks.versions._ensure_state(db, game_identity(game))

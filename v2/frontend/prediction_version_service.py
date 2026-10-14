@@ -25,6 +25,8 @@ class PredictionVersionService:
         task_store: GenerationTaskStore | None = None,
         input_preparer: Callable[..., dict[str, Any]] | None = None,
         pre_generation_preparer: Callable[[dict[str, Any], str], dict[str, Any]] | None = None,
+        final_readiness_collector=None,
+        final_publish_guard=None,
     ):
         self.store = store or PredictionVersionStore(clock=clock)
         self.clock = clock or self.store.clock
@@ -33,6 +35,8 @@ class PredictionVersionService:
         self.tasks = task_store or GenerationTaskStore(self.store)
         self.input_preparer = input_preparer
         self.pre_generation_preparer = pre_generation_preparer
+        self.final_readiness_collector=final_readiness_collector
+        self.final_publish_guard=final_publish_guard
 
     def selected(self, game: dict[str, Any]) -> dict[str, Any]:
         selection = self.store.select_current(game)
@@ -65,6 +69,13 @@ class PredictionVersionService:
             raise VersionStoreError("schedule_revision_changed")
         if game.get("game_type", registered["game_type"]) != registered["game_type"]:
             raise VersionStoreError("registered_game_type_changed")
+        from v2.pregame_system.two_stage_lifecycle import readiness_for_task
+        readiness=readiness_for_task(self.store,task,self.final_readiness_collector)
+        if readiness is not None and not readiness['ready']:
+            if readiness.get('next_check_at'):
+                with self.tasks.transaction()as db:
+                    db.execute("UPDATE generation_tasks SET next_attempt_at=?,last_error='waiting_final_ready' WHERE task_id=? AND status IN ('pending','failed')",(readiness['next_check_at'],task_id))
+            return self._selection_reply(self.selected(game),update_status='waiting_final_ready')
         claim = self.tasks.claim(task_id)
         if claim is None:
             task = self.tasks.get_task(task_id)
@@ -87,6 +98,15 @@ class PredictionVersionService:
 
     def _generate_version(self, data: dict[str, Any], game_id: str, claim: dict[str, Any]) -> dict[str, Any]:
         game = next(item for item in data["games"] if item["id"] == game_id)
+        incremental=claim['stage']=='FINAL_PREGAME'and json.loads(claim['metadata_json']).get('lifecycle')=='early-final-v1'
+        baseline=readiness=None
+        if incremental:
+            from v2.pregame_system.two_stage_lifecycle import readiness_for_task
+            readiness=readiness_for_task(self.store,claim,self.final_readiness_collector)
+            if not readiness or not readiness['ready']:raise VersionStoreError('final_not_ready')
+            with self.store.connect()as db:
+                row=db.execute('SELECT payload_json,payload_sha256 FROM prediction_versions WHERE version_id=?',(readiness['baseline_version_id'],)).fetchone()
+            baseline=json.loads(row['payload_json']);baseline.update(version_id=readiness['baseline_version_id'],payload_sha256=row['payload_sha256'])
         if game.get("game_type") is None:
             registered = self.tasks.registered_game(game_id)
             data = {**data, "games": [
@@ -100,11 +120,11 @@ class PredictionVersionService:
         # Scheduler production entrypoints; history-only Player Knowledge is
         # never a replacement for this proof.
         self.tasks.assert_claim(claim)
-        if self.pre_generation_preparer is not None:
+        if self.pre_generation_preparer is not None and not incremental:
             data = self.pre_generation_preparer(data, game_id)
             game = next(item for item in data["games"] if item["id"] == game_id)
         injuries = None
-        if self.service_factory is SavedGameAnalysisService:
+        if self.service_factory is SavedGameAnalysisService and not incremental:
             from .official_injury_reports import OfficialInjuryReportStore
             injuries = OfficialInjuryReportStore(self.store.path, clock=self.clock)
             try:
@@ -117,9 +137,9 @@ class PredictionVersionService:
         self.tasks.assert_claim(claim)
         if request["schedule_revision"] != claim["schedule_revision"]:
             raise VersionStoreError("schedule_revision_changed")
-        if self.input_preparer is not None:
+        if self.input_preparer is not None and not incremental:
             data = self.input_preparer(data, game_id, cutoff=request["requested_at"])
-        elif self.service_factory is SavedGameAnalysisService:
+        elif self.service_factory is SavedGameAnalysisService and not incremental:
             from .generation_input import prepare_generation_data
             data = prepare_generation_data(data, game_id, cutoff=request["requested_at"])
         game = next(item for item in data["games"] if item["id"] == game_id)
@@ -164,12 +184,20 @@ class PredictionVersionService:
             self.tasks.assert_claim(claim)
         before_writer()
         try:
-            analysis = service.analyze(
-                game_id,
-                allow_lookup=True,
-                cutoff=request["requested_at"],
-                before_writer=before_writer,
-            )
+            from v2.pregame_system.cost_ledger import production_scope
+            with production_scope(self.store.path,game_id,claim['stage'],request_id+':attempt-'+str(claim['attempt_count']),
+                                  holidays=json.loads(claim['metadata_json']).get('policy',{}).get('price_holidays',()),retry=max(0,claim['attempt_count']-1)):
+                if incremental:
+                    analysis=service.analyze_final(baseline,readiness,cutoff=request['requested_at'],before_writer=before_writer)
+                else:
+                    analysis = service.analyze(
+                        game_id,
+                        allow_lookup=True,
+                        cutoff=request["requested_at"],
+                        before_writer=before_writer,
+                    )
+                from v2.pregame_system.cost_ledger import CostLedger
+                CostLedger(self.store.path).refresh_search_account()
         except VersionStoreError as exc:
             if exc.args and exc.args[0] == "pregame_generation_closed":
                 self.store.select_current(game)
@@ -214,6 +242,20 @@ class PredictionVersionService:
             },
         }
         analyst_trace = analysis.get("analyst_trace") or {}
+        if incremental:
+            payload.update({key:analysis[key]for key in ('baseline_version_id','final_delta','final_readiness','change_assessment')})
+            payload['lifecycle_audit']={'tipoff_time':game['tipoff'],'early_generated_at':baseline['generated_at'],
+                **{key:readiness.get(key)for key in ('final_window_target_at','final_window_started_at','lineup_confirmed_at','availability_confirmed_at','final_ready_at')},
+                'final_generated_at':analysis['generated_at'],'early_context_hash':baseline['context_hash'],
+                'final_delta_hash':analysis['final_delta']['delta_hash'],'early_prediction_version':baseline['version_id']}
+            if self.final_publish_guard:self.final_publish_guard(game)
+            elif isinstance(service,SavedGameAnalysisService):
+                from v2.pregame_system.final_readiness import read_http
+                eid=game_id.removeprefix('espn:')
+                latest,_=read_http('https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event='+eid)
+                header=latest.get('header',{});event=(header.get('competitions')or[{}])[0]
+                if str(header.get('id'))!=eid or event.get('status',{}).get('type',{}).get('state')!='pre':
+                    raise VersionStoreError('pregame_generation_closed')
         for key in ("publication_receipt", "editorial_projection", "editorial_material", "quality_review",
                     "quality_review_input_sha256"):
             value = analysis.get(key)

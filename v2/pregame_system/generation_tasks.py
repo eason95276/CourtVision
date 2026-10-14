@@ -140,7 +140,7 @@ class GenerationTaskStore:
                 raise VersionStoreError("schedule_revision_changed")
             if state["registered_game_json"]:
                 previous = json.loads(state["registered_game_json"])
-                if any(key in game and game[key] != previous.get(key) for key in ("venue", "neutral_site")):
+                if any(key in game and previous.get(key) is not None and game[key] != previous[key] for key in ("venue", "neutral_site")):
                     raise VersionStoreError("schedule_changed")
                 normalized = {**previous, **normalized}
                 prior_type = previous["game_type"]

@@ -495,7 +495,7 @@ def build_analyst_context(
         None,
     )
     core = {
-        "game": clean({k: game[k] for k in ("game_id", "home", "away", "home_team_id", "away_team_id", "date", "tipoff", "scheduled_tipoff", "cutoff", "venue", "neutral_site", "game_type", "schedule_revision", "registered_game") if k in game}) if game else None,
+        "game": clean({k: game[k] for k in ("game_id", "home", "away", "home_team_id", "away_team_id", "date", "tipoff", "scheduled_tipoff", "cutoff", "venue", "neutral_site", "game_type", "schedule_revision", "registered_game", "season_event") if k in game}) if game else None,
         "analysis_request": analysis_request[:500] if analysis_request else None,
         "roster_context": roster_context,
         "matchup_history": matchup_history,

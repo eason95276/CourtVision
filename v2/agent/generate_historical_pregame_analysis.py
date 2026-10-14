@@ -1248,7 +1248,7 @@ def _safe_raw_response_evidence(raw_response: bytes, api_key: str) -> dict:
     }
 
 
-def request_deepseek(
+def _request_deepseek_impl(
     messages: list[dict[str, str]],
     api_key: str,
     model: str,
@@ -1362,6 +1362,15 @@ def request_deepseek(
         key: response_data[key] for key in ("id", "model", "created", "system_fingerprint")
         if isinstance(response_data.get(key), (str, int))
     })
+
+
+def request_deepseek(messages, api_key, model, max_tokens,
+                     timeout_seconds=DEFAULT_TIMEOUT_SECONDS, opener=None):
+    # Dormant without an explicitly scoped production run. Historical Evaluation
+    # receives the original parser/result and never gains billing side effects.
+    from v2.pregame_system.cost_ledger import metered_deepseek
+    return metered_deepseek(lambda observed_opener: _request_deepseek_impl(
+        messages, api_key, model, max_tokens, timeout_seconds, observed_opener), model, opener)
 
 
 def _finite_number(value: object, label: str) -> float:

@@ -22,7 +22,13 @@ class PublicRelease(unittest.TestCase):
             self.assertLess(datetime.fromisoformat(version['input_cutoff_at']),datetime.fromisoformat(row['game']['tipoff']))
             self.assertIsInstance(version['judgment']['analysis_article'],str)
     def test_facts_only_not_fabricated(self):
-        rows=[r for r in self.rows if r['prediction']['version'] is None];self.assertTrue(rows)
+        # Published catalog may legitimately have reports for every game.
+        # Always exercise the no-version contract with an explicit offline row.
+        from publish_game import game_projection
+        game=game_projection(self.rows[0]['game']);game.pop('prediction',None)
+        selection=public_selection({'status':'unavailable','version_id':None,'version':None,'state_revision':0},game)
+        self.assertIsNone(selection['version'])
+        rows=[r for r in self.rows if r['prediction']['version'] is None]+[{'game':game,'prediction':selection}]
         for row in rows:self.assertNotIn('prediction',row['game'])
     def test_postgame_identity(self):
         for row in self.rows:

@@ -243,14 +243,17 @@ class RuntimeTaskStore(GenerationTaskStore):
             return True
 
     def _lose_lease(self, claim, reason):
+        expired=_clock_instant(self.clock)>=_instant(claim['effective_deadline_at'],'effective_deadline_at')
+        stage='deadline_expired'if expired else'lease_failure'
+        if expired:reason='runtime_deadline_expired'
         with self._health_lock:
             event = self._lease_health.setdefault(claim["owner_token"], threading.Event())
             event.set()
         try:
             with self.transaction() as db:
-                db.execute("UPDATE scheduler_runtime_attempts SET heartbeat_health='lost',error_code=?,failure_stage='lease_failure' WHERE owner_token=? AND status='running'",
-                           (reason,claim["owner_token"]))
-            self.stop_task(claim["task_id"],reason,"lease_failure",owner_token=claim["owner_token"],status="cancelled")
+                db.execute("UPDATE scheduler_runtime_attempts SET heartbeat_health='lost',error_code=?,failure_stage=? WHERE owner_token=? AND status='running'",
+                           (reason,stage,claim["owner_token"]))
+            self.stop_task(claim["task_id"],reason,stage,owner_token=claim["owner_token"],status='expired'if expired else'cancelled')
         except sqlite3.Error:
             # Local guard stays lost; runner must treat failure to persist health as unsafe.
             pass

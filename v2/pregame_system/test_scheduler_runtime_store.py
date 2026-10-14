@@ -55,6 +55,15 @@ def test_opt_in_schema_is_additive_and_repeated_initialization_does_not_rewrite_
         assert db.execute("SELECT COUNT(*) FROM scheduler_runtime_attempts").fetchone()[0]==0
 
 
+def test_heartbeat_deadline_race_is_expired_not_ambiguous_cancelled(setup):
+    tasks,clock,game,task=setup
+    claim=tasks.claim(task['task_id']);assert claim
+    clock.at=TIP+timedelta(seconds=1)
+    tasks._lose_lease(claim,'runtime_heartbeat_lost')
+    assert tasks.get_task(task['task_id'])['status']=='expired'
+    assert tasks.get_task(task['task_id'])['last_error']=='runtime_deadline_expired'
+
+
 def test_claim_and_journal_are_atomic_with_identity_time_and_budget(setup):
     tasks,clock,g,final = setup
     clock.at += timedelta(seconds=7)

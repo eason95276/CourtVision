@@ -138,7 +138,7 @@ def build_registered_baseline(game, cutoff):
     path = new_run("registered_game_inputs") / "report.json"
     save(path, report)
     prepared = normalize_game(schedule_game, path, report, outputs=BASE / "outputs")
-    prepared.update({key: game[key] for key in ("venue", "neutral_site", "schedule_revision", "schedule_revision_source") if key in game})
+    prepared.update({key: game[key] for key in ("venue", "neutral_site", "schedule_revision", "schedule_revision_source", "season_event") if key in game})
     prepared.update(registered_game=True, game_type=game.get("game_type"), season_start=schedule_game["season_start"])
     prepared["roster_context"] = report.get("roster_context")
     from v2.pregame_system.matchup_history import (

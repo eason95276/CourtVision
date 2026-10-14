@@ -622,7 +622,9 @@ def _stat_issues_for_text(text: str, projection: dict, unit_id: str) -> list[dic
                              ("assists_per_game", "助攻"), ("minutes_per_game", "分钟")):
             if metric == "points_for_per_game" and tail.startswith("分钟"):
                 continue
-            if metric == "points_for_per_game" and (not re.search(r"场均|得分|points", prefix, re.I)
+            historical_compact = bool(re.search(r"上季|上赛季|去年|last season", text, re.I)
+                and re.match(r"\s*分\s*\d+(?:\.\d+)?\s*(?:助攻|篮板)", text[token.end():]))
+            if metric == "points_for_per_game" and (not (re.search(r"场均|得分|points", prefix, re.I) or historical_compact)
                                        or re.search(r"百分之|净胜|净负|净输|分差|总分|赢", prefix)):
                 continue
             if metric == "minutes_per_game" and not re.search(r"场均|average|avg", prefix, re.I):
@@ -648,6 +650,17 @@ def _stat_issues_for_text(text: str, projection: dict, unit_id: str) -> list[dic
         metric = _nearest_metric_for_token(text, token, labels)
         if not metric:
             continue
+        # Market quotations are external prices, not another forecast/stat.
+        # Only an explicitly market-labelled number can use the qualified quote.
+        local_prefix=text[max(0,token.start()-10):token.start()]
+        if metric=='expected_total' and re.search(r'市场|盘口|market',local_prefix,re.I):
+            market_facts=[f for f in projection.get('facts',[])if f.get('kind')=='MARKET'
+                and f.get('game_specific')and f.get('source_evidence_ids')and (f.get('value')or{}).get('source_url')]
+            if market_facts:
+                latest=max(market_facts,key=lambda f:str((f.get('value')or{}).get('observed_at')or(f.get('value')or{}).get('captured_at')or''))
+                value=(latest.get('value')or{}).get('total')
+                if isinstance(value,(int,float))and abs(_number_value(token.group())-value)<=_rounding_tolerance(token.group()):
+                    continue
         claim_type = classify_numeric_claim_type(text, token.start(), token.end(), metric, projection)
         if claim_type in {"forecast_or_game_script_estimate", "conditional_or_hypothetical_number",
                           "structural_or_count_expression", "team_identity", "other_numeric"}:
@@ -949,7 +962,7 @@ def _availability_issues_for_text(text: str, projection: dict, unit_id: str) -> 
     confirm_words = list(re.finditer(r"已确认|已经确认|官方(?:前瞻|公告)?确认|确认|确定|正式公布|officially confirmed|confirmed", text, re.I))
     explicit_confirmed = bool(starter_word and any(
         abs(item.start() - starter_word.start()) <= 40
-        and not re.search(r"(?:未|尚未|无法|不能|没有|并未|无|not|never|unconfirmed)[ ]*$",
+        and not re.search(r"(?:未|尚未|无法|不能|没有|并未|无|缺|缺少|not|never|unconfirmed)[ ]*$",
                           text[max(0, item.start()-12):item.start()], re.I)
         for item in confirm_words))
     if explicit_confirmed and names:
@@ -1050,9 +1063,9 @@ def _model_attribution_issues(text: str, unit_id: str) -> list[dict]:
 def _transaction_issues_for_text(text: str, projection: dict, unit_id: str) -> list[dict]:
     if re.search(r"如果|假如|可能|或许|传闻|没有证据|未确认", text):
         return []
-    verbs = ("被交易到", "交易至", "交易得到", "通过交易", "用", "换来", "换走",
+    verbs = ("被交易到", "交易至", "交易得到", "通过交易", "换来", "换走",
              "签下", "签约", "加盟", "引进", "离队", "裁掉", "traded", "trade", "signed", "acquired")
-    if not any(verb in text for verb in verbs):
+    if not any(verb in text for verb in verbs) and not re.search(r'用[^。！？；]{1,80}换',text):
         return []
     facts = projection.get("facts", [])
     names = set()

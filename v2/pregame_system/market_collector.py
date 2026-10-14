@@ -165,8 +165,12 @@ class BoundedMarketCollector:
             result={'status':'unavailable','reason':'market_budget_unavailable','evidence':[],'sources':[],'finished_at':now()}
         else:
             try:
+                from .cost_ledger import child_scope_environment
+                environment=None;scope=child_scope_environment()
+                if scope:environment={**os.environ,'COURTVISION_PRODUCTION_COST_SCOPE':scope}
                 process=subprocess.run([sys.executable,'-m','v2.pregame_system.market_collector',str(folder/'input.json'),str(folder/'collection')],
                     cwd=BASE.parent.parent,timeout=budget,capture_output=True,
+                    **({'env':environment}if environment is not None else{}),
                     creationflags=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0)
                 if process.returncode:raise ValueError('market_subprocess_failed')
                 result=__import__('json').loads((folder/'collection'/'result.json').read_text(encoding='utf-8'))
@@ -182,4 +186,5 @@ if __name__=='__main__':
     from .web_search import PregameWebSearch
     isolate_worker_children();load_local_env()
     game=json.loads(Path(sys.argv[1]).read_text(encoding='utf-8'))
-    MarketCollector(searcher=PregameWebSearch(),root=Path(sys.argv[2])).collect(game)
+    from .cost_ledger import inherited_scope
+    with inherited_scope():MarketCollector(searcher=PregameWebSearch(),root=Path(sys.argv[2])).collect(game)

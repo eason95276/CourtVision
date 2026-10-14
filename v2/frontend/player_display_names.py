@@ -29,7 +29,9 @@ def transliterate(players):
         {'role':'user','content':json.dumps({'players':players},ensure_ascii=False)}]
     from v2.pregame_system.storage import new_run,save
     root=new_run('player_name_translations');save(root/'request.json',{'messages':messages})
-    response=request_deepseek(messages,os.environ['DEEPSEEK_API_KEY'],'deepseek-v4-flash',3000,timeout_seconds=40)
+    from v2.pregame_system.cost_ledger import component
+    with component('Display Names'):
+        response=request_deepseek(messages,os.environ['DEEPSEEK_API_KEY'],'deepseek-v4-flash',3000,timeout_seconds=40)
     save(root/'response.json',{'raw':response.content,'usage':response.usage})
     raw=response.content.strip()
     if raw.startswith('```'):raw=re.sub(r'^```(?:json)?\s*|\s*```$','',raw)

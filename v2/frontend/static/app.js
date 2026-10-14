@@ -62,11 +62,19 @@ const text = (tag, value, className) => {
   node.textContent = playerDisplayCopy(value);
   return node;
 };
-const number = (value, digits = 1) =>
-  Number(value).toLocaleString("zh-CN", {
-    minimumFractionDigits: digits,
-    maximumFractionDigits: digits,
-  });
+const numberFormats = new Map();
+const dateFormats = new Map();
+const number = (value, digits = 1) => {
+  if (!numberFormats.has(digits)) numberFormats.set(digits, new Intl.NumberFormat("zh-CN", {
+    minimumFractionDigits: digits, maximumFractionDigits: digits,
+  }));
+  return numberFormats.get(digits).format(Number(value));
+};
+function dateTimeFormat(locale, options) {
+  const key = locale + JSON.stringify(options);
+  if (!dateFormats.has(key)) dateFormats.set(key, new Intl.DateTimeFormat(locale, options));
+  return dateFormats.get(key);
+}
 const percent = (value, digits = 1) =>
   `${number(Number(value) * 100, digits)}%`;
 
@@ -211,7 +219,7 @@ function analysisCompatible(game, payload) {
 }
 
 function chinaDateKey(value) {
-  const parts = new Intl.DateTimeFormat("en-CA", {
+  const parts = dateTimeFormat("en-CA", {
     timeZone: "Asia/Shanghai",
     year: "numeric",
     month: "2-digit",
@@ -224,7 +232,7 @@ function chinaDateKey(value) {
 }
 
 function displayDate(value, includeTime = true) {
-  return new Intl.DateTimeFormat("zh-CN", {
+  return dateTimeFormat("zh-CN", {
     timeZone: "Asia/Shanghai",
     month: "long",
     day: "numeric",
@@ -236,7 +244,7 @@ function displayDate(value, includeTime = true) {
 }
 
 function displayClock(value) {
-  return new Intl.DateTimeFormat("zh-CN", {
+  return dateTimeFormat("zh-CN", {
     timeZone: "Asia/Shanghai",
     hour: "2-digit",
     minute: "2-digit",
@@ -318,7 +326,9 @@ function logo(team, size = "card") {
   wrap.className = `team-logo-wrap ${size}`;
   const image = document.createElement("img");
   image.className = "team-logo";
-  image.src = logoSource(team);
+  const source = logoSource(team);
+  image.src = source;
+  image.decoding = "async";
   image.alt = `${team.name_zh}队徽`;
   image.width = size === "stage" ? 140 : 52;
   image.height = size === "stage" ? 140 : 52;
@@ -1799,7 +1809,7 @@ function renderContext(game, selectedVersion = null) {
 function formatCutoffForDisplay(value) {
   const timestamp = Date.parse(value || "");
   if (!Number.isFinite(timestamp)) return "未记录";
-  const formatted = new Intl.DateTimeFormat("zh-CN", {
+  const formatted = dateTimeFormat("zh-CN", {
     timeZone: "Asia/Shanghai",
     year: "numeric",
     month: "2-digit",
@@ -2009,7 +2019,9 @@ function renderDetail(game) {
   const scoreStatus = hasVisibleScore(game)
     ? `${["post", "final", "completed", "finished"].includes(game.status) ? " · 终场" : " · 当前比分"} ${scoreText(game.away.score)}-${scoreText(game.home.score)}`
     : "";
-  byId("detail-status").textContent = `${game.game_type === "preseason" ? "季前赛 · " : ""}${statusLabel(game)}${scoreStatus}`;
+  const phaseLabel = selectedVersion?.stage === "FINAL_PREGAME" ? " · FINAL PREGAME"
+    : selectedVersion?.stage === "EARLY_PREVIEW" ? " · EARLY PREVIEW" : "";
+  byId("detail-status").textContent = `${game.game_type === "preseason" ? "季前赛 · " : ""}${statusLabel(game)}${scoreStatus}${phaseLabel}`;
   byId("away-team").replaceChildren(stageTeam(game.away));
   byId("home-team").replaceChildren(stageTeam(game.home));
   renderPredictionDisplay(game);
@@ -2081,7 +2093,7 @@ function route() {
   if (raw.startsWith("#game/")) {
     const gameId = decodeURIComponent(raw.slice(6));
     const game = state.data.games.find((item) => item.id === gameId);
-    if (game) {
+    if (game && !game.public_summary) {
       if (!state.activeGame) state.homeScroll = window.scrollY;
       showView("detail");
       renderDetail(game);
@@ -2485,7 +2497,7 @@ function renderJudgment(payload) {
   const verdict = document.createElement("section");
   verdict.className = "analyst-verdict";
   verdict.append(
-    text("p", "第25秒最终预测", "verdict-label"),
+    text("p", payload.stage === "EARLY_PREVIEW" ? "第25秒 · EARLY PREVIEW" : payload.stage === "FINAL_PREGAME" ? "第25秒 · FINAL PREGAME" : "第25秒最终预测", "verdict-label"),
     text("h3", `${winner.name_zh}胜`),
     text(
       "p",
@@ -2906,6 +2918,13 @@ async function refreshScheduleWindow() {
   try {
     const next = await fetchScheduleWindow();
     if (!Array.isArray(next.games) || !Array.isArray(next.teams) || !next.schedule_window) return;
+    if (next.public_revision && next.public_revision === state.data.public_revision) return;
+    if (next.public_archive && activeId) {
+      const response = await fetch(`/api/game?game_id=${encodeURIComponent(activeId)}`, { cache: "no-store" });
+      const detail = await response.json();
+      const index = next.games.findIndex(item => item.id === activeId);
+      if (response.ok && detail.game?.id === activeId && index >= 0) next.games[index] = detail.game;
+    }
     for (const oldGame of state.data.games) {
       const replacement = next.games.find((game) => game.id === oldGame.id);
       if (replacement && (replacement.tipoff !== oldGame.tipoff ||

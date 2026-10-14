@@ -737,7 +737,7 @@ class SavedGameAnalysisService:
             missing_data=missing,
             game={"game_id": game_id, "home": game["home"], "away": game["away"],
                   "scheduled_tipoff": game.get("tipoff"), "cutoff": cutoff,
-                  **{key: clean(game[key]) for key in ("venue", "neutral_site", "schedule_revision", "game_type", "registered_game") if key in game}},
+                  **{key: clean(game[key]) for key in ("venue", "neutral_site", "schedule_revision", "game_type", "registered_game", "season_event") if key in game}},
             analysis_request=(
                 f"生成{matchup}的第25秒赛前分析。使用本次 AnalystContext 与 objective_evidence，"
                 "生成 final_prediction，并严格遵守 ProductAnalystOutput schema、字段格式和 evidence ID 协议。"
@@ -828,6 +828,13 @@ class SavedGameAnalysisService:
             "quality_review": analyst_trace.get("quality_review"),
             "quality_review_input_sha256": analyst_trace.get("quality_review_input_sha256"),
         }
+
+    def analyze_final(self,baseline,readiness,*,cutoff,before_writer=None):
+        """Reuse frozen static evidence. No Research/feature/Player Knowledge rerun."""
+        from v2.pregame_system.final_delta import run_incremental
+        root=self.analyst.root/'incremental_final'
+        return run_incremental(baseline,readiness,self.analyst,root,
+            before_writer=before_writer,client=self.analyst.forecast_client or self.analyst.client,input_cutoff=cutoff)
 
     def _attach_player_knowledge(self, game: dict[str, Any], cutoff: str) -> None:
         """Attach compact prior-season facts without changing numerical forecasts."""

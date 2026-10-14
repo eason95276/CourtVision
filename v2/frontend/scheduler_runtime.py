@@ -17,6 +17,7 @@ import sqlite3
 import threading
 import time
 import uuid
+from concurrent.futures import ThreadPoolExecutor
 from contextlib import closing
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
@@ -139,6 +140,11 @@ class PersistentScheduler:
         self.context = process_context or multiprocessing.get_context("spawn")
         self.worker_target = worker_target
         self.service_builder = service_builder
+        self.final_readiness_collector = None
+        self.readiness_pool=ThreadPoolExecutor(max_workers=2,thread_name_prefix='final-http-readiness')
+        self.readiness_jobs={}
+        self.public_pool=ThreadPoolExecutor(max_workers=1,thread_name_prefix='saved-final-publication')
+        self.public_jobs={}
         self.allowed_game_ids = None if allowed_game_ids is None else frozenset(allowed_game_ids)
         self.allowed_stages = None if allowed_stages is None else frozenset(allowed_stages)
         # Process liveness is real wall time; offline business clocks may compress
@@ -267,6 +273,11 @@ class PersistentScheduler:
                     self._event("worker_failed_before_claim",worker.task,failure_stage=category,
                                 detail={"error_type":(worker.terminal or {}).get("error_type"),"exit_code":worker.process.exitcode})
                 worker.pipe.close()
+                if (row['status']=='succeeded'and worker.task['stage']=='FINAL_PREGAME'
+                        and (worker.terminal or{}).get('version_id')and os.environ.get('COURTVISION_PUBLIC_PUBLISH_ROOT')):
+                    from .opening_publish import publish_final
+                    version_id=worker.terminal['version_id']
+                    self.public_jobs[version_id]=self.public_pool.submit(publish_final,worker.task['game_id'],version_id,database=self.service.store.path)
                 del self.active[identity]
 
     def tick(self):
@@ -277,6 +288,11 @@ class PersistentScheduler:
                 self.stop_event.set()
                 return {"status": "leader_unavailable", "dispatched": 0}
             self._reap()
+            for version_id,job in list(self.public_jobs.items()):
+                if not job.done():continue
+                try:self._event('saved_final_publication',detail=job.result())
+                except Exception as error:self._event('saved_final_publication_failed',detail={'version_id':version_id,'error_type':type(error).__name__})
+                del self.public_jobs[version_id]
             at = self._now()
             if self.last_plan_at is None or (at-self.last_plan_at).total_seconds() >= self.config.planner_interval_seconds:
                 from .pregame_scheduler import PregameScheduler
@@ -325,6 +341,26 @@ class PersistentScheduler:
                 low_busy = sum(w.task["stage"] != "FINAL_PREGAME" for w in self.active.values()) + sum(row["stage"]!="FINAL_PREGAME" for row in foreign_running)
                 if task["stage"] != "FINAL_PREGAME" and low_busy >= self.config.max_concurrency-self.config.final_reserved:
                     continue
+                from v2.pregame_system.two_stage_lifecycle import readiness_for_task
+                readiness=None
+                metadata=json.loads(task.get('metadata_json')or'{}')
+                if task['stage']=='FINAL_PREGAME'and metadata.get('lifecycle')=='early-final-v1':
+                    future=self.readiness_jobs.get(task['task_id'])
+                    if future is None:
+                        self.readiness_jobs[task['task_id']]=self.readiness_pool.submit(readiness_for_task,self.service.store,task,self.final_readiness_collector)
+                        continue
+                    if not future.done():continue
+                    try:readiness=future.result()
+                    except Exception as error:
+                        readiness={'ready':False,'next_check_at':_utc(at+timedelta(minutes=1)),
+                            'reasons':['readiness_error:'+type(error).__name__],'llm_calls':0}
+                    del self.readiness_jobs[task['task_id']]
+                if readiness is not None and not readiness['ready']:
+                    if readiness.get('next_check_at'):
+                        with self.tasks.transaction()as db:
+                            db.execute("UPDATE generation_tasks SET next_attempt_at=?,last_error='waiting_final_ready' WHERE task_id=? AND status IN ('pending','failed')",
+                                (readiness['next_check_at'],task['task_id']))
+                    continue
                 receive, send = self.context.Pipe(duplex=False)
                 process = self.context.Process(target=self.worker_target, args=(str(self.service.store.path), task["task_id"],
                     copy.deepcopy(self.runtime_data), self.config, self.run_id, send, self.service_builder, self.worker_clock),
@@ -367,6 +403,8 @@ class PersistentScheduler:
 
     def shutdown(self):
         self.stop_event.set()
+        self.readiness_pool.shutdown(wait=False,cancel_futures=True)
+        self.public_pool.shutdown(wait=False,cancel_futures=False)
         deadline = time.monotonic()+self.config.shutdown_grace_seconds
         while self.active and time.monotonic() < deadline:
             try:

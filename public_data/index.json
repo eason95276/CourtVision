@@ -2,33 +2,770 @@
   "contract_version": "courtvision-public-v1",
   "games": [
     {
+      "game_id": "espn:401909090",
+      "file": "games/espn_401909090.json",
+      "tipoff": "2026-10-21T01:30:00+00:00",
+      "version_id": "4ca2e7ba-39f1-4943-b581-9fe5159c3eed",
+      "public_sha256": "c368e96bd5a6a13b3bd2281a99eea6ab254c580823c74d4a4d5bb51e84b54376",
+      "home_record": {
+        "game": {
+          "id": "espn:401909090",
+          "status": "scheduled",
+          "tipoff": "2026-10-21T01:30:00+00:00",
+          "home": {
+            "id": 1610612759,
+            "name": "San Antonio Spurs",
+            "name_zh": "马刺",
+            "abbreviation": "SA",
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/sa.png",
+            "accent": "#C4CED4",
+            "espn_team_id": "24",
+            "score": null
+          },
+          "away": {
+            "id": 1610612760,
+            "name": "Oklahoma City Thunder",
+            "name_zh": "雷霆",
+            "abbreviation": "OKC",
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/okc.png",
+            "accent": "#007AC1",
+            "espn_team_id": "25",
+            "score": null
+          },
+          "postgame": null,
+          "game_type": "regular_season",
+          "schedule_revision": 1,
+          "registered_game": true,
+          "season": 2027,
+          "schedule_catalog_fact": true,
+          "venue": "Frost Bank Center",
+          "homepage_visible": true,
+          "public_summary": true
+        },
+        "prediction": {
+          "status": "current",
+          "game_id": "espn:401909090",
+          "version_id": "4ca2e7ba-39f1-4943-b581-9fe5159c3eed",
+          "state_revision": 9,
+          "locked_at": null,
+          "lock_reason": null,
+          "schedule_revision": 1,
+          "version": {
+            "analysis_contract_version": "two-stage-forecast-v1",
+            "base_input_hash": "dc6fa09362133daf74dfc61efb02d4a6b08ced6ac8de576effcb0bca5deb7fd6",
+            "game_id": "espn:401909090",
+            "game_identity": {
+              "away_team_id": 1610612760,
+              "game_id": "espn:401909090",
+              "home_team_id": 1610612759,
+              "scheduled_tipoff": "2026-10-21T01:30:00+00:00"
+            },
+            "generated_at": "2026-10-14T15:15:26.164887+00:00",
+            "input_cutoff_at": "2026-10-14T15:15:11.686920+00:00",
+            "published_at": "2026-10-14T15:15:26.319312+00:00",
+            "schedule_revision": 1,
+            "stage": "EARLY_PREVIEW",
+            "version_id": "4ca2e7ba-39f1-4943-b581-9fe5159c3eed",
+            "payload_sha256": "0eea56714e57e89c52f745d3b7c84a957e69ef34b2fa999471ba56a7cb5f91d1",
+            "input_snapshot": {
+              "away": {
+                "abbreviation": "OKC",
+                "accent": "#007AC1",
+                "id": 1610612760,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/okc.png",
+                "name": "Oklahoma City Thunder",
+                "name_zh": "雷霆"
+              },
+              "home": {
+                "abbreviation": "SA",
+                "accent": "#C4CED4",
+                "id": 1610612759,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/sa.png",
+                "name": "San Antonio Spurs",
+                "name_zh": "马刺"
+              },
+              "id": "espn:401909090",
+              "schedule_revision": 1,
+              "tipoff": "2026-10-21T01:30:00+00:00"
+            },
+            "judgment": {
+              "final_prediction": {
+                "evidence_ids": [
+                  "0d36afa1b538ba37d99d689a797e89e0ce6c1360289cf0d4c1e687673b06dfb6",
+                  "282e05c76c8f642c2e531b7f53b3b85a8a16de86a1443c00e517fadee1986761",
+                  "30b684d54b9c4c14ec4a8c36042e3c762c6859b25f3a7e0f2402f58140a57053",
+                  "680cc5c233653bb6bb49917bb4b920da446fca192e143639d906e58db72bf7af",
+                  "743e9c9b2e6e6e4f88582e8dc6eafdbe27e2df13214c1de0ed1deb12de091ec6",
+                  "928a08d3e8aec19941f14aecd84155d7feae00cdb0443071d9add8d7e5026c3d",
+                  "d13d52dacc3e8056c58aebc03397558156d48091f5286b5e7a2e3611c43a5186",
+                  "d86ba9bf3c62bb740bebd00e4a3c268636592dd3909a72a7fc53ca9d598d6ccb"
+                ],
+                "expected_margin": 3.0,
+                "expected_total": 224.5,
+                "win_probability": 0.58,
+                "winner_side": "home"
+              },
+              "pregame_story": {
+                "classification": "subjective_analysis",
+                "evidence_ids": [
+                  "0d36afa1b538ba37d99d689a797e89e0ce6c1360289cf0d4c1e687673b06dfb6",
+                  "282e05c76c8f642c2e531b7f53b3b85a8a16de86a1443c00e517fadee1986761",
+                  "30b684d54b9c4c14ec4a8c36042e3c762c6859b25f3a7e0f2402f58140a57053",
+                  "680cc5c233653bb6bb49917bb4b920da446fca192e143639d906e58db72bf7af",
+                  "743e9c9b2e6e6e4f88582e8dc6eafdbe27e2df13214c1de0ed1deb12de091ec6",
+                  "928a08d3e8aec19941f14aecd84155d7feae00cdb0443071d9add8d7e5026c3d"
+                ],
+                "statement": "上季西决七场，马刺靠篮板优势淘汰雷霆。如今雷霆为避第二土豪线送走乔、威金斯和多尔特，马刺则保留62胜核心并补入托拜厄斯·哈里斯。第25秒给出马刺胜、赢3分、总分224.5。",
+                "title": "揭幕战重演西决：马刺的内线优势还能压住雷霆三核吗"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": "espn:401909089",
+      "file": "games/espn_401909089.json",
+      "tipoff": "2026-10-20T23:00:00+00:00",
+      "version_id": "bb3ef799-662f-4a32-9294-bcc18620c3b5",
+      "public_sha256": "00c06839531b784176c45c36747bdb4861e8b5e7de839005079a7653c951bd45",
+      "home_record": {
+        "game": {
+          "id": "espn:401909089",
+          "status": "scheduled",
+          "tipoff": "2026-10-20T23:00:00+00:00",
+          "home": {
+            "id": 1610612752,
+            "name": "New York Knicks",
+            "name_zh": "尼克斯",
+            "abbreviation": "NY",
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png",
+            "accent": "#F58426",
+            "espn_team_id": "18",
+            "score": null
+          },
+          "away": {
+            "id": 1610612755,
+            "name": "Philadelphia 76ers",
+            "name_zh": "76人",
+            "abbreviation": "PHI",
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/phi.png",
+            "accent": "#006BB6",
+            "espn_team_id": "20",
+            "score": null
+          },
+          "postgame": null,
+          "game_type": "regular_season",
+          "schedule_revision": 1,
+          "registered_game": true,
+          "season": 2027,
+          "schedule_catalog_fact": true,
+          "venue": "Madison Square Garden",
+          "homepage_visible": true,
+          "public_summary": true
+        },
+        "prediction": {
+          "status": "current",
+          "game_id": "espn:401909089",
+          "version_id": "bb3ef799-662f-4a32-9294-bcc18620c3b5",
+          "state_revision": 11,
+          "locked_at": null,
+          "lock_reason": null,
+          "schedule_revision": 1,
+          "version": {
+            "analysis_contract_version": "two-stage-forecast-v1",
+            "base_input_hash": "4493bbd5b4b6642ef9167bfa0aabd57c87fd880791061977944be83f14bae701",
+            "game_id": "espn:401909089",
+            "game_identity": {
+              "away_team_id": 1610612755,
+              "game_id": "espn:401909089",
+              "home_team_id": 1610612752,
+              "scheduled_tipoff": "2026-10-20T23:00:00+00:00"
+            },
+            "generated_at": "2026-10-14T18:13:24.451481+00:00",
+            "input_cutoff_at": "2026-10-14T18:13:24.338227+00:00",
+            "published_at": "2026-10-14T18:13:24.505973+00:00",
+            "schedule_revision": 1,
+            "stage": "EARLY_PREVIEW",
+            "version_id": "bb3ef799-662f-4a32-9294-bcc18620c3b5",
+            "payload_sha256": "913561c4914b462273c45061207170be7f16c943bdc129a0b64b34cd79e1c26c",
+            "input_snapshot": {
+              "away": {
+                "abbreviation": "PHI",
+                "accent": "#006BB6",
+                "espn_team_id": "20",
+                "id": 1610612755,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/phi.png",
+                "name": "Philadelphia 76ers",
+                "name_zh": "76人"
+              },
+              "home": {
+                "abbreviation": "NY",
+                "accent": "#F58426",
+                "espn_team_id": "18",
+                "id": 1610612752,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png",
+                "name": "New York Knicks",
+                "name_zh": "尼克斯"
+              },
+              "id": "espn:401909089",
+              "schedule_revision": 1,
+              "tipoff": "2026-10-20T23:00:00+00:00"
+            },
+            "judgment": {
+              "final_prediction": {
+                "evidence_ids": [
+                  "0b45b1c5124ff17082ad99b05a8c887a265d2fa51a390da411bfd06e482a570a",
+                  "1eac927f54d944acdb5c0519b040206116577b0e1324239a0b84fe8f85675dbc",
+                  "3759c423c46362ef0e674e25fc8c70b9532132e75b93a7d0d584af6fd2aa3d02",
+                  "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074",
+                  "673fa7f81850d0626712978e178693707107e806ac1176689c163c7b8c2aad62",
+                  "8a7a209e9b4255146d3f6c3e17cacaa8e740a7e20bedb0f027b5882179faf81a",
+                  "ad24b2f7e0b565c8c62747574b9e5ef3a5bfae95885ba8b894a7e6a147015738",
+                  "ae133d568a64f4fa856374be193a560b4484a6392da68079b781fa029bb1857e",
+                  "b67c8293b5927e35b905aaf8896467547e0a6c994a7242cbc0bc985baa9dc919"
+                ],
+                "expected_margin": 7.5,
+                "expected_total": 226.5,
+                "win_probability": 0.72,
+                "winner_side": "home"
+              },
+              "pregame_story": {
+                "classification": "subjective_analysis",
+                "evidence_ids": [
+                  "0b45b1c5124ff17082ad99b05a8c887a265d2fa51a390da411bfd06e482a570a",
+                  "1eac927f54d944acdb5c0519b040206116577b0e1324239a0b84fe8f85675dbc",
+                  "3759c423c46362ef0e674e25fc8c70b9532132e75b93a7d0d584af6fd2aa3d02",
+                  "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074",
+                  "673fa7f81850d0626712978e178693707107e806ac1176689c163c7b8c2aad62",
+                  "8a7a209e9b4255146d3f6c3e17cacaa8e740a7e20bedb0f027b5882179faf81a"
+                ],
+                "statement": "尼克斯保留夺冠首发五人，主场揭幕战升旗；76人休赛期引入 LeBron James 与 Jaylen Brown，与 Embiid、Maxey、Edgecombe 组成全新首发，但共同比赛样本为零。第25秒看好主队赢球，却认为分差不会像天赋差距那样大。",
+                "title": "升旗夜，尼克斯的延续性对上76人的全新首发"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
       "game_id": "espn:401909088",
       "file": "games/espn_401909088.json",
       "tipoff": "2026-10-20T19:00:00+00:00",
-      "version_id": null,
-      "public_sha256": "e7f260d6e80c0e74fa3e1522e08b1928456ce23ab5f7f0ff482beeef761f4f67"
+      "version_id": "120739a9-e137-4788-958e-66825beddd31",
+      "public_sha256": "a9190d48cd7d9c4a62951a74510b71b3e5a7c5b32bb8e5edab79f164660da32f",
+      "home_record": {
+        "game": {
+          "id": "espn:401909088",
+          "status": "scheduled",
+          "tipoff": "2026-10-20T19:00:00+00:00",
+          "home": {
+            "id": 1610612765,
+            "name": "Detroit Pistons",
+            "name_zh": "活塞",
+            "abbreviation": "DET",
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/det.png",
+            "accent": "#C8102E",
+            "espn_team_id": "8",
+            "score": null
+          },
+          "away": {
+            "id": 1610612738,
+            "name": "Boston Celtics",
+            "name_zh": "凯尔特人",
+            "abbreviation": "BOS",
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/bos.png",
+            "accent": "#007A33",
+            "espn_team_id": "2",
+            "score": null
+          },
+          "postgame": null,
+          "game_type": "regular_season",
+          "schedule_revision": 1,
+          "registered_game": true,
+          "season": 2027,
+          "schedule_catalog_fact": true,
+          "venue": "Little Caesars Arena",
+          "homepage_visible": true,
+          "public_summary": true
+        },
+        "prediction": {
+          "status": "current",
+          "game_id": "espn:401909088",
+          "version_id": "120739a9-e137-4788-958e-66825beddd31",
+          "state_revision": 8,
+          "locked_at": null,
+          "lock_reason": null,
+          "schedule_revision": 1,
+          "version": {
+            "analysis_contract_version": "two-stage-forecast-v1",
+            "base_input_hash": "c83ec544596660f50dbfe76f331ab1bcd5dd3dbbf8ada7f648692b99bab7d725",
+            "game_id": "espn:401909088",
+            "game_identity": {
+              "away_team_id": 1610612738,
+              "game_id": "espn:401909088",
+              "home_team_id": 1610612765,
+              "scheduled_tipoff": "2026-10-20T19:00:00+00:00"
+            },
+            "generated_at": "2026-10-14T15:08:24.930801+00:00",
+            "input_cutoff_at": "2026-10-14T15:08:24.871001+00:00",
+            "published_at": "2026-10-14T15:08:24.981124+00:00",
+            "schedule_revision": 1,
+            "stage": "EARLY_PREVIEW",
+            "version_id": "120739a9-e137-4788-958e-66825beddd31",
+            "payload_sha256": "be55b25fd22db668ef3e60147fff34d45792850e27367ffc23fb30f2ce714d2a",
+            "input_snapshot": {
+              "away": {
+                "abbreviation": "BOS",
+                "accent": "#007A33",
+                "espn_team_id": "2",
+                "id": 1610612738,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/bos.png",
+                "name": "Boston Celtics",
+                "name_zh": "凯尔特人"
+              },
+              "home": {
+                "abbreviation": "DET",
+                "accent": "#C8102E",
+                "espn_team_id": "8",
+                "id": 1610612765,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/det.png",
+                "name": "Detroit Pistons",
+                "name_zh": "活塞"
+              },
+              "id": "espn:401909088",
+              "schedule_revision": 1,
+              "tipoff": "2026-10-20T19:00:00+00:00"
+            },
+            "judgment": {
+              "final_prediction": {
+                "evidence_ids": [
+                  "2489de7afd91f10884de2af18fcae81376c55fa57d7e03caf34ab332e0dbeba9",
+                  "65376eb3908159982e362cad2715e66c9ccbe0f4bbd44717e6dd88076cff7df9",
+                  "6e2fc5bf914c24a807bce49873f9935724b41add6bb747a6b986603c718f2f4e",
+                  "978889a53516cf73ded5fcdc497015dcb94925128cbe71c8a9796d5a714ef83d",
+                  "ab2d7bb2121b7e583e9966bc73f14332f705e88582037b590831456deebdfae9",
+                  "ad00dad5a352ed24d003e44393f69ab1b3124f4051f3e64ec4025dab5e23353f",
+                  "d35f236c0f0e71f4e81c0231b8b83a22806abf958d00f5ca16525ba874ffa4fb",
+                  "dec07a5489a4cfc51b4c6e8217e88250b28cb311c7c1a3e39db1fa406dcf4185",
+                  "f94e4882aa7921b9b0a8dc23e8c1f6fc2d407b46ae16cca26cda9df6679acc33"
+                ],
+                "expected_margin": 2.5,
+                "expected_total": 224.5,
+                "win_probability": 0.56,
+                "winner_side": "home"
+              },
+              "pregame_story": {
+                "classification": "subjective_analysis",
+                "evidence_ids": [
+                  "2489de7afd91f10884de2af18fcae81376c55fa57d7e03caf34ab332e0dbeba9",
+                  "65376eb3908159982e362cad2715e66c9ccbe0f4bbd44717e6dd88076cff7df9",
+                  "6e2fc5bf914c24a807bce49873f9935724b41add6bb747a6b986603c718f2f4e",
+                  "978889a53516cf73ded5fcdc497015dcb94925128cbe71c8a9796d5a714ef83d",
+                  "ab2d7bb2121b7e583e9966bc73f14332f705e88582037b590831456deebdfae9",
+                  "ad00dad5a352ed24d003e44393f69ab1b3124f4051f3e64ec4025dab5e23353f"
+                ],
+                "statement": "凯尔特人送走杰伦·布朗、换来保罗·乔治，塔图姆又刚从跟腱伤里回来；活塞则保留了坎宁安—杜伦—汤普森的核心框架，只在前场做了针对性调整。第25秒给出活塞主场胜、净胜2.5分、总分224.5，优势不大，但方向明确。",
+                "title": "坎宁安挡拆对上波士顿新锋线，活塞揭幕战先手在哪"
+              }
+            }
+          }
+        }
+      }
     },
     {
       "game_id": "espn:401898390",
       "file": "games/espn_401898390.json",
       "tipoff": "2026-10-07T02:00:00+00:00",
       "version_id": "ffc2947f-ae38-424c-894f-c2f05d71c3d6",
-      "public_sha256": "86616eac6a363412093ede948174ae5ab48a7c593fc6c5c50a87524b5a430843"
+      "public_sha256": "86616eac6a363412093ede948174ae5ab48a7c593fc6c5c50a87524b5a430843",
+      "home_record": {
+        "game": {
+          "away": {
+            "abbreviation": "LAL",
+            "accent": "#552583",
+            "id": 1610612747,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/lal.png",
+            "name": "Los Angeles Lakers",
+            "name_zh": "湖人",
+            "espn_team_id": "13",
+            "score": 98.0
+          },
+          "game_type": "preseason",
+          "home": {
+            "abbreviation": "GS",
+            "accent": "#1D428A",
+            "id": 1610612744,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/gs.png",
+            "name": "Golden State Warriors",
+            "name_zh": "勇士",
+            "espn_team_id": "9",
+            "score": 124.0
+          },
+          "id": "espn:401898390",
+          "registered_game": true,
+          "schedule_revision": 1,
+          "status": "final",
+          "tipoff": "2026-10-07T02:00:00+00:00",
+          "venue": "Chase Center",
+          "postgame": {
+            "status": "available",
+            "version_id": "f7764dcc-9896-4f97-9bef-0ad7225608af",
+            "score_text": "湖人 98 — 124 勇士",
+            "summary": "第25秒选对了胜方，没看准分差：赛前预计勇士赢3分，实际赢26分；总分预测只差1.5分。",
+            "prediction_summary": "勇士胜 · 胜率55% · 赛前预计赢3分，实际赢26分",
+            "market_summary": "让分方向 湖人 +4.5 · 未命中；总分 大分 · 命中"
+          },
+          "season": 2027,
+          "schedule_catalog_fact": true,
+          "homepage_visible": true,
+          "public_summary": true
+        },
+        "prediction": {
+          "status": "locked",
+          "game_id": "espn:401898390",
+          "version_id": "ffc2947f-ae38-424c-894f-c2f05d71c3d6",
+          "state_revision": 3,
+          "locked_at": "2026-10-07T04:35:37.867492+00:00",
+          "lock_reason": "game_status_started",
+          "schedule_revision": 1,
+          "version": {
+            "analysis_contract_version": "two-stage-forecast-v1",
+            "base_input_hash": "407aba74b3a4626d55654e0fa64dfc7aa2f819ce326d08a4b4cca15c02c073e3",
+            "game_id": "espn:401898390",
+            "game_identity": {
+              "away_team_id": 1610612747,
+              "game_id": "espn:401898390",
+              "home_team_id": 1610612744,
+              "scheduled_tipoff": "2026-10-07T02:00:00+00:00"
+            },
+            "generated_at": "2026-10-06T18:29:13.201270+00:00",
+            "input_cutoff_at": "2026-10-06T18:29:06.692561+00:00",
+            "published_at": "2026-10-06T18:29:13.374068+00:00",
+            "schedule_revision": 1,
+            "stage": "EARLY_PREVIEW",
+            "version_id": "ffc2947f-ae38-424c-894f-c2f05d71c3d6",
+            "payload_sha256": "8c28581d5ae0d65997de33057c074231374efeaba7b7998737d4e05b3f52c8b0",
+            "input_snapshot": {
+              "away": {
+                "abbreviation": "LAL",
+                "accent": "#552583",
+                "id": 1610612747,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/lal.png",
+                "name": "Los Angeles Lakers",
+                "name_zh": "湖人"
+              },
+              "home": {
+                "abbreviation": "GS",
+                "accent": "#1D428A",
+                "id": 1610612744,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/gs.png",
+                "name": "Golden State Warriors",
+                "name_zh": "勇士"
+              },
+              "id": "espn:401898390",
+              "schedule_revision": 1,
+              "tipoff": "2026-10-07T02:00:00+00:00"
+            },
+            "judgment": {
+              "final_prediction": {
+                "evidence_ids": [
+                  "40deb0096d1d90cb5aca26f7d4d175c44d56131f9817043c1f4c18a531b8ceac",
+                  "4edc3a8255ea2457f6e597f9d1d522996f89fdc7a84219c6df2c9aa145e8277f",
+                  "6889474241e3c046a968997ee10c2536df18d33a6e8a363a0afc94902a68e9bb",
+                  "9dc93cf8853e214011a7e291afde8a2208bcfdb96c413e0d146badc4d16490bd",
+                  "adb9af90090cb850b48b294cb256e5922bdc276f0afe0cca9feeedb8b59400f8",
+                  "c05f4b3066cce3c9b1f0d89f5f30a861fd6785335db40e9bf168aa084046cb5b",
+                  "c135c1b6c5442514311fb92db7e6bc95958de66e16272f4b2b2b063504bc7566",
+                  "f0c01aa069ff22d252cd1b2ad73d6bca9e9a5e5fcfe9d3bb1a991fb8af80f606",
+                  "f979801b7972d7a2ec2fac5ba3eacd1b953240a8307c9461788eaa6f98f40678"
+                ],
+                "expected_margin": 3.0,
+                "expected_total": 223.5,
+                "win_probability": 0.55,
+                "winner_side": "home"
+              },
+              "pregame_story": {
+                "classification": "subjective_analysis",
+                "evidence_ids": [
+                  "40deb0096d1d90cb5aca26f7d4d175c44d56131f9817043c1f4c18a531b8ceac",
+                  "4edc3a8255ea2457f6e597f9d1d522996f89fdc7a84219c6df2c9aa145e8277f",
+                  "6889474241e3c046a968997ee10c2536df18d33a6e8a363a0afc94902a68e9bb",
+                  "9dc93cf8853e214011a7e291afde8a2208bcfdb96c413e0d146badc4d16490bd",
+                  "adb9af90090cb850b48b294cb256e5922bdc276f0afe0cca9feeedb8b59400f8",
+                  "c05f4b3066cce3c9b1f0d89f5f30a861fd6785335db40e9bf168aa084046cb5b"
+                ],
+                "statement": "季前赛的胜负不重要，但勇士在Butler和Moody长期伤缺、预计季中前后才回归的背景下如何围绕库里搭出可用轮换，以及湖人带着首战大胜的节奏来访，才是这场最值得看的地方。第25秒给主队小幅优势，55%。",
+                "title": "勇士主场迎战湖人，真正的变量是库里们能打多久"
+              }
+            }
+          }
+        }
+      }
     },
     {
       "game_id": "espn:401914101",
       "file": "games/espn_401914101.json",
       "tipoff": "2026-10-05T23:00:00+00:00",
       "version_id": "8cead3c8-8f67-4c92-ac3e-e694df7b5780",
-      "public_sha256": "c93fcc017dfd26940aa981b389b71dafde1d80a92493cca4ed4b57291db3c0d0"
+      "public_sha256": "c93fcc017dfd26940aa981b389b71dafde1d80a92493cca4ed4b57291db3c0d0",
+      "home_record": {
+        "game": {
+          "away": {
+            "abbreviation": "NY",
+            "accent": "#F58426",
+            "id": 1610612752,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png",
+            "name": "New York Knicks",
+            "name_zh": "尼克斯",
+            "espn_team_id": "18",
+            "score": 97.0
+          },
+          "game_type": "preseason",
+          "home": {
+            "abbreviation": "PHI",
+            "accent": "#006BB6",
+            "id": 1610612755,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/phi.png",
+            "name": "Philadelphia 76ers",
+            "name_zh": "76人",
+            "espn_team_id": "20",
+            "score": 120.0
+          },
+          "id": "espn:401914101",
+          "registered_game": true,
+          "schedule_revision": 1,
+          "status": "final",
+          "tipoff": "2026-10-05T23:00:00+00:00",
+          "venue": "Xfinity Mobile Arena",
+          "postgame": {
+            "status": "available",
+            "version_id": "6b882a72-a320-47fb-ad69-18b439696af7",
+            "score_text": "尼克斯 97 — 120 76人",
+            "summary": "赛前判断尼克斯靠轮换深度客场小胜，但76人在恩比德、马克西、詹姆斯均未出场的情况下，凭更高的有效命中率和更低的失误率，从第二节起把比赛彻底拉开，最终120比97大胜，方向与分差双双落空。",
+            "prediction_summary": "尼克斯胜 · 胜率38% · 赛前预计赢4.5分，实际赢23分",
+            "market_summary": "让分方向 尼克斯 +1.5 · 未命中；总分 小分 · 命中"
+          },
+          "season": 2027,
+          "schedule_catalog_fact": true,
+          "homepage_visible": true,
+          "public_summary": true
+        },
+        "prediction": {
+          "status": "locked",
+          "game_id": "espn:401914101",
+          "version_id": "8cead3c8-8f67-4c92-ac3e-e694df7b5780",
+          "state_revision": 7,
+          "locked_at": "2026-10-05T23:00:04.762795+00:00",
+          "lock_reason": "scheduled_tipoff_reached",
+          "schedule_revision": 1,
+          "version": {
+            "analysis_contract_version": "two-stage-forecast-v1",
+            "base_input_hash": "c9def84a72e46e5c07653943a4231586ff25dc88578ac4a6f22ed4d78983546c",
+            "game_id": "espn:401914101",
+            "game_identity": {
+              "away_team_id": 1610612752,
+              "game_id": "espn:401914101",
+              "home_team_id": 1610612755,
+              "scheduled_tipoff": "2026-10-05T23:00:00+00:00"
+            },
+            "generated_at": "2026-10-05T17:50:54.760389+00:00",
+            "input_cutoff_at": "2026-10-05T17:50:51.900669+00:00",
+            "published_at": "2026-10-05T17:50:54.828690+00:00",
+            "schedule_revision": 1,
+            "stage": "EARLY_PREVIEW",
+            "version_id": "8cead3c8-8f67-4c92-ac3e-e694df7b5780",
+            "payload_sha256": "9ff9e7c473678f2d6c72abbcab0275b135696e480c48c6f0c4d5dcf0eb79c690",
+            "input_snapshot": {
+              "away": {
+                "abbreviation": "NY",
+                "accent": "#F58426",
+                "id": 1610612752,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png",
+                "name": "New York Knicks",
+                "name_zh": "尼克斯"
+              },
+              "home": {
+                "abbreviation": "PHI",
+                "accent": "#006BB6",
+                "id": 1610612755,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/phi.png",
+                "name": "Philadelphia 76ers",
+                "name_zh": "76人"
+              },
+              "id": "espn:401914101",
+              "schedule_revision": 1,
+              "tipoff": "2026-10-05T23:00:00+00:00"
+            },
+            "judgment": {
+              "final_prediction": {
+                "evidence_ids": [
+                  "1fded356a32cbb8ea9061249684063bb390f851224705b0091fcf5dc44f6841a",
+                  "4c8231857362a7c452a1ecaf018476840095e2fc7e31cb9e7430919d9f0c4c78",
+                  "4d066379a296fc1ae6901a25271d35dbe8e81184279ef53f34a83945202095cc",
+                  "8fcd918942a99b86a7eb777f227904a6c73f84e19556b257a55e25758129415b",
+                  "9033bef80c0863fce8c1f2b04b1609ab91585bde1fbca9f8a4094c352a5d71d9",
+                  "ad235f07ad58cee76788f9ad4b78203521bf29f08411bb699b0a548795f763d4",
+                  "adcef5e0a4458e337915d29198d71b08e78959ee5333479ab5cd3670a63a8aa7",
+                  "d361004b16ef8d4c069bb19573a81d09d0929eb030029fd4bddcf3bc4c930fc1",
+                  "dccaa5624351a9510ea657e39fef11806c47054fdf1a657e6a497a77a6fa398e"
+                ],
+                "expected_margin": 4.5,
+                "expected_total": 224.5,
+                "win_probability": 0.62,
+                "winner_side": "away"
+              },
+              "pregame_story": {
+                "classification": "subjective_analysis",
+                "evidence_ids": [
+                  "1fded356a32cbb8ea9061249684063bb390f851224705b0091fcf5dc44f6841a",
+                  "4c8231857362a7c452a1ecaf018476840095e2fc7e31cb9e7430919d9f0c4c78",
+                  "4d066379a296fc1ae6901a25271d35dbe8e81184279ef53f34a83945202095cc",
+                  "8fcd918942a99b86a7eb777f227904a6c73f84e19556b257a55e25758129415b",
+                  "9033bef80c0863fce8c1f2b04b1609ab91585bde1fbca9f8a4094c352a5d71d9",
+                  "ad235f07ad58cee76788f9ad4b78203521bf29f08411bb699b0a548795f763d4"
+                ],
+                "statement": "季前赛首战，76人可能迎来詹姆斯与布朗的首次亮相，但真正决定这场走向的，是两队核心被限制出场后，谁的轮换更站得住。我倾向尼克斯客场小胜，分差不会大。",
+                "title": "76人新拼图首秀，尼克斯的替补深度才是真考题"
+              }
+            }
+          }
+        }
+      }
     },
     {
       "game_id": "espn:401902644",
       "file": "games/espn_401902644.json",
       "tipoff": "2026-10-03T23:00:00+00:00",
       "version_id": "9e9ff064-ec82-4358-a83a-4c2d0debc91e",
-      "public_sha256": "d73ca5dcdbe7f07153ad02d262c37552958319d56a76d9804a1414a4fcc852d6"
+      "public_sha256": "d73ca5dcdbe7f07153ad02d262c37552958319d56a76d9804a1414a4fcc852d6",
+      "home_record": {
+        "game": {
+          "away": {
+            "abbreviation": "MIA",
+            "accent": "#98002E",
+            "id": 1610612748,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
+            "name": "Miami Heat",
+            "name_zh": "热火",
+            "espn_team_id": "14",
+            "score": 129.0
+          },
+          "game_type": "preseason",
+          "home": {
+            "abbreviation": "TOR",
+            "accent": "#CE1141",
+            "id": 1610612761,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/tor.png",
+            "name": "Toronto Raptors",
+            "name_zh": "猛龙",
+            "espn_team_id": "28",
+            "score": 105.0
+          },
+          "id": "espn:401902644",
+          "registered_game": true,
+          "schedule_revision": 1,
+          "status": "final",
+          "tipoff": "2026-10-03T23:00:00+00:00",
+          "venue": "Videotron Centre",
+          "postgame": {
+            "status": "available",
+            "version_id": "8409a18b-081b-4c3c-8e9e-c0379321fa82",
+            "score_text": "热火 129 — 105 猛龙",
+            "summary": "赛前最大的不确定项扬尼斯·阿德托昆博确认出战，热火首节轰下41分建立18分优势，全场有效命中率和罚球率全面占优，猛龙主场105比129落败，赛前58%胜率、3分分差的预测方向未命中。",
+            "prediction_summary": "猛龙胜 · 胜率58% · 赛前预计赢3分，实际赢24分",
+            "market_summary": null
+          },
+          "season": 2027,
+          "schedule_catalog_fact": true,
+          "homepage_visible": true,
+          "public_summary": true
+        },
+        "prediction": {
+          "status": "locked",
+          "game_id": "espn:401902644",
+          "version_id": "9e9ff064-ec82-4358-a83a-4c2d0debc91e",
+          "state_revision": 8,
+          "locked_at": "2026-10-03T23:00:26.120476+00:00",
+          "lock_reason": "scheduled_tipoff_reached",
+          "schedule_revision": 1,
+          "version": {
+            "analysis_contract_version": "two-stage-forecast-v1",
+            "base_input_hash": "4bd129f7e6de599b413bdacb3a52a177e30fc97c959bf7cb12b8d609163ae1a3",
+            "game_id": "espn:401902644",
+            "game_identity": {
+              "away_team_id": 1610612748,
+              "game_id": "espn:401902644",
+              "home_team_id": 1610612761,
+              "scheduled_tipoff": "2026-10-03T23:00:00+00:00"
+            },
+            "generated_at": "2026-10-03T19:32:01.970103+00:00",
+            "input_cutoff_at": "2026-10-03T19:31:45.635910+00:00",
+            "published_at": "2026-10-03T19:32:02.239467+00:00",
+            "schedule_revision": 1,
+            "stage": "EARLY_PREVIEW",
+            "version_id": "9e9ff064-ec82-4358-a83a-4c2d0debc91e",
+            "payload_sha256": "003bf31d7191f15cab9c7e8043364b46182f549706d33c3e24b8d83f412755d8",
+            "input_snapshot": {
+              "away": {
+                "abbreviation": "MIA",
+                "accent": "#98002E",
+                "id": 1610612748,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
+                "name": "Miami Heat",
+                "name_zh": "热火"
+              },
+              "home": {
+                "abbreviation": "TOR",
+                "accent": "#CE1141",
+                "id": 1610612761,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/tor.png",
+                "name": "Toronto Raptors",
+                "name_zh": "猛龙"
+              },
+              "id": "espn:401902644",
+              "schedule_revision": 1,
+              "tipoff": "2026-10-03T23:00:00+00:00"
+            },
+            "judgment": {
+              "final_prediction": {
+                "evidence_ids": [
+                  "3986bd746238870326a8b0e7ebb0f4e7e95bbc36191833d4741b9595f458f3e2",
+                  "4e93dc29cccaa04f5c13a275973105d5fb47f2be119fe5cc0c667f46930ad7e4",
+                  "533f140874f52f15e3be6c813d3c2d123e0b8d813be15faf946d3dcaec0432a0",
+                  "58514dfcdb519aaffd4cfd28e2d9a2848386d31d685c6e5d2c8062607a98f322",
+                  "614fcde601e9cf48c274f663a22532b8779f52c2a706f4cde61f0197e5ca9e13",
+                  "71d1ed8c5223985e86fdc693af9f81a15d70e0b1180d8de88e56582bd36797bc",
+                  "876911d6f79907b13ebe5578177156713822fad0683a105b2f02dee3bf8f4506",
+                  "b4fe50f49a2384ee5caa3aa7e66414d2ecb83b6bb0bb5e421be075cb833f9f84",
+                  "c957ff841a36b59a4339409f70b3790970ef87dd9559fe99ce1a28a72510f1a9",
+                  "e2dfaffe8c7155e9f28ed28d0045ffcc5daa3028da2cf5d11206a2e6ea4ed389",
+                  "f837855677b1d323b85281145d980022e35697083c3cffaf78eb02824bcb6f51",
+                  "f9a5669250e08583d7c8f3400f1d174ef13dde182c600ffbc142d2f67679507e"
+                ],
+                "expected_margin": 3.0,
+                "expected_total": 228.5,
+                "win_probability": 0.58,
+                "winner_side": "home"
+              },
+              "pregame_story": {
+                "classification": "subjective_analysis",
+                "evidence_ids": [
+                  "3986bd746238870326a8b0e7ebb0f4e7e95bbc36191833d4741b9595f458f3e2",
+                  "4e93dc29cccaa04f5c13a275973105d5fb47f2be119fe5cc0c667f46930ad7e4",
+                  "533f140874f52f15e3be6c813d3c2d123e0b8d813be15faf946d3dcaec0432a0",
+                  "58514dfcdb519aaffd4cfd28e2d9a2848386d31d685c6e5d2c8062607a98f322",
+                  "614fcde601e9cf48c274f663a22532b8779f52c2a706f4cde61f0197e5ca9e13",
+                  "71d1ed8c5223985e86fdc693af9f81a15d70e0b1180d8de88e56582bd36797bc"
+                ],
+                "statement": "NBA新赛季第一场季前赛在魁北克城开打，猛龙主场迎战热火。核心球员预计只打有限时间，真正值得看的是轮换边缘人和新秀能拿到多少机会。",
+                "title": "猛龙热火魁北克首战：季前赛的看点不在比分"
+              }
+            }
+          }
+        }
+      }
     }
   ],
-  "published_at": "2026-10-13T07:01:40.040927+00:00"
+  "published_at": "2026-10-14T18:13:25.846811+00:00"
 }

@@ -300,8 +300,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   document.body.classList.add("intro-playing");
   window.setTimeout(() => {
-    document.body.classList.remove("intro-playing");
     document.body.classList.add("intro-complete");
+    document.body.classList.remove("intro-playing");
     try {
       sessionStorage.setItem("25th-second.introSeen", "1");
     } catch (_) {}

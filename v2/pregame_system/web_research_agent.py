@@ -223,7 +223,20 @@ class AutonomousWebResearcher:
         if folder:
             save(folder / f"{stage}_model_request.json", {"created_at": now(), "messages": messages,
                 "tools": tools, "model": "deepseek-v4-flash", "automatic_retries": 0})
-        response = response.invoke(messages)
+        from .cost_ledger import component,begin_call,finish_call
+        billing_at=now()
+        with component('Research'):
+            billing_entry=begin_call('DeepSeek','deepseek-v4-flash',billing_at,{'research_step':stage})
+        try:
+            response = response.invoke(messages)
+        except Exception as error:
+            with component('Research'):
+                finish_call(billing_entry,model='deepseek-v4-flash',usage=None,success=False,error_type=type(error).__name__)
+            raise
+        billing_usage={**(response.usage_metadata or{}),**(response.response_metadata.get('token_usage')or{})}
+        with component('Research'):
+            finish_call(billing_entry,model=response.response_metadata.get('model_name')or'deepseek-v4-flash',
+                usage=billing_usage,success=True)
         receipt = {"received_at": now(), "latency_seconds": time.perf_counter()-start,
                    "raw": response.model_dump(mode="json"), "usage": response.usage_metadata or response.response_metadata.get("token_usage", {})}
         if folder:

@@ -754,6 +754,17 @@ def default_client(messages, schema):
                               "provider": getattr(response, "response_metadata", {})}
 
 
+def current_name_catalog(basketball):
+    """Identity protocol from verified current roster, never historical minutes."""
+    result={s:set()for s in ('home','away')}
+    for row in basketball.get('evidence',[]):
+        if row.get('section')!='roster_context':continue
+        for side,team in (row.get('value',{}).get('teams')or{}).items():
+            roster=team.get('official_team_roster')or team.get('current_team_roster')or{}
+            if side in result and roster.get('status')=='available':
+                result[side].update(p.get('name')or p.get('player_name')for p in roster.get('players',[])if p.get('name')or p.get('player_name'))
+    return {s:sorted(names)for s,names in result.items()}
+
 def _run_two_stage_impl(basketball: dict, market: dict, folder: Path, *, client=None,
                         skill_loader=None, removed_paths=(), transport_label=None, market_collector=None,
                         market_guard=None, require_analysis_core=False) -> dict:
@@ -780,6 +791,17 @@ def _run_two_stage_impl(basketball: dict, market: dict, folder: Path, *, client=
              messages_override=None):
         nonlocal calls
         request_schema = schema.model_json_schema()
+        if stage=='independent':
+            catalog=current_name_catalog(basketball)
+            if all(catalog.values()):
+                payload={**payload,'allowed_current_players_by_side':catalog}
+                props=request_schema.get('$defs',{}).get('LineupPlan',{}).get('properties',{})
+                for field in ('players','candidates'):
+                    if field in props:props[field]['items']={'type':'string','enum':sorted(set(catalog['home']+catalog['away']))}
+                definition=request_schema.get('$defs',{}).get('LineupPlan',{})
+                definition['allOf']=[{'if':{'properties':{'side':{'const':side}},'required':['side']},
+                    'then':{'properties':{field:{'items':{'type':'string','enum':catalog[side]}}
+                        for field in ('players','candidates')if field in props}}}for side in ('home','away')]
         if schema in {MarketReviewForecast, VersionedMarketReviewForecast}:
             # Keep the requested brief format stable while accepting a bounded
             # longer explanation verbatim. Numeric/evidence rules stay strict.
@@ -882,6 +904,8 @@ def _run_two_stage_impl(basketball: dict, market: dict, folder: Path, *, client=
             {"role": "system", "content": skill + "\n\n" + protocol},
             {"role": "user", "content": json.dumps(payload, ensure_ascii=False, allow_nan=False)},
         ]
+        if messages_override is None and stage=='independent'and all(current_name_catalog(basketball).values()):
+            messages[0]['content']+='\n身份输出协议：首发、候选与负荷计划中的球员，必须从allowed_current_players_by_side对应球队的当前名单逐字选择。home名单中的球员不可放入away阵容，反之亦然；历史分钟或旧交锋中的人名不证明当前归属。输出前逐人核对所属side；无法组出合法五人时使用unavailable，不替换或猜归属。'
         label = stage if correction is None else stage + "_protocol_revision"
         if correction is not None and correction_index>1:label+='_'+str(correction_index)
         if correction is not None:
@@ -899,7 +923,10 @@ def _run_two_stage_impl(basketball: dict, market: dict, folder: Path, *, client=
             "schema_repair_call": messages_override is not None,
             "automatic_retries": False})
         calls += 1
-        payload, usage = client(messages, schema)
+        from .cost_ledger import component
+        with component('Market Review' if stage.startswith('market') else 'Forecast',
+                       repair=correction is not None or 'repair' in stage,retry=max(0,correction_index-1) if correction is not None else 0):
+            payload, usage = client(messages, schema)
         save(folder / f"{label}_response.json", {"received_at": now(), "raw": payload, "usage": usage})
         if isinstance(payload, str):
             try:

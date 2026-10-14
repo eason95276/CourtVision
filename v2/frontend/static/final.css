@@ -85,6 +85,12 @@ body {
   visibility: hidden;
 }
 
+/* Removing the animation class must not reset either digit during fade-out. */
+.intro-complete .intro-number span:first-child { transform: translateY(-115%); opacity: 0; }
+.intro-complete .intro-number span:last-child { transform: translateY(0); }
+.intro-complete .brand-intro > strong,
+.intro-complete .brand-intro > p { opacity: 1; transform: translateY(-4px); }
+
 @keyframes intro-leave {
   to { transform: translateY(-115%); opacity: 0.08; }
 }
@@ -114,6 +120,24 @@ body {
   opacity: 0;
   filter: blur(110px);
   transition: opacity 600ms var(--editorial-ease), background 600ms var(--editorial-ease);
+}
+
+@media (max-width: 700px) {
+  /* Same colored glow, without rasterizing two oversized blur surfaces. */
+  .atmosphere i {
+    filter: none;
+    background: radial-gradient(ellipse, var(--glow-color) 0%, transparent 68%);
+    width: 85vw;
+    transition: opacity 600ms var(--editorial-ease);
+  }
+  .away-glow { --glow-color: var(--away-accent); }
+  .home-glow { --glow-color: var(--home-accent); }
+  #detail-view .players-section,
+  #detail-view .team-data-section,
+  #detail-view #matchup-history-section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 380px;
+  }
 }
 
 body[data-game-theme] .atmosphere i { opacity: 0.14; }

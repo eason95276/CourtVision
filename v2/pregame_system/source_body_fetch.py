@@ -78,13 +78,22 @@ def direct_fetch(url,timeout):
 
 
 def tavily_extract(url,timeout):
+    from .cost_ledger import active
     key=os.environ.get("TAVILY_API_KEY")
     if not key:raise ValueError("tavily_extract_not_configured")
     request=urllib.request.Request("https://api.tavily.com/extract",
-        data=json.dumps({"api_key":key,"urls":[url],"extract_depth":"advanced","format":"text"}).encode("utf-8"),
+        data=json.dumps({"api_key":key,"urls":[url],"extract_depth":"advanced","format":"text",
+                         **({'include_usage':True}if active()else{})}).encode("utf-8"),
         headers={"Content-Type":"application/json","User-Agent":"CourtVision-Research/2.0"},method="POST")
-    with urllib.request.urlopen(request,timeout=timeout) as response:
-        data=json.loads(response.read().decode("utf-8"))
+    from .cost_ledger import component,begin_call,finish_call
+    with component('Research Extract'):
+        entry=begin_call('Tavily',None,detail={'operation':'extract','extract_depth':'advanced','unit_price':'account_plan_not_verified'})
+        try:
+            with urllib.request.urlopen(request,timeout=timeout) as response:
+                data=json.loads(response.read().decode("utf-8"))
+        except Exception as error:
+            finish_call(entry,model=None,usage=None,success=False,error_type=type(error).__name__);raise
+        finish_call(entry,model=None,usage=data.get('usage'),success=True)
     matches=[r for r in data.get("results") or [] if r.get("url","").rstrip("/")==url.rstrip("/")]
     if not matches:raise ValueError("tavily_extract_failed:"+json.dumps(data.get("failed_results") or [],ensure_ascii=False)[:600])
     row=matches[0]
@@ -186,4 +195,6 @@ class SourceBodyFetcher:
             return {"url":url,"content":"","provider":"source-body-chain","captured_at":now(),
                     "errors":{"fetch":"all_body_providers_failed"},"fetch_attempts":attempts}
         with ThreadPoolExecutor(max_workers=min(4,max(1,len(urls)))) as pool:
-            return list(pool.map(finish,urls))
+            from contextvars import copy_context
+            jobs=[pool.submit(copy_context().run,finish,url)for url in urls]
+            return [job.result()for job in jobs]

@@ -129,6 +129,8 @@ def production_service(versions, tasks, data, report_phase):
 
     class Analyst(EvidenceBoundAnalyst):
         def judge(self, context, **kwargs):
+            if kwargs.get('_locked_forecast'):
+                report_phase('editorial',minimum_seconds=40)
             if kwargs.get("_correction"):
                 report_phase("editorial", minimum_seconds=40)
             return super().judge(context, **kwargs)

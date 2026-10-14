@@ -4,7 +4,7 @@ from pathlib import Path
 from datetime import datetime,timezone
 
 GAME_KEYS=set('id tipoff status home away venue neutral_site game_type season season_start season_phase schedule_revision registered_game schedule_catalog_fact nba_game_id background matchup_history player_display_names roster_context previous_season_team_stats official_injury_report season_form postgame technical source missing public_market_reference prediction'.split())
-VERSION_KEYS=set('analysis_contract_version base_input_hash game_id game_identity generated_at input_cutoff_at input_snapshot judgment public_market_reference published_at schedule_revision stage version_id payload_sha256 editorial_material sources evidence_index'.split())
+VERSION_KEYS=set('analysis_contract_version base_input_hash game_id game_identity generated_at input_cutoff_at input_snapshot judgment public_market_reference published_at schedule_revision stage version_id payload_sha256 editorial_material sources evidence_index baseline_version_id lifecycle_audit'.split())
 JUDGMENT_KEYS=set('analysis_article analysis_article_evidence_ids confidence core_question final_prediction game_script key_matchup_variables model_risk player_analysis pregame_story roster_analysis subjective_rationale supporting_evidence uncertainty unresolved_uncertainty watch_themes winner_lean'.split())
 PRIVATE=re.compile(r'(^|_)(token|secret|password|cookie|headers|raw|trace|traceback|artifact|path|request|task|debug|provenance|collector|local)(_|$)',re.I)
 LOCAL=re.compile(r'(?<![A-Za-z])[A-Za-z]:[\\/]|/Users/|/home/[^/]+/|file://|localhost|127\.0\.0\.1',re.I)
@@ -67,6 +67,20 @@ def public_selection(s,game):
     out['version']=v
     out['public_contract']='courtvision-public-v1'
     return out
+
+def home_record(record):
+    """Small, same-version home view; full article/context is loaded on navigation."""
+    game=choose(record['game'],{'id','tipoff','status','home','away','venue','game_type','season','schedule_revision','registered_game','schedule_catalog_fact','postgame'})
+    game.update(homepage_visible=True,public_summary=True)
+    selection=record['prediction'];version=selection.get('version')
+    slim=choose(selection,{'status','game_id','version_id','state_revision','locked_at','lock_reason','schedule_revision'})
+    if version:
+        v=choose(version,{'analysis_contract_version','base_input_hash','game_id','game_identity','generated_at','input_cutoff_at','published_at','schedule_revision','stage','version_id','payload_sha256'})
+        v['input_snapshot']=choose(version.get('input_snapshot'),{'id','home','away','tipoff','schedule_revision'})
+        v['judgment']=choose(version['judgment'],{'final_prediction','pregame_story'})
+        slim['version']=v
+    else:slim['version']=None
+    return {'game':game,'prediction':slim}
 def publish(game_id,destination,api_base='http://127.0.0.1:8625'):
     if not re.fullmatch(r'(espn|nba):\d+',game_id):raise ValueError('invalid_namespaced_game_id')
     def fetch(route):
@@ -85,7 +99,7 @@ def publish(game_id,destination,api_base='http://127.0.0.1:8625'):
     record['public_sha256']=sha(record)
     folder=Path(destination)/'games';slug=game_id.replace(':','_');save(folder/(slug+'.json'),record)
     index_path=Path(destination)/'index.json';index=read(index_path) if index_path.exists() else {'contract_version':'courtvision-public-v1','games':[]}
-    index['games']=[r for r in index['games'] if r['game_id']!=game_id]+[{'game_id':game_id,'file':'games/'+slug+'.json','tipoff':game['tipoff'],'version_id':selection.get('version_id'),'public_sha256':record['public_sha256']}]
+    index['games']=[r for r in index['games'] if r['game_id']!=game_id]+[{'game_id':game_id,'file':'games/'+slug+'.json','tipoff':game['tipoff'],'version_id':selection.get('version_id'),'public_sha256':record['public_sha256'],'home_record':home_record(record)}]
     index['games'].sort(key=lambda r:r['tipoff'],reverse=True);index['published_at']=record['publication']['exported_at'];save(index_path,index)
     print(json.dumps({'published_game':game_id,'version':selection.get('version_id'),'postgame':post.get('status'),'destination':str(destination)},ensure_ascii=True))
     return record

@@ -133,7 +133,9 @@ def call_recorded(folder, stage, messages, schema, client=None, *, max_tokens=40
         "max_tokens": max_tokens, "skill_hashes": prompt_skill_hashes(messages[0]["content"])})
     start = time.perf_counter()
     try:
-        raw, usage = client(messages, schema) if client else configured_client(messages, schema, max_tokens=max_tokens, model=model)
+        from .cost_ledger import component
+        with component(stage if stage in {'Change Assessment','Market Review'} else 'Editorial' if stage=='writer0' else 'Repair' if 'repair' in stage else 'Editorial Quality Review',repair='repair' in stage):
+            raw, usage = client(messages, schema) if client else configured_client(messages, schema, max_tokens=max_tokens, model=model)
     except Exception as exc:
         save(folder / f"{stage}_transport_failure.json", {"at": now(), "error_type": type(exc).__name__,
              "latency_seconds": time.perf_counter()-start, "automatic_retries": 0,
@@ -217,7 +219,7 @@ def draft_judgment(draft, context, numbers, projection=None):
         risks = core.get("flip_conditions") or []
         if risks:
             structured_core["model_risk"] = "；".join(
-                f"{item.get('condition')}：{item.get('judgment_effect')}" for item in risks[:2]
+                f"如果{item.get('condition')}，则{item.get('judgment_effect')}" for item in risks[:2]
             )[:500]
         matchups = []
         for item in (core.get("key_matchups") or [])[:3]:
@@ -554,6 +556,8 @@ _REPAIR_FINDING_GUIDANCE = {
         "补上投影明确提供的赛季标签，或删除精确统计。"),
     "transaction_claim_unverified": ("冻结的已采纳来源没有支持句中这笔具体交易关系。",
         "删除交易关系断言；不能从名单变化或球员身份推断交易细节。"),
+    "current_availability_unverified": ("没有本场已确认的出战/缺阵依据；长期伤病背景不等于本场官方状态。",
+        "删除确定的本场出战或长期缺阵断言。可以保留 BACKGROUND 明确支持的伤病事件本身，再作预计/条件判断；不能把受伤自动升级成已确认 OUT。"),
     "locked_forecast_text_mismatch": ("句中第25秒最终预测数字与锁定 Final 不一致。",
         "只将用户侧文字改成 projection.locked_prediction / PUBLIC_DECISION 的值；绝不修改预测对象。"),
 }

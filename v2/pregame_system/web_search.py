@@ -358,7 +358,8 @@ class PregameWebSearch:
         key = os.environ.get("TAVILY_API_KEY", "")
         if not key:
             raise ValueError("web_search_api_key_missing")
-        body = json.dumps({"api_key": key, **payload}).encode("utf-8")
+        from .cost_ledger import active
+        body = json.dumps({"api_key": key, **payload, **({'include_usage':True}if active()else{})}).encode("utf-8")
         request = urllib.request.Request(
             "https://api.tavily.com/search",
             data=body,
@@ -368,8 +369,16 @@ class PregameWebSearch:
             },
             method="POST",
         )
-        with urllib.request.urlopen(request, timeout=25) as response:
-            return json.loads(response.read().decode("utf-8"))
+        from .cost_ledger import component,begin_call,finish_call
+        with component('Research Search'):
+            entry=begin_call('Tavily',None,detail={'operation':'search','search_depth':payload.get('search_depth'),'unit_price':'account_plan_not_verified'})
+            try:
+                with urllib.request.urlopen(request, timeout=25) as response:
+                    result=json.loads(response.read().decode("utf-8"))
+            except Exception as error:
+                finish_call(entry,model=None,usage=None,success=False,error_type=type(error).__name__);raise
+            finish_call(entry,model=None,usage=result.get('usage'),success=True)
+            return result
 
     @staticmethod
     def _date(value: str | None) -> datetime | None:

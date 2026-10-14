@@ -214,6 +214,9 @@ def build_editorial_projection(context, locked_prediction, analyst_reasoning=Non
         identity["game_id"] = next((e.get("game_id") for e in evidence if e.get("game_id")), None)
     # Team home/away designation and venue are distinct facts.
     add("GAME", identity, refs("game_identity"), "/game", True)
+    event = game.get('season_event') or {}
+    if event.get('verified') is True and event.get('source_url'):
+        add('GAME', {'season_event':event}, refs('game_identity'), '/game/season_event', True)
     tipoff = game.get("scheduled_tipoff") or game.get("tipoff")
     if tipoff:
         stamp = datetime.fromisoformat(tipoff.replace("Z", "+00:00"))
