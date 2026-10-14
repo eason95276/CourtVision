@@ -231,7 +231,8 @@ def run_incremental(early,readiness,analyst,folder,*,before_writer=None,client=N
     collection=copy.deepcopy(snapshot['market_collection'])
     comparison=build_spread_comparison(context.game,collection,numbers(early),forecast['final_prediction'])
     tie=comparison.get('final',{}).get('ats_lean')=='no_edge'
-    if delta['market']['significant_move']or delta['market']['review_required']or tie:
+    review_needed=delta['market']['significant_move']or delta['market']['review_required']or tie or forecast['final_prediction']!=numbers(early)
+    if review_needed:
         value,hashes,meta=_call_update({'early_prediction':numbers(early),'updated_prediction':forecast['final_prediction'],
             'change_assessment':assessment,'market':collection.get('public_market_reference'),'market_delta':delta['market'],
             'basketball_delta':{k:v for k,v in delta.items()if k!='market'},'early_analysis_core':forecast.get('final_analysis_core'),
@@ -246,7 +247,7 @@ def run_incremental(early,readiness,analyst,folder,*,before_writer=None,client=N
     if forecast['spread_comparison'].get('final',{}).get('ats_lean')=='no_edge':raise ValueError('final_market_spread_edge_zero')
     if forecast.get('schema_version')=='two-stage-forecast-v2':
         forecast['revision_delta']={'incremental_final':True,'baseline_version_id':early['version_id'],'delta_hash':delta['delta_hash']}
-        forecast['market_provenance']={'timing_status':'observed_current_snapshot','market_signal_reviewed':delta['market']['significant_move']or tie,'original_information_overlap':'unknown'}
+        forecast['market_provenance']={'timing_status':'observed_current_snapshot','market_signal_reviewed':review_needed,'original_information_overlap':'unknown'}
     save(folder/'change_assessment.json',assessment);save(folder/'final.json',forecast)
     if before_writer:before_writer()
     judgment,trace=analyst.judge(context,_locked_forecast=forecast)

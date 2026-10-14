@@ -117,13 +117,16 @@ def test_material_lineup_update_uses_delta_not_full_research(tmp_path):
         'source_url':'https://site.api.espn.com/game','observed_at':at.isoformat()})
     def assess(messages,schema):
         payload=json.loads(messages[1]['content']);calls.append(payload)
-        assert 'market'not in payload and 'basketball_delta'in payload
-        ref=payload['allowed_evidence'][0]['id']
+        assert 'basketball_delta'in payload
+        if 'market'in payload:
+            ref=next(r for r in payload['allowed_evidence_ids']if r.startswith('final-market-'))
+        else:ref=payload['allowed_evidence'][0]['id']
         return {'prediction':{'winner_side':'home','win_probability':.6,'expected_home_margin':4.0,'expected_total':223.5},
             'rationale':'确认阵容变化后仅修正受影响的判断。','evidence_ids':[ref]},{}
     analyst=EvidenceBoundAnalyst(root=tmp_path/'writer',client=writer,forecast_client=assess,max_calls=4)
     result=run_incremental(early,{'ready':True,'snapshot':snapshot,'checked_at':at.isoformat()},analyst,tmp_path/'final',client=assess)
-    assert len(calls)==1 and result['change_assessment']['decision']=='update'
+    assert len(calls)==2 and result['change_assessment']['decision']=='update'
+    assert 'market'not in calls[0]and 'market'in calls[1]
     assert result['judgment']['final_prediction']['expected_margin']==4.0
     assert result['official_numeric_prediction']==early['official_numeric_prediction']
     assert result['search']['llm_research_calls']==0
