@@ -2620,16 +2620,20 @@ async function requestAiAnalysis(forceRefresh = false) {
     const facts = await fetchScheduleWindow();
     let freshGame = facts.games?.find((game) => game.id === gameId);
     let directSelection = null;
-    if (!freshGame) {
+    if (!freshGame || freshGame.public_summary) {
       const detailResponse = await fetch(`/api/game?game_id=${encodeURIComponent(gameId)}`, { cache: "no-store" });
       const detailPayload = await detailResponse.json();
       if (!detailResponse.ok || detailPayload.status !== "success" || detailPayload.game?.id !== gameId) {
         throw new Error("没有找到当前比赛");
       }
       freshGame = detailPayload.game;
-      freshGame.homepage_visible = false;
       directSelection = detailPayload.prediction;
-      facts.games.push(freshGame);
+      const existingSlot = facts.games.findIndex(game => game.id === gameId);
+      if (existingSlot >= 0) facts.games[existingSlot] = freshGame;
+      else {
+        freshGame.homepage_visible = false;
+        facts.games.push(freshGame);
+      }
     }
     if (state.activeGame?.id !== gameId) return;
     if (Number(freshGame.schedule_revision ?? 1) !== Number(state.activeGame.schedule_revision ?? 1)) {
