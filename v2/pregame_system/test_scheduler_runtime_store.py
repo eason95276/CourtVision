@@ -61,7 +61,8 @@ def test_heartbeat_deadline_race_is_expired_not_ambiguous_cancelled(setup):
     clock.at=TIP+timedelta(seconds=1)
     tasks._lose_lease(claim,'runtime_heartbeat_lost')
     assert tasks.get_task(task['task_id'])['status']=='expired'
-    assert tasks.get_task(task['task_id'])['last_error']=='runtime_deadline_expired'
+    assert tasks.get_task(task['task_id'])['last_error']=='pregame_generation_closed'
+    assert tasks.attempts_snapshot(task_id=task['task_id'])[0]['failure_stage']=='tipoff_crossed'
 
 
 def test_claim_and_journal_are_atomic_with_identity_time_and_budget(setup):

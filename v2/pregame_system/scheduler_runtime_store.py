@@ -142,6 +142,8 @@ class RuntimeTaskStore(GenerationTaskStore):
             expired = at >= _instant(row["effective_deadline_at"], "effective_deadline_at")
             reason = "runtime_deadline_expired" if expired else "runtime_recovery_requires_review"
             stage = "deadline_expired" if expired else "lease_failure"
+            if expired and row['stage']=='FINAL_PREGAME'and at>=_instant(row['deadline_at'],'deadline_at'):
+                reason,stage='pregame_generation_closed','tipoff_crossed'
             db.execute("""UPDATE generation_tasks SET status=?,last_error=?,finished_at=?,owner_token=NULL,
                 lease_until=NULL WHERE task_id=? AND status='running' AND owner_token=?""",
                 ("expired" if expired else "cancelled", reason, _utc(at), row["task_id"], row["owner_token"]))
@@ -246,6 +248,8 @@ class RuntimeTaskStore(GenerationTaskStore):
         expired=_clock_instant(self.clock)>=_instant(claim['effective_deadline_at'],'effective_deadline_at')
         stage='deadline_expired'if expired else'lease_failure'
         if expired:reason='runtime_deadline_expired'
+        if expired and claim['stage']=='FINAL_PREGAME'and _clock_instant(self.clock)>=_instant(claim['deadline_at'],'deadline_at'):
+            reason,stage='pregame_generation_closed','tipoff_crossed'
         with self._health_lock:
             event = self._lease_health.setdefault(claim["owner_token"], threading.Event())
             event.set()

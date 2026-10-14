@@ -254,7 +254,9 @@ class PersistentScheduler:
             row = self.tasks.get_task(identity)
             stop_at = _instant(worker.task["deadline_at"], "deadline_at") - timedelta(seconds=self.config.publish_margin_seconds)
             if worker.process.is_alive() and at >= stop_at:
-                self._stop_worker(worker, "runtime_deadline_expired", "deadline_expired")
+                crossed=worker.task['stage']=='FINAL_PREGAME'and at>=_instant(worker.task['deadline_at'],'deadline_at')
+                self._stop_worker(worker, 'pregame_generation_closed'if crossed else'runtime_deadline_expired',
+                    'tipoff_crossed'if crossed else'deadline_expired')
             elif worker.process.is_alive() and worker.owner_token and (row["status"] != "running" or row["owner_token"] != worker.owner_token):
                 if row["status"] != "succeeded":
                     self._stop_worker(worker, "generation_claim_lost", "lease_failure")
