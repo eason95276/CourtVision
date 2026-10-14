@@ -79,8 +79,13 @@ def construct_delta(early,snapshot):
     news=[r for r in snapshot.get('news',[])if r.get('eligible_for_fact')and r.get('source_url')and
           qualified_update(r)and r.get('published_at')and _instant(r['published_at'],'news_time')>_instant(early['input_cutoff_at'],'early_cutoff')]
     basketball_changed=any(r['material']for r in lineups+availability)or bool(restrictions)or bool(news)
+    from .final_readiness import important_players
+    core_names=important_players(early)
+    first_confirmation=any(r['before']=='unknown'and r['after']in {'available','active'}
+        and r['player_name']in core_names.get(r['side'],[])for r in availability)
     m=market_delta(early.get('public_market_reference'),snapshot.get('market_collection',{}).get('public_market_reference'),basketball_changed,numbers(early))
     value={'lineups':lineups,'availability':availability,'minutes_restrictions':restrictions,'reliable_news':news,
+        'new_key_availability_confirmation':first_confirmation,'requires_change_assessment':basketball_changed or first_confirmation,
         'market':m,'material_basketball_change':basketball_changed,'material_change':basketball_changed or m['significant_move'],
         'early_version_id':early['version_id'],'early_context_hash':early['context_hash']}
     value['delta_hash']=content_hash(value);return value
@@ -214,7 +219,7 @@ def run_incremental(early,readiness,analyst,folder,*,before_writer=None,client=N
     save(folder/'early_baseline.json',{'version_id':early['version_id'],'payload_sha256':early.get('payload_sha256'),'context_hash':early['context_hash'],'prediction':numbers(early)})
     save(folder/'delta.json',delta);save(folder/'final_context.json',context.model_dump())
     assessment={'decision':'retain','rationale':'新增首发和出战确认没有改变EARLY的重要篮球条件。','model_called':False}
-    if delta['material_basketball_change']:
+    if delta['requires_change_assessment']:
         value,hashes,meta=_call_update({'early_prediction':numbers(early),'early_analysis':early['judgment'].get('subjective_rationale'),
             'early_core':forecast.get('final_analysis_core'),'basketball_delta':{k:v for k,v in delta.items()if k!='market'},
             'allowed_evidence':[{k:r[k]for k in ('id','section','value')}for r in context.objective_evidence if r['id'].startswith('final-')and r['value'].get('claim_type')!='market_reference']},DeltaAssessment,folder,'Change Assessment',client)

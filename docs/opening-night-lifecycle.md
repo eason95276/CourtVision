@@ -21,6 +21,10 @@ model endpoint.
   Research. Changed basketball information can trigger a compact reassessment;
   material price signals can trigger Market Review. The existing Writer,
   factual publication checks and immutable version store remain authoritative.
+- First reliable confirmation of an important player's availability is sent to
+  Change Assessment even when the projected five names are unchanged. The
+  assessment may retain all four numbers; confirmation is not an instruction
+  to increase a probability or spread mechanically.
 - Small quote changes do not automatically rewrite predictions. Direction
   changes, crossing the existing baseline's spread/total direction, verified
   distinct-book movements, or basketball-linked changes are review signals.

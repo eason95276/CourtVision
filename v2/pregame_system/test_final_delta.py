@@ -16,6 +16,13 @@ def early_fixture():
         game_identity=snapshot['game_identity'],official_numeric_prediction=official,model_layers=copy.deepcopy(LAYERS),
         public_market_reference=copy.deepcopy(snapshot['market_collection']['public_market_reference']),sources=[],payload_sha256='a'*64,
         judgment={'final_prediction':{'winner_side':'home','win_probability':.55,'expected_margin':3.0,'expected_total':223.5,'evidence_ids':[]},'core_question':'半场持球对位','subjective_rationale':'主要观察双方半场持球与协防的相互作用。','analysis_article_evidence_ids':[]})
+    # The unchanged fixture has an explicit EARLY status baseline. A newly
+    # confirmed status is tested separately, not silently equated to no delta.
+    previous=copy.deepcopy(snapshot['availability']['records'])
+    for row in previous:row['observed_at']=context.game['cutoff']
+    early['analyst_context']['objective_evidence'].append({'id':'early-availability','section':'availability','kind':'Fact',
+        'value':{'records':previous},'cutoff':context.game['cutoff']})
+    early['analyst_context']['evidence_index']['early-availability']={'section':'availability','source_type':'Fact'}
     plan=early['editorial_material'][0]['pregame_plan'];plan.update(player_usage=[],key_matchup='半场持球对位',uncertainty=[])
     for r in plan['lineups']:r.update(basis='agent_expected',evidence_ids=['fixture-roster'],rationale='测试中的预计首发')
     return game,early,snapshot,at
@@ -54,6 +61,29 @@ def test_unverified_or_duplicate_books_not_consensus():
 def test_confirming_same_lineup_not_major_change():
     game,early,snapshot,at=early_fixture();r=construct_delta(early,snapshot)
     assert not r['material_change']and all(x['new_confirmation']for x in r['lineups'])
+
+
+def test_first_key_availability_confirmation_is_assessed_not_auto_ignored():
+    game,early,snapshot,at=early_fixture()
+    early['analyst_context']['objective_evidence']=[r for r in early['analyst_context']['objective_evidence']if r['section']!='availability']
+    delta=construct_delta(early,snapshot)
+    assert delta['new_key_availability_confirmation']and delta['requires_change_assessment']
+    assert not delta['material_basketball_change'] # Confirmation is not proof that numbers must change.
+
+
+def test_first_confirmation_can_assess_and_retain_all_numbers(tmp_path):
+    from .final_delta import numbers
+    game,early,snapshot,at=early_fixture();calls=[]
+    early['analyst_context']['objective_evidence']=[r for r in early['analyst_context']['objective_evidence']if r['section']!='availability']
+    def assess(messages,schema):
+        value=json.loads(messages[1]['content']);calls.append(value)
+        return {'prediction':numbers(early),'rationale':'确认出战与原来的可用阵容预期一致，保留数字。',
+            'evidence_ids':[value['allowed_evidence'][0]['id']]},{}
+    analyst=EvidenceBoundAnalyst(root=tmp_path/'writer',client=writer,forecast_client=assess,max_calls=4)
+    result=run_incremental(early,{'ready':True,'snapshot':snapshot,'checked_at':at.isoformat()},analyst,tmp_path/'final',client=assess)
+    assert len(calls)==1 and result['change_assessment']['decision']=='retain'
+    for field in ('winner_side','win_probability','expected_margin','expected_total'):
+        assert result['judgment']['final_prediction'][field]==early['judgment']['final_prediction'][field]
 
 def test_injury_change_or_different_starter_can_reassess():
     game,early,snapshot,at=early_fixture();snapshot['availability']['records'][0]['status']='Out'

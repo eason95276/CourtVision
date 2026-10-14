@@ -24,6 +24,11 @@ def setup(tmp_path):
         'player_usage':[],'key_matchup':'持球与协防','uncertainty':[]}
     c=payload['analyst_context'];c['roster_context']={'teams':{s:{'official_team_roster':{'status':'available','players':r['players']}}
         for s,r in snapshot['rosters'].items()}}
+    prior=copy.deepcopy(snapshot['availability']['records'])
+    for r in prior:r.update(observed_at=c['game']['cutoff'],team_id=game[r['side']]['id'],game_id=game['id'])
+    c['objective_evidence'].append({'id':'early-status-fixture','section':'availability','kind':'Fact','value':{'records':prior}})
+    c['evidence_index']['early-status-fixture']={'section':'availability','source_type':'Fact'}
+    payload['objective_evidence']=copy.deepcopy(c['objective_evidence'])
     payload['editorial_material']=[{'summary':'Explicit fixture judgment.','effect':'no_change','evidence_ids':['evidence-form'],'pregame_plan':plan}]
     payload.update(stage='EARLY_PREVIEW',policy_version='scheduler-v2',context_hash=c['context_hash'],
         model_layers={k:c[k]for k in ('pure_prediction','market_benchmark','divergence','residual_prediction','official_numeric_prediction')},
