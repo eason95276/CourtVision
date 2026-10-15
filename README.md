@@ -51,6 +51,15 @@ certification or betting-profit claim. Automatic final scheduling remains a prot
 [Representative RCA](evaluation/finalization/RCA_STORIES.md) includes identity scope,
 Decimal validation and the distinction between 15 articles and 14 qualified chains.
 
+## Offline prediction modeling experiments
+
+[LightGBM / XGBoost / ARIMA experiments](experiments/predictive_benchmark/README.md)
+include chronological model comparisons, training-only early stopping, and
+team-points walk-forward forecasting. [Executed results](experiments/predictive_benchmark/RESULTS.md)
+cover three tabular tasks and 492 team-game time-series targets. Code, fixed metadata
+and aggregate results are public; raw data and per-game outputs are not distributed.
+These are offline experiments, not production model replacements or accuracy-uplift claims.
+
 ## Run the public product: no keys or database
 
 Python 3.12+ and a browser:
@@ -81,6 +90,7 @@ The excluded baseline check needs the non-public frozen corpus; it is not a pass
 | `v2/frontend/` | Native product renderer and local server |
 | `agent/skills/` | Runtime Research, Forecasting, Editorial and Postgame principles |
 | `evaluation/` | Dataset/benchmark builders, closed-book execution, rubric, Judge, regression, tracing adapters |
+| `experiments/predictive_benchmark/` | Offline LightGBM/XGBoost comparison and ARIMA walk-forward study |
 | `public_data/` | Small sanitized real examples and schema |
 | `web/`, `scripts/` | Static adapter, build, public safety checks |
 | `.github/workflows/pages.yml` | Automatic checked Pages deployment |

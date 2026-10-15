@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+.pytest_cache/
+# Keep derived historical per-game data local until a separate public-license review.
+runs/
+tests-local.xml
