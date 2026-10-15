@@ -293,6 +293,23 @@ def build_prediction_versions_response(
                 "version_id": None, "state_revision": 0, "locked_at": None,
                 "lock_reason": None,
             })
+    if data is None:
+        # The schedule window is not a published-report index. Include saved
+        # current/locked reports outside today/tomorrow without enabling games.
+        db = service.store.connect()
+        try:
+            saved_ids = [row[0] for row in db.execute(
+                "SELECT game_id FROM game_prediction_state "
+                "WHERE current_version_id IS NOT NULL OR locked_version_id IS NOT NULL"
+            )]
+        finally:
+            db.close()
+        for saved_id in saved_ids:
+            if saved_id in selections:
+                continue
+            detail_status, detail = build_game_detail_response(saved_id, version_service=service)
+            if detail_status == 200 and detail.get("prediction", {}).get("version"):
+                selections[saved_id] = detail["prediction"]
     return 200, {"status": "success", "predictions": selections}
 
 

@@ -96,7 +96,7 @@ setupDateFilters = function () {
       continueScene(() => {
         state.selectedDate = button.dataset.date;
         setupDateFilters();
-        renderGames();
+        renderHome();
         [...byId("date-filters").children]
           .find((item) => item.dataset.date === state.selectedDate)
           ?.focus({ preventScroll: true });

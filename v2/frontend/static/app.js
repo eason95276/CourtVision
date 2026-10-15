@@ -19,6 +19,13 @@ const state = {
   currentChinaDay: null,
 };
 
+// Temporary opening-day presentation only. No report activation or generation.
+const HOME_OPENING_PREVIEW = {
+  enabled: true,
+  date: "2026-10-21",
+  gameIds: new Set(["espn:401909088", "espn:401909089", "espn:401909090"]),
+};
+
 const LOCAL_LOGO_TEAMS = new Set([
   "ATL",
   "BKN",
@@ -368,22 +375,51 @@ function setupFavoritePicker() {
   });
 }
 
+function homeCollectionOptions() {
+  if (HOME_OPENING_PREVIEW.enabled) {
+    return [
+      { key: "opening", label: "揭幕战", subtitle: "10月21日" },
+      { key: "published", label: "已发布", subtitle: "赛前 / 赛后" },
+    ];
+  }
+  // Daily navigation remains separate from this temporary first-day preview.
+  return [
+    { key: "published", label: "已发布", subtitle: "赛前 / 赛后" },
+    { key: state.todayDate, label: "今天", subtitle: displayDate(`${state.todayDate}T12:00:00+08:00`, false) },
+    { key: state.tomorrowDate, label: "明天", subtitle: displayDate(`${state.tomorrowDate}T12:00:00+08:00`, false) },
+  ];
+}
+
+function gameInHomeCollection(game, collection) {
+  const date = chinaDateKey(game.tipoff);
+  if (collection === "opening") {
+    return HOME_OPENING_PREVIEW.gameIds.has(game.id) && date === HOME_OPENING_PREVIEW.date;
+  }
+  if (collection === "published") {
+    // Only accepted published versions; no static prediction fallback or future day-two promotion.
+    const published = Boolean(state.currentAnalyses.get(game.id)?.version_id || game.postgame?.version_id);
+    return published && (!HOME_OPENING_PREVIEW.enabled || date < HOME_OPENING_PREVIEW.date);
+  }
+  return game.homepage_visible !== false && date === collection;
+}
+
 function setupDateFilters() {
   const today = state.data.schedule_window?.today || chinaDateKey(new Date());
   const tomorrow = state.data.schedule_window?.tomorrow || chinaDateKey(new Date(Date.parse(`${today}T12:00:00+08:00`) + 86400000));
   state.todayDate = today;
   state.tomorrowDate = tomorrow;
-  const dates = [today, tomorrow];
+  const options = homeCollectionOptions();
+  const dates = options.map((option) => option.key);
   state.selectedDate =
     state.selectedDate && dates.includes(state.selectedDate)
       ? state.selectedDate
-      : today;
+      : dates[0];
   const container = byId("date-filters");
   container.replaceChildren();
-  dates.forEach((date, index) => {
+  options.forEach(({ key: date, label, subtitle }) => {
     const button = document.createElement("button");
-    button.append(text("span", index === 0 ? "今天" : "明天"));
-    button.append(text("small", displayDate(`${date}T12:00:00+08:00`, false)));
+    button.append(text("span", label));
+    button.append(text("small", subtitle));
     button.className = "date-filter-button";
     button.type = "button";
     button.dataset.date = date;
@@ -391,7 +427,7 @@ function setupDateFilters() {
     button.addEventListener("click", () => {
       state.selectedDate = date;
       setupDateFilters();
-      renderGames();
+      renderHome();
       [...container.children]
         .find((item) => item.dataset.date === date)
         ?.focus({ preventScroll: true });
@@ -509,8 +545,7 @@ function renderGames() {
   const grid = byId("games-grid");
   grid.replaceChildren();
   const games = state.data.games
-    .filter((game) => game.homepage_visible !== false)
-    .filter((game) => chinaDateKey(game.tipoff) === state.selectedDate)
+    .filter((game) => gameInHomeCollection(game, state.selectedDate))
     .sort((a, b) => {
       const aFavorite =
         state.favoriteTeamId &&
@@ -531,6 +566,27 @@ function renderHome() {
   if (!state.data) return;
   setupDateFilters();
   renderGames();
+  const title = byId("home-games-title");
+  const emptyTitle = byId("games-empty").querySelector("strong");
+  const emptyCopy = byId("games-empty").querySelector("p");
+  if (state.selectedDate === "opening") {
+    if (title) title.textContent = "揭幕战首日";
+    byId("coverage-note").textContent = "2026年10月21日 · 北京时间";
+    byId("product-notice").textContent = "仅展示揭幕战第一天三场比赛；后续比赛日暂不展示。";
+    emptyTitle.textContent = "揭幕战资料暂不可用";
+    if (emptyCopy) emptyCopy.textContent = "稍后刷新查看已发布内容，不会现场生成分析。";
+    return;
+  }
+  if (state.selectedDate === "published") {
+    if (title) title.textContent = "已发布比赛";
+    byId("coverage-note").textContent = "已发布的赛前分析与赛后复盘 · 北京时间";
+    byId("product-notice").textContent = "只读取已保存的正式版本，不现场生成分析。";
+    emptyTitle.textContent = "暂无已发布比赛";
+    if (emptyCopy) emptyCopy.textContent = "正式发布的分析会保留在这里。";
+    return;
+  }
+  if (title) title.textContent = "接下来的比赛";
+  if (emptyCopy) emptyCopy.textContent = "今天和明天的赛程会分开显示；预测仅显示已正式发布的版本。";
   const window = state.data.schedule_window || {};
   const statusCopy = {
     ready: `${window.today_count || 0} 场今天 · ${window.tomorrow_count || 0} 场明天 · 北京时间`,
@@ -540,7 +596,6 @@ function renderHome() {
   };
   byId("coverage-note").textContent = statusCopy[window.status] || "赛程状态暂不可用 · 北京时间";
   byId("product-notice").textContent = "比分与赛程独立更新；预测只显示已正式发布的第25秒判断。";
-  const emptyTitle = byId("games-empty").querySelector("strong");
   if (window.status === "empty") emptyTitle.textContent = "今天与明天暂无比赛";
   else if (window.status === "stale") emptyTitle.textContent = "暂时无法确认今天或明天的赛程";
   else if (window.status === "unavailable") emptyTitle.textContent = "赛程尚未同步";
@@ -2898,11 +2953,20 @@ async function loadCurrentAnalyses() {
     const response = await fetch("/api/current-analyses", { cache: "no-store" });
     if (!response.ok) return;
     const payload = await response.json();
-    Object.entries(payload.predictions || {}).forEach(([gameId, selection]) => {
-      const game = state.data?.games.find((item) => item.id === gameId);
+    await Promise.all(Object.entries(payload.predictions || {}).map(async ([gameId, selection]) => {
+      let game = state.data?.games.find((item) => item.id === gameId);
+      if (!game && selection?.version && selection.version_id === selection.version.version_id) {
+        // A saved report can be outside today's schedule. Reuse the read-only detail endpoint.
+        try {
+          game = await loadGameById(gameId);
+          for (const team of [game.home, game.away]) {
+            if (!state.data.teams.some((item) => item.id === team.id)) state.data.teams.push(team);
+          }
+        } catch (_) { return; }
+      }
       if (!game) return;
       acceptPredictionSelection(gameId, selection);
-    });
+    }));
   } catch (_) {
     // The static demo remains usable without the local API server.
   }

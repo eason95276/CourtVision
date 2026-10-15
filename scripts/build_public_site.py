@@ -10,13 +10,6 @@ def build(output):
         if name=='app.js':
             start=text.index('const LOCAL_LOGO_TEAMS = new Set(');end=text.index('\n\nconst PLAYER_DISPLAY_NAMES',start)
             text=text[:start]+'const LOCAL_LOGO_TEAMS = new Set();'+text[end:]
-            text=text.replace('const dates = [today, tomorrow];','const dates = state.data.public_archive ? ["published"] : [today, tomorrow];')
-            text=text.replace('      : today;', '      : dates[0];')
-            text=text.replace('displayDate(`${date}T12:00:00+08:00`, false)', 'state.data.public_archive ? "赛前 / 赛后" : displayDate(`${date}T12:00:00+08:00`, false)')
-            text=text.replace('chinaDateKey(game.tipoff) === state.selectedDate','state.data.public_archive || chinaDateKey(game.tipoff) === state.selectedDate')
-            text=text.replace('index === 0 ? "今天" : "明天"','state.data.public_archive ? "已发布比赛" : (index === 0 ? "今天" : "明天")')
-            text=text.replace('byId("coverage-note").textContent = statusCopy[window.status] || "赛程状态暂不可用 · 北京时间";','byId("coverage-note").textContent = state.data.public_archive ? "已发布的真实赛前分析与赛后复盘 · 北京时间" : statusCopy[window.status];')
-            text=text.replace('byId("product-notice").textContent = "比分与赛程独立更新；预测只显示已正式发布的第25秒判断。";','byId("product-notice").textContent = state.data.public_archive ? "公开阅读站 · 内容在本地生成后发布，不现场调用AI。" : "预测只显示正式发布判断。";')
             text=text.replace('verdict.append(refresh);','if (!window.COURTVISION_PUBLIC) verdict.append(refresh);')
         if name=='final.css':text+='\n/* Public read-only release, no internal diagnostics. */\n.technical-details{display:none}\n'
         (out/name).write_text(text,encoding='utf-8')
