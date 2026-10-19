@@ -13,8 +13,9 @@
     <link rel="stylesheet" href="product.css" />
     <link rel="stylesheet" href="editorial.css" />
     <link rel="stylesheet" href="final.css" />
+    <link rel="stylesheet" href="broadcast.css" />
   </head>
-  <body>
+  <body class="broadcast-edition">
     <a class="skip-link" href="#main">跳到主要内容</a>
     <div class="brand-intro" id="brand-intro" aria-hidden="true">
       <div class="intro-number"><span>24</span><span>25</span></div>
@@ -58,7 +59,7 @@
         aria-labelledby="home-title"
       >
         <div class="home-hero">
-          <h1 id="home-title" class="sr-only">第25秒 NBA 比赛分析</h1>
+          <h1 id="home-title">每场比赛，<span>多看一秒。</span></h1>
           <div class="home-intro">
             <p>比赛日</p>
             <p id="coverage-note" class="coverage-note"></p>
@@ -107,7 +108,6 @@
           <span class="match-field match-field-home"></span>
           <span class="match-environment-court"></span>
         </div>
-        <h1 id="detail-title" class="sr-only">比赛详情</h1>
         <a class="back-link" href="#home" id="back-home">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="m14.5 5-7 7 7 7" />
@@ -119,10 +119,34 @@
           <div class="match-meta">
             <span id="detail-time"></span><span id="detail-status"></span
             ><span id="prediction-updated" hidden></span>
+            <span id="tipoff-countdown" class="tipoff-countdown" hidden></span>
           </div>
-          <div class="matchup-stage">
-            <div class="team-stage" id="away-team"></div>
-            <div class="prediction-focus">
+          <div class="cover-grid">
+            <div class="cover-copy">
+              <p class="cover-eyebrow" id="cover-eyebrow">本场焦点</p>
+              <h1 id="detail-title" class="cover-headline"></h1>
+              <p id="cover-dek" class="cover-dek"></p>
+              <button id="cover-dek-toggle" class="cover-dek-toggle" type="button" aria-controls="cover-dek" aria-expanded="false" hidden>展开导读</button>
+              <button class="ai-action" id="ai-analysis" type="button">
+                <span class="analyst-symbol" aria-hidden="true">24 → 25</span>
+                <span><strong>阅读第25秒分析</strong><small>进入本场完整分析</small></span>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg>
+              </button>
+            </div>
+            <div class="cover-opposition">
+              <p class="opposition-label">NBA · MATCHUP</p>
+              <div class="matchup-stage">
+                <div class="team-stage" id="away-team"></div>
+                <span class="match-cross" aria-hidden="true">×</span>
+                <div class="team-stage" id="home-team"></div>
+              </div>
+              <div id="cover-scoreline" class="cover-scoreline" hidden></div>
+              <div class="cover-signature" aria-hidden="true"><span>24</span><i>→</i><strong>25</strong></div>
+              <p class="opposition-caption">看见比分之外</p>
+            </div>
+          </div>
+          <div class="forecast-strip">
+            <div class="prediction-focus" id="prediction-focus">
               <p>赛前预测</p>
               <strong id="predicted-winner"></strong>
               <div
@@ -134,33 +158,23 @@
               </div>
               <small>胜率</small>
             </div>
-            <div class="team-stage" id="home-team"></div>
-          </div>
-          <div class="primary-judgment">
-            <p class="primary-judgment-title" id="primary-judgment-title">第25秒判断</p>
-            <div class="primary-numbers">
-              <div>
-                <span>分差</span><strong id="expected-margin"></strong>
-              </div>
-              <div class="quiet-number">
-                <span>总分</span><strong id="expected-total"></strong>
+            <div class="primary-judgment">
+              <p class="primary-judgment-title" id="primary-judgment-title">第25秒判断</p>
+              <div class="primary-numbers">
+                <div>
+                  <span>分差</span><strong id="expected-margin"></strong>
+                </div>
+                <div class="quiet-number">
+                  <span>总分</span><strong id="expected-total"></strong>
+                </div>
               </div>
             </div>
+            <div id="hero-probability-bar" class="forecast-probability" hidden></div>
           </div>
           <div id="hero-market" class="hero-market"></div>
           <div id="hero-market-source" class="market-reference-source" hidden></div>
         </article>
         <aside id="baseline-note" class="baseline-note" hidden></aside>
-        <button class="ai-action" id="ai-analysis" type="button">
-          <span class="analyst-symbol" aria-hidden="true">24 → 25</span
-          ><span
-            ><strong>阅读第25秒分析</strong
-            ><small>从数据进入这场比赛的判断</small></span
-          >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="m9 6 6 6-6 6" />
-          </svg>
-        </button>
 
         <section
           class="detail-section matchup-history-section"
@@ -298,5 +312,6 @@
 
     <script src="app.js" defer></script>
     <script src="editorial.js" defer></script>
+    <script src="broadcast.js" defer></script>
   </body>
 </html>

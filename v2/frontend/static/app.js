@@ -726,6 +726,9 @@ function renderMatchupWindow(game, rows, requestedGames) {
   window.className = "matchup-window";
   window.dataset.sampleGames = String(rows.length);
   window.append(text("h3", `近${requestedGames}场`));
+  if (complete.length < requestedGames) {
+    window.append(text("small", `现有${complete.length}场完整比分`, "matchup-sample-note"));
+  }
   const teams = document.createElement("div");
   teams.className = "matchup-window-teams";
   for (const team of [game.away, game.home]) {
@@ -836,6 +839,18 @@ function renderFactors(game, themes = null, status = "idle") {
 
 function renderPregameStory(story = null, status = "idle") {
   const note = byId("baseline-note");
+  const game = state.activeGame;
+  const title = byId("detail-title");
+  const dek = byId("cover-dek");
+  if (dek && game) {
+    title.textContent = story?.title ? analystCopy(story.title) : `${game.away.name_zh}对阵${game.home.name_zh}`;
+    dek.textContent = story?.statement ? analystCopy(story.statement) : "本场尚无已发布的完整分析，先查看已确认的比赛资料。";
+    byId("cover-eyebrow").textContent = hasVisibleScore(game) ? "赛前焦点 · 回看当时的判断" : story ? "本场焦点" : "比赛资料";
+    if (typeof updateCoverReading === "function") updateCoverReading();
+    note.hidden = true;
+    note.replaceChildren();
+    return;
+  }
   if (story) {
     note.hidden = false;
     note.replaceChildren(
@@ -1540,7 +1555,10 @@ function renderTeamData(game) {
   const awayData = teams.away?.metrics || {};
   const homeData = teams.home?.metrics || {};
   container.replaceChildren();
-  container.append(text("p", stats?.season ? `上赛季（${stats.season}）` : "上赛季数据", "team-season-label"));
+  const statsSources = [...new Set(["away", "home"].flatMap(side =>
+    (teams[side]?.sources || []).map(source => source.source).filter(Boolean)))];
+  const seasonLabel = stats?.season ? `上赛季（${stats.season}）` : "上赛季数据";
+  container.append(text("p", seasonLabel + (statsSources.length ? ` · 来源：${statsSources.join("、")}` : ""), "team-season-label"));
   const head = document.createElement("header");
   for (const side of ["away", "home"]) {
     const team = document.createElement("div");
@@ -1561,6 +1579,9 @@ function renderTeamData(game) {
       text("span", metric.label),
       comparisonValue(metric, homeData[metric.key], signals.home),
     );
+    if (typeof metricComparisonGraphic === "function") {
+      row.children[1].append(metricComparisonGraphic(metric, awayData[metric.key], homeData[metric.key], game));
+    }
     rows.append(row);
   });
   container.append(rows, renderTeamSeasonSummary(game, stats));
@@ -1999,7 +2020,7 @@ function renderPredictionDisplay(game) {
     "--probability",
     `${current.winner_probability * 100}%`,
   );
-  byId("expected-margin").textContent = compactWinnerMarginLabel(game);
+  byId("expected-margin").textContent = marginLabel(game).replace(/^预计/, "");
   byId("expected-total").textContent = number(current.expected_total);
   const updated = byId("prediction-updated");
   updated.hidden = !current.updated_at;
@@ -2074,8 +2095,9 @@ function renderDetail(game) {
   const scoreStatus = hasVisibleScore(game)
     ? `${["post", "final", "completed", "finished"].includes(game.status) ? " · 终场" : " · 当前比分"} ${scoreText(game.away.score)}-${scoreText(game.home.score)}`
     : "";
-  const phaseLabel = selectedVersion?.stage === "FINAL_PREGAME" ? " · FINAL PREGAME"
-    : selectedVersion?.stage === "EARLY_PREVIEW" ? " · EARLY PREVIEW" : "";
+  const phaseLabel = selectedVersion?.stage === "FINAL_PREGAME" ? " · 最终赛前分析"
+    : selectedVersion?.stage === "EARLY_PREVIEW" ? " · 赛前预览"
+      : selectedVersion?.stage === "UPDATED_PREVIEW" ? " · 重要更新" : "";
   byId("detail-status").textContent = `${game.game_type === "preseason" ? "季前赛 · " : ""}${statusLabel(game)}${scoreStatus}${phaseLabel}`;
   byId("away-team").replaceChildren(stageTeam(game.away));
   byId("home-team").replaceChildren(stageTeam(game.home));
@@ -2552,7 +2574,7 @@ function renderJudgment(payload) {
   const verdict = document.createElement("section");
   verdict.className = "analyst-verdict";
   verdict.append(
-    text("p", payload.stage === "EARLY_PREVIEW" ? "第25秒 · EARLY PREVIEW" : payload.stage === "FINAL_PREGAME" ? "第25秒 · FINAL PREGAME" : "第25秒最终预测", "verdict-label"),
+    text("p", payload.stage === "EARLY_PREVIEW" ? "第25秒 · 赛前预览" : payload.stage === "FINAL_PREGAME" ? "第25秒 · 最终赛前分析" : payload.stage === "UPDATED_PREVIEW" ? "第25秒 · 重要更新" : "第25秒 · 赛前判断", "verdict-label"),
     text("h3", `${winner.name_zh}胜`),
     text(
       "p",
@@ -2580,14 +2602,13 @@ function renderJudgment(payload) {
     displayedStoryTitle(payload) ||
     judgment.core_question ||
     `${state.activeGame.away.name_zh}对${state.activeGame.home.name_zh}`;
-  const shortReview = document.createElement("section");
-  shortReview.className = "analyst-short-review";
+  const shortReview = document.createElement("header");
+  shortReview.className = "reader-cover";
   shortReview.append(
-    text("p", "赛前短评", "verdict-label"),
-    text("h4", analystCopy(shortReviewTitle), "analyst-short-review-title"),
+    text("p", "第25秒 · 赛前分析", "reader-kicker"),
+    text("h2", analystCopy(shortReviewTitle), "reader-title"),
   );
-  verdict.append(shortReview);
-  container.replaceChildren(verdict);
+  container.replaceChildren(shortReview, verdict);
   const article = document.createElement("article");
   article.className = "analysis-block analysis-article";
   analystCopy(judgment.analysis_article || "")

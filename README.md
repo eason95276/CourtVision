@@ -2,7 +2,7 @@
 
 **NBA Analysis Agent + LLM Evaluation / AI Quality engineering.**
 
-[Live product](https://eason95276.github.io/CourtVision/) ·
+[Live product](https://nba.weitao.si/) ·
 [Architecture](docs/ARCHITECTURE.md) · [Evaluation evidence](evaluation/reports/FINAL_AI_HANDOFF.md) ·
 [Publish/deploy](docs/PUBLIC_DEPLOYMENT.md)
 
@@ -12,7 +12,18 @@ The website reuses the real product frontend. Generation stays local, not on vis
 clicks. 中文 NBA 分析产品，配套可追溯评测工程；胜负、让分和大小分分开解释，
 缺失信息保持未知，失败和修复尝试不被成功案例掩盖。
 
-![CourtVision product — actual public deployment](docs/images/live-product-desktop.png)
+![CourtVision — opening-night 76ers at Knicks pregame analysis](docs/images/opening-night-76ers-knicks-desktop.png)
+
+Opening-night product view: **76ers at Knicks**, showing the saved pregame story,
+prediction and market reference. Magazine-style basketball analysis with a
+shot-clock identity; the page reads published content without generating a report.
+
+<details>
+<summary>Mobile product view</summary>
+
+<img src="docs/images/opening-night-76ers-knicks-mobile.png" width="390" alt="CourtVision mobile: opening-night 76ers at Knicks pregame analysis" />
+
+</details>
 
 ## Architecture
 

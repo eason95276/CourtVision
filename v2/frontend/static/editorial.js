@@ -65,6 +65,7 @@ gameCard = function (game, index) {
   teams[0].append(text("span", "客场", "venue-label"));
   teams[1].append(text("span", "主场", "venue-label"));
   card.append(text("span", "比赛前瞻 ↗", "card-read"));
+  if (typeof decorateBroadcastCard === "function") decorateBroadcastCard(card, game);
   return card;
 };
 
@@ -82,6 +83,7 @@ renderGames = function () {
   if (sample) title.textContent = displayDate(sample.tipoff, false);
   document.querySelector(".section-kicker").textContent =
     `${cards.length} 场对阵 · 北京时间`;
+  if (typeof renderHomeEdition === "function") renderHomeEdition();
 };
 
 const originalDateFilters = setupDateFilters;
@@ -130,6 +132,7 @@ renderDetail = function (game) {
   byId("ai-analysis").querySelector(".analyst-symbol").textContent = "24 → 25";
   document.querySelector(".factors-section .section-title p").textContent =
     "赛前数据线索";
+  if (typeof renderBroadcastDetail === "function") renderBroadcastDetail(game);
 };
 
 const originalRoute = route;
