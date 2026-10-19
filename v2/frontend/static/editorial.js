@@ -1,4 +1,3 @@
-/* Presentation choreography only. Forecasts, evidence and API payloads stay intact. */
 const motionPreference = matchMedia("(prefers-reduced-motion: reduce)");
 let visualTransition = null;
 let openedGameId = null;
@@ -274,7 +273,6 @@ renderJudgment = function (payload) {
       ["为什么这么看", "关键球员与对位", "风险与未知"][index],
     );
   });
-  // A single continuous reading order with supporting and conflicting evidence intact.
   byId("sheet-content").classList.add("has-analysis");
 };
 

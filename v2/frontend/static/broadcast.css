@@ -1,4 +1,3 @@
-/* CourtVision edition: magazine stories, shot-clock identity, broadcast facts. */
 @font-face {
   font-family: "CV Clock";
   src: url("fonts/DSEG7Classic-Bold.woff2") format("woff2");
@@ -237,7 +236,6 @@
 .broadcast-edition .analysis-sheet { --data: "CV Condensed", "Bahnschrift", sans-serif; }
 .broadcast-edition :focus-visible { outline: 2px solid var(--warm); outline-offset: 4px; }
 
-/* Different editorial jobs get different compositions, using the existing DOM order. */
 .broadcast-edition #detail-view .matchup-history-section,
 .broadcast-edition #detail-view .team-data-section { display: grid; grid-template-columns: 175px minmax(0,1fr); gap: 34px; align-items: start; }
 .broadcast-edition #detail-view .matchup-history-section > .section-title,

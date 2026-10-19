@@ -1,59 +1,65 @@
-# Public deployment
+# 发布
 
-Local generation → saved projection → GitHub → Actions → Pages.
-Pages fits native HTML/CSS/JS, hash routes and JSON, with free HTTPS/custom domain.
-Vercel/backend hosting is unnecessary.
+网站入口是 <https://nba.weitao.si/>，源码在 [eason95276/CourtVision](https://github.com/eason95276/CourtVision)。
 
-Website: https://eason95276.github.io/CourtVision/
-Repository: https://github.com/eason95276/CourtVision
+报告在本地生成，公开站通过 GitHub Pages 展示导出的结果。Pages 不运行 Agent、本地 API、数据库、Scheduler 或评测工作台。
 
-## Publish from the private workspace
+## 预览页面
 
-After local generation and formal publication succeed:
+在公开仓库根目录执行：
 
 ```sh
-python publish_game.py espn:GAME_ID --destination ../courtvision-public/public_data
-cd ../courtvision-public
-python scripts/check_public_release.py --history
-python -m unittest discover -s tests/public -v
 python scripts/build_public_site.py
+python -m http.server 8000 --directory _site
+```
+
+打开 `http://localhost:8000`。比赛详情使用 `#game/...` 路由，刷新时仍由同一静态入口加载。
+
+## 导出一场比赛
+
+先在本地完成正式版本发布，再从公开仓库运行：
+
+```sh
+python publish_game.py espn:GAME_ID --api-base http://127.0.0.1:8625
+```
+
+默认写入当前仓库的 `public_data/`，也可用 `--destination` 指定目录。本地 API 只在导出时需要；导出读取已有版本，不调用生成接口，也不回写原 Prediction／Postgame Version。
+
+提交前检查本次数据和页面：
+
+```sh
+python -m unittest discover -s tests/public -v
+python scripts/check_public_release.py --history
+python scripts/build_public_site.py
+```
+
+公开站测试中的 JavaScript 回归需要 Node.js。另检查电脑和手机页面、文章与复盘入口，以及浏览器控制台。
+
+核对差异后，只提交这次导出的数据：
+
+```sh
+git diff -- public_data
 git add public_data
-git commit -m "Publish saved game"
+git commit -m "Publish saved game analysis"
 git push origin main
 ```
 
-The public exporter defaults to its own `public_data`. It reads saved GET endpoints,
-never generation POST. Private API is needed only during export. Updating public
-projection never mutates source versions. Do not automatically repackage source on
-every game; source releases need review. Do not stage the private workspace.
+新增比赛不需要重新打包整个私有工程。代码改动单独审查，不把私有目录、数据库、密钥或原始响应一起提交。
 
-Pages uses GitHub Actions: history/tree scan → focused checks → build `_site` →
-upload → deploy. Failed builds leave previous deployment intact. Game hash routes
-such as `#game/espn%3A401898390` survive refresh. No backend is hosted.
+## 部署流程
 
-## Custom domain: weitao.si
+`main` 上的提交触发 [Pages 工作流](../.github/workflows/pages.yml)：
 
-This domain did not point to Pages at release time. No premature redirect is added.
-Do not put registrar credentials/cookies in source.
+```text
+公开文件与历史检查 → 测试 → 构建 _site → 上传 → 部署
+```
 
-1. Prefer verify ownership in account **Settings → Pages**, using GitHub's generated
-   TXT record (do not invent a verification value).
-2. In repo **Settings → Pages → Custom domain**, add `weitao.si`.
-3. In registrar DNS, replace conflicting parking A records for `@`:
+检查失败时不会部署新页面，线上保留上一版。推送成功和网站更新是两个步骤：等 Actions 完成，再打开正式域名核对新页面、比赛详情与字体资源。
 
-   | Type | Host | Value |
-   |---|---|---|
-   | A | @ | 185.199.108.153 |
-   | A | @ | 185.199.109.153 |
-   | A | @ | 185.199.110.153 |
-   | A | @ | 185.199.111.153 |
-   | CNAME | www | eason95276.github.io |
+## 域名
 
-4. After DNS/certificate checks, enable **Enforce HTTPS**. Verify root/WWW and game
-   refresh. Coordinate steps: incomplete binding may redirect to an unready domain.
+产品使用子域名 `nba.weitao.si`，旧文档中的根域名 `weitao.si` 配置不作为当前产品配置。
 
-Official: [custom workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages),
-[domain setup](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site).
+如需调整域名，在仓库的 Settings → Pages 中核对 Custom domain 与 HTTPS 状态，再按 [GitHub 官方说明](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)处理 DNS。域名账户、验证值和登录信息不放进仓库。
 
-Not deployed: Agent/API/database, LLM keys, Research, Scheduler, Judge, Human workspace,
-tracing services or private ground truth.
+完整检查项见[发布清单](PUBLIC_RELEASE_CHECKLIST.md)。

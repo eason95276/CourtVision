@@ -382,7 +382,6 @@ function homeCollectionOptions() {
       { key: "published", label: "已发布", subtitle: "赛前 / 赛后" },
     ];
   }
-  // Daily navigation remains separate from this temporary first-day preview.
   return [
     { key: "published", label: "已发布", subtitle: "赛前 / 赛后" },
     { key: state.todayDate, label: "今天", subtitle: displayDate(`${state.todayDate}T12:00:00+08:00`, false) },
@@ -2989,7 +2988,6 @@ async function loadCurrentAnalyses() {
       acceptPredictionSelection(gameId, selection);
     }));
   } catch (_) {
-    // The static demo remains usable without the local API server.
   }
 }
 

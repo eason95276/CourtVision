@@ -1,21 +1,43 @@
-# Runtime, evaluation and display are separate
+# 架构
 
-Local SavedGameAnalysisService uses current roster identity, bounded facts and
-Player Knowledge. Researcher loads Research Skill. Forecast first excludes market;
-qualified Market Review follows. Writer reads a locked prediction and Editorial
-Skill. Hard-fact boundaries protect identity, concrete facts and immutable content.
-Server selects current/locked. Deterministic Postgame compares the last legal
-prediction against final facts; optional prose cannot rewrite it.
+CourtVision 分为本地分析、历史评测和公开展示三部分。
 
-Winner-positive margin, market spread and ATS are distinct. Historical appearance
-does not prove current membership/availability/confirmed starters.
+## 本地分析
 
-Evaluation separates context from outcomes/private metadata, records stateless
-requests, component failures and hashes, and distinguishes schema/recovery/content
-quality. Judge, quote matching and Human evaluation are not equivalent. Private
-raw corpora are not redistributed; included metrics are bounded disclosures.
+```text
+球队／球员历史数据 + 当前名单
+          ↓
+赛前 Research → 独立预测 → 市场复核 → 编辑与事实检查
+                                             ↓
+                               Prediction Version
+                                             ↓
+                            赛果对齐 → 结算与复盘
+```
 
-Public export makes read-only GETs and writes a positive display projection. The
-static adapter maps existing reads to JSON and rejects writes. Build reuses existing
-CSS, renderers and transitions, hides diagnostics, and shows a published archive.
-Actions deploys only `_site`, not backend, database, keys, tools or Scheduler.
+`SavedGameAnalysisService` 组织当前名单、Player Knowledge 和有截止时间约束的赛前材料。Research、Forecasting、Editorial 和 Postgame 分别读取各自的 Skill。
+
+独立预测输入不含盘口，后续市场复核保留独立结果及修改原因。编辑阶段读取锁定的预测数值，事实检查负责球队、球员、时间、具体统计与引用边界。
+
+正式版本保存输入和内容哈希。服务端选择当前版本或开赛时锁定的版本，赛后以最后合法赛前版本对照真实结果。确定性结算和可选的复盘文章分别保存，写作失败不改写基础结算。
+
+球员历史出场不能证明当前名单、出战或确认首发。模型预测的赢分、市场让分线与让分方向分别处理。
+
+## 历史评测
+
+```text
+冻结输入 → 请求与分阶段输出 → 合同检查 → 内容评审
+                                           ↓
+                          错误归因 → 修复 → 回归
+```
+
+赛果和私有评测信息与模型输入分开。每次请求保留配置、哈希和失败记录，原始输出、修复结果与最终验收分开统计。
+
+确定性检查、模型裁判和人工评测各自回答不同的问题。引文逐字匹配可以验证引用来源，不能代替对篮球推理的人工判断。原始语料保留在本地，公开仓库提供配置、脚本和汇总结果。
+
+## 公开展示
+
+`publish_game.py` 通过只读接口获取已保存内容，按允许字段导出 `public_data`。前端的 `web/static-data.js` 把读取请求映射到这些 JSON，并拒绝写入请求。
+
+`scripts/build_public_site.py` 复用正式页面及样式，生成 `_site`。GitHub Actions 检查后部署该目录。公开站不运行本地服务、数据库、Scheduler 或模型，浏览页面不会触发生成。
+
+展示数据与原版本的绑定规则见[公开数据约定](PUBLIC_DATA_CONTRACT.md)，部署步骤见[发布说明](PUBLIC_DEPLOYMENT.md)。

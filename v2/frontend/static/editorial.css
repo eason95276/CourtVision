@@ -1,4 +1,3 @@
-/* Matchday edition: team opposition becomes the axis of the reading experience. */
 ::view-transition {
   pointer-events: none;
 }
@@ -952,7 +951,6 @@ body {
     padding-left: 0;
   }
 }
-/* Screenshot correction: fit the analysis entry in short desktop viewports. */
 @media (min-width: 601px) {
   #detail-view .back-link {
     min-height: 32px;

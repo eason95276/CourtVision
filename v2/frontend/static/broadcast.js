@@ -1,4 +1,3 @@
-/* Visual edition only. Consume the selected saved version; never generate a report. */
 function savedStory(game) {
   const version = state.currentAnalyses.get(game.id);
   return version?.version_id ? displayedJudgment(version)?.pregame_story : null;
@@ -22,7 +21,6 @@ function renderHomeEdition() {
   const grid = byId("games-grid");
   const cards = [...grid.children];
   cards.forEach(card => card.classList.remove("expanded-game"));
-  // The existing game-day/favorite ordering selects the cover, with no hard-coded game.
   cards[0]?.classList.add("expanded-game");
   grid.classList.toggle("has-cover", cards.length > 0);
   grid.classList.toggle("single-card", cards.length === 1);
@@ -151,7 +149,6 @@ function metricComparisonGraphic(metric, awayValue, homeValue, game) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  // No polling of providers or reports; this timer only redraws local time.
   window.setInterval(() => { if (!document.hidden) updateTipoffClock(); }, 30000);
   document.addEventListener("visibilitychange", () => { if (!document.hidden) updateTipoffClock(); });
   byId("cover-dek-toggle").addEventListener("click", () => {
