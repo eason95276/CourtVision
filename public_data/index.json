@@ -153,8 +153,8 @@
       "game_id": "espn:401909089",
       "file": "games/espn_401909089.json",
       "tipoff": "2026-10-20T23:00:00+00:00",
-      "version_id": "dd9ef341-d3c4-4f3f-b3a6-a8d581fcb504",
-      "public_sha256": "5970e58959ed33ac0cf5fa4753d2d1b55cde8ea0faeacf01e75d8d6940865f9b",
+      "version_id": "7a8b4c07-af46-4340-b58b-f54f0c6c1e1f",
+      "public_sha256": "a9b83618e3df6a5a04ffee59960fbf1d59ee226b32e96952b77addc825607995",
       "home_record": {
         "game": {
           "id": "espn:401909089",
@@ -193,14 +193,14 @@
         "prediction": {
           "status": "current",
           "game_id": "espn:401909089",
-          "version_id": "dd9ef341-d3c4-4f3f-b3a6-a8d581fcb504",
-          "state_revision": 14,
+          "version_id": "7a8b4c07-af46-4340-b58b-f54f0c6c1e1f",
+          "state_revision": 16,
           "locked_at": null,
           "lock_reason": null,
           "schedule_revision": 1,
           "version": {
             "analysis_contract_version": "two-stage-forecast-v1",
-            "base_input_hash": "cf0d512e0413c281a24f9cd67a2c5a23a107b79176c70ca94776ccd75f0ab8e2",
+            "base_input_hash": "f5e928cb8c36a5a31d460483cb43752ae9b6a157dd567bc761c6a4945a0c72b4",
             "game_id": "espn:401909089",
             "game_identity": {
               "away_team_id": 1610612755,
@@ -208,13 +208,13 @@
               "home_team_id": 1610612752,
               "scheduled_tipoff": "2026-10-20T23:00:00+00:00"
             },
-            "generated_at": "2026-10-20T14:53:04.834068+00:00",
-            "input_cutoff_at": "2026-10-20T14:53:04.739217+00:00",
-            "published_at": "2026-10-20T14:53:06.390860+00:00",
+            "generated_at": "2026-10-20T22:40:45.009066+00:00",
+            "input_cutoff_at": "2026-10-20T22:40:24.924829+00:00",
+            "published_at": "2026-10-20T22:40:47.201950+00:00",
             "schedule_revision": 1,
-            "stage": "EARLY_PREVIEW",
-            "version_id": "dd9ef341-d3c4-4f3f-b3a6-a8d581fcb504",
-            "payload_sha256": "e0b148cf4781fd2c1e341bef08cb432dd74fb8883f85f63cde805aa4a381d2b7",
+            "stage": "FINAL_PREGAME",
+            "version_id": "7a8b4c07-af46-4340-b58b-f54f0c6c1e1f",
+            "payload_sha256": "6d0aee3573ea4196f0430b5225a76a29221fc4bcb81cc70b840ea78838861955",
             "input_snapshot": {
               "away": {
                 "abbreviation": "PHI",
@@ -241,16 +241,15 @@
             "judgment": {
               "final_prediction": {
                 "evidence_ids": [
-                  "0c71b7f9b4da4e0a3a81f1df212cd661a538b28d909f8d863c791890f1546458",
                   "1119ef55f00cd92b0ed0d65b4c4e0cf2694ab634aa5b31a7bda2968dda51f2eb",
                   "589245e2a0bcdae36d311d461aeedd03205116e1d4a36d9fec1c2db135d9e46c",
                   "5ea1539d5a484596163ef1d34ea36ce8eae1fe31fedfef1c4d0221e5e97927dd",
-                  "a9914ab979c1111031595e89e300ac53c5da6c6ca3773d0b828261b1930a006a",
                   "ac64965c5b96f6c26afdfa77bf6b7cd20ceb88b80cdf43c1202592bf3b7e9440",
-                  "adc7c02703e25185f5855304620843ebf820fa80946e09e66afe1ad8e2f2fe32",
-                  "b3cc1849ee02128a330583d07e28fd4505e7a80807aca1db6091eec92fc7b2d4",
                   "e2f1f11a660dd59b66189b650f99889fde01b12a9011fe6e949250e23d0124eb",
-                  "fcae5f6e3d8b7a62f06d23ebe1e431c1ba747b7b3a245eed2c9675cf29c83d22"
+                  "fcae5f6e3d8b7a62f06d23ebe1e431c1ba747b7b3a245eed2c9675cf29c83d22",
+                  "final-availability-ac452113ea9f7e9c757d",
+                  "final-availability-ac6ad219331c4a9f508b",
+                  "final-availability-b0eac1353f2ebc98b346"
                 ],
                 "expected_margin": 6.5,
                 "expected_total": 228.5,
@@ -260,14 +259,14 @@
               "pregame_story": {
                 "classification": "subjective_analysis",
                 "evidence_ids": [
-                  "0c71b7f9b4da4e0a3a81f1df212cd661a538b28d909f8d863c791890f1546458",
                   "1119ef55f00cd92b0ed0d65b4c4e0cf2694ab634aa5b31a7bda2968dda51f2eb",
                   "589245e2a0bcdae36d311d461aeedd03205116e1d4a36d9fec1c2db135d9e46c",
                   "5ea1539d5a484596163ef1d34ea36ce8eae1fe31fedfef1c4d0221e5e97927dd",
-                  "a9914ab979c1111031595e89e300ac53c5da6c6ca3773d0b828261b1930a006a",
-                  "ac64965c5b96f6c26afdfa77bf6b7cd20ceb88b80cdf43c1202592bf3b7e9440"
+                  "ac64965c5b96f6c26afdfa77bf6b7cd20ceb88b80cdf43c1202592bf3b7e9440",
+                  "e2f1f11a660dd59b66189b650f99889fde01b12a9011fe6e949250e23d0124eb",
+                  "fcae5f6e3d8b7a62f06d23ebe1e431c1ba747b7b3a245eed2c9675cf29c83d22"
                 ],
-                "statement": "纽约要在主场领戒指，詹姆斯和布朗加入后的76人，能不能让这场庆典变得没那么轻松？",
+                "statement": "尼克斯领戒指的夜晚，对面站着一支刚把詹姆斯和布朗塞进首发的76人——旧对手换了新面孔，这场揭幕战看的就是成熟体系能不能压住还没磨合好的天赋。",
                 "title": "纽约升旗迎旧敌\n费城新阵试锋芒"
               }
             }
@@ -849,5 +848,5 @@
       }
     }
   ],
-  "published_at": "2026-10-20T22:04:43.986464+00:00"
+  "published_at": "2026-10-20T22:40:55.496670+00:00"
 }
