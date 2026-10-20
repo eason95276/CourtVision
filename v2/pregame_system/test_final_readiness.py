@@ -86,6 +86,19 @@ def test_collection_finishes_after_initial_check_clock(tmp_path):
     r=FinalReadinessStore(store,collect).check(game,early)
     assert r['ready']and r['checked_at']==clock[0].isoformat()
 
+
+def test_ready_with_unknown_does_not_claim_availability_confirmation_on_fresh_or_cached_read(tmp_path):
+    game,early,snapshot,at=fixture();game['policy_config']={'final_information_policy':'latest_verified'}
+    for side in ('home','away'):snapshot['lineups'][side]['basis']='agent_expected'
+    snapshot['availability']['records']=[];calls=[]
+    def collect(*args):calls.append(1);return snapshot
+    versions=PredictionVersionStore(tmp_path/'db.sqlite',clock=lambda:at)
+    store=FinalReadinessStore(versions,collect)
+    for result in (store.check(game,early),store.check(game,early)):
+        assert result['ready']and result['warnings']
+        assert result['availability_confirmed_at']is None and result['lineup_confirmed_at']is None
+    assert calls==[1]
+
 def test_espn_player_active_is_not_match_availability():
     game,early,snapshot,at=fixture();rows=[{'athlete':{'displayName':'home Player '+str(i),'active':True},'starter':False}for i in range(5)]
     data={'header':{'id':'123','competitions':[{'id':'123','date':game['tipoff'],'status':{'type':{'state':'pre'}},'competitors':[{'team':{'id':'9'},'homeAway':'home'},{'team':{'id':'13'},'homeAway':'away'}]}]},'boxscore':{'players':[{'team':{'id':'9'},'statistics':[{'athletes':rows}]}]}}

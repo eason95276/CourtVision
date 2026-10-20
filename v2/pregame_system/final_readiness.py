@@ -12,6 +12,8 @@ UNCERTAIN={'unknown','questionable','doubtful','probable','unavailable'}
 
 def key(name):return ' '.join(str(name).casefold().split())
 def clock_value(clock):return _instant(clock() if clock else now(),'readiness_clock')
+def availability_confirmed(result):
+    return not any('availability_'in r or 'injury_'in r for r in list(result.get('reasons',[]))+list(result.get('warnings',[])))
 def next_check(tipoff,at):
     tip=_instant(tipoff,'tipoff');at=_instant(at,'at')
     for lead in CHECK_LEADS:
@@ -198,7 +200,11 @@ class FinalReadinessStore:
         if not force and last and last.get('information_policy','confirmed_only')==policy and last['baseline_version_id']==early['version_id']and _instant(last['next_check_at'],'next_check_at')>_instant(at,'at'):
             if last['ready']:
                 refreshed=evaluate_readiness(game,early,last['snapshot'],at)
-                if not refreshed['ready']:return {**last,**refreshed}
+                if not refreshed['ready']:
+                    value={**last,**refreshed}
+                    if not availability_confirmed(value):value['availability_confirmed_at']=None
+                    return value
+            if not availability_confirmed(last):last['availability_confirmed_at']=None
             return last
         if self.collector is None:self.collector=collect_final_snapshot
         try:snapshot=self.collector(game,early,at,self.versions)
@@ -208,7 +214,7 @@ class FinalReadinessStore:
         result['final_window_target_at']=_utc(_instant(game['tipoff'],'tipoff')-timedelta(minutes=20))
         result['final_window_started_at']=last.get('final_window_started_at',at)if last else at
         result['lineup_confirmed_at']=max(r.get('observed_at')or at for r in result['lineups'])if len(result['lineups'])==2 else None
-        result['availability_confirmed_at']=at if not any('availability_'in r or 'injury_'in r for r in result['reasons']) else None
+        result['availability_confirmed_at']=at if availability_confirmed(result) else None
         with self.versions.connect()as db:db.execute('INSERT OR IGNORE INTO final_readiness_checks VALUES(?,?,?,?,?,?,?,?)',
             (content_hash({'game':game['id'],'at':at,'snapshot':result['snapshot_hash']}),game['id'],at,result['next_check_at'],int(result['ready']),early['version_id'],result['snapshot_hash'],json.dumps(result,ensure_ascii=False)))
         return result
