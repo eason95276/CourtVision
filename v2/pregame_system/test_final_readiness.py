@@ -2,7 +2,6 @@ import copy
 from datetime import datetime,timedelta,timezone
 import pytest
 from .prediction_versions import PredictionVersionStore,game_identity
-from .generation_tasks import GenerationTaskStore
 from .scheduler_policy import SchedulerPolicyPlanner,normalized_policy
 from .final_readiness import evaluate_readiness,next_check,snapshot_from_espn,FinalReadinessStore
 
@@ -69,6 +68,7 @@ def test_legacy_policy_identity_unchanged():
     assert normalized_policy()['policy_identity']=='scheduler-v2:e8a4c19aa2916829'
 
 def test_two_stages_early_can_start_before_old_t72(tmp_path):
+    from .generation_tasks import GenerationTaskStore
     game,early,snapshot,at=fixture();clock=lambda:TIP-timedelta(days=7)
     store=PredictionVersionStore(tmp_path/'versions.sqlite',clock=clock);tasks=GenerationTaskStore(store)
     tasks.register_game(game);planner=SchedulerPolicyPlanner(tasks)
@@ -92,6 +92,7 @@ def test_espn_player_active_is_not_match_availability():
     assert not result['lineups']and not result['availability']['records']
 
 def test_fill_unknown_venue_without_overwriting_known_identity(tmp_path):
+    from .generation_tasks import GenerationTaskStore
     game,early,snapshot,at=fixture();store=PredictionVersionStore(tmp_path/'p.sqlite',clock=lambda:at-timedelta(days=2));tasks=GenerationTaskStore(store)
     tasks.register_game(game)
     g={**game,'venue':'Verified Arena','neutral_site':False}

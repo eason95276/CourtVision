@@ -7,7 +7,6 @@ import pytest
 from .final_readiness import evaluate_readiness
 from .final_information import qualify_claims, research_game
 from .test_final_readiness import fixture
-from .test_final_delta import early_fixture
 from .final_delta import compact_context
 from .deepseek_web import DeepSeekWebTransport
 from .research_evidence import source_role
@@ -73,6 +72,8 @@ def test_chinese_names_resolve_to_current_canonical_players():
 
 
 def test_latest_verified_keeps_unknown_and_expected_in_context():
+    pytest.importorskip('pandas',reason='Full production-stack integration; source-only CI does not install runtime dependencies.')
+    from .test_final_delta import early_fixture
     game,early,snapshot,at=early_fixture()
     game['policy_config']={'final_information_policy':'latest_verified'}
     for side in ('home','away'):snapshot['lineups'][side]['basis']='agent_expected'
@@ -90,6 +91,8 @@ def test_latest_verified_keeps_unknown_and_expected_in_context():
 
 
 def test_uncertainty_update_runs_bounded_assessment_without_market_leak(tmp_path):
+    pytest.importorskip('pandas',reason='Full production-stack integration; source-only CI does not install runtime dependencies.')
+    from .test_final_delta import early_fixture
     from .final_delta import run_incremental,numbers
     from .test_final_delta import writer
     from .analyst import EvidenceBoundAnalyst
