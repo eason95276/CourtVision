@@ -748,8 +748,10 @@ def default_client(messages, schema):
         remaining=(instant(game['scheduled_tipoff'])-instant(now())).total_seconds()
         timeout=min(timeout,remaining-40)
         if timeout<5:raise ValueError('market_review_budget_insufficient')
+    json_options = ({"response_format": {"type": "json_object"}}
+                    if schema in {VersionedIndependentForecast, VersionedMarketReviewForecast} else {})
     response = request_deepseek(messages, key, "deepseek-v4-flash", tokens,
-                               timeout_seconds=timeout)
+                               timeout_seconds=timeout, **json_options)
     return response.content, {"usage": response.usage, "finish_reason": response.finish_reason,
                               "provider": getattr(response, "response_metadata", {})}
 
@@ -918,6 +920,7 @@ def _run_two_stage_impl(basketball: dict, market: dict, folder: Path, *, client=
             "skill_hashes": prompt_skill_hashes(skill) if messages_override is None else {}, "model": "deepseek-v4-flash",
             "transport": transport_label or ("injected" if client is not default_client else "configured_deepseek"),
             "default_request_settings": {"temperature": 0.1, "thinking": "disabled",
+                                         "response_format": {"type": "json_object"} if require_analysis_core else None,
                                          "max_tokens": _forecast_max_tokens(schema, (basketball.get("game") or {}).get("game_type")),
                                          "timeout_seconds": 60 if (basketball.get("game") or {}).get("game_type") == "preseason" else 40},
             "schema_repair_call": messages_override is not None,

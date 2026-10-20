@@ -1,0 +1,37 @@
+name: Tomorrow's selected games
+on:
+  schedule:
+    - cron: '10 4 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - config/daily_picks.json
+      - public_data/**
+      - scripts/update_daily_board.py
+      - .github/workflows/daily-board.yml
+permissions:
+  contents: write
+concurrency:
+  group: daily-selected-games
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -s tests/public -p test_daily_board.py -v
+      - run: python scripts/update_daily_board.py
+      - name: Commit the README board only
+        run: |
+          if git diff --quiet -- README.md; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- README.md
+          git commit -m "Update tomorrow's selected games"
+          git push origin HEAD:main

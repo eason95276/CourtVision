@@ -1255,6 +1255,7 @@ def _request_deepseek_impl(
     max_tokens: int,
     timeout_seconds: float = DEFAULT_TIMEOUT_SECONDS,
     opener: Callable | None = None,
+    response_format: dict | None = None,
 ) -> ApiResult:
     payload = {
         "model": model,
@@ -1264,6 +1265,10 @@ def _request_deepseek_impl(
         "thinking": {"type": "disabled"},
         "stream": False,
     }
+    if response_format is not None:
+        if response_format != {"type": "json_object"}:
+            raise ValueError("unsupported_response_format")
+        payload["response_format"] = dict(response_format)
     request = urllib.request.Request(
         DEEPSEEK_API_URL,
         data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
@@ -1365,12 +1370,12 @@ def _request_deepseek_impl(
 
 
 def request_deepseek(messages, api_key, model, max_tokens,
-                     timeout_seconds=DEFAULT_TIMEOUT_SECONDS, opener=None):
+                     timeout_seconds=DEFAULT_TIMEOUT_SECONDS, opener=None, response_format=None):
     # Dormant without an explicitly scoped production run. Historical Evaluation
     # receives the original parser/result and never gains billing side effects.
     from v2.pregame_system.cost_ledger import metered_deepseek
     return metered_deepseek(lambda observed_opener: _request_deepseek_impl(
-        messages, api_key, model, max_tokens, timeout_seconds, observed_opener), model, opener)
+        messages, api_key, model, max_tokens, timeout_seconds, observed_opener, response_format), model, opener)
 
 
 def _finite_number(value: object, label: str) -> float:

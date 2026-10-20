@@ -275,8 +275,8 @@ def test_v2_default_client_applies_larger_budgets_without_changing_v1(monkeypatc
     transport = importlib.import_module("v2.agent.generate_historical_pregame_analysis")
     seen = []
 
-    def fake_request(messages, key, model, max_tokens, *, timeout_seconds):
-        seen.append((model, max_tokens, timeout_seconds))
+    def fake_request(messages, key, model, max_tokens, *, timeout_seconds, response_format=None):
+        seen.append((model, max_tokens, timeout_seconds, response_format))
         return SimpleNamespace(content="{}", usage={"completion_tokens": 1},
                                finish_reason="stop", response_metadata={})
 
@@ -291,6 +291,7 @@ def test_v2_default_client_applies_larger_budgets_without_changing_v1(monkeypatc
         "game_type": "preseason", "registered_game": False}}})}]
     default_client(preseason, MarketReviewForecast)
     assert [row[1] for row in seen] == [4800, 3600, 2400, 4200]
+    assert [row[3] for row in seen] == [{"type": "json_object"}, {"type": "json_object"}, None, None]
 
 
 def test_revision_delta_is_computed_from_independent_and_final_numbers():

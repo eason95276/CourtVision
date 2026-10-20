@@ -111,7 +111,8 @@ def configured_client(messages, schema, *, max_tokens=4000, model="deepseek-v4-f
             revised = urllib.request.Request(request.full_url, data=json.dumps(payload,ensure_ascii=False).encode("utf-8"),
                 headers=dict(request.header_items()), method=request.get_method())
             return urllib.request.urlopen(revised, timeout=timeout)
-    response = request_deepseek(messages, key, model, max_tokens, timeout_seconds=90, opener=opener)
+    response = request_deepseek(messages, key, model, max_tokens, timeout_seconds=90, opener=opener,
+                               response_format={"type": "json_object"})
     return response.content, {"usage": response.usage, "finish_reason": response.finish_reason,
                               "provider": getattr(response, "response_metadata", {})}
 
@@ -128,6 +129,7 @@ def call_recorded(folder, stage, messages, schema, client=None, *, max_tokens=40
         "schema": request_schema, "validation_schema": schema.model_json_schema(), "input_hash": input_hash,
         "input_characters": sum(len(m["content"]) for m in messages), "model": model,
         "mode": "injected" if client else "configured_deepseek", "automatic_retries": 0,
+        "response_format": None if client else {"type": "json_object"},
         "thinking": "enabled" if model == "deepseek-v4-pro" else "disabled",
         "reasoning_effort": "low" if model == "deepseek-v4-pro" else None,
         "max_tokens": max_tokens, "skill_hashes": prompt_skill_hashes(messages[0]["content"])})
