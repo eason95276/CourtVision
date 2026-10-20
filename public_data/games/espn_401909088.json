@@ -95,7 +95,7 @@
       "source_label": "开发期赛前预测快照"
     },
     "source": {
-      "schedule_captured_at": "2026-10-14T15:11:58.669123+00:00"
+      "schedule_captured_at": "2026-10-20T07:27:55.093124+00:00"
     },
     "roster_context": {
       "teams": {
@@ -568,7 +568,7 @@
     "season_form": {
       "status": "available",
       "game_id": "espn:401909088",
-      "cutoff": "2026-10-14T15:08:24.871001+00:00",
+      "cutoff": "2026-10-20T13:18:10.717764+00:00",
       "season_start": 2026,
       "competition_scope": "all_game_types_in_current_season",
       "source": "schedule_catalog_final_games",
@@ -576,78 +576,86 @@
       "teams": {
         "away": {
           "team_id": 1610612738,
-          "current_season_games": 2,
+          "current_season_games": 4,
           "current_season_game_ids": [
+            "espn:401898407",
+            "espn:401898405",
             "espn:401898398",
             "espn:401898392"
           ],
           "current_season_record": {
-            "wins": 2,
+            "wins": 4,
             "losses": 0
           },
           "current_last5": {
             "status": "available",
-            "games": 2,
-            "wins": 2,
+            "games": 4,
+            "wins": 4,
             "losses": 0,
             "win_rate": 1.0,
             "game_ids": [
+              "espn:401898407",
+              "espn:401898405",
               "espn:401898398",
               "espn:401898392"
             ]
           },
           "last_result": {
-            "game_id": "espn:401898398",
-            "played_at": "2026-10-11T00:00:00+00:00",
+            "game_id": "espn:401898407",
+            "played_at": "2026-10-16T23:00:00+00:00",
             "won": true,
-            "team_score": 144,
-            "opponent_score": 106,
+            "team_score": 125,
+            "opponent_score": 120,
             "opponent_team_id": 1610612755,
             "opponent_name_zh": "76人"
           },
           "streak": {
             "result": "win",
-            "games": 2
+            "games": 4
           }
         },
         "home": {
           "team_id": 1610612765,
-          "current_season_games": 2,
+          "current_season_games": 4,
           "current_season_game_ids": [
+            "espn:401908946",
+            "espn:401914125",
             "espn:401906510",
             "espn:401908947"
           ],
           "current_season_record": {
-            "wins": 1,
+            "wins": 3,
             "losses": 1
           },
           "current_last5": {
             "status": "available",
-            "games": 2,
-            "wins": 1,
+            "games": 4,
+            "wins": 3,
             "losses": 1,
-            "win_rate": 0.5,
+            "win_rate": 0.75,
             "game_ids": [
+              "espn:401908946",
+              "espn:401914125",
               "espn:401906510",
               "espn:401908947"
             ]
           },
           "last_result": {
-            "game_id": "espn:401906510",
-            "played_at": "2026-10-10T23:00:00+00:00",
-            "won": false,
-            "team_score": 108,
-            "opponent_score": 114,
-            "opponent_team_id": 1610612764,
-            "opponent_name_zh": "奇才"
+            "game_id": "espn:401908946",
+            "played_at": "2026-10-16T23:00:00+00:00",
+            "won": true,
+            "team_score": 129,
+            "opponent_score": 125,
+            "opponent_team_id": 1610612761,
+            "opponent_name_zh": "猛龙"
           },
           "streak": {
-            "result": "loss",
-            "games": 1
+            "result": "win",
+            "games": 2
           }
         }
       },
-      "context_hash": "18307f69692069f9f5d4e6e7f1de12a496a4cd40e2189ba9e0f426d02ae8a192"
+      "context_hash": "1a6d69c2677bd9a98aa8629bab9203ec2b95289bcece7b25ef76a1e054fb383c"
     },
     "game_type": "regular_season",
     "schedule_revision": 1,
@@ -1138,276 +1146,397 @@
       }
     },
     "official_injury_report": {
-      "status": "unavailable",
-      "records": []
+      "game_id": "espn:401909088",
+      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-19_05_45PM.pdf",
+      "source_published_at": "2026-10-19T21:45:00+00:00",
+      "captured_at": "2026-10-19T21:47:01.564060+00:00",
+      "source_sha256": "35a7204caa34e4c1ca9f9fb491cc793b2345e86257e8ffe2ee2ff4d1cddfac7b",
+      "parser_version": "nba-official-injury-live-v2",
+      "status": "published",
+      "report_id": "3659e565e28c74e744818653d15ee6a0963ba068f497486ca5e1114c767faa74",
+      "report_date": "2026-10-19",
+      "report_time": "17:45",
+      "coverage": "complete",
+      "records": [
+        {
+          "team_id": 1610612738,
+          "player_name": "Devin Carter",
+          "status": "out",
+          "reason": "Injury/Illness - Illness",
+          "game_id": "espn:401909088",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-19_05_45PM.pdf",
+          "source_published_at": "2026-10-19T21:45:00+00:00",
+          "captured_at": "2026-10-19T21:47:01.564060+00:00",
+          "source_sha256": "35a7204caa34e4c1ca9f9fb491cc793b2345e86257e8ffe2ee2ff4d1cddfac7b",
+          "parser_version": "nba-official-injury-live-v2"
+        },
+        {
+          "team_id": 1610612765,
+          "player_name": "Elijah Harkless",
+          "status": "questionable",
+          "reason": "G League - Two-Way",
+          "game_id": "espn:401909088",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-19_05_45PM.pdf",
+          "source_published_at": "2026-10-19T21:45:00+00:00",
+          "captured_at": "2026-10-19T21:47:01.564060+00:00",
+          "source_sha256": "35a7204caa34e4c1ca9f9fb491cc793b2345e86257e8ffe2ee2ff4d1cddfac7b",
+          "parser_version": "nba-official-injury-live-v2"
+        },
+        {
+          "team_id": 1610612765,
+          "player_name": "Isaac Jones",
+          "status": "out",
+          "reason": "G League - Two-Way",
+          "game_id": "espn:401909088",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-19_05_45PM.pdf",
+          "source_published_at": "2026-10-19T21:45:00+00:00",
+          "captured_at": "2026-10-19T21:47:01.564060+00:00",
+          "source_sha256": "35a7204caa34e4c1ca9f9fb491cc793b2345e86257e8ffe2ee2ff4d1cddfac7b",
+          "parser_version": "nba-official-injury-live-v2"
+        },
+        {
+          "team_id": 1610612765,
+          "player_name": "Taurean Prince",
+          "status": "questionable",
+          "reason": "Personal Reasons",
+          "game_id": "espn:401909088",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-19_05_45PM.pdf",
+          "source_published_at": "2026-10-19T21:45:00+00:00",
+          "captured_at": "2026-10-19T21:47:01.564060+00:00",
+          "source_sha256": "35a7204caa34e4c1ca9f9fb491cc793b2345e86257e8ffe2ee2ff4d1cddfac7b",
+          "parser_version": "nba-official-injury-live-v2"
+        },
+        {
+          "team_id": 1610612765,
+          "player_name": "Ugonna Onyenso",
+          "status": "out",
+          "reason": "G League - Two-Way",
+          "game_id": "espn:401909088",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-19_05_45PM.pdf",
+          "source_published_at": "2026-10-19T21:45:00+00:00",
+          "captured_at": "2026-10-19T21:47:01.564060+00:00",
+          "source_sha256": "35a7204caa34e4c1ca9f9fb491cc793b2345e86257e8ffe2ee2ff4d1cddfac7b",
+          "parser_version": "nba-official-injury-live-v2"
+        }
+      ]
     },
     "homepage_visible": true
   },
   "prediction": {
     "status": "current",
     "game_id": "espn:401909088",
-    "version_id": "120739a9-e137-4788-958e-66825beddd31",
-    "state_revision": 8,
+    "version_id": "3ddb18b9-0e77-48de-ab7f-5d5dad938fc5",
+    "state_revision": 11,
     "locked_at": null,
     "lock_reason": null,
     "schedule_revision": 1,
     "fact_view": {
       "schema_version": "pregame-fact-view-v1",
       "game_id": "espn:401909088",
-      "version_id": "120739a9-e137-4788-958e-66825beddd31",
-      "source_payload_sha256": "be55b25fd22db668ef3e60147fff34d45792850e27367ffc23fb30f2ce714d2a",
-      "origin": "legacy_frozen",
+      "version_id": "3ddb18b9-0e77-48de-ab7f-5d5dad938fc5",
+      "source_payload_sha256": "74165228f88febe42b647686fac22086f781ddff177a067a322e1c5193c62e59",
+      "origin": "new_frozen",
       "context": {
-        "schema_version": "pregame-fact-context-v1",
+        "feature_cutoff": "2026-10-20T12:59:53.466632+00:00",
         "game_id": "espn:401909088",
-        "feature_cutoff": "2026-10-14T14:46:07.725655+00:00",
-        "team_form": {
-          "home": {
-            "status": "partial",
-            "reason": "legacy_valid_n_competition_and_date_range_not_recorded",
-            "requested_games": 15,
-            "observed_games": null,
-            "game_ids": [],
-            "season_counts": {
-              "2026": 0,
-              "2025": 15,
-              "older": 0
-            },
-            "competition_counts": null,
-            "first_game_date": null,
-            "last_game_date": null,
-            "date_timezone": "America/New_York",
-            "metrics": {
-              "off_rating_15": {
-                "value": 109.82284566675756,
-                "valid_games": null,
-                "missing_games": null,
-                "unit": "points_per_100_possessions",
-                "aggregation": null,
-                "method": "not_recorded_in_legacy_version"
-              },
-              "def_rating_15": {
-                "value": 107.06845864320802,
-                "valid_games": null,
-                "missing_games": null,
-                "unit": "points_allowed_per_100_possessions",
-                "aggregation": null,
-                "method": "not_recorded_in_legacy_version"
-              },
-              "net_rating_15": {
-                "value": 2.754387023549543,
-                "valid_games": null,
-                "missing_games": null,
-                "unit": "points_per_100_possessions",
-                "aggregation": null,
-                "method": "not_recorded_in_legacy_version"
-              },
-              "pace_15": {
-                "value": 96.7850566037736,
-                "valid_games": null,
-                "missing_games": null,
-                "unit": "possessions_per_48_minutes",
-                "aggregation": null,
-                "method": "not_recorded_in_legacy_version"
-              },
-              "win_rate_15": {
-                "value": 0.5333333333333333,
-                "valid_games": null,
-                "missing_games": null,
-                "unit": "win_fraction",
-                "aggregation": null,
-                "method": "not_recorded_in_legacy_version"
-              },
-              "three_pct_15": {
-                "value": 0.3655333333333334,
-                "valid_games": null,
-                "missing_games": null,
-                "unit": "fraction",
-                "aggregation": null,
-                "method": "not_recorded_in_legacy_version"
-              },
-              "rebound_share_15": {
-                "value": 0.5265351247903909,
-                "valid_games": null,
-                "missing_games": null,
-                "unit": "fraction",
-                "aggregation": null,
-                "method": "not_recorded_in_legacy_version"
-              },
-              "turnover_rate_15": {
-                "value": 0.152730999783754,
-                "valid_games": null,
-                "missing_games": null,
-                "unit": "turnovers_per_possession",
-                "aggregation": null,
-                "method": "not_recorded_in_legacy_version"
-              }
-            }
-          },
+        "schedule": {
           "away": {
-            "status": "partial",
-            "reason": "legacy_valid_n_competition_and_date_range_not_recorded",
-            "requested_games": 15,
-            "observed_games": null,
-            "game_ids": [],
-            "season_counts": {
-              "2026": 0,
-              "2025": 15,
-              "older": 0
-            },
-            "competition_counts": null,
-            "first_game_date": null,
-            "last_game_date": null,
-            "date_timezone": "America/New_York",
-            "metrics": {
-              "off_rating_15": {
-                "value": 117.75680182680625,
-                "valid_games": null,
-                "missing_games": null,
-                "unit": "points_per_100_possessions",
-                "aggregation": null,
-                "method": "not_recorded_in_legacy_version"
-              },
-              "def_rating_15": {
-                "value": 110.5329395033653,
-                "valid_games": null,
-                "missing_games": null,
-                "unit": "points_allowed_per_100_possessions",
-                "aggregation": null,
-                "method": "not_recorded_in_legacy_version"
-              },
-              "net_rating_15": {
-                "value": 7.2238623234409545,
-                "valid_games": null,
-                "missing_games": null,
-                "unit": "points_per_100_possessions",
-                "aggregation": null,
-                "method": "not_recorded_in_legacy_version"
-              },
-              "pace_15": {
-                "value": 97.30266666666668,
-                "valid_games": null,
-                "missing_games": null,
-                "unit": "possessions_per_48_minutes",
-                "aggregation": null,
-                "method": "not_recorded_in_legacy_version"
-              },
-              "win_rate_15": {
-                "value": 0.6,
-                "valid_games": null,
-                "missing_games": null,
-                "unit": "win_fraction",
-                "aggregation": null,
-                "method": "not_recorded_in_legacy_version"
-              },
-              "three_pct_15": {
-                "value": 0.37279999999999996,
-                "valid_games": null,
-                "missing_games": null,
-                "unit": "fraction",
-                "aggregation": null,
-                "method": "not_recorded_in_legacy_version"
-              },
-              "rebound_share_15": {
-                "value": 0.5409691331748797,
-                "valid_games": null,
-                "missing_games": null,
-                "unit": "fraction",
-                "aggregation": null,
-                "method": "not_recorded_in_legacy_version"
-              },
-              "turnover_rate_15": {
-                "value": 0.12002082275051827,
-                "valid_games": null,
-                "missing_games": null,
-                "unit": "turnovers_per_possession",
-                "aggregation": null,
-                "method": "not_recorded_in_legacy_version"
-              }
-            }
+            "back_to_back": null,
+            "basis": null,
+            "reason": "no_cutoff_eligible_schedule_evidence",
+            "source_refs": [],
+            "status": "unavailable"
+          },
+          "home": {
+            "back_to_back": null,
+            "basis": null,
+            "reason": "no_cutoff_eligible_schedule_evidence",
+            "source_refs": [],
+            "status": "unavailable"
           }
         },
-        "schedule": {
-          "home": {
-            "status": "unavailable",
-            "reason": "legacy_version_has_no_verified_schedule_basis",
-            "basis": null,
-            "back_to_back": null,
-            "source_refs": []
-          },
+        "schema_version": "pregame-fact-context-v1",
+        "team_form": {
           "away": {
-            "status": "unavailable",
-            "reason": "legacy_version_has_no_verified_schedule_basis",
-            "basis": null,
-            "back_to_back": null,
-            "source_refs": []
+            "competition_counts": {
+              "playoffs": 7,
+              "regular_season": 8
+            },
+            "date_timezone": "America/New_York",
+            "first_game_date": "2026-03-30",
+            "game_ids": [
+              "0022501092",
+              "0022501106",
+              "0022501126",
+              "0022501132",
+              "0022501149",
+              "0022501168",
+              "0022501174",
+              "0022501186",
+              "0042500111",
+              "0042500112",
+              "0042500113",
+              "0042500114",
+              "0042500115",
+              "0042500116",
+              "0042500117"
+            ],
+            "last_game_date": "2026-05-02",
+            "metrics": {
+              "def_rating_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "points_allowed_per_100_possessions",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 110.5329395033653
+              },
+              "net_rating_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "points_per_100_possessions",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 7.2238623234409545
+              },
+              "off_rating_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "points_per_100_possessions",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 117.75680182680625
+              },
+              "pace_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "possessions_per_48_minutes",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 97.30266666666668
+              },
+              "rebound_share_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "fraction",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 0.5409691331748797
+              },
+              "three_pct_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "fraction",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 0.37279999999999996
+              },
+              "turnover_rate_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "turnovers_per_possession",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 0.12002082275051827
+              },
+              "win_rate_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "win_fraction",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 0.6
+              }
+            },
+            "observed_games": 15,
+            "reason": null,
+            "requested_games": 15,
+            "season_counts": {
+              "2025": 15
+            },
+            "status": "complete"
+          },
+          "home": {
+            "competition_counts": {
+              "playoffs": 14,
+              "regular_season": 1
+            },
+            "date_timezone": "America/New_York",
+            "first_game_date": "2026-04-12",
+            "game_ids": [
+              "0022501188",
+              "0042500101",
+              "0042500102",
+              "0042500103",
+              "0042500104",
+              "0042500105",
+              "0042500106",
+              "0042500107",
+              "0042500201",
+              "0042500202",
+              "0042500203",
+              "0042500204",
+              "0042500205",
+              "0042500206",
+              "0042500207"
+            ],
+            "last_game_date": "2026-05-17",
+            "metrics": {
+              "def_rating_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "points_allowed_per_100_possessions",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 107.06845864320802
+              },
+              "net_rating_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "points_per_100_possessions",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 2.754387023549543
+              },
+              "off_rating_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "points_per_100_possessions",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 109.82284566675756
+              },
+              "pace_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "possessions_per_48_minutes",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 96.7850566037736
+              },
+              "rebound_share_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "fraction",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 0.5265351247903909
+              },
+              "three_pct_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "fraction",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 0.3655333333333334
+              },
+              "turnover_rate_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "turnovers_per_possession",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 0.152730999783754
+              },
+              "win_rate_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "win_fraction",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 0.5333333333333333
+              }
+            },
+            "observed_games": 15,
+            "reason": null,
+            "requested_games": 15,
+            "season_counts": {
+              "2025": 15
+            },
+            "status": "complete"
           }
         }
       }
     },
     "display_projection": {
       "schema_version": "prediction-display-cutoffs-v1",
-      "version_id": "120739a9-e137-4788-958e-66825beddd31",
+      "version_id": "3ddb18b9-0e77-48de-ab7f-5d5dad938fc5",
       "market_interpretation": {
         "schema_version": "writer-market-interpretation-v1",
         "spread": {
           "status": "available",
           "margin_perspective": "home_minus_away",
-          "model_home_margin": 2.5,
-          "market_implied_home_margin": 1.5,
-          "spread_edge": 1.0,
-          "ats_lean": "home",
+          "model_home_margin": -2.5,
+          "market_implied_home_margin": -1.5,
+          "spread_edge": -1.0,
+          "ats_lean": "away",
           "ats_lean_reference": {
-            "side": "home",
-            "team_id": 1610612765,
-            "team_name": "活塞",
+            "side": "away",
+            "team_id": 1610612738,
+            "team_name": "凯尔特人",
             "line": -1.5,
-            "display": "活塞 -1.5"
+            "display": "凯尔特人 -1.5"
           },
-          "market_quote_id": "ddcc9552f8d4bfd9eeabd33b891c2e48db81588f336a91717638a9c7ff92df0b"
+          "market_quote_id": "45919d6bd1cd1acfc5a154a9008f59e4ef1717cda69c7b27dbbe7371d33d654a"
         },
         "total": {
           "status": "available",
-          "model_total": 224.5,
-          "market_total": 222.5,
-          "total_edge": 2.0,
+          "model_total": 222.5,
+          "market_total": 218.5,
+          "total_edge": 4.0,
           "total_lean": "over",
-          "market_quote_id": "ddcc9552f8d4bfd9eeabd33b891c2e48db81588f336a91717638a9c7ff92df0b"
+          "market_quote_id": "45919d6bd1cd1acfc5a154a9008f59e4ef1717cda69c7b27dbbe7371d33d654a"
         }
       },
       "cutoffs": {
-        "input_cutoff_at": "2026-10-14T15:08:24.871001+00:00",
-        "feature_cutoff_at": null,
+        "input_cutoff_at": "2026-10-20T13:18:10.717764+00:00",
+        "feature_cutoff_at": "2026-10-20T12:59:53.466632+00:00",
         "roster_context_cutoff_at": null
       }
     },
     "version": {
       "analysis_contract_version": "two-stage-forecast-v1",
-      "base_input_hash": "c83ec544596660f50dbfe76f331ab1bcd5dd3dbbf8ada7f648692b99bab7d725",
+      "base_input_hash": "30a6b998f06a51b93648eee4e8d6228041ee70806269b4cac1e67e222b9dca00",
       "editorial_material": [
         {
           "effect": "uncertainty",
           "evidence_ids": [
-            "48eff2a82ad02ce5c6abbdc00ab769965e35153aa81253c6a98c2dcb0595de5a",
-            "6e2fc5bf914c24a807bce49873f9935724b41add6bb747a6b986603c718f2f4e",
-            "ab2d7bb2121b7e583e9966bc73f14332f705e88582037b590831456deebdfae9",
-            "d35f236c0f0e71f4e81c0231b8b83a22806abf958d00f5ca16525ba874ffa4fb"
+            "846cd3287b3c326697aba00a7925f877956f4ac941517e582d2393564f7adcb4",
+            "8da2915381b59b1c089a8e1338e85e378299e7135d8bc74e75c4155dae2ca6c6",
+            "979ce555348c5bf359e1ef38d6956915cf7e1c9f411268d7133f764ac0998fc7",
+            "cd17cc86807c33b145df0cef92901ba986899d78d80bf2d97a02a9b7b01de02d"
           ],
           "pregame_plan": {
-            "key_matchup": "Cunningham 挡拆 vs 波士顿换防与 White/Pritchard 后场",
+            "key_matchup": "塔图姆/乔治锋线 vs 活塞前场防守",
             "lineups": [
               {
                 "basis": "agent_expected",
                 "candidates": [
+                  "Isaiah Joe",
                   "Ronald Holland II",
                   "Daniss Jenkins",
-                  "Isaiah Joe",
-                  "Kevin Huerter",
+                  "Javonte Green",
                   "Paul Reed"
                 ],
                 "evidence_ids": [
-                  "48eff2a82ad02ce5c6abbdc00ab769965e35153aa81253c6a98c2dcb0595de5a",
-                  "6e2fc5bf914c24a807bce49873f9935724b41add6bb747a6b986603c718f2f4e"
+                  "979ce555348c5bf359e1ef38d6956915cf7e1c9f411268d7133f764ac0998fc7",
+                  "846cd3287b3c326697aba00a7925f877956f4ac941517e582d2393564f7adcb4"
                 ],
                 "players": [
                   "Cade Cunningham",
@@ -1416,30 +1545,29 @@
                   "Duncan Robinson",
                   "John Collins"
                 ],
-                "rationale": "以上赛季分钟前八与休赛期引援推断：Cunningham/Duren/Thompson/Robinson 为延续核心，Collins 顶替 Harris 进入前场。",
+                "rationale": "以上赛季核心分钟与休赛期引援推断，坎宁安、杜伦、汤普森、罗宾逊为回归主力，科林斯补前场。",
                 "side": "home"
               },
               {
-                "basis": "agent_expected",
+                "basis": "source_expected",
                 "candidates": [
-                  "Sam Hauser",
-                  "Baylor Scheierman",
-                  "Jordan Walsh",
                   "Mitchell Robinson",
+                  "Baylor Scheierman",
+                  "Sam Hauser",
+                  "Hugo Gonzalez",
                   "Mike Conley"
                 ],
                 "evidence_ids": [
-                  "48eff2a82ad02ce5c6abbdc00ab769965e35153aa81253c6a98c2dcb0595de5a",
-                  "d35f236c0f0e71f4e81c0231b8b83a22806abf958d00f5ca16525ba874ffa4fb"
+                  "8da2915381b59b1c089a8e1338e85e378299e7135d8bc74e75c4155dae2ca6c6"
                 ],
                 "players": [
-                  "Derrick White",
                   "Payton Pritchard",
-                  "Jayson Tatum",
+                  "Derrick White",
                   "Paul George",
+                  "Jayson Tatum",
                   "Neemias Queta"
                 ],
-                "rationale": "White/Pritchard/Queta 为上赛季留队主力，Tatum 与 George 为报道中的新核心组合；Brown 已离队，故不列入。",
+                "rationale": "来源预测首发：普里查德、怀特、乔治、塔图姆、奎塔；罗宾逊等为关键替补。",
                 "side": "away"
               }
             ],
@@ -1447,130 +1575,126 @@
               {
                 "basis": "agent_estimate",
                 "evidence_ids": [
-                  "48eff2a82ad02ce5c6abbdc00ab769965e35153aa81253c6a98c2dcb0595de5a"
+                  "cd17cc86807c33b145df0cef92901ba986899d78d80bf2d97a02a9b7b01de02d"
                 ],
-                "minutes_max": 38,
+                "minutes_max": 36,
+                "minutes_min": 30,
+                "player_name": "Jayson Tatum",
+                "rationale": "赛前报道状态良好，预计正常核心负荷，但揭幕战无确认分钟限制。",
+                "side": "away"
+              },
+              {
+                "basis": "agent_estimate",
+                "evidence_ids": [
+                  "979ce555348c5bf359e1ef38d6956915cf7e1c9f411268d7133f764ac0998fc7"
+                ],
+                "minutes_max": 37,
                 "minutes_min": 32,
                 "player_name": "Cade Cunningham",
-                "rationale": "上赛季场均 23.9 分 9.9 助攻的绝对核心，揭幕战预计正常高负荷，但无官方限时信息。",
+                "rationale": "上赛季核心持球人，预计正常主力负荷。",
                 "side": "home"
-              },
-              {
-                "basis": "agent_estimate",
-                "evidence_ids": [
-                  "ab2d7bb2121b7e583e9966bc73f14332f705e88582037b590831456deebdfae9"
-                ],
-                "minutes_max": 34,
-                "minutes_min": 26,
-                "player_name": "Jayson Tatum",
-                "rationale": "跟腱伤后复出，负荷存在不确定性；区间为篮球判断，非官方限时。",
-                "side": "away"
-              },
-              {
-                "basis": "agent_estimate",
-                "evidence_ids": [
-                  "d35f236c0f0e71f4e81c0231b8b83a22806abf958d00f5ca16525ba874ffa4fb"
-                ],
-                "minutes_max": 34,
-                "minutes_min": 28,
-                "player_name": "Paul George",
-                "rationale": "新加盟核心，预计首发并承担主要持球，但磨合与状态未知。",
-                "side": "away"
               }
             ],
             "uncertainty": [
-              "双方首发均未确认，以上为分析性预计。",
-              "Tatum 与 George 的实际出场与负荷无公开证据。",
-              "活塞新前场组合的轮换与角色分配未验证。"
+              "双方首发均未官方确认",
+              "揭幕战负荷分配未知"
             ]
           },
           "summary": "本场预计首发与核心球员负荷"
         }
       ],
       "evidence_index": {
-        "0e0be2cf1aece442f98d77c964070a3720efe93789bf6a9a86a7cbd6a1dd6fe4": {
-          "section": "web_context",
-          "source_type": "Fact"
-        },
-        "2489de7afd91f10884de2af18fcae81376c55fa57d7e03caf34ab332e0dbeba9": {
-          "section": "matchup_history",
-          "source_type": "Fact"
-        },
-        "48eff2a82ad02ce5c6abbdc00ab769965e35153aa81253c6a98c2dcb0595de5a": {
-          "section": "roster_context",
-          "source_type": "Fact"
-        },
-        "5642ba526f0acbfd4c02b5d699731ac4ed9cede93efa2d13984b361463ca542a": {
-          "section": "web_context",
-          "source_type": "Fact"
-        },
-        "65376eb3908159982e362cad2715e66c9ccbe0f4bbd44717e6dd88076cff7df9": {
-          "section": "team_form",
-          "source_type": "Fact"
-        },
-        "65dea88f25bf52c0a9dcd645b36b9f61a0ce40dfe193d9337acdfd184311d3a2": {
-          "section": "matchup",
-          "source_type": "Fact"
-        },
-        "66a7cf4e4050ec2916a09c2d9ae4460580666deb9a03fceb995b3082bc5ac17a": {
-          "section": "research_status",
-          "source_type": "Context"
-        },
-        "684606e58d33f59deaf94bbc531a3db536be4ace645f253088ac4bd152cbb02d": {
-          "section": "game_identity",
-          "source_type": "Fact"
-        },
-        "6e2fc5bf914c24a807bce49873f9935724b41add6bb747a6b986603c718f2f4e": {
-          "section": "web_context",
-          "source_type": "Fact"
-        },
-        "949f6b565bbab7ca9c490c28c25d507dfc0465d1628af672b7ba576f28ec6c9f": {
-          "section": "web_context",
-          "source_type": "Fact"
-        },
-        "978889a53516cf73ded5fcdc497015dcb94925128cbe71c8a9796d5a714ef83d": {
-          "section": "season_phase",
-          "source_type": "Fact"
-        },
-        "992065c1cd01f27c0fab5ab753736d8efbab4425bf5e9999590db96fe5804f52": {
+        "030f501bba45faa969bf8043541ab183782420dcdb125dadcbde3740263baac8": {
           "section": "season_form",
           "source_type": "Fact"
         },
-        "ab2d7bb2121b7e583e9966bc73f14332f705e88582037b590831456deebdfae9": {
+        "0de644cad4d520411a195fa8a94b67f03779c1474c07e84b3b2b387002257573": {
           "section": "web_context",
           "source_type": "Fact"
         },
-        "ad00dad5a352ed24d003e44393f69ab1b3124f4051f3e64ec4025dab5e23353f": {
+        "1c941cdad8f2fa1729c30dd2df254eb79c64537fa82e730c70260fe9a934cfc7": {
+          "section": "matchup",
+          "source_type": "Fact"
+        },
+        "1d2d66705412890d0bf7711a5c604494bbc1e2475e24fcb4e71ef4dd8b181ba1": {
+          "section": "availability",
+          "source_type": "Fact"
+        },
+        "2751a4174d6820ae16b51ed5936405d4b627d85fe8d62c51a773c544707a7955": {
           "section": "web_context",
           "source_type": "Fact"
         },
-        "b4598ed4373f6415e2129007abd4f1ce82190666e0162ea3e3e75fe1ca82e1b4": {
-          "section": "model_facts",
+        "3028ebde3cdc02709903afccf5320cbe99eb4377a44295016b81b03c04225bde": {
+          "section": "season_phase",
           "source_type": "Fact"
         },
-        "be3be9dc297ed2c87986dced4f8cb74e1cb812d3b8dc627cd1a0460239f4aff8": {
-          "section": "web_context",
+        "3a34cc04321cde3d72b4482ade988347bfee0bb83f0cc8d3e7bf3ab8eabc15cb": {
+          "section": "game_identity",
           "source_type": "Fact"
         },
-        "d35f236c0f0e71f4e81c0231b8b83a22806abf958d00f5ca16525ba874ffa4fb": {
-          "section": "web_context",
-          "source_type": "Fact"
-        },
-        "ddcc9552f8d4bfd9eeabd33b891c2e48db81588f336a91717638a9c7ff92df0b": {
+        "45919d6bd1cd1acfc5a154a9008f59e4ef1717cda69c7b27dbbe7371d33d654a": {
           "section": "web_context",
           "source_type": "MarketSnapshot"
         },
-        "dec07a5489a4cfc51b4c6e8217e88250b28cb311c7c1a3e39db1fa406dcf4185": {
-          "section": "prediction",
-          "source_type": "ModelForecast"
+        "45da8fdf885147047eb11bc3455039f0a71669ae6e1220eaeaf7a8f91bc4d7ab": {
+          "section": "availability",
+          "source_type": "official_nba_injury_pdf"
         },
-        "f94e4882aa7921b9b0a8dc23e8c1f6fc2d407b46ae16cca26cda9df6679acc33": {
+        "4a31d193f3fce2045cf213f16c6df046ecc1cc187a8ce2242e48e90f56481334": {
+          "section": "model_facts",
+          "source_type": "Fact"
+        },
+        "56b4adbfb407eeb462ca8e83d9be9d46640be7028cb1b0446dc895fea750ebd0": {
+          "section": "research_status",
+          "source_type": "Context"
+        },
+        "846cd3287b3c326697aba00a7925f877956f4ac941517e582d2393564f7adcb4": {
           "section": "web_context",
           "source_type": "Fact"
         },
-        "fef4afd0ccf73036c2e5a20a9d5ea893a36aad87e83e2acea349ad73ae5070da": {
+        "8da2915381b59b1c089a8e1338e85e378299e7135d8bc74e75c4155dae2ca6c6": {
+          "section": "web_context",
+          "source_type": "Fact"
+        },
+        "979ce555348c5bf359e1ef38d6956915cf7e1c9f411268d7133f764ac0998fc7": {
+          "section": "roster_context",
+          "source_type": "Fact"
+        },
+        "9c3d0a17b390b2801a644ad3c620eb2f593a26cdda5414433f1670461017def9": {
+          "section": "web_context",
+          "source_type": "Fact"
+        },
+        "9e64f0ef6e8c0373e0a92c788bb82659024ad3410c4682c2db3a951467f6ac3a": {
+          "section": "web_context",
+          "source_type": "Fact"
+        },
+        "b6f02d1b4f77238af3bd50edc1a87f4ff934a7d3f8a45e6d707d5f88458df413": {
+          "section": "prediction",
+          "source_type": "ModelForecast"
+        },
+        "bdddc301178334b47782e9b9741ccb4c2775bd4285af08f1a40d6298dd3ab146": {
+          "section": "team_form",
+          "source_type": "Fact"
+        },
+        "c2774910a5d123d04849707ec8a2d290fb2b0352c5713101902cf599c8c56863": {
+          "section": "web_context",
+          "source_type": "Fact"
+        },
+        "c6646abec1135f8e6c56b0bd2c587d4580ac2eb561f0338986daafc674d37414": {
+          "section": "web_context",
+          "source_type": "Fact"
+        },
+        "c880574b57cee250720352906f98b29e37377c5e75210294f35c465e0584a413": {
           "section": "fact_context",
           "source_type": "Context"
+        },
+        "cd17cc86807c33b145df0cef92901ba986899d78d80bf2d97a02a9b7b01de02d": {
+          "section": "web_context",
+          "source_type": "Fact"
+        },
+        "d96d64e69c7d40ca431945a8c99114d884f948cc1c0f1d257a4d7dc69e140255": {
+          "section": "matchup_history",
+          "source_type": "Fact"
         },
         "public-market-fanduel-20260918-bos-det": {
           "section": "web_context",
@@ -1584,13 +1708,12 @@
         "home_team_id": 1610612765,
         "scheduled_tipoff": "2026-10-20T19:00:00+00:00"
       },
-      "generated_at": "2026-10-14T15:08:24.930801+00:00",
-      "input_cutoff_at": "2026-10-14T15:08:24.871001+00:00",
+      "generated_at": "2026-10-20T13:18:20.006766+00:00",
+      "input_cutoff_at": "2026-10-20T13:18:10.717764+00:00",
       "input_snapshot": {
         "away": {
           "abbreviation": "BOS",
           "accent": "#007A33",
-          "espn_team_id": "2",
           "id": 1610612738,
           "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/bos.png",
           "name": "Boston Celtics",
@@ -1598,8 +1721,79 @@
         },
         "background": {
           "availability": {
-            "message": "可靠伤病信息暂不可用。",
-            "status": "unavailable"
+            "captured_at": "2026-10-20T13:18:09.884284+00:00",
+            "coverage": "complete",
+            "game_id": "espn:401909088",
+            "parser_version": "nba-official-injury-live-v3",
+            "records": [
+              {
+                "captured_at": "2026-10-20T13:18:09.884284+00:00",
+                "game_id": "espn:401909088",
+                "parser_version": "nba-official-injury-live-v3",
+                "player_name": "Devin Carter",
+                "reason": "Injury/Illness - Illness",
+                "source_published_at": "2026-10-20T13:15:00+00:00",
+                "source_sha256": "1bd6e83339bcf451822d7f15428f943995128b4094494e8bfa0059d971284c82",
+                "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_15AM.pdf",
+                "status": "out",
+                "team_id": 1610612738
+              },
+              {
+                "captured_at": "2026-10-20T13:18:09.884284+00:00",
+                "game_id": "espn:401909088",
+                "parser_version": "nba-official-injury-live-v3",
+                "player_name": "Elijah Harkless",
+                "reason": "-",
+                "source_published_at": "2026-10-20T13:15:00+00:00",
+                "source_sha256": "1bd6e83339bcf451822d7f15428f943995128b4094494e8bfa0059d971284c82",
+                "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_15AM.pdf",
+                "status": "available",
+                "team_id": 1610612765
+              },
+              {
+                "captured_at": "2026-10-20T13:18:09.884284+00:00",
+                "game_id": "espn:401909088",
+                "parser_version": "nba-official-injury-live-v3",
+                "player_name": "Isaac Jones",
+                "reason": "G League - Two-Way",
+                "source_published_at": "2026-10-20T13:15:00+00:00",
+                "source_sha256": "1bd6e83339bcf451822d7f15428f943995128b4094494e8bfa0059d971284c82",
+                "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_15AM.pdf",
+                "status": "out",
+                "team_id": 1610612765
+              },
+              {
+                "captured_at": "2026-10-20T13:18:09.884284+00:00",
+                "game_id": "espn:401909088",
+                "parser_version": "nba-official-injury-live-v3",
+                "player_name": "Taurean Prince",
+                "reason": "Personal Reasons",
+                "source_published_at": "2026-10-20T13:15:00+00:00",
+                "source_sha256": "1bd6e83339bcf451822d7f15428f943995128b4094494e8bfa0059d971284c82",
+                "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_15AM.pdf",
+                "status": "out",
+                "team_id": 1610612765
+              },
+              {
+                "captured_at": "2026-10-20T13:18:09.884284+00:00",
+                "game_id": "espn:401909088",
+                "parser_version": "nba-official-injury-live-v3",
+                "player_name": "Ugonna Onyenso",
+                "reason": "G League - Two-Way",
+                "source_published_at": "2026-10-20T13:15:00+00:00",
+                "source_sha256": "1bd6e83339bcf451822d7f15428f943995128b4094494e8bfa0059d971284c82",
+                "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_15AM.pdf",
+                "status": "out",
+                "team_id": 1610612765
+              }
+            ],
+            "report_date": "2026-10-20",
+            "report_id": "12517d3fb207315312363ea36b861d6d166d92496ba52080f9d6cac3da4176be",
+            "report_time": "09:15",
+            "source_published_at": "2026-10-20T13:15:00+00:00",
+            "source_sha256": "1bd6e83339bcf451822d7f15428f943995128b4094494e8bfa0059d971284c82",
+            "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_15AM.pdf",
+            "status": "available"
           },
           "market": null,
           "recent_form": {
@@ -1625,17 +1819,30 @@
             }
           },
           "schedule": {
-            "away_back_to_back": 0.0,
-            "away_rest_days": 7.0,
-            "home_back_to_back": 0.0,
-            "home_rest_days": 7.0
+            "away": {
+              "back_to_back": null,
+              "basis": null,
+              "reason": "no_cutoff_eligible_schedule_evidence",
+              "source_refs": [],
+              "status": "unavailable"
+            },
+            "away_back_to_back": null,
+            "away_rest_days": null,
+            "home": {
+              "back_to_back": null,
+              "basis": null,
+              "reason": "no_cutoff_eligible_schedule_evidence",
+              "source_refs": [],
+              "status": "unavailable"
+            },
+            "home_back_to_back": null,
+            "home_rest_days": null
           }
         },
         "game_type": "regular_season",
         "home": {
           "abbreviation": "DET",
           "accent": "#C8102E",
-          "espn_team_id": "8",
           "id": 1610612765,
           "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/det.png",
           "name": "Detroit Pistons",
@@ -1644,8 +1851,8 @@
         "id": "espn:401909088",
         "matchup_history": {
           "away_team_id": 1610612738,
-          "context_hash": "3d9564829f9808dbb189a9c53e2817a4dc8586996793cb300a3157d3215149b3",
-          "cutoff": "2026-10-14T14:40:43.618541+00:00",
+          "context_hash": "c2b6246ae2bcf8e8d46179238ec50c3323ce092d4578a3f4ddd867d0766f5974",
+          "cutoff": "2026-10-20T12:59:53.466632+00:00",
           "game_id": "espn:401909088",
           "home_team_id": 1610612765,
           "matchup_relevance": "medium",
@@ -1823,11 +2030,87 @@
           {
             "reason": "longitudinal minutes/availability and roster roles not sufficiently verified; no player impact conclusion",
             "section": "key_players"
+          },
+          {
+            "reason": "ValueError: residual_model_integrity:win_probability",
+            "section": "residual_model"
           }
         ],
         "neutral_site": false,
-        "postgame": {
-          "status": "unavailable"
+        "official_injury_report": {
+          "captured_at": "2026-10-20T13:18:09.884284+00:00",
+          "coverage": "complete",
+          "game_id": "espn:401909088",
+          "parser_version": "nba-official-injury-live-v3",
+          "records": [
+            {
+              "captured_at": "2026-10-20T13:18:09.884284+00:00",
+              "game_id": "espn:401909088",
+              "parser_version": "nba-official-injury-live-v3",
+              "player_name": "Devin Carter",
+              "reason": "Injury/Illness - Illness",
+              "source_published_at": "2026-10-20T13:15:00+00:00",
+              "source_sha256": "1bd6e83339bcf451822d7f15428f943995128b4094494e8bfa0059d971284c82",
+              "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_15AM.pdf",
+              "status": "out",
+              "team_id": 1610612738
+            },
+            {
+              "captured_at": "2026-10-20T13:18:09.884284+00:00",
+              "game_id": "espn:401909088",
+              "parser_version": "nba-official-injury-live-v3",
+              "player_name": "Elijah Harkless",
+              "reason": "-",
+              "source_published_at": "2026-10-20T13:15:00+00:00",
+              "source_sha256": "1bd6e83339bcf451822d7f15428f943995128b4094494e8bfa0059d971284c82",
+              "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_15AM.pdf",
+              "status": "available",
+              "team_id": 1610612765
+            },
+            {
+              "captured_at": "2026-10-20T13:18:09.884284+00:00",
+              "game_id": "espn:401909088",
+              "parser_version": "nba-official-injury-live-v3",
+              "player_name": "Isaac Jones",
+              "reason": "G League - Two-Way",
+              "source_published_at": "2026-10-20T13:15:00+00:00",
+              "source_sha256": "1bd6e83339bcf451822d7f15428f943995128b4094494e8bfa0059d971284c82",
+              "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_15AM.pdf",
+              "status": "out",
+              "team_id": 1610612765
+            },
+            {
+              "captured_at": "2026-10-20T13:18:09.884284+00:00",
+              "game_id": "espn:401909088",
+              "parser_version": "nba-official-injury-live-v3",
+              "player_name": "Taurean Prince",
+              "reason": "Personal Reasons",
+              "source_published_at": "2026-10-20T13:15:00+00:00",
+              "source_sha256": "1bd6e83339bcf451822d7f15428f943995128b4094494e8bfa0059d971284c82",
+              "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_15AM.pdf",
+              "status": "out",
+              "team_id": 1610612765
+            },
+            {
+              "captured_at": "2026-10-20T13:18:09.884284+00:00",
+              "game_id": "espn:401909088",
+              "parser_version": "nba-official-injury-live-v3",
+              "player_name": "Ugonna Onyenso",
+              "reason": "G League - Two-Way",
+              "source_published_at": "2026-10-20T13:15:00+00:00",
+              "source_sha256": "1bd6e83339bcf451822d7f15428f943995128b4094494e8bfa0059d971284c82",
+              "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_15AM.pdf",
+              "status": "out",
+              "team_id": 1610612765
+            }
+          ],
+          "report_date": "2026-10-20",
+          "report_id": "12517d3fb207315312363ea36b861d6d166d92496ba52080f9d6cac3da4176be",
+          "report_time": "09:15",
+          "source_published_at": "2026-10-20T13:15:00+00:00",
+          "source_sha256": "1bd6e83339bcf451822d7f15428f943995128b4094494e8bfa0059d971284c82",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_15AM.pdf",
+          "status": "published"
         },
         "prediction": {
           "available": true,
@@ -1838,6 +2121,35 @@
           "winner_probability": 0.5490147634433887,
           "winner_team_id": 1610612765
         },
+        "public_market_reference": {
+          "away_moneyline": -122.0,
+          "away_spread": -1.5,
+          "captured_at": "2026-10-20T13:08:37.211566+00:00",
+          "eligible_prediction_input": false,
+          "expected_home_margin": -1.5,
+          "game_identity": {
+            "away_team": "Boston Celtics",
+            "away_team_id": 1610612738,
+            "game_id": "espn:401909088",
+            "game_type": "regular_season",
+            "home_team": "Detroit Pistons",
+            "home_team_id": 1610612765,
+            "registered_game": true,
+            "scheduled_tipoff": "2026-10-20T19:00Z"
+          },
+          "home_moneyline": 102.0,
+          "home_spread": 1.5,
+          "observed_at": "2026-10-20T13:08:37.211566+00:00",
+          "published_at": null,
+          "source_tier": 1,
+          "source_title": "Draft Kings current odds",
+          "source_url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909088/competitions/401909088/odds",
+          "sportsbook": "Draft Kings",
+          "status": "available",
+          "time_semantics": "observed current sportsbook quote; publication time unknown",
+          "total": 218.5,
+          "usage": "qualified_market_for_ai_review"
+        },
         "registered_game": true,
         "roster_context": {
           "teams": {
@@ -1845,7 +2157,7 @@
               "confirmed_starters": null,
               "current_rotation": null,
               "current_team_roster": {
-                "observed_at": "2026-10-14T14:40:43.452759+00:00",
+                "observed_at": "2026-10-20T12:59:51.369821+00:00",
                 "players": [
                   {
                     "name": "Devin Carter"
@@ -1857,9 +2169,6 @@
                     "name": "Mike Conley"
                   },
                   {
-                    "name": "Tucker DeVries"
-                  },
-                  {
                     "name": "Luka Garza"
                   },
                   {
@@ -1869,16 +2178,10 @@
                     "name": "Hugo Gonzalez"
                   },
                   {
-                    "name": "Hayden Gray"
-                  },
-                  {
                     "name": "Ron Harper Jr."
                   },
                   {
                     "name": "Sam Hauser"
-                  },
-                  {
-                    "name": "Gabe McGlothan"
                   },
                   {
                     "name": "Dillon Mitchell"
@@ -1899,9 +2202,6 @@
                     "name": "Jayson Tatum"
                   },
                   {
-                    "name": "Milos Uzan"
-                  },
-                  {
                     "name": "Jordan Walsh"
                   },
                   {
@@ -1912,10 +2212,10 @@
                   }
                 ],
                 "source": {
-                  "captured_at": "2026-10-14T14:40:43.452759+00:00",
-                  "observed_at": "2026-10-14T14:40:43.452759+00:00",
+                  "captured_at": "2026-10-20T12:59:51.369821+00:00",
+                  "observed_at": "2026-10-20T12:59:51.369821+00:00",
                   "parser_version": "official-team-rendered-roster-v1",
-                  "sha256": "fde6bc0109f6dd2ffeec044f65be8b1db25680b82bd82fb52f2bd838adab31d9",
+                  "sha256": "e8b0b926c26aea7c678c492141a3c6c4f56e0723d26cd2f3fa3768530ddb2132",
                   "source_type": "espn_current_team_roster",
                   "status": "success",
                   "url": "https://www.espn.com/nba/team/roster/_/name/bos/boston-celtics"
@@ -1929,7 +2229,7 @@
               "confirmed_starters": null,
               "current_rotation": null,
               "current_team_roster": {
-                "observed_at": "2026-10-14T14:40:43.246626+00:00",
+                "observed_at": "2026-10-20T12:59:53.282216+00:00",
                 "players": [
                   {
                     "name": "John Collins"
@@ -1984,16 +2284,13 @@
                   },
                   {
                     "name": "Ausar Thompson"
-                  },
-                  {
-                    "name": "Brice Williams"
                   }
                 ],
                 "source": {
-                  "captured_at": "2026-10-14T14:40:43.246626+00:00",
-                  "observed_at": "2026-10-14T14:40:43.246626+00:00",
+                  "captured_at": "2026-10-20T12:59:53.282216+00:00",
+                  "observed_at": "2026-10-20T12:59:53.282216+00:00",
                   "parser_version": "official-team-rendered-roster-v1",
-                  "sha256": "d4866e30716742bf96ca785f5b2be544fe3c30db4bced5fe74d8a65dc222c1fa",
+                  "sha256": "c0fc0be6e4daa32b9284f1b7191013de0ca55875fab77a1698bdb39e19f2403d",
                   "source_type": "espn_current_team_roster",
                   "status": "success",
                   "url": "https://www.espn.com/nba/team/roster/_/name/det/detroit-pistons"
@@ -2006,11 +2303,10 @@
           }
         },
         "schedule_revision": 1,
-        "season": 2027,
         "season_form": {
           "competition_scope": "all competitive games in each season",
-          "context_hash": "1c3528a6ce5e604c032d3af666bef03c18c8fcbe74fe112d7aa22c84dd2d5c56",
-          "cutoff": "2026-10-14T14:40:43.618541+00:00",
+          "context_hash": "e6afea389b19e796a6e296ded39eb4d583b0d0544f541f34c40f2d9b93ee676e",
+          "cutoff": "2026-10-20T12:59:53.466632+00:00",
           "game_id": "espn:401909088",
           "numeric_model_usage": false,
           "season_start": 2026,
@@ -2166,184 +2462,180 @@
           "primary_evidence": "no_local_current_season_rows; league_opener_unverified"
         },
         "season_start": 2026,
-        "source": {},
+        "source": {
+          "schedule_captured_at": "2026-10-20T12:59:47.455891+00:00"
+        },
         "status": "scheduled",
         "technical": {
-          "cutoff": "2026-10-14T14:46:07.725655+00:00"
+          "cutoff": "2026-10-20T12:59:53.466632+00:00",
+          "fact_context_cutoff": "2026-10-20T12:59:53.466632+00:00",
+          "source_label": "开发期赛前预测快照"
         },
         "tipoff": "2026-10-20T19:00:00+00:00",
         "venue": "Little Caesars Arena"
       },
       "judgment": {
-        "analysis_article": "这场揭幕战真正要看的，是活塞的延续性能不能压过凯尔特人的磨合期。\n\n活塞上赛季的进攻枢纽是坎宁安，场均23.9分9.9助攻，他的挡拆发起决定了球队半场进攻的下限。今天他面对的是一套变化不小的波士顿后场：怀特和普里查德都留队，但布朗离队后，外线能接管对方核心持球人的资源变少了。如果坎宁安能反复把杜伦拉进挡拆、逼出换防，活塞就有机会在半场阵地里稳定拿分，而不是靠零散的单打。杜伦上赛季场均19.5分10.5篮板，是这套挡拆最直接的终结点；汤普森则负责在防守端对上塔图姆或乔治，他的对位质量会直接影响活塞能不能把比赛拖进自己想要的半场节奏。\n\n凯尔特人这边，问题不在天赋，而在组合。塔图姆跟腱伤后只打了16场常规赛，复出后的状态和负荷都是未知数；乔治是新加入的主要持球点，两人之间的球权分配、无球跑位和挡拆后的分球路线，都需要比赛来验证。怀特和普里查德上赛季分别有16.5分5.4助攻和17.0分5.2助攻的输出，他们是这套阵容里最稳定的外线火力，但让他们去承担更多持球发起，和让他们在塔图姆、乔治身边做接应，是两种完全不同的角色。活塞的锋线防守如果能在这两人身上施加压力，波士顿的进攻就容易退化成单打。\n\n第25秒预计活塞赢2.5分，市场隐含的主场优势只有1.5分左右，说明模型认可活塞的主场和延续性，但不认为他们能轻松拉开。总分方面，第25秒给出224.5，略高于市场基准，理由是揭幕战防守沟通和轮换都没定型，实际得分环境可能比上赛季季后赛样本更松。这个判断有道理，但也要看塔图姆和乔治的实际出场时间——如果两人中有一人受限，波士顿的进攻上限会明显下降，比赛反而可能变得更慢、更低分。\n\n我的判断是：活塞的赢面来自坎宁安的挡拆和杜伦的内线终结，以及汤普森对波士顿新锋线的消耗；凯尔特人的机会则在于怀特、普里查德的外线手感，以及塔图姆、乔治能否在有限时间里打出高效单打。最可能改变比赛的变量是塔图姆的负荷——如果他正常出战且状态接近伤前，这场会更接近五五开；如果他受限，活塞的主场优势会被放大。",
+        "analysis_article": "上赛季，活塞四次碰凯尔特人赢了三场，最近一次只赢一分。那支拿下东部第一的球队，当然有底气在主场再迎老对手。但这次塔图姆身边换成了乔治：过去的对位经验还管不管用，是这场揭幕战最值得看的地方。\n\n我略站凯尔特人，让1.5分可以支持。\n\n我更看重的是塔图姆和乔治这两个持球点怎么让活塞的防守做选择。塔图姆赛前被描述为状态完全恢复、动作到位，乔治也说他看起来爆发力、投篮和防守都回来了。如果这两个人同时在场，活塞的汤普森和科林斯就得决定：换防之后谁去顶塔图姆的中距离，谁去追乔治绕出来的接球。如果协防提前向持球人靠拢，弱侧就可能出现接球投篮的机会；协防迟疑，塔图姆又有空间进入罚球线附近。活塞前场体型够，但揭幕战第一次真打，轮转的默契还没经过检验，这种迟疑很容易在第二节和第三节累积成几次空位三分和二次进攻。凯尔特人不需要打出一波流，只要每个回合都比对手多找到一次错位，分差就会慢慢往客队那边偏。\n\n活塞的还手在坎宁安手里。他上赛季是这支球队的进攻发动机，凯尔特人后场用怀特和普里查德去对，身高和对抗都不算压制。坎宁安如果能反复叫挡拆，把奎塔拉出来，再找到顺下的杜伦或者外弹的科林斯，活塞的进攻就能咬住。主场能量也会帮他们，揭幕夜的底特律不会安静。所以这场我预期的是客队小胜，不是拉开。\n\n总分我倾向大分，222.5比市场高4分，但把握不如让分。揭幕战双方都在试阵容，防守轮转没磨好，容易出现空位和转换；坎宁安和塔图姆都是能推节奏的人。不过这只是弱倾向——如果两队都打得谨慎、失误偏多，回合数掉下来，大分就不成立。\n\n开球后先看活塞怎么处理塔图姆的挡拆：能靠换防守住第一下，就能让其他人少补位；一旦需要夹击，凯尔特人能不能及时把球送到乔治和弱侧射手手里，才是客队把小优势攒到终场的关键。",
         "analysis_article_evidence_ids": [
-          "2489de7afd91f10884de2af18fcae81376c55fa57d7e03caf34ab332e0dbeba9",
-          "65376eb3908159982e362cad2715e66c9ccbe0f4bbd44717e6dd88076cff7df9",
-          "6e2fc5bf914c24a807bce49873f9935724b41add6bb747a6b986603c718f2f4e",
-          "978889a53516cf73ded5fcdc497015dcb94925128cbe71c8a9796d5a714ef83d",
-          "ab2d7bb2121b7e583e9966bc73f14332f705e88582037b590831456deebdfae9",
-          "ad00dad5a352ed24d003e44393f69ab1b3124f4051f3e64ec4025dab5e23353f",
-          "d35f236c0f0e71f4e81c0231b8b83a22806abf958d00f5ca16525ba874ffa4fb",
-          "dec07a5489a4cfc51b4c6e8217e88250b28cb311c7c1a3e39db1fa406dcf4185",
-          "f94e4882aa7921b9b0a8dc23e8c1f6fc2d407b46ae16cca26cda9df6679acc33"
+          "45919d6bd1cd1acfc5a154a9008f59e4ef1717cda69c7b27dbbe7371d33d654a",
+          "846cd3287b3c326697aba00a7925f877956f4ac941517e582d2393564f7adcb4",
+          "9c3d0a17b390b2801a644ad3c620eb2f593a26cdda5414433f1670461017def9",
+          "b6f02d1b4f77238af3bd50edc1a87f4ff934a7d3f8a45e6d707d5f88458df413",
+          "bdddc301178334b47782e9b9741ccb4c2775bd4285af08f1a40d6298dd3ab146",
+          "c2774910a5d123d04849707ec8a2d290fb2b0352c5713101902cf599c8c56863",
+          "c6646abec1135f8e6c56b0bd2c587d4580ac2eb561f0338986daafc674d37414",
+          "cd17cc86807c33b145df0cef92901ba986899d78d80bf2d97a02a9b7b01de02d",
+          "d96d64e69c7d40ca431945a8c99114d884f948cc1c0f1d257a4d7dc69e140255"
         ],
         "confidence": "low",
-        "core_question": "在双方阵容均大幅变动、且无确认伤病与首发的揭幕战中，延续性更好的活塞主场能否压过凯尔特人新核心组合的磨合期？",
+        "core_question": "揭幕战双方大改阵容后，凯尔特人的长期效率优势能否压过活塞的主场与交手优势？",
         "final_prediction": {
           "evidence_ids": [
-            "2489de7afd91f10884de2af18fcae81376c55fa57d7e03caf34ab332e0dbeba9",
-            "65376eb3908159982e362cad2715e66c9ccbe0f4bbd44717e6dd88076cff7df9",
-            "6e2fc5bf914c24a807bce49873f9935724b41add6bb747a6b986603c718f2f4e",
-            "978889a53516cf73ded5fcdc497015dcb94925128cbe71c8a9796d5a714ef83d",
-            "ab2d7bb2121b7e583e9966bc73f14332f705e88582037b590831456deebdfae9",
-            "ad00dad5a352ed24d003e44393f69ab1b3124f4051f3e64ec4025dab5e23353f",
-            "d35f236c0f0e71f4e81c0231b8b83a22806abf958d00f5ca16525ba874ffa4fb",
-            "dec07a5489a4cfc51b4c6e8217e88250b28cb311c7c1a3e39db1fa406dcf4185",
-            "f94e4882aa7921b9b0a8dc23e8c1f6fc2d407b46ae16cca26cda9df6679acc33"
+            "45919d6bd1cd1acfc5a154a9008f59e4ef1717cda69c7b27dbbe7371d33d654a",
+            "846cd3287b3c326697aba00a7925f877956f4ac941517e582d2393564f7adcb4",
+            "9c3d0a17b390b2801a644ad3c620eb2f593a26cdda5414433f1670461017def9",
+            "b6f02d1b4f77238af3bd50edc1a87f4ff934a7d3f8a45e6d707d5f88458df413",
+            "bdddc301178334b47782e9b9741ccb4c2775bd4285af08f1a40d6298dd3ab146",
+            "c2774910a5d123d04849707ec8a2d290fb2b0352c5713101902cf599c8c56863",
+            "c6646abec1135f8e6c56b0bd2c587d4580ac2eb561f0338986daafc674d37414",
+            "cd17cc86807c33b145df0cef92901ba986899d78d80bf2d97a02a9b7b01de02d",
+            "d96d64e69c7d40ca431945a8c99114d884f948cc1c0f1d257a4d7dc69e140255"
           ],
           "expected_margin": 2.5,
-          "expected_total": 224.5,
+          "expected_total": 222.5,
           "win_probability": 0.56,
-          "winner_side": "home"
+          "winner_side": "away"
         },
-        "game_script": "揭幕战双方都处于磨合期，开局节奏偏快但失误与防守沟通问题较多。活塞依靠 Cunningham 的挡拆组织与 Duren 的内线终结维持主场微弱领先，凯尔特人则依赖 White/Pritchard 的外线投射与 Tatum-George 的单打回应。比赛大概率在最后几分钟才分出胜负，双方得分环境因防守未定型而略高于模型给出的季后赛样本。",
+        "game_script": "揭幕战双方磨合中，节奏中等偏快。凯尔特人凭锋线效率与整体深度在比赛中段建立小幅领先，活塞靠坎宁安持球与主场能量紧咬，末节分差维持在个位数，客队略占上风。",
         "key_matchup_variables": [
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "48eff2a82ad02ce5c6abbdc00ab769965e35153aa81253c6a98c2dcb0595de5a",
-              "f94e4882aa7921b9b0a8dc23e8c1f6fc2d407b46ae16cca26cda9df6679acc33"
+              "bdddc301178334b47782e9b9741ccb4c2775bd4285af08f1a40d6298dd3ab146",
+              "cd17cc86807c33b145df0cef92901ba986899d78d80bf2d97a02a9b7b01de02d"
             ],
-            "statement": "Cade Cunningham 挡拆发起 vs 波士顿 White/Pritchard 后场与换防体系：Cunningham 是活塞进攻枢纽，上赛季场均 9.9 助攻；波士顿失去 Brown 后外线防守资源变化。 若 Cunningham 能持续制造错位与分球，活塞半场进攻效率将高于模型预期。"
+            "statement": "凯尔特人塔图姆/乔治锋线组合 vs 活塞汤普森/科林斯前场防守：凯尔特人进攻效率依赖锋线持球与投射，活塞前场体型与换防能力决定客队进攻流畅度。 若凯尔特人锋线打出效率，客队拉开分差；若被限制则比赛更接近。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "d35f236c0f0e71f4e81c0231b8b83a22806abf958d00f5ca16525ba874ffa4fb",
-              "ab2d7bb2121b7e583e9966bc73f14332f705e88582037b590831456deebdfae9"
+              "979ce555348c5bf359e1ef38d6956915cf7e1c9f411268d7133f764ac0998fc7",
+              "bdddc301178334b47782e9b9741ccb4c2775bd4285af08f1a40d6298dd3ab146"
             ],
-            "statement": "Jayson Tatum 与 Paul George 的新组合 vs 活塞 Ausar Thompson 领衔的锋线防守：这是波士顿新赛季进攻上限的关键，但两人均存在状态与磨合不确定性。 若组合运转顺畅，波士顿进攻可接近上赛季水准；若磨合生涩，得分效率将明显下滑。"
+            "statement": "坎宁安持球核心 vs 凯尔特人怀特/普里查德后场防守：坎宁安是活塞进攻发动机，凯尔特人后场防守质量决定活塞进攻上限。 坎宁安高效则活塞主场竞争力提升，压低客队优势。"
           }
         ],
-        "model_risk": "Tatum 确认缺阵或明显受限（如出场时间被压缩）。：波士顿进攻上限大幅下降，活塞优势扩大，分差与胜率上调。；Cunningham 或 Duren 出现未预期的缺阵或限时。：活塞进攻组织与内线终结受损，判断可能转向凯尔特人。",
+        "model_risk": "如果塔图姆或乔治实际出场受限或状态明显低于赛前报道，则凯尔特人优势削弱，可能转向活塞或缩小分差。；如果活塞新前场科林斯与奥科里实际角色显著大于预期并打出效率，则活塞主场优势放大，可能翻转胜负方向。",
         "player_analysis": [
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "48eff2a82ad02ce5c6abbdc00ab769965e35153aa81253c6a98c2dcb0595de5a",
-              "6e2fc5bf914c24a807bce49873f9935724b41add6bb747a6b986603c718f2f4e",
-              "ab2d7bb2121b7e583e9966bc73f14332f705e88582037b590831456deebdfae9",
-              "d35f236c0f0e71f4e81c0231b8b83a22806abf958d00f5ca16525ba874ffa4fb",
-              "dec07a5489a4cfc51b4c6e8217e88250b28cb311c7c1a3e39db1fa406dcf4185",
-              "f94e4882aa7921b9b0a8dc23e8c1f6fc2d407b46ae16cca26cda9df6679acc33"
-            ],
-            "player_name": "Cade Cunningham",
-            "statement": "活塞进攻的绝对枢纽，上赛季场均23.9分9.9助攻。今天他的挡拆发起直接决定活塞半场进攻能否稳定运转，也是波士顿后场防守资源变化后最需要限制的点。"
-          },
-          {
-            "classification": "subjective_analysis",
-            "evidence_ids": [
-              "48eff2a82ad02ce5c6abbdc00ab769965e35153aa81253c6a98c2dcb0595de5a"
-            ],
-            "player_name": "Jalen Duren",
-            "statement": "上赛季场均19.5分10.5篮板，是坎宁安挡拆最直接的终结点。他在内线的终结和篮板保护，是活塞对抗波士顿锋线体型的关键。"
-          },
-          {
-            "classification": "subjective_analysis",
-            "evidence_ids": [
-              "48eff2a82ad02ce5c6abbdc00ab769965e35153aa81253c6a98c2dcb0595de5a",
-              "6e2fc5bf914c24a807bce49873f9935724b41add6bb747a6b986603c718f2f4e",
-              "ab2d7bb2121b7e583e9966bc73f14332f705e88582037b590831456deebdfae9",
-              "d35f236c0f0e71f4e81c0231b8b83a22806abf958d00f5ca16525ba874ffa4fb",
-              "dec07a5489a4cfc51b4c6e8217e88250b28cb311c7c1a3e39db1fa406dcf4185",
-              "f94e4882aa7921b9b0a8dc23e8c1f6fc2d407b46ae16cca26cda9df6679acc33"
-            ],
-            "player_name": "Ausar Thompson",
-            "statement": "预计承担对塔图姆或乔治的锋线防守任务。他的对位质量会影响波士顿新核心的出手难度，也决定活塞能否把比赛拖入自己想要的半场节奏。"
-          },
-          {
-            "classification": "subjective_analysis",
-            "evidence_ids": [
-              "48eff2a82ad02ce5c6abbdc00ab769965e35153aa81253c6a98c2dcb0595de5a"
-            ],
-            "player_name": "Duncan Robinson",
-            "statement": "上赛季场均12.2分，是活塞外线最稳定的接应点之一。如果坎宁安的挡拆能吸引协防，他的无球投射是活塞拉开空间的重要出口。"
-          },
-          {
-            "classification": "subjective_analysis",
-            "evidence_ids": [
-              "48eff2a82ad02ce5c6abbdc00ab769965e35153aa81253c6a98c2dcb0595de5a",
-              "6e2fc5bf914c24a807bce49873f9935724b41add6bb747a6b986603c718f2f4e"
-            ],
-            "player_name": "John Collins",
-            "statement": "休赛期顶替哈里斯进入前场轮换，他的运动能力和终结方式会改变活塞挡拆后的内线选择，但具体角色分配尚未验证。"
-          },
-          {
-            "classification": "subjective_analysis",
-            "evidence_ids": [
-              "48eff2a82ad02ce5c6abbdc00ab769965e35153aa81253c6a98c2dcb0595de5a",
-              "6e2fc5bf914c24a807bce49873f9935724b41add6bb747a6b986603c718f2f4e",
-              "ab2d7bb2121b7e583e9966bc73f14332f705e88582037b590831456deebdfae9",
-              "d35f236c0f0e71f4e81c0231b8b83a22806abf958d00f5ca16525ba874ffa4fb",
-              "dec07a5489a4cfc51b4c6e8217e88250b28cb311c7c1a3e39db1fa406dcf4185",
-              "f94e4882aa7921b9b0a8dc23e8c1f6fc2d407b46ae16cca26cda9df6679acc33"
+              "8da2915381b59b1c089a8e1338e85e378299e7135d8bc74e75c4155dae2ca6c6",
+              "979ce555348c5bf359e1ef38d6956915cf7e1c9f411268d7133f764ac0998fc7",
+              "c6646abec1135f8e6c56b0bd2c587d4580ac2eb561f0338986daafc674d37414",
+              "cd17cc86807c33b145df0cef92901ba986899d78d80bf2d97a02a9b7b01de02d"
             ],
             "player_name": "Jayson Tatum",
-            "statement": "跟腱伤后复出，上赛季只打了16场常规赛，状态和负荷都是未知数。他是波士顿进攻上限的关键，若出场时间受限，球队的得分效率会明显下滑。"
+            "statement": "赛前被描述为状态完全恢复，是凯尔特人进攻的轴心；他叫挡拆时活塞的换防选择会决定客队能否持续制造错位。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "48eff2a82ad02ce5c6abbdc00ab769965e35153aa81253c6a98c2dcb0595de5a",
-              "6e2fc5bf914c24a807bce49873f9935724b41add6bb747a6b986603c718f2f4e",
-              "ab2d7bb2121b7e583e9966bc73f14332f705e88582037b590831456deebdfae9",
-              "d35f236c0f0e71f4e81c0231b8b83a22806abf958d00f5ca16525ba874ffa4fb",
-              "dec07a5489a4cfc51b4c6e8217e88250b28cb311c7c1a3e39db1fa406dcf4185",
-              "f94e4882aa7921b9b0a8dc23e8c1f6fc2d407b46ae16cca26cda9df6679acc33"
+              "0de644cad4d520411a195fa8a94b67f03779c1474c07e84b3b2b387002257573",
+              "8da2915381b59b1c089a8e1338e85e378299e7135d8bc74e75c4155dae2ca6c6",
+              "979ce555348c5bf359e1ef38d6956915cf7e1c9f411268d7133f764ac0998fc7",
+              "9c3d0a17b390b2801a644ad3c620eb2f593a26cdda5414433f1670461017def9"
             ],
             "player_name": "Paul George",
-            "statement": "新加入的主要持球点，预计首发并承担大量发起任务。他与塔图姆的球权分配和挡拆配合没有比赛样本，磨合质量直接影响波士顿的进攻流畅度。"
+            "statement": "夏天从费城来到波士顿，和塔图姆组成双持球锋线；他绕出接球和二次发起的能力，是活塞前场最难同时兼顾的点。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "48eff2a82ad02ce5c6abbdc00ab769965e35153aa81253c6a98c2dcb0595de5a"
+              "8da2915381b59b1c089a8e1338e85e378299e7135d8bc74e75c4155dae2ca6c6",
+              "979ce555348c5bf359e1ef38d6956915cf7e1c9f411268d7133f764ac0998fc7"
             ],
             "player_name": "Derrick White",
-            "statement": "上赛季场均16.5分5.4助攻，是波士顿留队后场里最稳定的攻防两端球员。在布朗离队后，他需要承担更多持球发起，同时还要面对坎宁安的挡拆冲击。"
+            "statement": "后场对位坎宁安的第一道防线，他的对抗和挤掩护质量决定活塞的挡拆能不能顺利展开。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "48eff2a82ad02ce5c6abbdc00ab769965e35153aa81253c6a98c2dcb0595de5a"
+              "8da2915381b59b1c089a8e1338e85e378299e7135d8bc74e75c4155dae2ca6c6",
+              "979ce555348c5bf359e1ef38d6956915cf7e1c9f411268d7133f764ac0998fc7"
             ],
             "player_name": "Payton Pritchard",
-            "statement": "上赛季场均17.0分5.2助攻，外线火力是波士顿的重要支撑。今天他既要提供投射，又要在防守端应对活塞后场的持球压力。"
+            "statement": "预计首发控卫，和怀特一起承担后场防守；他的投射也能在塔图姆被夹击时提供出口。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "48eff2a82ad02ce5c6abbdc00ab769965e35153aa81253c6a98c2dcb0595de5a"
+              "846cd3287b3c326697aba00a7925f877956f4ac941517e582d2393564f7adcb4",
+              "8da2915381b59b1c089a8e1338e85e378299e7135d8bc74e75c4155dae2ca6c6",
+              "979ce555348c5bf359e1ef38d6956915cf7e1c9f411268d7133f764ac0998fc7",
+              "cd17cc86807c33b145df0cef92901ba986899d78d80bf2d97a02a9b7b01de02d"
             ],
-            "player_name": "Neemias Queta",
-            "statement": "上赛季场均10.2分8.4篮板，是波士顿留队的主要内线。他需要在杜伦的挡拆终结和篮板冲击下保护禁区，这组对位会直接影响活塞的二次进攻机会。"
+            "player_name": "Cade Cunningham",
+            "statement": "活塞的进攻发动机，凯尔特人后场没有明显的身高压制；他能否反复叫挡拆找到杜伦或科林斯，是主队咬住比赛的关键。"
+          },
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "846cd3287b3c326697aba00a7925f877956f4ac941517e582d2393564f7adcb4",
+              "8da2915381b59b1c089a8e1338e85e378299e7135d8bc74e75c4155dae2ca6c6",
+              "979ce555348c5bf359e1ef38d6956915cf7e1c9f411268d7133f764ac0998fc7",
+              "cd17cc86807c33b145df0cef92901ba986899d78d80bf2d97a02a9b7b01de02d"
+            ],
+            "player_name": "Jalen Duren",
+            "statement": "坎宁安挡拆后的顺下终结点，也是活塞前场对抗凯尔特人内线的主要体型来源。"
+          },
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "846cd3287b3c326697aba00a7925f877956f4ac941517e582d2393564f7adcb4",
+              "8da2915381b59b1c089a8e1338e85e378299e7135d8bc74e75c4155dae2ca6c6",
+              "979ce555348c5bf359e1ef38d6956915cf7e1c9f411268d7133f764ac0998fc7",
+              "cd17cc86807c33b145df0cef92901ba986899d78d80bf2d97a02a9b7b01de02d"
+            ],
+            "player_name": "Ausar Thompson",
+            "statement": "预计承担对位塔图姆或乔治的锋线防守任务，他的换防范围决定活塞能不能少做夹击。"
+          },
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "846cd3287b3c326697aba00a7925f877956f4ac941517e582d2393564f7adcb4",
+              "979ce555348c5bf359e1ef38d6956915cf7e1c9f411268d7133f764ac0998fc7"
+            ],
+            "player_name": "John Collins",
+            "statement": "夏天顶替哈里斯进入前场，他的外弹投射和护框是活塞新阵容能否拉开空间的关键。"
+          },
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "846cd3287b3c326697aba00a7925f877956f4ac941517e582d2393564f7adcb4",
+              "8da2915381b59b1c089a8e1338e85e378299e7135d8bc74e75c4155dae2ca6c6",
+              "979ce555348c5bf359e1ef38d6956915cf7e1c9f411268d7133f764ac0998fc7",
+              "cd17cc86807c33b145df0cef92901ba986899d78d80bf2d97a02a9b7b01de02d"
+            ],
+            "player_name": "Duncan Robinson",
+            "statement": "回归主力轮换的射手，坎宁安被夹击时他的接球投篮是活塞最直接的回应方式。"
           }
         ],
         "pregame_story": {
           "classification": "subjective_analysis",
           "evidence_ids": [
-            "2489de7afd91f10884de2af18fcae81376c55fa57d7e03caf34ab332e0dbeba9",
-            "65376eb3908159982e362cad2715e66c9ccbe0f4bbd44717e6dd88076cff7df9",
-            "6e2fc5bf914c24a807bce49873f9935724b41add6bb747a6b986603c718f2f4e",
-            "978889a53516cf73ded5fcdc497015dcb94925128cbe71c8a9796d5a714ef83d",
-            "ab2d7bb2121b7e583e9966bc73f14332f705e88582037b590831456deebdfae9",
-            "ad00dad5a352ed24d003e44393f69ab1b3124f4051f3e64ec4025dab5e23353f"
+            "45919d6bd1cd1acfc5a154a9008f59e4ef1717cda69c7b27dbbe7371d33d654a",
+            "846cd3287b3c326697aba00a7925f877956f4ac941517e582d2393564f7adcb4",
+            "9c3d0a17b390b2801a644ad3c620eb2f593a26cdda5414433f1670461017def9",
+            "b6f02d1b4f77238af3bd50edc1a87f4ff934a7d3f8a45e6d707d5f88458df413",
+            "bdddc301178334b47782e9b9741ccb4c2775bd4285af08f1a40d6298dd3ab146",
+            "c2774910a5d123d04849707ec8a2d290fb2b0352c5713101902cf599c8c56863"
           ],
-          "statement": "凯尔特人送走杰伦·布朗、换来保罗·乔治，塔图姆又刚从跟腱伤里回来；活塞则保留了坎宁安—杜伦—汤普森的核心框架，只在前场做了针对性调整。第25秒给出活塞主场胜、净胜2.5分、总分224.5，优势不大，但方向明确。",
-          "title": "坎宁安挡拆对上波士顿新锋线，活塞揭幕战先手在哪"
+          "statement": "活塞上赛季四次交手赢了三场，如今塔图姆身边换成乔治。新锋线能否让底特律改变防守选择，是这场揭幕战的主线。",
+          "title": "塔图姆换了搭档，底特律还会那么难打吗？"
         },
         "roster_analysis": [],
-        "subjective_rationale": "凯尔特人送走杰伦·布朗、换来保罗·乔治，塔图姆又刚从跟腱伤里回来；活塞则保留了坎宁安—杜伦—汤普森的核心框架，只在前场做了针对性调整。第25秒给出活塞主场胜、净胜2.5分、总分224.5，优势不大，但方向明确。",
+        "subjective_rationale": "活塞上赛季东部第一，四次常规赛交手赢了凯尔特人三场；凯尔特人则在这个夏天把布朗换成乔治。揭幕战两队都还没打一场，谁的新阵容先找到手感，比纸面实力更值得看。",
         "supporting_evidence": [],
         "uncertainty": [],
         "unresolved_uncertainty": [],
@@ -2351,51 +2643,51 @@
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "2489de7afd91f10884de2af18fcae81376c55fa57d7e03caf34ab332e0dbeba9",
-              "65376eb3908159982e362cad2715e66c9ccbe0f4bbd44717e6dd88076cff7df9",
-              "6e2fc5bf914c24a807bce49873f9935724b41add6bb747a6b986603c718f2f4e",
-              "978889a53516cf73ded5fcdc497015dcb94925128cbe71c8a9796d5a714ef83d",
-              "ab2d7bb2121b7e583e9966bc73f14332f705e88582037b590831456deebdfae9",
-              "ad00dad5a352ed24d003e44393f69ab1b3124f4051f3e64ec4025dab5e23353f"
+              "45919d6bd1cd1acfc5a154a9008f59e4ef1717cda69c7b27dbbe7371d33d654a",
+              "846cd3287b3c326697aba00a7925f877956f4ac941517e582d2393564f7adcb4",
+              "9c3d0a17b390b2801a644ad3c620eb2f593a26cdda5414433f1670461017def9",
+              "b6f02d1b4f77238af3bd50edc1a87f4ff934a7d3f8a45e6d707d5f88458df413",
+              "bdddc301178334b47782e9b9741ccb4c2775bd4285af08f1a40d6298dd3ab146",
+              "c2774910a5d123d04849707ec8a2d290fb2b0352c5713101902cf599c8c56863"
             ],
-            "statement": "坎宁安上赛季场均9.9助攻，是活塞半场进攻的发起核心；布朗离队后波士顿外线防守资源变化，他能否持续制造错位和分球，决定活塞进攻效率。",
-            "title": "坎宁安挡拆 vs 波士顿换防"
+            "statement": "换防还是夹击，直接决定乔治和底角射手能不能拿到空位。",
+            "title": "塔图姆挡拆时活塞怎么选"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "2489de7afd91f10884de2af18fcae81376c55fa57d7e03caf34ab332e0dbeba9",
-              "65376eb3908159982e362cad2715e66c9ccbe0f4bbd44717e6dd88076cff7df9",
-              "6e2fc5bf914c24a807bce49873f9935724b41add6bb747a6b986603c718f2f4e",
-              "978889a53516cf73ded5fcdc497015dcb94925128cbe71c8a9796d5a714ef83d",
-              "ab2d7bb2121b7e583e9966bc73f14332f705e88582037b590831456deebdfae9",
-              "ad00dad5a352ed24d003e44393f69ab1b3124f4051f3e64ec4025dab5e23353f"
+              "45919d6bd1cd1acfc5a154a9008f59e4ef1717cda69c7b27dbbe7371d33d654a",
+              "846cd3287b3c326697aba00a7925f877956f4ac941517e582d2393564f7adcb4",
+              "9c3d0a17b390b2801a644ad3c620eb2f593a26cdda5414433f1670461017def9",
+              "b6f02d1b4f77238af3bd50edc1a87f4ff934a7d3f8a45e6d707d5f88458df413",
+              "bdddc301178334b47782e9b9741ccb4c2775bd4285af08f1a40d6298dd3ab146",
+              "c2774910a5d123d04849707ec8a2d290fb2b0352c5713101902cf599c8c56863"
             ],
-            "statement": "塔图姆跟腱伤后复出、乔治新加入，两人的球权分配和挡拆配合都没有比赛样本；这套组合运转是否顺畅，直接决定波士顿的进攻上限。",
-            "title": "塔图姆与乔治的首次组合"
+            "statement": "坎宁安能否反复叫挡拆把奎塔拉出来，是活塞咬住比分的主要路径。",
+            "title": "坎宁安对怀特、普里查德的错位"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "2489de7afd91f10884de2af18fcae81376c55fa57d7e03caf34ab332e0dbeba9",
-              "65376eb3908159982e362cad2715e66c9ccbe0f4bbd44717e6dd88076cff7df9",
-              "6e2fc5bf914c24a807bce49873f9935724b41add6bb747a6b986603c718f2f4e",
-              "978889a53516cf73ded5fcdc497015dcb94925128cbe71c8a9796d5a714ef83d",
-              "ab2d7bb2121b7e583e9966bc73f14332f705e88582037b590831456deebdfae9",
-              "ad00dad5a352ed24d003e44393f69ab1b3124f4051f3e64ec4025dab5e23353f"
+              "45919d6bd1cd1acfc5a154a9008f59e4ef1717cda69c7b27dbbe7371d33d654a",
+              "846cd3287b3c326697aba00a7925f877956f4ac941517e582d2393564f7adcb4",
+              "9c3d0a17b390b2801a644ad3c620eb2f593a26cdda5414433f1670461017def9",
+              "b6f02d1b4f77238af3bd50edc1a87f4ff934a7d3f8a45e6d707d5f88458df413",
+              "bdddc301178334b47782e9b9741ccb4c2775bd4285af08f1a40d6298dd3ab146",
+              "c2774910a5d123d04849707ec8a2d290fb2b0352c5713101902cf599c8c56863"
             ],
-            "statement": "汤普森预计承担对塔图姆或乔治的防守任务，他的对位质量会影响波士顿新核心的出手难度，也决定活塞能否把比赛拖入半场节奏。",
-            "title": "汤普森的锋线对位"
+            "statement": "两队新阵容第一次真打，轮转迟疑可能同时推高得分和客队的分差。",
+            "title": "揭幕战的防守轮转"
           }
         ],
-        "winner_lean": "home"
+        "winner_lean": "away"
       },
       "public_market_reference": {
-        "away_moneyline": -105.0,
-        "away_spread": 1.5,
-        "captured_at": "2026-10-14T14:45:55.123081+00:00",
+        "away_moneyline": -122.0,
+        "away_spread": -1.5,
+        "captured_at": "2026-10-20T13:08:37.211566+00:00",
         "eligible_prediction_input": false,
-        "expected_home_margin": 1.5,
+        "expected_home_margin": -1.5,
         "game_identity": {
           "away_team": "Boston Celtics",
           "away_team_id": 1610612738,
@@ -2406,9 +2698,9 @@
           "registered_game": true,
           "scheduled_tipoff": "2026-10-20T19:00Z"
         },
-        "home_moneyline": -115.0,
-        "home_spread": -1.5,
-        "observed_at": "2026-10-14T14:45:55.123081+00:00",
+        "home_moneyline": 102.0,
+        "home_spread": 1.5,
+        "observed_at": "2026-10-20T13:08:37.211566+00:00",
         "published_at": null,
         "source_tier": 1,
         "source_title": "Draft Kings current odds",
@@ -2416,83 +2708,83 @@
         "sportsbook": "Draft Kings",
         "status": "available",
         "time_semantics": "observed current sportsbook quote; publication time unknown",
-        "total": 222.5,
+        "total": 218.5,
         "usage": "qualified_market_for_ai_review"
       },
-      "published_at": "2026-10-14T15:08:24.981124+00:00",
+      "published_at": "2026-10-20T13:20:55.739535+00:00",
       "schedule_revision": 1,
       "sources": [
         {
-          "captured_at": "2026-10-14T14:45:05.852905+00:00",
+          "captured_at": "2026-10-20T13:03:19.159387+00:00",
           "category": "roster_news",
-          "id": "ab2d7bb2121b7e583e9966bc73f14332f705e88582037b590831456deebdfae9",
-          "published_at": "2026-09-18T18:15:13+00:00",
-          "title": "Brad Stevens Addresses Outlook For 2026-27 Boston Celtics - Yahoo Sports",
-          "url": "https://sports.yahoo.com/articles/brad-stevens-addresses-outlook-2026-181513757.html"
+          "id": "0de644cad4d520411a195fa8a94b67f03779c1474c07e84b3b2b387002257573",
+          "published_at": "2026-10-20T11:00:00+00:00",
+          "title": "Celtics' Opening-Day Injury Report Delivers An Encouraging Surprise - Yahoo Sports",
+          "url": "https://sports.yahoo.com/articles/celtics-opening-day-injury-report-110118103.html"
         },
         {
-          "captured_at": "2026-10-14T14:45:05.852905+00:00",
+          "captured_at": "2026-10-20T13:03:19.159387+00:00",
           "category": "game_story",
-          "id": "be3be9dc297ed2c87986dced4f8cb74e1cb812d3b8dc627cd1a0460239f4aff8",
-          "published_at": "2026-09-18T18:15:13+00:00",
-          "title": "Brad Stevens Addresses Outlook For 2026-27 Boston Celtics - Yahoo Sports",
-          "url": "https://sports.yahoo.com/articles/brad-stevens-addresses-outlook-2026-181513757.html"
+          "id": "2751a4174d6820ae16b51ed5936405d4b627d85fe8d62c51a773c544707a7955",
+          "published_at": "2026-10-20T11:00:00+00:00",
+          "title": "Celtics' Opening-Day Injury Report Delivers An Encouraging Surprise - Yahoo Sports",
+          "url": "https://sports.yahoo.com/articles/celtics-opening-day-injury-report-110118103.html"
         },
         {
-          "captured_at": "2026-10-14T14:45:05.852905+00:00",
-          "category": "roster_news",
-          "id": "5642ba526f0acbfd4c02b5d699731ac4ed9cede93efa2d13984b361463ca542a",
-          "published_at": "2026-09-18T18:15:13+00:00",
-          "title": "Brad Stevens Addresses Outlook For 2026-27 Boston Celtics - Yahoo Sports",
-          "url": "https://sports.yahoo.com/articles/brad-stevens-addresses-outlook-2026-181513757.html"
+          "captured_at": "2026-10-20T13:03:19.159387+00:00",
+          "category": "game_story",
+          "id": "c2774910a5d123d04849707ec8a2d290fb2b0352c5713101902cf599c8c56863",
+          "published_at": "2026-10-20T11:00:00+00:00",
+          "title": "Celtics' Opening-Day Injury Report Delivers An Encouraging Surprise - Yahoo Sports",
+          "url": "https://sports.yahoo.com/articles/celtics-opening-day-injury-report-110118103.html"
         },
         {
-          "captured_at": "2026-10-14T14:45:21.773616+00:00",
+          "captured_at": "2026-10-20T13:03:18.230704+00:00",
+          "category": "availability",
+          "id": "cd17cc86807c33b145df0cef92901ba986899d78d80bf2d97a02a9b7b01de02d",
+          "published_at": "2026-10-19T19:00:00+00:00",
+          "title": "Celtics’ Paul George Delivers Jayson Tatum Verdict Ahead Of Opener - Yahoo Sports",
+          "url": "https://sports.yahoo.com/articles/celtics-paul-george-delivers-jayson-193132412.html"
+        },
+        {
+          "captured_at": "2026-10-20T13:03:18.230704+00:00",
+          "category": "game_story",
+          "id": "c6646abec1135f8e6c56b0bd2c587d4580ac2eb561f0338986daafc674d37414",
+          "published_at": "2026-10-19T19:00:00+00:00",
+          "title": "Celtics’ Paul George Delivers Jayson Tatum Verdict Ahead Of Opener - Yahoo Sports",
+          "url": "https://sports.yahoo.com/articles/celtics-paul-george-delivers-jayson-193132412.html"
+        },
+        {
+          "captured_at": "2026-10-20T13:03:18.230704+00:00",
+          "category": "game_story",
+          "id": "9e64f0ef6e8c0373e0a92c788bb82659024ad3410c4682c2db3a951467f6ac3a",
+          "published_at": "2026-10-19T19:00:00+00:00",
+          "title": "Celtics’ Paul George Delivers Jayson Tatum Verdict Ahead Of Opener - Yahoo Sports",
+          "url": "https://sports.yahoo.com/articles/celtics-paul-george-delivers-jayson-193132412.html"
+        },
+        {
+          "captured_at": "2026-10-20T13:03:19.419166+00:00",
           "category": "roster_news",
-          "id": "6e2fc5bf914c24a807bce49873f9935724b41add6bb747a6b986603c718f2f4e",
-          "published_at": "2026-08-11T12:27:31+00:00",
+          "id": "846cd3287b3c326697aba00a7925f877956f4ac941517e582d2393564f7adcb4",
+          "published_at": "2026-08-11T00:00:00+00:00",
           "title": "Detroit Pistons will tip off 2026-27 NBA season against Boston Celtics - Yahoo Sports",
           "url": "https://sports.yahoo.com/articles/detroit-pistons-tip-off-2026-122731500.html"
         },
         {
-          "captured_at": "2026-10-14T14:45:21.773616+00:00",
+          "captured_at": "2026-10-20T13:03:19.419166+00:00",
           "category": "roster_news",
-          "id": "f94e4882aa7921b9b0a8dc23e8c1f6fc2d407b46ae16cca26cda9df6679acc33",
-          "published_at": "2026-08-11T12:27:31+00:00",
+          "id": "9c3d0a17b390b2801a644ad3c620eb2f593a26cdda5414433f1670461017def9",
+          "published_at": "2026-08-11T00:00:00+00:00",
           "title": "Detroit Pistons will tip off 2026-27 NBA season against Boston Celtics - Yahoo Sports",
           "url": "https://sports.yahoo.com/articles/detroit-pistons-tip-off-2026-122731500.html"
         },
         {
-          "captured_at": "2026-10-14T14:44:06.062103+00:00",
-          "category": "game_story",
-          "id": "d35f236c0f0e71f4e81c0231b8b83a22806abf958d00f5ca16525ba874ffa4fb",
-          "published_at": "2026-08-13T19:08:00+00:00",
-          "title": "NBA schedule 2026-27: Opening night, Christmas and must-see games - ESPN",
-          "url": "https://www.espn.com/nba/story/_/id/49471934/nba-full-schedule-2026-2027-games-watch-faq-rivalries-matchups"
-        },
-        {
-          "captured_at": "2026-10-14T14:44:06.062103+00:00",
-          "category": "game_story",
-          "id": "949f6b565bbab7ca9c490c28c25d507dfc0465d1628af672b7ba576f28ec6c9f",
-          "published_at": "2026-08-13T19:08:00+00:00",
-          "title": "NBA schedule 2026-27: Opening night, Christmas and must-see games - ESPN",
-          "url": "https://www.espn.com/nba/story/_/id/49471934/nba-full-schedule-2026-2027-games-watch-faq-rivalries-matchups"
-        },
-        {
-          "captured_at": "2026-10-14T14:45:25.145393+00:00",
-          "category": "game_story",
-          "id": "ad00dad5a352ed24d003e44393f69ab1b3124f4051f3e64ec4025dab5e23353f",
-          "published_at": "2026-08-11T11:54:35+00:00",
-          "title": "NBA reveals loaded three-game slate for 2026 opening night - Yahoo Sports",
-          "url": "https://sports.yahoo.com/articles/nba-reveals-loaded-three-game-115435895.html"
-        },
-        {
-          "captured_at": "2026-10-14T14:45:25.145393+00:00",
-          "category": "game_story",
-          "id": "0e0be2cf1aece442f98d77c964070a3720efe93789bf6a9a86a7cbd6a1dd6fe4",
-          "published_at": "2026-08-11T11:54:35+00:00",
-          "title": "NBA reveals loaded three-game slate for 2026 opening night - Yahoo Sports",
-          "url": "https://sports.yahoo.com/articles/nba-reveals-loaded-three-game-115435895.html"
+          "captured_at": "2026-10-20T13:03:20.066195+00:00",
+          "category": "lineup",
+          "id": "8da2915381b59b1c089a8e1338e85e378299e7135d8bc74e75c4155dae2ca6c6",
+          "published_at": "2026-10-19T09:00:00+00:00",
+          "title": "Pistons NBA predictions: Record, trade targets, playoffs, Finals pick - Yahoo Sports",
+          "url": "https://sports.yahoo.com/articles/pistons-nba-predictions-record-trade-091013994.html"
         },
         {
           "captured_at": "2026-09-18T16:21:13.259918+00:00",
@@ -2503,45 +2795,21 @@
           "url": "https://www.fanduel.com/research/nba-opening-day-schedule-odds-and-matchups-for-2026-27"
         },
         {
-          "captured_at": "2026-10-14T14:45:55.123081+00:00",
+          "captured_at": "2026-10-20T13:08:37.211566+00:00",
           "category": "market",
-          "id": "ddcc9552f8d4bfd9eeabd33b891c2e48db81588f336a91717638a9c7ff92df0b",
+          "id": "45919d6bd1cd1acfc5a154a9008f59e4ef1717cda69c7b27dbbe7371d33d654a",
           "published_at": null,
           "title": null,
           "url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909088/competitions/401909088/odds"
         }
       ],
       "stage": "EARLY_PREVIEW",
-      "version_id": "120739a9-e137-4788-958e-66825beddd31",
-      "payload_sha256": "be55b25fd22db668ef3e60147fff34d45792850e27367ffc23fb30f2ce714d2a",
+      "version_id": "3ddb18b9-0e77-48de-ab7f-5d5dad938fc5",
+      "payload_sha256": "74165228f88febe42b647686fac22086f781ddff177a067a322e1c5193c62e59",
       "analyst_context": {
         "objective_evidence": [
           {
-            "id": "ab2d7bb2121b7e583e9966bc73f14332f705e88582037b590831456deebdfae9",
-            "section": "web_context",
-            "value": {
-              "claim_type": "long_term_injury",
-              "eligible_for_fact": true,
-              "source_role": "professional",
-              "team_id": 1610612738,
-              "temporal_scope": "current_season_background",
-              "quote": ""
-            }
-          },
-          {
-            "id": "be3be9dc297ed2c87986dced4f8cb74e1cb812d3b8dc627cd1a0460239f4aff8",
-            "section": "web_context",
-            "value": {
-              "claim_type": "season_background",
-              "eligible_for_fact": true,
-              "source_role": "professional",
-              "team_id": 1610612738,
-              "temporal_scope": "current_season_background",
-              "quote": ""
-            }
-          },
-          {
-            "id": "5642ba526f0acbfd4c02b5d699731ac4ed9cede93efa2d13984b361463ca542a",
+            "id": "0de644cad4d520411a195fa8a94b67f03779c1474c07e84b3b2b387002257573",
             "section": "web_context",
             "value": {
               "claim_type": "personnel_change",
@@ -2553,7 +2821,67 @@
             }
           },
           {
-            "id": "6e2fc5bf914c24a807bce49873f9935724b41add6bb747a6b986603c718f2f4e",
+            "id": "2751a4174d6820ae16b51ed5936405d4b627d85fe8d62c51a773c544707a7955",
+            "section": "web_context",
+            "value": {
+              "claim_type": "season_background",
+              "eligible_for_fact": true,
+              "source_role": "professional",
+              "team_id": 1610612738,
+              "temporal_scope": "current_season_background",
+              "quote": ""
+            }
+          },
+          {
+            "id": "c2774910a5d123d04849707ec8a2d290fb2b0352c5713101902cf599c8c56863",
+            "section": "web_context",
+            "value": {
+              "claim_type": "season_background",
+              "eligible_for_fact": true,
+              "source_role": "professional",
+              "team_id": 1610612765,
+              "temporal_scope": "current_season_background",
+              "quote": ""
+            }
+          },
+          {
+            "id": "cd17cc86807c33b145df0cef92901ba986899d78d80bf2d97a02a9b7b01de02d",
+            "section": "web_context",
+            "value": {
+              "claim_type": "practice_update",
+              "eligible_for_fact": true,
+              "source_role": "professional",
+              "team_id": 1610612738,
+              "temporal_scope": "current_pregame",
+              "quote": ""
+            }
+          },
+          {
+            "id": "c6646abec1135f8e6c56b0bd2c587d4580ac2eb561f0338986daafc674d37414",
+            "section": "web_context",
+            "value": {
+              "claim_type": "coach_comments",
+              "eligible_for_fact": true,
+              "source_role": "professional",
+              "team_id": 1610612738,
+              "temporal_scope": "current_pregame",
+              "quote": ""
+            }
+          },
+          {
+            "id": "9e64f0ef6e8c0373e0a92c788bb82659024ad3410c4682c2db3a951467f6ac3a",
+            "section": "web_context",
+            "value": {
+              "claim_type": "coach_comments",
+              "eligible_for_fact": true,
+              "source_role": "professional",
+              "team_id": 1610612738,
+              "temporal_scope": "current_pregame",
+              "quote": ""
+            }
+          },
+          {
+            "id": "846cd3287b3c326697aba00a7925f877956f4ac941517e582d2393564f7adcb4",
             "section": "web_context",
             "value": {
               "claim_type": "personnel_change",
@@ -2565,7 +2893,7 @@
             }
           },
           {
-            "id": "f94e4882aa7921b9b0a8dc23e8c1f6fc2d407b46ae16cca26cda9df6679acc33",
+            "id": "9c3d0a17b390b2801a644ad3c620eb2f593a26cdda5414433f1670461017def9",
             "section": "web_context",
             "value": {
               "claim_type": "personnel_change",
@@ -2577,50 +2905,14 @@
             }
           },
           {
-            "id": "d35f236c0f0e71f4e81c0231b8b83a22806abf958d00f5ca16525ba874ffa4fb",
+            "id": "8da2915381b59b1c089a8e1338e85e378299e7135d8bc74e75c4155dae2ca6c6",
             "section": "web_context",
             "value": {
-              "claim_type": "season_background",
+              "claim_type": "projected_starters",
               "eligible_for_fact": true,
               "source_role": "professional",
               "team_id": 1610612738,
-              "temporal_scope": "current_season_background",
-              "quote": ""
-            }
-          },
-          {
-            "id": "949f6b565bbab7ca9c490c28c25d507dfc0465d1628af672b7ba576f28ec6c9f",
-            "section": "web_context",
-            "value": {
-              "claim_type": "season_background",
-              "eligible_for_fact": true,
-              "source_role": "professional",
-              "team_id": 1610612765,
-              "temporal_scope": "current_season_background",
-              "quote": ""
-            }
-          },
-          {
-            "id": "ad00dad5a352ed24d003e44393f69ab1b3124f4051f3e64ec4025dab5e23353f",
-            "section": "web_context",
-            "value": {
-              "claim_type": "role_background",
-              "eligible_for_fact": true,
-              "source_role": "professional",
-              "team_id": 1610612738,
-              "temporal_scope": "current_season_background",
-              "quote": ""
-            }
-          },
-          {
-            "id": "0e0be2cf1aece442f98d77c964070a3720efe93789bf6a9a86a7cbd6a1dd6fe4",
-            "section": "web_context",
-            "value": {
-              "claim_type": "season_background",
-              "eligible_for_fact": true,
-              "source_role": "professional",
-              "team_id": 1610612765,
-              "temporal_scope": "current_season_background",
+              "temporal_scope": "current_pregame",
               "quote": ""
             }
           },
@@ -2633,7 +2925,7 @@
             }
           },
           {
-            "id": "ddcc9552f8d4bfd9eeabd33b891c2e48db81588f336a91717638a9c7ff92df0b",
+            "id": "45919d6bd1cd1acfc5a154a9008f59e4ef1717cda69c7b27dbbe7371d33d654a",
             "section": "web_context",
             "value": {
               "claim_type": "market_reference",
@@ -2687,10 +2979,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-14T15:12:23.501375+00:00",
-    "source_prediction_version_id": "120739a9-e137-4788-958e-66825beddd31",
-    "source_prediction_payload_sha256": "be55b25fd22db668ef3e60147fff34d45792850e27367ffc23fb30f2ce714d2a",
+    "exported_at": "2026-10-20T13:21:21.720674+00:00",
+    "source_prediction_version_id": "3ddb18b9-0e77-48de-ab7f-5d5dad938fc5",
+    "source_prediction_payload_sha256": "74165228f88febe42b647686fac22086f781ddff177a067a322e1c5193c62e59",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "a9190d48cd7d9c4a62951a74510b71b3e5a7c5b32bb8e5edab79f164660da32f"
+  "public_sha256": "5d15a9cca97a6c9fe134040ca8e63aa65c88ce37e7f6066caa7905303e7cdfa9"
 }

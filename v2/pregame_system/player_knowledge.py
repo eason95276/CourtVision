@@ -432,6 +432,27 @@ def _normalized_identity_name(value: Any) -> str:
     return " ".join(re.sub(r"[^a-z0-9]+", " ", plain).split())
 
 
+def _identity_namespace(value: Any) -> str | None:
+    namespace = str(value or "").strip().upper()
+    return "NBA" if namespace in {"NBA", "NBA STATS"} else namespace or None
+
+
+def _player_identity(player: dict[str, Any], default_namespace="NBA") -> tuple[str | None, str | None]:
+    native_id = player.get("player_id")
+    if native_id not in (None, ""):
+        return (_identity_namespace(player.get("player_id_namespace") or default_namespace), str(native_id))
+    source_id = player.get("source_player_id")
+    namespaces = {_identity_namespace(player.get(key)) for key in (
+        "source_id_namespace", "source_player_id_namespace", "source_player_id_provider") if player.get(key)}
+    if source_id not in (None, "") and len(namespaces) == 1:
+        return next(iter(namespaces)), str(source_id)
+    return None, None
+
+
+def _qualified_identity(namespace: str | None, player_id: str | None) -> str | None:
+    return f"{namespace}:{player_id}" if namespace and player_id is not None else None
+
+
 def _factual_role_evidence(profile: dict[str, Any] | None) -> list[dict[str, Any]]:
     """Emit measured role proxies, never an unsupported player grade."""
     if not profile:
@@ -1095,7 +1116,7 @@ class PlayerKnowledgeStore:
     def _roster_players(team: dict[str, Any] | None, cutoff_utc: str) -> tuple[dict[str, Any] | None, list[dict[str, Any]], str | None]:
         if not team:
             return None, [], "team_roster_context_missing"
-        roster = team.get("official_team_roster") or team.get("roster")
+        roster = team.get("official_team_roster") or team.get("current_team_roster") or team.get("roster")
         if not roster or roster.get("status") != "available":
             return roster, [], "official_team_roster_unavailable"
         source = roster.get("source") or {}
@@ -1108,7 +1129,11 @@ class PlayerKnowledgeStore:
             return roster, [], "roster_capture_time_invalid"
         if captured_utc is None or captured_utc > cutoff_utc:
             return roster, [], "roster_captured_after_cutoff"
-        players = [p for p in roster.get("players") or [] if p.get("player_id") not in (None, "")]
+        players = [p for p in roster.get("players") or [] if isinstance(p, dict)]
+        identities = [_qualified_identity(*_player_identity(p, roster.get("id_namespace") or "NBA")) for p in players]
+        known = [identity for identity in identities if identity is not None]
+        if len(known) != len(set(known)):
+            return roster, [], "duplicate_current_roster_identity"
         return roster, players, None
 
     @staticmethod
@@ -1264,24 +1289,37 @@ class PlayerKnowledgeStore:
                 result["status"] = "partial"
                 continue
 
-            roster_by_id = {str(player["player_id"]): player for player in roster_players}
+            roster_identities = [_player_identity(player, roster.get("id_namespace") or "NBA")
+                                 for player in roster_players]
+            roster_by_id = {(_qualified_identity(*identity) or f"unresolved-row:{index}"): player
+                            for index, (player, identity) in enumerate(zip(roster_players, roster_identities))}
+            native_identity_by_key = dict(zip(roster_by_id, roster_identities))
             by_player = {str(p["player_id"]): p for p in team_summary.get("profiles", [])}
             source_id_by_roster_id: dict[str, str] = {}
             identity_method_by_roster_id: dict[str, str] = {}
             identity_issue_by_roster_id: dict[str, str] = {}
             for roster_id, roster_player in roster_by_id.items():
                 provider_aliases = roster_player.get("player_id_aliases") or {}
-                explicit_source_id = provider_aliases.get(provider)
-                if (explicit_source_id is None
-                        and str(roster_player.get("source_player_id_provider") or "") == provider):
-                    explicit_source_id = roster_player.get("source_player_id")
-                if explicit_source_id is not None and str(explicit_source_id) in all_rows_by_player:
-                    source_id_by_roster_id[roster_id] = str(explicit_source_id)
-                    identity_method_by_roster_id[roster_id] = "explicit_provider_id_alias"
-                    continue
-                if provider == PROVIDER and (roster_id in all_rows_by_player or roster_id in by_player):
-                    source_id_by_roster_id[roster_id] = roster_id
-                    identity_method_by_roster_id[roster_id] = "same_nba_person_id"
+                explicit_source_id = next((value for key, value in provider_aliases.items()
+                    if _identity_namespace(key) == _identity_namespace(provider)), None)
+                namespace, native_id = native_identity_by_key[roster_id]
+                method = "explicit_provider_id_alias"
+                if explicit_source_id is None:
+                    source_namespace, source_native_id = _player_identity({
+                        key: value for key, value in roster_player.items() if key != "player_id"})
+                    if source_namespace == _identity_namespace(provider):
+                        explicit_source_id = source_native_id
+                    elif namespace == _identity_namespace(provider):
+                        explicit_source_id = native_id
+                    method = "same_nba_person_id" if provider == PROVIDER else "same_provider_player_id"
+                if explicit_source_id is not None:
+                    if str(explicit_source_id) in all_rows_by_player:
+                        source_id_by_roster_id[roster_id] = str(explicit_source_id)
+                        identity_method_by_roster_id[roster_id] = method
+                    else:
+                        identity_issue_by_roster_id[roster_id] = (
+                            "not_found_in_complete_previous_season_dataset" if coverage.get("status") == "complete"
+                            else "no_player_id_match")
                     continue
                 if provider == "ESPN" and coverage.get("status") == "complete":
                     normalized_name = _normalized_identity_name(roster_player.get("name"))
@@ -1298,10 +1336,20 @@ class PlayerKnowledgeStore:
                     "provider_identity_crosswalk_requires_complete_league_coverage"
                     if provider == "ESPN" else "no_player_id_match"
                 )
+            aliases_by_source = defaultdict(list)
+            for key, source_id in source_id_by_roster_id.items():
+                aliases_by_source[source_id].append(key)
+            for keys in aliases_by_source.values():
+                if len(keys) > 1:
+                    for key in keys:
+                        del source_id_by_roster_id[key]
+                        identity_method_by_roster_id.pop(key, None)
+                        identity_issue_by_roster_id[key] = "ambiguous_provider_player_id_crosswalk"
             current_source_ids = set(source_id_by_roster_id.values())
-            roster_id_by_source_id = {
-                source_id: roster_id for roster_id, source_id in source_id_by_roster_id.items()
-            }
+            continuity_keys = {key: (_qualified_identity(*native_identity_by_key[key]) or
+                _qualified_identity(_identity_namespace(provider), source_id_by_roster_id.get(key))) for key in roster_by_id}
+            roster_id_by_source_id = {source_id: continuity_keys[roster_id]
+                                     for roster_id, source_id in source_id_by_roster_id.items()}
             player_rows = []
             for player_id, roster_player in roster_by_id.items():
                 source_player_id = source_id_by_roster_id.get(player_id)
@@ -1311,7 +1359,8 @@ class PlayerKnowledgeStore:
                 player_facts = all_rows_by_player.get(source_player_id, []) if source_player_id else []
                 all_team_stints = _aggregate_player_rows(source_player_id, player_facts) if player_facts else None
                 current_availability = self._availability_for_player(
-                    player_id, roster_player, team_id, availability_records or [], cutoff_utc
+                    player_id, {**roster_player, "player_id_namespace": native_identity_by_key[player_id][0]},
+                    team_id, availability_records or [], cutoff_utc
                 )
                 prior_stints = all_team_stints.get("team_stints", []) if all_team_stints else []
                 previous_total = (
@@ -1359,8 +1408,8 @@ class PlayerKnowledgeStore:
                     previous_status = HISTORY_UNAVAILABLE_DUE_TO_COVERAGE
                     history_reason = "not_observed_in_partial_previous_season_dataset"
                 profile = {
-                    "player_id": player_id,
-                    "player_id_namespace": "NBA",
+                    "player_id": native_identity_by_key[player_id][1],
+                    "player_id_namespace": native_identity_by_key[player_id][0],
                     "source_player_id": source_player_id,
                     "source_player_id_namespace": provider if source_player_id else None,
                     "identity_match_method": identity_method,
@@ -1402,7 +1451,8 @@ class PlayerKnowledgeStore:
                 player_rows.append(profile)
 
             previous_minutes = [
-                {"player_id": roster_id_by_source_id.get(str(profile["player_id"]), str(profile["player_id"])),
+                {"player_id": roster_id_by_source_id.get(str(profile["player_id"]),
+                    _qualified_identity(_identity_namespace(provider), str(profile["player_id"]))),
                  "name": profile.get("player_name"),
                  "minutes": profile["minutes_total"]}
                 for profile in team_summary.get("profiles", [])
@@ -1423,7 +1473,7 @@ class PlayerKnowledgeStore:
                         "status": "available" if team_coverage.get("complete") else "unavailable",
                         "team_id": team_id,
                         "season_start": target_start - 1,
-                        "id_namespace": "nba",
+                        "id_namespace": "provider-qualified",
                         "season_type": "Regular Season",
                         "per_mode": "Totals",
                         "players": previous_minutes,
@@ -1433,8 +1483,11 @@ class PlayerKnowledgeStore:
                     official_roster = dict(roster)
                     official_roster.setdefault("team_id", team_id)
                     official_roster.setdefault("season_start", target_start)
-                    official_roster.setdefault("id_namespace", "nba")
+                    official_roster["id_namespace"] = "provider-qualified"
+                    official_roster["players"] = [{**player, "player_id": continuity_keys[key]}
+                                                   for key, player in roster_by_id.items()]
                     continuity = calculate_continuity(official_roster, minutes)
+                    continuity["player_id_namespace"] = "provider-qualified"
                     continuity["roster_completeness_caveat"] = (
                         (roster.get("coverage") or {}).get("source_roster_completeness")
                         or "not_independently_verified"
@@ -1509,9 +1562,11 @@ class PlayerKnowledgeStore:
                 "players_with_current_team_stints": sum(p.get("previous_season_status") == "observed_on_current_team" for p in player_rows),
                 "unmatched_current_roster_players": [
                     {"player_id": p["player_id"], "player_name": p.get("player_name"),
+                      "player_id_namespace": p.get("player_id_namespace"),
                      "team_id": p.get("team_id"), "position": p.get("position"),
                      "status": p.get("previous_season_status"),
                      "source_player_id": p.get("source_player_id"),
+                      "source_player_id_namespace": p.get("source_player_id_namespace"),
                      "identity_resolution_status": p.get("identity_resolution_status"),
                      "previous_season_history_status": p.get("previous_season_history_status"),
                      "current_availability": p.get("current_availability")}
@@ -1554,7 +1609,9 @@ class PlayerKnowledgeStore:
             if record_team is not None and str(record_team) != str(team_id):
                 continue
             record_id = record.get("player_id") or record.get("person_id")
-            if record_id is not None and str(record_id) == player_id:
+            namespace, native_id = _player_identity(roster_player)
+            record_namespace = _identity_namespace(record.get("player_id_namespace") or "NBA")
+            if (record_id is not None and namespace == record_namespace and str(record_id) == native_id):
                 candidates.append(record)
                 continue
             name = " ".join(str(record.get("player_name") or record.get("player") or "").casefold().split())

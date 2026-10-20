@@ -15,6 +15,7 @@ STATUSES = {
     'awaiting_preview': '待生成新文风试稿',
     'awaiting_review': '单场试稿待人工确认',
     'preview_failed': '新试稿未通过校验，保留原报告',
+    'approved_draft': '文风稿已确认，正式版尚未替换',
     'awaiting_approval': '等待首篇试稿确认后再更新',
     'published': '本轮报告已发布',
     'failed': '本轮更新失败，保留原报告',

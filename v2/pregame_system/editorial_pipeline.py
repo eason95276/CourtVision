@@ -14,6 +14,7 @@ from pydantic import BaseModel, ConfigDict, Field
 from .editorial_contract import (
     build_editorial_projection, model_view, visible_units, validate_publication_hard_facts,
     make_publication_receipt, verify_hard_fact_candidates, public_visibility_issues,
+    _writer_market_interpretation,
 )
 from .editorial_skill import load_editorial_skill
 from .skill_provenance import prompt_skill_hashes
@@ -260,6 +261,55 @@ def normalize(draft):
     for key in ("title", "lead", "article"):
         d[key] = d[key].replace("\\n", "\n").strip()
     return EditorialDraft.model_validate(d).model_dump()
+
+
+def writer_view(projection, locked_forecast, game):
+    """Select prose material without altering the complete validation projection."""
+    view = model_view(projection)
+    facts = []
+    omitted = []
+    for fact in view['facts']:
+        value = fact['value']
+        if (fact['kind'] in {'MODEL_IDENTITY', 'MARKET'} or
+                fact['kind'] == 'MODEL_OUTPUT' and value.get('owner') != 'locked_final'):
+            omitted.append(fact['id'])
+            continue
+        if fact['kind'] == 'HISTORICAL':
+            # Keep the series result/story; the match table belongs to the page.
+            if 'meetings' in value:
+                series = value.get('series_summary') or {}
+                fact['value'] = {k: v for k, v in value.items()
+                                 if k not in {'meetings', 'series_summary'}}
+                fact['value']['series_summary'] = {k: series[k] for k in (
+                    'series_key', 'season_start', 'games', 'wins', 'winner_team_id') if k in series}
+            elif 'players' in value:
+                for player in value['players']:
+                    for key in ('average_statistics', 'stat_sample_counts', 'previous_team_stints'):
+                        player.pop(key, None)
+            elif 'metrics' in value:
+                omitted.append(fact['id'])
+                continue
+        if fact['kind'] == 'OBSERVATION' and isinstance(value, dict):
+            value.pop('games', None)
+            value.pop('metrics', None)
+        facts.append(fact)
+    view['facts'] = facts
+    from .ats import build_spread_comparison
+    comparison = locked_forecast.get('spread_comparison')
+    if not comparison:
+        comparison = build_spread_comparison(game, locked_forecast.get('market_collection'),
+                                             None, locked_forecast['final_prediction'])
+    view['prediction_interpretation'] = _writer_market_interpretation(
+        {'spread_comparison': comparison}, projection['locked_prediction'])
+    view['writing_material_policy'] = {
+        'omitted_fact_ids': omitted,
+        'complete_projection_preserved': True,
+        'instruction': '这是选过的写作资料，不是全量资料库。开头用故事和人物进入，不报效率、命中率或场均分差清单；'
+            '正文只保留推动观点的主角，写双方怎样出招、怎样回应。关键球员卡解释作用，不补回被省略的统计表。'
+            '让分和大小分只按prediction_interpretation给定的相对方向解释；数字差异不是篮球原因。'
+            '不要从记忆补统计，不把未确认的伤病当事实。参考文风的节奏，不能复制其球员、事件或方向。',
+    }
+    return view
 
 
 _JUDGMENT_TEXT_SCALARS = {"core_question", "game_script", "model_risk"}
@@ -585,7 +635,9 @@ def _repair_guidance(findings):
 
 
 def run_editorial(context, locked_forecast, folder, *, writer_client=None, reviewer_client=None,
-                  quality_review_enabled=False, max_calls=4):
+                  quality_review_enabled=False, max_calls=4, writer_model="deepseek-v4-flash", writing_brief=None):
+    if writer_model not in {"deepseek-v4-flash", "deepseek-v4-pro"}:
+        raise ValueError('unsupported_editorial_model')
     folder = Path(folder); folder.mkdir(parents=True, exist_ok=False)
     c = context.model_dump() if hasattr(context, "model_dump") else context
     numbers = locked_forecast["final_prediction"]
@@ -601,12 +653,23 @@ def run_editorial(context, locked_forecast, folder, *, writer_client=None, revie
     if max_calls < 1:
         raise ValueError("editorial_budget_cannot_cover_writer")
     skill = load_editorial_skill()
+    writing_input = writer_view(projection, locked_forecast, c.get('game') or {})
+    if writing_brief is not None:
+        writing_input['editor_assignment'] = {
+            'origin': 'operator_editorial_direction',
+            'scope': 'writing focus and voice, not new facts or a Forecasting result',
+            'brief': copy.deepcopy(writing_brief),
+        }
+    save(folder / 'writer_view.json', writing_input)
     draft, meta = call_recorded(folder, "writer0", [{"role": "system", "content": skill +
         "\n本次输入是冻结写作资料与已完成的第25秒篮球分析素材。用它形成作者判断；素材不是客观事实，也不提供ML特征归因。"
+        "完整参考稿只提供文风，不提供本场事实、方向或现成句子；其中注明被用户否定的开场不得模仿。"
+        "写成自然、顺口的体育评论，不为制造激情硬切短句；人物互动和具体比赛过程承担分析，不要列名单、复述资料或写成战术说明书。"
         "visibility=public 可按来源准确表达；visibility=writer_internal 只用于理解判断路径，不照抄内部层名称；audit_only 不会进入本次Writer视图。"
         "用户正文不得出现 Pure、Residual、ML 或其他内部模型层名称。不得搜索或改预测。"},
-        {"role": "user", "content": json.dumps(model_view(projection), ensure_ascii=False)}],
-        EditorialDraft, writer_client, max_tokens=3500)
+        {"role": "user", "content": json.dumps(writing_input, ensure_ascii=False)}],
+        EditorialDraft, writer_client, max_tokens=5500 if writer_model == 'deepseek-v4-pro' else 3500,
+        model=writer_model)
     calls += 1; metadata.append({"stage": "writer0", **{k: v for k, v in meta.items() if k != "raw"}})
     draft = normalize(draft)
     decision_mode = projection.get("protocol") == "editorial-decision-v2"

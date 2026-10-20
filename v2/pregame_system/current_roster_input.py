@@ -62,6 +62,7 @@ def parse_espn_roster(html,tid,season,source,*,expected_team_name=None):
         "source_player_id":p["source_player_id"],"source_id_namespace":"ESPN","raw_identity":p}
         for p in unique.values()],source,[],[],"current ESPN rendered roster links")
     roster["roster_basis"]="espn_current_team_roster"
+    roster["id_namespace"]="espn"
     roster["source"]["source_type"]="espn_current_team_roster"
     return roster
 

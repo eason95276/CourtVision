@@ -118,6 +118,13 @@ def classify_numeric_claim_type(text: str, start: int, end: int, metric: str | N
     before = prefix + text[start:end] + suffix
 
     token = text[start:end]
+    # Qualitative degree and verb reduplication do not assert a value of one.
+    # Keep actual decimals (一点五) and units (一分) on the numeric path.
+    if token == "一" and (re.match(r"点(?![零〇一二两三四五六七八九十百\d])|些", suffix)
+            or prefix[-1:] and re.fullmatch(r"[\u4e00-\u9fff]", prefix[-1:])
+            and suffix.startswith(prefix[-1:])):
+        return "other_numeric"
+
     # Ordinals and common idioms are not exact statistical claims.
     if (re.search(r"第\s*$", prefix) and re.match(r"\s*(?:节|场|轮|次|名|位|顺位)", suffix)
             or token in {"一", "两", "二", "三", "四"} and re.search(

@@ -2,9 +2,18 @@
   "timezone": "Asia/Shanghai",
   "slates": {
     "2026-10-21": [
-      {"game_id": "espn:401909088", "update_status": "awaiting_approval"},
-      {"game_id": "espn:401909089", "update_status": "preview_failed"},
-      {"game_id": "espn:401909090", "update_status": "awaiting_approval"}
+      {
+        "game_id": "espn:401909088",
+        "update_status": "published"
+      },
+      {
+        "game_id": "espn:401909089",
+        "update_status": "approved_draft"
+      },
+      {
+        "game_id": "espn:401909090",
+        "update_status": "published"
+      }
     ]
   }
 }

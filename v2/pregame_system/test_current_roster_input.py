@@ -17,6 +17,7 @@ def test_espn_current_membership_is_source_namespaced_not_a_starter_list():
     roster=parse_espn_roster(html,1610612761,2026,{"url":"https://www.espn.com/nba/team/roster/_/name/tor/toronto-raptors"})
     assert len(roster["players"])==1
     assert roster["players"][0]["source_id_namespace"]=="ESPN"
+    assert roster["id_namespace"]=="espn"
     assert roster["players"][0]["player_id"] is None
     assert "confirmed_starters" not in roster
     with pytest.raises(ValueError,match="team_scope"):

@@ -18,7 +18,7 @@ def load_editorial_skill() -> str:
     sections = [f"<editorial_skill source=\"{skill_path.as_posix()}\">\n{skill}\n</editorial_skill>"]
     requested = {
         item.strip().lower()
-        for item in os.environ.get("NBA_EDITORIAL_EXAMPLES", "").split(",")
+        for item in os.environ.get("NBA_EDITORIAL_EXAMPLES", "good").split(",")
         if item.strip()
     }
     for name, filename in (

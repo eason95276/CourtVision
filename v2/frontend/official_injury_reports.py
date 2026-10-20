@@ -19,7 +19,7 @@ from zoneinfo import ZoneInfo
 from v2.pregame_system.prediction_versions import DEFAULT_DATABASE, _instant
 from v2.pregame_system.storage import content_hash
 
-PARSER_VERSION = "nba-official-injury-live-v2"
+PARSER_VERSION = "nba-official-injury-live-v3"
 ET = ZoneInfo("America/New_York")
 PDF_RE = re.compile(r"https://ak-static\.cms\.nba\.com/referee/injury/Injury-Report_(\d{4}-\d{2}-\d{2})_(\d{2})(?:_(\d{2}))?(AM|PM)\.pdf", re.I)
 STATUSES = {"available", "active", "probable", "questionable", "doubtful", "out"}
@@ -81,6 +81,10 @@ def parse_official_pdf(body: bytes, url: str) -> dict:
             header_index=next((i for i,row in enumerate(table) if row and _compact(row[0])=='gamedate'),None)
             for raw in table[header_index+1 if header_index is not None else 0:]:
                 cells = (list(raw or []) + [None] * 7)[:7]
+                # Continuation pages can include the title inside the extracted
+                # table without repeating its column headings. It is not a team.
+                if _compact("".join(str(cell or "") for cell in cells)).startswith("injuryreport"):
+                    continue
                 if _compact(cells[0]) == "gamedate":
                     continue
                 for key, value in zip(context, cells[:4]):

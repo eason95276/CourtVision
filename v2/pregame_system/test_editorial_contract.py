@@ -40,6 +40,28 @@ def test_structured_venue_keeps_explicit_city_and_malformed_address_is_unknown()
     assert _venue_issues_for_text("这场比赛在多伦多举行。", projection, "article") == []
 
 
+@pytest.mark.parametrize('text', ['总分我反而看得轻一点，倾向大分。',
+    '文班在场时，雷霆的禁区得分会被压一压。',
+    '漏人和补位迟疑会制造一些轻松得分。'])
+def test_qualitative_one_is_not_an_exact_statistic(text):
+    from .editorial_hard_facts import _stat_issues_for_text
+    projection = {'game': deepcopy(GAME), 'facts': [
+        {'id': 'locked', 'kind': 'LOCKED_PREDICTION', 'value': LOCKED},
+        {'id': 'stat', 'kind': 'HISTORICAL', 'value': {'side': 'away',
+            'sample': 'previous_last10', 'season_start': 2025,
+            'metrics': {'games': 10, 'points_for_per_game': 112.5}}}]}
+    assert _stat_issues_for_text(text, projection, 'article') == []
+
+
+@pytest.mark.parametrize('value', ['一', '一点五', '1', '1.5'])
+def test_real_one_point_statistics_still_require_evidence(value):
+    from .editorial_hard_facts import _stat_issues_for_text
+    projection = opponent_series_projection()
+    text = f'上赛季季后赛对76人，尼克斯四场场均净胜{value}分。'
+    assert any(row['code'] == 'exact_stat_value_mismatch' for row in
+        _stat_issues_for_text(text, projection, 'article'))
+
+
 def opponent_series_projection():
     return {"game": {"home": {"id": 1, "name_zh": "76人", "name": "Philadelphia 76ers"},
                      "away": {"id": 2, "name_zh": "尼克斯", "name": "New York Knicks"}},

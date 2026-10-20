@@ -891,6 +891,11 @@ def _run_two_stage_impl(basketball: dict, market: dict, folder: Path, *, client=
                 '"judgment_effect":"...","evidence_ids":["<valid-id>"]}]}。'
                 "尖括号内容是占位说明，必须用真实 enum 值及本次输入中实际存在的 evidence ID 替换，不可原样输出。"
             )
+            protocol += (
+                "\n字段位置：prediction、factors、uncertainties、analysis_core、pregame_plan 是顶层兄弟字段。"
+                "uncertainties 只能放在顶层，不能放入 analysis_core；analysis_core 不接受 schema 以外的字段。"
+                "上面的对象片段只是 analysis_core 内部结构示意，不是整份响应。返回完整顶层 JSON。"
+            )
             if stage == "independent":
                 protocol += (
                     "\npregame_plan 只承担操作性阵容信息：首发依据、重要球员负荷和会影响判断的 lineup assumption。"

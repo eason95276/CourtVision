@@ -5,8 +5,8 @@
       "game_id": "espn:401909090",
       "file": "games/espn_401909090.json",
       "tipoff": "2026-10-21T01:30:00+00:00",
-      "version_id": "4ca2e7ba-39f1-4943-b581-9fe5159c3eed",
-      "public_sha256": "c368e96bd5a6a13b3bd2281a99eea6ab254c580823c74d4a4d5bb51e84b54376",
+      "version_id": "4e6ea2fc-1af9-42ed-b2d7-6fd35b31e581",
+      "public_sha256": "18cc12e861fb75b91fdc763d7ada195626ec6eac4a4f6de1dd27953f67ff5509",
       "home_record": {
         "game": {
           "id": "espn:401909090",
@@ -45,14 +45,14 @@
         "prediction": {
           "status": "current",
           "game_id": "espn:401909090",
-          "version_id": "4ca2e7ba-39f1-4943-b581-9fe5159c3eed",
-          "state_revision": 9,
+          "version_id": "4e6ea2fc-1af9-42ed-b2d7-6fd35b31e581",
+          "state_revision": 11,
           "locked_at": null,
           "lock_reason": null,
           "schedule_revision": 1,
           "version": {
             "analysis_contract_version": "two-stage-forecast-v1",
-            "base_input_hash": "dc6fa09362133daf74dfc61efb02d4a6b08ced6ac8de576effcb0bca5deb7fd6",
+            "base_input_hash": "1c26144996d25f70859dd6baea17e8a7ca128e2b77424610674567e3149b754c",
             "game_id": "espn:401909090",
             "game_identity": {
               "away_team_id": 1610612760,
@@ -60,13 +60,13 @@
               "home_team_id": 1610612759,
               "scheduled_tipoff": "2026-10-21T01:30:00+00:00"
             },
-            "generated_at": "2026-10-14T15:15:26.164887+00:00",
-            "input_cutoff_at": "2026-10-14T15:15:11.686920+00:00",
-            "published_at": "2026-10-14T15:15:26.319312+00:00",
+            "generated_at": "2026-10-20T13:15:36.988786+00:00",
+            "input_cutoff_at": "2026-10-20T13:15:26.460733+00:00",
+            "published_at": "2026-10-20T13:17:37.528853+00:00",
             "schedule_revision": 1,
             "stage": "EARLY_PREVIEW",
-            "version_id": "4ca2e7ba-39f1-4943-b581-9fe5159c3eed",
-            "payload_sha256": "0eea56714e57e89c52f745d3b7c84a957e69ef34b2fa999471ba56a7cb5f91d1",
+            "version_id": "4e6ea2fc-1af9-42ed-b2d7-6fd35b31e581",
+            "payload_sha256": "48c6f435132057d0abb28d0a778f7d39389deaa4a730e30b6b70dad0b427ba4c",
             "input_snapshot": {
               "away": {
                 "abbreviation": "OKC",
@@ -91,32 +91,33 @@
             "judgment": {
               "final_prediction": {
                 "evidence_ids": [
-                  "0d36afa1b538ba37d99d689a797e89e0ce6c1360289cf0d4c1e687673b06dfb6",
-                  "282e05c76c8f642c2e531b7f53b3b85a8a16de86a1443c00e517fadee1986761",
-                  "30b684d54b9c4c14ec4a8c36042e3c762c6859b25f3a7e0f2402f58140a57053",
-                  "680cc5c233653bb6bb49917bb4b920da446fca192e143639d906e58db72bf7af",
-                  "743e9c9b2e6e6e4f88582e8dc6eafdbe27e2df13214c1de0ed1deb12de091ec6",
-                  "928a08d3e8aec19941f14aecd84155d7feae00cdb0443071d9add8d7e5026c3d",
-                  "d13d52dacc3e8056c58aebc03397558156d48091f5286b5e7a2e3611c43a5186",
-                  "d86ba9bf3c62bb740bebd00e4a3c268636592dd3909a72a7fc53ca9d598d6ccb"
+                  "330404be65a58a95ff7f9113c73489f92550f1d61ef1e6eef4c3049ecd297c2d",
+                  "479cc1aea8d92e389cd4b245a10da9d444a62a69d8b559dcae6101d336b00913",
+                  "610e1f3e74af043ef04787ae8120dab033caf6eb4ceea1ab799636209642d0e5",
+                  "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0",
+                  "a3c6ebc8c126084fef20b9bda9131ae3a250cbc45c62ee203f49c07dacd525bc",
+                  "a7a6b3c73b4571cfd42eb8e8f92d59f8e46078a8eb33dd355336b6b37f8456e5",
+                  "acd9ec5a44093352d1486e16ce9204649da42e481740e0d471894b23ead97763",
+                  "e01d15b2e50596b8d77c43794ca4a140a4e98f9893acc35901fac168dfb7fe55",
+                  "fbb850878082350e965bca8aabeab4d38e499edd9ef578758b9b69c99cd4923b"
                 ],
-                "expected_margin": 3.0,
+                "expected_margin": 3.5,
                 "expected_total": 224.5,
                 "win_probability": 0.58,
-                "winner_side": "home"
+                "winner_side": "away"
               },
               "pregame_story": {
                 "classification": "subjective_analysis",
                 "evidence_ids": [
-                  "0d36afa1b538ba37d99d689a797e89e0ce6c1360289cf0d4c1e687673b06dfb6",
-                  "282e05c76c8f642c2e531b7f53b3b85a8a16de86a1443c00e517fadee1986761",
-                  "30b684d54b9c4c14ec4a8c36042e3c762c6859b25f3a7e0f2402f58140a57053",
-                  "680cc5c233653bb6bb49917bb4b920da446fca192e143639d906e58db72bf7af",
-                  "743e9c9b2e6e6e4f88582e8dc6eafdbe27e2df13214c1de0ed1deb12de091ec6",
-                  "928a08d3e8aec19941f14aecd84155d7feae00cdb0443071d9add8d7e5026c3d"
+                  "330404be65a58a95ff7f9113c73489f92550f1d61ef1e6eef4c3049ecd297c2d",
+                  "479cc1aea8d92e389cd4b245a10da9d444a62a69d8b559dcae6101d336b00913",
+                  "610e1f3e74af043ef04787ae8120dab033caf6eb4ceea1ab799636209642d0e5",
+                  "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0",
+                  "a3c6ebc8c126084fef20b9bda9131ae3a250cbc45c62ee203f49c07dacd525bc",
+                  "a7a6b3c73b4571cfd42eb8e8f92d59f8e46078a8eb33dd355336b6b37f8456e5"
                 ],
-                "statement": "上季西决七场，马刺靠篮板优势淘汰雷霆。如今雷霆为避第二土豪线送走乔、威金斯和多尔特，马刺则保留62胜核心并补入托拜厄斯·哈里斯。第25秒给出马刺胜、赢3分、总分224.5。",
-                "title": "揭幕战重演西决：马刺的内线优势还能压住雷霆三核吗"
+                "statement": "揭幕夜，马刺在主场迎上上季西决七场才被淘汰的雷霆。文班亚马的护框对上SGA的挡拆，这场球的分差大概不会大，但每一回合的选择都很重。",
+                "title": "文班守门，雷霆来敲门"
               }
             }
           }
@@ -252,8 +253,8 @@
       "game_id": "espn:401909088",
       "file": "games/espn_401909088.json",
       "tipoff": "2026-10-20T19:00:00+00:00",
-      "version_id": "120739a9-e137-4788-958e-66825beddd31",
-      "public_sha256": "a9190d48cd7d9c4a62951a74510b71b3e5a7c5b32bb8e5edab79f164660da32f",
+      "version_id": "3ddb18b9-0e77-48de-ab7f-5d5dad938fc5",
+      "public_sha256": "5d15a9cca97a6c9fe134040ca8e63aa65c88ce37e7f6066caa7905303e7cdfa9",
       "home_record": {
         "game": {
           "id": "espn:401909088",
@@ -292,14 +293,14 @@
         "prediction": {
           "status": "current",
           "game_id": "espn:401909088",
-          "version_id": "120739a9-e137-4788-958e-66825beddd31",
-          "state_revision": 8,
+          "version_id": "3ddb18b9-0e77-48de-ab7f-5d5dad938fc5",
+          "state_revision": 11,
           "locked_at": null,
           "lock_reason": null,
           "schedule_revision": 1,
           "version": {
             "analysis_contract_version": "two-stage-forecast-v1",
-            "base_input_hash": "c83ec544596660f50dbfe76f331ab1bcd5dd3dbbf8ada7f648692b99bab7d725",
+            "base_input_hash": "30a6b998f06a51b93648eee4e8d6228041ee70806269b4cac1e67e222b9dca00",
             "game_id": "espn:401909088",
             "game_identity": {
               "away_team_id": 1610612738,
@@ -307,18 +308,17 @@
               "home_team_id": 1610612765,
               "scheduled_tipoff": "2026-10-20T19:00:00+00:00"
             },
-            "generated_at": "2026-10-14T15:08:24.930801+00:00",
-            "input_cutoff_at": "2026-10-14T15:08:24.871001+00:00",
-            "published_at": "2026-10-14T15:08:24.981124+00:00",
+            "generated_at": "2026-10-20T13:18:20.006766+00:00",
+            "input_cutoff_at": "2026-10-20T13:18:10.717764+00:00",
+            "published_at": "2026-10-20T13:20:55.739535+00:00",
             "schedule_revision": 1,
             "stage": "EARLY_PREVIEW",
-            "version_id": "120739a9-e137-4788-958e-66825beddd31",
-            "payload_sha256": "be55b25fd22db668ef3e60147fff34d45792850e27367ffc23fb30f2ce714d2a",
+            "version_id": "3ddb18b9-0e77-48de-ab7f-5d5dad938fc5",
+            "payload_sha256": "74165228f88febe42b647686fac22086f781ddff177a067a322e1c5193c62e59",
             "input_snapshot": {
               "away": {
                 "abbreviation": "BOS",
                 "accent": "#007A33",
-                "espn_team_id": "2",
                 "id": 1610612738,
                 "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/bos.png",
                 "name": "Boston Celtics",
@@ -327,7 +327,6 @@
               "home": {
                 "abbreviation": "DET",
                 "accent": "#C8102E",
-                "espn_team_id": "8",
                 "id": 1610612765,
                 "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/det.png",
                 "name": "Detroit Pistons",
@@ -340,33 +339,33 @@
             "judgment": {
               "final_prediction": {
                 "evidence_ids": [
-                  "2489de7afd91f10884de2af18fcae81376c55fa57d7e03caf34ab332e0dbeba9",
-                  "65376eb3908159982e362cad2715e66c9ccbe0f4bbd44717e6dd88076cff7df9",
-                  "6e2fc5bf914c24a807bce49873f9935724b41add6bb747a6b986603c718f2f4e",
-                  "978889a53516cf73ded5fcdc497015dcb94925128cbe71c8a9796d5a714ef83d",
-                  "ab2d7bb2121b7e583e9966bc73f14332f705e88582037b590831456deebdfae9",
-                  "ad00dad5a352ed24d003e44393f69ab1b3124f4051f3e64ec4025dab5e23353f",
-                  "d35f236c0f0e71f4e81c0231b8b83a22806abf958d00f5ca16525ba874ffa4fb",
-                  "dec07a5489a4cfc51b4c6e8217e88250b28cb311c7c1a3e39db1fa406dcf4185",
-                  "f94e4882aa7921b9b0a8dc23e8c1f6fc2d407b46ae16cca26cda9df6679acc33"
+                  "45919d6bd1cd1acfc5a154a9008f59e4ef1717cda69c7b27dbbe7371d33d654a",
+                  "846cd3287b3c326697aba00a7925f877956f4ac941517e582d2393564f7adcb4",
+                  "9c3d0a17b390b2801a644ad3c620eb2f593a26cdda5414433f1670461017def9",
+                  "b6f02d1b4f77238af3bd50edc1a87f4ff934a7d3f8a45e6d707d5f88458df413",
+                  "bdddc301178334b47782e9b9741ccb4c2775bd4285af08f1a40d6298dd3ab146",
+                  "c2774910a5d123d04849707ec8a2d290fb2b0352c5713101902cf599c8c56863",
+                  "c6646abec1135f8e6c56b0bd2c587d4580ac2eb561f0338986daafc674d37414",
+                  "cd17cc86807c33b145df0cef92901ba986899d78d80bf2d97a02a9b7b01de02d",
+                  "d96d64e69c7d40ca431945a8c99114d884f948cc1c0f1d257a4d7dc69e140255"
                 ],
                 "expected_margin": 2.5,
-                "expected_total": 224.5,
+                "expected_total": 222.5,
                 "win_probability": 0.56,
-                "winner_side": "home"
+                "winner_side": "away"
               },
               "pregame_story": {
                 "classification": "subjective_analysis",
                 "evidence_ids": [
-                  "2489de7afd91f10884de2af18fcae81376c55fa57d7e03caf34ab332e0dbeba9",
-                  "65376eb3908159982e362cad2715e66c9ccbe0f4bbd44717e6dd88076cff7df9",
-                  "6e2fc5bf914c24a807bce49873f9935724b41add6bb747a6b986603c718f2f4e",
-                  "978889a53516cf73ded5fcdc497015dcb94925128cbe71c8a9796d5a714ef83d",
-                  "ab2d7bb2121b7e583e9966bc73f14332f705e88582037b590831456deebdfae9",
-                  "ad00dad5a352ed24d003e44393f69ab1b3124f4051f3e64ec4025dab5e23353f"
+                  "45919d6bd1cd1acfc5a154a9008f59e4ef1717cda69c7b27dbbe7371d33d654a",
+                  "846cd3287b3c326697aba00a7925f877956f4ac941517e582d2393564f7adcb4",
+                  "9c3d0a17b390b2801a644ad3c620eb2f593a26cdda5414433f1670461017def9",
+                  "b6f02d1b4f77238af3bd50edc1a87f4ff934a7d3f8a45e6d707d5f88458df413",
+                  "bdddc301178334b47782e9b9741ccb4c2775bd4285af08f1a40d6298dd3ab146",
+                  "c2774910a5d123d04849707ec8a2d290fb2b0352c5713101902cf599c8c56863"
                 ],
-                "statement": "凯尔特人送走杰伦·布朗、换来保罗·乔治，塔图姆又刚从跟腱伤里回来；活塞则保留了坎宁安—杜伦—汤普森的核心框架，只在前场做了针对性调整。第25秒给出活塞主场胜、净胜2.5分、总分224.5，优势不大，但方向明确。",
-                "title": "坎宁安挡拆对上波士顿新锋线，活塞揭幕战先手在哪"
+                "statement": "活塞上赛季四次交手赢了三场，如今塔图姆身边换成乔治。新锋线能否让底特律改变防守选择，是这场揭幕战的主线。",
+                "title": "塔图姆换了搭档，底特律还会那么难打吗？"
               }
             }
           }
@@ -767,5 +766,5 @@
       }
     }
   ],
-  "published_at": "2026-10-14T18:13:25.846811+00:00"
+  "published_at": "2026-10-20T13:21:22.668019+00:00"
 }

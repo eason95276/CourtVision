@@ -103,6 +103,34 @@ def test_known_url_is_refetched_and_updated_without_overwriting_history(tmp_path
     assert store.read_as_of(GAME)['records'][-1]['status']=='out'
 
 
+def test_continuation_page_title_does_not_replace_team_context(monkeypatch):
+    import pdfplumber
+    from .official_injury_reports import parse_official_pdf, ET
+    from v2.scripts import import_official_injury_report as importer
+    stamp = datetime(2026, 10, 20, 8, 30, tzinfo=ET)
+    monkeypatch.setattr(importer, '_report_timestamp', lambda page: stamp)
+    class Page:
+        width = 600
+        def __init__(self, rows): self.rows = rows
+        def extract_table(self, settings): return self.rows
+        def extract_text(self): return ''
+    class Document:
+        pages = [
+            Page([['Game Date', 'Game Time', 'Matchup', 'Team', 'Player Name', 'Status', 'Reason'],
+                  ['10/20/2026', '09:30(ET)', 'OKC@SAS', 'San Antonio Spurs', 'Harris,Tobias', 'Out', 'Calf']]),
+            Page([['', '', '', 'Injury Repor', 't: 10/20/26 08:3', '0 AM', ''],
+                  ['', '', '', '', 'Quaintance,Jayden', 'Out', 'Knee']]),
+        ]
+        def __enter__(self): return self
+        def __exit__(self, *args): return False
+    monkeypatch.setattr(pdfplumber, 'open', lambda stream: Document())
+    result = parse_official_pdf(b'%PDF-fixture',
+        'https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_08_30AM.pdf')
+    assert [r['team'] for r in result['records']] == ['San Antonio Spurs', 'San Antonio Spurs']
+    assert [r['player_name'] for r in result['records']] == ['Tobias Harris', 'Jayden Quaintance']
+    assert all(r['matchup'] == 'OKC@SAS' for r in result['records'])
+
+
 def test_parser_revision_schema_upgrade_preserves_every_old_row(tmp_path,monkeypatch):
     from . import official_injury_reports as module
     store=OfficialInjuryReportStore(tmp_path/'db.sqlite',clock=lambda:datetime(2026,10,4,tzinfo=timezone.utc),parser=lambda body,url:parsed(url))

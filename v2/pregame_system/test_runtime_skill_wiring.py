@@ -15,7 +15,7 @@ from v2.frontend.analysis_service import SavedGameAnalysisService
 
 @pytest.fixture(autouse=True)
 def default_examples_policy(monkeypatch):
-    monkeypatch.delenv("NBA_EDITORIAL_EXAMPLES", raising=False)
+    monkeypatch.setenv("NBA_EDITORIAL_EXAMPLES", "")
 
 
 LAYERS = {
@@ -48,10 +48,10 @@ def test_single_file_skill_loaders_read_latest_content_each_time(tmp_path, monke
     assert "version two" in loader()
 
 
-def test_editorial_loader_reads_latest_skill_without_examples_by_default(tmp_path, monkeypatch):
+def test_editorial_loader_reads_latest_skill_with_explicit_example_opt_out(tmp_path, monkeypatch):
     skill_dir = tmp_path / "editorial"
     skill_dir.mkdir()
-    monkeypatch.delenv("NBA_EDITORIAL_EXAMPLES", raising=False)
+    monkeypatch.setenv("NBA_EDITORIAL_EXAMPLES", "")
     skill_path = skill_dir / "SKILL.md"
     skill_path.write_text("editorial one", encoding="utf-8")
     (skill_dir / "good_examples.md").write_text("must stay unloaded", encoding="utf-8")
@@ -61,6 +61,16 @@ def test_editorial_loader_reads_latest_skill_without_examples_by_default(tmp_pat
     assert "must stay unloaded" not in editorial_skill.load_editorial_skill()
     skill_path.write_text("editorial two", encoding="utf-8")
     assert "editorial two" in editorial_skill.load_editorial_skill()
+
+
+def test_editorial_loader_includes_approved_prose_by_default(tmp_path, monkeypatch):
+    skill_dir = tmp_path / 'editorial'
+    skill_dir.mkdir()
+    (skill_dir / 'SKILL.md').write_text('writer rules', encoding='utf-8')
+    (skill_dir / 'good_examples.md').write_text('approved prose cadence', encoding='utf-8')
+    monkeypatch.setattr(editorial_skill, 'EDITORIAL_SKILL_DIR', skill_dir)
+    monkeypatch.delenv('NBA_EDITORIAL_EXAMPLES', raising=False)
+    assert 'approved prose cadence' in editorial_skill.load_editorial_skill()
 
 
 def test_editorial_loader_fails_explicitly_for_missing_or_empty_skill(tmp_path, monkeypatch):

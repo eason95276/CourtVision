@@ -356,6 +356,7 @@ def test_production_two_stage_contract_records_winner_flip_and_observed_only_tim
     assert set(independent_request["schema"]["$defs"]["ForecastClaim"]["required"]) == {
         "statement", "classification", "evidence_ids", "confidence"}
     assert "central_thesis 必须是 ForecastClaim 对象，不能是字符串" in independent_request["messages"][0]["content"]
+    assert "uncertainties 只能放在顶层，不能放入 analysis_core" in independent_request["messages"][0]["content"]
     assert result["schema_repair_provenance"]["schema_repair_used"] is False
     review_request = json.loads((tmp_path / "run" / "market_review_request.json").read_text(encoding="utf-8"))
     assert review_request["default_request_settings"]["max_tokens"] == 3600

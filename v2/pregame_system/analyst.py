@@ -278,7 +278,7 @@ def _compact_player_knowledge(value: dict[str, Any]) -> dict[str, Any]:
         players = []
         for profile in team.get("previous_season_players") or []:
             compact = {key: profile[key] for key in (
-                "player_id", "source_player_id", "player_name",
+                "player_id", "player_id_namespace", "source_player_id", "source_player_id_namespace", "player_name",
                 "previous_season_status", "previous_season_history_status", "current_availability",
             ) if key in profile}
             if profile.get("previous_season_history_reason"):
