@@ -1508,6 +1508,157 @@
         "input_cutoff_at": "2026-10-20T13:15:26.460733+00:00",
         "feature_cutoff_at": "2026-10-20T12:59:52.259716+00:00",
         "roster_context_cutoff_at": null
+      },
+      "portfolio_editorial": {
+        "schema_version": "portfolio-editorial-v1",
+        "artifact_id": "poem-title-4e6ea2fc-1af9-42ed-b2d7-6fd35b31e581",
+        "base_prediction_version_id": "4e6ea2fc-1af9-42ed-b2d7-6fd35b31e581",
+        "base_prediction_payload_sha256": "48c6f435132057d0abb28d0a778f7d39389deaa4a730e30b6b70dad0b427ba4c",
+        "editorial_sha256": "ec7f8c2a9fa53c8c208db398264bdbd83fac2608225051bbf09a80d8f1c641ee",
+        "generated_at": "2026-10-20T14:05:24.971728+00:00",
+        "editorial": {
+          "pregame_story": {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "330404be65a58a95ff7f9113c73489f92550f1d61ef1e6eef4c3049ecd297c2d",
+              "479cc1aea8d92e389cd4b245a10da9d444a62a69d8b559dcae6101d336b00913",
+              "610e1f3e74af043ef04787ae8120dab033caf6eb4ceea1ab799636209642d0e5",
+              "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0",
+              "a3c6ebc8c126084fef20b9bda9131ae3a250cbc45c62ee203f49c07dacd525bc",
+              "a7a6b3c73b4571cfd42eb8e8f92d59f8e46078a8eb33dd355336b6b37f8456e5"
+            ],
+            "statement": "上赛季西决打满七场的对手再次碰面，雷霆要过的，仍是文班亚马守着的禁区。",
+            "title": "七战旧账今重算\n文班长臂待雷霆"
+          },
+          "analysis_article": "揭幕夜，马刺在主场迎上雷霆。上季西决七场才被淘汰的那支雷霆，核心几乎原样回来了；马刺这边，文班亚马、福克斯、卡斯尔、哈珀、瓦塞尔这套预计首发也摆得出来。两队都没有慢热的空间。\n\n我最想看的是文班亚马站在禁区里的样子。SGA叫挡拆，第一下不一定能过人，他会往后退半步，看文班是跟出来还是守在篮下。跟出来，霍姆格伦和哈滕斯坦就有顺下和外弹的空间；守在篮下，SGA那手中距离和抛投就有出手机会。雷霆上季进攻效率高，靠的就是这种“你选一个”的持球方式。文班在不在场，马刺的防守几乎是两支队。\n\n但让我略站雷霆，原因不在纸面效率，而在马刺缺了哈里斯之后侧翼的轮换。哈里斯季前赛一直受左小腿拉伤困扰，主帅约翰逊表示他暂时还要继续休战，马刺少了一个能顶锋线、能接球投、能在换防里不被点名的人。福克斯和卡斯尔要承担更多持球，雷霆这边华莱士和卡鲁索正好是能贴、能掏、能追着人跑的外线。马刺后场一旦被逼出几次仓促出球，雷霆的转换就会来，SGA拿球推起来，分差就是这样一点点积起来的。\n\n所以我看好雷霆赢球，也看好雷霆+1.5这个方向。预计分差只有三分半左右，这不是一场能拉开的大胜，雷霆的优势更像是第三节替补轮换时多出的一两个回合，而不是某一节突然打崩。马刺主场反扑的能力是有的，文班只要在场上，禁区就不会轻易失守。\n\n总分这边，我倾向小分，但把握没有让分那么足。成立的剧本是：文班在场时雷霆不敢无脑冲筐，马刺后场被压迫后出手变慢，两边都得在半场里一板一眼地找机会。可揭幕战的节奏本身就不好猜，雷霆的替补深度也可能把比赛推快。这一项我只当次选。\n\n开球后先看一件事：SGA叫挡拆时，文班是跟出来还是守在篮下。他选哪一边，雷霆就会往另一边打。",
+          "watch_themes": [
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "330404be65a58a95ff7f9113c73489f92550f1d61ef1e6eef4c3049ecd297c2d",
+                "479cc1aea8d92e389cd4b245a10da9d444a62a69d8b559dcae6101d336b00913",
+                "610e1f3e74af043ef04787ae8120dab033caf6eb4ceea1ab799636209642d0e5",
+                "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0",
+                "a3c6ebc8c126084fef20b9bda9131ae3a250cbc45c62ee203f49c07dacd525bc",
+                "a7a6b3c73b4571cfd42eb8e8f92d59f8e46078a8eb33dd355336b6b37f8456e5"
+              ],
+              "statement": "SGA挡拆时，文班跟出来还是守篮下，直接决定雷霆的进攻走哪条路。",
+              "title": "文班亚马的防守选择"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "330404be65a58a95ff7f9113c73489f92550f1d61ef1e6eef4c3049ecd297c2d",
+                "479cc1aea8d92e389cd4b245a10da9d444a62a69d8b559dcae6101d336b00913",
+                "610e1f3e74af043ef04787ae8120dab033caf6eb4ceea1ab799636209642d0e5",
+                "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0",
+                "a3c6ebc8c126084fef20b9bda9131ae3a250cbc45c62ee203f49c07dacd525bc",
+                "a7a6b3c73b4571cfd42eb8e8f92d59f8e46078a8eb33dd355336b6b37f8456e5"
+              ],
+              "statement": "哈里斯的小腿伤势让马刺锋线轮换存在变数，福克斯和卡斯尔要面对华莱士、卡鲁索的贴防，失误多少会决定转换得分。",
+              "title": "马刺后场能不能顶住压迫"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "330404be65a58a95ff7f9113c73489f92550f1d61ef1e6eef4c3049ecd297c2d",
+                "479cc1aea8d92e389cd4b245a10da9d444a62a69d8b559dcae6101d336b00913",
+                "610e1f3e74af043ef04787ae8120dab033caf6eb4ceea1ab799636209642d0e5",
+                "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0",
+                "a3c6ebc8c126084fef20b9bda9131ae3a250cbc45c62ee203f49c07dacd525bc",
+                "a7a6b3c73b4571cfd42eb8e8f92d59f8e46078a8eb33dd355336b6b37f8456e5"
+              ],
+              "statement": "预计分差只有三分半，雷霆的深度优势最可能体现在轮换时段的一两个回合上。",
+              "title": "雷霆替补轮换的第三节"
+            }
+          ],
+          "player_analysis": [
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "175d912fe7c56352453fe8fd46e6ed2f6c1b255a489cba3f086c946a546376c3",
+                "c3f0cb907d5e3ed09fbc49224e67c62e32919c454e9f3c33aa5163e1e6aa4f01",
+                "fbb850878082350e965bca8aabeab4d38e499edd9ef578758b9b69c99cd4923b"
+              ],
+              "player_name": "Victor Wembanyama",
+              "statement": "马刺防守的支点。他在场时雷霆不敢随意冲筐，他下场后禁区立刻变宽，出场时间直接决定马刺防守的下限。"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "175d912fe7c56352453fe8fd46e6ed2f6c1b255a489cba3f086c946a546376c3",
+                "9ae78c344c1f259642fa91cbd382eca78d23bcbc6b6e95ec122b9a04bea30edb",
+                "fbb850878082350e965bca8aabeab4d38e499edd9ef578758b9b69c99cd4923b"
+              ],
+              "player_name": "De'Aaron Fox",
+              "statement": "马刺后场组织与突破更集中在他手里。他能不能在雷霆外线压迫下稳住出球，是马刺进攻不塌的关键。"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "175d912fe7c56352453fe8fd46e6ed2f6c1b255a489cba3f086c946a546376c3",
+                "fbb850878082350e965bca8aabeab4d38e499edd9ef578758b9b69c99cd4923b"
+              ],
+              "player_name": "Stephon Castle",
+              "statement": "预计首发后场之一，要分担持球，也要面对雷霆最能贴人的外线。他的失误数会直接影响马刺的回合质量。"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "175d912fe7c56352453fe8fd46e6ed2f6c1b255a489cba3f086c946a546376c3",
+                "c3f0cb907d5e3ed09fbc49224e67c62e32919c454e9f3c33aa5163e1e6aa4f01",
+                "fbb850878082350e965bca8aabeab4d38e499edd9ef578758b9b69c99cd4923b"
+              ],
+              "player_name": "Devin Vassell",
+              "statement": "马刺侧翼少人之后，他的投射和换防负担都变重，是文班之外最需要撑住锋线的人。"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "175d912fe7c56352453fe8fd46e6ed2f6c1b255a489cba3f086c946a546376c3",
+                "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0"
+              ],
+              "player_name": "Shai Gilgeous-Alexander",
+              "statement": "雷霆进攻的起点。他反复叫挡拆，把文班逼进“跟出来还是守篮下”的选择题，雷霆的效率就从这里长出来。"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "175d912fe7c56352453fe8fd46e6ed2f6c1b255a489cba3f086c946a546376c3",
+                "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0"
+              ],
+              "player_name": "Chet Holmgren",
+              "statement": "和哈滕斯坦一起撑起雷霆内线，既能顺下也能外弹，是文班跟出禁区后最直接的受益者。"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "175d912fe7c56352453fe8fd46e6ed2f6c1b255a489cba3f086c946a546376c3",
+                "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0"
+              ],
+              "player_name": "Isaiah Hartenstein",
+              "statement": "预计首发中锋，负责篮板和掩护质量，让SGA的挡拆有稳定的落点，也分担霍姆格伦的对位压力。"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "175d912fe7c56352453fe8fd46e6ed2f6c1b255a489cba3f086c946a546376c3",
+                "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0"
+              ],
+              "player_name": "Cason Wallace",
+              "statement": "雷霆外线压迫的第一道，预计首发就要去贴马刺的持球人，逼出仓促出球和转换机会。"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "175d912fe7c56352453fe8fd46e6ed2f6c1b255a489cba3f086c946a546376c3",
+                "a9464b4b59a1e4bf1affb5e2db3e2032facff9bc50fd97692c6ddc060dfa7953"
+              ],
+              "player_name": "Alex Caruso",
+              "statement": "替补席上的防守资源，出场时间未确认，但只要上场就能给马刺后场再加一层压力。"
+            }
+          ]
+        }
       }
     },
     "version": {
@@ -3049,5 +3200,5 @@
     "source_prediction_payload_sha256": "48c6f435132057d0abb28d0a778f7d39389deaa4a730e30b6b70dad0b427ba4c",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "0767c8a3cbc52a4806f464913a3c70fbdb65415d77d27dec7bdb94aacc9e9836"
+  "public_sha256": "966a6dc694fb93a04def5a4374fa149857bf2bb0ac72930390899ee42498e53e"
 }

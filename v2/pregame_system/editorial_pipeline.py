@@ -42,7 +42,8 @@ class KeyPlayerDraft(BaseModel):
 
 class EditorialDraft(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    title: str = Field(min_length=1, max_length=80)
+    title: str = Field(min_length=1, max_length=80,
+        description='Two seven-character Chinese lines separated by a newline, without punctuation; a game-specific story, not a predicted result. Existing saved drafts remain readable.')
     lead: str = Field(min_length=1, max_length=300)
     article: str = Field(min_length=1, max_length=2200)
     watch_themes: list[Theme] = Field(min_length=0, max_length=4)

@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-from publish_game import clean, sha, public_selection, lineup_reference_names
+from publish_game import clean, sha, public_selection, lineup_reference_names, home_record
 
 
 class PublicRelease(unittest.TestCase):
@@ -91,6 +91,34 @@ class PublicRelease(unittest.TestCase):
         quote = 'Projected: Payton Pritchard, Jayson Tatum. Unverified Player. Historical Player.'
         self.assertEqual(lineup_reference_names(source, quote), ['Jayson Tatum', 'Payton Pritchard'])
         self.assertNotIn('Projected', ' / '.join(lineup_reference_names(source, quote)))
+
+    def test_title_overlay_keeps_frozen_prediction_and_home_title_consistent(self):
+        for row in self.rows:
+            selection = row['prediction']
+            overlay = (selection.get('display_projection') or {}).get('portfolio_editorial')
+            if not overlay or not str(overlay.get('artifact_id', '')).startswith('poem-title-'):
+                continue
+            frozen = copy.deepcopy(selection['version'])
+            self.assertEqual(overlay['base_prediction_version_id'], frozen['version_id'])
+            self.assertEqual(overlay['base_prediction_payload_sha256'], frozen['payload_sha256'])
+            editorial = overlay['editorial']
+            self.assertRegex(editorial['pregame_story']['title'], r'^[\u4e00-\u9fff]{7}\n[\u4e00-\u9fff]{7}$')
+            self.assertEqual(editorial['analysis_article'], frozen['judgment']['analysis_article'])
+            self.assertEqual(editorial['player_analysis'], frozen['judgment'].get('player_analysis', []))
+            summary = home_record(row)
+            self.assertEqual(summary['prediction']['display_projection']['portfolio_editorial']['editorial']['pregame_story'], editorial['pregame_story'])
+            indexed = next(item['home_record'] for item in self.index['games'] if item['game_id'] == row['game']['id'])
+            self.assertEqual(indexed['prediction']['display_projection']['portfolio_editorial']['editorial']['pregame_story'], editorial['pregame_story'])
+            self.assertEqual(summary['prediction']['version']['judgment']['final_prediction'], frozen['judgment']['final_prediction'])
+            self.assertEqual(selection['version'], frozen)
+
+    def test_old_version_cannot_receive_another_versions_title(self):
+        row = copy.deepcopy(next(r for r in self.rows if r['prediction']['version']))
+        row['prediction'].setdefault('display_projection', {})['portfolio_editorial'] = {
+            'base_prediction_version_id': 'another-version',
+            'base_prediction_payload_sha256': row['prediction']['version']['payload_sha256'],
+            'editorial': {'pregame_story': {'title': 'Wrong title'}, 'analysis_article': 'Wrong article'}}
+        self.assertNotIn('display_projection', home_record(row)['prediction'])
 
     def test_identity_conflict_rejected(self):
         row = copy.deepcopy(next((r for r in self.rows if r['prediction']['version'])))

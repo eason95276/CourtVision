@@ -180,6 +180,13 @@ def home_record(record):
         v['input_snapshot'] = choose(version.get('input_snapshot'), {'id', 'home', 'away', 'tipoff', 'schedule_revision'})
         v['judgment'] = choose(version['judgment'], {'final_prediction', 'pregame_story'})
         slim['version'] = v
+        overlay = (selection.get('display_projection') or {}).get('portfolio_editorial')
+        if (overlay and overlay.get('base_prediction_version_id') == version['version_id']
+                and overlay.get('base_prediction_payload_sha256') == version['payload_sha256']):
+            view = choose(overlay, {'schema_version', 'artifact_id', 'base_prediction_version_id',
+                'base_prediction_payload_sha256', 'editorial_sha256', 'generated_at'})
+            view['editorial'] = choose(overlay.get('editorial'), {'pregame_story', 'analysis_article'})
+            slim['display_projection'] = {'portfolio_editorial': view}
     else:
         slim['version'] = None
     return {'game': game, 'prediction': slim}
