@@ -10,12 +10,12 @@ from zoneinfo import ZoneInfo
 from v2.pregame_system.storage import content_hash, digest, now, save
 from v2.pregame_system.prediction_versions import _instant, _json, payload_sha256
 from v2.pregame_system.espn_boxscore_normalizer import normalize_espn_summary_payload, normalize_identity_name
-from v2.pregame_system.market import team_id
 from .record import build_postgame_record
 from .ats_evaluation import aggregate_ats_evaluations
 
 
 def normalize_completed_summary(game, summary, source):
+    from v2.pregame_system.market import team_id
     event_id=game['id'].removeprefix('espn:')
     header=summary.get('header') or {}
     comp=(header.get('competitions') or [{}])[0]
