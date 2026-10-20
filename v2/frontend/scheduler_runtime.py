@@ -114,6 +114,14 @@ def status_report(database, *, config=None, at=None):
             report["status"] = "available"
     except (sqlite3.Error, ValueError, json.JSONDecodeError) as error:
         report.update(status="unavailable", reason=type(error).__name__)
+    queue_path = Path(database).resolve().parent / 'public-release' / 'queue.sqlite'
+    if queue_path.is_file():
+        try:
+            with closing(readonly_connection(queue_path)) as db:
+                report['publications'] = [dict(row) for row in db.execute(
+                    'SELECT version_id,game_id,status,attempts,next_attempt_at,last_error FROM publication_jobs ORDER BY created_at DESC LIMIT 20')]
+        except sqlite3.Error:
+            report['publication_status'] = 'unavailable'
     return report
 
 
@@ -145,6 +153,11 @@ class PersistentScheduler:
         self.readiness_jobs={}
         self.public_pool=ThreadPoolExecutor(max_workers=1,thread_name_prefix='saved-final-publication')
         self.public_jobs={}
+        self.publication_queue = None
+        self.last_publication_discovery = None
+        if os.environ.get('COURTVISION_PUBLIC_PUBLISH_ROOT'):
+            from .opening_publish import publication_queue
+            self.publication_queue = publication_queue(service.store.path)
         self.allowed_game_ids = None if allowed_game_ids is None else frozenset(allowed_game_ids)
         self.allowed_stages = None if allowed_stages is None else frozenset(allowed_stages)
         # Process liveness is real wall time; offline business clocks may compress
@@ -275,12 +288,43 @@ class PersistentScheduler:
                     self._event("worker_failed_before_claim",worker.task,failure_stage=category,
                                 detail={"error_type":(worker.terminal or {}).get("error_type"),"exit_code":worker.process.exitcode})
                 worker.pipe.close()
-                if (row['status']=='succeeded'and worker.task['stage']=='FINAL_PREGAME'
-                        and (worker.terminal or{}).get('version_id')and os.environ.get('COURTVISION_PUBLIC_PUBLISH_ROOT')):
-                    from .opening_publish import publish_final
-                    version_id=worker.terminal['version_id']
-                    self.public_jobs[version_id]=self.public_pool.submit(publish_final,worker.task['game_id'],version_id,database=self.service.store.path)
+                if self.publication_queue and row['status'] == 'succeeded' and (worker.terminal or {}).get('version_id'):
+                    try:
+                        self.publication_queue.enqueue(self.service.store.path,
+                            worker.task['game_id'], worker.terminal['version_id'])
+                    except Exception as error:
+                        self._event('saved_report_enqueue_failed', worker.task,
+                            detail={'error_type': type(error).__name__})
                 del self.active[identity]
+
+    def _pump_publications(self):
+        for version_id, job in list(self.public_jobs.items()):
+            if not job.done():
+                continue
+            try:
+                self._event('saved_report_publication', detail=job.result())
+            except Exception as error:
+                self._event('saved_report_publication_failed',
+                    detail={'version_id': version_id, 'error_type': type(error).__name__})
+            del self.public_jobs[version_id]
+        if self.publication_queue is None:
+            return
+        at = self.health_clock()
+        if self.last_publication_discovery is None or (at-self.last_publication_discovery).total_seconds() >= 60:
+            result = self.publication_queue.discover(self.service.store.path,
+                game_ids=self.allowed_game_ids, stages=self.allowed_stages)
+            if result['errors']:
+                self._event('saved_report_discovery_failed', detail=result)
+            self.last_publication_discovery = at
+        if not self.public_jobs:
+            job = self.publication_queue.claim(game_ids=self.allowed_game_ids)
+            if job:
+                from .opening_publish import publish_saved
+                def deliver(item):
+                    return publish_saved(item, public_root=os.environ['COURTVISION_PUBLIC_PUBLISH_ROOT'],
+                        queue_root=self.publication_queue.root,
+                        api_base=os.environ.get('COURTVISION_PUBLIC_API_BASE', 'http://127.0.0.1:8625'))
+                self.public_jobs[job['version_id']] = self.public_pool.submit(self.publication_queue.run, job, deliver)
 
     def tick(self):
         if self.stop_event.is_set():
@@ -290,11 +334,10 @@ class PersistentScheduler:
                 self.stop_event.set()
                 return {"status": "leader_unavailable", "dispatched": 0}
             self._reap()
-            for version_id,job in list(self.public_jobs.items()):
-                if not job.done():continue
-                try:self._event('saved_final_publication',detail=job.result())
-                except Exception as error:self._event('saved_final_publication_failed',detail={'version_id':version_id,'error_type':type(error).__name__})
-                del self.public_jobs[version_id]
+            try:
+                self._pump_publications()
+            except (OSError, ValueError, sqlite3.Error) as error:
+                self._event('saved_report_dispatch_failed', detail={'error_type': type(error).__name__})
             at = self._now()
             if self.last_plan_at is None or (at-self.last_plan_at).total_seconds() >= self.config.planner_interval_seconds:
                 from .pregame_scheduler import PregameScheduler
@@ -490,8 +533,9 @@ def main(argv=None):
         if args.once:
             try:
                 runner.tick()
-                while runner.active and not runner.stop_event.wait(.1):
+                while (runner.active or runner.public_jobs) and not runner.stop_event.wait(.1):
                     runner._reap()
+                    runner._pump_publications()
                     runner._leader()
             finally:
                 runner.shutdown()

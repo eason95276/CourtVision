@@ -125,7 +125,7 @@ def test_versioned_writer_receives_decision_core_and_market_transition_without_p
             "article": "The away guard will test the home switch. The home side's back line is the counter.",
             "watch_themes": [], "confidence": "medium", "player_analysis": []}, {"fixture": True}
 
-    judgment, trace = run_editorial(context, forecast, tmp_path / "decision-v2", writer_client=capture)
+    judgment, trace = run_editorial(context, forecast, tmp_path / "decision-v2", writer_client=capture, require_poem_title=False)
     fact_kinds = {fact["kind"] for fact in seen["payload"]["facts"]}
     assert "DECISION_CORE" in fact_kinds and "REVISION_PROVENANCE" in fact_kinds
     assert "supporting context beneath the Decision Core" in seen["payload"]["scope_legend"]["ANALYST_REASONING"]
@@ -235,7 +235,7 @@ def test_v2_game_script_hard_fact_repair_updates_public_judgment_not_locked_fore
         return {"patches": [{"unit_id": "game_script",
             "replacement": "主队希望先把比赛带入熟悉的半场节奏。"}]}, {"fixture": True}
 
-    judgment, trace = run_editorial(context, original_forecast, tmp_path / "game-script-repair", writer_client=client)
+    judgment, trace = run_editorial(context, original_forecast, tmp_path / "game-script-repair", writer_client=client, require_poem_title=False)
     assert calls == ["EditorialDraft", "EditorialRepair"]
     assert judgment["game_script"] == "主队希望先把比赛带入熟悉的半场节奏。"
     assert {key: judgment["final_prediction"][key] for key in
@@ -275,7 +275,7 @@ def test_decision_writer_blocks_internal_model_layer_names(tmp_path):
         return {"title": "A matchup", "lead": "A clean lead.", "article": "Pure gives the baseline.",
             "watch_themes": [], "confidence": "medium", "player_analysis": []}, {"fixture": True}
     with pytest.raises(ValueError, match="editorial_internal_model_layer_leak:Pure"):
-        run_editorial(context, forecast, tmp_path / "visibility", writer_client=leaking_writer)
+        run_editorial(context, forecast, tmp_path / "visibility", writer_client=leaking_writer, require_poem_title=False)
 
 
 @pytest.mark.parametrize("count", [0, 1, 2, 4])
@@ -325,7 +325,7 @@ def test_key_player_current_identity_evidence_and_frozen_numeric_output(frozen, 
         name = roster["value"]["roster_snapshot"][0]["name"]
         draft["player_analysis"] = [{"player_name": name, "statement": "这名球员的持球选择是我最想观察的变量。", "fact_ids": [roster["id"]]}]
         return draft, meta
-    judgment, trace = run_editorial(context, forecast, tmp_path / "players", writer_client=with_player)
+    judgment, trace = run_editorial(context, forecast, tmp_path / "players", writer_client=with_player, require_poem_title=False)
     assert len(judgment["player_analysis"]) == 1
     assert judgment["player_analysis"][0]["classification"] == "subjective_analysis"
     assert set(judgment["player_analysis"][0]["evidence_ids"]) <= set(context.evidence_index)
@@ -349,7 +349,7 @@ def test_key_player_rejects_historical_only_identity_unknown_fact_or_duplicate(f
         draft["player_analysis"] = [p, copy.deepcopy(p)] if mode == "duplicate" else [p]
         return draft, meta
     with pytest.raises(ValueError, match="key_player_"):
-        run_editorial(context, forecast, tmp_path / mode, writer_client=invalid)
+        run_editorial(context, forecast, tmp_path / mode, writer_client=invalid, require_poem_title=False)
 
 
 def test_key_player_hard_fact_repair_is_scoped_to_its_statement(frozen, tmp_path):
@@ -367,7 +367,7 @@ def test_key_player_hard_fact_repair_is_scoped_to_its_statement(frozen, tmp_path
         assert any(b["unit_id"] == "player_analysis.0.statement" for b in
                    json.loads(messages[-1]["content"])["hard_fact_blockers"])
         return {"patches": [{"unit_id": "player_analysis.0.statement", "replacement": "他的出战情况未确认，若能上场，持球选择值得看。"}]}, {}
-    judgment, trace = run_editorial(context, forecast, tmp_path / "player-repair", writer_client=scripted)
+    judgment, trace = run_editorial(context, forecast, tmp_path / "player-repair", writer_client=scripted, require_poem_title=False)
     assert judgment["player_analysis"][0]["player_name"] == "Fixture Guard"
     assert "未确认" in judgment["player_analysis"][0]["statement"]
     assert trace["editorial_calls"] == 2
@@ -381,7 +381,7 @@ def test_short_opinionated_article_publishes_without_sentence_citations_or_accep
     def capture(messages, schema):
         seen.update(json.loads(messages[-1]["content"]))
         return writer(messages, schema)
-    judgment, trace = run_editorial(context, forecast, tmp_path / "editorial", writer_client=capture)
+    judgment, trace = run_editorial(context, forecast, tmp_path / "editorial", writer_client=capture, require_poem_title=False)
     assert judgment["analysis_article"] == SHORT_ARTICLE
     assert len(judgment["analysis_article"]) < 400
     assert trace["editorial_calls"] == 1
@@ -408,7 +408,7 @@ def test_editorial_pipeline_can_publish_with_zero_watch_themes(frozen, tmp_path)
         draft, usage = writer(messages, schema)
         draft["watch_themes"] = []
         return draft, usage
-    judgment, trace = run_editorial(context, forecast, tmp_path / "no-watch-themes", writer_client=no_themes)
+    judgment, trace = run_editorial(context, forecast, tmp_path / "no-watch-themes", writer_client=no_themes, require_poem_title=False)
     assert judgment["watch_themes"] == []
     assert trace["publication_receipt"]["status"] == "eligible"
     assert judgment["final_prediction"]["expected_total"] == numbers["expected_total"]
@@ -422,7 +422,7 @@ def test_quality_feedback_never_blocks_publication(frozen, tmp_path, status):
         return {"status": status, "warnings": ["文章的对位解释还可更具体。"],
                 "possible_hard_fact_conflicts": []}, {"fixture": True}
     judgment, trace = run_editorial(context, forecast, tmp_path / status,
-        writer_client=writer, reviewer_client=reviewer)
+        writer_client=writer, reviewer_client=reviewer, require_poem_title=False)
     assert judgment["analysis_article"] == SHORT_ARTICLE
     assert trace["publication_receipt"]["status"] == "eligible"
     assert trace["publication_receipt"]["quality_review"]["status"] == status
@@ -437,7 +437,7 @@ def test_quality_reviewer_timeout_is_recorded_but_nonblocking(frozen, tmp_path):
     def unavailable(*args, **kwargs):
         raise TimeoutError("optional quality reviewer timed out")
     judgment, trace = run_editorial(context, forecast, tmp_path / "unavailable",
-        writer_client=writer, reviewer_client=unavailable)
+        writer_client=writer, reviewer_client=unavailable, require_poem_title=False)
     assert judgment["analysis_article"] == SHORT_ARTICLE
     assert trace["publication_receipt"]["status"] == "eligible"
     assert trace["quality_review"]["status"] == "unavailable"
@@ -454,7 +454,7 @@ def test_quality_hold_with_exact_candidate_remains_a_warning_without_determinist
                 "possible_hard_fact_conflicts": [{"quote": "我更看好热火，但关键仍在新组合如何落地。",
                     "code": "exact_stat_sample_mismatch", "fact_ids": []}]}, {"fixture": True}
     judgment, trace = run_editorial(context, forecast, tmp_path / "candidate", writer_client=writer,
-        reviewer_client=reviewer)
+        reviewer_client=reviewer, require_poem_title=False)
     assert judgment["analysis_article"] == SHORT_ARTICLE
     assert trace["publication_receipt"]["status"] == "eligible"
     assert trace["publication_receipt"]["quality_review"]["status"] == "hold"
@@ -474,7 +474,7 @@ def test_one_exact_stat_blocker_gets_one_local_repair_and_recheck(frozen, tmp_pa
         assert any(item["code"] == "exact_stat_sample_mismatch" for item in request["hard_fact_blockers"])
         return {"patches": [{"unit_id": request["affected_text"][0]["id"],
             "replacement": "热火上赛季近10场场均失分128.6。"}]}, {"fixture": True}
-    judgment, trace = run_editorial(context, forecast, tmp_path / "repair", writer_client=generate)
+    judgment, trace = run_editorial(context, forecast, tmp_path / "repair", writer_client=generate, require_poem_title=False)
     assert calls == ["EditorialDraft", "EditorialRepair"]
     assert trace["repair_rounds"] == 1
     assert not validate_publication_hard_facts(judgment, trace["editorial_projection"])
@@ -493,7 +493,7 @@ def test_repair_no_op_is_rejected_and_recorded_before_application(frozen, tmp_pa
         original = request["affected_text"][0]["text"]
         return {"patches": [{"unit_id": unit_id, "replacement": original}]}, {"fixture": True}
     with pytest.raises(ValueError, match="editorial_repair_ineffective"):
-        run_editorial(context, forecast, tmp_path / "no-op", writer_client=scripted)
+        run_editorial(context, forecast, tmp_path / "no-op", writer_client=scripted, require_poem_title=False)
     validation = json.loads((tmp_path / "no-op/repair1_validation.json").read_text(encoding="utf-8"))
     assert validation["status"] == "rejected"
     assert validation["no_op_targets"]
@@ -512,7 +512,7 @@ def test_effective_repair_deletes_unsupported_number_and_reduces_findings(frozen
         request = json.loads(messages[-1]["content"])
         return {"patches": [{"unit_id": request["affected_text"][0]["id"],
             "replacement": "热火的防守表现仍值得观察。"}]}, {"fixture": True}
-    judgment, trace = run_editorial(context, forecast, tmp_path / "effective-delete", writer_client=scripted)
+    judgment, trace = run_editorial(context, forecast, tmp_path / "effective-delete", writer_client=scripted, require_poem_title=False)
     validation = json.loads((tmp_path / "effective-delete/repair1_validation.json").read_text(encoding="utf-8"))
     assert validation["status"] == "applied_and_rechecked"
     assert validation["applied_patches"]
@@ -630,7 +630,7 @@ def test_hard_fact_still_present_after_repair_fails_closed_without_another_retry
         return {"patches": [{"unit_id": request["affected_text"][0]["id"],
             "replacement": "热火上赛季近15场场均失分128.6。"}]}, {"fixture": True}
     with pytest.raises(ValueError, match="editorial_repair_ineffective"):
-        run_editorial(context, forecast, tmp_path / "repair-failed", writer_client=generate)
+        run_editorial(context, forecast, tmp_path / "repair-failed", writer_client=generate, require_poem_title=False)
     assert calls == ["EditorialDraft", "EditorialRepair"]
     validation = json.loads((tmp_path / "repair-failed/repair1_validation.json").read_text(encoding="utf-8"))
     assert validation["no_op_targets"]
@@ -644,7 +644,7 @@ def test_writer_cannot_return_a_second_forecast(frozen, tmp_path):
         value["final_prediction"] = {"winner_side": "home", "expected_total": 250}
         return value, usage
     with pytest.raises(Exception):
-        run_editorial(context, forecast, tmp_path / "illicit", writer_client=illicit)
+        run_editorial(context, forecast, tmp_path / "illicit", writer_client=illicit, require_poem_title=False)
     assert not (tmp_path / "illicit/quality_review_request.json").exists()
 
 
@@ -659,7 +659,7 @@ def test_writer_schema_rejects_each_second_numeric_forecast_field(frozen, tmp_pa
         draft["final_prediction"] = {field: value}
         return draft, usage
     with pytest.raises(Exception):
-        run_editorial(context, forecast, tmp_path / field, writer_client=illicit)
+        run_editorial(context, forecast, tmp_path / field, writer_client=illicit, require_poem_title=False)
 
 
 def test_publication_pipeline_contains_no_sentence_accept_gate():

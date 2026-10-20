@@ -196,7 +196,7 @@ def test_plan_reaches_forecasting_then_writer_without_market_or_numeric_mutation
             "article": "我预计核心球员只打15～20分钟，前场适配和替补竞争是这场的看点。",
             "watch_themes": [{"title": "新组合", "statement": "观察球权分配。"},
                              {"title": "替补", "statement": "观察第二阵容。"}], "confidence": "low"}, {}
-    judgment, trace = run_editorial(context, locked, tmp_path/"writer", writer_client=writer)
+    judgment, trace = run_editorial(context, locked, tmp_path/"writer", writer_client=writer, require_poem_title=False)
     assert seen["game_id"] == context.game["game_id"]
     assert judgment["final_prediction"]["expected_margin"] == 3.5
     assert judgment["final_prediction"]["winner_side"] == "away"

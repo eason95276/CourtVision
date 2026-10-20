@@ -621,3 +621,36 @@ def test_short_final_budget_declines_without_any_provider_phase(tmp_path):
         assert row["last_error"]=="runtime_budget_insufficient"
         assert service.tasks.attempts_snapshot()==[]
     finally:runner.shutdown()
+
+def test_publication_pump_recovers_and_dispatches_without_generation(tmp_path, monkeypatch):
+    from . import opening_publish
+    delivered = []
+    class Queue:
+        root = tmp_path/'delivery'
+        claimed = False
+        def discover(self, database, **scope):
+            assert scope['game_ids'] == frozenset({'espn:401909089'})
+            assert scope['stages'] == frozenset({'FINAL_PREGAME'})
+            return {'eligible':1,'errors':[]}
+        def claim(self, **scope):
+            assert scope['game_ids'] == frozenset({'espn:401909089'})
+            if self.claimed:return None
+            self.claimed=True
+            return {'version_id':'recovered-final'}
+        def run(self, job, publisher):return publisher(job)
+    queue=Queue()
+    monkeypatch.setenv('COURTVISION_PUBLIC_PUBLISH_ROOT',str(tmp_path/'dirty-development'))
+    monkeypatch.setattr(opening_publish,'publication_queue',lambda database:queue)
+    def publish(job, **kwargs):
+        delivered.append(job['version_id'])
+        return {'status':'succeeded','version_id':job['version_id']}
+    monkeypatch.setattr(opening_publish,'publish_saved',publish)
+    runner,service,clock=setup_runtime(tmp_path)
+    runner.allowed_game_ids=frozenset({'espn:401909089'});runner.allowed_stages=frozenset({'FINAL_PREGAME'})
+    try:
+        runner._pump_publications()
+        runner.public_jobs['recovered-final'].result(timeout=2)
+        runner._pump_publications()
+        assert delivered==['recovered-final']
+        assert runner.active=={} and runner.public_jobs=={}
+    finally:runner.shutdown()

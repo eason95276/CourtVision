@@ -118,6 +118,9 @@ def classify_numeric_claim_type(text: str, start: int, end: int, metric: str | N
     before = prefix + text[start:end] + suffix
 
     token = text[start:end]
+    # A count of tactical options is not a score, even beside the word 得分.
+    if re.match(r"条(?:得分|进攻|突破|组织)?(?:路|路线|路径)|套(?:进攻|防守)?(?:方案|打法|配合)|种(?:进攻|防守)?(?:办法|选择|打法)", suffix):
+        return "structural_or_count_expression"
     # Qualitative degree and verb reduplication do not assert a value of one.
     # Keep actual decimals (一点五) and units (一分) on the numeric path.
     if token == "一" and (re.match(r"点(?![零〇一二两三四五六七八九十百\d])|些", suffix)

@@ -990,7 +990,7 @@ def test_saved_game_product_locks_numbers_and_separates_skills(tmp_path):
         assert data['locked_prediction']['expected_margin']==3.5
         assert data['locked_prediction']['expected_total']==228.5
         value=judgment_payload()
-        draft={'title':value['pregame_story']['title'],'lead':value['pregame_story']['statement'],
+        draft={'title':'前场对阵看篮板\n后场交锋争球权','lead':value['pregame_story']['statement'],
             'article':value['analysis_article'],'confidence':value['confidence'],
             'watch_themes':[{k:claim[k] for k in ('title','statement')} for claim in value['watch_themes']]}
         # Compact Writer output cannot supply a replacement numeric forecast.

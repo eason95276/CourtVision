@@ -31,7 +31,7 @@ def writer(messages,schema):
     text=('本场我更关注两队怎样回应彼此的持球选择。进攻方需要在突破和分球之间作出判断，防守方也要权衡上提与回收。'
         '如果协防提前移动，弱侧接应便可能成为下一步选择；如果防守维持原位，持球者就需要寻找直接创造机会的办法。'
         '这些是基于给定材料的篮球判断，并不是对已经发生比赛过程的描述。')*4
-    return {'title':'持球与协防的相互作用','lead':'沿用原判断，观察临场确认条件下的持球对位。','article':text,'watch_themes':[],
+    return {'title':'前场对阵看篮板\n后场交锋争球权','lead':'沿用原判断，观察临场确认条件下的持球对位。','article':text,'watch_themes':[],
             'confidence':'medium','player_analysis':[]},{'usage':{}}
 
 def test_ordinary_half_point_move_is_not_significant():
@@ -101,6 +101,8 @@ def test_no_material_change_does_not_run_forecast_or_research(tmp_path):
     assert result['official_numeric_prediction']==early['official_numeric_prediction']
     assert content_hash(early)==original and result['search']['llm_research_calls']==0
     assert result['change_assessment']['model_called']is False
+    assert result['analyst_trace']['title_policy']['status']=='passed'
+    assert result['analyst_trace']['title_policy']['revision_calls']==0
     assert all(x['pregame_plan']['lineups'][0]['basis']=='confirmed'for x in result['editorial_material']if x.get('pregame_plan'))
 
 def test_not_ready_stops_before_any_model(tmp_path):

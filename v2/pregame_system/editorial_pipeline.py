@@ -138,7 +138,7 @@ def call_recorded(folder, stage, messages, schema, client=None, *, max_tokens=40
     start = time.perf_counter()
     try:
         from .cost_ledger import component
-        with component(stage if stage in {'Change Assessment','Market Review'} else 'Editorial' if stage=='writer0' else 'Repair' if 'repair' in stage else 'Editorial Quality Review',repair='repair' in stage):
+        with component(stage if stage in {'Change Assessment','Market Review'} else 'Editorial' if stage in {'writer0','title_revision'} else 'Repair' if 'repair' in stage else 'Editorial Quality Review',repair='repair' in stage):
             raw, usage = client(messages, schema) if client else configured_client(messages, schema, max_tokens=max_tokens, model=model)
     except Exception as exc:
         save(folder / f"{stage}_transport_failure.json", {"at": now(), "error_type": type(exc).__name__,
@@ -636,7 +636,8 @@ def _repair_guidance(findings):
 
 
 def run_editorial(context, locked_forecast, folder, *, writer_client=None, reviewer_client=None,
-                  quality_review_enabled=False, max_calls=4, writer_model="deepseek-v4-flash", writing_brief=None):
+                  quality_review_enabled=False, max_calls=4, writer_model="deepseek-v4-flash", writing_brief=None,
+                  require_poem_title=True):
     if writer_model not in {"deepseek-v4-flash", "deepseek-v4-pro"}:
         raise ValueError('unsupported_editorial_model')
     folder = Path(folder); folder.mkdir(parents=True, exist_ok=False)
@@ -792,6 +793,47 @@ def run_editorial(context, locked_forecast, folder, *, writer_client=None, revie
                 "repair_provenance": repair_provenance, "repair_validation": validation, "stages": metadata})
             raise ValueError("publication_hard_fact_blocker:" + json.dumps(hard_findings, ensure_ascii=False))
 
+    title_policy = {"required": bool(require_poem_title), "revision_calls": 0}
+    if require_poem_title:
+        from .editorial_titles import TitleRevision, normalize_poem_title
+        original_title = judgment["pregame_story"]["title"]
+        title = normalize_poem_title(original_title)
+        if title is None:
+            if calls >= max_calls:
+                save(folder / "title_validation.json", {**title_policy, "status": "budget_unavailable"})
+                raise ValueError("editorial_title_correction_budget_unavailable")
+            calls += 1
+            title_policy["revision_calls"] = 1
+            revised, meta = call_recorded(folder, "title_revision", [
+                {"role": "system", "content": skill +
+                    "\n这次只改标题。返回 title 一个字段：两句各七个汉字，以换行分隔，不加标点。"
+                    "只用所给本场事实，不写确定赛果，不生造恩怨或缩写，不改正文、人物卡与预测。"},
+                {"role": "user", "content": json.dumps({"current_title": original_title,
+                    "writing_material": writing_input}, ensure_ascii=False)}],
+                TitleRevision, writer_client, max_tokens=300, model=writer_model)
+            metadata.append({"stage": "title_revision", **{k:v for k,v in meta.items() if k != "raw"}})
+            title = normalize_poem_title(revised["title"])
+            if title is None:
+                save(folder / "title_validation.json", {**title_policy, "status": "invalid_after_one_revision"})
+                raise ValueError("editorial_title_format_invalid_after_one_revision")
+        before_title_change = copy.deepcopy(judgment)
+        judgment["pregame_story"]["title"] = title
+        from .analyst import AnalystContext, AnalystJudgment, validate_judgment
+        judgment = validate_judgment(AnalystJudgment.model_validate(judgment),
+            AnalystContext.model_validate(c)).model_dump()
+        unchanged = copy.deepcopy(judgment)
+        unchanged["pregame_story"]["title"] = original_title
+        if unchanged != before_title_change:
+            raise ValueError("editorial_title_revision_changed_other_fields")
+        hard_findings = validate_publication_hard_facts(judgment, projection)
+        if hard_findings:
+            save(folder / "title_validation.json", {**title_policy, "status": "factual_blocker", "findings": hard_findings})
+            raise ValueError("editorial_title_factual_blocker:" + json.dumps(hard_findings, ensure_ascii=False))
+        draft["title"] = title
+        title_policy.update(status="passed", title=title,
+            separator_normalized=title_policy["revision_calls"] == 0 and title != original_title)
+        save(folder / "title_validation.json", title_policy)
+
     quality = {"status": "disabled", "warnings": [], "possible_hard_fact_conflicts": []}
     quality_review_input_sha256 = None
     review_requested = quality_review_enabled or reviewer_client is not None
@@ -825,11 +867,11 @@ def run_editorial(context, locked_forecast, folder, *, writer_client=None, revie
     save(folder / "publication_receipt.json", receipt)
     summary = {"status": "eligible", "calls": calls, "repair_rounds": repair_rounds,
                "hard_fact_checks": "passed", "quality_review_status": quality["status"],
-               "repair_provenance": repair_provenance, "stages": metadata}
+               "repair_provenance": repair_provenance, "title_policy": title_policy, "stages": metadata}
     save(folder / "summary.json", summary)
     return judgment, {"publication_receipt": receipt, "editorial_projection": projection,
         "editorial_material": material, "quality_review": quality, "editorial_calls": calls,
         "quality_review_input_sha256": quality_review_input_sha256,
         "editorial_stages": metadata, "repair_rounds": repair_rounds,
-        "repair_provenance": repair_provenance,
+        "repair_provenance": repair_provenance, "title_policy": title_policy,
         "editorial_artifact": str(folder)}
