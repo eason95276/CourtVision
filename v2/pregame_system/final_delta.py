@@ -14,7 +14,7 @@ from .prediction_versions import game_identity,VersionStoreError,_instant
 class DeltaAssessment(BaseModel):
     model_config=ConfigDict(extra='forbid')
     prediction:ForecastNumbers
-    rationale:str=Field(min_length=1,max_length=900)
+    rationale:str=Field(min_length=1,max_length=900,description='只用150至250个汉字说明这次是否调整，不重复analysis_core，不写审计长文。')
     evidence_ids:list[str]=Field(min_length=1,max_length=8)
     analysis_core:AnalysisCore|None=None
 
@@ -52,7 +52,7 @@ def construct_delta(early,snapshot):
     for side,row in snapshot.get('lineups',{}).items():
         before=old_lineups.get(side,[]);after=row.get('players',[])
         lineups.append({'side':side,'before':before,'after':after,'basis':row.get('basis'),
-            'material':not before or set(before)!=set(after),'new_confirmation':True,'source_url':row.get('source_url')})
+            'material':not before or set(before)!=set(after),'new_confirmation':row.get('basis')=='confirmed','source_url':row.get('source_url')})
     old_states={}
     for e in early.get('analyst_context',{}).get('objective_evidence',[]):
         v=e.get('value')or{}
@@ -84,8 +84,10 @@ def construct_delta(early,snapshot):
     first_confirmation=any(r['before']=='unknown'and r['after']in {'available','active'}
         and r['player_name']in core_names.get(r['side'],[])for r in availability)
     m=market_delta(early.get('public_market_reference'),snapshot.get('market_collection',{}).get('public_market_reference'),basketball_changed,numbers(early))
+    uncertainty=list(snapshot.get('information_uncertainty')or[])
     value={'lineups':lineups,'availability':availability,'minutes_restrictions':restrictions,'reliable_news':news,
-        'new_key_availability_confirmation':first_confirmation,'requires_change_assessment':basketball_changed or first_confirmation,
+        'unresolved_information':uncertainty,'uncertainty_updated':bool(uncertainty),
+        'new_key_availability_confirmation':first_confirmation,'requires_change_assessment':basketball_changed or first_confirmation or bool(uncertainty),
         'market':m,'material_basketball_change':basketball_changed,'material_change':basketball_changed or m['significant_move'],
         'early_version_id':early['version_id'],'early_context_hash':early['context_hash']}
     value['delta_hash']=content_hash(value);return value
@@ -102,25 +104,34 @@ def _refs(value):
 
 def compact_context(early,snapshot,cutoff):
     c=copy.deepcopy(early['analyst_context']);game=copy.deepcopy(early['input_snapshot'])
+    aliases=copy.deepcopy(snapshot.get('player_display_names')or game.get('player_display_names')or[])
+    if aliases:c['game']['player_display_names']=aliases;game['player_display_names']=aliases
     c['game'].update(cutoff=cutoff,stage='FINAL_PREGAME')
     # 'stage' is task metadata, not a new AnalystContext schema field.
-    c['analysis_request']='生成本场第25秒 FINAL 文章；预测已锁定。使用EARLY判断与本次已确认的增量事实，不重复研究静态资料。'
+    c['analysis_request']='生成本场最终赛前分析；数值判断已锁定。使用此前判断与本次已核实的增量事实，不重复研究静态资料。预计首发仍是预计，未知出战仍是未知，不能把最终版写成所有信息均已确认。'
     plan=early_plan(early)or{'lineups':[],'player_usage':[],'key_matchup':early['judgment'].get('core_question')or'本场关键对位','uncertainty':[]}
     plan['lineups']=[];sources=[];evidence=[]
     for side in ('home','away'):
         lineup=snapshot['lineups'][side];team_id=game[side]['id'];names=lineup['players']
+        basis=lineup.get('basis','confirmed');confirmed=basis=='confirmed'
         ref='final-lineup-'+content_hash({'side':side,'lineup':lineup})[:20]
-        evidence.append({'id':ref,'kind':'SourceFact','section':'web_context','game_id':game['id'],'cutoff':cutoff,
-            'value':{'claim_type':'confirmed_starter','category':'lineup','team_id':team_id,'eligible_for_fact':True,
-                'assertion_kind':'confirmed_fact','temporal_class':'LIVE','game_id':game['id'],
-                'temporal_scope':'current_pregame','source_role':'primary','quote':'Confirmed starters: '+', '.join(names),
-                'url':lineup['source_url'],'captured_at':lineup.get('observed_at')or snapshot['captured_at']}})
-        sources.append({'id':ref,'url':lineup['source_url'],'captured_at':lineup.get('observed_at')or snapshot['captured_at'],'source_type':'confirmed_game_lineup'})
-        plan['lineups'].append({'side':side,'basis':'confirmed','players':names,'evidence_ids':[ref],'rationale':'本场可靠比赛数据源已确认首发。'})
+        evidence.append({'id':ref,'kind':'SourceFact'if basis!='agent_expected'else'AnalystEstimate','section':'web_context','game_id':game['id'],'cutoff':cutoff,
+            'value':{'claim_type':'confirmed_starter'if confirmed else'projected_starters','category':'lineup','team_id':team_id,'eligible_for_fact':basis!='agent_expected',
+                'assertion_kind':'confirmed_fact'if confirmed else'reported_projection'if basis=='source_expected'else'analyst_estimate','temporal_class':'LIVE'if confirmed else'CURRENT','game_id':game['id'],
+                'temporal_scope':'current_pregame','source_role':lineup.get('source_role','primary'),
+                'quote':lineup.get('quote')or('Confirmed starters: 'if confirmed else'Expected lineup (not confirmed): ')+', '.join(names),
+                'url':lineup['source_url'],'published_at':lineup.get('published_at'),'captured_at':lineup.get('observed_at')or snapshot['captured_at']}})
+        sources.append({'id':ref,'url':lineup['source_url'],'captured_at':lineup.get('observed_at')or snapshot['captured_at'],'source_type':'confirmed_game_lineup'if confirmed else'expected_game_lineup'})
+        plan['lineups'].append({'side':side,'basis':basis,'players':names,'evidence_ids':[ref],
+            'rationale':'本场可靠比赛数据源已确认首发。'if confirmed else'沿用已发布首发预期，并核对当前归属及明确缺阵信息；本次尚未取得确认首发。'if basis=='agent_expected'else'可靠赛前报道提供的预计首发，尚未确认。'})
         team=c.setdefault('roster_context',{}).setdefault('teams',{}).setdefault(side,{})
         roster=copy.deepcopy(snapshot['rosters'][side]);roster['status']='available'
-        roster['source']={'source_url':lineup['source_url'],'captured_at':lineup.get('observed_at')or snapshot['captured_at'],'source_type':'confirmed_game_participants'}
-        team.update(team_id=team_id,official_team_roster=roster,confirmed_starters=[{'name':name,'team_id':team_id,'evidence_ids':[ref]}for name in names],projected_starters=[],confirmed_starters_evidence_ids=[ref])
+        roster['source']={'source_url':roster.get('source_url')or lineup['source_url'],'captured_at':roster.get('observed_at')or snapshot['captured_at'],
+            'source_type':roster.get('roster_basis')or'confirmed_game_participants'}
+        team.update(team_id=team_id,official_team_roster=roster,
+            confirmed_starters=[{'name':name,'team_id':team_id,'evidence_ids':[ref]}for name in names]if confirmed else[],
+            projected_starters=[]if confirmed else[{'name':name,'team_id':team_id,'evidence_ids':[ref]}for name in names],
+            confirmed_starters_evidence_ids=[ref]if confirmed else[])
         game.setdefault('roster_context',{}).setdefault('teams',{}).setdefault(side,{}).update(copy.deepcopy(team))
     current_out=set()
     for r in snapshot['availability']['records']:
@@ -130,11 +141,11 @@ def compact_context(early,snapshot,cutoff):
                 'assertion_kind':'confirmed_fact','temporal_class':'LIVE','game_id':game['id'],
                 'player_name':r['player_name'],'status':r['status'],'quote':r['player_name']+' '+r['status'],
                 'temporal_scope':'current_pregame','url':r['source_url'],'captured_at':r.get('observed_at')or snapshot['captured_at'],
-                'published_at':r.get('published_at'),'source_role':'primary'}})
+                'published_at':r.get('published_at'),'source_role':r.get('source_role','primary')}})
         sources.append({'id':ref,'url':r['source_url'],'captured_at':r.get('observed_at')or snapshot['captured_at'],'source_type':'game_availability'})
         if r['status'].casefold()in {'out','inactive'}:current_out.add(r['player_name'])
     plan['player_usage']=[r for r in plan.get('player_usage',[])if r['player_name']not in current_out]
-    plan['uncertainty']=[]
+    plan['uncertainty']=list(snapshot.get('information_uncertainty')or[])[:6]
     delta=construct_delta(early,snapshot)
     for row in delta['minutes_restrictions']+delta['reliable_news']:
         if not row.get('quote')or row.get('claim_type')not in {'minutes_restriction','personnel_change','role_background','long_term_injury','availability'}:
@@ -171,11 +182,20 @@ def compact_context(early,snapshot,cutoff):
     roster_ref='final-roster-'+content_hash(roster_value)[:20]
     evidence.append({'id':roster_ref,'kind':'SourceFact','section':'roster_context','game_id':game['id'],
         'cutoff':cutoff,'value':roster_value})
+    for usage in plan.get('player_usage',[]):
+        if usage.get('basis')=='agent_estimate':
+            # The frozen EARLY estimate is retained as an estimate. Its old
+            # membership citation has been superseded by the current roster.
+            usage['evidence_ids']=[roster_ref]
+            usage['rationale']='沿用此前负荷估计，并核对当前归属与缺阵消息；该范围不是本场确认安排。'
     c['objective_evidence']=evidence
     c['evidence_index']={r['id']:{'section':r['section'],'source_type':r.get('kind','Context')}for r in evidence}
-    c['missing_data']=[r for r in c.get('missing_data',[])if r.get('section')not in {'availability','projected_starters','confirmed_starters'}]
+    if not snapshot.get('information_uncertainty'):
+        c['missing_data']=[r for r in c.get('missing_data',[])if r.get('section')not in {'availability','projected_starters','confirmed_starters'}]
     c['roster_context']['cutoff']=cutoff
-    c['evidence_quality'].update(final_ready=True,confirmed_lineups=True)
+    c['evidence_quality'].update(final_ready=True,confirmed_lineups=all(r.get('basis')=='confirmed'for r in snapshot['lineups'].values()),
+        availability_unconfirmed=bool(snapshot.get('availability_unconfirmed')),
+        information_uncertainty=copy.deepcopy(snapshot.get('information_uncertainty')or[]))
     c['context_hash']=content_hash({k:v for k,v in c.items()if k!='context_hash'})
     game['official_injury_report']=copy.deepcopy(snapshot['injury']);game['public_market_reference']=copy.deepcopy(snapshot['market_collection'].get('public_market_reference'))
     game['roster_context']['cutoff']=cutoff
@@ -202,7 +222,10 @@ def _call_update(payload,schema,folder,stage,client=None):
     from .skill_provenance import prompt_skill_hashes
     from .editorial_pipeline import call_recorded
     skill=load_forecasting_skill()
-    messages=[{'role':'system','content':skill+'\n这是FINAL增量更新，不从零预测。EARLY是已经发布的基线。只根据新增可靠事实重新权衡受影响部分。普通价格微动不得单独推翻胜负方向。不改Official数字，不编事实。只引用本次允许的证据ID。'},
+    messages=[{'role':'system','content':skill+'\n这是FINAL增量更新，不从零预测。EARLY是已经发布的基线。只根据新增可靠事实重新权衡受影响部分。普通价格微动不得单独推翻胜负方向。不改Official数字，不编事实。只引用本次允许的证据ID。'
+        '如果有unresolved_information，必须在analysis_core中反映当前未知，不沿用“核心齐整”“全员健康”“确认会打”等未核实断言。'
+        '未知不是伤病事实；没有新的实际冲突时优先保留既有数值，更新假设措辞与不确定性。已有early_core时返回完整analysis_core。'
+        'analysis_core与rationale用简洁篮球语言，不复述历史统计具体数字、效率值或并排数字比较；这些数字保留在原证据表，判断引用证据ID。不要用一大串球员名字代替分析。'},
               {'role':'user','content':json.dumps(payload,ensure_ascii=False)}]
     with component(stage):value,meta=call_recorded(folder,stage,messages,schema,client,max_tokens=2600)
     return value,prompt_skill_hashes(skill),meta
@@ -210,7 +233,13 @@ def _call_update(payload,schema,folder,stage,client=None):
 def run_incremental(early,readiness,analyst,folder,*,before_writer=None,client=None,input_cutoff=None):
     folder=Path(folder);folder.mkdir(parents=True,exist_ok=False)
     if not readiness.get('ready'):raise VersionStoreError('final_not_ready')
-    snapshot=readiness['snapshot'];cutoff=input_cutoff or readiness['checked_at']
+    snapshot=copy.deepcopy(readiness['snapshot']);cutoff=input_cutoff or readiness['checked_at']
+    if readiness.get('warnings'):
+        warnings=readiness['warnings'];unknown=sum('availability_'in r for r in warnings)
+        snapshot['availability_unconfirmed']=bool(unknown or'injury_coverage_incomplete'in warnings)
+        snapshot['information_uncertainty']=(['首发仍有预计项，尚未取得完整确认。']if any('lineup_not_confirmed'in r for r in warnings)else[])+(
+            ['部分球员本场出战状态尚未明确，负荷和出场安排只能作条件分析。']if unknown else[])+(
+            ['官方伤病报告尚有未提交部分，不能把未列出的球员当作确认可出战。']if'injury_coverage_incomplete'in warnings else[])
     if snapshot['game_identity']!=early['game_identity']:raise VersionStoreError('final_baseline_identity_mismatch')
     if _instant(cutoff,'cutoff')>=_instant(early['game_identity']['scheduled_tipoff'],'tipoff'):raise VersionStoreError('pregame_generation_closed')
     context,game,plan,sources=compact_context(early,snapshot,cutoff)
@@ -222,9 +251,13 @@ def run_incremental(early,readiness,analyst,folder,*,before_writer=None,client=N
     if delta['requires_change_assessment']:
         value,hashes,meta=_call_update({'early_prediction':numbers(early),'early_analysis':early['judgment'].get('subjective_rationale'),
             'early_core':forecast.get('final_analysis_core'),'basketball_delta':{k:v for k,v in delta.items()if k!='market'},
-            'allowed_evidence':[{k:r[k]for k in ('id','section','value')}for r in context.objective_evidence if r['id'].startswith('final-')and r['value'].get('claim_type')!='market_reference']},DeltaAssessment,folder,'Change Assessment',client)
+            'rationale_length_target':'150至250个汉字，只写本次判断摘要',
+            'allowed_evidence':[{k:r[k]for k in ('id','section','value')}for r in basketball['evidence']
+                if isinstance(r.get('value'),dict)and r.get('section')!='early_assumption'and r['value'].get('claim_type')!='market_reference']},DeltaAssessment,folder,'Change Assessment',client)
         if not set(value['evidence_ids'])<=set(context.evidence_index):raise ValueError('final_delta_unknown_evidence')
         prediction=ForecastNumbers.model_validate(value['prediction']).model_dump();forecast['final_prediction']=prediction;forecast['review']['prediction']=prediction
+        if delta['uncertainty_updated']and forecast.get('final_analysis_core')and not value.get('analysis_core'):
+            raise ValueError('final_uncertainty_requires_current_analysis_core')
         forecast['review']['factors'].append({'classification':'inference','evidence_ids':value['evidence_ids'],'effect':'uncertainty','summary':value['rationale']})
         if value.get('analysis_core'):forecast['final_analysis_core']=value['analysis_core']
         forecast['skill_hashes']=hashes;forecast['calls']+=1;assessment={**value,'decision':'update'if prediction!=numbers(early)else'retain','model_called':True}
@@ -250,6 +283,9 @@ def run_incremental(early,readiness,analyst,folder,*,before_writer=None,client=N
         forecast['market_provenance']={'timing_status':'observed_current_snapshot','market_signal_reviewed':review_needed,'original_information_overlap':'unknown'}
     save(folder/'change_assessment.json',assessment);save(folder/'final.json',forecast)
     if before_writer:before_writer()
+    if not delta['material_basketball_change']:
+        forecast['same_game_baseline_title']={'game_id':early['game_identity']['game_id'],
+            'version_id':early['version_id'],'title':(early['judgment'].get('pregame_story')or{}).get('title')}
     judgment,trace=analyst.judge(context,_locked_forecast=forecast)
     from v2.frontend.analysis_service import analysis_base_fingerprint,prediction_layers,judgment_evidence_ids
     result={'status':'success','analysis_contract_version':'two-stage-forecast-v1','game_id':game['id'],'game_identity':game_identity(game),
@@ -258,7 +294,7 @@ def run_incremental(early,readiness,analyst,folder,*,before_writer=None,client=N
         'input_snapshot':clean(game),'model_layers':early['model_layers'],'official_numeric_prediction':early['official_numeric_prediction'],
         'analyst_context':context.model_dump(),'research':{'mode':'early_reused_plus_qualified_delta','baseline_version_id':early['version_id'],'evidence':context.objective_evidence},
         'public_market_reference':collection.get('public_market_reference'),'market_collection':collection,'spread_comparison':forecast['spread_comparison'],
-        'sources':early.get('sources',[])+sources,'cited_sources':sources,'search':{'mode':'incremental_no_unchanged_research','llm_research_calls':0},
+        'sources':early.get('sources',[])+sources,'cited_sources':sources,'search':{'mode':'incremental_game_information_only','llm_research_calls':(snapshot.get('information_acquisition')or{}).get('model_calls',0)},
         'analyst_trace':trace,'provenance':{'incremental':True,'baseline_version_id':early['version_id'],'baseline_payload_sha256':early.get('payload_sha256'),'early_context_hash':early['context_hash'],'final_delta_hash':delta['delta_hash']},
         'baseline_version_id':early['version_id'],'final_delta':delta,'final_readiness':readiness,'change_assessment':assessment}
     for k in ('publication_receipt','editorial_projection','editorial_material','quality_review','quality_review_input_sha256'):result[k]=trace.get(k)

@@ -12,7 +12,8 @@ def initialize_writer_attempts(store):
           artifact_sha256 TEXT, updated_at TEXT NOT NULL)''')
 
 
-def attempt_postgame_writer(store, postgame, generator, *, clock=None, output_root=DEFAULT_OUTPUT_ROOT):
+def attempt_postgame_writer(store, postgame, generator, *, clock=None, output_root=DEFAULT_OUTPUT_ROOT,
+                            prefer_off_peak=True, holidays=()):
     clock=clock or (lambda:datetime.now(timezone.utc))
     at=clock();version_id=postgame['version_id']
     initialize_writer_attempts(store)
@@ -27,6 +28,16 @@ def attempt_postgame_writer(store, postgame, generator, *, clock=None, output_ro
               lease_until=NULL,error=NULL,updated_at=excluded.updated_at''',
               (version_id,postgame['game_id'],artifact['artifact_sha256'],at.isoformat()))
         return {'editorial_status':'already_exists'}
+    from v2.pregame_system.cost_ledger import peak,next_off_peak,production_scope,component
+    if prefer_off_peak and peak(at,holidays):
+        due=next_off_peak(at,at+timedelta(days=1),holidays).isoformat()
+        with store.connect() as db:
+            db.execute('''INSERT INTO postgame_writer_attempts VALUES(?,?,'waiting',0,?,NULL,NULL,NULL,?)
+              ON CONFLICT(postgame_version_id) DO UPDATE SET next_attempt_at=excluded.next_attempt_at,
+              updated_at=excluded.updated_at WHERE postgame_writer_attempts.status!='succeeded'
+              AND (postgame_writer_attempts.lease_until IS NULL OR postgame_writer_attempts.lease_until<=excluded.updated_at)''',
+              (version_id,postgame['game_id'],due,at.isoformat()))
+        return {'editorial_status':'waiting_off_peak','next_attempt_at':due}
     with store.connect() as db:
         db.execute('BEGIN IMMEDIATE')
         row=db.execute('SELECT * FROM postgame_writer_attempts WHERE postgame_version_id=?',(version_id,)).fetchone()
@@ -42,7 +53,9 @@ def attempt_postgame_writer(store, postgame, generator, *, clock=None, output_ro
           (version_id,postgame['game_id'],count,(at+timedelta(minutes=3)).isoformat(),at.isoformat()))
         db.commit()
     try:
-        result=generator(store,postgame['game_id'],postgame_version_id=version_id)
+        with production_scope(store.path,postgame['game_id'],'POSTGAME',version_id+':'+str(count),holidays=holidays,retry=count-1):
+            with component('Postgame Editorial'):
+                result=generator(store,postgame['game_id'],postgame_version_id=version_id)
         status=getattr(result,'status','failed');success=status in {'success','already_exists'}
         artifact=load_postgame_editorial(postgame,output_root=output_root) if success else None
         if success and artifact is None:

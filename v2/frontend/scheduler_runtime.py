@@ -313,6 +313,9 @@ class PersistentScheduler:
         if self.last_publication_discovery is None or (at-self.last_publication_discovery).total_seconds() >= 60:
             result = self.publication_queue.discover(self.service.store.path,
                 game_ids=self.allowed_game_ids, stages=self.allowed_stages)
+            if hasattr(self.publication_queue,'discover_postgames'):
+                post=self.publication_queue.discover_postgames(self.service.store.path,game_ids=self.allowed_game_ids)
+                result['errors'].extend(post['errors'])
             if result['errors']:
                 self._event('saved_report_discovery_failed', detail=result)
             self.last_publication_discovery = at
@@ -325,6 +328,28 @@ class PersistentScheduler:
                         queue_root=self.publication_queue.root,
                         api_base=os.environ.get('COURTVISION_PUBLIC_API_BASE', 'http://127.0.0.1:8625'))
                 self.public_jobs[job['version_id']] = self.public_pool.submit(self.publication_queue.run, job, deliver)
+
+    def _warm_final_information(self, at):
+        if self.allowed_stages is not None and 'FINAL_PREGAME' not in self.allowed_stages:
+            return
+        with closing(self.service.store.connect()) as db:
+            candidates=[dict(r)for r in db.execute("SELECT * FROM generation_tasks WHERE stage='FINAL_PREGAME' AND status='pending' AND scheduled_for>? AND deadline_at<=?",
+                (_utc(at),_utc(at+timedelta(minutes=60))))]
+        from v2.pregame_system.two_stage_lifecycle import readiness_for_task
+        for task in candidates:
+            if self.allowed_game_ids is not None and task['game_id'] not in self.allowed_game_ids:
+                continue
+            if json.loads(task.get('metadata_json')or'{}').get('lifecycle')!='early-final-v1':
+                continue
+            key='warm:'+task['task_id']
+            future=self.readiness_jobs.get(key)
+            if future is not None:
+                if not future.done():continue
+                try:future.result()
+                except Exception as exc:self._event('final_information_warmup_failed',task,detail={'error_type':type(exc).__name__})
+                del self.readiness_jobs[key]
+            if len(self.readiness_jobs)>=2:continue
+            self.readiness_jobs[key]=self.readiness_pool.submit(readiness_for_task,self.service.store,task,self.final_readiness_collector,prewarm=True)
 
     def tick(self):
         if self.stop_event.is_set():
@@ -339,6 +364,7 @@ class PersistentScheduler:
             except (OSError, ValueError, sqlite3.Error) as error:
                 self._event('saved_report_dispatch_failed', detail={'error_type': type(error).__name__})
             at = self._now()
+            self._warm_final_information(at)
             if self.last_plan_at is None or (at-self.last_plan_at).total_seconds() >= self.config.planner_interval_seconds:
                 from .pregame_scheduler import PregameScheduler
                 from .generation_input import merge_registered_games

@@ -40,6 +40,14 @@ def test_invalid_titles_are_never_truncated_or_padded(value):
     assert normalize_poem_title(value) is None
 
 
+def test_character_array_revision_is_exact_without_truncation():
+    upper,lower=TITLE.splitlines()
+    value=TitleRevision(upper=list(upper),lower=list(lower))
+    assert value.rendered_title()==TITLE
+    with pytest.raises(ValueError):TitleRevision(upper=list(upper)+['字'],lower=list(lower))
+    with pytest.raises(ValueError):TitleRevision(upper=['两字']+list(upper)[1:],lower=list(lower))
+
+
 def title_client(initial=TITLE, revised=TITLE):
     calls = []
     def client(messages, schema):
@@ -93,6 +101,15 @@ def test_second_bad_title_is_rejected_without_looping(title_case, tmp_path):
     with pytest.raises(ValueError, match="title_format_invalid_after_one_revision"):
         run_editorial(context, forecast, tmp_path / "bad", writer_client=client)
     assert calls == ["EditorialDraft", "TitleRevision"]
+
+
+def test_same_game_validated_baseline_title_can_survive_bad_revision(title_case,tmp_path):
+    context,forecast=title_case;forecast=copy.deepcopy(forecast)
+    forecast['same_game_baseline_title']={'game_id':context.game['game_id'],'version_id':'same-game-earlier-version','title':TITLE}
+    client,calls=title_client(initial='不合格标题',revised='还是不合格标题')
+    judgment,trace=run_editorial(context,forecast,tmp_path/'retained',writer_client=client)
+    assert judgment['pregame_story']['title']==TITLE and calls==['EditorialDraft','TitleRevision']
+    assert trace['title_policy']['retained_same_game_baseline_title']=='same-game-earlier-version'
 
 
 def test_new_title_cannot_bypass_factual_guards(title_case, tmp_path):

@@ -170,7 +170,7 @@ class SourceBodyFetcher:
 
         def finish(url):
             item=by_url.get(url) or {"url":url,"content":"","diagnostic":{"failure_kind":"protocol","message":"primary_missing_result"}}
-            attempts=[{"provider":"free-search-mcp","operation":"fetch","url":url,"seconds":primary_seconds,
+            attempts=[{"provider":getattr(self.primary,'provider','free-search-mcp'),"operation":"fetch","url":url,"seconds":primary_seconds,
                        "status":"success" if readable(item) else "failed",
                        "diagnostic":item.get("diagnostic") or item.get("errors")}]
             if readable(item):return self._temporal({**item,"fetch_attempts":attempts,"captured_at":item.get("captured_at") or now()},deadline,probe_enabled=self.metadata_probe_enabled)

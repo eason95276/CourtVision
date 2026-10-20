@@ -18,6 +18,12 @@ def publish_saved(job, *, public_root, queue_root, api_base='http://127.0.0.1:86
     source = saved_publication(job['source_database'], job['game_id'], job['version_id'])
     if source['payload_sha256'] != job['payload_sha256']:
         raise ValueError('public_release_queued_hash_changed')
+    prediction_id=source['version']['version_id']
+    postgame=source.get('public_postgame')
+    def postgame_matches(record):
+        value=(record.get('postgame')or{}).get('postgame')or{}
+        return bool(postgame) and all(value.get(k)==postgame.get(k)for k in
+            ('version_id','title','short_review','article','score','prediction','market_reference','generated_at'))
     source_root = Path(public_root).resolve()
     env = {**os.environ, 'GIT_TERMINAL_PROMPT':'0', 'GCM_INTERACTIVE':'never'}
     def command(args, *, cwd, timeout=90):
@@ -38,25 +44,26 @@ def publish_saved(job, *, public_root, queue_root, api_base='http://127.0.0.1:86
     if path.is_file():
         old = json.loads(path.read_text(encoding='utf-8'))
         previous = (old.get('prediction') or {}).get('version') or {}
-        if previous.get('version_id') == job['version_id']:
-            if previous.get('payload_sha256') != job['payload_sha256']:
+        if previous.get('version_id') == prediction_id and (not postgame or postgame_matches(old)):
+            if previous.get('payload_sha256') != source.get('prediction_payload_sha256',source['payload_sha256']):
                 raise ValueError('public_release_remote_version_hash_conflict')
             clean = {key:value for key,value in old.items() if key != 'public_sha256'}
             digest = hashlib.sha256(json.dumps(clean,sort_keys=True,ensure_ascii=False,separators=(',',':'),allow_nan=False).encode()).hexdigest()
             index = json.loads((checkout/'public_data/index.json').read_text(encoding='utf-8'))
             entry = next((row for row in index.get('games',[]) if row.get('game_id')==job['game_id']),None)
             if (old.get('public_sha256') != digest or not entry or entry.get('public_sha256') != digest
-                    or entry.get('version_id') != job['version_id']):
+                    or entry.get('version_id') != prediction_id):
                 raise ValueError('public_release_remote_record_integrity_failed')
             return {'status':'already_published','version_id':job['version_id'],
                     'commit':command(['git','rev-parse','HEAD'],cwd=checkout)}
-        if previous.get('published_at') and _instant(previous['published_at'],'remote_published_at') >= _instant(source['version']['published_at'],'published_at'):
+        if previous.get('published_at') and (not postgame or previous.get('version_id')!=prediction_id) and _instant(previous['published_at'],'remote_published_at') >= _instant(source['version']['published_at'],'published_at'):
             return {'status':'superseded','version_id':job['version_id'],'remote_version_id':previous.get('version_id')}
     command([sys.executable,str(checkout/'publish_game.py'),job['game_id'],'--destination',str(checkout/'public_data'),'--api-base',api_base],cwd=checkout,timeout=60)
     record = json.loads(path.read_text(encoding='utf-8'))
     exported = record['prediction']['version']
-    if (exported['version_id'],exported['payload_sha256']) != (job['version_id'],job['payload_sha256']):
+    if (exported['version_id'],exported['payload_sha256']) != (prediction_id,source.get('prediction_payload_sha256',source['payload_sha256'])):
         return {'status':'superseded','version_id':job['version_id'],'selected_version_id':exported['version_id']}
+    if postgame and not postgame_matches(record):raise ValueError('public_release_postgame_projection_mismatch')
     selection_path = checkout/'config/daily_picks.json'
     if selection_path.is_file():
         selection = json.loads(selection_path.read_text(encoding='utf-8'))

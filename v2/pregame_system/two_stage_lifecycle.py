@@ -29,12 +29,12 @@ def plan(planner,db,game,state,policy,at):
         result.append(ensure('EARLY_PREVIEW',due,final_at,'off_peak_initial_judgment'))
     return result
 
-def readiness_for_task(versions,task,collector=None):
+def readiness_for_task(versions,task,collector=None,*,prewarm=False):
     """Returns persisted qualification before a worker/model is allowed to start."""
     from .final_readiness import FinalReadinessStore
     metadata=json.loads(task.get('metadata_json')or'{}')
     if task.get('stage')!='FINAL_PREGAME' or metadata.get('lifecycle')!=MODE:return None
-    if versions.clock()<_instant(task['scheduled_for'],'scheduled_for'):
+    if not prewarm and versions.clock()<_instant(task['scheduled_for'],'scheduled_for'):
         return {'ready':False,'reasons':['final_window_not_open'],'next_check_at':task['scheduled_for'],'llm_calls':0}
     with versions.connect()as db:
         state=db.execute('SELECT registered_game_json,current_version_id FROM game_prediction_state WHERE game_id=?',(task['game_id'],)).fetchone()

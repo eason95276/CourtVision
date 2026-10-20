@@ -78,6 +78,8 @@ def transport(tmp_path, published):
             calls.append(self.path)
             if self.path.startswith('/api/game?'):
                 value = {'status':'success','game':game,'prediction':{'status':'current','game_id':GID,'version_id':VID,'version':version,'state_revision':1}}
+            elif self.path.startswith('/api/postgame?') and version.get('test_postgame_payload'):
+                value={'status':'available','postgame':version['test_postgame_payload']}
             else: value = {'status':'unavailable','postgame':None}
             raw=json.dumps(value,ensure_ascii=False).encode();self.send_response(200);self.end_headers();self.wfile.write(raw)
         def do_POST(self): raise AssertionError('No publication POST allowed')
@@ -110,6 +112,38 @@ def test_discovery_respects_game_and_stage_scope(published):
     assert queue.discover(database,game_ids={'espn:another'})['eligible']==0
     assert queue.discover(database,stages={'EARLY_PREVIEW'})['eligible']==0
     assert queue.summary()==[]
+
+
+def test_postgame_delivery_has_own_identity_and_does_not_skip_same_pregame(published,transport,monkeypatch):
+    from v2.postgame_system import editorial
+    database,queue,clock,game,version=published
+    options,bare,source,calls=transport
+    queue.enqueue(database,GID,VID)
+    assert queue.run(queue.claim(),lambda job:publish_saved(job,**options))['status']=='succeeded'
+    post_id='offline-postgame'
+    post={'game_id':GID,'version_id':post_id,'base_prediction_version_id':VID,
+        'base_prediction_payload_sha256':version['payload_sha256'],'published_at':'2026-10-21T02:00:00Z'}
+    raw=json.dumps(post,sort_keys=True)
+    with sqlite3.connect(database)as db:
+        db.execute('CREATE TABLE postgame_versions(game_id TEXT,version_id TEXT,base_prediction_version_id TEXT,published_at TEXT,payload_json TEXT,payload_sha256 TEXT)')
+        db.execute('INSERT INTO postgame_versions VALUES(?,?,?,?,?,?)',(GID,post_id,VID,post['published_at'],raw,hashlib.sha256(raw.encode()).hexdigest()))
+    public={'game_id':GID,'version_id':post_id,'title':'Test review','short_review':'Direction review',
+        'article':'Synthetic postgame article.','score':{'text':'110-100'},'prediction':{},'market_reference':{},'generated_at':'2026-10-21T02:01:00Z'}
+    monkeypatch.setattr(editorial,'load_postgame_editorial',lambda *args,**kwargs:{'artifact_sha256':'f'*64})
+    monkeypatch.setattr(editorial,'build_public_postgame_payload',lambda *args,**kwargs:public)
+    game['postgame']={'status':'available','version_id':post_id}
+    version['test_postgame_payload']=public
+    assert queue.discover_postgames(database,game_ids={GID})['eligible']==1
+    job=queue.claim()
+    assert job['version_id']==VID+'::postgame::'+post_id
+    before=git(bare,'rev-list','--count','main')
+    result=queue.run(job,lambda item:publish_saved(item,**options))
+    assert result['status']=='succeeded'
+    assert int(git(bare,'rev-list','--count','main'))==int(before)+1
+    remote=json.loads(git(bare,'show','main:public_data/games/espn_401909089.json'))
+    assert remote['postgame']['postgame']['article']==public['article']
+    assert remote['prediction']['version']['version_id']==VID
+    assert '/api/postgame?game_id='+GID in calls
 
 
 def test_dispatch_does_not_claim_another_scope(published):

@@ -40,6 +40,22 @@ def test_returned_success_without_artifact_is_not_success(tmp_path,monkeypatch):
     assert result['editorial_status']=='failed'
     assert 'without_verified_artifact' in result['editorial_error_type']
 
+
+def test_peak_defers_article_without_consuming_attempt_or_blocking_record(tmp_path,monkeypatch):
+    store=PredictionVersionStore(tmp_path/'db.sqlite')
+    at=[datetime(2026,10,21,2,tzinfo=timezone.utc)]  # Wednesday 10:00 Beijing
+    post={'version_id':'postgame-peak','game_id':'espn:123'}
+    monkeypatch.setattr(writer_retry,'load_postgame_editorial',lambda *args,**kwargs:None)
+    calls=[]
+    def generate(*args,**kwargs):
+        calls.append(1);return SimpleNamespace(status='failed',error_type='temporary')
+    result=writer_retry.attempt_postgame_writer(store,post,generate,clock=lambda:at[0],output_root=tmp_path)
+    assert result['editorial_status']=='waiting_off_peak' and calls==[]
+    with store.connect() as db:assert db.execute('SELECT attempt_count FROM postgame_writer_attempts').fetchone()[0]==0
+    at[0]=datetime(2026,10,21,4,tzinfo=timezone.utc)  # 12:00 Beijing
+    result=writer_retry.attempt_postgame_writer(store,post,generate,clock=lambda:at[0],output_root=tmp_path)
+    assert calls==[1] and result['editorial_attempt']==1
+
 @pytest.mark.parametrize('winner_correct,spread,total,expected',[
     (True,'loss','win','胜负看对，让分看错，大小分看对。'),
     (False,'win','loss','胜负看错，让分看对，大小分看错。'),

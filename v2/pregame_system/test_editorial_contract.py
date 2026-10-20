@@ -43,7 +43,8 @@ def test_structured_venue_keeps_explicit_city_and_malformed_address_is_unknown()
 @pytest.mark.parametrize('text', ['总分我反而看得轻一点，倾向大分。',
     '文班在场时，雷霆的禁区得分会被压一压。',
     '漏人和补位迟疑会制造一些轻松得分。',
-    '他的活力是阵地进攻之外的另一条得分路。'])
+    '他的活力是阵地进攻之外的另一条得分路。',
+    '后场一旦失误偏多，雷霆的转换就会把分差一点点拉开。'])
 def test_qualitative_one_is_not_an_exact_statistic(text):
     from .editorial_hard_facts import _stat_issues_for_text
     projection = {'game': deepcopy(GAME), 'facts': [

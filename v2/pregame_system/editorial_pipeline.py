@@ -798,6 +798,9 @@ def run_editorial(context, locked_forecast, folder, *, writer_client=None, revie
         from .editorial_titles import TitleRevision, normalize_poem_title
         original_title = judgment["pregame_story"]["title"]
         title = normalize_poem_title(original_title)
+        baseline_title=locked_forecast.get('same_game_baseline_title')or{}
+        fallback_title=(normalize_poem_title(baseline_title.get('title'))
+            if baseline_title.get('game_id')==c.get('game',{}).get('game_id')and baseline_title.get('version_id')else None)
         if title is None:
             if calls >= max_calls:
                 save(folder / "title_validation.json", {**title_policy, "status": "budget_unavailable"})
@@ -806,13 +809,21 @@ def run_editorial(context, locked_forecast, folder, *, writer_client=None, revie
             title_policy["revision_calls"] = 1
             revised, meta = call_recorded(folder, "title_revision", [
                 {"role": "system", "content": skill +
-                    "\n这次只改标题。返回 title 一个字段：两句各七个汉字，以换行分隔，不加标点。"
+                    "\n这次只改标题。严格返回upper和lower两个数组，每个恰好七项，每项一个汉字。不要返回title字段。"
+                    "两句各七个汉字，不加标点，不把两个字塞进同一项。程序会逐项检查并拼成两句。"
                     "只用所给本场事实，不写确定赛果，不生造恩怨或缩写，不改正文、人物卡与预测。"},
                 {"role": "user", "content": json.dumps({"current_title": original_title,
+                    "current_line_character_counts":[len(line)for line in original_title.splitlines()],
+                    "current_line_characters":[list(line)for line in original_title.splitlines()],
+                    "required_characters_per_line":7,
+                    "same_game_valid_title_if_still_applicable":fallback_title,
                     "writing_material": writing_input}, ensure_ascii=False)}],
                 TitleRevision, writer_client, max_tokens=300, model=writer_model)
             metadata.append({"stage": "title_revision", **{k:v for k,v in meta.items() if k != "raw"}})
-            title = normalize_poem_title(revised["title"])
+            title = normalize_poem_title(TitleRevision.model_validate(revised).rendered_title())
+            if title is None and fallback_title:
+                title=fallback_title
+                title_policy['retained_same_game_baseline_title']=baseline_title['version_id']
             if title is None:
                 save(folder / "title_validation.json", {**title_policy, "status": "invalid_after_one_revision"})
                 raise ValueError("editorial_title_format_invalid_after_one_revision")

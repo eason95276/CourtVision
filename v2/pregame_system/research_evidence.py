@@ -44,6 +44,10 @@ PROFESSIONAL_DOMAINS = {
     "espn.com", "apnews.com", "reuters.com", "cbssports.com", "sports.yahoo.com",
     "sportsnet.ca", "tsn.ca", "nbcsports.com", "si.com", "theathletic.com",
     "nytimes.com", "miamiherald.com", "thestar.com", "sun-sentinel.com",
+    "celticsblog.com", "heavy.com", "nesn.com", "detroitnews.com", "freep.com",
+    "news.zhibo8.com", "news.zhibo8.cc", "news.zhibo8.net", "sports.sina.com.cn",
+    "voice.hupu.com", "nba.hupu.com", "qiumiwu.com",
+    "rotowire.com", "rotoballer.com", "basketballmonster.com", "fantasypros.com",
 }
 OFFICIAL_TEAM_DOMAINS = {"raptors.com"}
 VOLATILE_ASSERTION = re.compile(

@@ -123,7 +123,7 @@ def classify_numeric_claim_type(text: str, start: int, end: int, metric: str | N
         return "structural_or_count_expression"
     # Qualitative degree and verb reduplication do not assert a value of one.
     # Keep actual decimals (一点五) and units (一分) on the numeric path.
-    if token == "一" and (re.match(r"点(?![零〇一二两三四五六七八九十百\d])|些", suffix)
+    if token == "一" and (re.match(r"点(?![零〇一二两三四五六七八九十百\d])|些|旦", suffix)
             or prefix[-1:] and re.fullmatch(r"[\u4e00-\u9fff]", prefix[-1:])
             and suffix.startswith(prefix[-1:])):
         return "other_numeric"
@@ -899,18 +899,46 @@ def _minute_values(text: str) -> set[float]:
     return values
 
 
+def _mentioned_people(text,projection):
+    known=_known_people(projection)
+    names=[name for name in known if re.search(r'(?<![A-Za-z])'+re.escape(name)+r'(?![A-Za-z])',text,re.I)]
+    aliases={}
+    for row in projection.get('player_display_names')or[]:
+        canonical=row.get('canonical_name_en');zh=row.get('display_name_zh')
+        if canonical not in known or not zh:continue
+        for alias in {zh,zh.split('·')[-1]}:
+            if len(alias)>=2:aliases.setdefault(alias,set()).add(canonical)
+    for alias,owners in aliases.items():
+        if len(owners)==1 and alias in text:names.append(next(iter(owners)))
+    return list(dict.fromkeys(names))
+
+
 def _availability_issues_for_text(text: str, projection: dict, unit_id: str) -> list[dict]:
+    sentences=[part for part in re.split(r'(?<=[。！？；])',text)if part.strip()]
+    if len(sentences)>1:
+        return [issue for sentence in sentences for issue in _availability_issues_for_text(sentence,projection,unit_id)]
+    clauses=[part for part in re.split(r'[：:，,]',text)if part.strip()]
+    status_clauses=[part for part in clauses if re.search(r'缺阵|出战|首发|分钟限制|\bout\b|available|questionable|doubtful|probable|inactive|minutes? restriction',part,re.I)]
+    if len(clauses)>1 and status_clauses and all(_mentioned_people(part,projection)for part in status_clauses):
+        return [issue for clause in clauses for issue in _availability_issues_for_text(clause,projection,unit_id)]
     # Match assertions, not words inside a negated/unknown-status disclosure.
     # Mask only that clause; an actual assertion later in the unit still counts.
     text_for_claims = re.sub(
         r"(?:没有|并无|尚无|暂无|未有|均无)(?:可靠)?(?:分钟限制|首发|出战)(?:来源|信息|消息)"
+        r"|(?:没有|未见|暂无|均无|尚无)(?:明确的?|可靠的?)?缺阵(?:报告|消息|记录|通知)"
         r"|(?:没有|并无|尚无|暂无|未有|均无)(?:可靠)?(?:已)?确认(?:的)?(?:分钟限制|首发|出战(?:信息|名单)?)"
         r"|(?:未确认|尚未确认|尚未公布|not confirmed|unconfirmed)[^。！？；，,;.!?]{0,14}(?:分钟限制|限时出场|首发|minutes? restriction)",
         lambda m:" "*len(m.group()), text, flags=re.I)
     issues = []
     facts = projection.get("facts", [])
-    names = [name for name in _known_people(projection) if name.casefold() in text.casefold()]
+    names = _mentioned_people(text,projection)
     speculative = bool(re.search(r"如果|假如|若|我预计|预计|可能|或许|我认为|if\b|might\b|could\b", text, re.I))
+    full_strength=re.search(r'核心齐整|全员健康|完整核心|全员可用|全队健康|全员出战|全部正常出战',text)
+    if full_strength and (projection.get('limits')or{}).get('unconfirmed_player_availability')and not speculative:
+        prefix=text[max(0,full_strength.start()-12):full_strength.start()]
+        if not re.search(r'并非|不是|未能确认|不意味着|不能说|不能据此|尚未确认',prefix):
+            issues.append({'unit_id':unit_id,'code':'current_availability_unverified','quote':text,
+                'reason':'unknown_availability_cannot_be_full_strength'})
     minutes_claim = re.search(r"限制(?:在)?\s*\d{1,2}\s*分钟|受限.{0,8}\d{1,2}\s*分钟|(?:有|存在|受到|处于).{0,5}(?:分钟限制|限时出场)|(?:分钟限制|限时出场).{0,5}(?:已确认|确有|正式宣布)|(?:has|is on|was placed on|has been placed on).{0,12}(?:a )?minutes? restriction|\d{1,2}[- ]minute restriction|limited to\s*\d{1,2}\s*minutes?|capped at\s*\d{1,2}\s*minutes?", text_for_claims, re.I)
     unconfirmed_minutes = re.search(r"(?:未确认|尚未公布|尚无|暂无|未知|不确定|没有可靠信息|unconfirmed|not confirmed|unknown|unavailable).{0,14}(?:分钟限制|限时出场|minutes? restriction)|(?:分钟限制|限时出场|minutes? restriction).{0,14}(?:未确认|尚未公布|尚无|暂无|未知|不确定|unconfirmed|not confirmed|unknown|unavailable)", text, re.I)
     if unconfirmed_minutes and minutes_claim and unconfirmed_minutes.start() <= minutes_claim.start() < unconfirmed_minutes.end():
@@ -954,9 +982,9 @@ def _availability_issues_for_text(text: str, projection: dict, unit_id: str) -> 
                     status = "out"
                 elif "questionable" in quote:
                     status = "questionable"
-            claims_out = bool(re.search(r"缺阵|无法出战|不会出场|ruled out|\binactive\b|\bdnp\b|\bout\b", text, re.I))
-            claims_available = bool(re.search(r"获准|可以出战|确认出战|\bavailable\b|cleared to play", text, re.I))
-            claims_questionable = bool(re.search(r"出战成疑|\bquestionable\b|\bdoubtful\b|\bprobable\b", text, re.I))
+            claims_out = bool(re.search(r"缺阵|无法出战|不会出场|ruled out|\binactive\b|\bdnp\b|\bout\b", text_for_claims, re.I))
+            claims_available = bool(re.search(r"获准|可以出战|确认出战|\bavailable\b|cleared to play", text_for_claims, re.I))
+            claims_questionable = bool(re.search(r"出战成疑|\bquestionable\b|\bdoubtful\b|\bprobable\b", text_for_claims, re.I))
             out_status = {"out", "inactive", "suspended", "dnp"}
             if ((claims_out and status not in out_status)
                     or (claims_available and status in out_status)

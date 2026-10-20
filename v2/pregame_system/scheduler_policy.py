@@ -35,6 +35,10 @@ def normalized_policy(value=None):
         result.update(lifecycle='early-final-v1',early_requested_at=requested,
             prefer_off_peak=value.get('prefer_off_peak',True),price_holidays=value.get('price_holidays',[]))
         if not isinstance(result['prefer_off_peak'],bool):raise VersionStoreError('off_peak_flag_invalid')
+        if 'final_information_policy' in value:
+            mode=value['final_information_policy']
+            if mode not in {'confirmed_only','latest_verified'}:raise VersionStoreError('final_information_policy_invalid')
+            result['final_information_policy']=mode
     result["policy_identity"] = POLICY_VERSION + ":" + content_hash(result)[:16]
     return result
 

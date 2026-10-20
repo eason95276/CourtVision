@@ -279,7 +279,7 @@ def test_one_writer_call_creates_immutable_version_bound_article_and_public_proj
         assert "2026-10-07" in messages[1]["content"]
         assert "market_benchmark" not in messages[1]["content"]
         return json.dumps({
-            "title": "东契奇、里夫斯没打，勇士半场建立28分优势",
+            "title": "双星缺阵添变数\n勇士主场定乾坤",
             "short_review": "胜负方向看对了，但湖人两名预计核心最终缺阵，勇士把分差拉到了26分。",
             "article": "第一节和第二节比分分别是45比31、36比22，勇士半场领先28分。"
                        "\n\n赛前预计库里赢3分的判断命中方向，但实际差距来到26分。东契奇和里夫斯赛后记录为DNP，"
@@ -348,7 +348,7 @@ def test_writer_rejects_tampered_companion_artifact(tmp_path):
     out = tmp_path / "editorials"
     skill = tmp_path / "skill.md"
     skill.write_text("skill", encoding="utf-8")
-    response = json.dumps({"title":"标题","short_review":"短评","article":"正文一段。"}, ensure_ascii=False)
+    response = json.dumps({"title":"双星缺阵添变数\n勇士主场定乾坤","short_review":"短评","article":"正文一段。"}, ensure_ascii=False)
     generated = generate_postgame_editorial(
         store, GAME_ID, api_client=lambda *args: response, api_key="fixture-key",
         output_root=out, skill_path=skill,
@@ -370,7 +370,7 @@ def test_manual_postgame_publication_sidecar_switches_reader_without_mutating_fr
     skill_path = tmp_path / "skill.md"
     skill_path.write_text("fixture skill", encoding="utf-8")
     response = json.dumps({
-        "title": "Writer 原稿",
+        "title": "双星缺阵添变数\n勇士主场定乾坤",
         "short_review": "Writer 原稿短评",
         "article": "Writer 原稿正文。",
     }, ensure_ascii=False)

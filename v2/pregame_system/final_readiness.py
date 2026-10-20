@@ -6,7 +6,7 @@ from pathlib import Path
 from .prediction_versions import game_identity,VersionStoreError,_instant,_utc
 from .storage import content_hash,now
 
-CHECK_LEADS=(20,15,10,5)
+CHECK_LEADS=(60,35,25,20,15,10,5)
 CLEAR={'available','active','out','inactive'}
 UNCERTAIN={'unknown','questionable','doubtful','probable','unavailable'}
 
@@ -91,9 +91,35 @@ def evaluate_readiness(game,early,snapshot,at,*,market_max_age=300,injury_max_ag
         stamp=_instant(market.get('captured_at'),'market_captured_at')
         if stamp>at or at-stamp>timedelta(seconds=market_max_age):reasons.append('market_stale')
     except (ValueError,TypeError,VersionStoreError):reasons.append('market_time_unverified')
+    warnings=[]
+    if (game.get('policy_config')or{}).get('final_information_policy')=='latest_verified':
+        optional=('availability_unresolved:','availability_stale:','availability_time_unknown:')
+        for reason in list(reasons):
+            side=next((s for s in ('home','away') if reason.startswith(s+'_')),None)
+            lineup=(snapshot.get('lineups')or{}).get(side,{}) if side else {}
+            if any(part in reason for part in optional) or (reason.endswith('_lineup_not_confirmed')
+                    and lineup.get('basis') in {'agent_expected','source_expected'} and len(lineup.get('players',[]))==5):
+                warnings.append(reason);reasons.remove(reason)
+        if ('injury_coverage_incomplete'in reasons and injury.get('status')in {'published','available'}
+                and injury.get('source_url')and not any(r in reasons for r in ('injury_stale','injury_time_unverified'))):
+            reasons.remove('injury_coverage_incomplete');warnings.append('injury_coverage_incomplete')
+        # Current roster membership and absence of a known Out conflict remain
+        # mandatory even when the lineup itself is explicitly an estimate.
+        for side in ('home','away'):
+            lineup=(snapshot.get('lineups')or{}).get(side,{})
+            roster=(snapshot.get('rosters')or{}).get(side,{})
+            members={key(p.get('name')or p.get('player_name'))for p in roster.get('players',[])}
+            if roster.get('status')!='verified' or not {key(n)for n in lineup.get('players',[])}<=members:
+                reasons.append(side+'_starter_identity_unverified')
+            for name in lineup.get('players',[]):
+                row=states.get((side,key(name)))or{}
+                if str(row.get('status','')).casefold()in {'out','inactive'}:
+                    reasons.append(side+'_starter_status_conflict:'+name)
     result={'schema_version':'final-readiness-v1','game_id':game['id'],'ready':not reasons,'reasons':sorted(set(reasons)),
+        'warnings':sorted(set(warnings)),'information_policy':(game.get('policy_config')or{}).get('final_information_policy','confirmed_only'),
         'checked_at':_utc(at),'final_ready_at':_utc(at)if not reasons else None,'next_check_at':next_check(game['tipoff'],_utc(at)),
-        'important_players':cores,'lineups':lineups,'snapshot':snapshot,'snapshot_hash':content_hash(snapshot),'llm_calls':0}
+        'important_players':cores,'lineups':lineups,'snapshot':snapshot,'snapshot_hash':content_hash(snapshot),
+        'llm_calls':(snapshot.get('information_acquisition')or{}).get('model_calls',0)}
     return result
 
 def read_http(url,timeout=4):
@@ -168,7 +194,8 @@ class FinalReadinessStore:
         return json.loads(row[0])if row else None
     def check(self,game,early,*,force=False):
         at=_utc(self.versions.clock());last=self.latest(game['id'])
-        if not force and last and last['baseline_version_id']==early['version_id']and _instant(last['next_check_at'],'next_check_at')>_instant(at,'at'):
+        policy=(game.get('policy_config')or{}).get('final_information_policy','confirmed_only')
+        if not force and last and last.get('information_policy','confirmed_only')==policy and last['baseline_version_id']==early['version_id']and _instant(last['next_check_at'],'next_check_at')>_instant(at,'at'):
             if last['ready']:
                 refreshed=evaluate_readiness(game,early,last['snapshot'],at)
                 if not refreshed['ready']:return {**last,**refreshed}
@@ -194,12 +221,24 @@ def collect_final_snapshot(game,early,at,versions):
     from v2.frontend.official_injury_reports import OfficialInjuryReportStore
     eid=game['id'].removeprefix('espn:');summary_url='https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event='+eid
     odds_url=f'https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/{eid}/competitions/{eid}/odds'
-    with ThreadPoolExecutor(max_workers=2)as pool:
+    with ThreadPoolExecutor(max_workers=4)as pool:
         sf=pool.submit(read_http,summary_url);mf=pool.submit(read_http,odds_url)
+        rf={side:pool.submit(read_http,'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/'+str(game[side]['espn_team_id'])+'/roster')for side in ('home','away')}
         summary,sr=sf.result()
         try:market,mr=mf.result()
         except Exception:market,mr={},{}
+        rosters={}
+        for side,future in rf.items():
+            try:
+                data,receipt=future.result()
+                if str((data.get('team')or{}).get('id'))!=str(game[side]['espn_team_id']):continue
+                players=[{'name':p['displayName'],'source_player_id':str(p['id']),'source_id_namespace':'ESPN'}for p in data.get('athletes',[])if p.get('id')and p.get('displayName')]
+                if players:rosters[side]={'status':'verified','players':players,'source_url':receipt['url'],'observed_at':receipt['captured_at'],'roster_basis':'current_team_roster_not_game_active_list'}
+            except Exception:pass
     result=snapshot_from_espn(game,summary,sr)
+    for side,roster in rosters.items():result['rosters'][side]=roster
+    from v2.frontend.player_display_names import catalog
+    result['player_display_names']=catalog(versions,[p for r in result['rosters'].values()for p in r.get('players',[])])
     comp=summary['header']['competitions'][0]
     event=next((e for e in events({'events':[{'id':eid,'date':comp['date'],'competitions':[comp]}]},sr)if e['game_id']==game['id']),None)
     quote=normalize_book_market(market,event,mr,now())if event and mr else None
@@ -208,14 +247,48 @@ def collect_final_snapshot(game,early,at,versions):
     try:store.refresh(game,max_seconds=5,max_reports=1)
     except Exception:pass
     report=store.read_as_of(game,now(),captured_before_cutoff=True)
-    if report.get('status')in {'published','available'} and report.get('coverage')in {'complete','COMPLETE'}:
+    if report.get('status')in {'published','available'}:
         result['injury']=report
+        if str(result['injury'].get('coverage','')).casefold()=='complete':result['injury']['coverage']='complete'
         for row in report.get('records',[]):
             side=next((s for s in ('home','away')if int(row.get('team_id',0))==int(game[s]['id'])),None)
             if side:result['availability']['records'].append({**row,'side':side,'source_url':report.get('source_url'),'published_at':row.get('source_published_at')or report.get('source_published_at'),'observed_at':report.get('captured_at')})
+    if len(result['lineups'])<2 or any(r.get('status','').casefold()in UNCERTAIN for r in result['availability']['records']):
+        from .final_information import enrich_snapshot
+        from .cost_ledger import production_scope,component
+        try:
+            with production_scope(versions.path,game['id'],'FINAL_INFORMATION',sr['captured_at']):
+                with component('Final Information'):
+                    enrich_snapshot(game,early,result,versions)
+        except Exception as exc:result['information_acquisition']={'status':'failed','error_type':type(exc).__name__}
+    if (game.get('policy_config')or{}).get('final_information_policy')=='latest_verified':
+        from .final_delta import early_plan
+        out={key(r['player_name'])for r in result['availability']['records']if str(r.get('status','')).casefold()in {'out','inactive'}}
+        for row in early_plan(early).get('lineups',[]):
+            side=row['side']
+            if side in result['lineups']:continue
+            members={key(p['name'])for p in result['rosters'].get(side,{}).get('players',[])}
+            names=list(row.get('players')or[])
+            replacements=[n for n in row.get('candidates',[])if key(n)in members and key(n)not in out and n not in names]
+            for index,name in enumerate(names):
+                if key(name)in out or key(name)not in members:
+                    if replacements:names[index]=replacements.pop(0)
+            if len(names)==5 and len(set(names))==5 and all(key(n)in members and key(n)not in out for n in names):
+                result['lineups'][side]={'basis':'agent_expected','players':names,'source_url':result['rosters'][side].get('source_url'),
+                    'observed_at':result['rosters'][side].get('observed_at'),'source_kind':'retained_early_estimate','baseline_version_id':early['version_id']}
+    # Prefer the newest explicit report; same-time adverse status wins a tie.
+    def order(row):
+        try:stamp=_instant(row.get('published_at')or row.get('observed_at'),'availability_time')
+        except Exception:stamp=_instant(at,'at')-timedelta(days=365)
+        severity={'available':0,'active':0,'probable':1,'questionable':2,'doubtful':3,'out':4,'inactive':4}
+        return stamp,severity.get(str(row.get('status','')).casefold(),1)
+    resolved={}
+    for row in sorted(result['availability']['records'],key=order):resolved[(row['side'],key(row['player_name']))]=row
+    result['availability']['records']=list(resolved.values())
     # A positive confirmed-starting assignment is availability evidence, unlike
     # absence from an injury report. Explicit newer Out/Questionable overrides it.
     for side,lineup in result['lineups'].items():
+        if lineup.get('basis')!='confirmed':continue
         listed={key(r['player_name'])for r in result['availability']['records']if r.get('side')==side}
         for name in lineup['players']:
             if key(name)not in listed:result['availability']['records'].append({'side':side,'player_name':name,'status':'Available','source_url':lineup['source_url'],'observed_at':lineup['observed_at'],'source_kind':'confirmed_starting_assignment'})

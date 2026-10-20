@@ -108,6 +108,13 @@ class CostLedger:
             if prior:retry+=generation_retry
         try:price=calculate(model,usage,at,scope.get('holidays',())) if provider=='DeepSeek' else {'currency':'CNY','calculated_cost':None,'cost_status':'provider_price_unknown'}
         except ValueError:price={'currency':'CNY','calculated_cost':None,'cost_status':'provider_usage_invalid'}
+        if provider in {'DeepSeek Search','DeepSeek Fetch'}:
+            requests=(detail or {}).get('billable_requests')
+            if isinstance(requests,int) and not isinstance(requests,bool) and requests>=0:
+                price={'currency':'CNY','calculated_cost':str(Decimal(requests)*Decimal('0.005')),
+                    'cost_status':'published_request_rate','billable_requests':requests,
+                    'rate_source':'https://api-docs.deepseek.com/zh-cn/guides/search/',
+                    'rate_revision':'deepseek-search-fetch-20261021'}
         value={**price,'entry_id':str(uuid.uuid4()),'game_id':scope['game_id'],'stage':scope['stage'],
             'run_id':scope['run_id'],'component':component,'provider':provider,'model':model,
             'generation_attempt':generation_retry+1,

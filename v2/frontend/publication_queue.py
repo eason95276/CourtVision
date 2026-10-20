@@ -18,6 +18,30 @@ STAGES = {"EARLY_PREVIEW", "UPDATED_PREVIEW", "FINAL_PREGAME"}
 
 def saved_publication(database, game_id, version_id):
     """Read a published row without initializing its database."""
+    if '::postgame::' in version_id:
+        base_id,post_id=version_id.split('::postgame::',1)
+        base=saved_publication(database,game_id,base_id)
+        with closing(sqlite3.connect(Path(database).resolve().as_uri()+'?mode=ro',uri=True))as db:
+            db.row_factory=sqlite3.Row
+            row=db.execute('SELECT payload_json,payload_sha256 FROM postgame_versions WHERE game_id=? AND version_id=?',(game_id,post_id)).fetchone()
+        if not row or hashlib.sha256(row['payload_json'].encode()).hexdigest()!=row['payload_sha256']:
+            raise ValueError('public_release_postgame_missing_or_corrupt')
+        post=json.loads(row['payload_json'])
+        if post.get('base_prediction_version_id')!=base_id or post.get('base_prediction_payload_sha256')!=base['payload_sha256']:
+            raise ValueError('public_release_postgame_base_mismatch')
+        from v2.postgame_system.editorial import load_postgame_editorial,build_public_postgame_payload
+        artifact=load_postgame_editorial(post)
+        if not artifact:raise ValueError('public_release_postgame_article_pending')
+        class ReadStore:
+            path=Path(database)
+            def connect(self):
+                connection=sqlite3.connect(Path(database).resolve().as_uri()+'?mode=ro',uri=True)
+                connection.row_factory=sqlite3.Row
+                return connection
+        public=build_public_postgame_payload(ReadStore(),post)
+        digest=hashlib.sha256((row['payload_sha256']+artifact['artifact_sha256']).encode()).hexdigest()
+        return {**base,'payload_sha256':digest,'prediction_payload_sha256':base['payload_sha256'],
+            'postgame':post,'public_postgame':public,'artifact_sha256':artifact['artifact_sha256']}
     if not isinstance(game_id, str) or not re.fullmatch(r'(espn|nba):\d+', game_id):
         raise ValueError('public_release_game_id_invalid')
     with closing(sqlite3.connect(Path(database).resolve().as_uri() + "?mode=ro", uri=True)) as db:
@@ -80,6 +104,20 @@ class PublicationQueue:
                 result['eligible'] += 1
             except ValueError as error:
                 result['errors'].append({'version_id': vid, 'error': str(error)})
+        return result
+
+    def discover_postgames(self,database,*,game_ids=None):
+        result={'eligible':0,'errors':[]}
+        with closing(sqlite3.connect(Path(database).resolve().as_uri()+'?mode=ro',uri=True))as db:
+            if not db.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='postgame_versions'").fetchone():return result
+            rows=db.execute('''SELECT p.game_id,p.version_id,p.base_prediction_version_id FROM postgame_versions p
+                WHERE p.version_id=(SELECT n.version_id FROM postgame_versions n WHERE n.game_id=p.game_id ORDER BY n.published_at DESC,n.rowid DESC LIMIT 1)''').fetchall()
+        for gid,vid,base in rows:
+            if game_ids is not None and gid not in game_ids:continue
+            try:
+                self.enqueue(database,gid,base+'::postgame::'+vid);result['eligible']+=1
+            except ValueError as exc:
+                if str(exc)!='public_release_postgame_article_pending':result['errors'].append({'game_id':gid,'error':str(exc)})
         return result
 
     def claim(self, version_id=None, *, game_ids=None):

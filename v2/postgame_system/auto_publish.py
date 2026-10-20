@@ -41,6 +41,7 @@ class PostgameAutoPublisher:
         clock: Callable[[], datetime] | None = None,
         max_games: int = 20,
         editorial_output_root=None,
+        allowed_game_ids=None,
     ):
         self.catalog = catalog
         self.store=prediction_service.store if prediction_service is not None else PredictionVersionStore(catalog.path)
@@ -51,6 +52,7 @@ class PostgameAutoPublisher:
         self.clock = clock or (lambda: datetime.now(timezone.utc))
         self.max_games = max(1, min(int(max_games), 50))
         self.editorial_output_root=editorial_output_root
+        self.allowed_game_ids=None if allowed_game_ids is None else set(allowed_game_ids)
 
     def _candidates(self) -> list[dict[str, Any]]:
         now = self.clock()
@@ -72,7 +74,7 @@ class PostgameAutoPublisher:
                    ORDER BY s.scheduled_tipoff,s.game_id LIMIT ?""",
                 (now.astimezone(timezone.utc).isoformat(), self.max_games),
             ).fetchall()
-        return [dict(row) for row in rows]
+        return [dict(row) for row in rows if self.allowed_game_ids is None or row['game_id']in self.allowed_game_ids]
 
     def _stored_result(self, game_id: str):
         with self.store.connect() as db:
@@ -159,6 +161,7 @@ class PostgameAutoPublisher:
                         AND (a.lease_until IS NULL OR a.lease_until<=?)))
                     ORDER BY p.published_at,p.game_id LIMIT ?''',(at,at,self.max_games))]
             for game_id in ids:
+                if self.allowed_game_ids is not None and game_id not in self.allowed_game_ids:continue
                 try:
                     post=read_postgame(self.store,game_id)
                     options={'clock':self.clock}
@@ -176,7 +179,23 @@ class PostgameAutoPublisher:
 
 
 def sync_pending_postgames(catalog: ScheduleCatalog, **kwargs) -> list[dict[str, Any]]:
+    import os
+    scope=os.environ.get('COURTVISION_REPORT_GAME_IDS')
+    if scope and 'allowed_game_ids'not in kwargs:kwargs['allowed_game_ids']=scope.split(',')
     if "editorial_generator" not in kwargs:
         from .editorial import generate_postgame_editorial
         kwargs["editorial_generator"] = generate_postgame_editorial
-    return PostgameAutoPublisher(catalog, **kwargs).sync_pending()
+    result=PostgameAutoPublisher(catalog, **kwargs).sync_pending()
+    root=os.environ.get('COURTVISION_PUBLIC_PUBLISH_ROOT')
+    if root:
+        from v2.frontend.opening_publish import publication_queue,publish_saved
+        queue=publication_queue(catalog.path)
+        allowed=kwargs.get('allowed_game_ids')
+        discovery=queue.discover_postgames(catalog.path,game_ids=allowed)
+        if discovery['errors']:result.append({'publication_errors':discovery['errors']})
+        job=queue.claim(game_ids=allowed)
+        if job:
+            result.append({'public_delivery':queue.run(job,lambda item:publish_saved(item,
+                public_root=root,queue_root=queue.root,
+                api_base=os.environ.get('COURTVISION_PUBLIC_API_BASE','http://127.0.0.1:8625')))})
+    return result

@@ -575,7 +575,9 @@ def _messages(context: dict[str, Any], skill_text: str) -> list[dict[str, str]]:
         "正文优先解释比赛实际如何形成结果，"
         "再复核赛前预测、阵容/球员假设以及公开早盘参考。市场报价只陈述实际报价和自己的方向结果，"
         "不能替市场解释定价原因。未被输入支持的回合、战术因果、动机或伤病原因一律不补。"
-        "文章自然分成约 3～5 段，不逐项罗列统计；短评用一句话概括最关键的复盘结论。"
+        "正文主要篇幅复核赛前胜负、让分与大小分判断的具体理由怎样成立或失败，不堆球员名字。"
+        "开头简短，有真实冲突和可读性；正文约500～800字，少量自然段，材料不足就更短；短评一句话。"
+        "标题为上下各七个汉字的两句定场诗，中间一个换行，不加标点、不编赛况。"
         "题目与正文使用中文球员姓名；若输入有显示名，以显示名为准。\n\n"
         "<frozen_postgame_context>\n"
         + json.dumps(writer_context, ensure_ascii=False, separators=(",", ":"))
@@ -725,6 +727,7 @@ def generate_postgame_editorial(
     timeout_seconds: float = 60.0,
     output_root: str | Path = DEFAULT_OUTPUT_ROOT,
     skill_path: str | Path = SKILL_PATH,
+    require_poem_title: bool = True,
 ) -> PostgameEditorialResult:
     """Make one Writer call. Existing article artifacts are immutable/idempotent."""
     from .version_service import read_postgame
@@ -778,16 +781,40 @@ def generate_postgame_editorial(
         path = save(run_dir / "failure.json", failure)
         return PostgameEditorialResult("failed", failure_path=path, error_type="MissingAPIKey",
                                        model=resolved_model)
+    calls_made=0
+    def invoke(request_messages,*,repair=False):
+        nonlocal calls_made
+        calls_made+=1
+        from v2.pregame_system.cost_ledger import component,metered_deepseek
+        with component('Postgame Editorial',repair=repair):
+            if api_client is None:
+                return metered_deepseek(lambda opener:request_deepseek(request_messages,str(api_key),resolved_model,timeout_seconds,opener=opener),resolved_model,None)
+            response=api_client(request_messages,str(api_key or ''),resolved_model,timeout_seconds)
+            return response.get('content')if isinstance(response,dict)else response
     try:
-        if api_client is None:
-            raw = request_deepseek(messages, str(api_key), resolved_model, timeout_seconds)
-        else:
-            response = api_client(messages, str(api_key or ""), resolved_model, timeout_seconds)
-            raw = response.get("content") if isinstance(response, dict) else response
+        raw=invoke(messages)
         if not isinstance(raw, str) or not raw.strip():
             raise ValueError("postgame_editorial_empty_response")
         save(run_dir / "response.json", {"received_at": now(), "content": raw})
         editorial = _parse_editorial(raw, _display_names(postgame))
+        title_policy={'required':require_poem_title,'revision_calls':0}
+        if require_poem_title:
+            from v2.pregame_system.editorial_titles import normalize_poem_title
+            title=normalize_poem_title(editorial['title'])
+            if title is None:
+                revision_messages=[{'role':'system','content':
+                    '只修正赛后文章标题，输出JSON的upper和lower两个数组，每个恰好七项，每项一个汉字。不要返回title字段，无标点。'
+                    '不能修改正文或数字，不编球员、恩怨、逆转、绝杀等未由正文支持的事实。'},
+                    {'role':'user','content':json.dumps({'title':editorial['title'],'short_review':editorial['short_review'],
+                        'article':editorial['article']},ensure_ascii=False)}]
+                corrected=invoke(revision_messages,repair=True)
+                save(run_dir/'title_revision.json',{'content':corrected})
+                value=json.loads(corrected)
+                from v2.pregame_system.editorial_titles import TitleRevision
+                title=normalize_poem_title(TitleRevision.model_validate(value).rendered_title());title_policy['revision_calls']=1
+            if title is None:raise ValueError('postgame_poem_title_invalid')
+            editorial['title']=title
+        title_policy['status']='passed'if require_poem_title else'legacy_fixture'
         artifact = {
             "schema_version": SCHEMA_VERSION,
             "game_id": postgame["game_id"],
@@ -802,6 +829,7 @@ def generate_postgame_editorial(
         "generated_at": now(),
         "editorial": editorial,
         "writer_response_sha256": content_hash(raw),
+        "title_policy":title_policy,
         "sources": context["sources"],
             "market_reference_review": context["public_market_reference_review"],
             "provenance": context["provenance"],
@@ -816,7 +844,7 @@ def generate_postgame_editorial(
             "status": "success",
             "article_path": str(target),
             "artifact_sha256": artifact["artifact_sha256"],
-            "writer_calls_made": 1,
+            "writer_calls_made": calls_made,
         })
         return PostgameEditorialResult("success", artifact_path=target, model=resolved_model)
     except Exception as exc:
@@ -827,7 +855,7 @@ def generate_postgame_editorial(
             "failed_at": now(),
             "postgame_version_id": postgame["version_id"],
             "base_prediction_version_id": postgame["base_prediction_version_id"],
-            "writer_calls_made": 1,
+            "writer_calls_made": calls_made,
         }
         path = save(run_dir / "failure.json", failure)
         return PostgameEditorialResult("failed", failure_path=path, error_type=type(exc).__name__,

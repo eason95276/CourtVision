@@ -122,14 +122,16 @@ def test_current_game_notice_does_not_stop_personnel_body_recovery(tmp_path):
         return [{"url":u,"content":(personnel if u==urls[4] else game_notice)+" Miami Heat details."*8,
                  "published_date":"2026-10-01"} for u in us]
     def client(stage,messages,*unused):
-        if stage=="search":return [{"name":"search_pregame_web","args":{"categories":["lineup"],"reason":"current plan"}}]
+        if stage=="search":return [{"name":"search_pregame_web","args":{"categories":["lineup"],"reason":"current plan",
+            "analysis_questions":[{"id":"q1","priority":"core","category":"lineup","question":"What is the current training camp rotation?"}]}}]
         if stage=="fetch":return [{"name":"fetch_sources","args":{"urls":urls[:4],"reason":"read"}}]
         sources=json.loads(messages[-1]["content"])["sources"]
         u=sources[0]["url"]
         return [{"name":"submit_research_claims","args":{"claims":[{
             "url":u,"quote":personnel if u==urls[4] else game_notice,
             "claim_type":"coach_comments" if u==urls[4] else "game_news",
-            "assertion_kind":"confirmed_fact","team_id":GAME["away_team_id"],"game_reference":""}]}}]
+                "assertion_kind":"confirmed_fact","team_id":GAME["away_team_id"],"game_reference":"",
+                "analysis_question_ids":["q1"]if u==urls[4]else[]}]}}]
     searcher=SimpleNamespace(search=lambda *a,**k:{"game":GAME,"live_registered":True,"records":records},
                              local_transport=SimpleNamespace(fetch_many=fetch))
     context,trace=AutonomousWebResearcher(searcher=searcher,client=client,root=tmp_path).investigate(
