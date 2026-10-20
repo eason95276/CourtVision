@@ -2,5 +2,6 @@
 pytest>=8,<9
 jsonschema>=4.23,<5
 pydantic>=2.10,<3
+tzdata>=2025.1; sys_platform == "win32"
 # Optional full private evaluation: deepeval, label-studio, arize-phoenix,
 # opentelemetry-sdk, opentelemetry-exporter-otlp-proto-http.

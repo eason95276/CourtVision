@@ -1,3 +1,4 @@
+/* Final product layer: match tension, editorial reading, restrained continuity. */
 :root {
   --canvas: #0d1218;
   --surface: #141b23;
@@ -634,6 +635,7 @@ body[data-game-theme] .atmosphere i { opacity: 0.14; }
   }
 }
 
+/* Local compression for the existing head-to-head data block. */
 #detail-view .team-data-section {
   margin-top: clamp(30px, 4vw, 48px);
   padding-block: 18px;
@@ -715,6 +717,7 @@ body[data-game-theme] .atmosphere i { opacity: 0.14; }
   .analysis-sheet > header { border: 1px solid var(--line); }
 }
 
+/* Editorial finish: the matchup remains present after the hero leaves view. */
 #home-view,
 #detail-view {
   position: relative;
@@ -1115,6 +1118,7 @@ body[data-game-theme] .atmosphere i { opacity: 0.14; }
   letter-spacing: 0.05em;
 }
 
+/* The analyst is a match-specific reading surface, not a generic report. */
 .analysis-sheet {
   isolation: isolate;
   background:
@@ -1604,6 +1608,7 @@ body[data-game-theme] .atmosphere i { opacity: 0.14; }
   }
 }
 
+/* Persistent home identity: brand by default, one-team atmosphere when selected. */
 body[data-favorite-theme="team"]:not([data-game-theme]) {
   background:
     radial-gradient(ellipse 72% 48% at 82% 8%, color-mix(in srgb, var(--team-accent) 16%, transparent), transparent 72%),
@@ -1644,6 +1649,7 @@ body[data-favorite-theme="team"]:not([data-game-theme]) {
   background-image: none;
 }
 
+/* The title stays alive at rest. Motion is deliberately slow and low contrast. */
 .home-hero h1 {
   position: relative;
   width: max-content;
@@ -1730,6 +1736,7 @@ body[data-favorite-theme="team"]:not([data-game-theme]) {
   50% { opacity: 0.78; transform: translateX(4%) rotate(0.7deg) scaleX(1.04); }
 }
 
+/* Match fields occupy the space around the hero and continue down the page. */
 #detail-view > .match-environment {
   position: absolute;
   z-index: 0;
@@ -1813,6 +1820,7 @@ body[data-favorite-theme="team"]:not([data-game-theme]) {
   border-left: 1px solid #ffffff0a;
 }
 
+/* Shared match identity returns, with explicit cleanup after every transition. */
 ::view-transition-group(away-crest),
 ::view-transition-group(home-crest),
 ::view-transition-group(away-name),
@@ -1898,6 +1906,7 @@ body[data-favorite-theme="team"]:not([data-game-theme]) {
   }
 }
 
+/* Postgame shares the pregame reader shell and match atmosphere. */
 .postgame-entry {
   grid-template-columns: minmax(190px, 0.72fr) minmax(0, 1.6fr) auto;
 }
@@ -2026,6 +2035,7 @@ body[data-favorite-theme="team"]:not([data-game-theme]) {
 }
 
 .postgame-reader-article h1 {
+  white-space: pre-line;
   max-width: 24ch;
   margin: 8px 0 30px;
   color: var(--primary);
