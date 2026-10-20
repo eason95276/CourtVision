@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-from publish_game import clean, sha, public_selection
+from publish_game import clean, sha, public_selection, lineup_reference_names
 
 
 class PublicRelease(unittest.TestCase):
@@ -80,6 +80,17 @@ class PublicRelease(unittest.TestCase):
         code = (ROOT / 'publish_game.py').read_text(encoding='utf-8')
         self.assertNotIn('method="POST"', code)
         self.assertNotIn('import openai', code)
+
+    def test_lineup_names_survive_without_optional_display_names(self):
+        source = {'input_snapshot': {'roster_context': {'teams': {
+            'away': {'current_team_roster': {'status': 'available', 'players': [
+                {'name': 'Payton Pritchard'}, {'name': 'Jayson Tatum'}, {'name': 'Not In Quote'}]}},
+            'home': {'official_team_roster': {'status': 'unavailable', 'players': [
+                {'name': 'Unverified Player'}]}}}},
+            'historical_players': [{'name': 'Historical Player'}]}}
+        quote = 'Projected: Payton Pritchard, Jayson Tatum. Unverified Player. Historical Player.'
+        self.assertEqual(lineup_reference_names(source, quote), ['Jayson Tatum', 'Payton Pritchard'])
+        self.assertNotIn('Projected', ' / '.join(lineup_reference_names(source, quote)))
 
     def test_identity_conflict_rejected(self):
         row = copy.deepcopy(next((r for r in self.rows if r['prediction']['version'])))

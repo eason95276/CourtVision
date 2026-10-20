@@ -94,6 +94,19 @@ def game_projection(raw):
     return g
 
 
+def lineup_reference_names(source, quote):
+    snapshot = source.get('input_snapshot') or {}
+    names = {row.get('canonical_name_en') for row in snapshot.get('player_display_names') or []}
+    for side in ('home', 'away'):
+        team = ((snapshot.get('roster_context') or {}).get('teams') or {}).get(side) or {}
+        for field in ('official_team_roster', 'current_team_roster'):
+            roster = team.get(field) or {}
+            if roster.get('status') == 'available':
+                names.update(row.get('name') or row.get('player_name')
+                    for row in roster.get('players') or [] if isinstance(row, dict))
+    return sorted(name for name in names if isinstance(name, str) and name and name in quote)
+
+
 def public_selection(s, game):
     if not s.get('version'):
         return {
@@ -130,7 +143,7 @@ def public_selection(s, game):
         if row.get('section') == 'web_context':
             value = item.get('value') or {}
             quote = value.get('quote', '')
-            names = [p.get('canonical_name_en', '') for p in source.get('input_snapshot', {}).get('player_display_names', []) if p.get('canonical_name_en') in quote]
+            names = lineup_reference_names(source, quote)
             value['quote'] = ' / '.join(names)
             item['value'] = value
         material.append(item)
@@ -141,7 +154,7 @@ def public_selection(s, game):
             continue
         value = choose(row.get('value'), {'eligible_for_fact', 'team_id', 'claim_type', 'temporal_scope', 'source_role'})
         quote = (row.get('value') or {}).get('quote', '')
-        names = [p.get('canonical_name_en') for p in source.get('input_snapshot', {}).get('player_display_names', []) if p.get('canonical_name_en') and p['canonical_name_en'] in quote]
+        names = lineup_reference_names(source, quote)
         value['quote'] = ' / '.join(names)
         objective.append({'id': row['id'], 'section': 'web_context', 'value': value})
     v['analyst_context'] = {'objective_evidence': objective}
