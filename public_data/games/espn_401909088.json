@@ -95,7 +95,7 @@
       "source_label": "开发期赛前预测快照"
     },
     "source": {
-      "schedule_captured_at": "2026-10-20T21:39:44.443665+00:00"
+      "schedule_captured_at": "2026-10-20T21:54:08.414396+00:00"
     },
     "roster_context": {
       "teams": {
@@ -396,10 +396,10 @@
       }
     },
     "postgame": {
-      "status": "editorial_unavailable",
+      "status": "available",
       "version_id": "4a1761d1-bed9-41c7-84df-7fa455776321",
       "score_text": "凯尔特人 113 — 121 活塞",
-      "summary": "赛果已同步，复盘文章校验中。",
+      "summary": "凯尔特人让分判断失误，大分方向命中，但总分数值仍低估；活塞在罚球线上多拿的分，吃掉了客队运动战的优势。",
       "prediction_summary": "凯尔特人胜 · 胜率44% · 赛前预计赢2.5分，实际赢8分",
       "market_summary": "让分方向 凯尔特人 -1.5 · 未命中；总分 大分 · 命中"
     },
@@ -3105,8 +3105,102 @@
     "public_contract": "courtvision-public-v1"
   },
   "postgame": {
-    "status": "unavailable",
-    "postgame": null
+    "status": "available",
+    "postgame": {
+      "game_id": "espn:401909088",
+      "version_id": "4a1761d1-bed9-41c7-84df-7fa455776321",
+      "title": "绿军半场占先机\n活塞逆风夺胜局",
+      "short_review": "凯尔特人让分判断失误，大分方向命中，但总分数值仍低估；活塞在罚球线上多拿的分，吃掉了客队运动战的优势。",
+      "settlement_summary": "胜负看错，让分看错，大小分看对。",
+      "article": "半场领先13分，最后却输了8分。凯尔特人在底特律把好开局打丢了，活塞121比113赢下揭幕战。我赛前看好波士顿，支持凯尔特人让1.5分，这个判断错了。\n\n我当时期待的是塔图姆和乔治两个持球点，让活塞的防守不断做选择。乔治交出了38分，塔图姆只有13分、三分7投0中，得分重心明显偏向一侧。不过塔图姆还有11次助攻，组织上的贡献也得算进去；不能因为输了球，就把他的整场表现一笔抹掉。我原先寄望双锋线持续拉开分差，最终结果没有兑现这个设想。\n\n活塞赢球的得分账很直接：运动战得分93比97落后，罚球得分却是28比16领先。波士顿投篮多挣了4分，在罚球线上又丢回12分，终场正好输8分。再加上篮板49比39，主队在投篮之外拿到了足够的补充。赛前那点对客队的倾向，没能抵住这些差额。\n\n比赛的反差也不只在最后几分钟。凯尔特人带着58比45进入中场，活塞下半场拿到76分，波士顿只有55分。前半场的领先是真实的，后半场被翻过去同样真实；开局比分顺着预测走，不能替整场判断兜底。\n\n大小分方向看对了，数值却仍低估。赛前预计总分222.5，冻结市场线218.5，我选大分；实际234分，比预测高11.5分。所以这场该分开记：胜负和让分都错，大分方向命中，总分预测也没有准到可以轻描淡写。\n\n下一次再支持这样的让分方向，我需要单独检查：持球得分带来的优势，有多少余地去抵住罚球和篮板上的损失。这一晚，凯尔特人的双锋线没有把比赛带进我预想的结局，底特律用另一张得分账收走了胜利。",
+      "score": {
+        "home": {
+          "name": "活塞",
+          "score": 121
+        },
+        "away": {
+          "name": "凯尔特人",
+          "score": 113
+        },
+        "text": "凯尔特人 113 — 121 活塞"
+      },
+      "prediction": {
+        "winner_name": "凯尔特人",
+        "winner_probability": 0.43999999999999995,
+        "expected_winner_margin": 2.5,
+        "expected_total": 222.5,
+        "actual_winner_name": "活塞",
+        "actual_winner_margin": 8,
+        "actual_total": 234
+      },
+      "market_reference": {
+        "status": "available",
+        "home_spread": 1.5,
+        "away_spread": -1.5,
+        "total": 218.5,
+        "home_team_name": "活塞",
+        "away_team_name": "凯尔特人",
+        "source_title": "Draft Kings current odds",
+        "sportsbook": "Draft Kings",
+        "captured_at": "2026-10-20T13:08:37.211566+00:00",
+        "source_url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909088/competitions/401909088/odds",
+        "spread_review": {
+          "lean_side": "away",
+          "lean_line": -1.5,
+          "settlement": "loss"
+        },
+        "total_review": {
+          "lean": "over",
+          "settlement": "win",
+          "market_total": 218.5
+        }
+      },
+      "sources": [
+        {
+          "label": "比赛结果与球员数据",
+          "title": "ESPN 比赛数据",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=401909088",
+          "captured_at": "2026-10-20T21:39:50.516089+00:00"
+        },
+        {
+          "label": "公开早盘参考",
+          "title": "Draft Kings current odds",
+          "url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909088/competitions/401909088/odds",
+          "captured_at": "2026-10-20T13:08:37.211566+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "Celtics' Opening-Day Injury Report Delivers An Encouraging Surprise - Yahoo Sports",
+          "url": "https://sports.yahoo.com/articles/celtics-opening-day-injury-report-110118103.html",
+          "captured_at": "2026-10-20T13:03:19.159387+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "Celtics’ Paul George Delivers Jayson Tatum Verdict Ahead Of Opener - Yahoo Sports",
+          "url": "https://sports.yahoo.com/articles/celtics-paul-george-delivers-jayson-193132412.html",
+          "captured_at": "2026-10-20T13:03:18.230704+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "Detroit Pistons will tip off 2026-27 NBA season against Boston Celtics - Yahoo Sports",
+          "url": "https://sports.yahoo.com/articles/detroit-pistons-tip-off-2026-122731500.html",
+          "captured_at": "2026-10-20T13:03:19.419166+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "Pistons NBA predictions: Record, trade targets, playoffs, Finals pick - Yahoo Sports",
+          "url": "https://sports.yahoo.com/articles/pistons-nba-predictions-record-trade-091013994.html",
+          "captured_at": "2026-10-20T13:03:20.066195+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "NBA Opening Day Schedule, Odds and Matchups for 2026-27",
+          "url": "https://www.fanduel.com/research/nba-opening-day-schedule-odds-and-matchups-for-2026-27",
+          "captured_at": "2026-09-18T16:21:13.259918+00:00"
+        }
+      ],
+      "generated_at": "2026-10-20T21:50:33.956648+00:00"
+    }
   },
   "market": {
     "status": "available",
@@ -3145,10 +3239,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-20T21:40:04.209183+00:00",
+    "exported_at": "2026-10-20T21:54:17.450415+00:00",
     "source_prediction_version_id": "3ddb18b9-0e77-48de-ab7f-5d5dad938fc5",
     "source_prediction_payload_sha256": "74165228f88febe42b647686fac22086f781ddff177a067a322e1c5193c62e59",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "fb54a47dfe204214cf984a05a5c382da61cb8493ee371b97c6e620f75372d785"
+  "public_sha256": "6c874bcdbf323b3191e0a9c2346b611ed517deb9a6f80b58aed3962c8a420221"
 }
