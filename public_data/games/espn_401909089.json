@@ -95,7 +95,7 @@
       "source_label": "开发期赛前预测快照"
     },
     "source": {
-      "schedule_captured_at": "2026-10-14T16:00:21.689564+00:00"
+      "schedule_captured_at": "2026-10-20T07:27:55.093124+00:00"
     },
     "roster_context": {
       "teams": {
@@ -588,7 +588,7 @@
     "season_form": {
       "status": "available",
       "game_id": "espn:401909089",
-      "cutoff": "2026-10-14T18:13:24.338227+00:00",
+      "cutoff": "2026-10-20T14:53:04.739217+00:00",
       "season_start": 2026,
       "competition_scope": "all_game_types_in_current_season",
       "source": "schedule_catalog_final_games",
@@ -596,62 +596,66 @@
       "teams": {
         "away": {
           "team_id": 1610612755,
-          "current_season_games": 3,
+          "current_season_games": 4,
           "current_season_game_ids": [
+            "espn:401898407",
             "espn:401898398",
             "espn:401901823",
             "espn:401914101"
           ],
           "current_season_record": {
             "wins": 1,
-            "losses": 2
+            "losses": 3
           },
           "current_last5": {
             "status": "available",
-            "games": 3,
+            "games": 4,
             "wins": 1,
-            "losses": 2,
-            "win_rate": 0.3333333333333333,
+            "losses": 3,
+            "win_rate": 0.25,
             "game_ids": [
+              "espn:401898407",
               "espn:401898398",
               "espn:401901823",
               "espn:401914101"
             ]
           },
           "last_result": {
-            "game_id": "espn:401898398",
-            "played_at": "2026-10-11T00:00:00+00:00",
+            "game_id": "espn:401898407",
+            "played_at": "2026-10-16T23:00:00+00:00",
             "won": false,
-            "team_score": 106,
-            "opponent_score": 144,
+            "team_score": 120,
+            "opponent_score": 125,
             "opponent_team_id": 1610612738,
             "opponent_name_zh": "凯尔特人"
           },
           "streak": {
             "result": "loss",
-            "games": 2
+            "games": 3
           }
         },
         "home": {
           "team_id": 1610612752,
-          "current_season_games": 4,
+          "current_season_games": 5,
           "current_season_game_ids": [
+            "espn:401908945",
             "espn:401908944",
             "espn:401914124",
             "espn:401906508",
             "espn:401914101"
           ],
           "current_season_record": {
-            "wins": 0,
+            "wins": 1,
             "losses": 4
           },
           "current_last5": {
             "status": "available",
-            "games": 4,
-            "wins": 0,
+            "games": 5,
+            "wins": 1,
             "losses": 4,
-            "win_rate": 0.0,
+            "win_rate": 0.2,
             "game_ids": [
+              "espn:401908945",
               "espn:401908944",
               "espn:401914124",
               "espn:401906508",
@@ -659,21 +663,21 @@
             ]
           },
           "last_result": {
-            "game_id": "espn:401908944",
-            "played_at": "2026-10-13T23:00:00+00:00",
-            "won": false,
-            "team_score": 98,
-            "opponent_score": 148,
+            "game_id": "espn:401908945",
+            "played_at": "2026-10-15T23:30:00+00:00",
+            "won": true,
+            "team_score": 122,
+            "opponent_score": 120,
             "opponent_team_id": 1610612761,
             "opponent_name_zh": "猛龙"
           },
           "streak": {
-            "result": "loss",
-            "games": 4
+            "result": "win",
+            "games": 1
           }
         }
       },
-      "context_hash": "90ec79411c8401665ecdff1f5913ad5603e0983306e70772bfec514457b593f8"
+      "context_hash": "bd65056f4280b1d3bd7dcbbe24907d84c97dcf56e25494c9924c9ed47b58d012"
     },
     "game_type": "regular_season",
     "schedule_revision": 1,
@@ -1116,29 +1120,112 @@
       }
     },
     "official_injury_report": {
-      "status": "unavailable",
-      "records": []
+      "game_id": "espn:401909089",
+      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_10_15AM.pdf",
+      "source_published_at": "2026-10-20T14:15:00+00:00",
+      "captured_at": "2026-10-20T14:31:06.575722+00:00",
+      "source_sha256": "143409b22378187e716d0b67592f80fc7b084e64c970017e8e34500c36f105e6",
+      "parser_version": "nba-official-injury-live-v3",
+      "status": "published",
+      "report_id": "333c3eeaa9029f5252c111823ddc72bc4e151a7b895d9ef6a96c83c77eb76319",
+      "report_date": "2026-10-20",
+      "report_time": "10:15",
+      "coverage": "partial",
+      "records": [
+        {
+          "team_id": 1610612755,
+          "player_name": "Adem Bona",
+          "status": "questionable",
+          "reason": "Injury/Illness - Left Foot Sprain",
+          "game_id": "espn:401909089",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_10_15AM.pdf",
+          "source_published_at": "2026-10-20T14:15:00+00:00",
+          "captured_at": "2026-10-20T14:31:06.575722+00:00",
+          "source_sha256": "143409b22378187e716d0b67592f80fc7b084e64c970017e8e34500c36f105e6",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612755,
+          "player_name": "Anfernee Simons",
+          "status": "questionable",
+          "reason": "Injury/Illness - Left Hamstring Tightness/Soreness",
+          "game_id": "espn:401909089",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_10_15AM.pdf",
+          "source_published_at": "2026-10-20T14:15:00+00:00",
+          "captured_at": "2026-10-20T14:31:06.575722+00:00",
+          "source_sha256": "143409b22378187e716d0b67592f80fc7b084e64c970017e8e34500c36f105e6",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612755,
+          "player_name": "Ariel Hukporti",
+          "status": "out",
+          "reason": "Injury/Illness - Right Achilles Tendon Rupture/Tear",
+          "game_id": "espn:401909089",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_10_15AM.pdf",
+          "source_published_at": "2026-10-20T14:15:00+00:00",
+          "captured_at": "2026-10-20T14:31:06.575722+00:00",
+          "source_sha256": "143409b22378187e716d0b67592f80fc7b084e64c970017e8e34500c36f105e6",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612755,
+          "player_name": "Dean Wade",
+          "status": "questionable",
+          "reason": "Injury/Illness - Left Ankle Sprain",
+          "game_id": "espn:401909089",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_10_15AM.pdf",
+          "source_published_at": "2026-10-20T14:15:00+00:00",
+          "captured_at": "2026-10-20T14:31:06.575722+00:00",
+          "source_sha256": "143409b22378187e716d0b67592f80fc7b084e64c970017e8e34500c36f105e6",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612755,
+          "player_name": "Dominick Barlow",
+          "status": "out",
+          "reason": "Injury/Illness - Low Back Stress Reaction",
+          "game_id": "espn:401909089",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_10_15AM.pdf",
+          "source_published_at": "2026-10-20T14:15:00+00:00",
+          "captured_at": "2026-10-20T14:31:06.575722+00:00",
+          "source_sha256": "143409b22378187e716d0b67592f80fc7b084e64c970017e8e34500c36f105e6",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612755,
+          "player_name": "Tacko Fall",
+          "status": "out",
+          "reason": "Injury/Illness - Left Quadriceps Strain",
+          "game_id": "espn:401909089",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_10_15AM.pdf",
+          "source_published_at": "2026-10-20T14:15:00+00:00",
+          "captured_at": "2026-10-20T14:31:06.575722+00:00",
+          "source_sha256": "143409b22378187e716d0b67592f80fc7b084e64c970017e8e34500c36f105e6",
+          "parser_version": "nba-official-injury-live-v3"
+        }
+      ]
     },
     "homepage_visible": true
   },
   "prediction": {
     "status": "current",
     "game_id": "espn:401909089",
-    "version_id": "bb3ef799-662f-4a32-9294-bcc18620c3b5",
-    "state_revision": 11,
+    "version_id": "dd9ef341-d3c4-4f3f-b3a6-a8d581fcb504",
+    "state_revision": 14,
     "locked_at": null,
     "lock_reason": null,
     "schedule_revision": 1,
     "fact_view": {
       "schema_version": "pregame-fact-view-v1",
       "game_id": "espn:401909089",
-      "version_id": "bb3ef799-662f-4a32-9294-bcc18620c3b5",
-      "source_payload_sha256": "913561c4914b462273c45061207170be7f16c943bdc129a0b64b34cd79e1c26c",
+      "version_id": "dd9ef341-d3c4-4f3f-b3a6-a8d581fcb504",
+      "source_payload_sha256": "e0b148cf4781fd2c1e341bef08cb432dd74fb8883f85f63cde805aa4a381d2b7",
       "origin": "legacy_frozen",
       "context": {
         "schema_version": "pregame-fact-context-v1",
         "game_id": "espn:401909089",
-        "feature_cutoff": "2026-10-14T15:29:38.622540+00:00",
+        "feature_cutoff": "2026-09-17T12:53:24.908944+00:00",
         "team_form": {
           "home": {
             "status": "partial",
@@ -1325,210 +1412,57 @@
     },
     "display_projection": {
       "schema_version": "prediction-display-cutoffs-v1",
-      "version_id": "bb3ef799-662f-4a32-9294-bcc18620c3b5",
+      "version_id": "dd9ef341-d3c4-4f3f-b3a6-a8d581fcb504",
       "market_interpretation": {
         "schema_version": "writer-market-interpretation-v1",
         "spread": {
           "status": "available",
           "margin_perspective": "home_minus_away",
-          "model_home_margin": 7.5,
-          "market_implied_home_margin": 5.5,
+          "model_home_margin": 6.5,
+          "market_implied_home_margin": 4.5,
           "spread_edge": 2.0,
           "ats_lean": "home",
           "ats_lean_reference": {
             "side": "home",
             "team_id": 1610612752,
             "team_name": "尼克斯",
-            "line": -5.5,
-            "display": "尼克斯 -5.5"
+            "line": -4.5,
+            "display": "尼克斯 -4.5"
           },
-          "market_quote_id": "673fa7f81850d0626712978e178693707107e806ac1176689c163c7b8c2aad62"
+          "market_quote_id": "adc7c02703e25185f5855304620843ebf820fa80946e09e66afe1ad8e2f2fe32"
         },
         "total": {
           "status": "available",
-          "model_total": 226.5,
-          "market_total": 231.5,
-          "total_edge": -5.0,
+          "model_total": 228.5,
+          "market_total": 232.5,
+          "total_edge": -4.0,
           "total_lean": "under",
-          "market_quote_id": "673fa7f81850d0626712978e178693707107e806ac1176689c163c7b8c2aad62"
+          "market_quote_id": "adc7c02703e25185f5855304620843ebf820fa80946e09e66afe1ad8e2f2fe32"
         }
       },
       "cutoffs": {
-        "input_cutoff_at": "2026-10-14T18:13:24.338227+00:00",
+        "input_cutoff_at": "2026-10-20T14:53:04.739217+00:00",
         "feature_cutoff_at": null,
-        "roster_context_cutoff_at": null
-      },
-      "portfolio_editorial": {
-        "schema_version": "portfolio-editorial-v1",
-        "artifact_id": "poem-title-bb3ef799-662f-4a32-9294-bcc18620c3b5",
-        "base_prediction_version_id": "bb3ef799-662f-4a32-9294-bcc18620c3b5",
-        "base_prediction_payload_sha256": "913561c4914b462273c45061207170be7f16c943bdc129a0b64b34cd79e1c26c",
-        "editorial_sha256": "c096a64bc368f75cac6e56876f755462e94dad00dc6eeacaaed9149b43989e29",
-        "generated_at": "2026-10-20T14:05:24.971728+00:00",
-        "editorial": {
-          "pregame_story": {
-            "classification": "subjective_analysis",
-            "evidence_ids": [
-              "0b45b1c5124ff17082ad99b05a8c887a265d2fa51a390da411bfd06e482a570a",
-              "1eac927f54d944acdb5c0519b040206116577b0e1324239a0b84fe8f85675dbc",
-              "3759c423c46362ef0e674e25fc8c70b9532132e75b93a7d0d584af6fd2aa3d02",
-              "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074",
-              "673fa7f81850d0626712978e178693707107e806ac1176689c163c7b8c2aad62",
-              "8a7a209e9b4255146d3f6c3e17cacaa8e740a7e20bedb0f027b5882179faf81a"
-            ],
-            "statement": "纽约要在主场升起冠军旗，76人带着詹姆斯和布朗回来，新阵容能否改写上赛季被横扫的局面？",
-            "title": "纽约升旗迎旧敌\n老詹领军再叩关"
-          },
-          "analysis_article": "这场揭幕战最值得看的矛盾，是延续性对全新阵容。尼克斯上季夺冠的首发五人全部保留，Brunson、Bridges、Anunoby、Hart、Towns 之间的换防、协防轮转和弱侧轮转已经跑了一整年；76人则把 LeBron James、Jaylen Brown 塞进 Embiid、Maxey、Edgecombe 身边，纸面天赋够高，但五个人此前没有一起打过正式比赛。揭幕战没有磨合样本，这种差距通常先体现在防守端：谁去补弱侧、谁在挡拆后换防、谁负责保护后场篮板，都需要时间建立。\n\n对位上，尼克斯的锋线群是这场的关键。Anunoby 和 Bridges 可以轮流对位 LeBron 和 Jaylen Brown，Hart 负责扫荡和篮板，Towns 则要在防守端面对 Embiid 的低位单打。76人的进攻发起大概率由 LeBron 和 Maxey 分担，Embiid 若出场会是半场进攻的轴心；但 Embiid 上季只打了38场，揭幕战负荷没有可靠信息，这直接决定76人内线能撑多久。尼克斯这边，Towns 的替补由 Drummond 承担，护框和篮板保护略有降级，但面对 Embiid 之外的76人内线，Drummond 的体型仍够用。\n\n76人替补中锋 Hukporti 跟腱撕裂，内线深度只剩 Bona 一类轮换，一旦 Embiid 时间受限，篮板和护框压力会明显放大。尼克斯的延续性优势因此更可能体现在二次进攻和防守篮板上，而不是单纯靠手感拉开。\n\n第25秒预计尼克斯赢7.5分、胜率72%，方向与市场一致，但比市场定价的主队优势更足；总分226.5则低于市场基准，说明第25秒不认为这是一场对攻大战。揭幕战双方都缺确认首发和伤病状态，76人新阵容的磨合程度是最大变量——如果 LeBron、Brown、Embiid、Maxey 全部健康且配合顺畅，分差会向个位数收窄；如果 Embiid 负荷受限，尼克斯的篮板和内线优势会被放大。",
-          "watch_themes": [
-            {
-              "classification": "subjective_analysis",
-              "evidence_ids": [
-                "0b45b1c5124ff17082ad99b05a8c887a265d2fa51a390da411bfd06e482a570a",
-                "1eac927f54d944acdb5c0519b040206116577b0e1324239a0b84fe8f85675dbc",
-                "3759c423c46362ef0e674e25fc8c70b9532132e75b93a7d0d584af6fd2aa3d02",
-                "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074",
-                "673fa7f81850d0626712978e178693707107e806ac1176689c163c7b8c2aad62",
-                "8a7a209e9b4255146d3f6c3e17cacaa8e740a7e20bedb0f027b5882179faf81a"
-              ],
-              "statement": "尼克斯保留夺冠首发五人，76人则把 LeBron、Jaylen Brown 与 Embiid、Maxey、Edgecombe 拼成全新阵容，共同比赛样本为零。揭幕战里，防守轮转和弱侧协防的默契差距可能比天赋差距更早显现。",
-              "title": "延续性首发 vs 全新首发"
-            },
-            {
-              "classification": "subjective_analysis",
-              "evidence_ids": [
-                "0b45b1c5124ff17082ad99b05a8c887a265d2fa51a390da411bfd06e482a570a",
-                "1eac927f54d944acdb5c0519b040206116577b0e1324239a0b84fe8f85675dbc",
-                "3759c423c46362ef0e674e25fc8c70b9532132e75b93a7d0d584af6fd2aa3d02",
-                "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074",
-                "673fa7f81850d0626712978e178693707107e806ac1176689c163c7b8c2aad62",
-                "8a7a209e9b4255146d3f6c3e17cacaa8e740a7e20bedb0f027b5882179faf81a"
-              ],
-              "statement": "Embiid 上季仅出战38场，揭幕战负荷没有可靠信息；Hukporti 跟腱撕裂长期缺阵后，76人替补内线只剩 Bona、Drummond 一类轮换。若 Embiid 时间受限，尼克斯的篮板和护框优势会被放大。",
-              "title": "Embiid 的负荷决定76人内线能撑多久"
-            },
-            {
-              "classification": "subjective_analysis",
-              "evidence_ids": [
-                "0b45b1c5124ff17082ad99b05a8c887a265d2fa51a390da411bfd06e482a570a",
-                "1eac927f54d944acdb5c0519b040206116577b0e1324239a0b84fe8f85675dbc",
-                "3759c423c46362ef0e674e25fc8c70b9532132e75b93a7d0d584af6fd2aa3d02",
-                "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074",
-                "673fa7f81850d0626712978e178693707107e806ac1176689c163c7b8c2aad62",
-                "8a7a209e9b4255146d3f6c3e17cacaa8e740a7e20bedb0f027b5882179faf81a"
-              ],
-              "statement": "Anunoby 和 Bridges 可以轮流接管 LeBron 与 Jaylen Brown，Hart 负责扫荡和篮板。这组对位是尼克斯延续性优势最直接的落点，也决定76人半场进攻的发起难度。",
-              "title": "尼克斯锋线群对位 LeBron 与 Brown"
-            }
-          ],
-          "player_analysis": [
-            {
-              "classification": "subjective_analysis",
-              "evidence_ids": [
-                "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074",
-                "ad24b2f7e0b565c8c62747574b9e5ef3a5bfae95885ba8b894a7e6a147015738",
-                "c6094e6b38be2b4c7f35dde304b2caba09c29a8a5e8433184169bee245678496"
-              ],
-              "player_name": "Jalen Brunson",
-              "statement": "尼克斯夺冠核心控卫，揭幕战预计正常首发负荷。他的挡拆发起和关键球处理是主队半场进攻的稳定器，面对76人全新后场组合，Brunson 的中距离和造犯规能力可能成为拉开分差的直接手段。"
-            },
-            {
-              "classification": "subjective_analysis",
-              "evidence_ids": [
-                "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074",
-                "ad24b2f7e0b565c8c62747574b9e5ef3a5bfae95885ba8b894a7e6a147015738",
-                "c6094e6b38be2b4c7f35dde304b2caba09c29a8a5e8433184169bee245678496"
-              ],
-              "player_name": "Karl-Anthony Towns",
-              "statement": "首发中锋，预计正常负荷。他要在防守端面对 Embiid 的低位单打，同时用外弹和篮板参与进攻；若 Embiid 时间受限，Towns 在内线的对位压力会明显减轻。"
-            },
-            {
-              "classification": "subjective_analysis",
-              "evidence_ids": [
-                "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074"
-              ],
-              "player_name": "OG Anunoby",
-              "statement": "尼克斯锋线防守的第一选择，预计承担对位 LeBron 或 Jaylen Brown 的主要任务。他的换防弹性和协防覆盖，是尼克斯延续性防守体系能否限制76人新首发个人能力的关键。"
-            },
-            {
-              "classification": "subjective_analysis",
-              "evidence_ids": [
-                "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074"
-              ],
-              "player_name": "Mikal Bridges",
-              "statement": "与 Anunoby 组成锋线防守双闸，可以在 LeBron 和 Brown 之间切换对位。他的无球跑动和接球投篮也能在 Brunson 被夹击时提供弱侧出口。"
-            },
-            {
-              "classification": "subjective_analysis",
-              "evidence_ids": [
-                "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074"
-              ],
-              "player_name": "Josh Hart",
-              "statement": "首发锋线，负责篮板、扫荡和转换推进。面对76人内线深度受损的轮换，Hart 的冲抢和二次进攻可能成为尼克斯扩大分差的隐性来源。"
-            },
-            {
-              "classification": "subjective_analysis",
-              "evidence_ids": [
-                "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074",
-                "ad24b2f7e0b565c8c62747574b9e5ef3a5bfae95885ba8b894a7e6a147015738",
-                "c6094e6b38be2b4c7f35dde304b2caba09c29a8a5e8433184169bee245678496"
-              ],
-              "player_name": "LeBron James",
-              "statement": "休赛期加盟的76人新核心，预计首发并承担主要持球。他的组织能串联 Maxey 和 Embiid，但揭幕战负荷没有确认信息；若出场时间受限，76人半场进攻的发起质量会明显下降。"
-            },
-            {
-              "classification": "subjective_analysis",
-              "evidence_ids": [
-                "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074",
-                "ad24b2f7e0b565c8c62747574b9e5ef3a5bfae95885ba8b894a7e6a147015738",
-                "c6094e6b38be2b4c7f35dde304b2caba09c29a8a5e8433184169bee245678496"
-              ],
-              "player_name": "Joel Embiid",
-              "statement": "76人内线轴心，上季出战场次有限，揭幕战负荷存在不确定性。他在场时是半场进攻的低位支点，也是限制 Towns 的关键；一旦时间受限，76人篮板和护框压力会直接放大。"
-            },
-            {
-              "classification": "subjective_analysis",
-              "evidence_ids": [
-                "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074"
-              ],
-              "player_name": "Tyrese Maxey",
-              "statement": "上季场均28.3分的后场得分点，预计与 LeBron 分担持球。他的速度和挡拆攻击能针对尼克斯的换防，是76人在新阵容磨合期最可靠的个人进攻来源。"
-            },
-            {
-              "classification": "subjective_analysis",
-              "evidence_ids": [
-                "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074",
-                "ad24b2f7e0b565c8c62747574b9e5ef3a5bfae95885ba8b894a7e6a147015738"
-              ],
-              "player_name": "Jaylen Brown",
-              "statement": "休赛期通过交易加盟的锋线得分手，预计首发。他的持球单打和转换冲击需要 Anunoby 或 Bridges 全程盯防，是76人能否在个人能力上咬住比分的关键变量。"
-            },
-            {
-              "classification": "subjective_analysis",
-              "evidence_ids": [
-                "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074",
-                "ad24b2f7e0b565c8c62747574b9e5ef3a5bfae95885ba8b894a7e6a147015738"
-              ],
-              "player_name": "VJ Edgecombe",
-              "statement": "2026年最佳新秀一阵后卫，预计进入全新首发。他的运动能力和防守活力是76人年轻端的补充，但在缺乏共同比赛样本的揭幕战里，角色定位和球权分配仍待观察。"
-            }
-          ]
-        }
+        "roster_context_cutoff_at": "2026-09-15T18:46:30.942176+00:00"
       }
     },
     "version": {
       "analysis_contract_version": "two-stage-forecast-v1",
-      "base_input_hash": "4493bbd5b4b6642ef9167bfa0aabd57c87fd880791061977944be83f14bae701",
+      "base_input_hash": "cf0d512e0413c281a24f9cd67a2c5a23a107b79176c70ca94776ccd75f0ab8e2",
       "editorial_material": [
         {
           "effect": "uncertainty",
           "evidence_ids": [
-            "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074",
-            "ad24b2f7e0b565c8c62747574b9e5ef3a5bfae95885ba8b894a7e6a147015738",
-            "c6094e6b38be2b4c7f35dde304b2caba09c29a8a5e8433184169bee245678496"
+            "458ffb9c357568531a593adf3a90b674dacbc23f11b39f7569a929b663ba52f1",
+            "5607993efb7246d292448a9b7a0b4dd73e156445c031e8de594d21be3742a920",
+            "589245e2a0bcdae36d311d461aeedd03205116e1d4a36d9fec1c2db135d9e46c",
+            "665ff7afbba3159f1c5905e5433929b82fdc21f15a39e426f5e86f7295c0df02",
+            "ac64965c5b96f6c26afdfa77bf6b7cd20ceb88b80cdf43c1202592bf3b7e9440",
+            "e2f1f11a660dd59b66189b650f99889fde01b12a9011fe6e949250e23d0124eb",
+            "fcae5f6e3d8b7a62f06d23ebe1e431c1ba747b7b3a245eed2c9675cf29c83d22"
           ],
           "pregame_plan": {
-            "key_matchup": "尼克斯延续性首发 vs 76人全新首发",
+            "key_matchup": "Brunson/Towns 挡拆 vs Embiid 护框",
             "lineups": [
               {
                 "basis": "agent_expected",
@@ -1536,12 +1470,11 @@
                   "Miles McBride",
                   "Landry Shamet",
                   "Jordan Clarkson",
-                  "Andre Drummond",
-                  "Jose Alvarado"
+                  "Andre Drummond"
                 ],
                 "evidence_ids": [
-                  "c6094e6b38be2b4c7f35dde304b2caba09c29a8a5e8433184169bee245678496",
-                  "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074"
+                  "e2f1f11a660dd59b66189b650f99889fde01b12a9011fe6e949250e23d0124eb",
+                  "5607993efb7246d292448a9b7a0b4dd73e156445c031e8de594d21be3742a920"
                 ],
                 "players": [
                   "Jalen Brunson",
@@ -1550,21 +1483,20 @@
                   "Josh Hart",
                   "Karl-Anthony Towns"
                 ],
-                "rationale": "上季夺冠首发五人全部保留，预计延续；替补由新援与 Shamet/McBride 组成。",
+                "rationale": "上季核心五人保留，Hart 预计可打，作为最可能首发。",
                 "side": "home"
               },
               {
                 "basis": "agent_expected",
                 "candidates": [
-                  "Anfernee Simons",
                   "Kentavious Caldwell-Pope",
-                  "Dominick Barlow",
-                  "Adem Bona",
-                  "Dean Wade"
+                  "Justin Edwards",
+                  "Jabari Walker",
+                  "Caleb Love"
                 ],
                 "evidence_ids": [
-                  "ad24b2f7e0b565c8c62747574b9e5ef3a5bfae95885ba8b894a7e6a147015738",
-                  "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074"
+                  "ac64965c5b96f6c26afdfa77bf6b7cd20ceb88b80cdf43c1202592bf3b7e9440",
+                  "458ffb9c357568531a593adf3a90b674dacbc23f11b39f7569a929b663ba52f1"
                 ],
                 "players": [
                   "Tyrese Maxey",
@@ -1573,7 +1505,7 @@
                   "LeBron James",
                   "Joel Embiid"
                 ],
-                "rationale": "报道称 LeBron、Brown、Embiid、Maxey、Edgecombe 组成新首发；Hukporti 跟腱撕裂缺阵，内线由 Bona/Drummond 补位。",
+                "rationale": "来源仅以叙述方式提及这五人组合，未逐人确认首发；Barlow/Hukporti/Fall 缺阵，Wade 存疑，故按推断首发处理。",
                 "side": "away"
               }
             ],
@@ -1581,128 +1513,128 @@
               {
                 "basis": "agent_estimate",
                 "evidence_ids": [
-                  "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074"
+                  "665ff7afbba3159f1c5905e5433929b82fdc21f15a39e426f5e86f7295c0df02"
                 ],
-                "minutes_max": 36,
-                "minutes_min": 30,
+                "minutes_max": 37,
+                "minutes_min": 32,
                 "player_name": "Jalen Brunson",
-                "rationale": "夺冠核心控卫，揭幕战预计正常首发负荷，无确认限时信息。",
+                "rationale": "核心控卫，揭幕战预计正常负荷。",
                 "side": "home"
               },
               {
                 "basis": "agent_estimate",
                 "evidence_ids": [
-                  "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074"
+                  "665ff7afbba3159f1c5905e5433929b82fdc21f15a39e426f5e86f7295c0df02"
                 ],
-                "minutes_max": 34,
-                "minutes_min": 28,
+                "minutes_max": 35,
+                "minutes_min": 30,
                 "player_name": "Karl-Anthony Towns",
-                "rationale": "首发中锋，预计正常负荷；Drummond 作为替补中锋分担。",
+                "rationale": "内线核心，正常首发负荷。",
                 "side": "home"
               },
               {
                 "basis": "agent_estimate",
                 "evidence_ids": [
-                  "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074"
+                  "589245e2a0bcdae36d311d461aeedd03205116e1d4a36d9fec1c2db135d9e46c"
                 ],
                 "minutes_max": 32,
                 "minutes_min": 24,
                 "player_name": "Joel Embiid",
-                "rationale": "上季仅出战38场，揭幕战负荷存在不确定性，估计低于满负荷。",
+                "rationale": "健康史与揭幕战负荷存疑，估计低于满负荷。",
                 "side": "away"
               },
               {
                 "basis": "agent_estimate",
                 "evidence_ids": [
-                  "ad24b2f7e0b565c8c62747574b9e5ef3a5bfae95885ba8b894a7e6a147015738"
+                  "fcae5f6e3d8b7a62f06d23ebe1e431c1ba747b7b3a245eed2c9675cf29c83d22"
                 ],
                 "minutes_max": 34,
                 "minutes_min": 28,
                 "player_name": "LeBron James",
-                "rationale": "新加盟核心，预计首发并承担主要持球，但揭幕战负荷无确认信息。",
+                "rationale": "新队首战，估计正常偏保守负荷。",
                 "side": "away"
               }
             ],
             "uncertainty": [
-              "双方首发均未确认，以上为分析性预计。",
-              "Embiid 与 LeBron 的揭幕战负荷无可靠来源。",
-              "76人替补内线在 Hukporti 缺阵后的轮换未确认。"
+              "双方首发均未官方确认",
+              "Embiid 实际负荷未知",
+              "Wade/Bona/Simons 赛前状态未定"
             ]
           },
           "summary": "本场预计首发与核心球员负荷"
         }
       ],
       "evidence_index": {
-        "0812a84ab4037cd5f62367b6f4f22f6b980030429073e12b6df90c0d8d612e0d": {
-          "section": "model_facts",
+        "018c89d9bb6aee3a13de5631b2b16864951cb46aa88a0a4079834df35470c17f": {
+          "section": "game_identity",
           "source_type": "Fact"
         },
-        "0b45b1c5124ff17082ad99b05a8c887a265d2fa51a390da411bfd06e482a570a": {
-          "section": "team_form",
-          "source_type": "Fact"
-        },
-        "1eac927f54d944acdb5c0519b040206116577b0e1324239a0b84fe8f85675dbc": {
-          "section": "web_context",
-          "source_type": "Fact"
-        },
-        "2edbbfce47a6828832f3a84ef527bd9d0b0787b26697c2795f0ed5890d39d62e": {
+        "04ba8e9bf62126d292ca6ee5b91a0ca261cb3f10bacaebe571b64f5f5e31b995": {
           "section": "matchup",
           "source_type": "Fact"
         },
-        "3759c423c46362ef0e674e25fc8c70b9532132e75b93a7d0d584af6fd2aa3d02": {
-          "section": "prediction",
-          "source_type": "ModelForecast"
-        },
-        "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074": {
-          "section": "roster_context",
-          "source_type": "Fact"
-        },
-        "673fa7f81850d0626712978e178693707107e806ac1176689c163c7b8c2aad62": {
-          "section": "web_context",
-          "source_type": "MarketSnapshot"
-        },
-        "6b6d3c2cc43a881e607ed4bbdf60579f2d9a85b2e987c27e6a9c6f424c7aaf48": {
-          "section": "web_context",
-          "source_type": "Fact"
-        },
-        "7f35b1354776836d16a4d4ae1435b90a820121c91567978870ee2fb11743eeda": {
-          "section": "web_context",
-          "source_type": "Fact"
-        },
-        "839998770afda01b512d7ec29acd1f269d02187e3d76a72ccb75e9360dea69e0": {
+        "0c71b7f9b4da4e0a3a81f1df212cd661a538b28d909f8d863c791890f1546458": {
           "section": "season_form",
           "source_type": "Fact"
         },
-        "864add2329db5c9d962e16332ad7a298709005c1c3c5cc89b6f2e0376ea09043": {
+        "1119ef55f00cd92b0ed0d65b4c4e0cf2694ab634aa5b31a7bda2968dda51f2eb": {
+          "section": "prediction",
+          "source_type": "ModelForecast"
+        },
+        "2962d25aef11cc9af4f25620be6e1722de7d2120bf7c7a2e62efb25d56e948fb": {
+          "section": "web_context",
+          "source_type": "Fact"
+        },
+        "3ca787e3d14e1a0277684008ee435f4ea7571bb261ed6fc82948868553fe5a34": {
           "section": "research_status",
           "source_type": "Context"
         },
-        "8a7a209e9b4255146d3f6c3e17cacaa8e740a7e20bedb0f027b5882179faf81a": {
-          "section": "fact_context",
-          "source_type": "Context"
-        },
-        "ad24b2f7e0b565c8c62747574b9e5ef3a5bfae95885ba8b894a7e6a147015738": {
+        "458ffb9c357568531a593adf3a90b674dacbc23f11b39f7569a929b663ba52f1": {
           "section": "web_context",
           "source_type": "Fact"
         },
-        "ae133d568a64f4fa856374be193a560b4484a6392da68079b781fa029bb1857e": {
+        "5607993efb7246d292448a9b7a0b4dd73e156445c031e8de594d21be3742a920": {
+          "section": "web_context",
+          "source_type": "Fact"
+        },
+        "589245e2a0bcdae36d311d461aeedd03205116e1d4a36d9fec1c2db135d9e46c": {
+          "section": "web_context",
+          "source_type": "Fact"
+        },
+        "5ea1539d5a484596163ef1d34ea36ce8eae1fe31fedfef1c4d0221e5e97927dd": {
           "section": "matchup_history",
           "source_type": "Fact"
         },
-        "b67c8293b5927e35b905aaf8896467547e0a6c994a7242cbc0bc985baa9dc919": {
+        "665ff7afbba3159f1c5905e5433929b82fdc21f15a39e426f5e86f7295c0df02": {
+          "section": "roster_context",
+          "source_type": "Fact"
+        },
+        "6fafd8503635a11ef9f3f08d85e304997bdb339f6c627670cfba8d3044008501": {
           "section": "season_phase",
           "source_type": "Fact"
         },
-        "c6094e6b38be2b4c7f35dde304b2caba09c29a8a5e8433184169bee245678496": {
+        "a9914ab979c1111031595e89e300ac53c5da6c6ca3773d0b828261b1930a006a": {
+          "section": "availability",
+          "source_type": "Fact"
+        },
+        "ac64965c5b96f6c26afdfa77bf6b7cd20ceb88b80cdf43c1202592bf3b7e9440": {
           "section": "web_context",
           "source_type": "Fact"
         },
-        "d54cd5724919f1fad027350f6c7a408abb3abea34da8d010a373cf32deda81b2": {
+        "adc7c02703e25185f5855304620843ebf820fa80946e09e66afe1ad8e2f2fe32": {
+          "section": "web_context",
+          "source_type": "MarketSnapshot"
+        },
+        "b3cc1849ee02128a330583d07e28fd4505e7a80807aca1db6091eec92fc7b2d4": {
           "section": "web_context",
           "source_type": "Fact"
         },
-        "e87caf2cd8ebc4fe4c46ee527387e0ec3a6a0ebc7495238f9f92dbc580fcc4e1": {
-          "section": "game_identity",
+        "e2f1f11a660dd59b66189b650f99889fde01b12a9011fe6e949250e23d0124eb": {
+          "section": "team_form",
+          "source_type": "Fact"
+        },
+        "fcae5f6e3d8b7a62f06d23ebe1e431c1ba747b7b3a245eed2c9675cf29c83d22": {
+          "section": "web_context",
           "source_type": "Fact"
         },
         "public-market-fanduel-20260918-phi-nyk": {
@@ -1717,8 +1649,8 @@
         "home_team_id": 1610612752,
         "scheduled_tipoff": "2026-10-20T23:00:00+00:00"
       },
-      "generated_at": "2026-10-14T18:13:24.451481+00:00",
-      "input_cutoff_at": "2026-10-14T18:13:24.338227+00:00",
+      "generated_at": "2026-10-20T14:53:04.834068+00:00",
+      "input_cutoff_at": "2026-10-20T14:53:04.739217+00:00",
       "input_snapshot": {
         "away": {
           "abbreviation": "PHI",
@@ -1731,8 +1663,93 @@
         },
         "background": {
           "availability": {
-            "message": "可靠伤病信息暂不可用。",
-            "status": "unavailable"
+            "message": "已连接 6 条合格球员状态。",
+            "records": [
+              {
+                "captured_at": "2026-10-20T14:31:06.575722+00:00",
+                "game_id": "espn:401909089",
+                "parser_version": "nba-official-injury-live-v3",
+                "player_name": "Adem Bona",
+                "reason": "Injury/Illness - Left Foot Sprain",
+                "source_cutoff": null,
+                "source_published_at": "2026-10-20T14:15:00+00:00",
+                "source_sha256": "143409b22378187e716d0b67592f80fc7b084e64c970017e8e34500c36f105e6",
+                "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_10_15AM.pdf",
+                "status": "questionable",
+                "team_id": 1610612755
+              },
+              {
+                "captured_at": "2026-10-20T14:31:06.575722+00:00",
+                "game_id": "espn:401909089",
+                "parser_version": "nba-official-injury-live-v3",
+                "player_name": "Anfernee Simons",
+                "reason": "Injury/Illness - Left Hamstring Tightness/Soreness",
+                "source_cutoff": null,
+                "source_published_at": "2026-10-20T14:15:00+00:00",
+                "source_sha256": "143409b22378187e716d0b67592f80fc7b084e64c970017e8e34500c36f105e6",
+                "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_10_15AM.pdf",
+                "status": "questionable",
+                "team_id": 1610612755
+              },
+              {
+                "captured_at": "2026-10-20T14:31:06.575722+00:00",
+                "game_id": "espn:401909089",
+                "parser_version": "nba-official-injury-live-v3",
+                "player_name": "Ariel Hukporti",
+                "reason": "Injury/Illness - Right Achilles Tendon Rupture/Tear",
+                "source_cutoff": null,
+                "source_published_at": "2026-10-20T14:15:00+00:00",
+                "source_sha256": "143409b22378187e716d0b67592f80fc7b084e64c970017e8e34500c36f105e6",
+                "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_10_15AM.pdf",
+                "status": "out",
+                "team_id": 1610612755
+              },
+              {
+                "captured_at": "2026-10-20T14:31:06.575722+00:00",
+                "game_id": "espn:401909089",
+                "parser_version": "nba-official-injury-live-v3",
+                "player_name": "Dean Wade",
+                "reason": "Injury/Illness - Left Ankle Sprain",
+                "source_cutoff": null,
+                "source_published_at": "2026-10-20T14:15:00+00:00",
+                "source_sha256": "143409b22378187e716d0b67592f80fc7b084e64c970017e8e34500c36f105e6",
+                "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_10_15AM.pdf",
+                "status": "questionable",
+                "team_id": 1610612755
+              },
+              {
+                "captured_at": "2026-10-20T14:31:06.575722+00:00",
+                "game_id": "espn:401909089",
+                "parser_version": "nba-official-injury-live-v3",
+                "player_name": "Dominick Barlow",
+                "reason": "Injury/Illness - Low Back Stress Reaction",
+                "source_cutoff": null,
+                "source_published_at": "2026-10-20T14:15:00+00:00",
+                "source_sha256": "143409b22378187e716d0b67592f80fc7b084e64c970017e8e34500c36f105e6",
+                "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_10_15AM.pdf",
+                "status": "out",
+                "team_id": 1610612755
+              },
+              {
+                "captured_at": "2026-10-20T14:31:06.575722+00:00",
+                "game_id": "espn:401909089",
+                "parser_version": "nba-official-injury-live-v3",
+                "player_name": "Tacko Fall",
+                "reason": "Injury/Illness - Left Quadriceps Strain",
+                "source_cutoff": null,
+                "source_published_at": "2026-10-20T14:15:00+00:00",
+                "source_sha256": "143409b22378187e716d0b67592f80fc7b084e64c970017e8e34500c36f105e6",
+                "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_10_15AM.pdf",
+                "status": "out",
+                "team_id": 1610612755
+              }
+            ],
+            "status": "available",
+            "time_validation": {
+              "accepted_records": 6,
+              "cutoff": "2026-10-20T14:31:06.594223+00:00",
+              "rejected_records": 0
+            }
           },
           "market": null,
           "recent_form": {
@@ -1777,8 +1794,8 @@
         "id": "espn:401909089",
         "matchup_history": {
           "away_team_id": 1610612755,
-          "context_hash": "417edbe309a64e2ebd756e0a2de78bb429dbd2a838d32ecdcee7da070d333af8",
-          "cutoff": "2026-10-14T15:25:20.015745+00:00",
+          "context_hash": "48ec4cc6e5afe4af83c0679ccae1a0e9a2000520d8e59a76b0154078519e15cb",
+          "cutoff": "2026-09-27T14:42:37.061134+00:00",
           "game_id": "espn:401909089",
           "home_team_id": 1610612752,
           "matchup_relevance": "high",
@@ -2045,6 +2062,367 @@
           }
         ],
         "neutral_site": false,
+        "official_injury_report": {
+          "captured_at": "2026-10-20T14:31:06.575722+00:00",
+          "coverage": "partial",
+          "game_id": "espn:401909089",
+          "parser_version": "nba-official-injury-live-v3",
+          "records": [
+            {
+              "captured_at": "2026-10-20T14:31:06.575722+00:00",
+              "game_id": "espn:401909089",
+              "parser_version": "nba-official-injury-live-v3",
+              "player_name": "Adem Bona",
+              "reason": "Injury/Illness - Left Foot Sprain",
+              "source_published_at": "2026-10-20T14:15:00+00:00",
+              "source_sha256": "143409b22378187e716d0b67592f80fc7b084e64c970017e8e34500c36f105e6",
+              "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_10_15AM.pdf",
+              "status": "questionable",
+              "team_id": 1610612755
+            },
+            {
+              "captured_at": "2026-10-20T14:31:06.575722+00:00",
+              "game_id": "espn:401909089",
+              "parser_version": "nba-official-injury-live-v3",
+              "player_name": "Anfernee Simons",
+              "reason": "Injury/Illness - Left Hamstring Tightness/Soreness",
+              "source_published_at": "2026-10-20T14:15:00+00:00",
+              "source_sha256": "143409b22378187e716d0b67592f80fc7b084e64c970017e8e34500c36f105e6",
+              "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_10_15AM.pdf",
+              "status": "questionable",
+              "team_id": 1610612755
+            },
+            {
+              "captured_at": "2026-10-20T14:31:06.575722+00:00",
+              "game_id": "espn:401909089",
+              "parser_version": "nba-official-injury-live-v3",
+              "player_name": "Ariel Hukporti",
+              "reason": "Injury/Illness - Right Achilles Tendon Rupture/Tear",
+              "source_published_at": "2026-10-20T14:15:00+00:00",
+              "source_sha256": "143409b22378187e716d0b67592f80fc7b084e64c970017e8e34500c36f105e6",
+              "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_10_15AM.pdf",
+              "status": "out",
+              "team_id": 1610612755
+            },
+            {
+              "captured_at": "2026-10-20T14:31:06.575722+00:00",
+              "game_id": "espn:401909089",
+              "parser_version": "nba-official-injury-live-v3",
+              "player_name": "Dean Wade",
+              "reason": "Injury/Illness - Left Ankle Sprain",
+              "source_published_at": "2026-10-20T14:15:00+00:00",
+              "source_sha256": "143409b22378187e716d0b67592f80fc7b084e64c970017e8e34500c36f105e6",
+              "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_10_15AM.pdf",
+              "status": "questionable",
+              "team_id": 1610612755
+            },
+            {
+              "captured_at": "2026-10-20T14:31:06.575722+00:00",
+              "game_id": "espn:401909089",
+              "parser_version": "nba-official-injury-live-v3",
+              "player_name": "Dominick Barlow",
+              "reason": "Injury/Illness - Low Back Stress Reaction",
+              "source_published_at": "2026-10-20T14:15:00+00:00",
+              "source_sha256": "143409b22378187e716d0b67592f80fc7b084e64c970017e8e34500c36f105e6",
+              "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_10_15AM.pdf",
+              "status": "out",
+              "team_id": 1610612755
+            },
+            {
+              "captured_at": "2026-10-20T14:31:06.575722+00:00",
+              "game_id": "espn:401909089",
+              "parser_version": "nba-official-injury-live-v3",
+              "player_name": "Tacko Fall",
+              "reason": "Injury/Illness - Left Quadriceps Strain",
+              "source_published_at": "2026-10-20T14:15:00+00:00",
+              "source_sha256": "143409b22378187e716d0b67592f80fc7b084e64c970017e8e34500c36f105e6",
+              "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_10_15AM.pdf",
+              "status": "out",
+              "team_id": 1610612755
+            }
+          ],
+          "report_date": "2026-10-20",
+          "report_id": "333c3eeaa9029f5252c111823ddc72bc4e151a7b895d9ef6a96c83c77eb76319",
+          "report_time": "10:15",
+          "source_published_at": "2026-10-20T14:15:00+00:00",
+          "source_sha256": "143409b22378187e716d0b67592f80fc7b084e64c970017e8e34500c36f105e6",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_10_15AM.pdf",
+          "status": "published"
+        },
+        "player_display_names": [
+          {
+            "canonical_name_en": "Dominick Barlow",
+            "created_at": "2026-10-14T15:22:32.215248+00:00",
+            "display_name_zh": "多米尼克·巴洛",
+            "name_key": "dominick barlow",
+            "player_id": "name:dominick barlow",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Adem Bona",
+            "created_at": "2026-10-14T15:22:32.215852+00:00",
+            "display_name_zh": "阿德姆·博纳",
+            "name_key": "adem bona",
+            "player_id": "name:adem bona",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Jaylen Brown",
+            "created_at": "2026-10-14T15:22:32.216514+00:00",
+            "display_name_zh": "杰伦·布朗",
+            "name_key": "jaylen brown",
+            "player_id": "name:jaylen brown",
+            "translation_source": "known_mapping"
+          },
+          {
+            "canonical_name_en": "Kentavious Caldwell-Pope",
+            "created_at": "2026-10-14T15:22:32.217208+00:00",
+            "display_name_zh": "肯塔维奥斯·考德威尔-波普",
+            "name_key": "kentavious caldwell pope",
+            "player_id": "name:kentavious caldwell pope",
+            "translation_source": "known_mapping"
+          },
+          {
+            "canonical_name_en": "VJ Edgecombe",
+            "created_at": "2026-10-14T15:22:32.217835+00:00",
+            "display_name_zh": "VJ·埃奇库姆",
+            "name_key": "vj edgecombe",
+            "player_id": "name:vj edgecombe",
+            "translation_source": "known_mapping"
+          },
+          {
+            "canonical_name_en": "Justin Edwards",
+            "created_at": "2026-10-14T15:22:32.218447+00:00",
+            "display_name_zh": "贾斯汀·爱德华兹",
+            "name_key": "justin edwards",
+            "player_id": "name:justin edwards",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Joel Embiid",
+            "created_at": "2026-10-14T15:22:32.219068+00:00",
+            "display_name_zh": "乔尔·恩比德",
+            "name_key": "joel embiid",
+            "player_id": "name:joel embiid",
+            "translation_source": "known_mapping"
+          },
+          {
+            "canonical_name_en": "Tacko Fall",
+            "created_at": "2026-10-14T15:22:32.219680+00:00",
+            "display_name_zh": "塔科·法尔",
+            "name_key": "tacko fall",
+            "player_id": "name:tacko fall",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Ariel Hukporti",
+            "created_at": "2026-10-14T15:22:32.219717+00:00",
+            "display_name_zh": "阿里尔·胡克波蒂",
+            "name_key": "ariel hukporti",
+            "player_id": "name:ariel hukporti",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "LeBron James",
+            "created_at": "2026-10-14T15:22:32.220329+00:00",
+            "display_name_zh": "勒布朗·詹姆斯",
+            "name_key": "lebron james",
+            "player_id": "name:lebron james",
+            "translation_source": "known_mapping"
+          },
+          {
+            "canonical_name_en": "Caleb Love",
+            "created_at": "2026-10-14T15:22:32.220975+00:00",
+            "display_name_zh": "凯莱布·乐福",
+            "name_key": "caleb love",
+            "player_id": "name:caleb love",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Tyrese Maxey",
+            "created_at": "2026-10-14T15:22:32.221760+00:00",
+            "display_name_zh": "泰瑞斯·马克西",
+            "name_key": "tyrese maxey",
+            "player_id": "name:tyrese maxey",
+            "translation_source": "known_mapping"
+          },
+          {
+            "canonical_name_en": "Labaron Philon Jr.",
+            "created_at": "2026-10-14T15:22:32.222501+00:00",
+            "display_name_zh": "拉巴伦·菲隆二世",
+            "name_key": "labaron philon jr",
+            "player_id": "name:labaron philon jr",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Rayan Rupert",
+            "created_at": "2026-10-14T15:22:32.222534+00:00",
+            "display_name_zh": "拉扬·鲁珀特",
+            "name_key": "rayan rupert",
+            "player_id": "name:rayan rupert",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Anfernee Simons",
+            "created_at": "2026-10-14T15:22:32.223270+00:00",
+            "display_name_zh": "安芬尼·西蒙斯",
+            "name_key": "anfernee simons",
+            "player_id": "name:anfernee simons",
+            "translation_source": "known_mapping"
+          },
+          {
+            "canonical_name_en": "Dean Wade",
+            "created_at": "2026-10-14T15:22:32.223977+00:00",
+            "display_name_zh": "迪恩·韦德",
+            "name_key": "dean wade",
+            "player_id": "name:dean wade",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Jabari Walker",
+            "created_at": "2026-10-14T15:22:32.224639+00:00",
+            "display_name_zh": "贾巴里·沃克",
+            "name_key": "jabari walker",
+            "player_id": "name:jabari walker",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Jaden Akins",
+            "created_at": "2026-10-14T15:22:32.202263+00:00",
+            "display_name_zh": "杰登·阿金斯",
+            "name_key": "jaden akins",
+            "player_id": "name:jaden akins",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Jose Alvarado",
+            "created_at": "2026-10-14T15:22:32.202937+00:00",
+            "display_name_zh": "何塞·阿尔瓦拉多",
+            "name_key": "jose alvarado",
+            "player_id": "name:jose alvarado",
+            "translation_source": "known_mapping"
+          },
+          {
+            "canonical_name_en": "OG Anunoby",
+            "created_at": "2026-10-14T15:22:32.203609+00:00",
+            "display_name_zh": "OG·阿奴诺比",
+            "name_key": "og anunoby",
+            "player_id": "name:og anunoby",
+            "translation_source": "known_mapping"
+          },
+          {
+            "canonical_name_en": "Mikal Bridges",
+            "created_at": "2026-10-14T15:22:32.204928+00:00",
+            "display_name_zh": "米卡尔·布里奇斯",
+            "name_key": "mikal bridges",
+            "player_id": "name:mikal bridges",
+            "translation_source": "known_mapping"
+          },
+          {
+            "canonical_name_en": "Jalen Brunson",
+            "created_at": "2026-10-14T15:22:32.206167+00:00",
+            "display_name_zh": "杰伦·布伦森",
+            "name_key": "jalen brunson",
+            "player_id": "name:jalen brunson",
+            "translation_source": "known_mapping"
+          },
+          {
+            "canonical_name_en": "Jordan Clarkson",
+            "created_at": "2026-10-14T15:22:32.206798+00:00",
+            "display_name_zh": "乔丹·克拉克森",
+            "name_key": "jordan clarkson",
+            "player_id": "name:jordan clarkson",
+            "translation_source": "known_mapping"
+          },
+          {
+            "canonical_name_en": "Pacome Dadiet",
+            "created_at": "2026-10-14T15:22:32.207443+00:00",
+            "display_name_zh": "帕科姆·达迪耶",
+            "name_key": "pacome dadiet",
+            "player_id": "name:pacome dadiet",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Mohamed Diawara",
+            "created_at": "2026-10-14T15:22:32.208309+00:00",
+            "display_name_zh": "穆罕默德·迪亚瓦拉",
+            "name_key": "mohamed diawara",
+            "player_id": "name:mohamed diawara",
+            "translation_source": "known_mapping"
+          },
+          {
+            "canonical_name_en": "Andre Drummond",
+            "created_at": "2026-10-14T15:22:32.208942+00:00",
+            "display_name_zh": "安德烈·德拉蒙德",
+            "name_key": "andre drummond",
+            "player_id": "name:andre drummond",
+            "translation_source": "known_mapping"
+          },
+          {
+            "canonical_name_en": "Josh Hart",
+            "created_at": "2026-10-14T15:22:32.210282+00:00",
+            "display_name_zh": "约什·哈特",
+            "name_key": "josh hart",
+            "player_id": "name:josh hart",
+            "translation_source": "known_mapping"
+          },
+          {
+            "canonical_name_en": "Tyler Kolek",
+            "created_at": "2026-10-14T15:22:32.210959+00:00",
+            "display_name_zh": "泰勒·科勒克",
+            "name_key": "tyler kolek",
+            "player_id": "name:tyler kolek",
+            "translation_source": "known_mapping"
+          },
+          {
+            "canonical_name_en": "Miles McBride",
+            "created_at": "2026-10-14T15:22:32.211567+00:00",
+            "display_name_zh": "迈尔斯·麦克布赖德",
+            "name_key": "miles mcbride",
+            "player_id": "name:miles mcbride",
+            "translation_source": "known_mapping"
+          },
+          {
+            "canonical_name_en": "Kevin McCullar Jr.",
+            "created_at": "2026-10-14T15:22:32.212179+00:00",
+            "display_name_zh": "凯文·麦克卡勒",
+            "name_key": "kevin mccullar jr",
+            "player_id": "name:kevin mccullar jr",
+            "translation_source": "known_mapping"
+          },
+          {
+            "canonical_name_en": "Tyler Nickel",
+            "created_at": "2026-10-14T15:22:32.212787+00:00",
+            "display_name_zh": "泰勒·尼克尔",
+            "name_key": "tyler nickel",
+            "player_id": "name:tyler nickel",
+            "translation_source": "known_mapping"
+          },
+          {
+            "canonical_name_en": "Landry Shamet",
+            "created_at": "2026-10-14T15:22:32.213396+00:00",
+            "display_name_zh": "兰德里·沙梅特",
+            "name_key": "landry shamet",
+            "player_id": "name:landry shamet",
+            "translation_source": "known_mapping"
+          },
+          {
+            "canonical_name_en": "Karl-Anthony Towns",
+            "created_at": "2026-10-14T15:22:32.214036+00:00",
+            "display_name_zh": "卡尔-安东尼·唐斯",
+            "name_key": "karl anthony towns",
+            "player_id": "name:karl anthony towns",
+            "translation_source": "known_mapping"
+          },
+          {
+            "canonical_name_en": "James Wiseman",
+            "created_at": "2026-10-14T15:22:32.214641+00:00",
+            "display_name_zh": "詹姆斯·怀斯曼",
+            "name_key": "james wiseman",
+            "player_id": "name:james wiseman",
+            "translation_source": "llm_transliteration"
+          }
+        ],
         "postgame": {
           "status": "unavailable"
         },
@@ -2057,6 +2435,35 @@
           "winner_probability": 0.8167483717438521,
           "winner_team_id": 1610612752
         },
+        "public_market_reference": {
+          "away_moneyline": 150.0,
+          "away_spread": 4.5,
+          "captured_at": "2026-10-20T14:34:51.332377+00:00",
+          "eligible_prediction_input": false,
+          "expected_home_margin": 4.5,
+          "game_identity": {
+            "away_team": "Philadelphia 76ers",
+            "away_team_id": 1610612755,
+            "game_id": "espn:401909089",
+            "game_type": "regular_season",
+            "home_team": "New York Knicks",
+            "home_team_id": 1610612752,
+            "registered_game": true,
+            "scheduled_tipoff": "2026-10-20T23:00Z"
+          },
+          "home_moneyline": -180.0,
+          "home_spread": -4.5,
+          "observed_at": "2026-10-20T14:34:51.332377+00:00",
+          "published_at": null,
+          "source_tier": 1,
+          "source_title": "Draft Kings current odds",
+          "source_url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909089/competitions/401909089/odds",
+          "sportsbook": "Draft Kings",
+          "status": "available",
+          "time_semantics": "observed current sportsbook quote; publication time unknown",
+          "total": 232.5,
+          "usage": "qualified_market_for_ai_review"
+        },
         "registered_game": true,
         "roster_context": {
           "teams": {
@@ -2064,168 +2471,222 @@
               "confirmed_starters": null,
               "current_rotation": null,
               "current_team_roster": {
-                "observed_at": "2026-10-14T15:25:19.791134+00:00",
+                "observed_at": "2026-10-20T14:31:03.164423+00:00",
                 "players": [
                   {
-                    "name": "Dominick Barlow"
+                    "name": "Dominick Barlow",
+                    "player_id": null,
+                    "team_id": 1610612755
                   },
                   {
-                    "name": "Adem Bona"
+                    "name": "Adem Bona",
+                    "player_id": null,
+                    "team_id": 1610612755
                   },
                   {
-                    "name": "Jaylen Brown"
+                    "name": "Jaylen Brown",
+                    "player_id": null,
+                    "team_id": 1610612755
                   },
                   {
-                    "name": "Kentavious Caldwell-Pope"
+                    "name": "Kentavious Caldwell-Pope",
+                    "player_id": null,
+                    "team_id": 1610612755
                   },
                   {
-                    "name": "VJ Edgecombe"
+                    "name": "VJ Edgecombe",
+                    "player_id": null,
+                    "team_id": 1610612755
                   },
                   {
-                    "name": "Justin Edwards"
+                    "name": "Justin Edwards",
+                    "player_id": null,
+                    "team_id": 1610612755
                   },
                   {
-                    "name": "Joel Embiid"
+                    "name": "Joel Embiid",
+                    "player_id": null,
+                    "team_id": 1610612755
                   },
                   {
-                    "name": "Tacko Fall"
+                    "name": "Tacko Fall",
+                    "player_id": null,
+                    "team_id": 1610612755
                   },
                   {
-                    "name": "Ariel Hukporti"
+                    "name": "Ariel Hukporti",
+                    "player_id": null,
+                    "team_id": 1610612755
                   },
                   {
-                    "name": "LeBron James"
+                    "name": "LeBron James",
+                    "player_id": null,
+                    "team_id": 1610612755
                   },
                   {
-                    "name": "Dillon Jones"
+                    "name": "Caleb Love",
+                    "player_id": null,
+                    "team_id": 1610612755
                   },
                   {
-                    "name": "Caleb Love"
+                    "name": "Tyrese Maxey",
+                    "player_id": null,
+                    "team_id": 1610612755
                   },
                   {
-                    "name": "Tyrese Maxey"
+                    "name": "Labaron Philon Jr.",
+                    "player_id": null,
+                    "team_id": 1610612755
                   },
                   {
-                    "name": "Duke Miles"
+                    "name": "Rayan Rupert",
+                    "player_id": null,
+                    "team_id": 1610612755
                   },
                   {
-                    "name": "Jameer Nelson Jr."
+                    "name": "Anfernee Simons",
+                    "player_id": null,
+                    "team_id": 1610612755
                   },
                   {
-                    "name": "Labaron Philon Jr."
+                    "name": "Dean Wade",
+                    "player_id": null,
+                    "team_id": 1610612755
                   },
                   {
-                    "name": "Rayan Rupert"
-                  },
-                  {
-                    "name": "Anfernee Simons"
-                  },
-                  {
-                    "name": "Saint Thomas"
-                  },
-                  {
-                    "name": "Dean Wade"
-                  },
-                  {
-                    "name": "Jabari Walker"
+                    "name": "Jabari Walker",
+                    "player_id": null,
+                    "team_id": 1610612755
                   }
                 ],
                 "source": {
-                  "captured_at": "2026-10-14T15:25:19.791134+00:00",
-                  "observed_at": "2026-10-14T15:25:19.791134+00:00",
+                  "captured_at": "2026-10-20T14:31:03.164423+00:00",
+                  "http_status": 200,
+                  "observed_at": "2026-10-20T14:31:03.164423+00:00",
                   "parser_version": "official-team-rendered-roster-v1",
-                  "sha256": "073c0900026c4e77629890070730bb26349e53475ac2dc748df4bb996e01b9e7",
+                  "retry_count": 0,
+                  "sha256": "4a4546b52df7baddc8c6d41eccccb530746196e94e7f23faae6b68f8d90f8b76",
                   "source_type": "espn_current_team_roster",
                   "status": "success",
+                  "temporal_basis": "observed_at",
                   "url": "https://www.espn.com/nba/team/roster/_/name/phi/philadelphia-76ers"
                 },
-                "status": "available"
+                "status": "available",
+                "team_id": 1610612755
               },
               "official_team_roster": null,
+              "projected_starters": null,
               "team_id": 1610612755
             },
             "home": {
               "confirmed_starters": null,
               "current_rotation": null,
               "current_team_roster": {
-                "observed_at": "2026-10-14T15:25:19.792042+00:00",
+                "observed_at": "2026-10-20T14:31:03.167829+00:00",
                 "players": [
                   {
-                    "name": "Ochai Agbaji"
+                    "name": "Jaden Akins",
+                    "player_id": null,
+                    "team_id": 1610612752
                   },
                   {
-                    "name": "Jaden Akins"
+                    "name": "Jose Alvarado",
+                    "player_id": null,
+                    "team_id": 1610612752
                   },
                   {
-                    "name": "Jose Alvarado"
+                    "name": "OG Anunoby",
+                    "player_id": null,
+                    "team_id": 1610612752
                   },
                   {
-                    "name": "OG Anunoby"
+                    "name": "Mikal Bridges",
+                    "player_id": null,
+                    "team_id": 1610612752
                   },
                   {
-                    "name": "Tony Bradley"
+                    "name": "Jalen Brunson",
+                    "player_id": null,
+                    "team_id": 1610612752
                   },
                   {
-                    "name": "Mikal Bridges"
+                    "name": "Jordan Clarkson",
+                    "player_id": null,
+                    "team_id": 1610612752
                   },
                   {
-                    "name": "Bruce Brown"
+                    "name": "Pacome Dadiet",
+                    "player_id": null,
+                    "team_id": 1610612752
                   },
                   {
-                    "name": "Jalen Brunson"
+                    "name": "Mohamed Diawara",
+                    "player_id": null,
+                    "team_id": 1610612752
                   },
                   {
-                    "name": "Jordan Clarkson"
+                    "name": "Andre Drummond",
+                    "player_id": null,
+                    "team_id": 1610612752
                   },
                   {
-                    "name": "Pacome Dadiet"
+                    "name": "Josh Hart",
+                    "player_id": null,
+                    "team_id": 1610612752
                   },
                   {
-                    "name": "Mohamed Diawara"
+                    "name": "Tyler Kolek",
+                    "player_id": null,
+                    "team_id": 1610612752
                   },
                   {
-                    "name": "Andre Drummond"
+                    "name": "Miles McBride",
+                    "player_id": null,
+                    "team_id": 1610612752
                   },
                   {
-                    "name": "Drew Eubanks"
+                    "name": "Kevin McCullar Jr.",
+                    "player_id": null,
+                    "team_id": 1610612752
                   },
                   {
-                    "name": "Josh Hart"
+                    "name": "Tyler Nickel",
+                    "player_id": null,
+                    "team_id": 1610612752
                   },
                   {
-                    "name": "Tyler Kolek"
+                    "name": "Landry Shamet",
+                    "player_id": null,
+                    "team_id": 1610612752
                   },
                   {
-                    "name": "Miles McBride"
+                    "name": "Karl-Anthony Towns",
+                    "player_id": null,
+                    "team_id": 1610612752
                   },
                   {
-                    "name": "Kevin McCullar Jr."
-                  },
-                  {
-                    "name": "Tyler Nickel"
-                  },
-                  {
-                    "name": "Landry Shamet"
-                  },
-                  {
-                    "name": "Karl-Anthony Towns"
-                  },
-                  {
-                    "name": "James Wiseman"
+                    "name": "James Wiseman",
+                    "player_id": null,
+                    "team_id": 1610612752
                   }
                 ],
                 "source": {
-                  "captured_at": "2026-10-14T15:25:19.792042+00:00",
-                  "observed_at": "2026-10-14T15:25:19.792042+00:00",
+                  "captured_at": "2026-10-20T14:31:03.167829+00:00",
+                  "http_status": 200,
+                  "observed_at": "2026-10-20T14:31:03.167829+00:00",
                   "parser_version": "official-team-rendered-roster-v1",
-                  "sha256": "294769e417e4dabc88c49c568d7c9bc59b91c729184256fb9079aaedcf340a0e",
+                  "retry_count": 0,
+                  "sha256": "3fed67a8a6a1f5621c0c448d8068ac9969d532ce85f9b3b403954c4982384715",
                   "source_type": "espn_current_team_roster",
                   "status": "success",
+                  "temporal_basis": "observed_at",
                   "url": "https://www.espn.com/nba/team/roster/_/name/ny/new-york-knicks"
                 },
-                "status": "available"
+                "status": "available",
+                "team_id": 1610612752
               },
               "official_team_roster": null,
+              "projected_starters": null,
               "team_id": 1610612752
             }
           }
@@ -2234,8 +2695,8 @@
         "season": 2027,
         "season_form": {
           "competition_scope": "all competitive games in each season",
-          "context_hash": "22964729671cca04e5ffcbb8a612b35f0e711e5a3377cf9f9b2380b439caae48",
-          "cutoff": "2026-10-14T15:25:20.015745+00:00",
+          "context_hash": "32183c76148d0707164936aafb9f99069b63aa343085e9919e6da2fbd92b5481",
+          "cutoff": "2026-09-27T14:42:37.061134+00:00",
           "game_id": "espn:401909089",
           "numeric_model_usage": false,
           "season_start": 2026,
@@ -2392,181 +2853,205 @@
         "season_phase": {
           "away_current_season_games": 0,
           "comparison_sample_games": 0,
-          "display_label": "当前赛季本地样本为零",
+          "display_label": "上赛季季后赛 / 上赛季末段",
           "game_type": "regular_season",
-          "global_opening_night_confirmed": false,
           "home_current_season_games": 0,
-          "phase": "very_early",
-          "primary_evidence": "no_local_current_season_rows; league_opener_unverified"
+          "phase": "opening_night",
+          "primary_evidence": "previous_season_playoffs_or_finish"
         },
         "season_start": 2026,
         "source": {},
         "status": "scheduled",
         "technical": {
-          "cutoff": "2026-10-14T15:29:38.622540+00:00"
+          "cutoff": "2026-09-17T12:53:24.908944+00:00",
+          "source_label": "开发期赛前预测快照"
         },
         "tipoff": "2026-10-20T23:00:00+00:00",
         "venue": "Madison Square Garden"
       },
       "judgment": {
-        "analysis_article": "这场揭幕战最值得看的矛盾，是延续性对全新阵容。尼克斯上季夺冠的首发五人全部保留，Brunson、Bridges、Anunoby、Hart、Towns 之间的换防、协防轮转和弱侧轮转已经跑了一整年；76人则把 LeBron James、Jaylen Brown 塞进 Embiid、Maxey、Edgecombe 身边，纸面天赋够高，但五个人此前没有一起打过正式比赛。揭幕战没有磨合样本，这种差距通常先体现在防守端：谁去补弱侧、谁在挡拆后换防、谁负责保护后场篮板，都需要时间建立。\n\n对位上，尼克斯的锋线群是这场的关键。Anunoby 和 Bridges 可以轮流对位 LeBron 和 Jaylen Brown，Hart 负责扫荡和篮板，Towns 则要在防守端面对 Embiid 的低位单打。76人的进攻发起大概率由 LeBron 和 Maxey 分担，Embiid 若出场会是半场进攻的轴心；但 Embiid 上季只打了38场，揭幕战负荷没有可靠信息，这直接决定76人内线能撑多久。尼克斯这边，Towns 的替补由 Drummond 承担，护框和篮板保护略有降级，但面对 Embiid 之外的76人内线，Drummond 的体型仍够用。\n\n76人替补中锋 Hukporti 跟腱撕裂，内线深度只剩 Bona 一类轮换，一旦 Embiid 时间受限，篮板和护框压力会明显放大。尼克斯的延续性优势因此更可能体现在二次进攻和防守篮板上，而不是单纯靠手感拉开。\n\n第25秒预计尼克斯赢7.5分、胜率72%，方向与市场一致，但比市场定价的主队优势更足；总分226.5则低于市场基准，说明第25秒不认为这是一场对攻大战。揭幕战双方都缺确认首发和伤病状态，76人新阵容的磨合程度是最大变量——如果 LeBron、Brown、Embiid、Maxey 全部健康且配合顺畅，分差会向个位数收窄；如果 Embiid 负荷受限，尼克斯的篮板和内线优势会被放大。",
+        "analysis_article": "几个月前，76人被尼克斯四场送出了季后赛。如今纽约准备在揭幕夜领戒指，费城带来的却是一副新面孔：詹姆斯和布朗加入之后，这支球队还能不能用老办法对付，才是这场重逢最值得看的地方。\n\n我最想看的是费城这套新阵容的球怎么分。马克西借恩比德掩护往里冲，是第一道门；弱侧詹姆斯和布朗再打二人配合，是第二道门；底线还有埃奇科姆飞进来。纸面上层层叠叠，可这些人在正式比赛里一起打过几个回合，谁也说不准。天赋摆在那里，默契得现场长出来。\n\n但我还是站尼克斯，让4.5分可以支持。\n\n理由不在费城缺什么，而在纽约有什么。布伦森叫掩护，唐斯往外一拉，防守立刻要做选择：恩比德跟出去，篮下就空；他守在里头，布伦森就在中距离停下来。这个选择题，尼克斯一晚上能提几十遍。哈特脚踝有点状况，但预计能打，纽约的侧翼轮转和篮板拼抢不至于散架。\n\n费城要接住这道题，靠的是恩比德。如果恩比德能以正常负荷护住篮下，尼克斯的半场进攻就得一回合又一回合地磨；他要是负荷受限，唐斯在外线的空间会越拉越大，布朗和詹姆斯再能单打，也追不上分差一点点被磨开的速度。这不是说费城一定崩，而是说他们的容错比纽约薄。\n\n总分我偏小，把握没有让分那么足。小分要成立，得是尼克斯把比赛拖进半场，费城耐着性子找恩比德，两边都在阵地里较劲。可只要詹姆斯抓下篮板就推、马克西先跑出去，回合数一多，这个方向就悬了。\n\n开球后先看布伦森连续叫挡拆时，恩比德和身后的队友怎么接：内线跟出来，弱侧有没有人及时补位；内线守得深，纽约能不能拿到舒服的中距离。再看费城能否抓住篮板后直接提速，让詹姆斯赶在防线落稳之前把球送到马克西手里。这两条路谁走得更顺，比升旗仪式更能解释比赛会往哪边走。",
         "analysis_article_evidence_ids": [
-          "0b45b1c5124ff17082ad99b05a8c887a265d2fa51a390da411bfd06e482a570a",
-          "1eac927f54d944acdb5c0519b040206116577b0e1324239a0b84fe8f85675dbc",
-          "3759c423c46362ef0e674e25fc8c70b9532132e75b93a7d0d584af6fd2aa3d02",
-          "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074",
-          "673fa7f81850d0626712978e178693707107e806ac1176689c163c7b8c2aad62",
-          "8a7a209e9b4255146d3f6c3e17cacaa8e740a7e20bedb0f027b5882179faf81a",
-          "ad24b2f7e0b565c8c62747574b9e5ef3a5bfae95885ba8b894a7e6a147015738",
-          "ae133d568a64f4fa856374be193a560b4484a6392da68079b781fa029bb1857e",
-          "b67c8293b5927e35b905aaf8896467547e0a6c994a7242cbc0bc985baa9dc919"
+          "0c71b7f9b4da4e0a3a81f1df212cd661a538b28d909f8d863c791890f1546458",
+          "1119ef55f00cd92b0ed0d65b4c4e0cf2694ab634aa5b31a7bda2968dda51f2eb",
+          "589245e2a0bcdae36d311d461aeedd03205116e1d4a36d9fec1c2db135d9e46c",
+          "5ea1539d5a484596163ef1d34ea36ce8eae1fe31fedfef1c4d0221e5e97927dd",
+          "a9914ab979c1111031595e89e300ac53c5da6c6ca3773d0b828261b1930a006a",
+          "ac64965c5b96f6c26afdfa77bf6b7cd20ceb88b80cdf43c1202592bf3b7e9440",
+          "adc7c02703e25185f5855304620843ebf820fa80946e09e66afe1ad8e2f2fe32",
+          "b3cc1849ee02128a330583d07e28fd4505e7a80807aca1db6091eec92fc7b2d4",
+          "e2f1f11a660dd59b66189b650f99889fde01b12a9011fe6e949250e23d0124eb",
+          "fcae5f6e3d8b7a62f06d23ebe1e431c1ba747b7b3a245eed2c9675cf29c83d22"
         ],
         "confidence": "medium",
-        "core_question": "卫冕冠军尼克斯在主场揭幕战面对全新组建、磨合未知的76人，实力与延续性优势能否转化为两位数分差？",
+        "core_question": "卫冕冠军尼克斯的成熟体系能否在揭幕战压制天赋升级但磨合未定的76人新阵容？",
         "final_prediction": {
           "evidence_ids": [
-            "0b45b1c5124ff17082ad99b05a8c887a265d2fa51a390da411bfd06e482a570a",
-            "1eac927f54d944acdb5c0519b040206116577b0e1324239a0b84fe8f85675dbc",
-            "3759c423c46362ef0e674e25fc8c70b9532132e75b93a7d0d584af6fd2aa3d02",
-            "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074",
-            "673fa7f81850d0626712978e178693707107e806ac1176689c163c7b8c2aad62",
-            "8a7a209e9b4255146d3f6c3e17cacaa8e740a7e20bedb0f027b5882179faf81a",
-            "ad24b2f7e0b565c8c62747574b9e5ef3a5bfae95885ba8b894a7e6a147015738",
-            "ae133d568a64f4fa856374be193a560b4484a6392da68079b781fa029bb1857e",
-            "b67c8293b5927e35b905aaf8896467547e0a6c994a7242cbc0bc985baa9dc919"
+            "0c71b7f9b4da4e0a3a81f1df212cd661a538b28d909f8d863c791890f1546458",
+            "1119ef55f00cd92b0ed0d65b4c4e0cf2694ab634aa5b31a7bda2968dda51f2eb",
+            "589245e2a0bcdae36d311d461aeedd03205116e1d4a36d9fec1c2db135d9e46c",
+            "5ea1539d5a484596163ef1d34ea36ce8eae1fe31fedfef1c4d0221e5e97927dd",
+            "a9914ab979c1111031595e89e300ac53c5da6c6ca3773d0b828261b1930a006a",
+            "ac64965c5b96f6c26afdfa77bf6b7cd20ceb88b80cdf43c1202592bf3b7e9440",
+            "adc7c02703e25185f5855304620843ebf820fa80946e09e66afe1ad8e2f2fe32",
+            "b3cc1849ee02128a330583d07e28fd4505e7a80807aca1db6091eec92fc7b2d4",
+            "e2f1f11a660dd59b66189b650f99889fde01b12a9011fe6e949250e23d0124eb",
+            "fcae5f6e3d8b7a62f06d23ebe1e431c1ba747b7b3a245eed2c9675cf29c83d22"
           ],
-          "expected_margin": 7.5,
-          "expected_total": 226.5,
-          "win_probability": 0.72,
+          "expected_margin": 6.5,
+          "expected_total": 228.5,
+          "win_probability": 0.68,
           "winner_side": "home"
         },
-        "game_script": "尼克斯凭延续的夺冠核心与主场氛围在首节建立领先，靠防守轮转和篮板控制节奏；76人依靠 LeBron、Maxey、Jaylen Brown 的个人能力阶段性追分，但新阵容的配合生疏与内线深度不足使其难以持续缩小差距。比赛大概率维持主队中段领先，最终以个位数到低两位数分差收场。",
+        "game_script": "尼克斯凭主场与体系延续性开局建立领先，Brunson 与 Towns 的挡拆持续制造机会；76人靠 Maxey 速度与 LeBron/Brown 单打追分，但磨合与 Embiid 负荷限制使其难以持续缩小差距。尼克斯中段拉开，末节控制节奏，最终以中个位数到两位数分差取胜。",
         "key_matchup_variables": [
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "c6094e6b38be2b4c7f35dde304b2caba09c29a8a5e8433184169bee245678496",
-              "ad24b2f7e0b565c8c62747574b9e5ef3a5bfae95885ba8b894a7e6a147015738"
+              "5ea1539d5a484596163ef1d34ea36ce8eae1fe31fedfef1c4d0221e5e97927dd",
+              "589245e2a0bcdae36d311d461aeedd03205116e1d4a36d9fec1c2db135d9e46c"
             ],
-            "statement": "尼克斯延续性核心（Brunson/Towns/Anunoby/Bridges/Hart） vs 76人全新首发（LeBron、Jaylen Brown、Maxey、Edgecombe、Embiid）：一边是夺冠后高度延续的体系，一边是休赛期大换血、缺乏共同比赛样本的阵容。 尼克斯在配合默契与防守轮转上占优，利于主队拉开分差。"
+            "statement": "尼克斯 Brunson/Towns 挡拆与半场执行 vs 76人 Embiid 护框与换防：尼克斯上季季后赛进攻效率 130.7，靠挡拆与空间撕开76人防守。 若Embiid负荷受限，尼克斯半场进攻顺畅，分差扩大。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "1eac927f54d944acdb5c0519b040206116577b0e1324239a0b84fe8f85675dbc",
-              "ae133d568a64f4fa856374be193a560b4484a6392da68079b781fa029bb1857e"
+              "fcae5f6e3d8b7a62f06d23ebe1e431c1ba747b7b3a245eed2c9675cf29c83d22",
+              "ac64965c5b96f6c26afdfa77bf6b7cd20ceb88b80cdf43c1202592bf3b7e9440"
             ],
-            "statement": "尼克斯内线（Towns/Drummond） vs 76人内线（Embiid/Bona 等轮换）：76人替补中锋 Hukporti 跟腱撕裂，内线深度受损；Embiid 上季出战场次有限，揭幕战负荷待确认。若尼克斯内线保持正常轮换，篮板与护框上占优，进一步支持主队分差。"
+            "statement": "76人 LeBron/Brown/Maxey 新组持球 vs 尼克斯 Bridges/Anunoby 侧翼防守：76人天赋升级但球权分配与磨合未验证，尼克斯侧翼防守是联盟顶级。 磨合不足会压低76人进攻效率，限制其追分。"
           }
         ],
-        "model_risk": "如果76人新首发（LeBron、Jaylen Brown、Embiid、Maxey）全部健康出战且磨合顺畅。，则客队天赋上限提高，分差应缩小，胜率向五五开靠拢。；如果尼克斯核心（Brunson/Towns/Anunoby 等）出现未披露的缺阵或负荷限制。，则主队延续性优势被削弱，分差与胜率应下调。",
+        "model_risk": "如果Embiid 健康出战并承担接近正常负荷，内线攻防压制 Towns。，则分差显著缩小，胜率下调至接近五五开。；如果76人新组 LeBron/Brown/Maxey 首战即高效运转，尼克斯侧翼防守被拉开。，则可能翻转胜负方向或使分差接近零。",
         "player_analysis": [
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074",
-              "ad24b2f7e0b565c8c62747574b9e5ef3a5bfae95885ba8b894a7e6a147015738",
-              "c6094e6b38be2b4c7f35dde304b2caba09c29a8a5e8433184169bee245678496"
+              "458ffb9c357568531a593adf3a90b674dacbc23f11b39f7569a929b663ba52f1",
+              "5607993efb7246d292448a9b7a0b4dd73e156445c031e8de594d21be3742a920",
+              "589245e2a0bcdae36d311d461aeedd03205116e1d4a36d9fec1c2db135d9e46c",
+              "665ff7afbba3159f1c5905e5433929b82fdc21f15a39e426f5e86f7295c0df02",
+              "ac64965c5b96f6c26afdfa77bf6b7cd20ceb88b80cdf43c1202592bf3b7e9440",
+              "e2f1f11a660dd59b66189b650f99889fde01b12a9011fe6e949250e23d0124eb"
             ],
             "player_name": "Jalen Brunson",
-            "statement": "尼克斯夺冠核心控卫，揭幕战预计正常首发负荷。他的挡拆发起和关键球处理是主队半场进攻的稳定器，面对76人全新后场组合，Brunson 的中距离和造犯规能力可能成为拉开分差的直接手段。"
+            "statement": "尼克斯半场进攻的发动机，他反复叫挡拆逼恩比德做选择，是分差能否拉开的关键。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074",
-              "ad24b2f7e0b565c8c62747574b9e5ef3a5bfae95885ba8b894a7e6a147015738",
-              "c6094e6b38be2b4c7f35dde304b2caba09c29a8a5e8433184169bee245678496"
+              "458ffb9c357568531a593adf3a90b674dacbc23f11b39f7569a929b663ba52f1",
+              "5607993efb7246d292448a9b7a0b4dd73e156445c031e8de594d21be3742a920",
+              "589245e2a0bcdae36d311d461aeedd03205116e1d4a36d9fec1c2db135d9e46c",
+              "665ff7afbba3159f1c5905e5433929b82fdc21f15a39e426f5e86f7295c0df02",
+              "ac64965c5b96f6c26afdfa77bf6b7cd20ceb88b80cdf43c1202592bf3b7e9440",
+              "e2f1f11a660dd59b66189b650f99889fde01b12a9011fe6e949250e23d0124eb"
             ],
             "player_name": "Karl-Anthony Towns",
-            "statement": "首发中锋，预计正常负荷。他要在防守端面对 Embiid 的低位单打，同时用外弹和篮板参与进攻；若 Embiid 时间受限，Towns 在内线的对位压力会明显减轻。"
+            "statement": "外拉投射把恩比德拽出禁区，为布伦森和自己同时打开空间。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074"
+              "458ffb9c357568531a593adf3a90b674dacbc23f11b39f7569a929b663ba52f1",
+              "5607993efb7246d292448a9b7a0b4dd73e156445c031e8de594d21be3742a920",
+              "589245e2a0bcdae36d311d461aeedd03205116e1d4a36d9fec1c2db135d9e46c",
+              "665ff7afbba3159f1c5905e5433929b82fdc21f15a39e426f5e86f7295c0df02",
+              "ac64965c5b96f6c26afdfa77bf6b7cd20ceb88b80cdf43c1202592bf3b7e9440",
+              "e2f1f11a660dd59b66189b650f99889fde01b12a9011fe6e949250e23d0124eb"
             ],
             "player_name": "OG Anunoby",
-            "statement": "尼克斯锋线防守的第一选择，预计承担对位 LeBron 或 Jaylen Brown 的主要任务。他的换防弹性和协防覆盖，是尼克斯延续性防守体系能否限制76人新首发个人能力的关键。"
+            "statement": "对位詹姆斯或布朗的第一道闸，他的犯规数和体能决定纽约侧翼能顶多久。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074"
+              "458ffb9c357568531a593adf3a90b674dacbc23f11b39f7569a929b663ba52f1",
+              "5607993efb7246d292448a9b7a0b4dd73e156445c031e8de594d21be3742a920",
+              "589245e2a0bcdae36d311d461aeedd03205116e1d4a36d9fec1c2db135d9e46c",
+              "665ff7afbba3159f1c5905e5433929b82fdc21f15a39e426f5e86f7295c0df02",
+              "ac64965c5b96f6c26afdfa77bf6b7cd20ceb88b80cdf43c1202592bf3b7e9440",
+              "e2f1f11a660dd59b66189b650f99889fde01b12a9011fe6e949250e23d0124eb"
             ],
             "player_name": "Mikal Bridges",
-            "statement": "与 Anunoby 组成锋线防守双闸，可以在 LeBron 和 Brown 之间切换对位。他的无球跑动和接球投篮也能在 Brunson 被夹击时提供弱侧出口。"
+            "statement": "另一侧翼的补位与协防，费城弱侧二人配合能不能打顺，要看他。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074"
+              "5607993efb7246d292448a9b7a0b4dd73e156445c031e8de594d21be3742a920",
+              "665ff7afbba3159f1c5905e5433929b82fdc21f15a39e426f5e86f7295c0df02"
             ],
             "player_name": "Josh Hart",
-            "statement": "首发锋线，负责篮板、扫荡和转换推进。面对76人内线深度受损的轮换，Hart 的冲抢和二次进攻可能成为尼克斯扩大分差的隐性来源。"
+            "statement": "脚踝有伤但预计能打，他的篮板与转换推进影响纽约的轮换深度。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074",
-              "ad24b2f7e0b565c8c62747574b9e5ef3a5bfae95885ba8b894a7e6a147015738",
-              "c6094e6b38be2b4c7f35dde304b2caba09c29a8a5e8433184169bee245678496"
-            ],
-            "player_name": "LeBron James",
-            "statement": "休赛期加盟的76人新核心，预计首发并承担主要持球。他的组织能串联 Maxey 和 Embiid，但揭幕战负荷没有确认信息；若出场时间受限，76人半场进攻的发起质量会明显下降。"
-          },
-          {
-            "classification": "subjective_analysis",
-            "evidence_ids": [
-              "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074",
-              "ad24b2f7e0b565c8c62747574b9e5ef3a5bfae95885ba8b894a7e6a147015738",
-              "c6094e6b38be2b4c7f35dde304b2caba09c29a8a5e8433184169bee245678496"
+              "458ffb9c357568531a593adf3a90b674dacbc23f11b39f7569a929b663ba52f1",
+              "5607993efb7246d292448a9b7a0b4dd73e156445c031e8de594d21be3742a920",
+              "589245e2a0bcdae36d311d461aeedd03205116e1d4a36d9fec1c2db135d9e46c",
+              "665ff7afbba3159f1c5905e5433929b82fdc21f15a39e426f5e86f7295c0df02",
+              "ac64965c5b96f6c26afdfa77bf6b7cd20ceb88b80cdf43c1202592bf3b7e9440",
+              "e2f1f11a660dd59b66189b650f99889fde01b12a9011fe6e949250e23d0124eb"
             ],
             "player_name": "Joel Embiid",
-            "statement": "76人内线轴心，上季出战场次有限，揭幕战负荷存在不确定性。他在场时是半场进攻的低位支点，也是限制 Towns 的关键；一旦时间受限，76人篮板和护框压力会直接放大。"
+            "statement": "费城整套攻防的支点，他的健康与负荷决定内线能不能压住唐斯。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074"
+              "665ff7afbba3159f1c5905e5433929b82fdc21f15a39e426f5e86f7295c0df02",
+              "ac64965c5b96f6c26afdfa77bf6b7cd20ceb88b80cdf43c1202592bf3b7e9440"
             ],
             "player_name": "Tyrese Maxey",
-            "statement": "上季场均28.3分的后场得分点，预计与 LeBron 分担持球。他的速度和挡拆攻击能针对尼克斯的换防，是76人在新阵容磨合期最可靠的个人进攻来源。"
+            "statement": "借掩护冲击第一道防线，是费城把比赛跑起来、把回合数拉高的起点。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074",
-              "ad24b2f7e0b565c8c62747574b9e5ef3a5bfae95885ba8b894a7e6a147015738"
+              "665ff7afbba3159f1c5905e5433929b82fdc21f15a39e426f5e86f7295c0df02",
+              "ac64965c5b96f6c26afdfa77bf6b7cd20ceb88b80cdf43c1202592bf3b7e9440",
+              "fcae5f6e3d8b7a62f06d23ebe1e431c1ba747b7b3a245eed2c9675cf29c83d22"
+            ],
+            "player_name": "LeBron James",
+            "statement": "新队首战，他在弱侧组织与转换推进，是费城追分时最稳的那只手。"
+          },
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "665ff7afbba3159f1c5905e5433929b82fdc21f15a39e426f5e86f7295c0df02",
+              "ac64965c5b96f6c26afdfa77bf6b7cd20ceb88b80cdf43c1202592bf3b7e9440",
+              "fcae5f6e3d8b7a62f06d23ebe1e431c1ba747b7b3a245eed2c9675cf29c83d22"
             ],
             "player_name": "Jaylen Brown",
-            "statement": "休赛期通过交易加盟的锋线得分手，预计首发。他的持球单打和转换冲击需要 Anunoby 或 Bridges 全程盯防，是76人能否在个人能力上咬住比分的关键变量。"
+            "statement": "单打与冲击篮下的第二持球点，配合断掉时他能自己解决问题。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074",
-              "ad24b2f7e0b565c8c62747574b9e5ef3a5bfae95885ba8b894a7e6a147015738"
+              "665ff7afbba3159f1c5905e5433929b82fdc21f15a39e426f5e86f7295c0df02",
+              "ac64965c5b96f6c26afdfa77bf6b7cd20ceb88b80cdf43c1202592bf3b7e9440"
             ],
             "player_name": "VJ Edgecombe",
-            "statement": "2026年最佳新秀一阵后卫，预计进入全新首发。他的运动能力和防守活力是76人年轻端的补充，但在缺乏共同比赛样本的揭幕战里，角色定位和球权分配仍待观察。"
+            "statement": "底线空切与快攻终结，他的活力是费城阵地进攻之外的另一条得分路。"
           }
         ],
         "pregame_story": {
           "classification": "subjective_analysis",
           "evidence_ids": [
-            "0b45b1c5124ff17082ad99b05a8c887a265d2fa51a390da411bfd06e482a570a",
-            "1eac927f54d944acdb5c0519b040206116577b0e1324239a0b84fe8f85675dbc",
-            "3759c423c46362ef0e674e25fc8c70b9532132e75b93a7d0d584af6fd2aa3d02",
-            "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074",
-            "673fa7f81850d0626712978e178693707107e806ac1176689c163c7b8c2aad62",
-            "8a7a209e9b4255146d3f6c3e17cacaa8e740a7e20bedb0f027b5882179faf81a"
+            "0c71b7f9b4da4e0a3a81f1df212cd661a538b28d909f8d863c791890f1546458",
+            "1119ef55f00cd92b0ed0d65b4c4e0cf2694ab634aa5b31a7bda2968dda51f2eb",
+            "589245e2a0bcdae36d311d461aeedd03205116e1d4a36d9fec1c2db135d9e46c",
+            "5ea1539d5a484596163ef1d34ea36ce8eae1fe31fedfef1c4d0221e5e97927dd",
+            "a9914ab979c1111031595e89e300ac53c5da6c6ca3773d0b828261b1930a006a",
+            "ac64965c5b96f6c26afdfa77bf6b7cd20ceb88b80cdf43c1202592bf3b7e9440"
           ],
-          "statement": "尼克斯保留夺冠首发五人，主场揭幕战升旗；76人休赛期引入 LeBron James 与 Jaylen Brown，与 Embiid、Maxey、Edgecombe 组成全新首发，但共同比赛样本为零。第25秒看好主队赢球，却认为分差不会像天赋差距那样大。",
-          "title": "升旗夜，尼克斯的延续性对上76人的全新首发"
+          "statement": "纽约要在主场领戒指，詹姆斯和布朗加入后的76人，能不能让这场庆典变得没那么轻松？",
+          "title": "纽约升旗迎旧敌\n费城新阵试锋芒"
         },
         "roster_analysis": [],
-        "subjective_rationale": "尼克斯保留夺冠首发五人，主场揭幕战升旗；76人休赛期引入 LeBron James 与 Jaylen Brown，与 Embiid、Maxey、Edgecombe 组成全新首发，但共同比赛样本为零。第25秒看好主队赢球，却认为分差不会像天赋差距那样大。",
+        "subjective_rationale": "揭幕夜尼克斯在主场领戒指，对面站着的正是上季季后赛被他们横扫的76人，只是这回费城带来了詹姆斯和布朗。",
         "supporting_evidence": [],
         "uncertainty": [],
         "unresolved_uncertainty": [],
@@ -2574,51 +3059,51 @@
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "0b45b1c5124ff17082ad99b05a8c887a265d2fa51a390da411bfd06e482a570a",
-              "1eac927f54d944acdb5c0519b040206116577b0e1324239a0b84fe8f85675dbc",
-              "3759c423c46362ef0e674e25fc8c70b9532132e75b93a7d0d584af6fd2aa3d02",
-              "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074",
-              "673fa7f81850d0626712978e178693707107e806ac1176689c163c7b8c2aad62",
-              "8a7a209e9b4255146d3f6c3e17cacaa8e740a7e20bedb0f027b5882179faf81a"
+              "0c71b7f9b4da4e0a3a81f1df212cd661a538b28d909f8d863c791890f1546458",
+              "1119ef55f00cd92b0ed0d65b4c4e0cf2694ab634aa5b31a7bda2968dda51f2eb",
+              "589245e2a0bcdae36d311d461aeedd03205116e1d4a36d9fec1c2db135d9e46c",
+              "5ea1539d5a484596163ef1d34ea36ce8eae1fe31fedfef1c4d0221e5e97927dd",
+              "a9914ab979c1111031595e89e300ac53c5da6c6ca3773d0b828261b1930a006a",
+              "ac64965c5b96f6c26afdfa77bf6b7cd20ceb88b80cdf43c1202592bf3b7e9440"
             ],
-            "statement": "尼克斯保留夺冠首发五人，76人则把 LeBron、Jaylen Brown 与 Embiid、Maxey、Edgecombe 拼成全新阵容，共同比赛样本为零。揭幕战里，防守轮转和弱侧协防的默契差距可能比天赋差距更早显现。",
-            "title": "延续性首发 vs 全新首发"
+            "statement": "他防布伦森与唐斯的挡拆时上提还是沉退，直接决定尼克斯半场进攻的顺畅程度。",
+            "title": "恩比德站在哪"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "0b45b1c5124ff17082ad99b05a8c887a265d2fa51a390da411bfd06e482a570a",
-              "1eac927f54d944acdb5c0519b040206116577b0e1324239a0b84fe8f85675dbc",
-              "3759c423c46362ef0e674e25fc8c70b9532132e75b93a7d0d584af6fd2aa3d02",
-              "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074",
-              "673fa7f81850d0626712978e178693707107e806ac1176689c163c7b8c2aad62",
-              "8a7a209e9b4255146d3f6c3e17cacaa8e740a7e20bedb0f027b5882179faf81a"
+              "0c71b7f9b4da4e0a3a81f1df212cd661a538b28d909f8d863c791890f1546458",
+              "1119ef55f00cd92b0ed0d65b4c4e0cf2694ab634aa5b31a7bda2968dda51f2eb",
+              "589245e2a0bcdae36d311d461aeedd03205116e1d4a36d9fec1c2db135d9e46c",
+              "5ea1539d5a484596163ef1d34ea36ce8eae1fe31fedfef1c4d0221e5e97927dd",
+              "a9914ab979c1111031595e89e300ac53c5da6c6ca3773d0b828261b1930a006a",
+              "ac64965c5b96f6c26afdfa77bf6b7cd20ceb88b80cdf43c1202592bf3b7e9440"
             ],
-            "statement": "Embiid 上季仅出战38场，揭幕战负荷没有可靠信息；Hukporti 跟腱撕裂长期缺阵后，76人替补内线只剩 Bona、Drummond 一类轮换。若 Embiid 时间受限，尼克斯的篮板和护框优势会被放大。",
-            "title": "Embiid 的负荷决定76人内线能撑多久"
+            "statement": "马克西、詹姆斯、布朗三人同时持球，第一场正式比赛里谁先让、谁先攻，值得盯。",
+            "title": "费城的球怎么分"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "0b45b1c5124ff17082ad99b05a8c887a265d2fa51a390da411bfd06e482a570a",
-              "1eac927f54d944acdb5c0519b040206116577b0e1324239a0b84fe8f85675dbc",
-              "3759c423c46362ef0e674e25fc8c70b9532132e75b93a7d0d584af6fd2aa3d02",
-              "4ac0e01ed6478ae88ab91ed37e78c36bf9fd15ad2865b643e850d75b4d6ff074",
-              "673fa7f81850d0626712978e178693707107e806ac1176689c163c7b8c2aad62",
-              "8a7a209e9b4255146d3f6c3e17cacaa8e740a7e20bedb0f027b5882179faf81a"
+              "0c71b7f9b4da4e0a3a81f1df212cd661a538b28d909f8d863c791890f1546458",
+              "1119ef55f00cd92b0ed0d65b4c4e0cf2694ab634aa5b31a7bda2968dda51f2eb",
+              "589245e2a0bcdae36d311d461aeedd03205116e1d4a36d9fec1c2db135d9e46c",
+              "5ea1539d5a484596163ef1d34ea36ce8eae1fe31fedfef1c4d0221e5e97927dd",
+              "a9914ab979c1111031595e89e300ac53c5da6c6ca3773d0b828261b1930a006a",
+              "ac64965c5b96f6c26afdfa77bf6b7cd20ceb88b80cdf43c1202592bf3b7e9440"
             ],
-            "statement": "Anunoby 和 Bridges 可以轮流接管 LeBron 与 Jaylen Brown，Hart 负责扫荡和篮板。这组对位是尼克斯延续性优势最直接的落点，也决定76人半场进攻的发起难度。",
-            "title": "尼克斯锋线群对位 LeBron 与 Brown"
+            "statement": "尼克斯想把比赛拖进阵地，费城想跑起来，回合数会决定总分往哪边走。",
+            "title": "节奏归谁"
           }
         ],
         "winner_lean": "home"
       },
       "public_market_reference": {
-        "away_moneyline": 180.0,
-        "away_spread": 5.5,
-        "captured_at": "2026-10-14T15:29:27.916914+00:00",
+        "away_moneyline": 150.0,
+        "away_spread": 4.5,
+        "captured_at": "2026-10-20T14:34:51.332377+00:00",
         "eligible_prediction_input": false,
-        "expected_home_margin": 5.5,
+        "expected_home_margin": 4.5,
         "game_identity": {
           "away_team": "Philadelphia 76ers",
           "away_team_id": 1610612755,
@@ -2629,9 +3114,9 @@
           "registered_game": true,
           "scheduled_tipoff": "2026-10-20T23:00Z"
         },
-        "home_moneyline": -218.0,
-        "home_spread": -5.5,
-        "observed_at": "2026-10-14T15:29:27.916914+00:00",
+        "home_moneyline": -180.0,
+        "home_spread": -4.5,
+        "observed_at": "2026-10-20T14:34:51.332377+00:00",
         "published_at": null,
         "source_tier": 1,
         "source_title": "Draft Kings current odds",
@@ -2639,160 +3124,220 @@
         "sportsbook": "Draft Kings",
         "status": "available",
         "time_semantics": "observed current sportsbook quote; publication time unknown",
-        "total": 231.5,
+        "total": 232.5,
         "usage": "qualified_market_for_ai_review"
       },
-      "published_at": "2026-10-14T18:13:24.505973+00:00",
+      "published_at": "2026-10-20T14:53:06.390860+00:00",
       "schedule_revision": 1,
       "sources": [
         {
-          "captured_at": "2026-10-14T15:28:16.645333+00:00",
+          "captured_at": "2026-10-20T14:34:17.259266+00:00",
+          "category": "availability",
+          "claim_type": "availability",
+          "discovered_via": "Philadelphia 76ers New York Knicks 2026-27 pregame 2026-10-20 LeBron James、Joel Embiid、Tyrese Maxey 在2026-27揭幕战对尼克斯的出战状态与伤病/负荷限制如何？",
+          "id": "b3cc1849ee02128a330583d07e28fd4505e7a80807aca1db6091eec92fc7b2d4",
+          "publication_precision": "timestamp",
+          "published_at": "2026-10-20T03:00:00+00:00",
+          "source_id": "f8d5e56cf1777784521854f51745f922b34facb2e59fc30c83f25a3b8c89b59b",
+          "temporal_confidence": "precise_game_specific",
+          "title": "Ring Night Preview: Knicks vs. 76ers, October 20, 2026 - Yahoo Sports",
+          "url": "https://sports.yahoo.com/articles/ring-night-preview-knicks-vs-040000337.html",
+          "verified_by": "https://sports.yahoo.com/articles/ring-night-preview-knicks-vs-040000337.html"
+        },
+        {
+          "captured_at": "2026-10-20T14:34:17.259266+00:00",
+          "category": "availability",
+          "claim_type": "availability",
+          "discovered_via": "Philadelphia 76ers New York Knicks 2026-27 pregame 2026-10-20 LeBron James、Joel Embiid、Tyrese Maxey 在2026-27揭幕战对尼克斯的出战状态与伤病/负荷限制如何？",
+          "id": "5607993efb7246d292448a9b7a0b4dd73e156445c031e8de594d21be3742a920",
+          "publication_precision": "timestamp",
+          "published_at": "2026-10-20T03:00:00+00:00",
+          "source_id": "f8d5e56cf1777784521854f51745f922b34facb2e59fc30c83f25a3b8c89b59b",
+          "temporal_confidence": "precise_game_specific",
+          "title": "Ring Night Preview: Knicks vs. 76ers, October 20, 2026 - Yahoo Sports",
+          "url": "https://sports.yahoo.com/articles/ring-night-preview-knicks-vs-040000337.html",
+          "verified_by": "https://sports.yahoo.com/articles/ring-night-preview-knicks-vs-040000337.html"
+        },
+        {
+          "captured_at": "2026-10-20T14:34:17.259266+00:00",
           "category": "roster_news",
-          "id": "ad24b2f7e0b565c8c62747574b9e5ef3a5bfae95885ba8b894a7e6a147015738",
-          "published_at": "2026-10-08T22:09:15+00:00",
-          "title": "Sixers plan to play starters in preseason game vs. Nets | NBA.com",
-          "url": "https://www.nba.com/news/sixers-plan-to-play-starters-in-preseason-game-vs-nets"
+          "claim_type": "personnel_change",
+          "discovered_via": "Philadelphia 76ers New York Knicks 2026-27 pregame 2026-10-20 LeBron James、Joel Embiid、Tyrese Maxey 在2026-27揭幕战对尼克斯的出战状态与伤病/负荷限制如何？",
+          "id": "fcae5f6e3d8b7a62f06d23ebe1e431c1ba747b7b3a245eed2c9675cf29c83d22",
+          "publication_precision": "timestamp",
+          "published_at": "2026-10-20T03:00:00+00:00",
+          "source_id": "f8d5e56cf1777784521854f51745f922b34facb2e59fc30c83f25a3b8c89b59b",
+          "temporal_confidence": "sufficient_for_background",
+          "title": "Ring Night Preview: Knicks vs. 76ers, October 20, 2026 - Yahoo Sports",
+          "url": "https://sports.yahoo.com/articles/ring-night-preview-knicks-vs-040000337.html",
+          "verified_by": "https://sports.yahoo.com/articles/ring-night-preview-knicks-vs-040000337.html"
         },
         {
-          "captured_at": "2026-10-14T15:28:16.645333+00:00",
+          "captured_at": "2026-10-20T14:34:17.259266+00:00",
           "category": "roster_news",
-          "id": "1eac927f54d944acdb5c0519b040206116577b0e1324239a0b84fe8f85675dbc",
-          "published_at": "2026-10-08T22:09:15+00:00",
-          "title": "Sixers plan to play starters in preseason game vs. Nets | NBA.com",
-          "url": "https://www.nba.com/news/sixers-plan-to-play-starters-in-preseason-game-vs-nets"
+          "claim_type": "personnel_change",
+          "discovered_via": "Philadelphia 76ers New York Knicks 2026-27 pregame 2026-10-20 LeBron James、Joel Embiid、Tyrese Maxey 在2026-27揭幕战对尼克斯的出战状态与伤病/负荷限制如何？",
+          "id": "2962d25aef11cc9af4f25620be6e1722de7d2120bf7c7a2e62efb25d56e948fb",
+          "publication_precision": "timestamp",
+          "published_at": "2026-10-20T03:00:00+00:00",
+          "source_id": "f8d5e56cf1777784521854f51745f922b34facb2e59fc30c83f25a3b8c89b59b",
+          "temporal_confidence": "sufficient_for_background",
+          "title": "Ring Night Preview: Knicks vs. 76ers, October 20, 2026 - Yahoo Sports",
+          "url": "https://sports.yahoo.com/articles/ring-night-preview-knicks-vs-040000337.html",
+          "verified_by": "https://sports.yahoo.com/articles/ring-night-preview-knicks-vs-040000337.html"
         },
         {
-          "captured_at": "2026-10-14T15:29:00.994964+00:00",
-          "category": "roster_news",
-          "id": "c6094e6b38be2b4c7f35dde304b2caba09c29a8a5e8433184169bee245678496",
-          "published_at": "2026-09-18T11:20:00+00:00",
-          "title": "New York Knicks offseason recap, early 2026-27 season preview - ESPN",
-          "url": "https://www.espn.com/nba/story/_/id/49956980/new-york-knicks-offseason-recap-early-2026-27-season-preview-jalen-brunson"
+          "captured_at": "2026-10-20T14:34:17.259266+00:00",
+          "category": "lineup",
+          "claim_type": "projected_starters",
+          "discovered_via": "Philadelphia 76ers New York Knicks 2026-27 pregame 2026-10-20 LeBron James、Joel Embiid、Tyrese Maxey 在2026-27揭幕战对尼克斯的出战状态与伤病/负荷限制如何？",
+          "id": "ac64965c5b96f6c26afdfa77bf6b7cd20ceb88b80cdf43c1202592bf3b7e9440",
+          "publication_precision": "timestamp",
+          "published_at": "2026-10-20T03:00:00+00:00",
+          "source_id": "f8d5e56cf1777784521854f51745f922b34facb2e59fc30c83f25a3b8c89b59b",
+          "temporal_confidence": "precise_current",
+          "title": "Ring Night Preview: Knicks vs. 76ers, October 20, 2026 - Yahoo Sports",
+          "url": "https://sports.yahoo.com/articles/ring-night-preview-knicks-vs-040000337.html",
+          "verified_by": "https://sports.yahoo.com/articles/ring-night-preview-knicks-vs-040000337.html"
         },
         {
-          "captured_at": "2026-10-14T15:29:00.994964+00:00",
+          "captured_at": "2026-10-20T14:34:17.259266+00:00",
+          "category": "lineup",
+          "claim_type": "projected_starters",
+          "discovered_via": "Philadelphia 76ers New York Knicks 2026-27 pregame 2026-10-20 LeBron James、Joel Embiid、Tyrese Maxey 在2026-27揭幕战对尼克斯的出战状态与伤病/负荷限制如何？",
+          "id": "458ffb9c357568531a593adf3a90b674dacbc23f11b39f7569a929b663ba52f1",
+          "publication_precision": "timestamp",
+          "published_at": "2026-10-20T03:00:00+00:00",
+          "source_id": "f8d5e56cf1777784521854f51745f922b34facb2e59fc30c83f25a3b8c89b59b",
+          "temporal_confidence": "precise_current",
+          "title": "Ring Night Preview: Knicks vs. 76ers, October 20, 2026 - Yahoo Sports",
+          "url": "https://sports.yahoo.com/articles/ring-night-preview-knicks-vs-040000337.html",
+          "verified_by": "https://sports.yahoo.com/articles/ring-night-preview-knicks-vs-040000337.html"
+        },
+        {
+          "captured_at": "2026-10-20T14:34:17.259266+00:00",
           "category": "game_story",
-          "id": "d54cd5724919f1fad027350f6c7a408abb3abea34da8d010a373cf32deda81b2",
-          "published_at": "2026-09-18T11:20:00+00:00",
-          "title": "New York Knicks offseason recap, early 2026-27 season preview - ESPN",
-          "url": "https://www.espn.com/nba/story/_/id/49956980/new-york-knicks-offseason-recap-early-2026-27-season-preview-jalen-brunson"
-        },
-        {
-          "captured_at": "2026-10-14T15:29:00.994964+00:00",
-          "category": "game_story",
-          "id": "6b6d3c2cc43a881e607ed4bbdf60579f2d9a85b2e987c27e6a9c6f424c7aaf48",
-          "published_at": "2026-09-18T11:20:00+00:00",
-          "title": "New York Knicks offseason recap, early 2026-27 season preview - ESPN",
-          "url": "https://www.espn.com/nba/story/_/id/49956980/new-york-knicks-offseason-recap-early-2026-27-season-preview-jalen-brunson"
-        },
-        {
-          "captured_at": "2026-10-14T15:29:01.311727+00:00",
-          "category": "game_story",
-          "id": "7f35b1354776836d16a4d4ae1435b90a820121c91567978870ee2fb11743eeda",
-          "published_at": "2026-09-30T11:00:00+00:00",
-          "title": "NBA preview 2026-27: What Bobby Marks is watching at 30 training camps - ESPN",
-          "url": "https://www.espn.com/nba/story/_/id/50061973/nba-preview-2026-27-bobby-marks-training-camp-guide-duren-pistons-lebron-76ers-30-teams"
+          "claim_type": "role_background",
+          "discovered_via": "Philadelphia 76ers New York Knicks 2026-27 pregame 2026-10-20 LeBron James、Joel Embiid、Tyrese Maxey 在2026-27揭幕战对尼克斯的出战状态与伤病/负荷限制如何？",
+          "id": "589245e2a0bcdae36d311d461aeedd03205116e1d4a36d9fec1c2db135d9e46c",
+          "publication_precision": "timestamp",
+          "published_at": "2026-10-20T03:00:00+00:00",
+          "source_id": "f8d5e56cf1777784521854f51745f922b34facb2e59fc30c83f25a3b8c89b59b",
+          "temporal_confidence": "sufficient_for_background",
+          "title": "Ring Night Preview: Knicks vs. 76ers, October 20, 2026 - Yahoo Sports",
+          "url": "https://sports.yahoo.com/articles/ring-night-preview-knicks-vs-040000337.html",
+          "verified_by": "https://sports.yahoo.com/articles/ring-night-preview-knicks-vs-040000337.html"
         },
         {
           "captured_at": "2026-09-18T16:21:13.259918+00:00",
           "category": "market",
+          "claim_type": null,
+          "discovered_via": null,
           "id": "public-market-fanduel-20260918-phi-nyk",
+          "publication_precision": null,
           "published_at": null,
+          "source_id": null,
+          "temporal_confidence": null,
           "title": "NBA Opening Day Schedule, Odds and Matchups for 2026-27",
-          "url": "https://www.fanduel.com/research/nba-opening-day-schedule-odds-and-matchups-for-2026-27"
+          "url": "https://www.fanduel.com/research/nba-opening-day-schedule-odds-and-matchups-for-2026-27",
+          "verified_by": null
         },
         {
-          "captured_at": "2026-10-14T15:29:27.916914+00:00",
-          "category": "market",
-          "id": "673fa7f81850d0626712978e178693707107e806ac1176689c163c7b8c2aad62",
+          "captured_at": "2026-10-20T14:34:51.332377+00:00",
+          "id": "adc7c02703e25185f5855304620843ebf820fa80946e09e66afe1ad8e2f2fe32",
           "published_at": null,
-          "title": null,
-          "url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909089/competitions/401909089/odds"
-        },
-        {
-          "captured_at": "2026-10-14T15:29:27.916914+00:00",
-          "category": "market",
-          "id": "673fa7f81850d0626712978e178693707107e806ac1176689c163c7b8c2aad62",
-          "published_at": null,
-          "title": null,
+          "sha256": "081ff0681a9eb0112d8543bfd93d08f6582d89a5893561c022c4d8181dbee237",
+          "source_type": "qualified_market_snapshot",
           "url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909089/competitions/401909089/odds"
         }
       ],
       "stage": "EARLY_PREVIEW",
-      "version_id": "bb3ef799-662f-4a32-9294-bcc18620c3b5",
-      "payload_sha256": "913561c4914b462273c45061207170be7f16c943bdc129a0b64b34cd79e1c26c",
+      "version_id": "dd9ef341-d3c4-4f3f-b3a6-a8d581fcb504",
+      "payload_sha256": "e0b148cf4781fd2c1e341bef08cb432dd74fb8883f85f63cde805aa4a381d2b7",
       "analyst_context": {
         "objective_evidence": [
           {
-            "id": "ad24b2f7e0b565c8c62747574b9e5ef3a5bfae95885ba8b894a7e6a147015738",
+            "id": "b3cc1849ee02128a330583d07e28fd4505e7a80807aca1db6091eec92fc7b2d4",
             "section": "web_context",
             "value": {
-              "claim_type": "personnel_change",
+              "claim_type": "availability",
               "eligible_for_fact": true,
-              "source_role": "primary",
+              "source_role": "professional",
               "team_id": 1610612755,
-              "temporal_scope": "current_season_background",
-              "quote": ""
+              "temporal_scope": "current_pregame",
+              "quote": "Adem Bona / Dean Wade / Josh Hart"
             }
           },
           {
-            "id": "1eac927f54d944acdb5c0519b040206116577b0e1324239a0b84fe8f85675dbc",
+            "id": "5607993efb7246d292448a9b7a0b4dd73e156445c031e8de594d21be3742a920",
             "section": "web_context",
             "value": {
-              "claim_type": "long_term_injury",
+              "claim_type": "availability",
               "eligible_for_fact": true,
-              "source_role": "primary",
-              "team_id": 1610612755,
-              "temporal_scope": "current_season_background",
-              "quote": ""
+              "source_role": "professional",
+              "team_id": 1610612752,
+              "temporal_scope": "current_pregame",
+              "quote": "Josh Hart"
             }
           },
           {
-            "id": "c6094e6b38be2b4c7f35dde304b2caba09c29a8a5e8433184169bee245678496",
+            "id": "fcae5f6e3d8b7a62f06d23ebe1e431c1ba747b7b3a245eed2c9675cf29c83d22",
             "section": "web_context",
             "value": {
               "claim_type": "personnel_change",
               "eligible_for_fact": true,
               "source_role": "professional",
-              "team_id": 1610612752,
+              "team_id": 1610612755,
               "temporal_scope": "current_season_background",
-              "quote": ""
+              "quote": "Jaylen Brown / LeBron James"
             }
           },
           {
-            "id": "d54cd5724919f1fad027350f6c7a408abb3abea34da8d010a373cf32deda81b2",
+            "id": "2962d25aef11cc9af4f25620be6e1722de7d2120bf7c7a2e62efb25d56e948fb",
             "section": "web_context",
             "value": {
-              "claim_type": "season_background",
+              "claim_type": "personnel_change",
               "eligible_for_fact": true,
               "source_role": "professional",
-              "team_id": 1610612752,
+              "team_id": 1610612755,
               "temporal_scope": "current_season_background",
+              "quote": "Anfernee Simons / Dean Wade / Kentavious Caldwell-Pope / Labaron Philon Jr."
+            }
+          },
+          {
+            "id": "ac64965c5b96f6c26afdfa77bf6b7cd20ceb88b80cdf43c1202592bf3b7e9440",
+            "section": "web_context",
+            "value": {
+              "claim_type": "projected_starters",
+              "eligible_for_fact": true,
+              "source_role": "professional",
+              "team_id": 1610612755,
+              "temporal_scope": "current_pregame",
+              "quote": "Jaylen Brown / Joel Embiid / LeBron James / Tyrese Maxey / VJ Edgecombe"
+            }
+          },
+          {
+            "id": "458ffb9c357568531a593adf3a90b674dacbc23f11b39f7569a929b663ba52f1",
+            "section": "web_context",
+            "value": {
+              "claim_type": "projected_starters",
+              "eligible_for_fact": true,
+              "source_role": "professional",
+              "team_id": 1610612755,
+              "temporal_scope": "current_pregame",
               "quote": ""
             }
           },
           {
-            "id": "6b6d3c2cc43a881e607ed4bbdf60579f2d9a85b2e987c27e6a9c6f424c7aaf48",
+            "id": "589245e2a0bcdae36d311d461aeedd03205116e1d4a36d9fec1c2db135d9e46c",
             "section": "web_context",
             "value": {
               "claim_type": "role_background",
               "eligible_for_fact": true,
               "source_role": "professional",
-              "team_id": 1610612752,
+              "team_id": 1610612755,
               "temporal_scope": "current_season_background",
-              "quote": ""
-            }
-          },
-          {
-            "id": "7f35b1354776836d16a4d4ae1435b90a820121c91567978870ee2fb11743eeda",
-            "section": "web_context",
-            "value": {
-              "claim_type": "season_background",
-              "eligible_for_fact": true,
-              "source_role": "professional",
-              "team_id": 1610612752,
-              "temporal_scope": "current_season_background",
-              "quote": ""
+              "quote": "Joel Embiid"
             }
           },
           {
@@ -2804,16 +3349,7 @@
             }
           },
           {
-            "id": "673fa7f81850d0626712978e178693707107e806ac1176689c163c7b8c2aad62",
-            "section": "web_context",
-            "value": {
-              "claim_type": "market_reference",
-              "eligible_for_fact": true,
-              "quote": ""
-            }
-          },
-          {
-            "id": "673fa7f81850d0626712978e178693707107e806ac1176689c163c7b8c2aad62",
+            "id": "adc7c02703e25185f5855304620843ebf820fa80946e09e66afe1ad8e2f2fe32",
             "section": "web_context",
             "value": {
               "claim_type": "market_reference",
@@ -2834,31 +3370,31 @@
     "status": "available",
     "game_id": "espn:401909089",
     "public_market_reference": {
-      "away_moneyline": 180.0,
-      "away_spread": 5.5,
-      "captured_at": "2026-10-14T15:29:27.916914+00:00",
+      "away_moneyline": 150.0,
+      "away_spread": 4.5,
+      "captured_at": "2026-10-20T14:34:51.332377+00:00",
       "eligible_prediction_input": false,
-      "expected_home_margin": 5.5,
+      "expected_home_margin": 4.5,
       "game_identity": {
         "away_team_id": 1610612755,
         "game_id": "espn:401909089",
         "home_team_id": 1610612752,
         "scheduled_tipoff": "2026-10-20T23:00:00+00:00"
       },
-      "home_moneyline": -218.0,
-      "home_spread": -5.5,
-      "observed_at": "2026-10-14T15:29:27.916914+00:00",
+      "home_moneyline": -180.0,
+      "home_spread": -4.5,
+      "observed_at": "2026-10-20T14:34:51.332377+00:00",
       "published_at": null,
-      "recorded_at": "2026-10-14T15:29:28.323160+00:00",
+      "recorded_at": "2026-10-20T14:34:51.807381+00:00",
       "reference_kind": "current_reference",
-      "snapshot_id": "35bed1aa9f179c1aa61eed581859003db65e6f6a5fe79dd35e45751124ad63a1",
+      "snapshot_id": "c2a5402d8edbcd0bc1c2c281431874e7cc8c1b1bb4a2912967cac63fb0e0dd75",
       "source_tier": 1,
       "source_title": "Draft Kings current odds",
       "source_url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909089/competitions/401909089/odds",
       "sportsbook": "Draft Kings",
       "status": "available",
       "time_semantics": "observed current sportsbook quote; publication time unknown",
-      "total": 231.5,
+      "total": 232.5,
       "usage": "display_only_market_reference"
     },
     "refreshing": false,
@@ -2867,10 +3403,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-14T18:13:25.846811+00:00",
-    "source_prediction_version_id": "bb3ef799-662f-4a32-9294-bcc18620c3b5",
-    "source_prediction_payload_sha256": "913561c4914b462273c45061207170be7f16c943bdc129a0b64b34cd79e1c26c",
+    "exported_at": "2026-10-20T15:07:45.822691+00:00",
+    "source_prediction_version_id": "dd9ef341-d3c4-4f3f-b3a6-a8d581fcb504",
+    "source_prediction_payload_sha256": "e0b148cf4781fd2c1e341bef08cb432dd74fb8883f85f63cde805aa4a381d2b7",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "8298f1932cdf5ed4689dc566d047ba99c50dbd602fd09bc4dc012368e21b6d82"
+  "public_sha256": "5970e58959ed33ac0cf5fa4753d2d1b55cde8ea0faeacf01e75d8d6940865f9b"
 }
