@@ -126,6 +126,9 @@ class SchedulerPolicyPlanner:
         self.tasks = tasks
 
     def configure(self, game_id, configuration):
+        configuration=dict(configuration)
+        if configuration.get('lifecycle')=='early-final-v1':
+            configuration.setdefault('final_information_policy','latest_verified')
         policy = normalized_policy(configuration)
         at = _clock_instant(self.tasks.clock)
         with self.tasks.transaction() as db:

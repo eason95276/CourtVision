@@ -73,6 +73,7 @@ def test_two_stages_early_can_start_before_old_t72(tmp_path):
     store=PredictionVersionStore(tmp_path/'versions.sqlite',clock=clock);tasks=GenerationTaskStore(store)
     tasks.register_game(game);planner=SchedulerPolicyPlanner(tasks)
     game=planner.configure(game['id'],{'report_enabled':True,'lifecycle':'early-final-v1','early_requested_at':clock().isoformat()})
+    assert game['policy_config']['final_information_policy']=='latest_verified'
     planned=planner.plan_game(game);assert {t['stage']for t in planned}=={'EARLY_PREVIEW','FINAL_PREGAME'}
     final=next(t for t in planned if t['stage']=='FINAL_PREGAME');assert final['scheduled_for']==(TIP-timedelta(minutes=20)).isoformat()
     assert len(planner.plan_game(game))==2

@@ -39,7 +39,8 @@ def setup(tmp_path):
     seal_fixture_payload(payload)
     early=versions.publish(game,request,payload)
     tasks=GenerationTaskStore(versions);tasks.register_game(game)
-    planner=SchedulerPolicyPlanner(tasks);registered=planner.configure(game['id'],{'report_enabled':True,'lifecycle':'early-final-v1','early_requested_at':clock.value.isoformat()})
+    planner=SchedulerPolicyPlanner(tasks);registered=planner.configure(game['id'],{'report_enabled':True,'lifecycle':'early-final-v1','early_requested_at':clock.value.isoformat(),
+        'final_information_policy':'confirmed_only'})
     final=next(t for t in planner.plan_game(registered)if t['stage']=='FINAL_PREGAME')
     return clock,versions,tasks,game,early,snapshot,final
 
