@@ -1508,6 +1508,166 @@
         "input_cutoff_at": "2026-10-20T13:18:10.717764+00:00",
         "feature_cutoff_at": "2026-10-20T12:59:53.466632+00:00",
         "roster_context_cutoff_at": null
+      },
+      "portfolio_editorial": {
+        "schema_version": "portfolio-editorial-v1",
+        "artifact_id": "poem-title-3ddb18b9-0e77-48de-ab7f-5d5dad938fc5",
+        "base_prediction_version_id": "3ddb18b9-0e77-48de-ab7f-5d5dad938fc5",
+        "base_prediction_payload_sha256": "74165228f88febe42b647686fac22086f781ddff177a067a322e1c5193c62e59",
+        "editorial_sha256": "d98afe77454fac4f4d29e8679337e3dd12071ee8752bc89450b6666cc48bea01",
+        "generated_at": "2026-10-20T14:05:24.971728+00:00",
+        "editorial": {
+          "pregame_story": {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "45919d6bd1cd1acfc5a154a9008f59e4ef1717cda69c7b27dbbe7371d33d654a",
+              "846cd3287b3c326697aba00a7925f877956f4ac941517e582d2393564f7adcb4",
+              "9c3d0a17b390b2801a644ad3c620eb2f593a26cdda5414433f1670461017def9",
+              "b6f02d1b4f77238af3bd50edc1a87f4ff934a7d3f8a45e6d707d5f88458df413",
+              "bdddc301178334b47782e9b9741ccb4c2775bd4285af08f1a40d6298dd3ab146",
+              "c2774910a5d123d04849707ec8a2d290fb2b0352c5713101902cf599c8c56863"
+            ],
+            "statement": "活塞上赛季四战赢下三场，如今塔图姆身边换成了乔治，底特律的旧办法还能管用吗？",
+            "title": "绿军双锋同试剑\n活塞主场再迎敌"
+          },
+          "analysis_article": "上赛季，活塞四次碰凯尔特人赢了三场，最近一次只赢一分。那支拿下东部第一的球队，当然有底气在主场再迎老对手。但这次塔图姆身边换成了乔治：过去的对位经验还管不管用，是这场揭幕战最值得看的地方。\n\n我略站凯尔特人，让1.5分可以支持。\n\n我更看重的是塔图姆和乔治这两个持球点怎么让活塞的防守做选择。塔图姆赛前被描述为状态完全恢复、动作到位，乔治也说他看起来爆发力、投篮和防守都回来了。如果这两个人同时在场，活塞的汤普森和科林斯就得决定：换防之后谁去顶塔图姆的中距离，谁去追乔治绕出来的接球。如果协防提前向持球人靠拢，弱侧就可能出现接球投篮的机会；协防迟疑，塔图姆又有空间进入罚球线附近。活塞前场体型够，但揭幕战第一次真打，轮转的默契还没经过检验，这种迟疑很容易在第二节和第三节累积成几次空位三分和二次进攻。凯尔特人不需要打出一波流，只要每个回合都比对手多找到一次错位，分差就会慢慢往客队那边偏。\n\n活塞的还手在坎宁安手里。他上赛季是这支球队的进攻发动机，凯尔特人后场用怀特和普里查德去对，身高和对抗都不算压制。坎宁安如果能反复叫挡拆，把奎塔拉出来，再找到顺下的杜伦或者外弹的科林斯，活塞的进攻就能咬住。主场能量也会帮他们，揭幕夜的底特律不会安静。所以这场我预期的是客队小胜，不是拉开。\n\n总分我倾向大分，222.5比市场高4分，但把握不如让分。揭幕战双方都在试阵容，防守轮转没磨好，容易出现空位和转换；坎宁安和塔图姆都是能推节奏的人。不过这只是弱倾向——如果两队都打得谨慎、失误偏多，回合数掉下来，大分就不成立。\n\n开球后先看活塞怎么处理塔图姆的挡拆：能靠换防守住第一下，就能让其他人少补位；一旦需要夹击，凯尔特人能不能及时把球送到乔治和弱侧射手手里，才是客队把小优势攒到终场的关键。",
+          "watch_themes": [
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "45919d6bd1cd1acfc5a154a9008f59e4ef1717cda69c7b27dbbe7371d33d654a",
+                "846cd3287b3c326697aba00a7925f877956f4ac941517e582d2393564f7adcb4",
+                "9c3d0a17b390b2801a644ad3c620eb2f593a26cdda5414433f1670461017def9",
+                "b6f02d1b4f77238af3bd50edc1a87f4ff934a7d3f8a45e6d707d5f88458df413",
+                "bdddc301178334b47782e9b9741ccb4c2775bd4285af08f1a40d6298dd3ab146",
+                "c2774910a5d123d04849707ec8a2d290fb2b0352c5713101902cf599c8c56863"
+              ],
+              "statement": "换防还是夹击，直接决定乔治和底角射手能不能拿到空位。",
+              "title": "塔图姆挡拆时活塞怎么选"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "45919d6bd1cd1acfc5a154a9008f59e4ef1717cda69c7b27dbbe7371d33d654a",
+                "846cd3287b3c326697aba00a7925f877956f4ac941517e582d2393564f7adcb4",
+                "9c3d0a17b390b2801a644ad3c620eb2f593a26cdda5414433f1670461017def9",
+                "b6f02d1b4f77238af3bd50edc1a87f4ff934a7d3f8a45e6d707d5f88458df413",
+                "bdddc301178334b47782e9b9741ccb4c2775bd4285af08f1a40d6298dd3ab146",
+                "c2774910a5d123d04849707ec8a2d290fb2b0352c5713101902cf599c8c56863"
+              ],
+              "statement": "坎宁安能否反复叫挡拆把奎塔拉出来，是活塞咬住比分的主要路径。",
+              "title": "坎宁安对怀特、普里查德的错位"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "45919d6bd1cd1acfc5a154a9008f59e4ef1717cda69c7b27dbbe7371d33d654a",
+                "846cd3287b3c326697aba00a7925f877956f4ac941517e582d2393564f7adcb4",
+                "9c3d0a17b390b2801a644ad3c620eb2f593a26cdda5414433f1670461017def9",
+                "b6f02d1b4f77238af3bd50edc1a87f4ff934a7d3f8a45e6d707d5f88458df413",
+                "bdddc301178334b47782e9b9741ccb4c2775bd4285af08f1a40d6298dd3ab146",
+                "c2774910a5d123d04849707ec8a2d290fb2b0352c5713101902cf599c8c56863"
+              ],
+              "statement": "两队新阵容第一次真打，轮转迟疑可能同时推高得分和客队的分差。",
+              "title": "揭幕战的防守轮转"
+            }
+          ],
+          "player_analysis": [
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "8da2915381b59b1c089a8e1338e85e378299e7135d8bc74e75c4155dae2ca6c6",
+                "979ce555348c5bf359e1ef38d6956915cf7e1c9f411268d7133f764ac0998fc7",
+                "c6646abec1135f8e6c56b0bd2c587d4580ac2eb561f0338986daafc674d37414",
+                "cd17cc86807c33b145df0cef92901ba986899d78d80bf2d97a02a9b7b01de02d"
+              ],
+              "player_name": "Jayson Tatum",
+              "statement": "赛前被描述为状态完全恢复，是凯尔特人进攻的轴心；他叫挡拆时活塞的换防选择会决定客队能否持续制造错位。"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "0de644cad4d520411a195fa8a94b67f03779c1474c07e84b3b2b387002257573",
+                "8da2915381b59b1c089a8e1338e85e378299e7135d8bc74e75c4155dae2ca6c6",
+                "979ce555348c5bf359e1ef38d6956915cf7e1c9f411268d7133f764ac0998fc7",
+                "9c3d0a17b390b2801a644ad3c620eb2f593a26cdda5414433f1670461017def9"
+              ],
+              "player_name": "Paul George",
+              "statement": "夏天从费城来到波士顿，和塔图姆组成双持球锋线；他绕出接球和二次发起的能力，是活塞前场最难同时兼顾的点。"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "8da2915381b59b1c089a8e1338e85e378299e7135d8bc74e75c4155dae2ca6c6",
+                "979ce555348c5bf359e1ef38d6956915cf7e1c9f411268d7133f764ac0998fc7"
+              ],
+              "player_name": "Derrick White",
+              "statement": "后场对位坎宁安的第一道防线，他的对抗和挤掩护质量决定活塞的挡拆能不能顺利展开。"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "8da2915381b59b1c089a8e1338e85e378299e7135d8bc74e75c4155dae2ca6c6",
+                "979ce555348c5bf359e1ef38d6956915cf7e1c9f411268d7133f764ac0998fc7"
+              ],
+              "player_name": "Payton Pritchard",
+              "statement": "预计首发控卫，和怀特一起承担后场防守；他的投射也能在塔图姆被夹击时提供出口。"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "846cd3287b3c326697aba00a7925f877956f4ac941517e582d2393564f7adcb4",
+                "8da2915381b59b1c089a8e1338e85e378299e7135d8bc74e75c4155dae2ca6c6",
+                "979ce555348c5bf359e1ef38d6956915cf7e1c9f411268d7133f764ac0998fc7",
+                "cd17cc86807c33b145df0cef92901ba986899d78d80bf2d97a02a9b7b01de02d"
+              ],
+              "player_name": "Cade Cunningham",
+              "statement": "活塞的进攻发动机，凯尔特人后场没有明显的身高压制；他能否反复叫挡拆找到杜伦或科林斯，是主队咬住比赛的关键。"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "846cd3287b3c326697aba00a7925f877956f4ac941517e582d2393564f7adcb4",
+                "8da2915381b59b1c089a8e1338e85e378299e7135d8bc74e75c4155dae2ca6c6",
+                "979ce555348c5bf359e1ef38d6956915cf7e1c9f411268d7133f764ac0998fc7",
+                "cd17cc86807c33b145df0cef92901ba986899d78d80bf2d97a02a9b7b01de02d"
+              ],
+              "player_name": "Jalen Duren",
+              "statement": "坎宁安挡拆后的顺下终结点，也是活塞前场对抗凯尔特人内线的主要体型来源。"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "846cd3287b3c326697aba00a7925f877956f4ac941517e582d2393564f7adcb4",
+                "8da2915381b59b1c089a8e1338e85e378299e7135d8bc74e75c4155dae2ca6c6",
+                "979ce555348c5bf359e1ef38d6956915cf7e1c9f411268d7133f764ac0998fc7",
+                "cd17cc86807c33b145df0cef92901ba986899d78d80bf2d97a02a9b7b01de02d"
+              ],
+              "player_name": "Ausar Thompson",
+              "statement": "预计承担对位塔图姆或乔治的锋线防守任务，他的换防范围决定活塞能不能少做夹击。"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "846cd3287b3c326697aba00a7925f877956f4ac941517e582d2393564f7adcb4",
+                "979ce555348c5bf359e1ef38d6956915cf7e1c9f411268d7133f764ac0998fc7"
+              ],
+              "player_name": "John Collins",
+              "statement": "夏天顶替哈里斯进入前场，他的外弹投射和护框是活塞新阵容能否拉开空间的关键。"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "846cd3287b3c326697aba00a7925f877956f4ac941517e582d2393564f7adcb4",
+                "8da2915381b59b1c089a8e1338e85e378299e7135d8bc74e75c4155dae2ca6c6",
+                "979ce555348c5bf359e1ef38d6956915cf7e1c9f411268d7133f764ac0998fc7",
+                "cd17cc86807c33b145df0cef92901ba986899d78d80bf2d97a02a9b7b01de02d"
+              ],
+              "player_name": "Duncan Robinson",
+              "statement": "回归主力轮换的射手，坎宁安被夹击时他的接球投篮是活塞最直接的回应方式。"
+            }
+          ]
+        }
       }
     },
     "version": {
@@ -2984,5 +3144,5 @@
     "source_prediction_payload_sha256": "74165228f88febe42b647686fac22086f781ddff177a067a322e1c5193c62e59",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "9821330691a1a1e849a884951d1b6a6b30a3a3ee0f85b1afaf7f379fdbc2bb4c"
+  "public_sha256": "bb52243654660482a71f3b8e2ae627c227a4fc10a1bc446a106a2b3b98791b1c"
 }
