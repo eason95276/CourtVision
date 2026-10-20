@@ -280,11 +280,11 @@
       "file": "games/espn_401909088.json",
       "tipoff": "2026-10-20T19:00:00+00:00",
       "version_id": "3ddb18b9-0e77-48de-ab7f-5d5dad938fc5",
-      "public_sha256": "bb52243654660482a71f3b8e2ae627c227a4fc10a1bc446a106a2b3b98791b1c",
+      "public_sha256": "2a70da5a6a64b3c464e2d21a43421c6cdfa3cfde8ce0250f1de0da6a0a2c07bd",
       "home_record": {
         "game": {
           "id": "espn:401909088",
-          "status": "scheduled",
+          "status": "final",
           "tipoff": "2026-10-20T19:00:00+00:00",
           "home": {
             "id": 1610612765,
@@ -294,7 +294,7 @@
             "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/det.png",
             "accent": "#C8102E",
             "espn_team_id": "8",
-            "score": null
+            "score": 121.0
           },
           "away": {
             "id": 1610612738,
@@ -304,9 +304,16 @@
             "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/bos.png",
             "accent": "#007A33",
             "espn_team_id": "2",
-            "score": null
+            "score": 113.0
           },
-          "postgame": null,
+          "postgame": {
+            "status": "available",
+            "version_id": "4a1761d1-bed9-41c7-84df-7fa455776321",
+            "score_text": "凯尔特人 113 — 121 活塞",
+            "summary": "凯尔特人双锋线没能兑现赛前优势，活塞靠罚球和篮板在下半场翻盘，让分方向判断错误，大分方向则被比赛验证。",
+            "prediction_summary": "凯尔特人胜 · 胜率44% · 赛前预计赢2.5分，实际赢8分",
+            "market_summary": "让分方向 凯尔特人 -1.5 · 未命中；总分 大分 · 命中"
+          },
           "game_type": "regular_season",
           "schedule_revision": 1,
           "registered_game": true,
@@ -317,12 +324,12 @@
           "public_summary": true
         },
         "prediction": {
-          "status": "current",
+          "status": "locked",
           "game_id": "espn:401909088",
           "version_id": "3ddb18b9-0e77-48de-ab7f-5d5dad938fc5",
-          "state_revision": 11,
-          "locked_at": null,
-          "lock_reason": null,
+          "state_revision": 13,
+          "locked_at": "2026-10-20T19:00:32.371482+00:00",
+          "lock_reason": "scheduled_tipoff_reached",
           "schedule_revision": 1,
           "version": {
             "analysis_contract_version": "two-stage-forecast-v1",
@@ -842,5 +849,5 @@
       }
     }
   ],
-  "published_at": "2026-10-20T15:07:45.822691+00:00"
+  "published_at": "2026-10-20T21:40:04.209183+00:00"
 }
