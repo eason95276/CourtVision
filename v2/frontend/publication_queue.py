@@ -19,7 +19,9 @@ STAGES = {"EARLY_PREVIEW", "UPDATED_PREVIEW", "FINAL_PREGAME"}
 def saved_publication(database, game_id, version_id):
     """Read a published row without initializing its database."""
     if '::postgame::' in version_id:
-        base_id,post_id=version_id.split('::postgame::',1)
+        base_id,post_key=version_id.split('::postgame::',1)
+        post_key,_,requested_view=post_key.partition('::view::')
+        post_id,_,requested_article=post_key.partition('::article::')
         base=saved_publication(database,game_id,base_id)
         with closing(sqlite3.connect(Path(database).resolve().as_uri()+'?mode=ro',uri=True))as db:
             db.row_factory=sqlite3.Row
@@ -29,7 +31,7 @@ def saved_publication(database, game_id, version_id):
         post=json.loads(row['payload_json'])
         if post.get('base_prediction_version_id')!=base_id or post.get('base_prediction_payload_sha256')!=base['payload_sha256']:
             raise ValueError('public_release_postgame_base_mismatch')
-        from v2.postgame_system.editorial import load_postgame_editorial,build_public_postgame_payload
+        from v2.postgame_system.editorial import load_postgame_editorial,build_public_postgame_payload,build_public_postgame_entry,build_postgame_context,_publication_editorial
         artifact=load_postgame_editorial(post)
         if not artifact:raise ValueError('public_release_postgame_article_pending')
         class ReadStore:
@@ -39,9 +41,21 @@ def saved_publication(database, game_id, version_id):
                 connection.row_factory=sqlite3.Row
                 return connection
         public=build_public_postgame_payload(ReadStore(),post)
-        digest=hashlib.sha256((row['payload_sha256']+artifact['artifact_sha256']).encode()).hexdigest()
+        entry=build_public_postgame_entry(ReadStore(),post)
+        from v2.pregame_system.storage import content_hash
+        display_sha=content_hash({'postgame':public,'entry':entry})
+        if requested_article and requested_article!=artifact['artifact_sha256']:
+            raise ValueError('public_release_article_selection_changed')
+        if requested_view and requested_view!=display_sha:
+            raise ValueError('public_release_article_selection_changed')
+        if artifact.get('article_contract_version')=='postgame-fan-v2' or (artifact.get('title_policy')or{}).get('required'):
+            from v2.postgame_system.article_contract import validate_article
+            issues=validate_article(_publication_editorial(artifact),build_postgame_context(ReadStore(),game_id))
+            if issues:raise ValueError('public_release_postgame_article_contract:'+json.dumps(issues,ensure_ascii=False))
+        digest=hashlib.sha256((row['payload_sha256']+artifact['artifact_sha256']+display_sha).encode()).hexdigest()
         return {**base,'payload_sha256':digest,'prediction_payload_sha256':base['payload_sha256'],
-            'postgame':post,'public_postgame':public,'artifact_sha256':artifact['artifact_sha256']}
+            'postgame':post,'public_postgame':public,'public_postgame_entry':entry,
+            'artifact_sha256':artifact['artifact_sha256'],'display_sha256':display_sha}
     if not isinstance(game_id, str) or not re.fullmatch(r'(espn|nba):\d+', game_id):
         raise ValueError('public_release_game_id_invalid')
     with closing(sqlite3.connect(Path(database).resolve().as_uri() + "?mode=ro", uri=True)) as db:
@@ -115,7 +129,9 @@ class PublicationQueue:
         for gid,vid,base in rows:
             if game_ids is not None and gid not in game_ids:continue
             try:
-                self.enqueue(database,gid,base+'::postgame::'+vid);result['eligible']+=1
+                key=base+'::postgame::'+vid
+                source=saved_publication(database,gid,key)
+                self.enqueue(database,gid,key+'::view::'+source['display_sha256']);result['eligible']+=1
             except ValueError as exc:
                 if str(exc)!='public_release_postgame_article_pending':result['errors'].append({'game_id':gid,'error':str(exc)})
         return result
@@ -171,7 +187,10 @@ class PublicationQueue:
     def run(self, job, publisher):
         with self.keep_alive(job):
             try: result = publisher(job)
-            except Exception as error: return self._finish(job, error=error)
+            except Exception as error:
+                if str(error)=='public_release_article_selection_changed':
+                    return self._finish(job,result={'status':'superseded','reason':'article_selection_changed'})
+                return self._finish(job, error=error)
             if result.get('status') not in {'pushed','already_published','superseded'}:
                 return self._finish(job, error='publication_result_not_success')
             return self._finish(job, result=result)

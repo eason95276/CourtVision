@@ -131,11 +131,12 @@ def test_postgame_delivery_has_own_identity_and_does_not_skip_same_pregame(publi
         'article':'Synthetic postgame article.','score':{'text':'110-100'},'prediction':{},'market_reference':{},'generated_at':'2026-10-21T02:01:00Z'}
     monkeypatch.setattr(editorial,'load_postgame_editorial',lambda *args,**kwargs:{'artifact_sha256':'f'*64})
     monkeypatch.setattr(editorial,'build_public_postgame_payload',lambda *args,**kwargs:public)
+    monkeypatch.setattr(editorial,'build_public_postgame_entry',lambda *args,**kwargs:{'status':'available','version_id':post_id})
     game['postgame']={'status':'available','version_id':post_id}
     version['test_postgame_payload']=public
     assert queue.discover_postgames(database,game_ids={GID})['eligible']==1
     job=queue.claim()
-    assert job['version_id']==VID+'::postgame::'+post_id
+    assert job['version_id'].startswith(VID+'::postgame::'+post_id+'::view::')
     before=git(bare,'rev-list','--count','main')
     result=queue.run(job,lambda item:publish_saved(item,**options))
     assert result['status']=='succeeded'

@@ -47,6 +47,10 @@ def load_postgame_skill(path: str | Path = SKILL_PATH) -> str:
         raise ValueError("postgame_skill_unavailable") from exc
     if not skill:
         raise ValueError("postgame_skill_empty")
+    if Path(path).resolve()==SKILL_PATH.resolve():
+        try:reference=Path(path).with_name('good_examples.md').read_text(encoding='utf-8').strip()
+        except OSError as exc:raise ValueError('postgame_style_reference_unavailable')from exc
+        skill+='\n\n<style_reference_not_game_evidence>\n'+reference+'\n</style_reference_not_game_evidence>'
     return skill
 
 
@@ -499,6 +503,7 @@ def _messages(context: dict[str, Any], skill_text: str) -> list[dict[str, str]]:
     system = (
         "你是第25秒的赛后文章 Writer。下面的 Postgame Skill 控制你的复盘重点与写法。"
         "只使用用户消息中这场比赛的赛前冻结内容、赛后事实和来源，不联网、不使用记忆补事实。"
+        "Skill中的style_reference仅示范写法，其中的比赛、数字、球员和故事都不是本场事实，不得借用。"
         "比分、球员数据、赛前预测、市场线、方向和结算只能依照输入；不得修改、重算或添加具体数字。"
         "不得把相关统计写成确定战术因果，不得凭节次得分编造节内回合或具体得分潮。"
         "赛后确认的 DNP、分钟、首发不能倒写成赛前已经确认。"
@@ -507,6 +512,8 @@ def _messages(context: dict[str, Any], skill_text: str) -> list[dict[str, str]]:
     )
     system += "\n\n<postgame_skill>\n" + skill_text + "\n</postgame_skill>"
     writer_context = json.loads(json.dumps(context, ensure_ascii=False))
+    from .article_contract import public_verdicts
+    writer_context['verified_public_verdicts']=public_verdicts(context)
     writer_context.pop("provenance", None)
     writer_context.get("game", {}).pop("game_id", None)
     writer_context["game"]["actual_winner"] = (
@@ -516,6 +523,8 @@ def _messages(context: dict[str, Any], skill_text: str) -> list[dict[str, str]]:
     )
     writer_context["game"]["actual_winner_margin"] = abs(writer_context["game"]["actual_home_margin"])
     forecast = writer_context.get("prediction", {})
+    forecast['winner_probability']=_winner_probability(context)
+    forecast['home_win_probability']=forecast.pop('win_probability',None)
     forecast["predicted_winner"] = forecast.pop("winner_name", "未知")
     forecast["predicted_home_margin"] = forecast.pop("expected_home_margin", None)
     forecast["expected_winner_margin"] = (
@@ -729,7 +738,7 @@ def generate_postgame_editorial(
     skill_path: str | Path = SKILL_PATH,
     require_poem_title: bool = True,
 ) -> PostgameEditorialResult:
-    """Make one Writer call. Existing article artifacts are immutable/idempotent."""
+    """One Writer plus bounded article/title repairs; existing artifacts stay immutable."""
     from .version_service import read_postgame
 
     postgame = read_postgame(store, game_id)
@@ -768,6 +777,9 @@ def generate_postgame_editorial(
         "input_sha256": content_hash(messages),
         "skill_sha256": content_hash(skill_text),
         "writer_calls_planned": 1,
+        "max_writer_calls":3,
+        "article_revision_limit":1,
+        "title_revision_limit":1,
     }
     save(run_dir / "attempt.json", attempt)
     save(run_dir / "request.json", {"messages": messages})
@@ -797,6 +809,20 @@ def generate_postgame_editorial(
             raise ValueError("postgame_editorial_empty_response")
         save(run_dir / "response.json", {"received_at": now(), "content": raw})
         editorial = _parse_editorial(raw, _display_names(postgame))
+        from .article_contract import validate_article
+        findings=validate_article(editorial,context)
+        if findings:
+            revision_messages=[{'role':'system','content':system['content']}for system in messages[:1]]
+            revision_messages.append({'role':'user','content':json.dumps({'task':
+                '只修正这篇赛后文章的明确问题，并压缩到500至800字。返回title、short_review、article三个字段。'
+                '盘口受让和让分严格抄verified_public_verdicts，不自己翻译正负号。没有球员分节统计，不能写半场个人表现；'
+                '没有逐回合资料，不写关键时段爆发、对位已经兑现或教练何时调整。保留最重要的2至4名球员，删除重复结算与方法说明。',
+                'findings':findings,'candidate':editorial,'frozen_input':json.loads(messages[-1]['content'].split('<frozen_postgame_context>\n',1)[1].split('\n</frozen_postgame_context>',1)[0])},ensure_ascii=False)})
+            repaired=invoke(revision_messages,repair=True)
+            save(run_dir/'article_revision.json',{'content':repaired,'findings':findings})
+            editorial=_parse_editorial(repaired,_display_names(postgame))
+            findings=validate_article(editorial,context)
+            if findings:raise ValueError('postgame_article_contract:'+json.dumps(findings,ensure_ascii=False))
         title_policy={'required':require_poem_title,'revision_calls':0}
         if require_poem_title:
             from v2.pregame_system.editorial_titles import normalize_poem_title
@@ -830,6 +856,7 @@ def generate_postgame_editorial(
         "editorial": editorial,
         "writer_response_sha256": content_hash(raw),
         "title_policy":title_policy,
+        "article_contract_version":"postgame-fan-v2",
         "sources": context["sources"],
             "market_reference_review": context["public_market_reference_review"],
             "provenance": context["provenance"],
@@ -862,6 +889,12 @@ def generate_postgame_editorial(
                                        model=resolved_model)
 
 
+def _winner_probability(context):
+    value=context['prediction'].get('win_probability')
+    if value is None:return None
+    return value if context['prediction']['winner_team_id']==context['game']['home']['team_id']else 1-value
+
+
 def _public_summary(context: dict[str, Any]) -> dict[str, Any]:
     game = context["game"]
     prediction = context["prediction"]
@@ -873,11 +906,12 @@ def _public_summary(context: dict[str, Any]) -> dict[str, Any]:
         predicted_margin if prediction["winner_team_id"] == home["team_id"] else -predicted_margin
     )
     actual_winner_margin = abs(game["actual_home_margin"])
-    probability = prediction.get("win_probability")
+    actual_winner=home if game['actual_home_margin']>0 else away
+    probability = _winner_probability(context)
     prediction_summary = (
-        f"{predicted_winner['name']}胜"
+        f"赛前看好{predicted_winner['name']}"
         + (f" · 胜率{probability * 100:.0f}%" if probability is not None else "")
-        + (f" · 赛前预计赢{abs(winner_margin):g}分，实际赢{actual_winner_margin}分"
+        + (f" · 预计赢{abs(winner_margin):g}分；赛果{actual_winner['name']}赢{actual_winner_margin:g}分"
            if winner_margin is not None else "")
     )
     market = context["public_market_reference_review"]
@@ -953,7 +987,7 @@ def build_public_postgame_payload(
     )
     forecast = {
         "winner_name": predicted_winner["name"],
-        "winner_probability": prediction.get("win_probability"),
+        "winner_probability": _winner_probability(context),
         "expected_winner_margin": winner_margin,
         "expected_total": prediction.get("expected_total"),
         "actual_winner_name": actual_winner["name"],

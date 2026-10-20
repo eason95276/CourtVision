@@ -22,8 +22,11 @@ def publish_saved(job, *, public_root, queue_root, api_base='http://127.0.0.1:86
     postgame=source.get('public_postgame')
     def postgame_matches(record):
         value=(record.get('postgame')or{}).get('postgame')or{}
+        entry=record.get('game',{}).get('postgame')or{}
+        expected_entry=source.get('public_postgame_entry')or{}
         return bool(postgame) and all(value.get(k)==postgame.get(k)for k in
-            ('version_id','title','short_review','article','score','prediction','market_reference','generated_at'))
+            ('version_id','title','short_review','article','score','prediction','market_reference','generated_at'))and all(
+            entry.get(k)==expected_entry.get(k)for k in expected_entry)
     source_root = Path(public_root).resolve()
     env = {**os.environ, 'GIT_TERMINAL_PROMPT':'0', 'GCM_INTERACTIVE':'never'}
     def command(args, *, cwd, timeout=90):
@@ -87,7 +90,9 @@ def publish_saved(job, *, public_root, queue_root, api_base='http://127.0.0.1:86
     command(['git','add','--',*paths],cwd=checkout)
     name = command(['git','config','user.name'],cwd=source_root)
     email = command(['git','config','user.email'],cwd=source_root)
-    command(['git','-c','user.name='+name,'-c','user.email='+email,'commit','-m','Publish saved report '+job['game_id']+' '+job['version_id']],cwd=checkout)
+    subject=('Publish postgame review '+job['game_id']+' '+source['postgame']['version_id'][:8]
+        if postgame else'Publish saved report '+job['game_id']+' '+job['version_id'])
+    command(['git','-c','user.name='+name,'-c','user.email='+email,'commit','-m',subject],cwd=checkout)
     command(['git','push','origin','HEAD:main'],cwd=checkout,timeout=120)
     return {'status':'pushed','game_id':job['game_id'],'version_id':job['version_id'],
         'commit':command(['git','rev-parse','HEAD'],cwd=checkout),'generation_calls':0,'deployment':'GitHub Pages Actions pending'}

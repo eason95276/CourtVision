@@ -26,3 +26,18 @@ def test_invalid_repair_does_not_publish_or_loop(tmp_path):
     result=generate_postgame_editorial(store,GAME_ID,api_client=client,api_key='fixture',output_root=tmp_path/'articles')
     assert result.status=='failed'and len(calls)==2
     assert not list((tmp_path/'articles').glob('*.json'))
+
+
+def test_one_article_repair_corrects_quote_sign_before_sealing(tmp_path):
+    from .editorial import build_postgame_context
+    store=fixture_store(tmp_path);calls=[]
+    home=build_postgame_context(store,GAME_ID)['game']['home']['name']
+    def client(messages,*args):
+        calls.append(messages)
+        return json.dumps({'title':'双星缺阵添变数\n勇士主场定乾坤','short_review':'复核市场报价。',
+            'article':home+('受让'if len(calls)==1 else'让')+'4.5分。'},ensure_ascii=False)
+    result=generate_postgame_editorial(store,GAME_ID,api_client=client,api_key='fixture',output_root=tmp_path/'articles')
+    assert result.status=='success'and len(calls)==2
+    saved=json.loads(result.artifact_path.read_text(encoding='utf-8'))
+    assert saved['editorial']['article']==home+'让4.5分。'
+    assert saved['article_contract_version']=='postgame-fan-v2'
