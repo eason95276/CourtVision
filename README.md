@@ -17,7 +17,7 @@
 | 07:30 | [公牛 @ 猛龙](https://nba.weitao.si/#game/espn%3A401909837) | 事实页，尚无正式报告 | 报告待生成 |
 | 07:30 | [森林狼 @ 热火](https://nba.weitao.si/#game/espn%3A401909091) | 事实页，尚无正式报告 | 报告待生成 |
 | 08:00 | [爵士 @ 灰熊](https://nba.weitao.si/#game/espn%3A401909838) | 事实页，尚无正式报告 | 报告待生成 |
-| 08:30 | [独行侠 @ 火箭](https://nba.weitao.si/#game/espn%3A401909840) | 事实页，尚无正式报告 | 报告待生成 |
+| 08:30 | [独行侠 @ 火箭](https://nba.weitao.si/#game/espn%3A401909840) | 已有正式报告；资料截止 10-21 23:00 | 本轮报告已发布 |
 | 10:00 | [勇士 @ 湖人](https://nba.weitao.si/#game/espn%3A401909092) | 事实页，尚无正式报告 | 报告待生成 |
 | 10:00 | [太阳 @ 开拓者](https://nba.weitao.si/#game/espn%3A401909841) | 事实页，尚无正式报告 | 报告待生成 |
 
