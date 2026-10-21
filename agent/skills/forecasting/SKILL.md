@@ -21,6 +21,10 @@
 
 最终数字代表「第25秒」的判断，不需要机械复现任何单一模型或市场盘口。
 
+对位状态与置信度分开：列出了任何 key_matchups，就必须使用 matchup_status=identified，具体不确定性写在各项的 confidence/uncertainty。只有不列任何具体对位时才使用 no_clear_matchup，并令 key_matchups=[]。不能一边说没有明确对位，一边列出一个低置信度对位。
+
+Market Review 中会进入公开文章的理由只讲篮球：阵容、得分方式、防守、回合数及具体证据，不出现 Pure、Residual、Official、schema 或内部模型标签。内部对照字段仍保留真实数值和来源，不用改名或改数字来绕过检查。
+
 ## 执行阶段
 
 预测由程序分为两次独立请求。遵守本次输入标明的阶段。
