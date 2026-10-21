@@ -538,3 +538,12 @@ def test_prior_url_retry_prefers_sports_sources_over_generic_name_matches(tmp_pa
     rows = searcher._prior_discovery_urls(GAME, searcher._date("2026-10-20T18:55:00Z"), {"availability"})
     assert len(rows) == 8 and rows[0]["url"] == "https://www.espn.com/nba/preview"
     assert all(row["eligible_for_fact"] is False for row in rows)
+
+
+def test_market_only_search_never_uses_prior_discovery_urls(tmp_path, monkeypatch):
+    searcher = PregameWebSearch(tmp_path, transport=lambda _: {"results": []})
+    def unwanted(*args, **kwargs):
+        pytest.fail("market collection must not use this non-market URL fallback")
+    monkeypatch.setattr(searcher, "_prior_discovery_urls", unwanted)
+    result = searcher.search({**GAME, "registered_game": True}, "2026-10-20T18:55:00Z", categories={"market"})
+    assert result["records"] == []
