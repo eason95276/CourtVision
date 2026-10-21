@@ -718,3 +718,62 @@ def test_player_reference_revision_uses_current_witness_without_rewriting_articl
     assert trace['editorial_calls']==2
     receipt=json.loads((tmp_path/'identity-revision/player_reference_validation.json').read_text(encoding='utf-8'))
     assert receipt['status']=='accepted'and receipt['other_draft_fields_changed']is False
+
+
+@pytest.mark.parametrize('still_invalid',[False,True])
+def test_one_residual_availability_repair_is_bounded_and_keeps_numbers(frozen,tmp_path,still_invalid):
+    context,forecast=frozen;context=current_player_fixture(context);calls=[]
+    def scripted(messages,schema):
+        calls.append(schema)
+        if schema is EditorialDraft:
+            draft,meta=writer(messages,schema)
+            draft['article']='Fixture Guard 本场缺阵。'
+            return draft,meta
+        assert schema is EditorialRepair
+        payload=json.loads(messages[-1]['content']);target=payload['affected_text'][0]['id']
+        replacement='Fixture Guard 今晚已经确认缺阵。'if len(calls)==2 else (
+            'Fixture Guard 本场已确定缺阵。'if still_invalid else'如果Fixture Guard无法出战，球队需要重新分配持球。')
+        return {'patches':[{'unit_id':target,'replacement':replacement}]},{'fixture':True}
+    if still_invalid:
+        with pytest.raises(ValueError,match='publication_hard_fact_blocker'):
+            run_editorial(context,forecast,tmp_path/'residual',writer_client=scripted,max_calls=3,require_poem_title=False)
+    else:
+        judgment,trace=run_editorial(context,forecast,tmp_path/'residual',writer_client=scripted,max_calls=3,require_poem_title=False)
+        assert judgment['final_prediction']['expected_total']==forecast['final_prediction']['expected_total']
+        assert trace['editorial_calls']==3
+    assert len(calls)==3
+
+
+def test_partial_meaningful_repairs_are_kept_but_unresolved_facts_still_require_correction(frozen,tmp_path):
+    context,forecast=frozen;context=current_player_fixture(context);calls=[]
+    def scripted(messages,schema):
+        calls.append(schema)
+        if schema is EditorialDraft:
+            draft,meta=writer(messages,schema);draft['article']='Fixture Guard 本场缺阵。比赛在多伦多举行。'
+            return draft,meta
+        payload=json.loads(messages[-1]['content']);targets=payload['affected_text']
+        if len(calls)==2:
+            return {'patches':[{'unit_id':u['id'],'replacement':
+                '如果Fixture Guard不能出战，持球任务需要调整。'if 'Fixture Guard'in u['text']else u['text']}for u in targets]},{'fixture':True}
+        assert len(targets)==1 and '多伦多'in targets[0]['text']
+        return {'patches':[{'unit_id':targets[0]['id'],'replacement':'比赛地点以冻结赛程为准。'}]},{'fixture':True}
+    judgment,trace=run_editorial(context,forecast,tmp_path/'partial',writer_client=scripted,max_calls=3,require_poem_title=False)
+    assert len(calls)==3 and '如果Fixture Guard'in judgment['analysis_article']
+    assert '多伦多'not in judgment['analysis_article']
+    assert judgment['final_prediction']['expected_total']==forecast['final_prediction']['expected_total']
+    assert trace['editorial_calls']==3
+
+
+@pytest.mark.parametrize('same_game',[False,True])
+def test_legal_same_game_title_can_survive_exhausted_revision_budget(frozen,tmp_path,same_game):
+    context,forecast=frozen;forecast=copy.deepcopy(forecast)
+    forecast['same_game_baseline_title']={'game_id':context.game['game_id']if same_game else'espn:other',
+        'version_id':'synthetic-baseline','title':'前场对位看攻守\n轮换深浅见高低'}
+    if same_game:
+        judgment,trace=run_editorial(context,forecast,tmp_path/'title-budget',writer_client=writer,max_calls=1)
+        assert judgment['pregame_story']['title']==forecast['same_game_baseline_title']['title']
+        assert trace['editorial_calls']==1
+        assert json.loads((tmp_path/'title-budget/title_validation.json').read_text(encoding='utf-8'))['retained_without_extra_call']
+    else:
+        with pytest.raises(ValueError,match='editorial_title_correction_budget_unavailable'):
+            run_editorial(context,forecast,tmp_path/'title-budget',writer_client=writer,max_calls=1)

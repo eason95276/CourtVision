@@ -467,6 +467,27 @@ def validate_market_revision_reason(review: VersionedMarketReviewForecast,
     if review.decision == "revise" and not any(
             set(factors[index].evidence_ids) & basketball_ids for index in basketball_indices):
         raise ValueError("market_revision_requires_basketball_evidence")
+def validate_market_text_revision(previous, revised):
+    text_fields = {"rationale", "summary", "statement", "central_question", "expected_game_script",
+        "subject", "opponent_or_scheme", "why_it_matters", "expected_effect", "uncertainty",
+        "condition", "judgment_effect"}
+    def compare(before, after, path=()):
+        if isinstance(before, dict):
+            if not isinstance(after, dict) or before.keys() != after.keys():
+                raise ValueError("market_text_revision_structure_changed")
+            for key in before:compare(before[key], after[key], path+(key,))
+        elif isinstance(before, list):
+            if not isinstance(after, list) or len(before) != len(after):
+                raise ValueError("market_text_revision_list_changed")
+            for index, (a,b) in enumerate(zip(before,after)):compare(a,b,path+(index,))
+        elif isinstance(before, str) and (path[-1:] and path[-1] in text_fields or "uncertainties" in path):
+            if not isinstance(after,str) or not set(re.findall(r"[-+]?\d+(?:\.\d+)?",after)) <= set(re.findall(r"[-+]?\d+(?:\.\d+)?",before)):
+                raise ValueError("market_text_revision_new_numeric_claim")
+        elif before != after:
+            raise ValueError("market_text_revision_changed_locked_field:"+".".join(map(str,path)))
+    compare(previous.model_dump(), revised.model_dump())
+
+
 def validate_market_timing_claims(review, timing_status: str) -> None:
     """A timestamped observation alone cannot prove what information a book had."""
     if timing_status == "published_at_verified":
@@ -818,7 +839,7 @@ def _run_two_stage_impl(basketball: dict, market: dict, folder: Path, *, client=
             request_schema["properties"]["rationale"]["maxLength"] = (
                 900 if schema is VersionedMarketReviewForecast else 1000
             )
-        if require_analysis_core and stage in {"market_review", "market_review_tiebreak"}:
+        if require_analysis_core and stage in {"market_review", "market_review_tiebreak", "market_review_text_revision"}:
             # The independent stage already froze the potentially long lineup
             # and player-load plan. The market stage revises numeric judgment,
             # not that plan; repeating it exhausted the real preseason response
@@ -871,7 +892,7 @@ def _run_two_stage_impl(basketball: dict, market: dict, folder: Path, *, client=
                 "按实际方向更新 decision / revision_reason，并在 rationale 解释基于现有篮球分析为何选择该侧。"
             )
         if (basketball.get("game") or {}).get("game_type") == "preseason":
-            if require_analysis_core and stage in {"market_review", "market_review_tiebreak"}:
+            if require_analysis_core and stage in {"market_review", "market_review_tiebreak", "market_review_text_revision"}:
                 protocol += "\n独立阶段的 pregame_plan 已冻结并会被原样复用；本阶段不输出、不改写首发或分钟计划。"
             else:
                 protocol += ("\n本場为 preseason，必须填写 pregame_plan 的双方 lineup 和关键球员负荷。"
@@ -924,6 +945,11 @@ def _run_two_stage_impl(basketball: dict, market: dict, folder: Path, *, client=
         ]
         if messages_override is None and stage=='independent'and all(current_name_catalog(basketball).values()):
             messages[0]['content']+='\n身份输出协议：首发、候选与负荷计划中的球员，必须从allowed_current_players_by_side对应球队的当前名单逐字选择。home名单中的球员不可放入away阵容，反之亦然；历史分钟或旧交锋中的人名不证明当前归属。输出前逐人核对所属side；无法组出合法五人时使用unavailable，不替换或猜归属。'
+        if stage == "market_review_text_revision":
+            messages[0]['content'] += ("\n本次只纠正previous_market_review中无法验证的市场信息重叠/内部模型层措辞。"
+                "没有盘口发布时间就不能声称市场已消化、已计入或未计入具体新闻。只谈实际观察到的报价和篮球判断。"
+                "prediction全部数字、decision、market_assessment、revision_reason、因素分类/方向/引用、分钟与阵容都必须原样保留。"
+                "只可改rationale、因素/analysis_core的文字；不得新增任何数字或事实。pregame_plan可不返回，调用方复用原计划。")
         strict_transport = (client is default_client and schema is VersionedIndependentForecast
             and (basketball.get('game') or {}).get('registered_game') is True)
         label = stage if correction is None else stage + "_protocol_revision"
@@ -1226,14 +1252,36 @@ def _run_two_stage_impl(basketball: dict, market: dict, folder: Path, *, client=
                     validate_market_timing_claims(review, timing_status)
             except Exception as exc:
                 if market_collector is None:raise
-                save(folder/'market_review_failure.json',{'reason':type(exc).__name__,'error':str(exc)[:200],
-                    'action':'retain_validated_independent_forecast','invalid_candidate_published':False})
-                fallback_schema = market_review_schema
-                fallback = {**independent_value, "decision": "unavailable", "market_assessment": "unavailable",
-                    "rationale": "市场复核未成功，保留已验证的独立预测。"}
-                if require_analysis_core:
-                    fallback["revision_reason"] = None
-                review=fallback_schema.model_validate(fallback)
+                text_recovered = False
+                if (require_analysis_core and calls <= 3 and str(exc) in {
+                        "market_information_overlap_unverified", "market_reweighting_public_reason_contains_internal_model_label"}):
+                    previous_review = review
+                    save(folder/'market_review_initial_failure.json',{'error':str(exc),'scope':'text-only correction permitted; numeric decision frozen'})
+                    try:
+                        revised = call("market_review_text_revision", {"basketball":basketball,
+                            "independent":independent_value,"market_context":market_context,
+                            "previous_market_review":previous_review.model_dump(),"protocol_error":str(exc)}, market_review_schema)
+                        if revised.pregame_plan is None:revised.pregame_plan=previous_review.pregame_plan
+                        validate_market_text_revision(previous_review,revised)
+                        _validate_evidence(revised,_ids(basketball)|_ids(market))
+                        validate_pregame_plan(revised.pregame_plan,basketball)
+                        validate_market_revision_reason(revised,_ids(basketball),_ids(market))
+                        validate_market_timing_claims(revised,timing_status)
+                        review=revised;text_recovered=True
+                        save(folder/'market_review_text_revision_acceptance.json',{'status':'accepted',
+                            'corrected_error':str(exc),'prediction_unchanged':True,'plan_unchanged':True})
+                    except Exception as correction_error:
+                        save(folder/'market_review_text_revision_acceptance.json',{'status':'failed',
+                            'error_type':type(correction_error).__name__,'error':str(correction_error)[:200]})
+                if not text_recovered:
+                    save(folder/'market_review_failure.json',{'reason':type(exc).__name__,'error':str(exc)[:200],
+                        'action':'retain_validated_independent_forecast','invalid_candidate_published':False})
+                    fallback_schema = market_review_schema
+                    fallback = {**independent_value, "decision": "unavailable", "market_assessment": "unavailable",
+                        "rationale": "市场复核未成功，保留已验证的独立预测。"}
+                    if require_analysis_core:
+                        fallback["revision_reason"] = None
+                    review=fallback_schema.model_validate(fallback)
         else:
             fallback = {**independent_value, "decision": "unavailable", "market_assessment": "unavailable",
                 "rationale": "未获得可用市场资料，保留独立预测。"}

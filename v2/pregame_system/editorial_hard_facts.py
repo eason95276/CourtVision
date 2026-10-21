@@ -157,6 +157,12 @@ def classify_numeric_claim_type(text: str, start: int, end: int, metric: str | N
             r"(?:胜率|分差|总分).{0,18}(?:下调|上调|收窄|扩大|升至|降至)", prefix[-80:]):
         return "conditional_or_hypothetical_number"
 
+    if (re.match(r"\s*分(?!钟|之)", suffix)
+            and re.search(r"一次|单次|每次|每回合|一个回合", prefix)
+            and re.search(r"可能|预计|有望|本场|覆盖让分", sentence)
+            and not re.search(r"场均|上季|上赛季|去年|过去|最近\s*\d+场", sentence)):
+        return "forecast_or_game_script_estimate"
+
     # Explicit final-forecast language is checked only against locked Final.
     if metric in {"win_rate", "win_pct", "point_margin_per_game", "expected_total"} and re.search(
             r"第25秒.{0,8}(?:预测|预计)|最终预测|我的最终预测|最终我(?:站|看好|认为|选)|我最终|我给|我选|第25秒看好", sentence):
@@ -558,7 +564,12 @@ def _nearest_metric_for_token(text: str, token, labels) -> str | None:
                 continue
             after_value = start >= token.end()
             nearest.append((distance, 0 if after_value else 1, metric))
-    return min(nearest, key=lambda item: (item[0], item[1]))[2] if nearest else None
+    metric = min(nearest, key=lambda item: (item[0], item[1]))[2] if nearest else None
+    if (metric in {"rebounds_per_game", "assists_per_game", "minutes_per_game"}
+            and re.match(r"\s*分(?!钟|之)", text[token.end():])
+            and not re.search(r"分差|总分|净胜|净负|净输|赢|输|让|受让", text[max(0,token.start()-16):token.start()])):
+        return "points_for_per_game"
+    return metric
 
 
 def _h2h_comparison_side(text: str, token, metric: str, labels, projection: dict,
@@ -620,7 +631,7 @@ def _single_preseason_stat_issues(text, projection, unit_id, player_name=None):
     units = {"points": "points", "point": "points", "分": "points", "篮板": "rebounds",
              "rebounds": "rebounds", "rebound": "rebounds", "助攻": "assists", "assists": "assists",
              "assist": "assists", "分钟": "minutes", "minutes": "minutes", "minute": "minutes"}
-    pattern = re.compile(r"(?<![A-Za-z0-9.])(\d+(?:\.\d+)?|one|two|three|four|five|six|seven|eight|nine|ten)\s*"
+    pattern = re.compile(r"(?<![A-Za-z0-9.])(-?\d+(?:\.\d+)?|one|two|three|four|five|six|seven|eight|nine|ten)\s*"
                          r"(minutes?|分钟|points?|分(?!钟)|rebounds?|篮板|assists?|助攻)(?![A-Za-z])", re.I)
     def values(value):
         result = {}
@@ -1014,6 +1025,10 @@ def _supported_long_term_background(text, projection):
     if re.search(r"本场|今晚|今天|已经确认|已确认|官方宣布|确认缺阵|不会出场|首发|分钟|限时|this game|tonight|confirmed|minutes", text, re.I):
         return False
     named = {name for name in _known_people(projection) if " " in name and name.casefold() in text.casefold()}
+    for row in projection.get("player_display_names") or []:
+        canonical, zh = row.get("canonical_name_en"), row.get("display_name_zh")
+        if canonical in _known_people(projection) and zh and zh in text:
+            named.add(canonical)
     if not named:
         return False
     for name in named:

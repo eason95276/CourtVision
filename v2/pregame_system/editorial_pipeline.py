@@ -839,13 +839,21 @@ def run_editorial(context, locked_forecast, folder, *, writer_client=None, revie
                 "rejected_patch_count": len(response_validation["rejected_patches"])})
             response_validation["post_repair_findings"] = unchanged_findings
             save(folder / "repair1_validation.json", response_validation)
-            save(folder / "summary.json", {"status": "rejected", "calls": calls, "repair_rounds": 1,
+            save(folder / "summary.json", {"status": "rejected", "calls": calls, "repair_rounds": repair_rounds,
                 "hard_fact_findings": hard_findings, "post_repair_findings": unchanged_findings,
                 "repair_provenance": [], "repair_validation": response_validation, "stages": metadata})
             raise ValueError("editorial_repair_response_invalid:" + type(exc).__name__) from exc
         metadata.append({"stage": "repair1", **{k: v for k, v in meta.items() if k != "raw"}})
         response_validation = inspect_repair_patches(
             draft, units, patches["patches"], affected, projection)
+        rejected = response_validation.get("rejected_patches") or []
+        if (rejected and all(row["reasons"] == ["no_op"] for row in rejected)
+                and len(rejected) < len(patches["patches"])):
+            skipped = {row["patch_index"] for row in rejected}
+            patches["patches"] = [patch for index, patch in enumerate(patches["patches"]) if index not in skipped]
+            response_validation = {**response_validation, "status": "accepted",
+                "deferred_no_op_patches": rejected, "rejected_patches": []}
+            metadata[-1]["deferred_no_op_patches"] = rejected
         if response_validation["status"] != "accepted":
             unchanged_findings = validate_publication_hard_facts(judgment, projection)
             metadata[-1]["status"] = "ineffective_or_out_of_scope"
@@ -854,7 +862,7 @@ def run_editorial(context, locked_forecast, folder, *, writer_client=None, revie
                 original_findings=hard_findings, applied_patches=[],
                 post_repair_findings=unchanged_findings)
             save(folder / "repair1_validation.json", response_validation)
-            save(folder / "summary.json", {"status": "rejected", "calls": calls, "repair_rounds": 1,
+            save(folder / "summary.json", {"status": "rejected", "calls": calls, "repair_rounds": repair_rounds,
                 "hard_fact_findings": hard_findings, "post_repair_findings": unchanged_findings,
                 "repair_provenance": [], "repair_validation": response_validation, "stages": metadata})
             reasons = sorted({reason for row in response_validation["rejected_patches"] for reason in row["reasons"]})
@@ -870,8 +878,39 @@ def run_editorial(context, locked_forecast, folder, *, writer_client=None, revie
             "original_findings": json.loads((folder / "draft0.json").read_text(encoding="utf-8"))["hard_fact_findings"],
             "applied_patches": repair_provenance, "post_repair_findings": hard_findings}
         save(folder / "repair1_validation.json", validation)
+        if hard_findings and calls < max_calls:
+            # One final wording correction for source scope; never another forecast.
+            residual = copy.deepcopy(hard_findings)
+            second_affected = {row["unit_id"] for row in residual}
+            second_targets = [unit for unit in units if unit["id"] in second_affected]
+            calls += 1
+            repair_rounds += 1
+            second, meta = call_recorded(folder, "repair2", [{"role": "system", "content":
+                "这是最后一次限定文本修正。只修 affected_text 中仍然触发的确定性冲突，按finding_explanations改正。"
+                "没有本场来源时删去确定缺阵判断，改成明确的如果/若条件句或仅描述伤病恢复背景；不能只换姓名语言或加背景二字。"
+                "数字和地点等具体断言只能使用冻结投影中同口径事实；无安全依据时改成不含该精确断言的分析句。"
+                "逐个target返回一个实质不同的replacement，不改其他句子、球员身份、预测数字或原始事实，不添加新断言。"},
+                {"role": "user", "content": json.dumps({"projection": model_view(projection),
+                    "hard_fact_blockers": residual, "affected_text": second_targets,
+                    "finding_explanations": _repair_guidance(residual)}, ensure_ascii=False)}],
+                EditorialRepair, writer_client, max_tokens=1600)
+            second_validation = inspect_repair_patches(draft, units, second["patches"], second_affected, projection)
+            if second_validation["status"] != "accepted":
+                save(folder / "repair2_validation.json", second_validation)
+                raise ValueError("editorial_second_repair_invalid")
+            draft, extra_overrides, extra_provenance = apply_patches(draft, units, second["patches"],
+                second_affected, include_judgment_overrides=True, projection=projection)
+            judgment_overrides = list({**dict(judgment_overrides), **dict(extra_overrides)}.items())
+            judgment = make_judgment(draft, judgment_overrides)
+            hard_findings = validate_publication_hard_facts(judgment, projection)
+            repair_provenance.extend(extra_provenance)
+            metadata.append({"stage": "repair2", **{k: v for k, v in meta.items() if k != "raw"},
+                "applied_patches": extra_provenance})
+            save(folder / "draft2.json", {"draft": draft, "judgment": judgment, "hard_fact_findings": hard_findings})
+            save(folder / "repair2_validation.json", {**second_validation, "original_findings": residual,
+                "applied_patches": extra_provenance, "post_repair_findings": hard_findings})
         if hard_findings:
-            save(folder / "summary.json", {"status": "rejected", "calls": calls, "repair_rounds": 1,
+            save(folder / "summary.json", {"status": "rejected", "calls": calls, "repair_rounds": repair_rounds,
                 "hard_fact_findings": hard_findings, "post_repair_findings": hard_findings,
                 "repair_provenance": repair_provenance, "repair_validation": validation, "stages": metadata})
             raise ValueError("publication_hard_fact_blocker:" + json.dumps(hard_findings, ensure_ascii=False))
@@ -884,6 +923,10 @@ def run_editorial(context, locked_forecast, folder, *, writer_client=None, revie
         baseline_title=locked_forecast.get('same_game_baseline_title')or{}
         fallback_title=(normalize_poem_title(baseline_title.get('title'))
             if baseline_title.get('game_id')==c.get('game',{}).get('game_id')and baseline_title.get('version_id')else None)
+        if title is None and fallback_title and calls >= max_calls:
+            title = fallback_title
+            title_policy['retained_same_game_baseline_title'] = baseline_title['version_id']
+            title_policy['retained_without_extra_call'] = True
         if title is None:
             if calls >= max_calls:
                 save(folder / "title_validation.json", {**title_policy, "status": "budget_unavailable"})

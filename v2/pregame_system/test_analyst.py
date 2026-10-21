@@ -687,3 +687,11 @@ def test_public_cli_exposes_explicit_analyst_opt_in_and_ledger():
     text=(BASE/'__main__.py').read_text(encoding='utf-8')
     assert "--analyst-judgment" in text
     assert "--analyst-ledger" in text
+
+
+def test_explicit_production_budget_is_bounded_without_changing_default():
+    from .analyst import EvidenceBoundAnalyst
+    assert EvidenceBoundAnalyst().max_calls==5
+    assert EvidenceBoundAnalyst(max_calls=8).max_calls==8
+    assert EvidenceBoundAnalyst(max_calls=999).max_calls==8
+    assert EvidenceBoundAnalyst(max_calls=2).max_calls==2

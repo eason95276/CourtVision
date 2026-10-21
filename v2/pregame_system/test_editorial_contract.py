@@ -1280,12 +1280,13 @@ def test_reported_preseason_event_is_not_compared_with_season_averages():
     assert any(r['code']=='exact_stat_value_mismatch'for r in _stat_issues_for_text('热火上季场均15篮板。',projection,'article'))
 
 
-@pytest.mark.parametrize('mode',['wrong_value','wrong_actor','non_fact','no_source','unnamed_single_metric'])
+@pytest.mark.parametrize('mode',['wrong_value','negative_value','wrong_actor','non_fact','no_source','unnamed_single_metric'])
 def test_single_event_verification_stays_source_and_identity_bound(mode):
     from .editorial_hard_facts import _stat_issues_for_text
     projection=_event_stat_projection();name='Giannis Antetokounmpo'
     text='季前赛23分钟20分15篮板9助攻。'
     if mode=='wrong_value':text=text.replace('15篮板','16篮板')
+    if mode=='negative_value':text=text.replace('15篮板','-15篮板')
     if mode=='wrong_actor':name='Bam Adebayo'
     if mode=='non_fact':projection['facts'][1]['kind']='UNKNOWN'
     if mode=='no_source':projection['facts'].pop(1)
@@ -1326,3 +1327,22 @@ def test_long_term_injury_background_is_not_a_this_game_out_assertion():
 def test_background_support_does_not_replace_live_availability_identity_or_minutes(text):
     from .editorial_hard_facts import _availability_issues_for_text
     assert _availability_issues_for_text(text,_long_term_background_projection(),'article')
+
+
+def test_possession_scoring_estimate_is_not_a_season_rebound_statistic():
+    from .editorial_hard_facts import _stat_issues_for_text
+    projection=_event_stat_projection()
+    text='这条优势能反复出现：一次前场篮板是两分，连续几个回合把对手拖进补防，分差才可能覆盖让分。'
+    assert _stat_issues_for_text(text,projection,'article')==[]
+    assert _stat_issues_for_text('热火上季场均篮板只有两分。',projection,'article')
+
+
+
+def test_long_term_background_chinese_full_name_uses_verified_alias_without_lastname_guessing():
+    from .editorial_hard_facts import _availability_issues_for_text
+    projection=_long_term_background_projection()
+    projection['player_display_names']=[{'canonical_name_en':'Mark Williams','display_name_zh':'马克·威廉姆斯'},
+        {'canonical_name_en':'Robert Williams III','display_name_zh':'罗伯特·威廉姆斯三世'}]
+    assert _availability_issues_for_text('马克·威廉姆斯因肩伤长期缺阵的背景下，轮换面临考验。',projection,'article')==[]
+    assert _availability_issues_for_text('罗伯特·威廉姆斯三世因肩伤长期缺阵的背景下，轮换面临考验。',projection,'article')
+    assert _availability_issues_for_text('马克·威廉姆斯在伤病背景下今晚已确认缺阵。',projection,'article')

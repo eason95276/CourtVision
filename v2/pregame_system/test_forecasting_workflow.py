@@ -1176,3 +1176,43 @@ def test_usage_basis_revision_preserves_prediction_and_minute_ranges(tmp_path,mo
         with pytest.raises(ValueError,match='protocol_revision_changed_prediction|protocol_revision_changed_minutes|confirmed_minutes_source_unverified'):
             run_two_stage(view,{'evidence':[]},tmp_path/'run',client=client,skill_loader=lambda:'FORECAST')
     assert len(calls)==2
+
+
+@pytest.mark.parametrize('mode',['text','number','reference','new_text_number'])
+def test_market_text_only_revision_cannot_rewrite_decision_or_evidence(mode):
+    from .forecasting_workflow import validate_market_text_revision
+    before=VersionedMarketReviewForecast.model_validate(versioned_output(3.0,223.5,['basketball.fact','market.quote'],review=True,decision='revise'))
+    after=before.model_copy(deep=True)
+    if mode=='text':after.rationale='只比较实际观察到的盘口与篮球判断，信息重叠未知。'
+    if mode=='number':after.prediction.expected_total+=1
+    if mode=='reference':after.factors[0].evidence_ids=['other-id']
+    if mode=='new_text_number':after.rationale='A new value of 999.5 is unsupported.'
+    if mode=='text':validate_market_text_revision(before,after)
+    else:
+        with pytest.raises(ValueError,match='market_text_revision_'):validate_market_text_revision(before,after)
+
+
+def test_market_timing_text_gets_one_locked_numeric_correction_before_fallback(tmp_path):
+    basketball={'game':{'game_type':'regular_season','registered_game':True},'evidence':[
+        {'id':'basketball.fact','section':'team_form','value':{'note':'home court context'}},
+        {'id':'model.pure','section':'pure_prediction','value':{'note':'baseline'}}]}
+    market={'evidence':[{'id':'market.quote','section':'market','value':{'home_spread':-4.5}}]}
+    seen=[]
+    def client(messages,schema):
+        seen.append(schema);payload=json.loads(messages[1]['content'])
+        if schema is VersionedIndependentForecast:return versioned_output(-2.5,224.5,['basketball.fact','model.pure']),{}
+        if 'previous_market_review'in payload:
+            value=copy.deepcopy(payload['previous_market_review'])
+            value['rationale']='Only observed prices are known; information overlap remains unknown.'
+            return value,{}
+        value=versioned_output(3.0,223.5,['basketball.fact','market.quote'],review=True,decision='revise')
+        value['rationale']='The market had the same public information about the latest injury before pricing the home favorite.'
+        return value,{}
+    result=run_two_stage(basketball,market,tmp_path/'run',client=client,require_analysis_core=True,
+        market_collector=lambda game:{'status':'available','evidence':market['evidence'],
+            'public_market_reference':{'published_at':None,'observed_at':'2026-10-06T18:28:50+00:00'}})
+    assert len(seen)==3 and result['final_prediction']['expected_home_margin']==3.0
+    assert result['independent']['prediction']['expected_home_margin']==-2.5
+    assert result['market_provenance']['information_overlap']=='unknown'
+    receipt=json.loads((tmp_path/'run/market_review_text_revision_acceptance.json').read_text())
+    assert receipt['status']=='accepted'and receipt['prediction_unchanged']

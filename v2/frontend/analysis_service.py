@@ -737,7 +737,7 @@ class SavedGameAnalysisService:
             missing_data=missing,
             game={"game_id": game_id, "home": game["home"], "away": game["away"],
                   "scheduled_tipoff": game.get("tipoff"), "cutoff": cutoff,
-                  **{key: clean(game[key]) for key in ("venue", "neutral_site", "schedule_revision", "game_type", "registered_game", "season_event") if key in game}},
+                  **{key: clean(game[key]) for key in ("venue", "neutral_site", "schedule_revision", "game_type", "registered_game", "season_event", "player_display_names") if key in game}},
             analysis_request=(
                 f"生成{matchup}的第25秒赛前分析。使用本次 AnalystContext 与 objective_evidence，"
                 "生成 final_prediction，并严格遵守 ProductAnalystOutput schema、字段格式和 evidence ID 协议。"

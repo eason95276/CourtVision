@@ -162,7 +162,7 @@ class PredictionVersionService:
         if self.analyst_factory:
             analyst = self.analyst_factory(request)
         else:
-            analyst = EvidenceBoundAnalyst(root=request_root / "analyst", max_calls=6, include_forecasting_skill=True)
+            analyst = EvidenceBoundAnalyst(root=request_root / "analyst", max_calls=8, include_forecasting_skill=True)
         service_kwargs: dict[str, Any] = {"analyst": analyst}
         if self.service_factory is SavedGameAnalysisService:
             from .player_display_names import PlayerDisplayNameStore

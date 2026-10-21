@@ -177,7 +177,7 @@ def production_service(versions, tasks, data, report_phase):
         return Analyst(root=root / f"attempt-{claim['attempt_count']:02d}" / "analyst",
                        # independent + two bounded protocol repairs + market
                        # review + writer + one hard-fact repair; no extra retries.
-                       max_calls=6, include_forecasting_skill=True)
+                       max_calls=8, include_forecasting_skill=True)
 
     return PredictionVersionService(store=versions, task_store=tasks, service_factory=factory,
         analyst_factory=analyst_factory, input_preparer=prepare,

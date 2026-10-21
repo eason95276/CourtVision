@@ -593,7 +593,7 @@ class EvidenceBoundAnalyst:
     ):
         self.root = Path(root or BASE / "outputs/analyst_calls")
         self.client = client
-        self.max_calls = min(max(int(max_calls), 1), 6)
+        self.max_calls = min(max(int(max_calls), 1), 8)
         self.include_forecasting_skill = bool(include_forecasting_skill)
         self.forecast_client = forecast_client
         self.reviewer_client = reviewer_client
