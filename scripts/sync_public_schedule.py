@@ -30,6 +30,7 @@ def build_schedule(boards,teams,selection,at):
     today=at.astimezone(CHINA).date();days={today+timedelta(days=n)for n in range(3)}
     mapping={str(t['espn_team_id']):t for t in teams['teams']}
     picks={g['game_id']for day,rows in selection['slates'].items()if day in {d.isoformat()for d in days}for g in rows}
+    selection_status={g['game_id']:g['update_status']for day,rows in selection['slates'].items()if day in {d.isoformat()for d in days}for g in rows}
     games={}
     for board in boards:
         for event in board['payload']['events']:
@@ -58,7 +59,7 @@ def build_schedule(boards,teams,selection,at):
                 'venue':(competition.get('venue')or{}).get('fullName'),'neutral_site':bool(competition.get('neutralSite')),
                 'game_type':{1:'preseason',2:'regular_season',3:'playoffs'}.get((event.get('seasonType')or{}).get('type')or(event.get('season')or{}).get('type'),'unknown'),
                 'season':(event.get('season')or{}).get('year'),'schedule_catalog_fact':True,'homepage_visible':True,
-                'registered_game':False,'report_selected':gid in picks,'beijing_date':tip.astimezone(CHINA).date().isoformat(),
+                'registered_game':False,'report_selected':gid in picks,'report_generation_status':selection_status.get(gid),'beijing_date':tip.astimezone(CHINA).date().isoformat(),
                 'source':{'schedule_captured_at':at.isoformat()},'missing':[],
                 'postgame':None}
             if gid in games and any(games[gid][s]['id']!=game[s]['id']for s in('home','away')):

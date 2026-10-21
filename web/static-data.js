@@ -65,7 +65,7 @@
   function withFacts(record, fact) {
     if (!fact) return record;
     const old = record || {};
-    let prediction = old.prediction || {status:fact.report_selected?'pending':'unavailable',
+    let prediction = old.prediction || {status:fact.report_selected && !['failed','preview_failed'].includes(fact.report_generation_status)?'pending':'unavailable',
       game_id:fact.id,version_id:null,version:null,state_revision:0};
     const frozenTip = prediction.version?.game_identity?.scheduled_tipoff || old.game?.tipoff;
     if (prediction.version && new Date(frozenTip).getTime() !== new Date(fact.tipoff).getTime()) {

@@ -21,7 +21,7 @@ def event(eid='1',home='19',away='1',tip='2026-10-21T23:00:00Z'):
 class PublicSchedule(unittest.TestCase):
     def setUp(self):
         self.teams=json.loads((ROOT/'config/nba_teams.json').read_text(encoding='utf-8'))
-        self.selection={'slates':{'2026-10-22':[{'game_id':'espn:1'}]}}
+        self.selection={'slates':{'2026-10-22':[{'game_id':'espn:1','update_status':'awaiting_preview'}]}}
         self.at=datetime(2026,10,21,14,tzinfo=timezone.utc)
 
     def build(self,events):

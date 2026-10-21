@@ -45,6 +45,13 @@ class DailyBoard(unittest.TestCase):
         self.records['espn:1']['prediction']['version'] = None
         self.assertIn('事实页，尚无正式报告', render_board(self.selection, self.records, self.now))
 
+    def test_failed_first_report_does_not_claim_an_old_report_exists(self):
+        self.records['espn:1']['prediction']['version'] = None
+        self.selection['slates']['2026-10-21'][0]['update_status'] = 'failed'
+        board = render_board(self.selection, self.records, self.now)
+        self.assertIn('本轮生成未通过，尚无正式报告', board)
+        self.assertNotIn('保留原报告', board)
+
     def test_other_records_are_not_selected(self):
         self.records['espn:2'] = copy.deepcopy(self.records['espn:1'])
         self.records['espn:2']['game']['away']['name_zh'] = '未选择的球队'

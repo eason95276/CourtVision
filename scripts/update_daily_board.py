@@ -74,7 +74,10 @@ def render_board(selection, records, as_of):
         else:
             report = '事实页，尚无正式报告'
         url = 'https://nba.weitao.si/#game/' + quote(gid, safe='')
-        rows.append((tipoff, f'| {tipoff:%H:%M} | [{name}]({url}) | {report} | {STATUSES[pick["update_status"]]} |'))
+        update_label = STATUSES[pick['update_status']]
+        if not version and pick['update_status'] in {'failed', 'preview_failed'}:
+            update_label = '本轮生成未通过，尚无正式报告'
+        rows.append((tipoff, f'| {tipoff:%H:%M} | [{name}]({url}) | {report} | {update_label} |'))
     if rows:
         lines += ['| 开赛 | 比赛 | 当前公开内容 | 本轮更新 |',
                   '|---|---|---|---|', *[row[1] for row in sorted(rows)]]
