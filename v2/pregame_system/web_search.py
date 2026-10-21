@@ -852,7 +852,7 @@ class PregameWebSearch:
                 }
             )
 
-        if discovery and not records:
+        if discovery and not records and any(category != "market" for category, _ in query_rows):
             recovered = self._prior_discovery_urls(game, cutoff_dt, {category for category, _ in query_rows if category != "market"})
             if recovered:
                 records.extend(recovered)
