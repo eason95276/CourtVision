@@ -5,8 +5,8 @@
       "game_id": "espn:401909090",
       "file": "games/espn_401909090.json",
       "tipoff": "2026-10-21T01:30:00+00:00",
-      "version_id": "4e6ea2fc-1af9-42ed-b2d7-6fd35b31e581",
-      "public_sha256": "966a6dc694fb93a04def5a4374fa149857bf2bb0ac72930390899ee42498e53e",
+      "version_id": "a4477a54-3427-4d82-a2d2-27d8872a94a9",
+      "public_sha256": "cb868ced0ed0cc863b693de11188745334efbea3cc6d5ac1b694b9bdc4e38db1",
       "home_record": {
         "game": {
           "id": "espn:401909090",
@@ -45,14 +45,14 @@
         "prediction": {
           "status": "current",
           "game_id": "espn:401909090",
-          "version_id": "4e6ea2fc-1af9-42ed-b2d7-6fd35b31e581",
-          "state_revision": 11,
+          "version_id": "a4477a54-3427-4d82-a2d2-27d8872a94a9",
+          "state_revision": 13,
           "locked_at": null,
           "lock_reason": null,
           "schedule_revision": 1,
           "version": {
             "analysis_contract_version": "two-stage-forecast-v1",
-            "base_input_hash": "1c26144996d25f70859dd6baea17e8a7ca128e2b77424610674567e3149b754c",
+            "base_input_hash": "c30a07b7b0e848cf67fd74537236bb0a64f08d89377fbbcecc049c4d6d73204e",
             "game_id": "espn:401909090",
             "game_identity": {
               "away_team_id": 1610612760,
@@ -60,13 +60,13 @@
               "home_team_id": 1610612759,
               "scheduled_tipoff": "2026-10-21T01:30:00+00:00"
             },
-            "generated_at": "2026-10-20T13:15:36.988786+00:00",
-            "input_cutoff_at": "2026-10-20T13:15:26.460733+00:00",
-            "published_at": "2026-10-20T13:17:37.528853+00:00",
+            "generated_at": "2026-10-21T01:10:32.798270+00:00",
+            "input_cutoff_at": "2026-10-21T01:10:13.049217+00:00",
+            "published_at": "2026-10-21T01:10:35.582926+00:00",
             "schedule_revision": 1,
-            "stage": "EARLY_PREVIEW",
-            "version_id": "4e6ea2fc-1af9-42ed-b2d7-6fd35b31e581",
-            "payload_sha256": "48c6f435132057d0abb28d0a778f7d39389deaa4a730e30b6b70dad0b427ba4c",
+            "stage": "FINAL_PREGAME",
+            "version_id": "a4477a54-3427-4d82-a2d2-27d8872a94a9",
+            "payload_sha256": "0ab50104e7bf5820b5918a20c02dd98e438b7e93d6e902fd4d0a0ae298e2dc0f",
             "input_snapshot": {
               "away": {
                 "abbreviation": "OKC",
@@ -92,14 +92,15 @@
               "final_prediction": {
                 "evidence_ids": [
                   "330404be65a58a95ff7f9113c73489f92550f1d61ef1e6eef4c3049ecd297c2d",
-                  "479cc1aea8d92e389cd4b245a10da9d444a62a69d8b559dcae6101d336b00913",
                   "610e1f3e74af043ef04787ae8120dab033caf6eb4ceea1ab799636209642d0e5",
-                  "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0",
                   "a3c6ebc8c126084fef20b9bda9131ae3a250cbc45c62ee203f49c07dacd525bc",
-                  "a7a6b3c73b4571cfd42eb8e8f92d59f8e46078a8eb33dd355336b6b37f8456e5",
-                  "acd9ec5a44093352d1486e16ce9204649da42e481740e0d471894b23ead97763",
                   "e01d15b2e50596b8d77c43794ca4a140a4e98f9893acc35901fac168dfb7fe55",
-                  "fbb850878082350e965bca8aabeab4d38e499edd9ef578758b9b69c99cd4923b"
+                  "final-availability-1d15fbb7de59a84e8c91",
+                  "final-availability-352b335aaad9f247aaed",
+                  "final-availability-44ed173530f15f11b745",
+                  "final-availability-6403d771100aa2d82b92",
+                  "final-availability-b7822593f64046b5b053",
+                  "final-market-9d665b667307abc06745"
                 ],
                 "expected_margin": 3.5,
                 "expected_total": 224.5,
@@ -110,39 +111,14 @@
                 "classification": "subjective_analysis",
                 "evidence_ids": [
                   "330404be65a58a95ff7f9113c73489f92550f1d61ef1e6eef4c3049ecd297c2d",
-                  "479cc1aea8d92e389cd4b245a10da9d444a62a69d8b559dcae6101d336b00913",
                   "610e1f3e74af043ef04787ae8120dab033caf6eb4ceea1ab799636209642d0e5",
-                  "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0",
                   "a3c6ebc8c126084fef20b9bda9131ae3a250cbc45c62ee203f49c07dacd525bc",
-                  "a7a6b3c73b4571cfd42eb8e8f92d59f8e46078a8eb33dd355336b6b37f8456e5"
+                  "e01d15b2e50596b8d77c43794ca4a140a4e98f9893acc35901fac168dfb7fe55",
+                  "final-availability-1d15fbb7de59a84e8c91",
+                  "final-availability-352b335aaad9f247aaed"
                 ],
-                "statement": "揭幕夜，马刺在主场迎上上季西决七场才被淘汰的雷霆。文班亚马的护框对上SGA的挡拆，这场球的分差大概不会大，但每一回合的选择都很重。",
-                "title": "文班守门，雷霆来敲门"
-              }
-            }
-          },
-          "display_projection": {
-            "portfolio_editorial": {
-              "schema_version": "portfolio-editorial-v1",
-              "base_prediction_version_id": "4e6ea2fc-1af9-42ed-b2d7-6fd35b31e581",
-              "base_prediction_payload_sha256": "48c6f435132057d0abb28d0a778f7d39389deaa4a730e30b6b70dad0b427ba4c",
-              "editorial_sha256": "ec7f8c2a9fa53c8c208db398264bdbd83fac2608225051bbf09a80d8f1c641ee",
-              "generated_at": "2026-10-20T14:05:24.971728+00:00",
-              "editorial": {
-                "pregame_story": {
-                  "classification": "subjective_analysis",
-                  "evidence_ids": [
-                    "330404be65a58a95ff7f9113c73489f92550f1d61ef1e6eef4c3049ecd297c2d",
-                    "479cc1aea8d92e389cd4b245a10da9d444a62a69d8b559dcae6101d336b00913",
-                    "610e1f3e74af043ef04787ae8120dab033caf6eb4ceea1ab799636209642d0e5",
-                    "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0",
-                    "a3c6ebc8c126084fef20b9bda9131ae3a250cbc45c62ee203f49c07dacd525bc",
-                    "a7a6b3c73b4571cfd42eb8e8f92d59f8e46078a8eb33dd355336b6b37f8456e5"
-                  ],
-                  "statement": "上赛季西决打满七场的对手再次碰面，雷霆要过的，仍是文班亚马守着的禁区。",
-                  "title": "七战旧账今重算\n文班长臂待雷霆"
-                },
-                "analysis_article": "揭幕夜，马刺在主场迎上雷霆。上季西决七场才被淘汰的那支雷霆，核心几乎原样回来了；马刺这边，文班亚马、福克斯、卡斯尔、哈珀、瓦塞尔这套预计首发也摆得出来。两队都没有慢热的空间。\n\n我最想看的是文班亚马站在禁区里的样子。SGA叫挡拆，第一下不一定能过人，他会往后退半步，看文班是跟出来还是守在篮下。跟出来，霍姆格伦和哈滕斯坦就有顺下和外弹的空间；守在篮下，SGA那手中距离和抛投就有出手机会。雷霆上季进攻效率高，靠的就是这种“你选一个”的持球方式。文班在不在场，马刺的防守几乎是两支队。\n\n但让我略站雷霆，原因不在纸面效率，而在马刺缺了哈里斯之后侧翼的轮换。哈里斯季前赛一直受左小腿拉伤困扰，主帅约翰逊表示他暂时还要继续休战，马刺少了一个能顶锋线、能接球投、能在换防里不被点名的人。福克斯和卡斯尔要承担更多持球，雷霆这边华莱士和卡鲁索正好是能贴、能掏、能追着人跑的外线。马刺后场一旦被逼出几次仓促出球，雷霆的转换就会来，SGA拿球推起来，分差就是这样一点点积起来的。\n\n所以我看好雷霆赢球，也看好雷霆+1.5这个方向。预计分差只有三分半左右，这不是一场能拉开的大胜，雷霆的优势更像是第三节替补轮换时多出的一两个回合，而不是某一节突然打崩。马刺主场反扑的能力是有的，文班只要在场上，禁区就不会轻易失守。\n\n总分这边，我倾向小分，但把握没有让分那么足。成立的剧本是：文班在场时雷霆不敢无脑冲筐，马刺后场被压迫后出手变慢，两边都得在半场里一板一眼地找机会。可揭幕战的节奏本身就不好猜，雷霆的替补深度也可能把比赛推快。这一项我只当次选。\n\n开球后先看一件事：SGA叫挡拆时，文班是跟出来还是守在篮下。他选哪一边，雷霆就会往另一边打。"
+                "statement": "揭幕夜马刺主场迎雷霆，文班的护框对上SGA的挡拆，这是两队新赛季第一场真正的硬仗。",
+                "title": "文班坐镇迎雷霆\n亚历山大叩圣城"
               }
             }
           }
@@ -848,5 +824,5 @@
       }
     }
   ],
-  "published_at": "2026-10-20T22:40:55.496670+00:00"
+  "published_at": "2026-10-21T01:14:26.864614+00:00"
 }

@@ -99,7 +99,7 @@
       "source_label": "开发期赛前预测快照"
     },
     "source": {
-      "schedule_captured_at": "2026-10-20T07:27:55.093124+00:00"
+      "schedule_captured_at": "2026-10-21T01:10:21.049257+00:00"
     },
     "roster_context": {
       "teams": {
@@ -618,7 +618,7 @@
     "season_form": {
       "status": "available",
       "game_id": "espn:401909090",
-      "cutoff": "2026-10-20T13:15:26.460733+00:00",
+      "cutoff": "2026-10-21T01:10:13.049217+00:00",
       "season_start": 2026,
       "competition_scope": "all_game_types_in_current_season",
       "source": "schedule_catalog_final_games",
@@ -709,7 +709,7 @@
           }
         }
       },
-      "context_hash": "38263d5a8e7daebf97151186152fc0aeddec4b27c6793eaf28557aabda31ce26"
+      "context_hash": "10d3bb1ca0574c8d8d01813538d723da2500b03e8dbe67aa696051897bde8797"
     },
     "game_type": "regular_season",
     "schedule_revision": 1,
@@ -1185,16 +1185,16 @@
     },
     "official_injury_report": {
       "game_id": "espn:401909090",
-      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-19_05_45PM.pdf",
-      "source_published_at": "2026-10-19T21:45:00+00:00",
-      "captured_at": "2026-10-19T21:47:01.564060+00:00",
-      "source_sha256": "35a7204caa34e4c1ca9f9fb491cc793b2345e86257e8ffe2ee2ff4d1cddfac7b",
-      "parser_version": "nba-official-injury-live-v2",
+      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_00PM.pdf",
+      "source_published_at": "2026-10-21T01:00:00+00:00",
+      "captured_at": "2026-10-21T01:05:05.898351+00:00",
+      "source_sha256": "3eb6009a480d486bf2b79b529434988dec91990d78f4861c16c97afa13079681",
+      "parser_version": "nba-official-injury-live-v3",
       "status": "published",
-      "report_id": "3659e565e28c74e744818653d15ee6a0963ba068f497486ca5e1114c767faa74",
-      "report_date": "2026-10-19",
-      "report_time": "17:45",
-      "coverage": "partial",
+      "report_id": "7d40bf6f0f1fd4bb567af59092cbf16b6232b3f06ef5a209926ae8a3ed0ca2f7",
+      "report_date": "2026-10-20",
+      "report_time": "21:00",
+      "coverage": "complete",
       "records": [
         {
           "team_id": 1610612759,
@@ -1202,11 +1202,11 @@
           "status": "out",
           "reason": "Injury/Illness - Right Knee Surgery",
           "game_id": "espn:401909090",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-19_05_45PM.pdf",
-          "source_published_at": "2026-10-19T21:45:00+00:00",
-          "captured_at": "2026-10-19T21:47:01.564060+00:00",
-          "source_sha256": "35a7204caa34e4c1ca9f9fb491cc793b2345e86257e8ffe2ee2ff4d1cddfac7b",
-          "parser_version": "nba-official-injury-live-v2"
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_00PM.pdf",
+          "source_published_at": "2026-10-21T01:00:00+00:00",
+          "captured_at": "2026-10-21T01:05:05.898351+00:00",
+          "source_sha256": "3eb6009a480d486bf2b79b529434988dec91990d78f4861c16c97afa13079681",
+          "parser_version": "nba-official-injury-live-v3"
         },
         {
           "team_id": 1610612759,
@@ -1214,11 +1214,47 @@
           "status": "out",
           "reason": "Injury/Illness - Left Calf Strain",
           "game_id": "espn:401909090",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-19_05_45PM.pdf",
-          "source_published_at": "2026-10-19T21:45:00+00:00",
-          "captured_at": "2026-10-19T21:47:01.564060+00:00",
-          "source_sha256": "35a7204caa34e4c1ca9f9fb491cc793b2345e86257e8ffe2ee2ff4d1cddfac7b",
-          "parser_version": "nba-official-injury-live-v2"
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_00PM.pdf",
+          "source_published_at": "2026-10-21T01:00:00+00:00",
+          "captured_at": "2026-10-21T01:05:05.898351+00:00",
+          "source_sha256": "3eb6009a480d486bf2b79b529434988dec91990d78f4861c16c97afa13079681",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612760,
+          "player_name": "Nikola Topic",
+          "status": "out",
+          "reason": "Injury/Illness - Low Back Surgery",
+          "game_id": "espn:401909090",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_00PM.pdf",
+          "source_published_at": "2026-10-21T01:00:00+00:00",
+          "captured_at": "2026-10-21T01:05:05.898351+00:00",
+          "source_sha256": "3eb6009a480d486bf2b79b529434988dec91990d78f4861c16c97afa13079681",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612760,
+          "player_name": "Otega Oweh",
+          "status": "out",
+          "reason": "Injury/Illness - Right Achilles Tendon Repair/Surgery",
+          "game_id": "espn:401909090",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_00PM.pdf",
+          "source_published_at": "2026-10-21T01:00:00+00:00",
+          "captured_at": "2026-10-21T01:05:05.898351+00:00",
+          "source_sha256": "3eb6009a480d486bf2b79b529434988dec91990d78f4861c16c97afa13079681",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612760,
+          "player_name": "Thomas Sorber",
+          "status": "out",
+          "reason": "Injury/Illness - Right Knee Surgery",
+          "game_id": "espn:401909090",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_00PM.pdf",
+          "source_published_at": "2026-10-21T01:00:00+00:00",
+          "captured_at": "2026-10-21T01:05:05.898351+00:00",
+          "source_sha256": "3eb6009a480d486bf2b79b529434988dec91990d78f4861c16c97afa13079681",
+          "parser_version": "nba-official-injury-live-v3"
         }
       ]
     },
@@ -1227,16 +1263,16 @@
   "prediction": {
     "status": "current",
     "game_id": "espn:401909090",
-    "version_id": "4e6ea2fc-1af9-42ed-b2d7-6fd35b31e581",
-    "state_revision": 11,
+    "version_id": "a4477a54-3427-4d82-a2d2-27d8872a94a9",
+    "state_revision": 13,
     "locked_at": null,
     "lock_reason": null,
     "schedule_revision": 1,
     "fact_view": {
       "schema_version": "pregame-fact-view-v1",
       "game_id": "espn:401909090",
-      "version_id": "4e6ea2fc-1af9-42ed-b2d7-6fd35b31e581",
-      "source_payload_sha256": "48c6f435132057d0abb28d0a778f7d39389deaa4a730e30b6b70dad0b427ba4c",
+      "version_id": "a4477a54-3427-4d82-a2d2-27d8872a94a9",
+      "source_payload_sha256": "0ab50104e7bf5820b5918a20c02dd98e438b7e93d6e902fd4d0a0ae298e2dc0f",
       "origin": "new_frozen",
       "context": {
         "feature_cutoff": "2026-10-20T12:59:52.259716+00:00",
@@ -1476,218 +1512,59 @@
     },
     "display_projection": {
       "schema_version": "prediction-display-cutoffs-v1",
-      "version_id": "4e6ea2fc-1af9-42ed-b2d7-6fd35b31e581",
+      "version_id": "a4477a54-3427-4d82-a2d2-27d8872a94a9",
       "market_interpretation": {
         "schema_version": "writer-market-interpretation-v1",
         "spread": {
           "status": "available",
           "margin_perspective": "home_minus_away",
           "model_home_margin": -3.5,
-          "market_implied_home_margin": 1.5,
-          "spread_edge": -5.0,
+          "market_implied_home_margin": -1.5,
+          "spread_edge": -2.0,
           "ats_lean": "away",
           "ats_lean_reference": {
             "side": "away",
             "team_id": 1610612760,
             "team_name": "雷霆",
-            "line": 1.5,
-            "display": "雷霆 +1.5"
+            "line": -1.5,
+            "display": "雷霆 -1.5"
           },
-          "market_quote_id": "637158b6f14f4bfd790db37546dc1ac0d4850f5961dbacda46ca0982b86a6f82"
+          "market_quote_id": "b7915f2c492479b9f348440ec5a9fe98294b05d744593a6aa5aa04f5f46a399d"
         },
         "total": {
           "status": "available",
           "model_total": 224.5,
-          "market_total": 230.5,
-          "total_edge": -6.0,
+          "market_total": 229.5,
+          "total_edge": -5.0,
           "total_lean": "under",
-          "market_quote_id": "637158b6f14f4bfd790db37546dc1ac0d4850f5961dbacda46ca0982b86a6f82"
+          "market_quote_id": "b7915f2c492479b9f348440ec5a9fe98294b05d744593a6aa5aa04f5f46a399d"
         }
       },
       "cutoffs": {
-        "input_cutoff_at": "2026-10-20T13:15:26.460733+00:00",
+        "input_cutoff_at": "2026-10-21T01:10:13.049217+00:00",
         "feature_cutoff_at": "2026-10-20T12:59:52.259716+00:00",
         "roster_context_cutoff_at": null
-      },
-      "portfolio_editorial": {
-        "schema_version": "portfolio-editorial-v1",
-        "artifact_id": "poem-title-4e6ea2fc-1af9-42ed-b2d7-6fd35b31e581",
-        "base_prediction_version_id": "4e6ea2fc-1af9-42ed-b2d7-6fd35b31e581",
-        "base_prediction_payload_sha256": "48c6f435132057d0abb28d0a778f7d39389deaa4a730e30b6b70dad0b427ba4c",
-        "editorial_sha256": "ec7f8c2a9fa53c8c208db398264bdbd83fac2608225051bbf09a80d8f1c641ee",
-        "generated_at": "2026-10-20T14:05:24.971728+00:00",
-        "editorial": {
-          "pregame_story": {
-            "classification": "subjective_analysis",
-            "evidence_ids": [
-              "330404be65a58a95ff7f9113c73489f92550f1d61ef1e6eef4c3049ecd297c2d",
-              "479cc1aea8d92e389cd4b245a10da9d444a62a69d8b559dcae6101d336b00913",
-              "610e1f3e74af043ef04787ae8120dab033caf6eb4ceea1ab799636209642d0e5",
-              "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0",
-              "a3c6ebc8c126084fef20b9bda9131ae3a250cbc45c62ee203f49c07dacd525bc",
-              "a7a6b3c73b4571cfd42eb8e8f92d59f8e46078a8eb33dd355336b6b37f8456e5"
-            ],
-            "statement": "上赛季西决打满七场的对手再次碰面，雷霆要过的，仍是文班亚马守着的禁区。",
-            "title": "七战旧账今重算\n文班长臂待雷霆"
-          },
-          "analysis_article": "揭幕夜，马刺在主场迎上雷霆。上季西决七场才被淘汰的那支雷霆，核心几乎原样回来了；马刺这边，文班亚马、福克斯、卡斯尔、哈珀、瓦塞尔这套预计首发也摆得出来。两队都没有慢热的空间。\n\n我最想看的是文班亚马站在禁区里的样子。SGA叫挡拆，第一下不一定能过人，他会往后退半步，看文班是跟出来还是守在篮下。跟出来，霍姆格伦和哈滕斯坦就有顺下和外弹的空间；守在篮下，SGA那手中距离和抛投就有出手机会。雷霆上季进攻效率高，靠的就是这种“你选一个”的持球方式。文班在不在场，马刺的防守几乎是两支队。\n\n但让我略站雷霆，原因不在纸面效率，而在马刺缺了哈里斯之后侧翼的轮换。哈里斯季前赛一直受左小腿拉伤困扰，主帅约翰逊表示他暂时还要继续休战，马刺少了一个能顶锋线、能接球投、能在换防里不被点名的人。福克斯和卡斯尔要承担更多持球，雷霆这边华莱士和卡鲁索正好是能贴、能掏、能追着人跑的外线。马刺后场一旦被逼出几次仓促出球，雷霆的转换就会来，SGA拿球推起来，分差就是这样一点点积起来的。\n\n所以我看好雷霆赢球，也看好雷霆+1.5这个方向。预计分差只有三分半左右，这不是一场能拉开的大胜，雷霆的优势更像是第三节替补轮换时多出的一两个回合，而不是某一节突然打崩。马刺主场反扑的能力是有的，文班只要在场上，禁区就不会轻易失守。\n\n总分这边，我倾向小分，但把握没有让分那么足。成立的剧本是：文班在场时雷霆不敢无脑冲筐，马刺后场被压迫后出手变慢，两边都得在半场里一板一眼地找机会。可揭幕战的节奏本身就不好猜，雷霆的替补深度也可能把比赛推快。这一项我只当次选。\n\n开球后先看一件事：SGA叫挡拆时，文班是跟出来还是守在篮下。他选哪一边，雷霆就会往另一边打。",
-          "watch_themes": [
-            {
-              "classification": "subjective_analysis",
-              "evidence_ids": [
-                "330404be65a58a95ff7f9113c73489f92550f1d61ef1e6eef4c3049ecd297c2d",
-                "479cc1aea8d92e389cd4b245a10da9d444a62a69d8b559dcae6101d336b00913",
-                "610e1f3e74af043ef04787ae8120dab033caf6eb4ceea1ab799636209642d0e5",
-                "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0",
-                "a3c6ebc8c126084fef20b9bda9131ae3a250cbc45c62ee203f49c07dacd525bc",
-                "a7a6b3c73b4571cfd42eb8e8f92d59f8e46078a8eb33dd355336b6b37f8456e5"
-              ],
-              "statement": "SGA挡拆时，文班跟出来还是守篮下，直接决定雷霆的进攻走哪条路。",
-              "title": "文班亚马的防守选择"
-            },
-            {
-              "classification": "subjective_analysis",
-              "evidence_ids": [
-                "330404be65a58a95ff7f9113c73489f92550f1d61ef1e6eef4c3049ecd297c2d",
-                "479cc1aea8d92e389cd4b245a10da9d444a62a69d8b559dcae6101d336b00913",
-                "610e1f3e74af043ef04787ae8120dab033caf6eb4ceea1ab799636209642d0e5",
-                "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0",
-                "a3c6ebc8c126084fef20b9bda9131ae3a250cbc45c62ee203f49c07dacd525bc",
-                "a7a6b3c73b4571cfd42eb8e8f92d59f8e46078a8eb33dd355336b6b37f8456e5"
-              ],
-              "statement": "哈里斯的小腿伤势让马刺锋线轮换存在变数，福克斯和卡斯尔要面对华莱士、卡鲁索的贴防，失误多少会决定转换得分。",
-              "title": "马刺后场能不能顶住压迫"
-            },
-            {
-              "classification": "subjective_analysis",
-              "evidence_ids": [
-                "330404be65a58a95ff7f9113c73489f92550f1d61ef1e6eef4c3049ecd297c2d",
-                "479cc1aea8d92e389cd4b245a10da9d444a62a69d8b559dcae6101d336b00913",
-                "610e1f3e74af043ef04787ae8120dab033caf6eb4ceea1ab799636209642d0e5",
-                "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0",
-                "a3c6ebc8c126084fef20b9bda9131ae3a250cbc45c62ee203f49c07dacd525bc",
-                "a7a6b3c73b4571cfd42eb8e8f92d59f8e46078a8eb33dd355336b6b37f8456e5"
-              ],
-              "statement": "预计分差只有三分半，雷霆的深度优势最可能体现在轮换时段的一两个回合上。",
-              "title": "雷霆替补轮换的第三节"
-            }
-          ],
-          "player_analysis": [
-            {
-              "classification": "subjective_analysis",
-              "evidence_ids": [
-                "175d912fe7c56352453fe8fd46e6ed2f6c1b255a489cba3f086c946a546376c3",
-                "c3f0cb907d5e3ed09fbc49224e67c62e32919c454e9f3c33aa5163e1e6aa4f01",
-                "fbb850878082350e965bca8aabeab4d38e499edd9ef578758b9b69c99cd4923b"
-              ],
-              "player_name": "Victor Wembanyama",
-              "statement": "马刺防守的支点。他在场时雷霆不敢随意冲筐，他下场后禁区立刻变宽，出场时间直接决定马刺防守的下限。"
-            },
-            {
-              "classification": "subjective_analysis",
-              "evidence_ids": [
-                "175d912fe7c56352453fe8fd46e6ed2f6c1b255a489cba3f086c946a546376c3",
-                "9ae78c344c1f259642fa91cbd382eca78d23bcbc6b6e95ec122b9a04bea30edb",
-                "fbb850878082350e965bca8aabeab4d38e499edd9ef578758b9b69c99cd4923b"
-              ],
-              "player_name": "De'Aaron Fox",
-              "statement": "马刺后场组织与突破更集中在他手里。他能不能在雷霆外线压迫下稳住出球，是马刺进攻不塌的关键。"
-            },
-            {
-              "classification": "subjective_analysis",
-              "evidence_ids": [
-                "175d912fe7c56352453fe8fd46e6ed2f6c1b255a489cba3f086c946a546376c3",
-                "fbb850878082350e965bca8aabeab4d38e499edd9ef578758b9b69c99cd4923b"
-              ],
-              "player_name": "Stephon Castle",
-              "statement": "预计首发后场之一，要分担持球，也要面对雷霆最能贴人的外线。他的失误数会直接影响马刺的回合质量。"
-            },
-            {
-              "classification": "subjective_analysis",
-              "evidence_ids": [
-                "175d912fe7c56352453fe8fd46e6ed2f6c1b255a489cba3f086c946a546376c3",
-                "c3f0cb907d5e3ed09fbc49224e67c62e32919c454e9f3c33aa5163e1e6aa4f01",
-                "fbb850878082350e965bca8aabeab4d38e499edd9ef578758b9b69c99cd4923b"
-              ],
-              "player_name": "Devin Vassell",
-              "statement": "马刺侧翼少人之后，他的投射和换防负担都变重，是文班之外最需要撑住锋线的人。"
-            },
-            {
-              "classification": "subjective_analysis",
-              "evidence_ids": [
-                "175d912fe7c56352453fe8fd46e6ed2f6c1b255a489cba3f086c946a546376c3",
-                "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0"
-              ],
-              "player_name": "Shai Gilgeous-Alexander",
-              "statement": "雷霆进攻的起点。他反复叫挡拆，把文班逼进“跟出来还是守篮下”的选择题，雷霆的效率就从这里长出来。"
-            },
-            {
-              "classification": "subjective_analysis",
-              "evidence_ids": [
-                "175d912fe7c56352453fe8fd46e6ed2f6c1b255a489cba3f086c946a546376c3",
-                "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0"
-              ],
-              "player_name": "Chet Holmgren",
-              "statement": "和哈滕斯坦一起撑起雷霆内线，既能顺下也能外弹，是文班跟出禁区后最直接的受益者。"
-            },
-            {
-              "classification": "subjective_analysis",
-              "evidence_ids": [
-                "175d912fe7c56352453fe8fd46e6ed2f6c1b255a489cba3f086c946a546376c3",
-                "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0"
-              ],
-              "player_name": "Isaiah Hartenstein",
-              "statement": "预计首发中锋，负责篮板和掩护质量，让SGA的挡拆有稳定的落点，也分担霍姆格伦的对位压力。"
-            },
-            {
-              "classification": "subjective_analysis",
-              "evidence_ids": [
-                "175d912fe7c56352453fe8fd46e6ed2f6c1b255a489cba3f086c946a546376c3",
-                "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0"
-              ],
-              "player_name": "Cason Wallace",
-              "statement": "雷霆外线压迫的第一道，预计首发就要去贴马刺的持球人，逼出仓促出球和转换机会。"
-            },
-            {
-              "classification": "subjective_analysis",
-              "evidence_ids": [
-                "175d912fe7c56352453fe8fd46e6ed2f6c1b255a489cba3f086c946a546376c3",
-                "a9464b4b59a1e4bf1affb5e2db3e2032facff9bc50fd97692c6ddc060dfa7953"
-              ],
-              "player_name": "Alex Caruso",
-              "statement": "替补席上的防守资源，出场时间未确认，但只要上场就能给马刺后场再加一层压力。"
-            }
-          ]
-        }
       }
     },
     "version": {
       "analysis_contract_version": "two-stage-forecast-v1",
-      "base_input_hash": "1c26144996d25f70859dd6baea17e8a7ca128e2b77424610674567e3149b754c",
+      "base_input_hash": "c30a07b7b0e848cf67fd74537236bb0a64f08d89377fbbcecc049c4d6d73204e",
+      "baseline_version_id": "4e6ea2fc-1af9-42ed-b2d7-6fd35b31e581",
       "editorial_material": [
         {
           "effect": "uncertainty",
           "evidence_ids": [
-            "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0",
-            "a9464b4b59a1e4bf1affb5e2db3e2032facff9bc50fd97692c6ddc060dfa7953",
-            "c3f0cb907d5e3ed09fbc49224e67c62e32919c454e9f3c33aa5163e1e6aa4f01",
-            "fbb850878082350e965bca8aabeab4d38e499edd9ef578758b9b69c99cd4923b"
+            "final-lineup-b45dbca0cb84073fe664",
+            "final-lineup-f8375b3bf852ad86d414",
+            "final-roster-6b4711dfc62be30609e6"
           ],
           "pregame_plan": {
             "key_matchup": "Wembanyama 护框 vs SGA 挡拆",
             "lineups": [
               {
-                "basis": "source_expected",
-                "candidates": [
-                  "Keldon Johnson",
-                  "Julian Champagnie",
-                  "Harrison Barnes",
-                  "Luke Kornet",
-                  "Carter Bryant"
-                ],
+                "basis": "agent_expected",
                 "evidence_ids": [
-                  "fbb850878082350e965bca8aabeab4d38e499edd9ef578758b9b69c99cd4923b",
-                  "c3f0cb907d5e3ed09fbc49224e67c62e32919c454e9f3c33aa5163e1e6aa4f01"
+                  "final-lineup-f8375b3bf852ad86d414"
                 ],
                 "players": [
                   "De'Aaron Fox",
@@ -1696,21 +1573,13 @@
                   "Devin Vassell",
                   "Victor Wembanyama"
                 ],
-                "rationale": "来源预测首发 Fox/Castle/Harper/Vassell/Wembanyama；Harris 确认缺阵，替补由 Johnson、Champagnie 等填补。",
+                "rationale": "沿用已发布首发预期，并核对当前归属及明确缺阵信息；本次尚未取得确认首发。",
                 "side": "home"
               },
               {
-                "basis": "source_expected",
-                "candidates": [
-                  "Alex Caruso",
-                  "Ajay Mitchell",
-                  "Jaylin Williams",
-                  "Kenrich Williams",
-                  "Jared McCain"
-                ],
+                "basis": "agent_expected",
                 "evidence_ids": [
-                  "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0",
-                  "a9464b4b59a1e4bf1affb5e2db3e2032facff9bc50fd97692c6ddc060dfa7953"
+                  "final-lineup-b45dbca0cb84073fe664"
                 ],
                 "players": [
                   "Shai Gilgeous-Alexander",
@@ -1719,7 +1588,7 @@
                   "Chet Holmgren",
                   "Isaiah Hartenstein"
                 ],
-                "rationale": "来源预测首发 SGA/Wallace/J.Williams/Holmgren/Hartenstein；替补深度由 Caruso、Mitchell 等构成。",
+                "rationale": "沿用已发布首发预期，并核对当前归属及明确缺阵信息；本次尚未取得确认首发。",
                 "side": "away"
               }
             ],
@@ -1727,52 +1596,51 @@
               {
                 "basis": "agent_estimate",
                 "evidence_ids": [
-                  "fbb850878082350e965bca8aabeab4d38e499edd9ef578758b9b69c99cd4923b"
+                  "final-roster-6b4711dfc62be30609e6"
                 ],
                 "minutes_max": 36,
                 "minutes_min": 30,
                 "player_name": "Victor Wembanyama",
-                "rationale": "核心中锋揭幕战预计正常负荷，但无官方限时信息，估计 30-36 分钟。",
+                "rationale": "沿用此前负荷估计，并核对当前归属与缺阵消息；该范围不是本场确认安排。",
                 "side": "home"
               },
               {
                 "basis": "agent_estimate",
                 "evidence_ids": [
-                  "fbb850878082350e965bca8aabeab4d38e499edd9ef578758b9b69c99cd4923b"
+                  "final-roster-6b4711dfc62be30609e6"
                 ],
                 "minutes_max": 35,
                 "minutes_min": 30,
                 "player_name": "De'Aaron Fox",
-                "rationale": "首发控卫，Harris 缺阵后组织负担加重，估计 30-35 分钟。",
+                "rationale": "沿用此前负荷估计，并核对当前归属与缺阵消息；该范围不是本场确认安排。",
                 "side": "home"
               },
               {
                 "basis": "agent_estimate",
                 "evidence_ids": [
-                  "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0"
+                  "final-roster-6b4711dfc62be30609e6"
                 ],
                 "minutes_max": 37,
                 "minutes_min": 32,
                 "player_name": "Shai Gilgeous-Alexander",
-                "rationale": "核心后卫揭幕战预计正常负荷，估计 32-37 分钟。",
+                "rationale": "沿用此前负荷估计，并核对当前归属与缺阵消息；该范围不是本场确认安排。",
                 "side": "away"
               },
               {
                 "basis": "agent_estimate",
                 "evidence_ids": [
-                  "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0"
+                  "final-roster-6b4711dfc62be30609e6"
                 ],
                 "minutes_max": 33,
                 "minutes_min": 28,
                 "player_name": "Chet Holmgren",
-                "rationale": "首发内线，与哈滕斯坦分担中锋时间，估计 28-33 分钟。",
+                "rationale": "沿用此前负荷估计，并核对当前归属与缺阵消息；该范围不是本场确认安排。",
                 "side": "away"
               }
             ],
             "uncertainty": [
-              "双方均无确认首发，以上为来源预测。",
-              "马刺 Harris 确认缺阵，其余球员出战状态未独立确认。",
-              "雷霆替补轮换与卡鲁索负荷未确认。"
+              "首发仍有预计项，尚未取得完整确认。",
+              "部分球员本场出战状态尚未明确，负荷和出场安排只能作条件分析。"
             ]
           },
           "summary": "本场预计首发与核心球员负荷"
@@ -1780,40 +1648,28 @@
       ],
       "evidence_index": {
         "175d912fe7c56352453fe8fd46e6ed2f6c1b255a489cba3f086c946a546376c3": {
-          "section": "roster_context",
-          "source_type": "Fact"
+          "section": "early_assumption",
+          "source_type": "BaselineContext"
         },
         "330404be65a58a95ff7f9113c73489f92550f1d61ef1e6eef4c3049ecd297c2d": {
           "section": "team_form",
-          "source_type": "Fact"
-        },
-        "3c475f460272875ba5f07695bbe03e825d192e013676f0cb9b27d8b43b857723": {
-          "section": "model_facts",
           "source_type": "Fact"
         },
         "479cc1aea8d92e389cd4b245a10da9d444a62a69d8b559dcae6101d336b00913": {
           "section": "web_context",
           "source_type": "Fact"
         },
-        "5e1f86be023b2ece4a24b9b32ebcbf9298b09171f9697447a9d02d08f26b778b": {
-          "section": "season_form",
-          "source_type": "Fact"
-        },
         "610e1f3e74af043ef04787ae8120dab033caf6eb4ceea1ab799636209642d0e5": {
           "section": "prediction",
           "source_type": "ModelForecast"
         },
-        "637158b6f14f4bfd790db37546dc1ac0d4850f5961dbacda46ca0982b86a6f82": {
-          "section": "web_context",
-          "source_type": "MarketSnapshot"
-        },
         "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0": {
-          "section": "web_context",
-          "source_type": "Fact"
+          "section": "early_assumption",
+          "source_type": "BaselineContext"
         },
         "9ae78c344c1f259642fa91cbd382eca78d23bcbc6b6e95ec122b9a04bea30edb": {
-          "section": "availability",
-          "source_type": "official_nba_injury_pdf"
+          "section": "early_assumption",
+          "source_type": "BaselineContext"
         },
         "a3c6ebc8c126084fef20b9bda9131ae3a250cbc45c62ee203f49c07dacd525bc": {
           "section": "matchup_history",
@@ -1824,44 +1680,60 @@
           "source_type": "Context"
         },
         "a9464b4b59a1e4bf1affb5e2db3e2032facff9bc50fd97692c6ddc060dfa7953": {
-          "section": "web_context",
-          "source_type": "Fact"
+          "section": "early_assumption",
+          "source_type": "BaselineContext"
         },
         "acd9ec5a44093352d1486e16ce9204649da42e481740e0d471894b23ead97763": {
           "section": "web_context",
           "source_type": "Fact"
         },
-        "b29e90d27c1fd5aa09712bbfae4eccec28ff7a16062b16c5384b85157a3e1c72": {
-          "section": "matchup",
-          "source_type": "Fact"
-        },
         "c3f0cb907d5e3ed09fbc49224e67c62e32919c454e9f3c33aa5163e1e6aa4f01": {
-          "section": "web_context",
-          "source_type": "Fact"
-        },
-        "d1c9c13013aa949e93e45efb51006edfdb87310d938cce1ddac634d27ec6e2bb": {
-          "section": "game_identity",
-          "source_type": "Fact"
-        },
-        "d5663020ca4db39c1b30ccab03ee8355a55d826a140061cfc5db22a81c249edf": {
-          "section": "web_context",
-          "source_type": "Fact"
+          "section": "early_assumption",
+          "source_type": "BaselineContext"
         },
         "e01d15b2e50596b8d77c43794ca4a140a4e98f9893acc35901fac168dfb7fe55": {
           "section": "season_phase",
           "source_type": "Fact"
         },
-        "e6a19dfa122652ddb4a22e059aec1ccd191294d7ef5287b5172650032e6032c5": {
-          "section": "research_status",
-          "source_type": "Context"
-        },
         "fbb850878082350e965bca8aabeab4d38e499edd9ef578758b9b69c99cd4923b": {
-          "section": "web_context",
-          "source_type": "Fact"
+          "section": "early_assumption",
+          "source_type": "BaselineContext"
         },
-        "public-market-fanduel-20260918-okc-sa": {
+        "final-availability-1d15fbb7de59a84e8c91": {
           "section": "web_context",
-          "source_type": "Fact"
+          "source_type": "SourceFact"
+        },
+        "final-availability-352b335aaad9f247aaed": {
+          "section": "web_context",
+          "source_type": "SourceFact"
+        },
+        "final-availability-44ed173530f15f11b745": {
+          "section": "web_context",
+          "source_type": "SourceFact"
+        },
+        "final-availability-6403d771100aa2d82b92": {
+          "section": "web_context",
+          "source_type": "SourceFact"
+        },
+        "final-availability-b7822593f64046b5b053": {
+          "section": "web_context",
+          "source_type": "SourceFact"
+        },
+        "final-lineup-b45dbca0cb84073fe664": {
+          "section": "web_context",
+          "source_type": "AnalystEstimate"
+        },
+        "final-lineup-f8375b3bf852ad86d414": {
+          "section": "web_context",
+          "source_type": "AnalystEstimate"
+        },
+        "final-market-9d665b667307abc06745": {
+          "section": "web_context",
+          "source_type": "MarketSnapshot"
+        },
+        "final-roster-6b4711dfc62be30609e6": {
+          "section": "roster_context",
+          "source_type": "SourceFact"
         }
       },
       "game_id": "espn:401909090",
@@ -1871,8 +1743,8 @@
         "home_team_id": 1610612759,
         "scheduled_tipoff": "2026-10-21T01:30:00+00:00"
       },
-      "generated_at": "2026-10-20T13:15:36.988786+00:00",
-      "input_cutoff_at": "2026-10-20T13:15:26.460733+00:00",
+      "generated_at": "2026-10-21T01:10:32.798270+00:00",
+      "input_cutoff_at": "2026-10-21T01:10:13.049217+00:00",
       "input_snapshot": {
         "away": {
           "abbreviation": "OKC",
@@ -2289,80 +2161,354 @@
         ],
         "neutral_site": false,
         "official_injury_report": {
-          "captured_at": "2026-10-20T13:15:24.055306+00:00",
+          "captured_at": "2026-10-21T01:05:05.898351+00:00",
           "coverage": "complete",
           "game_id": "espn:401909090",
           "parser_version": "nba-official-injury-live-v3",
           "records": [
             {
-              "captured_at": "2026-10-20T13:15:24.055306+00:00",
+              "captured_at": "2026-10-21T01:05:05.898351+00:00",
               "game_id": "espn:401909090",
               "parser_version": "nba-official-injury-live-v3",
               "player_name": "Jayden Quaintance",
               "reason": "Injury/Illness - Right Knee Surgery",
-              "source_published_at": "2026-10-20T13:00:00+00:00",
-              "source_sha256": "924aa1e1dc1847edba94a9d188b3cac69ca3504a1e4659b835c6010a96d85d25",
-              "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_00AM.pdf",
+              "source_published_at": "2026-10-21T01:00:00+00:00",
+              "source_sha256": "3eb6009a480d486bf2b79b529434988dec91990d78f4861c16c97afa13079681",
+              "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_00PM.pdf",
               "status": "out",
               "team_id": 1610612759
             },
             {
-              "captured_at": "2026-10-20T13:15:24.055306+00:00",
+              "captured_at": "2026-10-21T01:05:05.898351+00:00",
               "game_id": "espn:401909090",
               "parser_version": "nba-official-injury-live-v3",
               "player_name": "Tobias Harris",
               "reason": "Injury/Illness - Left Calf Strain",
-              "source_published_at": "2026-10-20T13:00:00+00:00",
-              "source_sha256": "924aa1e1dc1847edba94a9d188b3cac69ca3504a1e4659b835c6010a96d85d25",
-              "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_00AM.pdf",
+              "source_published_at": "2026-10-21T01:00:00+00:00",
+              "source_sha256": "3eb6009a480d486bf2b79b529434988dec91990d78f4861c16c97afa13079681",
+              "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_00PM.pdf",
               "status": "out",
               "team_id": 1610612759
             },
             {
-              "captured_at": "2026-10-20T13:15:24.055306+00:00",
+              "captured_at": "2026-10-21T01:05:05.898351+00:00",
               "game_id": "espn:401909090",
               "parser_version": "nba-official-injury-live-v3",
               "player_name": "Nikola Topic",
               "reason": "Injury/Illness - Low Back Surgery",
-              "source_published_at": "2026-10-20T13:00:00+00:00",
-              "source_sha256": "924aa1e1dc1847edba94a9d188b3cac69ca3504a1e4659b835c6010a96d85d25",
-              "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_00AM.pdf",
+              "source_published_at": "2026-10-21T01:00:00+00:00",
+              "source_sha256": "3eb6009a480d486bf2b79b529434988dec91990d78f4861c16c97afa13079681",
+              "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_00PM.pdf",
               "status": "out",
               "team_id": 1610612760
             },
             {
-              "captured_at": "2026-10-20T13:15:24.055306+00:00",
+              "captured_at": "2026-10-21T01:05:05.898351+00:00",
               "game_id": "espn:401909090",
               "parser_version": "nba-official-injury-live-v3",
               "player_name": "Otega Oweh",
               "reason": "Injury/Illness - Right Achilles Tendon Repair/Surgery",
-              "source_published_at": "2026-10-20T13:00:00+00:00",
-              "source_sha256": "924aa1e1dc1847edba94a9d188b3cac69ca3504a1e4659b835c6010a96d85d25",
-              "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_00AM.pdf",
+              "source_published_at": "2026-10-21T01:00:00+00:00",
+              "source_sha256": "3eb6009a480d486bf2b79b529434988dec91990d78f4861c16c97afa13079681",
+              "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_00PM.pdf",
               "status": "out",
               "team_id": 1610612760
             },
             {
-              "captured_at": "2026-10-20T13:15:24.055306+00:00",
+              "captured_at": "2026-10-21T01:05:05.898351+00:00",
               "game_id": "espn:401909090",
               "parser_version": "nba-official-injury-live-v3",
               "player_name": "Thomas Sorber",
               "reason": "Injury/Illness - Right Knee Surgery",
-              "source_published_at": "2026-10-20T13:00:00+00:00",
-              "source_sha256": "924aa1e1dc1847edba94a9d188b3cac69ca3504a1e4659b835c6010a96d85d25",
-              "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_00AM.pdf",
+              "source_published_at": "2026-10-21T01:00:00+00:00",
+              "source_sha256": "3eb6009a480d486bf2b79b529434988dec91990d78f4861c16c97afa13079681",
+              "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_00PM.pdf",
               "status": "out",
               "team_id": 1610612760
             }
           ],
           "report_date": "2026-10-20",
-          "report_id": "1cfd1f0128137182052a10700da0505989b76a773f9a4fb06a65e62201e086d0",
-          "report_time": "09:00",
-          "source_published_at": "2026-10-20T13:00:00+00:00",
-          "source_sha256": "924aa1e1dc1847edba94a9d188b3cac69ca3504a1e4659b835c6010a96d85d25",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_00AM.pdf",
+          "report_id": "7d40bf6f0f1fd4bb567af59092cbf16b6232b3f06ef5a209926ae8a3ed0ca2f7",
+          "report_time": "21:00",
+          "source_published_at": "2026-10-21T01:00:00+00:00",
+          "source_sha256": "3eb6009a480d486bf2b79b529434988dec91990d78f4861c16c97afa13079681",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_00PM.pdf",
           "status": "published"
         },
+        "player_display_names": [
+          {
+            "canonical_name_en": "Harrison Barnes",
+            "created_at": "2026-10-14T15:14:26.308074+00:00",
+            "display_name_zh": "哈里森·巴恩斯",
+            "name_key": "harrison barnes",
+            "player_id": "name:harrison barnes",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Maliq Brown",
+            "created_at": "2026-10-14T15:14:26.308141+00:00",
+            "display_name_zh": "马利克·布朗",
+            "name_key": "maliq brown",
+            "player_id": "name:maliq brown",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Carter Bryant",
+            "created_at": "2026-10-14T15:14:26.308172+00:00",
+            "display_name_zh": "卡特·布莱恩特",
+            "name_key": "carter bryant",
+            "player_id": "name:carter bryant",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Stephon Castle",
+            "created_at": "2026-10-14T15:14:26.308198+00:00",
+            "display_name_zh": "斯蒂芬·卡斯尔",
+            "name_key": "stephon castle",
+            "player_id": "name:stephon castle",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Julian Champagnie",
+            "created_at": "2026-10-14T15:14:26.308223+00:00",
+            "display_name_zh": "朱利安·尚帕涅",
+            "name_key": "julian champagnie",
+            "player_id": "name:julian champagnie",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "De'Aaron Fox",
+            "created_at": "2026-10-14T15:14:26.308271+00:00",
+            "display_name_zh": "达龙·福克斯",
+            "name_key": "de aaron fox",
+            "player_id": "name:de aaron fox",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Ja'Kobi Gillespie",
+            "created_at": "2026-10-14T15:14:26.308441+00:00",
+            "display_name_zh": "贾科比·吉莱斯皮",
+            "name_key": "ja kobi gillespie",
+            "player_id": "name:ja kobi gillespie",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Dylan Harper",
+            "created_at": "2026-10-14T15:14:26.308496+00:00",
+            "display_name_zh": "迪伦·哈珀",
+            "name_key": "dylan harper",
+            "player_id": "name:dylan harper",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Tobias Harris",
+            "created_at": "2026-10-14T15:14:26.308528+00:00",
+            "display_name_zh": "托拜厄斯·哈里斯",
+            "name_key": "tobias harris",
+            "player_id": "name:tobias harris",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Keldon Johnson",
+            "created_at": "2026-10-14T15:14:26.308570+00:00",
+            "display_name_zh": "凯尔登·约翰逊",
+            "name_key": "keldon johnson",
+            "player_id": "name:keldon johnson",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "David Jones Garcia",
+            "created_at": "2026-10-14T15:14:26.308606+00:00",
+            "display_name_zh": "大卫·琼斯·加西亚",
+            "name_key": "david jones garcia",
+            "player_id": "name:david jones garcia",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Luke Kornet",
+            "created_at": "2026-10-14T15:14:26.308643+00:00",
+            "display_name_zh": "卢克·科内特",
+            "name_key": "luke kornet",
+            "player_id": "name:luke kornet",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Jordan McLaughlin",
+            "created_at": "2026-10-14T15:14:26.308669+00:00",
+            "display_name_zh": "乔丹·麦克劳克林",
+            "name_key": "jordan mclaughlin",
+            "player_id": "name:jordan mclaughlin",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Jayden Quaintance",
+            "created_at": "2026-10-14T15:14:26.308728+00:00",
+            "display_name_zh": "杰登·昆坦斯",
+            "name_key": "jayden quaintance",
+            "player_id": "name:jayden quaintance",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Tarris Reed Jr.",
+            "created_at": "2026-10-14T15:14:26.308753+00:00",
+            "display_name_zh": "塔里斯·里德二世",
+            "name_key": "tarris reed jr",
+            "player_id": "name:tarris reed jr",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Devin Vassell",
+            "created_at": "2026-10-14T15:14:26.308777+00:00",
+            "display_name_zh": "德文·瓦塞尔",
+            "name_key": "devin vassell",
+            "player_id": "name:devin vassell",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Victor Wembanyama",
+            "created_at": "2026-10-14T15:14:26.308816+00:00",
+            "display_name_zh": "维克托·文班亚马",
+            "name_key": "victor wembanyama",
+            "player_id": "name:victor wembanyama",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Brooks Barnhizer",
+            "created_at": "2026-10-14T15:14:26.308875+00:00",
+            "display_name_zh": "布鲁克斯·巴恩海泽",
+            "name_key": "brooks barnhizer",
+            "player_id": "name:brooks barnhizer",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Alex Caruso",
+            "created_at": "2026-10-14T15:14:26.308900+00:00",
+            "display_name_zh": "亚历克斯·卡鲁索",
+            "name_key": "alex caruso",
+            "player_id": "name:alex caruso",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Josh Dix",
+            "created_at": "2026-10-14T15:14:26.308924+00:00",
+            "display_name_zh": "乔什·迪克斯",
+            "name_key": "josh dix",
+            "player_id": "name:josh dix",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Shai Gilgeous-Alexander",
+            "created_at": "2026-10-14T15:14:26.308951+00:00",
+            "display_name_zh": "谢伊·吉尔杰斯-亚历山大",
+            "name_key": "shai gilgeous alexander",
+            "player_id": "name:shai gilgeous alexander",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Isaiah Hartenstein",
+            "created_at": "2026-10-14T15:14:26.308976+00:00",
+            "display_name_zh": "以赛亚·哈尔滕施泰因",
+            "name_key": "isaiah hartenstein",
+            "player_id": "name:isaiah hartenstein",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Chet Holmgren",
+            "created_at": "2026-10-14T15:14:26.309024+00:00",
+            "display_name_zh": "切特·霍姆格伦",
+            "name_key": "chet holmgren",
+            "player_id": "name:chet holmgren",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Aday Mara",
+            "created_at": "2026-10-14T15:14:26.309047+00:00",
+            "display_name_zh": "阿代·马拉",
+            "name_key": "aday mara",
+            "player_id": "name:aday mara",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Jared McCain",
+            "created_at": "2026-10-14T15:14:26.309072+00:00",
+            "display_name_zh": "贾里德·麦凯恩",
+            "name_key": "jared mccain",
+            "player_id": "name:jared mccain",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Ajay Mitchell",
+            "created_at": "2026-10-14T15:14:26.309132+00:00",
+            "display_name_zh": "阿杰·米切尔",
+            "name_key": "ajay mitchell",
+            "player_id": "name:ajay mitchell",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Otega Oweh",
+            "created_at": "2026-10-14T15:14:26.309156+00:00",
+            "display_name_zh": "奥泰加·奥维",
+            "name_key": "otega oweh",
+            "player_id": "name:otega oweh",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Thomas Sorber",
+            "created_at": "2026-10-14T15:14:26.309257+00:00",
+            "display_name_zh": "托马斯·索伯",
+            "name_key": "thomas sorber",
+            "player_id": "name:thomas sorber",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Bennett Stirtz",
+            "created_at": "2026-10-14T15:14:26.309285+00:00",
+            "display_name_zh": "本内特·斯特茨",
+            "name_key": "bennett stirtz",
+            "player_id": "name:bennett stirtz",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Nikola Topic",
+            "created_at": "2026-10-14T15:14:26.309345+00:00",
+            "display_name_zh": "尼古拉·托皮奇",
+            "name_key": "nikola topic",
+            "player_id": "name:nikola topic",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Cason Wallace",
+            "created_at": "2026-10-14T15:14:26.309370+00:00",
+            "display_name_zh": "卡森·华莱士",
+            "name_key": "cason wallace",
+            "player_id": "name:cason wallace",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Jalen Williams",
+            "created_at": "2026-10-14T15:14:26.309399+00:00",
+            "display_name_zh": "杰伦·威廉姆斯",
+            "name_key": "jalen williams",
+            "player_id": "name:jalen williams",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Jaylin Williams",
+            "created_at": "2026-10-14T15:14:26.309423+00:00",
+            "display_name_zh": "杰林·威廉姆斯",
+            "name_key": "jaylin williams",
+            "player_id": "name:jaylin williams",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Kenrich Williams",
+            "created_at": "2026-10-14T15:14:26.309448+00:00",
+            "display_name_zh": "肯里奇·威廉姆斯",
+            "name_key": "kenrich williams",
+            "player_id": "name:kenrich williams",
+            "translation_source": "llm_transliteration"
+          }
+        ],
         "prediction": {
           "available": true,
           "expected_away_score": 108.8510538058597,
@@ -2373,24 +2519,24 @@
           "winner_team_id": 1610612759
         },
         "public_market_reference": {
-          "away_moneyline": -102.0,
-          "away_spread": 1.5,
-          "captured_at": "2026-10-20T13:08:38.543704+00:00",
+          "away_moneyline": -118.0,
+          "away_spread": -1.5,
+          "captured_at": "2026-10-21T01:10:04.086961+00:00",
           "eligible_prediction_input": false,
-          "expected_home_margin": 1.5,
+          "expected_home_margin": -1.5,
           "game_identity": {
             "away_team": "Oklahoma City Thunder",
             "away_team_id": 1610612760,
             "game_id": "espn:401909090",
-            "game_type": "regular_season",
+            "game_type": null,
             "home_team": "San Antonio Spurs",
             "home_team_id": 1610612759,
             "registered_game": true,
             "scheduled_tipoff": "2026-10-21T01:30Z"
           },
-          "home_moneyline": -118.0,
-          "home_spread": -1.5,
-          "observed_at": "2026-10-20T13:08:38.543704+00:00",
+          "home_moneyline": -102.0,
+          "home_spread": 1.5,
+          "observed_at": "2026-10-21T01:10:04.086961+00:00",
           "published_at": null,
           "source_tier": 1,
           "source_title": "Draft Kings current odds",
@@ -2398,14 +2544,15 @@
           "sportsbook": "Draft Kings",
           "status": "available",
           "time_semantics": "observed current sportsbook quote; publication time unknown",
-          "total": 230.5,
+          "total": 229.5,
           "usage": "qualified_market_for_ai_review"
         },
         "registered_game": true,
         "roster_context": {
           "teams": {
             "away": {
-              "confirmed_starters": null,
+              "confirmed_starters": [],
+              "confirmed_starters_evidence_ids": [],
               "current_rotation": null,
               "current_team_roster": {
                 "observed_at": "2026-10-20T12:59:52.098125+00:00",
@@ -2473,11 +2620,110 @@
                 },
                 "status": "available"
               },
-              "official_team_roster": null,
+              "official_team_roster": {
+                "observed_at": "2026-10-21T01:10:04.513487+00:00",
+                "players": [
+                  {
+                    "name": "Brooks Barnhizer"
+                  },
+                  {
+                    "name": "Alex Caruso"
+                  },
+                  {
+                    "name": "Josh Dix"
+                  },
+                  {
+                    "name": "Shai Gilgeous-Alexander"
+                  },
+                  {
+                    "name": "Isaiah Hartenstein"
+                  },
+                  {
+                    "name": "Chet Holmgren"
+                  },
+                  {
+                    "name": "Aday Mara"
+                  },
+                  {
+                    "name": "Jared McCain"
+                  },
+                  {
+                    "name": "Ajay Mitchell"
+                  },
+                  {
+                    "name": "Otega Oweh"
+                  },
+                  {
+                    "name": "Thomas Sorber"
+                  },
+                  {
+                    "name": "Bennett Stirtz"
+                  },
+                  {
+                    "name": "Nikola Topic"
+                  },
+                  {
+                    "name": "Cason Wallace"
+                  },
+                  {
+                    "name": "Jalen Williams"
+                  },
+                  {
+                    "name": "Jaylin Williams"
+                  },
+                  {
+                    "name": "Kenrich Williams"
+                  }
+                ],
+                "source": {
+                  "captured_at": "2026-10-21T01:10:04.513487+00:00",
+                  "source_type": "current_team_roster_not_game_active_list",
+                  "source_url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/25/roster"
+                },
+                "status": "available"
+              },
+              "projected_starters": [
+                {
+                  "evidence_ids": [
+                    "final-lineup-b45dbca0cb84073fe664"
+                  ],
+                  "name": "Shai Gilgeous-Alexander",
+                  "team_id": 1610612760
+                },
+                {
+                  "evidence_ids": [
+                    "final-lineup-b45dbca0cb84073fe664"
+                  ],
+                  "name": "Cason Wallace",
+                  "team_id": 1610612760
+                },
+                {
+                  "evidence_ids": [
+                    "final-lineup-b45dbca0cb84073fe664"
+                  ],
+                  "name": "Jalen Williams",
+                  "team_id": 1610612760
+                },
+                {
+                  "evidence_ids": [
+                    "final-lineup-b45dbca0cb84073fe664"
+                  ],
+                  "name": "Chet Holmgren",
+                  "team_id": 1610612760
+                },
+                {
+                  "evidence_ids": [
+                    "final-lineup-b45dbca0cb84073fe664"
+                  ],
+                  "name": "Isaiah Hartenstein",
+                  "team_id": 1610612760
+                }
+              ],
               "team_id": 1610612760
             },
             "home": {
-              "confirmed_starters": null,
+              "confirmed_starters": [],
+              "confirmed_starters_evidence_ids": [],
               "current_rotation": null,
               "current_team_roster": {
                 "observed_at": "2026-10-20T12:59:51.794345+00:00",
@@ -2545,7 +2791,105 @@
                 },
                 "status": "available"
               },
-              "official_team_roster": null,
+              "official_team_roster": {
+                "observed_at": "2026-10-21T01:10:03.596057+00:00",
+                "players": [
+                  {
+                    "name": "Harrison Barnes"
+                  },
+                  {
+                    "name": "Maliq Brown"
+                  },
+                  {
+                    "name": "Carter Bryant"
+                  },
+                  {
+                    "name": "Stephon Castle"
+                  },
+                  {
+                    "name": "Julian Champagnie"
+                  },
+                  {
+                    "name": "De'Aaron Fox"
+                  },
+                  {
+                    "name": "Ja'Kobi Gillespie"
+                  },
+                  {
+                    "name": "Dylan Harper"
+                  },
+                  {
+                    "name": "Tobias Harris"
+                  },
+                  {
+                    "name": "Keldon Johnson"
+                  },
+                  {
+                    "name": "David Jones Garcia"
+                  },
+                  {
+                    "name": "Luke Kornet"
+                  },
+                  {
+                    "name": "Jordan McLaughlin"
+                  },
+                  {
+                    "name": "Jayden Quaintance"
+                  },
+                  {
+                    "name": "Tarris Reed Jr."
+                  },
+                  {
+                    "name": "Devin Vassell"
+                  },
+                  {
+                    "name": "Victor Wembanyama"
+                  }
+                ],
+                "source": {
+                  "captured_at": "2026-10-21T01:10:03.596057+00:00",
+                  "source_type": "current_team_roster_not_game_active_list",
+                  "source_url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/24/roster"
+                },
+                "status": "available"
+              },
+              "projected_starters": [
+                {
+                  "evidence_ids": [
+                    "final-lineup-f8375b3bf852ad86d414"
+                  ],
+                  "name": "De'Aaron Fox",
+                  "team_id": 1610612759
+                },
+                {
+                  "evidence_ids": [
+                    "final-lineup-f8375b3bf852ad86d414"
+                  ],
+                  "name": "Stephon Castle",
+                  "team_id": 1610612759
+                },
+                {
+                  "evidence_ids": [
+                    "final-lineup-f8375b3bf852ad86d414"
+                  ],
+                  "name": "Dylan Harper",
+                  "team_id": 1610612759
+                },
+                {
+                  "evidence_ids": [
+                    "final-lineup-f8375b3bf852ad86d414"
+                  ],
+                  "name": "Devin Vassell",
+                  "team_id": 1610612759
+                },
+                {
+                  "evidence_ids": [
+                    "final-lineup-f8375b3bf852ad86d414"
+                  ],
+                  "name": "Victor Wembanyama",
+                  "team_id": 1610612759
+                }
+              ],
               "team_id": 1610612759
             }
           }
@@ -2740,54 +3084,54 @@
         "venue": "Frost Bank Center"
       },
       "judgment": {
-        "analysis_article": "揭幕夜，马刺在主场迎上雷霆。上季西决七场才被淘汰的那支雷霆，核心几乎原样回来了；马刺这边，文班亚马、福克斯、卡斯尔、哈珀、瓦塞尔这套预计首发也摆得出来。两队都没有慢热的空间。\n\n我最想看的是文班亚马站在禁区里的样子。SGA叫挡拆，第一下不一定能过人，他会往后退半步，看文班是跟出来还是守在篮下。跟出来，霍姆格伦和哈滕斯坦就有顺下和外弹的空间；守在篮下，SGA那手中距离和抛投就有出手机会。雷霆上季进攻效率高，靠的就是这种“你选一个”的持球方式。文班在不在场，马刺的防守几乎是两支队。\n\n但让我略站雷霆，原因不在纸面效率，而在马刺缺了哈里斯之后侧翼的轮换。哈里斯季前赛一直受左小腿拉伤困扰，主帅约翰逊表示他暂时还要继续休战，马刺少了一个能顶锋线、能接球投、能在换防里不被点名的人。福克斯和卡斯尔要承担更多持球，雷霆这边华莱士和卡鲁索正好是能贴、能掏、能追着人跑的外线。马刺后场一旦被逼出几次仓促出球，雷霆的转换就会来，SGA拿球推起来，分差就是这样一点点积起来的。\n\n所以我看好雷霆赢球，也看好雷霆+1.5这个方向。预计分差只有三分半左右，这不是一场能拉开的大胜，雷霆的优势更像是第三节替补轮换时多出的一两个回合，而不是某一节突然打崩。马刺主场反扑的能力是有的，文班只要在场上，禁区就不会轻易失守。\n\n总分这边，我倾向小分，但把握没有让分那么足。成立的剧本是：文班在场时雷霆不敢无脑冲筐，马刺后场被压迫后出手变慢，两边都得在半场里一板一眼地找机会。可揭幕战的节奏本身就不好猜，雷霆的替补深度也可能把比赛推快。这一项我只当次选。\n\n开球后先看一件事：SGA叫挡拆时，文班是跟出来还是守在篮下。他选哪一边，雷霆就会往另一边打。",
+        "analysis_article": "马刺的揭幕夜请来了雷霆。上赛季季后赛两队打了七场，马刺4比3过关，如今新赛季第一场就再碰面，谁都想看看这轮旧账会不会接着算下去。\n\n我最想看的是文班亚马和SGA这一组。SGA叫挡拆，霍姆格伦或哈滕斯坦上来做墙，马刺的防守就得做选择：文班是提上来干扰持球人，还是守在篮下等球进来。如果他提上去，身后需要有人补禁区；如果他守得深，SGA就有中距离停下来的空间。这是雷霆最擅长反复提出的问题，也是马刺防守体系每晚都要回答的问题。\n\n但让我选方向，我还是站雷霆，让1.5分可以支持。\n\n我更信任的是雷霆进攻被挡住第一条路之后还有第二条。SGA持球被夹，球可以交给杰伦·威廉姆斯沿另一侧冲进来，霍姆格伦往外拉又能把文班从篮下带走。马刺这边哈里斯因左小腿拉伤缺阵，侧翼轮换偏薄，一旦文班被拉出禁区，补位的人手就不那么够用。雷霆不需要每个回合都打成，只要持续把文班拖进这种两难，优势就会一点点攒起来。\n\n马刺当然有还手的办法。福克斯可以自己往里冲，卡斯尔和哈珀也能在SGA被包夹时找到空位。文班在篮下站着，雷霆的突破手就得掂量一下。如果马刺后场把球保护好、失误不多，雷霆的转换机会就少，比赛会变得很黏。\n\n总分我更偏小，但看得没有让分那么重。揭幕战双方节奏通常偏谨慎，马刺有文班护框，雷霆也不会轻易把比赛打成对攻。可只要SGA拿下篮板就推、福克斯先冲出去，回合数就会上去。这条反例很具体，开球后就能看见。\n\n所以我更支持雷霆的让分方向，小分只是次选。先看文班能不能在挡拆里既守住篮下又不被拉得太远，再看马刺后场能不能在雷霆的外线压迫下把球稳稳送到该去的地方。这两件事，才是揭幕夜真正好看的地方。",
         "analysis_article_evidence_ids": [
           "330404be65a58a95ff7f9113c73489f92550f1d61ef1e6eef4c3049ecd297c2d",
-          "479cc1aea8d92e389cd4b245a10da9d444a62a69d8b559dcae6101d336b00913",
           "610e1f3e74af043ef04787ae8120dab033caf6eb4ceea1ab799636209642d0e5",
-          "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0",
           "a3c6ebc8c126084fef20b9bda9131ae3a250cbc45c62ee203f49c07dacd525bc",
-          "a7a6b3c73b4571cfd42eb8e8f92d59f8e46078a8eb33dd355336b6b37f8456e5",
-          "acd9ec5a44093352d1486e16ce9204649da42e481740e0d471894b23ead97763",
           "e01d15b2e50596b8d77c43794ca4a140a4e98f9893acc35901fac168dfb7fe55",
-          "fbb850878082350e965bca8aabeab4d38e499edd9ef578758b9b69c99cd4923b"
+          "final-availability-1d15fbb7de59a84e8c91",
+          "final-availability-352b335aaad9f247aaed",
+          "final-availability-44ed173530f15f11b745",
+          "final-availability-6403d771100aa2d82b92",
+          "final-availability-b7822593f64046b5b053",
+          "final-market-9d665b667307abc06745"
         ],
         "confidence": "medium",
-        "core_question": "上季西决七场惜败的雷霆，能否在客场用更高效的进攻压过核心齐整但缺少 Harris 的马刺？",
+        "core_question": "雷霆能否在客场用更高效的进攻压过缺少 Harris、但核心预计可用的马刺？",
         "final_prediction": {
           "evidence_ids": [
             "330404be65a58a95ff7f9113c73489f92550f1d61ef1e6eef4c3049ecd297c2d",
-            "479cc1aea8d92e389cd4b245a10da9d444a62a69d8b559dcae6101d336b00913",
             "610e1f3e74af043ef04787ae8120dab033caf6eb4ceea1ab799636209642d0e5",
-            "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0",
             "a3c6ebc8c126084fef20b9bda9131ae3a250cbc45c62ee203f49c07dacd525bc",
-            "a7a6b3c73b4571cfd42eb8e8f92d59f8e46078a8eb33dd355336b6b37f8456e5",
-            "acd9ec5a44093352d1486e16ce9204649da42e481740e0d471894b23ead97763",
             "e01d15b2e50596b8d77c43794ca4a140a4e98f9893acc35901fac168dfb7fe55",
-            "fbb850878082350e965bca8aabeab4d38e499edd9ef578758b9b69c99cd4923b"
+            "final-availability-1d15fbb7de59a84e8c91",
+            "final-availability-352b335aaad9f247aaed",
+            "final-availability-44ed173530f15f11b745",
+            "final-availability-6403d771100aa2d82b92",
+            "final-availability-b7822593f64046b5b053",
+            "final-market-9d665b667307abc06745"
           ],
           "expected_margin": 3.5,
           "expected_total": 224.5,
           "win_probability": 0.58,
           "winner_side": "away"
         },
-        "game_script": "揭幕战双方核心齐整，开局节奏偏谨慎。雷霆靠 SGA 持球与霍姆格伦空间维持进攻效率，马刺以文班护框和 Fox 突破回应。Harris 缺阵使马刺侧翼轮换偏薄，第三节雷霆替补深度可能小幅拉开，末节马刺主场反扑但难以完全抹平，最终客队小胜。",
+        "game_script": "揭幕战双方核心预计出战，开局节奏偏谨慎。雷霆靠 SGA 持球与霍姆格伦空间维持进攻效率，马刺以文班护框和 Fox 突破回应。Harris 缺阵使马刺侧翼轮换偏薄，第三节雷霆替补深度可能小幅拉开，末节马刺主场反扑但难以完全抹平，最终客队小胜。",
         "key_matchup_variables": [
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "330404be65a58a95ff7f9113c73489f92550f1d61ef1e6eef4c3049ecd297c2d",
-              "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0"
+              "330404be65a58a95ff7f9113c73489f92550f1d61ef1e6eef4c3049ecd297c2d"
             ],
-            "statement": "Victor Wembanyama（马刺护框核心） vs 雷霆 SGA 挡拆与霍姆格伦/哈滕斯坦双塔冲击：文班是马刺防守体系支点，雷霆上季进攻效率 117.0 依赖 SGA 突破分球；文班能否限制禁区决定马刺防守下限。 若文班在场时护框有效，雷霆进攻效率回落，比赛更接近；反之雷霆可拉开分差。"
+            "statement": "Victor Wembanyama（马刺护框核心） vs 雷霆 SGA 挡拆与霍姆格伦/哈滕斯坦内线冲击：文班是马刺防守体系支点，能否限制禁区决定马刺防守下限。 文班在场且护框有效时雷霆进攻效率回落、比赛更接近；反之雷霆可拉开分差。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "fbb850878082350e965bca8aabeab4d38e499edd9ef578758b9b69c99cd4923b",
-              "a9464b4b59a1e4bf1affb5e2db3e2032facff9bc50fd97692c6ddc060dfa7953"
+              "330404be65a58a95ff7f9113c73489f92550f1d61ef1e6eef4c3049ecd297c2d"
             ],
-            "statement": "De'Aaron Fox / Stephon Castle 后场 vs 雷霆 Cason Wallace、Alex Caruso 外线压迫：马刺缺少 Harris 后更依赖后场创造，雷霆外线防守资源充足，可能压低马刺进攻效率。 若马刺后场失误偏多，雷霆转换得分扩大优势。"
+            "statement": "De'Aaron Fox / Stephon Castle 后场 vs 雷霆 Cason Wallace、Alex Caruso 外线压迫：马刺缺少 Harris 后更依赖后场创造，雷霆外线防守资源充足。 若马刺后场失误偏多，雷霆转换得分扩大优势。"
           }
         ],
         "model_risk": "如果若文班亚马出场时间明显受限或状态不佳，则马刺防守体系崩塌，雷霆分差扩大，胜率上调。；如果若雷霆 SGA 或霍姆格伦被确认缺阵/限时，则客队优势消失，判断转向主队或接近五五开。",
@@ -2795,103 +3139,97 @@
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "175d912fe7c56352453fe8fd46e6ed2f6c1b255a489cba3f086c946a546376c3",
-              "c3f0cb907d5e3ed09fbc49224e67c62e32919c454e9f3c33aa5163e1e6aa4f01",
-              "fbb850878082350e965bca8aabeab4d38e499edd9ef578758b9b69c99cd4923b"
+              "final-lineup-b45dbca0cb84073fe664",
+              "final-lineup-f8375b3bf852ad86d414",
+              "final-roster-6b4711dfc62be30609e6"
             ],
             "player_name": "Victor Wembanyama",
-            "statement": "马刺防守的支点。他在场时雷霆不敢随意冲筐，他下场后禁区立刻变宽，出场时间直接决定马刺防守的下限。"
+            "statement": "马刺防守体系的支点，他在挡拆里守得住篮下又不被拉太远，马刺才有和雷霆缠斗的底气。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "175d912fe7c56352453fe8fd46e6ed2f6c1b255a489cba3f086c946a546376c3",
-              "9ae78c344c1f259642fa91cbd382eca78d23bcbc6b6e95ec122b9a04bea30edb",
-              "fbb850878082350e965bca8aabeab4d38e499edd9ef578758b9b69c99cd4923b"
+              "final-availability-352b335aaad9f247aaed",
+              "final-roster-6b4711dfc62be30609e6"
             ],
             "player_name": "De'Aaron Fox",
-            "statement": "马刺后场组织与突破更集中在他手里。他能不能在雷霆外线压迫下稳住出球，是马刺进攻不塌的关键。"
+            "statement": "哈里斯缺阵后马刺更依赖后场创造，福克斯的突破和失误控制直接决定马刺进攻能不能跟上。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "175d912fe7c56352453fe8fd46e6ed2f6c1b255a489cba3f086c946a546376c3",
-              "fbb850878082350e965bca8aabeab4d38e499edd9ef578758b9b69c99cd4923b"
+              "final-roster-6b4711dfc62be30609e6"
             ],
             "player_name": "Stephon Castle",
-            "statement": "预计首发后场之一，要分担持球，也要面对雷霆最能贴人的外线。他的失误数会直接影响马刺的回合质量。"
+            "statement": "和福克斯一起承担持球任务，面对雷霆外线压迫时的出球质量很关键。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "175d912fe7c56352453fe8fd46e6ed2f6c1b255a489cba3f086c946a546376c3",
-              "c3f0cb907d5e3ed09fbc49224e67c62e32919c454e9f3c33aa5163e1e6aa4f01",
-              "fbb850878082350e965bca8aabeab4d38e499edd9ef578758b9b69c99cd4923b"
+              "final-availability-352b335aaad9f247aaed",
+              "final-roster-6b4711dfc62be30609e6"
             ],
             "player_name": "Devin Vassell",
-            "statement": "马刺侧翼少人之后，他的投射和换防负担都变重，是文班之外最需要撑住锋线的人。"
+            "statement": "侧翼轮换偏薄的情况下，他的投射和防守覆盖能帮马刺撑住文班被拉出后的空档。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "175d912fe7c56352453fe8fd46e6ed2f6c1b255a489cba3f086c946a546376c3",
-              "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0"
+              "final-lineup-b45dbca0cb84073fe664",
+              "final-lineup-f8375b3bf852ad86d414",
+              "final-roster-6b4711dfc62be30609e6"
             ],
             "player_name": "Shai Gilgeous-Alexander",
-            "statement": "雷霆进攻的起点。他反复叫挡拆，把文班逼进“跟出来还是守篮下”的选择题，雷霆的效率就从这里长出来。"
+            "statement": "雷霆进攻的发动机，他叫挡拆逼文班做选择，是雷霆把比赛拖进自己节奏的主要方式。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "175d912fe7c56352453fe8fd46e6ed2f6c1b255a489cba3f086c946a546376c3",
-              "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0"
+              "final-roster-6b4711dfc62be30609e6"
             ],
             "player_name": "Chet Holmgren",
-            "statement": "和哈滕斯坦一起撑起雷霆内线，既能顺下也能外弹，是文班跟出禁区后最直接的受益者。"
+            "statement": "往外拉能把文班带离篮下，给SGA和杰伦·威廉姆斯的突破腾出空间。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "175d912fe7c56352453fe8fd46e6ed2f6c1b255a489cba3f086c946a546376c3",
-              "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0"
+              "final-roster-6b4711dfc62be30609e6"
+            ],
+            "player_name": "Jalen Williams",
+            "statement": "SGA被夹击时的第二出球点，沿另一侧冲击能考验马刺偏薄的侧翼补位。"
+          },
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "final-roster-6b4711dfc62be30609e6"
             ],
             "player_name": "Isaiah Hartenstein",
-            "statement": "预计首发中锋，负责篮板和掩护质量，让SGA的挡拆有稳定的落点，也分担霍姆格伦的对位压力。"
+            "statement": "内线做墙和篮板保护，帮雷霆在文班面前维持二次进攻和禁区存在。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "175d912fe7c56352453fe8fd46e6ed2f6c1b255a489cba3f086c946a546376c3",
-              "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0"
+              "final-roster-6b4711dfc62be30609e6"
             ],
             "player_name": "Cason Wallace",
-            "statement": "雷霆外线压迫的第一道，预计首发就要去贴马刺的持球人，逼出仓促出球和转换机会。"
-          },
-          {
-            "classification": "subjective_analysis",
-            "evidence_ids": [
-              "175d912fe7c56352453fe8fd46e6ed2f6c1b255a489cba3f086c946a546376c3",
-              "a9464b4b59a1e4bf1affb5e2db3e2032facff9bc50fd97692c6ddc060dfa7953"
-            ],
-            "player_name": "Alex Caruso",
-            "statement": "替补席上的防守资源，出场时间未确认，但只要上场就能给马刺后场再加一层压力。"
+            "statement": "外线压迫马刺后场，逼出失误换成转换得分是雷霆拉开分差的一条路。"
           }
         ],
         "pregame_story": {
           "classification": "subjective_analysis",
           "evidence_ids": [
             "330404be65a58a95ff7f9113c73489f92550f1d61ef1e6eef4c3049ecd297c2d",
-            "479cc1aea8d92e389cd4b245a10da9d444a62a69d8b559dcae6101d336b00913",
             "610e1f3e74af043ef04787ae8120dab033caf6eb4ceea1ab799636209642d0e5",
-            "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0",
             "a3c6ebc8c126084fef20b9bda9131ae3a250cbc45c62ee203f49c07dacd525bc",
-            "a7a6b3c73b4571cfd42eb8e8f92d59f8e46078a8eb33dd355336b6b37f8456e5"
+            "e01d15b2e50596b8d77c43794ca4a140a4e98f9893acc35901fac168dfb7fe55",
+            "final-availability-1d15fbb7de59a84e8c91",
+            "final-availability-352b335aaad9f247aaed"
           ],
-          "statement": "揭幕夜，马刺在主场迎上上季西决七场才被淘汰的雷霆。文班亚马的护框对上SGA的挡拆，这场球的分差大概不会大，但每一回合的选择都很重。",
-          "title": "文班守门，雷霆来敲门"
+          "statement": "揭幕夜马刺主场迎雷霆，文班的护框对上SGA的挡拆，这是两队新赛季第一场真正的硬仗。",
+          "title": "文班坐镇迎雷霆\n亚历山大叩圣城"
         },
         "roster_analysis": [],
-        "subjective_rationale": "揭幕夜，马刺在主场迎上上季西决七场才被淘汰的雷霆。文班亚马的护框对上SGA的挡拆，这场球的分差大概不会大，但每一回合的选择都很重。",
+        "subjective_rationale": "揭幕夜马刺主场迎雷霆，文班的护框对上SGA的挡拆，这是两队新赛季第一场真正的硬仗。",
         "supporting_evidence": [],
         "uncertainty": [],
         "unresolved_uncertainty": [],
@@ -2900,63 +3238,76 @@
             "classification": "subjective_analysis",
             "evidence_ids": [
               "330404be65a58a95ff7f9113c73489f92550f1d61ef1e6eef4c3049ecd297c2d",
-              "479cc1aea8d92e389cd4b245a10da9d444a62a69d8b559dcae6101d336b00913",
               "610e1f3e74af043ef04787ae8120dab033caf6eb4ceea1ab799636209642d0e5",
-              "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0",
               "a3c6ebc8c126084fef20b9bda9131ae3a250cbc45c62ee203f49c07dacd525bc",
-              "a7a6b3c73b4571cfd42eb8e8f92d59f8e46078a8eb33dd355336b6b37f8456e5"
+              "e01d15b2e50596b8d77c43794ca4a140a4e98f9893acc35901fac168dfb7fe55",
+              "final-availability-1d15fbb7de59a84e8c91",
+              "final-availability-352b335aaad9f247aaed"
             ],
-            "statement": "SGA挡拆时，文班跟出来还是守篮下，直接决定雷霆的进攻走哪条路。",
-            "title": "文班亚马的防守选择"
+            "statement": "SGA反复叫挡拆，文班是提上干扰还是守深，这个选择会决定雷霆的进攻效率。",
+            "title": "文班的挡拆选择题"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
               "330404be65a58a95ff7f9113c73489f92550f1d61ef1e6eef4c3049ecd297c2d",
-              "479cc1aea8d92e389cd4b245a10da9d444a62a69d8b559dcae6101d336b00913",
               "610e1f3e74af043ef04787ae8120dab033caf6eb4ceea1ab799636209642d0e5",
-              "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0",
               "a3c6ebc8c126084fef20b9bda9131ae3a250cbc45c62ee203f49c07dacd525bc",
-              "a7a6b3c73b4571cfd42eb8e8f92d59f8e46078a8eb33dd355336b6b37f8456e5"
+              "e01d15b2e50596b8d77c43794ca4a140a4e98f9893acc35901fac168dfb7fe55",
+              "final-availability-1d15fbb7de59a84e8c91",
+              "final-availability-352b335aaad9f247aaed"
             ],
-            "statement": "哈里斯的小腿伤势让马刺锋线轮换存在变数，福克斯和卡斯尔要面对华莱士、卡鲁索的贴防，失误多少会决定转换得分。",
-            "title": "马刺后场能不能顶住压迫"
+            "statement": "哈里斯缺阵让马刺侧翼偏薄，文班被拉出禁区后，补位的人手够不够用。",
+            "title": "马刺侧翼的补位"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
               "330404be65a58a95ff7f9113c73489f92550f1d61ef1e6eef4c3049ecd297c2d",
-              "479cc1aea8d92e389cd4b245a10da9d444a62a69d8b559dcae6101d336b00913",
               "610e1f3e74af043ef04787ae8120dab033caf6eb4ceea1ab799636209642d0e5",
-              "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0",
               "a3c6ebc8c126084fef20b9bda9131ae3a250cbc45c62ee203f49c07dacd525bc",
-              "a7a6b3c73b4571cfd42eb8e8f92d59f8e46078a8eb33dd355336b6b37f8456e5"
+              "e01d15b2e50596b8d77c43794ca4a140a4e98f9893acc35901fac168dfb7fe55",
+              "final-availability-1d15fbb7de59a84e8c91",
+              "final-availability-352b335aaad9f247aaed"
             ],
-            "statement": "预计分差只有三分半，雷霆的深度优势最可能体现在轮换时段的一两个回合上。",
-            "title": "雷霆替补轮换的第三节"
+            "statement": "华莱士和卡鲁索的外线防守能不能逼出马刺后场的失误，进而换成转换得分。",
+            "title": "雷霆的外线压迫"
           }
         ],
         "winner_lean": "away"
       },
+      "lifecycle_audit": {
+        "availability_confirmed_at": null,
+        "early_context_hash": "d6bf89f9f2a4ce2f1695ce98b9ffe6461c097d4f4802e88952cb770f1f9522a7",
+        "early_generated_at": "2026-10-20T13:15:36.988786+00:00",
+        "early_prediction_version": "4e6ea2fc-1af9-42ed-b2d7-6fd35b31e581",
+        "final_delta_hash": "7f66bf4342ffd8f7cc5b871796239f89c81f7cfc19a4d87e7909a172d4639999",
+        "final_generated_at": "2026-10-21T01:10:32.798270+00:00",
+        "final_ready_at": "2026-10-21T01:10:06.860556+00:00",
+        "final_window_started_at": "2026-10-21T00:30:26.231188+00:00",
+        "final_window_target_at": "2026-10-21T01:10:00+00:00",
+        "lineup_confirmed_at": null,
+        "tipoff_time": "2026-10-21T01:30:00+00:00"
+      },
       "public_market_reference": {
-        "away_moneyline": -102.0,
-        "away_spread": 1.5,
-        "captured_at": "2026-10-20T13:08:38.543704+00:00",
+        "away_moneyline": -118.0,
+        "away_spread": -1.5,
+        "captured_at": "2026-10-21T01:10:04.086961+00:00",
         "eligible_prediction_input": false,
-        "expected_home_margin": 1.5,
+        "expected_home_margin": -1.5,
         "game_identity": {
           "away_team": "Oklahoma City Thunder",
           "away_team_id": 1610612760,
           "game_id": "espn:401909090",
-          "game_type": "regular_season",
+          "game_type": null,
           "home_team": "San Antonio Spurs",
           "home_team_id": 1610612759,
           "registered_game": true,
           "scheduled_tipoff": "2026-10-21T01:30Z"
         },
-        "home_moneyline": -118.0,
-        "home_spread": -1.5,
-        "observed_at": "2026-10-20T13:08:38.543704+00:00",
+        "home_moneyline": -102.0,
+        "home_spread": 1.5,
+        "observed_at": "2026-10-21T01:10:04.086961+00:00",
         "published_at": null,
         "source_tier": 1,
         "source_title": "Draft Kings current odds",
@@ -2964,10 +3315,10 @@
         "sportsbook": "Draft Kings",
         "status": "available",
         "time_semantics": "observed current sportsbook quote; publication time unknown",
-        "total": 230.5,
+        "total": 229.5,
         "usage": "qualified_market_for_ai_review"
       },
-      "published_at": "2026-10-20T13:17:37.528853+00:00",
+      "published_at": "2026-10-21T01:10:35.582926+00:00",
       "schedule_revision": 1,
       "sources": [
         {
@@ -3041,13 +3392,154 @@
           "published_at": null,
           "title": null,
           "url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909090/competitions/401909090/odds"
+        },
+        {
+          "captured_at": "2026-10-21T01:10:03.596057+00:00",
+          "id": "final-lineup-f8375b3bf852ad86d414",
+          "source_type": "expected_game_lineup",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/24/roster"
+        },
+        {
+          "captured_at": "2026-10-21T01:10:04.513487+00:00",
+          "id": "final-lineup-b45dbca0cb84073fe664",
+          "source_type": "expected_game_lineup",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/25/roster"
+        },
+        {
+          "captured_at": "2026-10-21T01:05:05.898351+00:00",
+          "id": "final-availability-b7822593f64046b5b053",
+          "source_type": "game_availability",
+          "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_00PM.pdf"
+        },
+        {
+          "captured_at": "2026-10-21T01:05:05.898351+00:00",
+          "id": "final-availability-352b335aaad9f247aaed",
+          "source_type": "game_availability",
+          "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_00PM.pdf"
+        },
+        {
+          "captured_at": "2026-10-21T01:05:05.898351+00:00",
+          "id": "final-availability-6403d771100aa2d82b92",
+          "source_type": "game_availability",
+          "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_00PM.pdf"
+        },
+        {
+          "captured_at": "2026-10-21T01:05:05.898351+00:00",
+          "id": "final-availability-1d15fbb7de59a84e8c91",
+          "source_type": "game_availability",
+          "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_00PM.pdf"
+        },
+        {
+          "captured_at": "2026-10-21T01:05:05.898351+00:00",
+          "id": "final-availability-44ed173530f15f11b745",
+          "source_type": "game_availability",
+          "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_00PM.pdf"
+        },
+        {
+          "captured_at": "2026-10-21T01:10:04.086961+00:00",
+          "id": "final-market-9d665b667307abc06745",
+          "source_type": "qualified_market_snapshot",
+          "url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909090/competitions/401909090/odds"
         }
       ],
-      "stage": "EARLY_PREVIEW",
-      "version_id": "4e6ea2fc-1af9-42ed-b2d7-6fd35b31e581",
-      "payload_sha256": "48c6f435132057d0abb28d0a778f7d39389deaa4a730e30b6b70dad0b427ba4c",
+      "stage": "FINAL_PREGAME",
+      "version_id": "a4477a54-3427-4d82-a2d2-27d8872a94a9",
+      "payload_sha256": "0ab50104e7bf5820b5918a20c02dd98e438b7e93d6e902fd4d0a0ae298e2dc0f",
       "analyst_context": {
         "objective_evidence": [
+          {
+            "id": "final-lineup-f8375b3bf852ad86d414",
+            "section": "web_context",
+            "value": {
+              "claim_type": "projected_starters",
+              "eligible_for_fact": false,
+              "source_role": "primary",
+              "team_id": 1610612759,
+              "temporal_scope": "current_pregame",
+              "quote": "De'Aaron Fox / Devin Vassell / Dylan Harper / Stephon Castle / Victor Wembanyama"
+            }
+          },
+          {
+            "id": "final-lineup-b45dbca0cb84073fe664",
+            "section": "web_context",
+            "value": {
+              "claim_type": "projected_starters",
+              "eligible_for_fact": false,
+              "source_role": "primary",
+              "team_id": 1610612760,
+              "temporal_scope": "current_pregame",
+              "quote": "Cason Wallace / Chet Holmgren / Isaiah Hartenstein / Jalen Williams / Shai Gilgeous-Alexander"
+            }
+          },
+          {
+            "id": "final-availability-b7822593f64046b5b053",
+            "section": "web_context",
+            "value": {
+              "claim_type": "availability",
+              "eligible_for_fact": true,
+              "source_role": "primary",
+              "team_id": 1610612759,
+              "temporal_scope": "current_pregame",
+              "quote": "Jayden Quaintance"
+            }
+          },
+          {
+            "id": "final-availability-352b335aaad9f247aaed",
+            "section": "web_context",
+            "value": {
+              "claim_type": "availability",
+              "eligible_for_fact": true,
+              "source_role": "primary",
+              "team_id": 1610612759,
+              "temporal_scope": "current_pregame",
+              "quote": "Tobias Harris"
+            }
+          },
+          {
+            "id": "final-availability-6403d771100aa2d82b92",
+            "section": "web_context",
+            "value": {
+              "claim_type": "availability",
+              "eligible_for_fact": true,
+              "source_role": "primary",
+              "team_id": 1610612760,
+              "temporal_scope": "current_pregame",
+              "quote": "Nikola Topic"
+            }
+          },
+          {
+            "id": "final-availability-1d15fbb7de59a84e8c91",
+            "section": "web_context",
+            "value": {
+              "claim_type": "availability",
+              "eligible_for_fact": true,
+              "source_role": "primary",
+              "team_id": 1610612760,
+              "temporal_scope": "current_pregame",
+              "quote": "Otega Oweh"
+            }
+          },
+          {
+            "id": "final-availability-44ed173530f15f11b745",
+            "section": "web_context",
+            "value": {
+              "claim_type": "availability",
+              "eligible_for_fact": true,
+              "source_role": "primary",
+              "team_id": 1610612760,
+              "temporal_scope": "current_pregame",
+              "quote": "Thomas Sorber"
+            }
+          },
+          {
+            "id": "final-market-9d665b667307abc06745",
+            "section": "web_context",
+            "value": {
+              "claim_type": "market_reference",
+              "eligible_for_fact": true,
+              "quote": ""
+            }
+          },
           {
             "id": "479cc1aea8d92e389cd4b245a10da9d444a62a69d8b559dcae6101d336b00913",
             "section": "web_context",
@@ -3069,83 +3561,6 @@
               "source_role": "professional",
               "team_id": 1610612759,
               "temporal_scope": "current_season_background",
-              "quote": ""
-            }
-          },
-          {
-            "id": "fbb850878082350e965bca8aabeab4d38e499edd9ef578758b9b69c99cd4923b",
-            "section": "web_context",
-            "value": {
-              "claim_type": "projected_starters",
-              "eligible_for_fact": true,
-              "source_role": "professional",
-              "team_id": 1610612759,
-              "temporal_scope": "current_pregame",
-              "quote": "De'Aaron Fox / Devin Vassell / Dylan Harper / Stephon Castle / Victor Wembanyama"
-            }
-          },
-          {
-            "id": "8975ec15f0445f1e1942dd8794549c628677c60af25c6e475cceb94214e0cdf0",
-            "section": "web_context",
-            "value": {
-              "claim_type": "projected_starters",
-              "eligible_for_fact": true,
-              "source_role": "professional",
-              "team_id": 1610612760,
-              "temporal_scope": "current_pregame",
-              "quote": "Cason Wallace / Chet Holmgren / Isaiah Hartenstein / Jalen Williams / Shai Gilgeous-Alexander"
-            }
-          },
-          {
-            "id": "a9464b4b59a1e4bf1affb5e2db3e2032facff9bc50fd97692c6ddc060dfa7953",
-            "section": "web_context",
-            "value": {
-              "claim_type": "current_roster",
-              "eligible_for_fact": true,
-              "source_role": "professional",
-              "team_id": 1610612760,
-              "temporal_scope": "current_pregame",
-              "quote": "Aday Mara / Ajay Mitchell / Alex Caruso / Bennett Stirtz / Jared McCain / Jaylin Williams / Kenrich Williams / Nikola Topic / Thomas Sorber"
-            }
-          },
-          {
-            "id": "c3f0cb907d5e3ed09fbc49224e67c62e32919c454e9f3c33aa5163e1e6aa4f01",
-            "section": "web_context",
-            "value": {
-              "claim_type": "projected_starters",
-              "eligible_for_fact": true,
-              "source_role": "professional",
-              "team_id": 1610612759,
-              "temporal_scope": "current_pregame",
-              "quote": "Devin Vassell / Victor Wembanyama"
-            }
-          },
-          {
-            "id": "d5663020ca4db39c1b30ccab03ee8355a55d826a140061cfc5db22a81c249edf",
-            "section": "web_context",
-            "value": {
-              "claim_type": "coach_change",
-              "eligible_for_fact": true,
-              "source_role": "professional",
-              "team_id": 1610612759,
-              "temporal_scope": "current_season_background",
-              "quote": ""
-            }
-          },
-          {
-            "id": "public-market-fanduel-20260918-okc-sa",
-            "section": "web_context",
-            "value": {
-              "eligible_for_fact": true,
-              "quote": ""
-            }
-          },
-          {
-            "id": "637158b6f14f4bfd790db37546dc1ac0d4850f5961dbacda46ca0982b86a6f82",
-            "section": "web_context",
-            "value": {
-              "claim_type": "market_reference",
-              "eligible_for_fact": true,
               "quote": ""
             }
           }
@@ -3195,10 +3610,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-20T13:28:46.487984+00:00",
-    "source_prediction_version_id": "4e6ea2fc-1af9-42ed-b2d7-6fd35b31e581",
-    "source_prediction_payload_sha256": "48c6f435132057d0abb28d0a778f7d39389deaa4a730e30b6b70dad0b427ba4c",
+    "exported_at": "2026-10-21T01:14:26.864614+00:00",
+    "source_prediction_version_id": "a4477a54-3427-4d82-a2d2-27d8872a94a9",
+    "source_prediction_payload_sha256": "0ab50104e7bf5820b5918a20c02dd98e438b7e93d6e902fd4d0a0ae298e2dc0f",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "966a6dc694fb93a04def5a4374fa149857bf2bb0ac72930390899ee42498e53e"
+  "public_sha256": "cb868ced0ed0cc863b693de11188745334efbea3cc6d5ac1b694b9bdc4e38db1"
 }
