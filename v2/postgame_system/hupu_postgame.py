@@ -219,7 +219,7 @@ class HupuPostgameCollector:
         # One bounded search for an attributable coach account, kept out of fan opinions.
         if time.monotonic()-started<75:
             try:
-                found=self.transport.search({'query':f'site:bbs.hupu.com {away} {home} {day} 赛后 主帅 转换 防守','max_results':4})
+                found=self.transport.search({'query':f'site:bbs.hupu.com {away} {home} {day} 赛后 主帅 采访','max_results':4})
                 for candidate in found.get('results',[])[:2]:
                     if time.monotonic()-started>100:break
                     try:
