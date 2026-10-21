@@ -36,7 +36,8 @@ def test_returned_success_without_artifact_is_not_success(tmp_path,monkeypatch):
     store=PredictionVersionStore(tmp_path/'db.sqlite')
     monkeypatch.setattr(writer_retry,'load_postgame_editorial',lambda *args,**kwargs:None)
     result=writer_retry.attempt_postgame_writer(store,{'version_id':'test','game_id':'espn:test'},
-        lambda *args,**kwargs:SimpleNamespace(status='success'),output_root=tmp_path)
+        lambda *args,**kwargs:SimpleNamespace(status='success'),output_root=tmp_path,
+        clock=lambda:datetime(2026,10,21,0,tzinfo=timezone.utc))
     assert result['editorial_status']=='failed'
     assert 'without_verified_artifact' in result['editorial_error_type']
 
