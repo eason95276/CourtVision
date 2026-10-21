@@ -72,6 +72,8 @@
       prediction = {status:'schedule_changed',game_id:fact.id,version_id:null,version:null};
     }
     return {...old,game:{...old.game,...fact,
+      technical:old.game?.technical || {source_label:'尚无正式报告',prediction_method:null,model_version:null},
+      previous_season_team_stats:old.game?.previous_season_team_stats || {status:'unavailable',teams:{}},
       registered_game:old.game?.registered_game || false,
       postgame:old.game?.postgame || fact.postgame},prediction,
       postgame:old.postgame || {status:'unavailable',postgame:null},

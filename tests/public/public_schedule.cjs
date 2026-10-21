@@ -17,7 +17,7 @@ const call=async path=>(await context.window.fetch('https://example.test'+path))
   let result=await call('/api/schedule-window');
   assert.equal(result.schedule_window.today,'2026-10-21');assert.equal(result.schedule_window.tomorrow,'2026-10-22');
   assert.equal(result.schedule_window.tomorrow_count,2);
-  let detail=await call('/api/game?game_id=unselected');assert.equal(detail.status,'success');assert.equal(detail.prediction.version,null);assert.equal(detail.prediction.status,'unavailable');
+  let detail=await call('/api/game?game_id=unselected');assert.equal(detail.status,'success');assert.equal(detail.prediction.version,null);assert.equal(detail.prediction.status,'unavailable');assert.equal(detail.game.technical.source_label,'尚无正式报告');assert.equal(detail.game.previous_season_team_stats.status,'unavailable');
   detail=await call('/api/game?game_id=selected');assert.equal(detail.prediction.status,'pending');assert.equal(detail.prediction.version,null);
   detail=await call('/api/game?game_id=published');assert.equal(detail.prediction.version.payload_sha256,'frozen');
   now=Date.parse('2026-10-21T16:01:00Z');result=await call('/api/schedule-window');
