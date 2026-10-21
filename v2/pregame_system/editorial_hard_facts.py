@@ -136,7 +136,7 @@ def classify_numeric_claim_type(text: str, start: int, end: int, metric: str | N
         return "other_numeric"
 
     # Ordinals and common idioms are not exact statistical claims.
-    if (re.search(r"第\s*$", prefix) and re.match(r"\s*(?:节|场|轮|次|名|位|顺位)", suffix)
+    if (re.search(r"第\s*$", prefix) and re.match(r"\s*(?:节|场|轮|次|名|位|顺位|责任人)", suffix)
             or token in {"一", "两", "二", "三", "四"} and re.search(
                 r"(?:一环|第一(?:道|个|节|步|阵)|两边|两侧|三节|二次进攻|两三回合)", sentence)):
         return "structural_or_count_expression"

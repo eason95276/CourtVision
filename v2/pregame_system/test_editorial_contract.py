@@ -1201,6 +1201,7 @@ def test_frozen_attempt_files_remain_unchanged(run):
 
 @pytest.mark.parametrize("text", [
     "公牛五号位的护框和篮板都打了折扣。",
+    "独行侠护框和防守篮板的第一责任人。",
     "公牛5号位的护框和篮板都打了折扣。",
     "猛龙进攻端多一个稳定得分点还是少一个。",
 ])
