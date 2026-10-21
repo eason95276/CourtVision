@@ -25,6 +25,15 @@ def test_full_game_player_points_are_not_partial_game_evidence():
     assert any(i['code']=='player_period_claim_without_period_data'for i in validate_article({'article':'乔治半场就打出高效得分。'},context()))
 
 
+def test_fan_quotes_require_actual_source_and_cannot_claim_consensus():
+    value=context()
+    assert any(i['code']=='fan_reaction_without_source'for i in validate_article({'article':'虎扑球迷说这场有意思。'},value))
+    value['fan_discussion']={'status':'available','threads':[{'comments':[{'text':'这场惊喜了，赛前没觉得能赢。'}]}]}
+    assert validate_article({'article':'虎扑热评里的“这场惊喜了”，说出了结果的反差。'},value)==[]
+    assert any(i['code']=='fan_quote_not_in_source'for i in validate_article({'article':'虎扑热评说“全靠裁判保送”。'},value))
+    assert any(i['code']=='fan_consensus_overclaim'for i in validate_article({'article':'所有球迷都认为这场赢得轻松。'},value))
+
+
 def test_length_and_unobserved_sequences_are_bounded():
     assert any(i['code']=='article_too_long'for i in validate_article({'article':'字'*901},context()))
     assert validate_article({'article':'第三节活塞得到37分。'},context())==[]
@@ -35,6 +44,14 @@ def test_final_score_cannot_be_borrowed_from_style_reference():
     value=context();value['game'].update(home_score=121,away_score=113)
     assert validate_article({'article':'活塞121比113拿下比赛。'},value)==[]
     assert any(i['code']=='final_score_mismatch'for i in validate_article({'article':'活塞128比110拿下比赛。'},value))
+
+
+def test_total_direction_hit_does_not_reverse_numeric_error_direction():
+    value=context();value['game']['actual_total']=206;value['prediction']['expected_total']=228.5
+    assert public_verdicts(value)['total_prediction_relation']=='总分预测高于实际22.5分'
+    assert any(i['code']=='total_prediction_error_direction_mismatch'for i in
+        validate_article({'article':'小分命中，但总分被大幅低估。'},value))
+    assert validate_article({'article':'小分命中，但总分预测高于实际。'},value)==[]
 
 
 def test_away_forecast_probability_and_actual_winner_are_separate():

@@ -156,10 +156,12 @@ class PostgameAutoPublisher:
                     LEFT JOIN postgame_writer_attempts a ON a.postgame_version_id=p.version_id
                     WHERE p.version_id=(SELECT latest.version_id FROM postgame_versions latest
                         WHERE latest.game_id=p.game_id ORDER BY latest.published_at DESC,latest.rowid DESC LIMIT 1)
-                      AND (a.postgame_version_id IS NULL OR (a.status!='succeeded' AND a.attempt_count<3
+                      AND (a.postgame_version_id IS NULL OR (a.status!='succeeded' AND a.attempt_count<3+COALESCE(
+                        (SELECT g.additional_attempts FROM postgame_writer_retry_grants g
+                         WHERE g.postgame_version_id=p.version_id AND g.not_before<=? AND g.expires_at>?),0)
                         AND (a.next_attempt_at IS NULL OR a.next_attempt_at<=?)
                         AND (a.lease_until IS NULL OR a.lease_until<=?)))
-                    ORDER BY p.published_at,p.game_id LIMIT ?''',(at,at,self.max_games))]
+                    ORDER BY p.published_at,p.game_id LIMIT ?''',(at,at,at,at,self.max_games))]
             for game_id in ids:
                 if self.allowed_game_ids is not None and game_id not in self.allowed_game_ids:continue
                 try:

@@ -21,6 +21,11 @@ def public_verdicts(context):
         'total_result':{'win':'大小分命中','loss':'大小分未命中','push':'大小分走盘'}.get(total.get('settlement')),
         'total_absolute_error':prediction.get('absolute_total_error'),
         'margin_absolute_error':prediction.get('absolute_margin_error')}
+    predicted,actual=prediction.get('expected_total'),teams.get('actual_total')
+    if predicted is not None and actual is not None:
+        error=predicted-actual
+        result['total_prediction_relation']=('总分预测接近实际'if abs(error)<0.001 else
+            ('总分预测高于实际'if error>0 else'总分预测低于实际')+f'{abs(error):g}分')
     return result
 
 
@@ -29,6 +34,25 @@ def validate_article(editorial,context):
     body=editorial.get('article','');whole='\n'.join(str(editorial.get(k,''))for k in ('title','short_review','article'))
     if len(re.sub(r'\s+','',body))>900:issues.append({'code':'article_too_long','limit':900})
     if re.search(r'\bavailability\b|payload|\bQA\b|hash',whole,re.I):issues.append({'code':'internal_audit_language'})
+    predicted=(context.get('prediction')or{}).get('expected_total');actual=game.get('actual_total')
+    if predicted is not None and actual is not None:
+        low=re.search(r'总分(?:预测)?(?:被)?(?:大幅|明显|显著)?低估|低估(?:了)?(?:本场)?总分',whole)
+        high=re.search(r'总分(?:预测)?(?:被)?(?:大幅|明显|显著)?高估|高估(?:了)?(?:本场)?总分',whole)
+        if (predicted>actual and low)or(predicted<actual and high):
+            issues.append({'code':'total_prediction_error_direction_mismatch'})
+    discussion=context.get('fan_discussion')or{}
+    fan_mentions=re.search(r'虎扑(?:球迷|网友|热评|评论)|网友(?:都|纷纷)(?:说|认为)|球迷一致认为',whole)
+    if fan_mentions and discussion.get('status')!='available':
+        issues.append({'code':'fan_reaction_without_source'})
+    if re.search(r'所有球迷|全体球迷|球迷一致认为|网友都认为',whole):
+        issues.append({'code':'fan_consensus_overclaim'})
+    fan_quotes=re.findall(r'虎扑[^。！？\n]{0,24}?[“「]([^”」]+)[”」]',whole)
+    source_texts=[re.sub(r'\s+','',comment['text'])for thread in discussion.get('threads',[])
+        for comment in thread.get('comments',[])]
+    if sum(len(q)for q in fan_quotes)>40:issues.append({'code':'fan_quote_too_long'})
+    for fan_quote in fan_quotes:
+        if not any(re.sub(r'\s+','',fan_quote)in text for text in source_texts):
+            issues.append({'code':'fan_quote_not_in_source','quote':fan_quote})
     for side in ('home','away'):
         team=game[side]['name'];line=quote.get(side+'_spread')
         if line is None and side=='away'and quote.get('home_spread')is not None:line=-quote['home_spread']

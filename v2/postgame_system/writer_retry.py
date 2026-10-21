@@ -10,6 +10,38 @@ def initialize_writer_attempts(store):
           postgame_version_id TEXT PRIMARY KEY, game_id TEXT NOT NULL, status TEXT NOT NULL,
           attempt_count INTEGER NOT NULL, next_attempt_at TEXT, lease_until TEXT, error TEXT,
           artifact_sha256 TEXT, updated_at TEXT NOT NULL)''')
+        db.execute('''CREATE TABLE IF NOT EXISTS postgame_writer_retry_grants(
+          postgame_version_id TEXT PRIMARY KEY,additional_attempts INTEGER NOT NULL CHECK(additional_attempts=1),
+          not_before TEXT NOT NULL,expires_at TEXT NOT NULL,reason TEXT NOT NULL,
+          prior_attempt_json TEXT NOT NULL,granted_at TEXT NOT NULL)''')
+
+
+def grant_reviewed_writer_retry(store,version_id,*,reason,not_before,expires_at,clock=None):
+    """One explicit, audited extra attempt; never erase/reset the original three."""
+    import json
+    from v2.pregame_system.cost_ledger import instant
+    at=(clock or(lambda:datetime.now(timezone.utc)))()
+    start,end=instant(not_before),instant(expires_at)
+    if not str(reason).strip() or end<=start or end<=at:
+        raise ValueError('writer_retry_grant_invalid')
+    initialize_writer_attempts(store)
+    with store.connect()as db:
+        db.execute('BEGIN IMMEDIATE')
+        row=db.execute('SELECT * FROM postgame_writer_attempts WHERE postgame_version_id=?',(version_id,)).fetchone()
+        if not row or row['status']!='exhausted' or row['attempt_count']!=3 or row['lease_until']:
+            raise ValueError('writer_retry_grant_requires_reviewed_exhausted_attempts')
+        if db.execute('SELECT 1 FROM postgame_writer_retry_grants WHERE postgame_version_id=?',(version_id,)).fetchone():
+            raise ValueError('writer_retry_grant_already_exists')
+        db.execute('INSERT INTO postgame_writer_retry_grants VALUES(?,1,?,?,?,?,?)',
+            (version_id,start.isoformat(),end.isoformat(),str(reason).strip(),json.dumps(dict(row)),at.isoformat()))
+        db.commit()
+
+
+def writer_attempt_limit(store,version_id,at):
+    from v2.pregame_system.cost_ledger import instant
+    with store.connect()as db:
+        grant=db.execute('SELECT * FROM postgame_writer_retry_grants WHERE postgame_version_id=?',(version_id,)).fetchone()
+    return 3+(1 if grant and instant(grant['not_before'])<=instant(at)<instant(grant['expires_at'])else 0)
 
 
 def attempt_postgame_writer(store, postgame, generator, *, clock=None, output_root=DEFAULT_OUTPUT_ROOT,
@@ -50,16 +82,20 @@ def attempt_postgame_writer(store, postgame, generator, *, clock=None, output_ro
     with store.connect() as db:
         db.execute('BEGIN IMMEDIATE')
         row=db.execute('SELECT * FROM postgame_writer_attempts WHERE postgame_version_id=?',(version_id,)).fetchone()
-        if row and (row['status']=='succeeded' or row['attempt_count']>=3 or
+        # Read the separately recorded grant on this transaction's connection.
+        grant=db.execute('SELECT * FROM postgame_writer_retry_grants WHERE postgame_version_id=?',(version_id,)).fetchone()
+        from v2.pregame_system.cost_ledger import instant
+        limit=3+(1 if grant and instant(grant['not_before'])<=instant(at)<instant(grant['expires_at'])else 0)
+        if row and (row['status']=='succeeded' or row['attempt_count']>=limit or
                     (row['lease_until'] and row['lease_until']>at.isoformat()) or
                     (row['next_attempt_at'] and row['next_attempt_at']>at.isoformat())):
             db.commit()
-            return {'editorial_status':'exhausted' if row['attempt_count']>=3 else 'waiting'}
+            return {'editorial_status':'exhausted' if row['attempt_count']>=limit else 'waiting'}
         count=(row['attempt_count'] if row else 0)+1
         db.execute('''INSERT INTO postgame_writer_attempts VALUES(?,?,'running',?,NULL,?,NULL,NULL,?)
           ON CONFLICT(postgame_version_id) DO UPDATE SET status='running',attempt_count=excluded.attempt_count,
           next_attempt_at=NULL,lease_until=excluded.lease_until,error=NULL,updated_at=excluded.updated_at''',
-          (version_id,postgame['game_id'],count,(at+timedelta(minutes=3)).isoformat(),at.isoformat()))
+          (version_id,postgame['game_id'],count,(at+timedelta(minutes=6)).isoformat(),at.isoformat()))
         db.commit()
     try:
         with production_scope(store.path,postgame['game_id'],'POSTGAME',version_id+':'+str(count),holidays=holidays,retry=count-1):
@@ -76,7 +112,7 @@ def attempt_postgame_writer(store, postgame, generator, *, clock=None, output_ro
     with store.connect() as db:
         db.execute('''UPDATE postgame_writer_attempts SET status=?,next_attempt_at=?,lease_until=NULL,
           error=?,artifact_sha256=?,updated_at=? WHERE postgame_version_id=?''',
-          ('succeeded' if success else 'exhausted' if count>=3 else 'failed',
-           None if success or count>=3 else (completed+timedelta(minutes=5*2**(count-1))).isoformat(),
+          ('succeeded' if success else 'exhausted' if count>=limit else 'failed',
+           None if success or count>=limit else (completed+timedelta(minutes=5*2**(count-1))).isoformat(),
            error,artifact.get('artifact_sha256') if artifact else None,completed.isoformat(),version_id))
     return {'editorial_status':status,'editorial_attempt':count,**({'editorial_error_type':error} if error else {})}

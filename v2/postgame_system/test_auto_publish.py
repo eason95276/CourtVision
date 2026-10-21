@@ -144,6 +144,26 @@ def test_auto_postgame_invokes_separate_writer_after_immutable_publish(tmp_path,
     assert calls==[(GAME["id"],result[0]["version_id"])]
 
 
+def test_coordinator_recognizes_explicit_review_grant_without_reset(tmp_path,monkeypatch):
+    from . import writer_retry
+    catalog,service,clock=_fixture(tmp_path)
+    FakePostgame(service.store).publish(GAME,'fixture-result',required_base_version=BASE['version_id'])
+    writer_retry.initialize_writer_attempts(service.store)
+    with service.store.connect()as db:
+        db.execute("INSERT INTO postgame_writer_attempts VALUES('postgame-v1',?,'exhausted',3,NULL,NULL,'reviewed',NULL,?)",
+            (GAME['id'],clock().isoformat()))
+    writer_retry.grant_reviewed_writer_retry(service.store,'postgame-v1',reason='Reviewed and fixed failure',
+        not_before='2026-10-06T12:00:00Z',expires_at='2026-10-06T15:30:00Z',clock=clock)
+    calls=[]
+    monkeypatch.setattr(writer_retry,'load_postgame_editorial',lambda *a,**k:{'artifact_sha256':'a'*64}if calls else None)
+    def generate(*a,**k):calls.append(1);return type('Result',(),{'status':'success'})()
+    sync=auto_publish.PostgameAutoPublisher(catalog,prediction_service=service,postgame_factory=FakePostgame,
+        editorial_generator=generate,clock=clock)
+    assert sync.sync_pending()[0]['editorial_attempt']==4
+    assert calls==[1]
+    assert sync.sync_pending()==[]
+
+
 def test_public_postgame_sync_defaults_to_runtime_writer_without_model_in_test(tmp_path,monkeypatch):
     from . import editorial
     catalog,service,clock=_fixture(tmp_path)

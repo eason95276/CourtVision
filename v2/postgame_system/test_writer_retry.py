@@ -80,6 +80,44 @@ def test_existing_article_is_not_rewritten_or_delayed_by_evening_policy(tmp_path
         clock=lambda:datetime(2026,10,21,2,tzinfo=timezone.utc),output_root=tmp_path)
     assert result['editorial_status']=='already_exists'
 
+
+def test_reviewed_recovery_preserves_old_attempts_and_allows_only_one_extra(tmp_path,monkeypatch):
+    store=PredictionVersionStore(tmp_path/'db.sqlite');writer_retry.initialize_writer_attempts(store)
+    post={'version_id':'reviewed','game_id':'espn:reviewed'}
+    with store.connect()as db:
+        db.execute("INSERT INTO postgame_writer_attempts VALUES(?,?,'exhausted',3,NULL,NULL,'article_too_long',NULL,?)",
+            (post['version_id'],post['game_id'],'2026-10-21T04:20:00+00:00'))
+    writer_retry.grant_reviewed_writer_retry(store,post['version_id'],reason='Reviewed length failures; revised bounded compression prompt',
+        not_before='2026-10-21T12:00:00Z',expires_at='2026-10-21T15:30:00Z',
+        clock=lambda:datetime(2026,10,21,7,tzinfo=timezone.utc))
+    with store.connect()as db:
+        row=db.execute('SELECT * FROM postgame_writer_attempts').fetchone()
+        assert row['attempt_count']==3 and row['status']=='exhausted'and row['error']=='article_too_long'
+        grant=db.execute('SELECT prior_attempt_json FROM postgame_writer_retry_grants').fetchone()
+        assert json.loads(grant[0])['attempt_count']==3
+    assert writer_retry.writer_attempt_limit(store,post['version_id'],datetime(2026,10,21,7,tzinfo=timezone.utc))==3
+    assert writer_retry.writer_attempt_limit(store,post['version_id'],datetime(2026,10,21,12,tzinfo=timezone.utc))==4
+    monkeypatch.setattr(writer_retry,'load_postgame_editorial',lambda *a,**k:None)
+    calls=[]
+    def generator(*a,**k):calls.append(1);return SimpleNamespace(status='failed',error_type='fixture')
+    at=datetime(2026,10,21,12,tzinfo=timezone.utc)
+    assert writer_retry.attempt_postgame_writer(store,post,generator,clock=lambda:at,output_root=tmp_path)['editorial_attempt']==4
+    assert writer_retry.attempt_postgame_writer(store,post,generator,clock=lambda:at,output_root=tmp_path)['editorial_status']=='exhausted'
+    assert calls==[1]
+    with pytest.raises(ValueError,match='requires_reviewed|already_exists'):
+        writer_retry.grant_reviewed_writer_retry(store,post['version_id'],reason='No repeated grants',
+            not_before='2026-10-21T12:00:00Z',expires_at='2026-10-21T15:30:00Z',clock=lambda:at)
+
+
+def test_expired_review_grant_does_not_allow_an_extra_call(tmp_path):
+    store=PredictionVersionStore(tmp_path/'db.sqlite');writer_retry.initialize_writer_attempts(store)
+    with store.connect()as db:
+        db.execute("INSERT INTO postgame_writer_attempts VALUES('expired','espn:e','exhausted',3,NULL,NULL,'old',NULL,'old')")
+    writer_retry.grant_reviewed_writer_retry(store,'expired',reason='One bounded review',
+        not_before='2026-10-21T12:00:00Z',expires_at='2026-10-21T15:30:00Z',
+        clock=lambda:datetime(2026,10,21,7,tzinfo=timezone.utc))
+    assert writer_retry.writer_attempt_limit(store,'expired',datetime(2026,10,22,12,tzinfo=timezone.utc))==3
+
 @pytest.mark.parametrize('winner_correct,spread,total,expected',[
     (True,'loss','win','胜负看对，让分看错，大小分看对。'),
     (False,'win','loss','胜负看错，让分看对，大小分看错。'),
