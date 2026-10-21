@@ -2,6 +2,124 @@
   "contract_version": "courtvision-public-v1",
   "games": [
     {
+      "game_id": "espn:401909840",
+      "file": "games/espn_401909840.json",
+      "tipoff": "2026-10-22T00:30:00+00:00",
+      "version_id": "d4becef7-6f4b-4ada-ba2b-0020bdf7e25f",
+      "public_sha256": "f718dd85e0c47f7f40ee167550a9a1c874a39d8805bd67e1364f797c4faecedf",
+      "home_record": {
+        "game": {
+          "away": {
+            "abbreviation": "DAL",
+            "accent": "#00538C",
+            "id": 1610612742,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/dal.png",
+            "name": "Dallas Mavericks",
+            "name_zh": "独行侠",
+            "espn_team_id": "6",
+            "score": null
+          },
+          "game_type": "regular_season",
+          "home": {
+            "abbreviation": "HOU",
+            "accent": "#CE1141",
+            "id": 1610612745,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/hou.png",
+            "name": "Houston Rockets",
+            "name_zh": "火箭",
+            "espn_team_id": "10",
+            "score": null
+          },
+          "id": "espn:401909840",
+          "registered_game": true,
+          "schedule_revision": 1,
+          "status": "scheduled",
+          "tipoff": "2026-10-22T00:30:00+00:00",
+          "venue": "Toyota Center (Houston)",
+          "season": 2027,
+          "schedule_catalog_fact": true,
+          "postgame": null,
+          "homepage_visible": true,
+          "public_summary": true
+        },
+        "prediction": {
+          "status": "current",
+          "game_id": "espn:401909840",
+          "version_id": "d4becef7-6f4b-4ada-ba2b-0020bdf7e25f",
+          "state_revision": 2,
+          "locked_at": null,
+          "lock_reason": null,
+          "schedule_revision": 1,
+          "version": {
+            "analysis_contract_version": "two-stage-forecast-v1",
+            "base_input_hash": "0c80580bccff3414cc2dfcb4b1c8cead78bd0850bd760cec64282d91aba7cb4d",
+            "game_id": "espn:401909840",
+            "game_identity": {
+              "away_team_id": 1610612742,
+              "game_id": "espn:401909840",
+              "home_team_id": 1610612745,
+              "scheduled_tipoff": "2026-10-22T00:30:00+00:00"
+            },
+            "generated_at": "2026-10-21T15:00:58.494129+00:00",
+            "input_cutoff_at": "2026-10-21T15:00:46.145234+00:00",
+            "published_at": "2026-10-21T15:01:00.282913+00:00",
+            "schedule_revision": 1,
+            "stage": "EARLY_PREVIEW",
+            "version_id": "d4becef7-6f4b-4ada-ba2b-0020bdf7e25f",
+            "payload_sha256": "4b284b99217c0cda5423fb082e6b437981309c20a7c197c6c7737775b29c1d0d",
+            "input_snapshot": {
+              "away": {
+                "abbreviation": "DAL",
+                "accent": "#00538C",
+                "id": 1610612742,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/dal.png",
+                "name": "Dallas Mavericks",
+                "name_zh": "独行侠"
+              },
+              "home": {
+                "abbreviation": "HOU",
+                "accent": "#CE1141",
+                "id": 1610612745,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/hou.png",
+                "name": "Houston Rockets",
+                "name_zh": "火箭"
+              },
+              "id": "espn:401909840",
+              "schedule_revision": 1,
+              "tipoff": "2026-10-22T00:30:00+00:00"
+            },
+            "judgment": {
+              "final_prediction": {
+                "evidence_ids": [
+                  "30d55b2ce835934b98e9a3ec26baea6adc5d2b0422998a317d7f9a12870834a1",
+                  "521605e99173f502e673bb2fda499819d8554baed1575af4cd88caee3eaaa487",
+                  "548f5ed2782b5a657e6a417e3d3ea8b9a7ca83de247ed5cc10eae922d54fa56d",
+                  "9f840164900dc811a0e519507626f8977cd0c0aebb49619bc84b60d012c2ae56",
+                  "b673f0cc08fa90fcd9fe6d297a4fff2ad68f819153a2197a2d0576bbd3508d49"
+                ],
+                "expected_margin": 8.5,
+                "expected_total": 228.5,
+                "win_probability": 0.7,
+                "winner_side": "home"
+              },
+              "pregame_story": {
+                "classification": "subjective_analysis",
+                "evidence_ids": [
+                  "30d55b2ce835934b98e9a3ec26baea6adc5d2b0422998a317d7f9a12870834a1",
+                  "521605e99173f502e673bb2fda499819d8554baed1575af4cd88caee3eaaa487",
+                  "548f5ed2782b5a657e6a417e3d3ea8b9a7ca83de247ed5cc10eae922d54fa56d",
+                  "9f840164900dc811a0e519507626f8977cd0c0aebb49619bc84b60d012c2ae56",
+                  "b673f0cc08fa90fcd9fe6d297a4fff2ad68f819153a2197a2d0576bbd3508d49"
+                ],
+                "statement": "赛季首战，火箭带着上季的班底在主场等独行侠，对面却是一套刚拼起来的新阵容——延续性对天赋，这场球从跳球就有得看。",
+                "title": "火箭主场迎旧敌\n独行侠新阵试锋"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
       "game_id": "espn:401909834",
       "file": "games/espn_401909834.json",
       "tipoff": "2026-10-21T23:00:00+00:00",
@@ -948,5 +1066,5 @@
       }
     }
   ],
-  "published_at": "2026-10-21T14:43:25.313361+00:00"
+  "published_at": "2026-10-21T15:14:11.453802+00:00"
 }
