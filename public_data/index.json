@@ -220,7 +220,7 @@
                   "cf8cd0053ecc196f81d51c83e017aa3f9d1e5daa07b0d33bac4fd53ca21886f2",
                   "f39134a7ee44ee1851ae1fe46f5d8ad2b2bcf2108ae76544e583c88a724f7f98"
                 ],
-                "expected_margin": 3.0,
+                "expected_margin": 3,
                 "expected_total": 227.5,
                 "win_probability": 0.56,
                 "winner_side": "home"
@@ -365,8 +365,8 @@
       "game_id": "espn:401909838",
       "file": "games/espn_401909838.json",
       "tipoff": "2026-10-22T00:00:00+00:00",
-      "version_id": "3db4d66a-03ca-45b3-a98c-7a2506326d5f",
-      "public_sha256": "a9f91bbe850ed06ee36020f515b836a12b75ba69e1b78395af821cd204697408",
+      "version_id": "de41cb5f-9d75-4805-8a72-3032a3af513d",
+      "public_sha256": "bd05a79f728a1e70db5c2d4a296fb14735ee06f6360d67778993aa6a47769513",
       "home_record": {
         "game": {
           "away": {
@@ -405,14 +405,14 @@
         "prediction": {
           "status": "current",
           "game_id": "espn:401909838",
-          "version_id": "3db4d66a-03ca-45b3-a98c-7a2506326d5f",
-          "state_revision": 2,
+          "version_id": "de41cb5f-9d75-4805-8a72-3032a3af513d",
+          "state_revision": 3,
           "locked_at": null,
           "lock_reason": null,
           "schedule_revision": 1,
           "version": {
             "analysis_contract_version": "two-stage-forecast-v1",
-            "base_input_hash": "f0d03f150781015c1782b2ce67169d006889655066202786eb15bcd2987f4d2e",
+            "base_input_hash": "d4cde080ba7fd5e39d9c578b767bbaf5427f8a4c0295811e60968f9d4efd3896",
             "game_id": "espn:401909838",
             "game_identity": {
               "away_team_id": 1610612762,
@@ -420,13 +420,13 @@
               "home_team_id": 1610612763,
               "scheduled_tipoff": "2026-10-22T00:00:00+00:00"
             },
-            "generated_at": "2026-10-21T14:45:45.315658+00:00",
-            "input_cutoff_at": "2026-10-21T14:45:34.267523+00:00",
-            "published_at": "2026-10-21T14:45:46.851150+00:00",
+            "generated_at": "2026-10-21T23:40:46.192583+00:00",
+            "input_cutoff_at": "2026-10-21T23:40:26.823575+00:00",
+            "published_at": "2026-10-21T23:40:48.370036+00:00",
             "schedule_revision": 1,
-            "stage": "EARLY_PREVIEW",
-            "version_id": "3db4d66a-03ca-45b3-a98c-7a2506326d5f",
-            "payload_sha256": "626491a015e32ab5de13fb128dabe292eed667d76a42844eebd34b4e9b51b68e",
+            "stage": "FINAL_PREGAME",
+            "version_id": "de41cb5f-9d75-4805-8a72-3032a3af513d",
+            "payload_sha256": "4d3d727917c312f5d582d0602683a70938e84068d47a5a10fddc36b0a44a4c10",
             "input_snapshot": {
               "away": {
                 "abbreviation": "UTAH",
@@ -454,13 +454,15 @@
                   "16edfee6e84f7cecd14d1ff47b385e478a1ca767c20cf6935f7460d385df9022",
                   "3ebae06af15302a8f5bac85cd6e7926ce25826926fcb6ffc2459d4f2a866d32f",
                   "6c48c01a29c95e6787760057d3bbff8aeb3472bb25dbf29243e7989db5bc6d39",
-                  "7d54469415e13fa3b6bde7887cbe29011a4bf56970c70cdec6cae2790d0253de",
+                  "bfc4c5da18ecd541b2790a8fa3c2e90b945726b4766018c674e3821d4a815e82",
                   "de935e8ebdd6ce12e64ddb731f99b90a74a7ea4c3dbfc6cda9460128ea8c2dd3",
-                  "e6cb87b7160c9e8724e71a3834548e22c04936e1966508a1fe3c498d087d6e71",
-                  "f1857786a369aa95d9bc83d7f0d67e3bb47907379058d15b89145ec09997dadf",
-                  "f8ab9f3a9dbb0b8d5a36d8686e5d9ceffb6a321c655c73c19b48668324f2569a"
+                  "final-availability-69317aa4384d5a8d92be",
+                  "final-availability-82f52381f039910e6477",
+                  "final-availability-d7a105afba4322414fbe",
+                  "final-availability-df92fce4ca76a15e38ae",
+                  "final-availability-e86fb7fc4e6c410a7481"
                 ],
-                "expected_margin": 2.0,
+                "expected_margin": 2,
                 "expected_total": 238.5,
                 "win_probability": 0.56,
                 "winner_side": "away"
@@ -471,12 +473,12 @@
                   "16edfee6e84f7cecd14d1ff47b385e478a1ca767c20cf6935f7460d385df9022",
                   "3ebae06af15302a8f5bac85cd6e7926ce25826926fcb6ffc2459d4f2a866d32f",
                   "6c48c01a29c95e6787760057d3bbff8aeb3472bb25dbf29243e7989db5bc6d39",
-                  "7d54469415e13fa3b6bde7887cbe29011a4bf56970c70cdec6cae2790d0253de",
+                  "bfc4c5da18ecd541b2790a8fa3c2e90b945726b4766018c674e3821d4a815e82",
                   "de935e8ebdd6ce12e64ddb731f99b90a74a7ea4c3dbfc6cda9460128ea8c2dd3",
-                  "e6cb87b7160c9e8724e71a3834548e22c04936e1966508a1fe3c498d087d6e71"
+                  "final-availability-69317aa4384d5a8d92be"
                 ],
-                "statement": "灰熊把重建的钥匙交给布泽，爵士则带着新援杰克逊上门，揭幕夜就看这两套新阵容谁先站稳。",
-                "title": "灰熊换血迎新季\n爵士杰克逊登门"
+                "statement": "灰熊把重建押在Boozer和Edey身上，爵士则带着Jaren Jackson Jr.和Markkanen上门，揭幕夜就看新内线谁先站稳。",
+                "title": "灰熊换血迎新季\n爵士补强叩孟城"
               }
             }
           }
@@ -708,7 +710,7 @@
                   "567fed0bf8dc3b55fa1d686f12dec4a7bc7c5928821fb4d6687d2273d7c6c60d",
                   "final-availability-983b05e7d38c401965e3"
                 ],
-                "expected_margin": 3.0,
+                "expected_margin": 3,
                 "expected_total": 224.5,
                 "win_probability": 0.56,
                 "winner_side": "home"
@@ -832,7 +834,7 @@
                   "final-availability-a99b01240ddee54f808a",
                   "final-availability-aa6694e450a0d2100ce8"
                 ],
-                "expected_margin": 4.0,
+                "expected_margin": 4,
                 "expected_total": 218.5,
                 "win_probability": 0.58,
                 "winner_side": "home"
@@ -1123,7 +1125,7 @@
             "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/det.png",
             "accent": "#C8102E",
             "espn_team_id": "8",
-            "score": 121.0
+            "score": 121
           },
           "away": {
             "id": 1610612738,
@@ -1133,7 +1135,7 @@
             "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/bos.png",
             "accent": "#007A33",
             "espn_team_id": "2",
-            "score": 113.0
+            "score": 113
           },
           "postgame": {
             "status": "available",
@@ -1275,7 +1277,7 @@
             "name": "Los Angeles Lakers",
             "name_zh": "湖人",
             "espn_team_id": "13",
-            "score": 98.0
+            "score": 98
           },
           "game_type": "preseason",
           "home": {
@@ -1286,7 +1288,7 @@
             "name": "Golden State Warriors",
             "name_zh": "勇士",
             "espn_team_id": "9",
-            "score": 124.0
+            "score": 124
           },
           "id": "espn:401898390",
           "registered_game": true,
@@ -1366,7 +1368,7 @@
                   "f0c01aa069ff22d252cd1b2ad73d6bca9e9a5e5fcfe9d3bb1a991fb8af80f606",
                   "f979801b7972d7a2ec2fac5ba3eacd1b953240a8307c9461788eaa6f98f40678"
                 ],
-                "expected_margin": 3.0,
+                "expected_margin": 3,
                 "expected_total": 223.5,
                 "win_probability": 0.55,
                 "winner_side": "home"
@@ -1430,7 +1432,7 @@
             "name": "New York Knicks",
             "name_zh": "尼克斯",
             "espn_team_id": "18",
-            "score": 97.0
+            "score": 97
           },
           "game_type": "preseason",
           "home": {
@@ -1441,7 +1443,7 @@
             "name": "Philadelphia 76ers",
             "name_zh": "76人",
             "espn_team_id": "20",
-            "score": 120.0
+            "score": 120
           },
           "id": "espn:401914101",
           "registered_game": true,
@@ -1560,7 +1562,7 @@
             "name": "Miami Heat",
             "name_zh": "热火",
             "espn_team_id": "14",
-            "score": 129.0
+            "score": 129
           },
           "game_type": "preseason",
           "home": {
@@ -1571,7 +1573,7 @@
             "name": "Toronto Raptors",
             "name_zh": "猛龙",
             "espn_team_id": "28",
-            "score": 105.0
+            "score": 105
           },
           "id": "espn:401902644",
           "registered_game": true,
@@ -1654,7 +1656,7 @@
                   "f837855677b1d323b85281145d980022e35697083c3cffaf78eb02824bcb6f51",
                   "f9a5669250e08583d7c8f3400f1d174ef13dde182c600ffbc142d2f67679507e"
                 ],
-                "expected_margin": 3.0,
+                "expected_margin": 3,
                 "expected_total": 228.5,
                 "win_probability": 0.58,
                 "winner_side": "home"
@@ -1678,5 +1680,5 @@
       }
     }
   ],
-  "published_at": "2026-10-21T23:13:12.293806+00:00"
+  "published_at": "2026-10-21T23:44:55.280989+00:00"
 }
