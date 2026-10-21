@@ -7,6 +7,15 @@ def line_text(team,line):
     return team+('受让'if line>0 else'让'if line<0 else'平手')+(f'{abs(line):g}分'if line else'')
 
 
+def period_scope(clause):
+    if '下半场'in clause:return [3,4]
+    if '半场'in clause or'上半场'in clause:return [1,2]
+    for period,pattern in [(1,r'首节|第一节|第1节'),(2,r'次节|第二节|第2节'),
+                           (3,r'第三节|第3节'),(4,r'末节(?!之王)|第四节|第4节')]:
+        if re.search(pattern,clause):return [period]
+    return []
+
+
 def public_verdicts(context):
     teams=context['game'];market=context.get('public_market_reference_review')or{};quote=market.get('quote')or{}
     spread=market.get('spread')or{};total=market.get('total')or{}
@@ -85,12 +94,24 @@ def validate_article(editorial,context):
     clauses=re.split(r'[。！？；，,\n]',whole)
     for clause in clauses:
         names=[(alias,rows[0])for alias,rows in aliases.items()if len(rows)==1 and alias in clause]
-        if names and not context.get('player_period_stats')and re.search(r'半场|首节|次节|末节|第[一二三四1234]节',clause)and re.search(r'得分|拿到|砍下|高效|命中|三分|篮板|助攻|连续|爆发',clause):
-            issues.append({'code':'player_period_claim_without_period_data','quote':clause})
+        periods=period_scope(clause)
         for alias,row in names:
+            scoped=[s for s in context.get('player_period_stats',[])if s['name']==row['name']and s['period']in periods]
+            verified=bool(periods)and{r['period']for r in scoped}==set(periods)
+            atomic_assist=bool(re.search(r'(?:送出|传出|完成)(?:了)?(?:一次)?助攻',clause))and any(
+                e.get('period')in periods and re.search(re.escape(row['name'])+r' assists\)',e.get('text',''))
+                for e in context.get('verified_game_events',[]))
+            if periods and not verified and not atomic_assist and re.search(r'得分|拿到|砍下|高效|命中|三分|篮板|助攻|连续|爆发|\d+投|\d+中|\d+分',clause):
+                issues.append({'code':'player_period_claim_without_period_data','quote':clause})
+            shooting=re.search(r'(\d+)(?:投|中)(\d+)(?:中)?',clause)
+            if shooting and (verified or not periods):
+                actual=(sum(r['fga']for r in scoped),sum(r['fgm']for r in scoped))if verified else tuple(reversed(row.get('field_goals')or[None,None]))
+                if None not in actual and tuple(map(int,shooting.groups()))!=actual:
+                    issues.append({'code':'player_shooting_mismatch','quote':shooting[0],'expected':actual})
             match=re.search(re.escape(alias)+r'(?:全场|拿到|得到|贡献|砍下|交出)?\s*(\d+(?:\.\d+)?)\s*分',clause)
-            if match and row.get('points')is not None and abs(float(match[1])-row['points'])>0.001:
-                issues.append({'code':'player_points_mismatch','quote':match[0],'expected':row['points']})
+            expected=sum(r['points']for r in scoped)if verified else row.get('points')
+            if match and expected is not None and (not periods or verified)and abs(float(match[1])-expected)>0.001:
+                issues.append({'code':'player_points_mismatch','quote':match[0],'expected':expected})
         if not re.search(r'赛前|预期|预想|设想|如果|假如|若',clause)and re.search(
             r'集中在.{0,8}时段|(?:下半场|第三节|第四节).{0,16}(?:调整防守|加强对抗|改变防守)|连续.{0,8}(?:三分|得分潮)|错位.{0,8}正在兑现',clause):
             issues.append({'code':'sequence_claim_without_play_by_play','quote':clause})

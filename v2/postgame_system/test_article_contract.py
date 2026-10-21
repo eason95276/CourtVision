@@ -25,6 +25,20 @@ def test_full_game_player_points_are_not_partial_game_evidence():
     assert any(i['code']=='player_period_claim_without_period_data'for i in validate_article({'article':'乔治半场就打出高效得分。'},context()))
 
 
+def test_period_shooting_uses_only_the_matching_players_verified_period():
+    value=context();value['player_period_stats']=[{'name':'保罗·乔治','period':4,'points':2,'fgm':1,'fga':5,'assists':2}]
+    assert validate_article({'article':'乔治末节5投1中。'},value)==[]
+    assert any(i['code']=='player_shooting_mismatch'for i in validate_article({'article':'乔治末节5投2中。'},value))
+    assert any(i['code']=='player_period_claim_without_period_data'for i in validate_article({'article':'乔治上半场就打出高效得分。'},value))
+    assert validate_article({'article':'末节之王乔治全场38分。'},value)==[]
+
+
+def test_single_recorded_assist_is_not_a_claim_about_period_totals():
+    value=context();value['verified_game_events']=[{'period':3,'text':'队友 makes three point shot (保罗·乔治 assists)'}]
+    assert validate_article({'article':'第三节最后一球，乔治送出助攻。'},value)==[]
+    assert any(i['code']=='player_period_claim_without_period_data'for i in validate_article({'article':'乔治第三节拿到8分。'},value))
+
+
 def test_fan_quotes_require_actual_source_and_cannot_claim_consensus():
     value=context()
     assert any(i['code']=='fan_reaction_without_source'for i in validate_article({'article':'虎扑球迷说这场有意思。'},value))

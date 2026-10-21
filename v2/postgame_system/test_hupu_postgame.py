@@ -65,15 +65,21 @@ def test_other_scores_pregame_future_unknown_time_and_empty_replies_fail_closed(
 def test_collect_fetches_real_body_not_snippet_and_cache_is_version_bound(tmp_path):
     calls=[]
     def search(payload):
+        if '主帅'in payload['query']:
+            calls.append('coach_search');return {'results':[]}
         calls.append('search');return {'results':[{'url':URL,'title':'本场赛后','content':BODY}]}
     def fetch(url):calls.append('fetch');return {'url':url,'content':BODY}
     collector=HupuPostgameCollector(tmp_path,transport=SimpleNamespace(search=search),fetcher=fetch,clock=lambda:AT)
     first=collector.collect(CONTEXT,POST)
-    assert first['status']=='available'and calls==['search','fetch']
-    assert collector.collect(CONTEXT,POST)==first and calls==['search','fetch']
+    assert first['status']=='available'and calls==['search','fetch','coach_search']
+    assert collector.collect(CONTEXT,POST)==first and calls==['search','fetch','coach_search']
     other={**POST,'version_id':'post-another'}
     assert collector.collect(CONTEXT,other)['binding']['version_id']=='post-another'
-    assert calls==['search','fetch','search','fetch']
+    assert calls==['search','fetch','coach_search','search','fetch','coach_search']
+    collector.collect(CONTEXT,POST,force=True)
+    snapshots=list((tmp_path/POST['version_id']).glob('20*.json'))
+    assert len(snapshots)==2
+    assert json.loads((tmp_path/POST['version_id']/'latest.json').read_text(encoding='utf-8'))['schema_version'].endswith('v2')
 
 
 def test_search_only_snippet_cannot_become_discussion(tmp_path):
@@ -81,6 +87,23 @@ def test_search_only_snippet_cannot_become_discussion(tmp_path):
     collector=HupuPostgameCollector(tmp_path,transport=transport,fetcher=lambda u:{'url':u,'content':''},clock=lambda:AT)
     report=collector.collect(CONTEXT,POST)
     assert report['status']=='missing'and report['threads']==[]
+
+
+def test_popular_basketball_criticism_is_kept_and_floor_duplicates_removed():
+    body='这些回帖亮了\n5楼 布伦森这场真拉胯，关键时刻没扛住。\n亮了(80)\n布伦森这场真拉胯，关键时刻没扛住。\n亮了(80)'
+    rows=comments(body)
+    assert len(rows)==1 and rows[0]['text'].startswith('布伦森')
+    body='这些回帖亮了\n傻逼，布伦森投得太差，末节得分没有扛起来。\n亮了(120)'
+    rows=comments(body)
+    assert len(rows)==1 and '布伦森'in rows[0]['text']and rows[0]['adapted_not_direct_quote']
+
+
+def test_coach_report_is_bound_to_score_date_and_named_editorial_source():
+    from .hupu_postgame import qualify_coach_report
+    body='虎扑篮球资讯(1280级)楼主2026-10-21 10:23:00\n虎扑10月21日讯 尼克斯主场100-106不敌76人。赛后主帅表示转换防守很差。\n来源：X'
+    row=qualify_coach_report({'url':URL,'content':body,'title':'主帅赛后谈转换防守'},CONTEXT,POST,AT)
+    assert row['classification']=='source_attributed_coach_statement'and'转换防守'in row['statement']
+    with pytest.raises(ValueError):qualify_coach_report({'url':URL,'content':body.replace('100-106','100-110')},CONTEXT,POST,AT)
 
 
 def test_writer_receives_qualified_fan_context_separate_from_verified_facts(tmp_path):
