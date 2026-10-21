@@ -36,6 +36,18 @@ class PublicSchedule(unittest.TestCase):
         self.assertEqual(result['generation_calls'],0)
         self.assertEqual(events,before)
 
+    def test_scores_are_facts_only_and_missing_is_not_zero(self):
+        fixture=event()
+        for row in fixture['competitions'][0]['competitors']:row['score']='0'
+        self.assertNotIn('score',self.build([fixture])['games'][0]['home'])
+        fixture['competitions'][0]['status']['type']={'state':'post','name':'STATUS_FINAL','completed':True}
+        fixture['competitions'][0]['competitors'][0]['score']='106'
+        fixture['competitions'][0]['competitors'][1]['score']='100'
+        game=self.build([fixture])['games'][0]
+        self.assertEqual((game['home']['score'],game['away']['score']),(106,100))
+        fixture['competitions'][0]['competitors'][1]['score']=None
+        self.assertNotIn('score',self.build([fixture])['games'][0]['away'])
+
     def test_beijing_boundary_and_rescheduled_date(self):
         result=self.build([event(tip='2026-10-21T16:00:00Z')])
         self.assertEqual(result['games'][0]['beijing_date'],'2026-10-22')

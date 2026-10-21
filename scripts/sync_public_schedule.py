@@ -1,6 +1,7 @@
 """Public scoreboard facts only. Never imports a model, Agent, or local database."""
 import argparse
 import json
+import math
 import sys
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
@@ -41,6 +42,13 @@ def build_schedule(boards,teams,selection,at):
             for side,row in sides.items():
                 identity=mapping[str(row['team']['id'])]
                 converted[side]={k:v for k,v in identity.items()if k!='espn_team_id'}
+                if competition['status']['type'].get('state') in {'in','post'}:
+                    try:
+                        score=float(row['score'])
+                        if math.isfinite(score) and score>=0:
+                            converted[side]['score']=int(score) if score.is_integer() else score
+                    except (KeyError,TypeError,ValueError):
+                        pass
             state=competition['status']['type'];name=state.get('name','').lower()
             status=('cancelled'if'cancel'in name else'postponed'if any(s in name for s in('postpon','suspend','delay'))else
                 'final'if state.get('completed')and state.get('state')=='post'else
