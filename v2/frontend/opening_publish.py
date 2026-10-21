@@ -102,7 +102,8 @@ def publish_saved(job, *, public_root, queue_root, api_base='http://127.0.0.1:86
                 raise
             # This isolated checkout owns only one saved delivery. Preserve remote
             # schedule/README changes; never force-push or regenerate the report.
-            command(['git','pull','--rebase','origin','main'],cwd=checkout,timeout=120)
+            command(['git','-c','user.name='+name,'-c','user.email='+email,
+                     'pull','--rebase','origin','main'],cwd=checkout,timeout=120)
     return {'status':'pushed','game_id':job['game_id'],'version_id':job['version_id'],
         'commit':command(['git','rev-parse','HEAD'],cwd=checkout),'generation_calls':0,'deployment':'GitHub Pages Actions pending'}
 

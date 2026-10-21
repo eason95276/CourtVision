@@ -4,6 +4,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import os
 import shutil
 import sqlite3
 import subprocess
@@ -63,6 +64,7 @@ def transport(tmp_path, published):
     source.mkdir(); git(source,'init','--initial-branch=main')
     git(source,'config','user.name','Offline publisher');git(source,'config','user.email','offline@example.invalid')
     # Exercise the actual public exporter, not a test that writes the desired output itself.
+    (source/'.gitattributes').write_text('* text eol=lf\n',encoding='utf-8')
     exporter = Path(__file__).resolve().parents[3]/'courtvision-public/publish_game.py'
     if not exporter.is_file(): exporter = Path(__file__).resolve().parents[2]/'publish_game.py'
     shutil.copyfile(exporter,source/'publish_game.py')
@@ -236,7 +238,10 @@ def test_retry_limit_is_terminal(published):
     assert queue.claim() is None
 
 
-def test_delivery_rebases_a_concurrent_schedule_commit_without_regeneration(published,transport,tmp_path):
+def test_delivery_rebases_a_concurrent_schedule_commit_without_regeneration(published,transport,tmp_path,monkeypatch):
+    # The isolated clone must work on CI without an inherited global Git identity.
+    monkeypatch.setenv('GIT_CONFIG_GLOBAL',os.devnull)
+    monkeypatch.setenv('GIT_CONFIG_NOSYSTEM','1')
     database,queue,*_=published
     options,bare,source,calls=transport
     moved=[False]
@@ -250,10 +255,12 @@ def test_delivery_rebases_a_concurrent_schedule_commit_without_regeneration(publ
             (other/'README.md').write_text('Upstream schedule note',encoding='utf-8')
             git(other,'add','README.md');git(other,'commit','-m','Concurrent schedule update')
             git(other,'push','origin','main')
-        return subprocess.run(args,**kwargs)
+        result=subprocess.run(args,**kwargs)
+        assert result.returncode==0 or args[:2]==['git','push'],result.stderr
+        return result
     queue.enqueue(database,GID,VID)
     result=queue.run(queue.claim(),lambda job:publish_saved(job,runner=concurrent_push,**options))
-    assert result['status']=='succeeded'and result['attempts']==1
+    assert result['status']=='succeeded'and result['attempts']==1,queue.summary()
     assert git(bare,'show','main:README.md')=='Upstream schedule note'
     assert json.loads(git(bare,'show','main:public_data/games/espn_401909089.json'))['prediction']['version_id']==VID
     assert (source/'README.md').read_text()=='Uncommitted human work'
