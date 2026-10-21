@@ -931,7 +931,7 @@ def _run_two_stage_impl(basketball: dict, market: dict, folder: Path, *, client=
         if correction is not None:
             messages.append({"role":"user", "content":json.dumps({
                 "protocol_correction":correction, "allowed_evidence_ids":sorted(_ids(basketball)),
-                "instruction":"修正本次引用/首发basis协议错误，逐字复制允许的 evidence ID。source_expected/confirmed 需要对应首发来源覆盖列出的球员；只有部分来自报道、其余由你推断的阵容，应标为 agent_expected，不能声称来源确认。不能修改 prediction 数字，不得新增事实。返回完整 schema JSON。"
+                "instruction":"修正本次引用/阵容与负荷basis协议错误，逐字复制允许的 evidence ID。source_expected/confirmed 需要对应首发来源覆盖列出的球员；只有部分来自报道、其余由你推断的阵容，应标为 agent_expected，不能声称来源确认。同时核对所有首发与负荷的来源标签。source_confirmed 的分钟范围必须由本场 minutes_restriction 原文支持，否则只改为 agent_estimate 并说明是分析估计；保留同一球员的分钟上下限，不得改成已确认。不改 prediction 数字，不新增事实。返回完整 schema JSON。"
             },ensure_ascii=False)})
         wire_schema = None
         if strict_transport:
@@ -1124,15 +1124,18 @@ def _run_two_stage_impl(basketball: dict, market: dict, folder: Path, *, client=
                 })
                 save(folder / "schema_repair_provenance.json", schema_repair_provenance)
                 raise ValueError("forecast_schema_repair_output_invalid") from exc
-            category='references' if str(exc) in {'unknown_plan_evidence','unknown_forecast_evidence'} else 'lineup_basis' if str(exc).startswith('lineup_basis_source_unverified:') else None
+            category='references' if str(exc) in {'unknown_plan_evidence','unknown_forecast_evidence'} else 'plan_basis' if str(exc).startswith('lineup_basis_source_unverified:') or str(exc)=='confirmed_minutes_source_unverified' else None
             # At most once per protocol class. A reference repair must not
             # consume the separate basis repair; repeated failures stop.
             if category is None or category in repaired:raise
             repaired.add(category)
+            before_usage = sorted((row.side,row.player_name,row.minutes_min,row.minutes_max)for row in (independent.pregame_plan.player_usage if independent.pregame_plan else []))
             independent = call('independent',basketball,independent_schema,correction_index=len(repaired),
                 correction={'error':str(exc),'candidate':independent.model_dump()})
             if independent.prediction.model_dump()!=original_prediction:
                 raise ValueError('protocol_revision_changed_prediction')
+            if category=='plan_basis'and sorted((row.side,row.player_name,row.minutes_min,row.minutes_max)for row in (independent.pregame_plan.player_usage if independent.pregame_plan else []))!=before_usage:
+                raise ValueError('protocol_revision_changed_minutes')
     if schema_repair_used:
         save(folder / "independent_schema_repair_acceptance.json", {
             "schema_validated": True, "content_lock_validated": True,

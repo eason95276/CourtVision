@@ -1152,3 +1152,27 @@ def test_registered_independent_uses_qualified_model_without_affecting_market_tr
     default_client(messages,VersionedIndependentForecast)
     default_client(messages,VersionedMarketReviewForecast)
     assert seen==[('independent','deepseek-v4-pro'),('market','deepseek-v4-flash')]
+
+
+@pytest.mark.parametrize('mode',['correct','changes_prediction','changes_minutes','still_invalid'])
+def test_usage_basis_revision_preserves_prediction_and_minute_ranges(tmp_path,mode):
+    from .test_pregame_estimates import inputs,plan,forecast
+    context=inputs();view,_,_=prepare_analyst(context.model_dump());calls=[]
+    original=plan();original['player_usage'][0]['basis']='source_confirmed'
+    def client(messages,schema):
+        calls.append(messages)
+        result=forecast(copy.deepcopy(original))
+        if len(calls)>1:
+            assert json.loads(messages[-1]['content'])['protocol_correction']['error']=='confirmed_minutes_source_unverified'
+            if mode!='still_invalid':result['pregame_plan']['player_usage'][0]['basis']='agent_estimate'
+            if mode=='changes_prediction':result['prediction']['expected_total']+=1
+            if mode=='changes_minutes':result['pregame_plan']['player_usage'][0]['minutes_max']+=1
+        return result,{}
+    if mode=='correct':
+        result=run_two_stage(view,{'evidence':[]},tmp_path/'run',client=client,skill_loader=lambda:'FORECAST')
+        usage=result['independent']['pregame_plan']['player_usage'][0]
+        assert usage['basis']=='agent_estimate'and(usage['minutes_min'],usage['minutes_max'])==(15,20)
+    else:
+        with pytest.raises(ValueError,match='protocol_revision_changed_prediction|protocol_revision_changed_minutes|confirmed_minutes_source_unverified'):
+            run_two_stage(view,{'evidence':[]},tmp_path/'run',client=client,skill_loader=lambda:'FORECAST')
+    assert len(calls)==2
