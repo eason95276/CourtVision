@@ -484,128 +484,6 @@
       }
     },
     {
-      "game_id": "espn:401909091",
-      "file": "games/espn_401909091.json",
-      "tipoff": "2026-10-21T23:30:00+00:00",
-      "version_id": "c790fb4a-b22b-4357-8224-daacc5ed260c",
-      "public_sha256": "ac846c66c52cd3143181c81c9f6e42309d989f3e01c8c82a371d30105dcb4252",
-      "home_record": {
-        "game": {
-          "id": "espn:401909091",
-          "status": "scheduled",
-          "tipoff": "2026-10-21T23:30:00+00:00",
-          "home": {
-            "id": 1610612748,
-            "name": "Miami Heat",
-            "name_zh": "热火",
-            "abbreviation": "MIA",
-            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
-            "accent": "#98002E",
-            "espn_team_id": "14",
-            "score": null
-          },
-          "away": {
-            "id": 1610612750,
-            "name": "Minnesota Timberwolves",
-            "name_zh": "森林狼",
-            "abbreviation": "MIN",
-            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/min.png",
-            "accent": "#0C2340",
-            "espn_team_id": "16",
-            "score": null
-          },
-          "postgame": null,
-          "game_type": "regular_season",
-          "schedule_revision": 1,
-          "registered_game": true,
-          "season": 2027,
-          "schedule_catalog_fact": true,
-          "venue": "Kaseya Center",
-          "homepage_visible": true,
-          "public_summary": true
-        },
-        "prediction": {
-          "status": "current",
-          "game_id": "espn:401909091",
-          "version_id": "c790fb4a-b22b-4357-8224-daacc5ed260c",
-          "state_revision": 2,
-          "locked_at": null,
-          "lock_reason": null,
-          "schedule_revision": 1,
-          "version": {
-            "analysis_contract_version": "two-stage-forecast-v1",
-            "base_input_hash": "0303436651ac63f860bf6f95109817db03013adb95518f7b5ca1a5bc3edea45a",
-            "game_id": "espn:401909091",
-            "game_identity": {
-              "away_team_id": 1610612750,
-              "game_id": "espn:401909091",
-              "home_team_id": 1610612748,
-              "scheduled_tipoff": "2026-10-21T23:30:00+00:00"
-            },
-            "generated_at": "2026-10-21T17:40:26.013325+00:00",
-            "input_cutoff_at": "2026-10-21T17:40:15.767460+00:00",
-            "published_at": "2026-10-21T17:40:28.391572+00:00",
-            "schedule_revision": 1,
-            "stage": "EARLY_PREVIEW",
-            "version_id": "c790fb4a-b22b-4357-8224-daacc5ed260c",
-            "payload_sha256": "76ce68326745f1f49070426f234df3bf9859a83fe7d573fd42e69373002d6d6c",
-            "input_snapshot": {
-              "away": {
-                "abbreviation": "MIN",
-                "accent": "#0C2340",
-                "espn_team_id": "16",
-                "id": 1610612750,
-                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/min.png",
-                "name": "Minnesota Timberwolves",
-                "name_zh": "森林狼"
-              },
-              "home": {
-                "abbreviation": "MIA",
-                "accent": "#98002E",
-                "espn_team_id": "14",
-                "id": 1610612748,
-                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
-                "name": "Miami Heat",
-                "name_zh": "热火"
-              },
-              "id": "espn:401909091",
-              "schedule_revision": 1,
-              "tipoff": "2026-10-21T23:30:00+00:00"
-            },
-            "judgment": {
-              "final_prediction": {
-                "evidence_ids": [
-                  "005bffe2618afebfb64d2fccaed7fdde60b16e863dcdeec84cbcd4b89697cda4",
-                  "14e96b1b32ea8e370b39e1a6ebbdd5fe9db541b1f265c5739ff614435ee96df8",
-                  "43921c66a40cbbda12cb04f7a9494e2a2664c375687b1cd90b25570ed2b5c19f",
-                  "52cdee68377ebf7c922e446db05faa495ad305d0db453def5e0e23f88d13cbfd",
-                  "53ff33dbfb2bbd4f73e6c47352244add74e2e16aefb730023fe4368adafaef72",
-                  "5419b084ccaf0237e7c41d992625545972e4a06ac8a69f35d6745e7576599f0e"
-                ],
-                "expected_margin": 3.0,
-                "expected_total": 224.5,
-                "win_probability": 0.56,
-                "winner_side": "home"
-              },
-              "pregame_story": {
-                "classification": "subjective_analysis",
-                "evidence_ids": [
-                  "005bffe2618afebfb64d2fccaed7fdde60b16e863dcdeec84cbcd4b89697cda4",
-                  "14e96b1b32ea8e370b39e1a6ebbdd5fe9db541b1f265c5739ff614435ee96df8",
-                  "43921c66a40cbbda12cb04f7a9494e2a2664c375687b1cd90b25570ed2b5c19f",
-                  "52cdee68377ebf7c922e446db05faa495ad305d0db453def5e0e23f88d13cbfd",
-                  "53ff33dbfb2bbd4f73e6c47352244add74e2e16aefb730023fe4368adafaef72",
-                  "5419b084ccaf0237e7c41d992625545972e4a06ac8a69f35d6745e7576599f0e"
-                ],
-                "statement": "字母哥在迈阿密的常规赛首秀，撞上芬奇自己都承认怕篮板的森林狼，这场揭幕战的内线账很好算。",
-                "title": "字母哥热火首秀\n爱德华兹闯迈阿"
-              }
-            }
-          }
-        }
-      }
-    },
-    {
       "game_id": "espn:401909837",
       "file": "games/espn_401909837.json",
       "tipoff": "2026-10-21T23:30:00+00:00",
@@ -724,6 +602,129 @@
                 ],
                 "statement": "猛龙在主场揭幕战迎来阵容重组的公牛，莱昂纳德与巴恩斯的侧翼组合第一次正式亮相，对面则要在内线减员的情况下撑住四十八分钟。",
                 "title": "猛龙开幕迎公牛\n莱昂纳德试新阵"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": "espn:401909091",
+      "file": "games/espn_401909091.json",
+      "tipoff": "2026-10-21T23:30:00+00:00",
+      "version_id": "ff077f81-86ad-4191-8cea-3ca538b399de",
+      "public_sha256": "c2d678a37dcf5bf68a12e5b4066ead28006321b973a21fa1f843d0c31e0af617",
+      "home_record": {
+        "game": {
+          "id": "espn:401909091",
+          "status": "scheduled",
+          "tipoff": "2026-10-21T23:30:00+00:00",
+          "home": {
+            "id": 1610612748,
+            "name": "Miami Heat",
+            "name_zh": "热火",
+            "abbreviation": "MIA",
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
+            "accent": "#98002E",
+            "espn_team_id": "14",
+            "score": null
+          },
+          "away": {
+            "id": 1610612750,
+            "name": "Minnesota Timberwolves",
+            "name_zh": "森林狼",
+            "abbreviation": "MIN",
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/min.png",
+            "accent": "#0C2340",
+            "espn_team_id": "16",
+            "score": null
+          },
+          "postgame": null,
+          "game_type": "regular_season",
+          "schedule_revision": 1,
+          "registered_game": true,
+          "season": 2027,
+          "schedule_catalog_fact": true,
+          "venue": "Kaseya Center",
+          "homepage_visible": true,
+          "public_summary": true
+        },
+        "prediction": {
+          "status": "current",
+          "game_id": "espn:401909091",
+          "version_id": "ff077f81-86ad-4191-8cea-3ca538b399de",
+          "state_revision": 3,
+          "locked_at": null,
+          "lock_reason": null,
+          "schedule_revision": 1,
+          "version": {
+            "analysis_contract_version": "two-stage-forecast-v1",
+            "base_input_hash": "d1c2a7987abd61366e5a0fdb18304247ea0757268bdff76b02aa98f8dd299b9c",
+            "game_id": "espn:401909091",
+            "game_identity": {
+              "away_team_id": 1610612750,
+              "game_id": "espn:401909091",
+              "home_team_id": 1610612748,
+              "scheduled_tipoff": "2026-10-21T23:30:00+00:00"
+            },
+            "generated_at": "2026-10-21T23:10:37.638042+00:00",
+            "input_cutoff_at": "2026-10-21T23:10:14.996530+00:00",
+            "published_at": "2026-10-21T23:10:43.744068+00:00",
+            "schedule_revision": 1,
+            "stage": "FINAL_PREGAME",
+            "version_id": "ff077f81-86ad-4191-8cea-3ca538b399de",
+            "payload_sha256": "6f58d066f0867ba77f8bda59b322799430d6a8410e963372fdaf5f00ecfeb863",
+            "input_snapshot": {
+              "away": {
+                "abbreviation": "MIN",
+                "accent": "#0C2340",
+                "espn_team_id": "16",
+                "id": 1610612750,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/min.png",
+                "name": "Minnesota Timberwolves",
+                "name_zh": "森林狼"
+              },
+              "home": {
+                "abbreviation": "MIA",
+                "accent": "#98002E",
+                "espn_team_id": "14",
+                "id": 1610612748,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
+                "name": "Miami Heat",
+                "name_zh": "热火"
+              },
+              "id": "espn:401909091",
+              "schedule_revision": 1,
+              "tipoff": "2026-10-21T23:30:00+00:00"
+            },
+            "judgment": {
+              "final_prediction": {
+                "evidence_ids": [
+                  "14e96b1b32ea8e370b39e1a6ebbdd5fe9db541b1f265c5739ff614435ee96df8",
+                  "43921c66a40cbbda12cb04f7a9494e2a2664c375687b1cd90b25570ed2b5c19f",
+                  "52cdee68377ebf7c922e446db05faa495ad305d0db453def5e0e23f88d13cbfd",
+                  "53ff33dbfb2bbd4f73e6c47352244add74e2e16aefb730023fe4368adafaef72",
+                  "5419b084ccaf0237e7c41d992625545972e4a06ac8a69f35d6745e7576599f0e",
+                  "567fed0bf8dc3b55fa1d686f12dec4a7bc7c5928821fb4d6687d2273d7c6c60d",
+                  "final-availability-983b05e7d38c401965e3"
+                ],
+                "expected_margin": 3.0,
+                "expected_total": 224.5,
+                "win_probability": 0.56,
+                "winner_side": "home"
+              },
+              "pregame_story": {
+                "classification": "subjective_analysis",
+                "evidence_ids": [
+                  "14e96b1b32ea8e370b39e1a6ebbdd5fe9db541b1f265c5739ff614435ee96df8",
+                  "43921c66a40cbbda12cb04f7a9494e2a2664c375687b1cd90b25570ed2b5c19f",
+                  "52cdee68377ebf7c922e446db05faa495ad305d0db453def5e0e23f88d13cbfd",
+                  "53ff33dbfb2bbd4f73e6c47352244add74e2e16aefb730023fe4368adafaef72",
+                  "5419b084ccaf0237e7c41d992625545972e4a06ac8a69f35d6745e7576599f0e",
+                  "567fed0bf8dc3b55fa1d686f12dec4a7bc7c5928821fb4d6687d2273d7c6c60d"
+                ],
+                "statement": "字母哥第一次以热火球员身份打正式比赛，对面森林狼偏偏是主帅芬奇自己承认篮板最让人不放心的那支球队。",
+                "title": "字母哥首秀热火\n狼队内线待检验"
               }
             }
           }
@@ -1677,5 +1678,5 @@
       }
     }
   ],
-  "published_at": "2026-10-21T23:11:10.695062+00:00"
+  "published_at": "2026-10-21T23:13:12.293806+00:00"
 }
