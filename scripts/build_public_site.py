@@ -1,6 +1,7 @@
 """Build the existing native product renderer; no local backend or models."""
 
 import argparse
+import hashlib
 import json
 import shutil
 from pathlib import Path
@@ -34,6 +35,13 @@ def build(output):
             text += '\n/* Public read-only release, no internal diagnostics. */\n.technical-details{display:none}\n'
         (out / name).write_text(text, encoding='utf-8')
     shutil.copy2(ROOT / 'web/static-data.js', out / 'static-data.js')
+    index = out / 'index.html'
+    html = index.read_text(encoding='utf-8')
+    for asset in list(out.glob('*.js')) + list(out.glob('*.css')):
+        digest = hashlib.sha256(asset.read_bytes()).hexdigest()[:12]
+        for attribute in ('src', 'href'):
+            html = html.replace(f'{attribute}="{asset.name}"', f'{attribute}="{asset.name}?v={digest}"')
+    index.write_text(html, encoding='utf-8')
     shutil.copytree(ROOT / 'v2/frontend/static/fonts', out / 'fonts', dirs_exist_ok=True)
     shutil.copytree(ROOT / 'public_data', out / 'public_data', dirs_exist_ok=True)
     (out / '.nojekyll').touch()

@@ -28,6 +28,11 @@ class HomeCollections(unittest.TestCase):
             self.assertIn('gameInHomeCollection(game, state.selectedDate)', code)
             self.assertNotIn('state.data.public_archive || chinaDateKey(game.tipoff)', code)
             self.assertIn('homeCollectionOptions()', code)
+            import hashlib
+            html = (Path(folder) / 'index.html').read_text(encoding='utf-8')
+            for name in ('app.js', 'static-data.js', 'final.css'):
+                digest = hashlib.sha256((Path(folder) / name).read_bytes()).hexdigest()[:12]
+                self.assertIn(name + '?v=' + digest, html)
 
 
 if __name__ == '__main__':
