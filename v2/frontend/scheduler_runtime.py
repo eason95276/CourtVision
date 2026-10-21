@@ -24,6 +24,10 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
+# Bound native pools before importing the model stack, including spawned workers.
+for _thread_setting in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS", "NUMEXPR_NUM_THREADS"):
+    os.environ.setdefault(_thread_setting, "1")
+
 from v2.pregame_system.prediction_versions import DEFAULT_DATABASE, _instant, _utc
 from .export_data import DEFAULT_OUTPUT, read_json
 from .scheduler_runtime_config import RuntimeConfig
@@ -68,8 +72,11 @@ def validate_activation(database, receipt_path, *, allow_real_execution=False,
     if stages is not None and (not isinstance(stages,list) or not stages or
             any(s not in {"EARLY_PREVIEW","UPDATED_PREVIEW","FINAL_PREGAME"} for s in stages)):
         raise ValueError("activation_stage_scope_invalid")
+    model = receipt.get("forecast_model", "deepseek-v4-flash")
+    if model not in {"deepseek-v4-flash", "deepseek-v4-pro"}:
+        raise ValueError("activation_forecast_model_invalid")
     return {"validated_version_id": version_id, "authorization": "explicit_operator_receipt",
-            "allowed_game_ids": sorted(set(scope)), "allowed_stages":stages}
+            "allowed_game_ids": sorted(set(scope)), "allowed_stages":stages, "forecast_model":model}
 
 
 def status_report(database, *, config=None, at=None):
@@ -549,6 +556,7 @@ def main(argv=None):
         activation = validate_activation(args.database, args.activation_receipt, allow_real_execution=args.allow_real_execution)
         from .server import load_local_env
         load_local_env()
+        os.environ["COURTVISION_FORECAST_MODEL"] = activation["forecast_model"]
         config = RuntimeConfig.from_env()
         service = build_service(args.database, config)
         runner = PersistentScheduler(service, config=config,

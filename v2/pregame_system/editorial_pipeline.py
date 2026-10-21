@@ -40,6 +40,15 @@ class KeyPlayerDraft(BaseModel):
     fact_ids: list[str] = Field(min_length=1, max_length=6)
 
 
+class PlayerReferencePatch(KeyPlayerDraft):
+    index: int = Field(ge=0, le=9)
+
+
+class PlayerReferenceRepair(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    patches: list[PlayerReferencePatch] = Field(min_length=1, max_length=10)
+
+
 class EditorialDraft(BaseModel):
     model_config = ConfigDict(extra="forbid")
     title: str = Field(min_length=1, max_length=80,
@@ -599,6 +608,8 @@ def _quality_failure(exc):
 
 
 _REPAIR_FINDING_GUIDANCE = {
+    "unverified_coach_quote": ("引号中的文字不能作为可逐字核验的教练原话；英文采访的中文意译也不是原文引语。",
+        "根据已采纳来源把整句改成明确的中文转述，不保留未经核验的引号，不只原样删标点；转述含义仍须有来源支持。"),
     "exact_stat_value_mismatch": ("句中被识别为精确统计的数值与对应冻结事实不一致。",
         "仅可改用投影中同一指标、赛季、球队和样本支持的数值；否则删除精确数值或改为不含精确事实的判断。"),
     "exact_stat_value_unverified": ("当前冻结材料没有该精确统计的可核验值。",
@@ -635,6 +646,58 @@ def _repair_guidance(findings):
     return result
 
 
+def current_player_catalog(projection):
+    catalog = {}
+    game = projection.get("game") or {}
+    for fact in projection.get("facts", []):
+        value = fact.get("value") or {}
+        side = value.get("side")
+        if (fact.get("kind") != "CURRENT" or side not in {"home", "away"}
+                or value.get("team_id") != (game.get(side) or {}).get("id")):
+            continue
+        for player in value.get("roster_snapshot") or []:
+            name = str(player.get("name") or player.get("player_name") or "").strip()
+            if name:
+                catalog.setdefault(name.casefold(), []).append({"name": name, "side": side,
+                    "team": (game.get(side) or {}).get("name_zh"), "fact_id": fact["id"]})
+    return catalog
+
+
+def invalid_player_references(draft, projection):
+    catalog = current_player_catalog(projection)
+    all_facts = {fact["id"] for fact in projection.get("facts", [])}
+    targets = []
+    seen = set()
+    for index, player in enumerate(draft.get("player_analysis") or []):
+        name = player["player_name"].strip().casefold()
+        if name in seen:
+            raise ValueError("key_player_duplicate_or_unknown_fact")
+        seen.add(name)
+        identities = catalog.get(name, [])
+        if not identities or len({row["side"] for row in identities}) != 1:
+            raise ValueError("key_player_current_identity_not_supported")
+        refs = set(player["fact_ids"])
+        if not refs <= all_facts or not refs.intersection(row["fact_id"] for row in identities):
+            targets.append({"index": index, "original": copy.deepcopy(player), "current_identity": identities})
+    return targets
+
+
+def apply_player_reference_repair(draft, patches, targets, projection):
+    allowed = {target["index"]: target for target in targets}
+    indices = [patch["index"] for patch in patches]
+    if len(indices) != len(set(indices)) or set(indices) != set(allowed):
+        raise ValueError("key_player_reference_repair_scope_invalid")
+    result = copy.deepcopy(draft)
+    for patch in patches:
+        index = patch["index"]
+        if patch["player_name"] != draft["player_analysis"][index]["player_name"]:
+            raise ValueError("key_player_reference_repair_changed_player")
+        result["player_analysis"][index] = {key: patch[key] for key in ("player_name", "statement", "fact_ids")}
+    if invalid_player_references(result, projection):
+        raise ValueError("key_player_reference_repair_unverified")
+    return result
+
+
 def run_editorial(context, locked_forecast, folder, *, writer_client=None, reviewer_client=None,
                   quality_review_enabled=False, max_calls=4, writer_model="deepseek-v4-flash", writing_brief=None,
                   require_poem_title=True):
@@ -662,6 +725,7 @@ def run_editorial(context, locked_forecast, folder, *, writer_client=None, revie
             'scope': 'writing focus and voice, not new facts or a Forecasting result',
             'brief': copy.deepcopy(writing_brief),
         }
+    writing_input['current_player_identity_index'] = list(current_player_catalog(projection).values())
     save(folder / 'writer_view.json', writing_input)
     draft, meta = call_recorded(folder, "writer0", [{"role": "system", "content": skill +
         "\n本次输入是冻结写作资料与已完成的第25秒篮球分析素材。用它形成作者判断；素材不是客观事实，也不提供ML特征归因。"
@@ -689,6 +753,25 @@ def run_editorial(context, locked_forecast, folder, *, writer_client=None, revie
             _set_judgment_text(value, location, replacement)
         return validate_judgment(AnalystJudgment.model_validate(value), context).model_dump()
 
+    player_targets = invalid_player_references(draft, projection)
+    if player_targets:
+        save(folder / "player_reference_findings.json", {"targets": player_targets})
+        if calls >= max_calls:
+            raise ValueError("key_player_reference_repair_budget_unavailable")
+        calls += 1
+        repaired, meta = call_recorded(folder, "player_reference_revision", [{"role": "system", "content":
+            "只修正列出的球员卡身份引用。球员姓名与卡片序号不可变，每个target恰好一个patch；不改其他卡片、标题、正文、预测或事实。"
+            "fact_ids必须包含current_identity提供的CURRENT名单fact_id，可保留实际支持说明的其他投影引用。"
+            "statement若把球员说成另一队的角色，只按current_identity中真实球队重写这一张卡，不添加新事实；球员具体出战仍未知时保留预计或条件。"},
+            {"role": "user", "content": json.dumps({"targets": player_targets,
+                "projection": model_view(projection)}, ensure_ascii=False)}],
+            PlayerReferenceRepair, writer_client, max_tokens=1800, model=writer_model)
+        metadata.append({"stage": "player_reference_revision", **{k: v for k, v in meta.items() if k != "raw"}})
+        draft = apply_player_reference_repair(draft, repaired["patches"], player_targets, projection)
+        repair_rounds += 1
+        save(folder / "player_reference_validation.json", {"status": "accepted", "targets": player_targets,
+            "patches": repaired["patches"], "other_draft_fields_changed": False})
+
     judgment = make_judgment(draft)
     if decision_mode:
         visibility_issues = public_visibility_issues(judgment)
@@ -714,7 +797,7 @@ def run_editorial(context, locked_forecast, folder, *, writer_client=None, revie
                                "expected_total", "model_home_margin", "ATS", "Forecasting source artifact"],
                 "effectiveness": "Every replacement must materially differ from its original text and resolve the cited issue.",
             }}
-        calls += 1; repair_rounds = 1
+        calls += 1; repair_rounds += 1
         try:
             patches, meta = call_recorded(folder, "repair1", [{"role": "system", "content": load_editorial_skill() +
                 "\n只改正下列确定的硬事实冲突。保留篮球判断，不改数字预测、未指出文本和事实输入。"

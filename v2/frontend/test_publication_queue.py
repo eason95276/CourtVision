@@ -234,3 +234,27 @@ def test_retry_limit_is_terminal(published):
     assert queue.run(queue.claim(),fail)['status']=='retry';clock.advance(901)
     assert queue.run(queue.claim(),fail)['status']=='failed';clock.advance(901)
     assert queue.claim() is None
+
+
+def test_delivery_rebases_a_concurrent_schedule_commit_without_regeneration(published,transport,tmp_path):
+    database,queue,*_=published
+    options,bare,source,calls=transport
+    moved=[False]
+    def concurrent_push(args,**kwargs):
+        if args[:2]==['git','push']and not moved[0]:
+            moved[0]=True
+            other=tmp_path/'schedule-publisher'
+            git(tmp_path,'clone',str(bare),str(other))
+            git(other,'config','user.name','Schedule')
+            git(other,'config','user.email','schedule@example.invalid')
+            (other/'README.md').write_text('Upstream schedule note',encoding='utf-8')
+            git(other,'add','README.md');git(other,'commit','-m','Concurrent schedule update')
+            git(other,'push','origin','main')
+        return subprocess.run(args,**kwargs)
+    queue.enqueue(database,GID,VID)
+    result=queue.run(queue.claim(),lambda job:publish_saved(job,runner=concurrent_push,**options))
+    assert result['status']=='succeeded'and result['attempts']==1
+    assert git(bare,'show','main:README.md')=='Upstream schedule note'
+    assert json.loads(git(bare,'show','main:public_data/games/espn_401909089.json'))['prediction']['version_id']==VID
+    assert (source/'README.md').read_text()=='Uncommitted human work'
+    assert calls and all(path.startswith('/api/')for path in calls)

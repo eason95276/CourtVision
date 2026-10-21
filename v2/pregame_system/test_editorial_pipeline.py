@@ -340,6 +340,10 @@ def test_key_player_rejects_historical_only_identity_unknown_fact_or_duplicate(f
     context, forecast = frozen
     context = current_player_fixture(context)
     def invalid(messages, schema):
+        from .editorial_pipeline import PlayerReferenceRepair
+        if schema is PlayerReferenceRepair:
+            targets = json.loads(messages[-1]["content"])["targets"]
+            return {"patches": [{"index": t["index"], **t["original"]} for t in targets]}, {"fixture": True}
         draft, meta = writer(messages, schema)
         facts = json.loads(messages[-1]["content"])["facts"]
         roster = next(f for f in facts if f["kind"] == "CURRENT" and f["value"].get("roster_snapshot"))
@@ -686,3 +690,31 @@ def test_article_length_is_nonempty_schema_not_minimum_word_gate():
     article["article"] = ""
     with pytest.raises(Exception):
         normalize(article)
+
+
+def test_player_reference_revision_uses_current_witness_without_rewriting_article(frozen, tmp_path):
+    from .editorial_pipeline import PlayerReferenceRepair
+    context, forecast = frozen
+    context = current_player_fixture(context)
+    calls=[]
+    def scripted(messages, schema):
+        calls.append(schema)
+        payload=json.loads(messages[-1]["content"])
+        if schema is EditorialDraft:
+            draft, meta=writer(messages,schema)
+            roster=next(f for f in payload['facts']if f['kind']=='CURRENT'and f['value'].get('roster_snapshot'))
+            historical=next(f for f in payload['facts']if f['kind']=='HISTORICAL')
+            draft['player_analysis']=[{'player_name':roster['value']['roster_snapshot'][0]['name'],
+                'statement':'这名球员的持球选择是关键。','fact_ids':[historical['id']]}]
+            return draft,meta
+        assert schema is PlayerReferenceRepair
+        target=payload['targets'][0]
+        return {'patches':[{'index':target['index'],**target['original'],
+            'fact_ids':[target['current_identity'][0]['fact_id']]}]}, {'fixture':True}
+    judgment,trace=run_editorial(context,forecast,tmp_path/'identity-revision',writer_client=scripted,require_poem_title=False)
+    assert calls==[EditorialDraft,PlayerReferenceRepair]
+    assert judgment['analysis_article']==SHORT_ARTICLE
+    assert judgment['final_prediction']['expected_total']==forecast['final_prediction']['expected_total']
+    assert trace['editorial_calls']==2
+    receipt=json.loads((tmp_path/'identity-revision/player_reference_validation.json').read_text(encoding='utf-8'))
+    assert receipt['status']=='accepted'and receipt['other_draft_fields_changed']is False

@@ -332,7 +332,7 @@ class AutonomousWebResearcher:
                 new_sources.append(pipeline.add_source(candidate, item))
         if claims is None:
             extractable = [s for s in new_sources if s["qualification_reason"] is None]
-            claims = self._extract_claims(context, extractable) if extractable and time.perf_counter() < getattr(self, "_acquisition_deadline", float("inf")) else []
+            claims = self._extract_claims(context, extractable) if extractable and getattr(self, "_claim_call_count", 0) < 3 - int(getattr(self, "_question_revision_used", False)) and time.perf_counter() < getattr(self, "_acquisition_deadline", float("inf")) else []
         start = len(pipeline.decisions)
         for claim in claims:
             pipeline.validate_claim(claim)
@@ -400,12 +400,16 @@ class AutonomousWebResearcher:
         candidates = list(context.get("records") or [])
         context["discovery_records"] = candidates
         attempted = set()
+        prior_urls_retried = False
         stop_reason = None
         # The URL/time budgets, not a fixed number of batches, bound recovery.
         # With full batches this remains at most three fetches (12 URLs); if an
         # earlier source reveals fewer candidates, the remaining URL budget can
         # still be used for newly discovered accountable originals.
         for batch in range(self.max_fetch_urls):
+            if self._claim_call_count >= 3 - int(getattr(self, "_question_revision_used", False)):
+                stop_reason = "research_model_call_budget_exhausted"
+                break
             if time.perf_counter() - start >= self.acquisition_budget_seconds:
                 stop_reason = "acquisition_budget_exhausted"
                 break
@@ -414,6 +418,19 @@ class AutonomousWebResearcher:
                 break
             ranked = rank_candidates(candidates, context["game"], attempted=attempted)
             accountable = [r for r in ranked if source_role(r["url"]) != "secondary_discovery"]
+            if not accountable and not prior_urls_retried:
+                prior_urls_retried = True
+                recover = getattr(self.searcher, "_prior_discovery_urls", None)
+                if callable(recover):
+                    recovered = recover(context["game"], _instant(cutoff),
+                        {r.get("category") for r in context.get("discovery_records", []) if r.get("category") != "market"}
+                        | {q["category"] for q in context.get("analysis_questions", []) if q.get("category") != "market"})
+                    recovered = [r for r in recovered if r["url"] not in attempted]
+                    candidates.extend(recovered)
+                    ranked = rank_candidates(candidates, context["game"], attempted=attempted)
+                    accountable = [r for r in ranked if source_role(r["url"]) != "secondary_discovery"]
+                    trace["calls"].append({"tool": "prior_url_recovery", "record_count": len(recovered),
+                        "semantics": "URLs only; new fetch and normal fact validation required"})
             if not accountable:
                 stop_reason = "candidate_pool_exhausted" if not ranked else "remaining_sources_below_fact_quality"
                 break
@@ -530,6 +547,7 @@ class AutonomousWebResearcher:
         folder = self._folder()
         self._audit_folder = folder
         self._model_receipts = []
+        self._question_revision_used = False
         for attribute in ("_acquisition_deadline", "_evidence_pipeline", "_claim_call_count"):
             if hasattr(self, attribute): delattr(self, attribute)
         messages = self._messages(game, cutoff, categories, local_context)
@@ -572,25 +590,47 @@ class AutonomousWebResearcher:
             selected |= required_freshness
             if not selected:
                 raise WebResearchAgentError("research_agent_empty_categories")
-            questions = args.get("analysis_questions") or []
             live_registered = bool(game.get("registered_game") and not replay)
-            if live_registered and not questions:
-                raise WebResearchAgentError("research_agent_analysis_questions_missing")
-            if not isinstance(questions, list) or len(questions) > 3:
-                raise WebResearchAgentError("research_agent_analysis_questions_invalid")
-            ids = [str(question.get("id") or "") for question in questions if isinstance(question, dict)]
-            if len(ids) != len(questions) or len(ids) != len(set(ids)):
-                raise WebResearchAgentError("research_agent_analysis_question_ids_invalid")
-            if live_registered and not any(question.get("priority") == "core" for question in questions):
-                raise WebResearchAgentError("research_agent_core_analysis_question_missing")
-            for question in questions:
-                qid = str(question.get("id") or "")
-                category = str(question.get("category") or "")
-                text = str(question.get("question") or "").strip()
-                if (qid not in {"q1", "q2", "q3"} or question.get("priority") not in {"core", "supporting"}
-                        or category not in selected or len(text) < 8 or len(text) > 220
-                        or "\n" in text or "://" in text):
-                    raise WebResearchAgentError("research_agent_analysis_question_invalid")
+            def validate_questions(questions):
+                if live_registered and not questions:
+                    raise WebResearchAgentError("research_agent_analysis_questions_missing")
+                if not isinstance(questions, list) or len(questions) > 3:
+                    raise WebResearchAgentError("research_agent_analysis_questions_invalid")
+                ids = [str(question.get("id") or "") for question in questions if isinstance(question, dict)]
+                if len(ids) != len(questions) or len(ids) != len(set(ids)):
+                    raise WebResearchAgentError("research_agent_analysis_question_ids_invalid")
+                if live_registered and not any(question.get("priority") == "core" for question in questions):
+                    raise WebResearchAgentError("research_agent_core_analysis_question_missing")
+                for question in questions:
+                    qid = str(question.get("id") or "")
+                    category = str(question.get("category") or "")
+                    text = str(question.get("question") or "").strip()
+                    if (qid not in {"q1", "q2", "q3"} or question.get("priority") not in {"core", "supporting"}
+                            or category not in selected or len(text) < 8 or len(text) > 220
+                            or "\n" in text or "://" in text):
+                        raise WebResearchAgentError("research_agent_analysis_question_invalid")
+            questions = args.get("analysis_questions") or []
+            try:
+                validate_questions(questions)
+            except WebResearchAgentError as original_error:
+                if not live_registered:
+                    raise
+                save(folder / "search_question_protocol_error.json", {
+                    "code": str(original_error), "original_questions": questions,
+                    "selected_categories": sorted(selected), "scope": "no search has run"})
+                revised = self._tool_calls(stage="search_question_revision", messages=messages + [{
+                    "role": "user", "content": json.dumps({"protocol_error": str(original_error),
+                        "original_questions": questions, "selected_categories": sorted(selected),
+                        "instruction": "只纠正 analysis_questions 的工具协议。保留研究目标，每个问题8到220字符，建议不超过120字符；不用长名单堆进一个问题。id只用q1/q2/q3且唯一，priority只用core/supporting，至少一个core，category只能来自selected_categories。不能包含换行或URL。只调用一次search_pregame_web；不扩大类别，不搜索、不添加事实。"}, ensure_ascii=False)}],
+                    tools=[SEARCH_TOOL], required=True)
+                if len(revised) != 1 or revised[0].get("name") != "search_pregame_web":
+                    raise WebResearchAgentError("research_question_revision_invalid_tool")
+                questions = (revised[0].get("args") or {}).get("analysis_questions") or []
+                validate_questions(questions)
+                self._question_revision_used = True
+                save(folder / "search_question_revision_validation.json", {
+                    "status": "accepted", "questions": questions, "selected_categories": sorted(selected),
+                    "other_search_arguments_changed": False, "extra_claim_budget": False})
             context_questions = [clean(question) for question in questions]
             focus = str(args.get("focus") or "").strip()
             focus_category = str(args.get("focus_category") or "").strip()

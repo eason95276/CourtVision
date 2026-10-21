@@ -125,6 +125,16 @@ def classify_numeric_claim_type(text: str, start: int, end: int, metric: str | N
             or token in {"一", "1"} and re.search(r"(?:多|少)$", prefix)
             and suffix.startswith("个") and "得分点" in prefix[-30:]):
         return "structural_or_count_expression"
+    if (token in {"三", "3"} and re.match(r"分(?:命中|投|出手|线|球|手感|不稳|火力|威胁|空间|能力)", suffix)
+            or re.match(r"人|名(?:球员|主力|首发|替补)|个(?:人|球员|主力)", suffix)):
+        return "structural_or_count_expression"
+    if token == "一" and prefix.endswith("之"):
+        return "other_numeric"
+    if token in {"一两", "两三", "三四", "四五", "五六", "六七", "七八", "八九"} and not re.search(
+            r"场均|上季|上赛季|本季|本赛季|去年|命中率|效率|上一场|单场|昨天", sentence):
+        return "forecast_or_game_script_estimate"
+    if re.match(r"个(?:词|问题|重点|角度)|件(?:事|事情)|句", suffix):
+        return "structural_or_count_expression"
     # A count of tactical options is not a score, even beside the word 得分.
     if re.match(r"条(?:得分|进攻|突破|组织)?(?:路|路线|路径)|套(?:进攻|防守)?(?:方案|打法|配合)|种(?:进攻|防守)?(?:办法|选择|打法)", suffix):
         return "structural_or_count_expression"
@@ -138,7 +148,7 @@ def classify_numeric_claim_type(text: str, start: int, end: int, metric: str | N
     # Ordinals and common idioms are not exact statistical claims.
     if (re.search(r"第\s*$", prefix) and re.match(r"\s*(?:节|场|轮|次|名|位|顺位|责任人)", suffix)
             or token in {"一", "两", "二", "三", "四"} and re.search(
-                r"(?:一环|第一(?:道|个|节|步|阵)|两边|两侧|三节|二次进攻|两三回合)", sentence)):
+                r"(?:一环|第一(?:道|个|节|步|阵)|两边|两侧|三节|二次进攻|二次得分|两三回合)", sentence)):
         return "structural_or_count_expression"
 
     if re.search(r"如果|假如|倘若|若是|若|一旦|只要|条件是", prefix, re.I):
@@ -540,6 +550,12 @@ def _nearest_metric_for_token(text: str, token, labels) -> str | None:
                 continue
             distance = len(gap)
         if distance <= 14:
+            # Association needs statistical syntax, not just proximity. In
+            # "23分钟20分15篮板" the other units/values cannot belong to rebounds;
+            # "篮板端的另一半" is prose. Retain paired comparison notation.
+            if distance and not (_NUMBER_RE.search(gap) and re.search(r"对(?!手|方|位|抗)|比(?!赛|较)|\bvs\b|versus", gap, re.I)) and not re.fullmatch(
+                    r"(?:\s|[:：=()（）]|每百回合|每场|场均|数值|数字|数|为|是|达到|达|到|约|只有|仅|高达|低至|接近|超过|不到|大约|左右|个|次|记|上升至|下降至|降至|升至|低于|高于|少于|多于)*", gap):
+                continue
             after_value = start >= token.end()
             nearest.append((distance, 0 if after_value else 1, metric))
     return min(nearest, key=lambda item: (item[0], item[1]))[2] if nearest else None
@@ -595,7 +611,75 @@ def _h2h_comparison_side(text: str, token, metric: str, labels, projection: dict
     return assigned.get((token.start(), token.end()))
 
 
-def _stat_issues_for_text(text: str, projection: dict, unit_id: str) -> list[dict]:
+def _single_preseason_stat_issues(text, projection, unit_id, player_name=None):
+    # This is source-bound event verification, never a season-average fallback.
+    if not re.search(r"季前赛|preseason", text, re.I) or re.search(r"场均|per.game|averag", text, re.I):
+        return None
+    words = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
+             "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10}
+    units = {"points": "points", "point": "points", "分": "points", "篮板": "rebounds",
+             "rebounds": "rebounds", "rebound": "rebounds", "助攻": "assists", "assists": "assists",
+             "assist": "assists", "分钟": "minutes", "minutes": "minutes", "minute": "minutes"}
+    pattern = re.compile(r"(?<![A-Za-z0-9.])(\d+(?:\.\d+)?|one|two|three|four|five|six|seven|eight|nine|ten)\s*"
+                         r"(minutes?|分钟|points?|分(?!钟)|rebounds?|篮板|assists?|助攻)(?![A-Za-z])", re.I)
+    def values(value):
+        result = {}
+        for match in pattern.finditer(value):
+            raw, unit = match.group(1).lower(), match.group(2).lower()
+            result.setdefault(units[unit], set()).add(float(words[raw]) if raw in words else float(raw))
+        return result
+    requested = values(text)
+    if not requested:
+        return None
+    roster = {}
+    for fact in projection.get("facts", []):
+        if fact.get("kind") == "CURRENT":
+            v = fact.get("value") or {}
+            for player in v.get("roster_snapshot") or []:
+                name = str(player.get("name") or player.get("player_name") or "").strip()
+                if name:
+                    roster[name] = v.get("team_id")
+    surnames = {}
+    for name in roster:
+        surname = name.split()[-1]
+        if len(surname) >= 5:
+            surnames.setdefault(surname.casefold(), []).append(name)
+    def actors(value):
+        found = {name for name in roster if name.casefold() in value.casefold()}
+        for surname, names in surnames.items():
+            if len(names) == 1 and re.search(r"(?<![A-Za-z])" + re.escape(surname) + r"(?![A-Za-z])", value, re.I):
+                found.add(names[0])
+        return found
+    explicit = {player_name} if player_name else actors(text)
+    supporting = []
+    for fact in projection.get("facts", []):
+        v = fact.get("value") or {}
+        quote = str(v.get("quote") or "")
+        if (fact.get("kind") not in {"CURRENT", "BACKGROUND", "LIVE"} or not v.get("claim_type")
+                or v.get("source_role") not in {"primary", "professional"}
+                or not re.search(r"preseason|季前赛", quote, re.I) or re.search(r"场均|per.game|averag", quote, re.I)):
+            continue
+        owners = actors(quote)
+        if len(owners) != 1 or roster[next(iter(owners))] != v.get("team_id"):
+            continue
+        if explicit and owners != explicit:
+            continue
+        # An unnamed subject requires a multi-metric signature and a unique source actor.
+        if not explicit and len(requested) < 2:
+            continue
+        observed = values(quote)
+        if all(metric in observed and numbers <= observed[metric] for metric, numbers in requested.items()):
+            supporting.append((fact["id"], next(iter(owners))))
+    spans = [(match.start(1), match.end(1)) for match in pattern.finditer(text)]
+    if supporting and len({owner for _, owner in supporting}) == 1:
+        return {"findings": [], "spans": spans}
+    return {"findings": [{"unit_id": unit_id, "code": "exact_stat_value_unverified", "quote": text,
+             "statistic_scope": "reported_single_preseason_game", "stated_statistics": {k: sorted(v) for k, v in requested.items()},
+             "available_fact_ids": [fact_id for fact_id, _ in supporting]}], "spans": spans}
+
+
+def _stat_issues_for_text(text: str, projection: dict, unit_id: str, *, player_name=None) -> list[dict]:
+    event = _single_preseason_stat_issues(text, projection, unit_id, player_name) or {"findings": [], "spans": []}
     rows = _metric_rows(projection)
     game = projection.get("game") or {}
     team_mentions = _team_name_spans(text, game)
@@ -649,9 +733,11 @@ def _stat_issues_for_text(text: str, projection: dict, unit_id: str) -> list[dic
             if metric in known_metrics and tail.startswith(unit):
                 start = token.end() + unit_offset
                 labels.append((start, start+len(unit), metric))
-    issues = []
+    issues = list(event["findings"])
     seen = set()
     for token in _NUMBER_RE.finditer(text):
+        if any(start <= token.start() and token.end() <= end for start, end in event["spans"]):
+            continue
         # A product name is not a statistic, even next to a numeric metric.
         if any(start <= token.start() and token.end() <= end for start, end in name_spans):
             continue
@@ -920,12 +1006,35 @@ def _mentioned_people(text,projection):
     return list(dict.fromkeys(names))
 
 
+def _supported_long_term_background(text, projection):
+    if not re.search(r"背景|此前|休赛期|恢复期|background|offseason|previously", text, re.I):
+        return False
+    if not re.search(r"长期|数月|数周|long.term|months|weeks", text, re.I):
+        return False
+    if re.search(r"本场|今晚|今天|已经确认|已确认|官方宣布|确认缺阵|不会出场|首发|分钟|限时|this game|tonight|confirmed|minutes", text, re.I):
+        return False
+    named = {name for name in _known_people(projection) if " " in name and name.casefold() in text.casefold()}
+    if not named:
+        return False
+    for name in named:
+        supported = any(fact.get("kind") == "BACKGROUND"
+            and (fact.get("value") or {}).get("claim_type") == "long_term_injury"
+            and (fact.get("value") or {}).get("source_role") in {"primary", "professional"}
+            and name.casefold() in str((fact.get("value") or {}).get("quote") or "").casefold()
+            and re.search(r"长期|数月|数周|sideline.{0,50}(?:months|weeks)|out.{0,30}(?:months|weeks)",
+                str((fact.get("value") or {}).get("quote") or ""), re.I)
+            for fact in projection.get("facts", []))
+        if not supported:
+            return False
+    return True
+
+
 def _availability_issues_for_text(text: str, projection: dict, unit_id: str) -> list[dict]:
     sentences=[part for part in re.split(r'(?<=[。！？；])',text)if part.strip()]
     if len(sentences)>1:
         return [issue for sentence in sentences for issue in _availability_issues_for_text(sentence,projection,unit_id)]
     clauses=[part for part in re.split(r'[：:，,]',text)if part.strip()]
-    status_clauses=[part for part in clauses if re.search(r'缺阵|出战|首发|分钟限制|\bout\b|available|questionable|doubtful|probable|inactive|minutes? restriction',part,re.I)]
+    status_clauses=[part for part in clauses if re.search(r'缺阵|出战|首发|分钟限制|限时|\bout\b|available|questionable|doubtful|probable|inactive|minutes? restriction',part,re.I)]
     if len(clauses)>1 and status_clauses and all(_mentioned_people(part,projection)for part in status_clauses):
         return [issue for clause in clauses for issue in _availability_issues_for_text(clause,projection,unit_id)]
     # Match assertions, not words inside a negated/unknown-status disclosure.
@@ -951,6 +1060,8 @@ def _availability_issues_for_text(text: str, projection: dict, unit_id: str) -> 
     if unconfirmed_minutes and minutes_claim and unconfirmed_minutes.start() <= minutes_claim.start() < unconfirmed_minutes.end():
         minutes_claim = None
     status_claim = re.search(r"(?:已确认|官方宣布|正式确认).{0,10}(?:缺阵|缺席|出战|上场|首发|\bout\b|\bavailable\b)|已获准|获准|可以出战|确认出战|缺阵|无法出战|不会出场|出战成疑|\bquestionable\b|\bdoubtful\b|\bprobable\b|\bavailable\b|ruled out|\binactive\b|\bdnp\b|\bout\b", text_for_claims, re.I) or minutes_claim
+    if status_claim and not minutes_claim and _supported_long_term_background(text, projection):
+        status_claim = None
     if minutes_claim and not speculative and not names:
         issues.append({"unit_id": unit_id, "code": "current_minutes_restriction_unverified", "quote": text})
     if status_claim and not speculative and not names:
@@ -1418,7 +1529,7 @@ def validate_publication_hard_facts(judgment: dict, projection: dict) -> list[di
                 player_name = players[index].get("player_name")
         issues.extend(_player_appearance_issues_for_text(text, projection, unit_id, player_name))
         issues.extend(_sample_count_issues_for_text(text, projection, unit_id))
-        issues.extend(_stat_issues_for_text(text, projection, unit_id))
+        issues.extend(_stat_issues_for_text(text, projection, unit_id, player_name=player_name))
         issues.extend(_venue_issues_for_text(text, projection, unit_id))
         issues.extend(_coach_quote_issues_for_text(text, projection, unit_id))
         issues.extend(_availability_issues_for_text(text, projection, unit_id))

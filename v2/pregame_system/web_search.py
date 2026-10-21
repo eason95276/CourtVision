@@ -590,7 +590,7 @@ class PregameWebSearch:
                         continue
                     seen.add(url)
                     row = {key: item[key] for key in ("category", "url", "title", "domain", "snippet",
-                        "published_at", "captured_at", "provider_temporal_metadata") if key in item}
+                        "published_at", "captured_at", "provider_temporal_metadata", "previously_verified_url") if key in item}
                     row.update(id=content_hash({"category": item["category"], "url": url,
                         "cutoff": cutoff_dt.isoformat(), "mode": "prior_discovery_url_retry"}),
                         search_provider="prior_discovery_url_retry", eligible_for_fact=False,
@@ -601,7 +601,7 @@ class PregameWebSearch:
                 continue
         # Prefer established sports providers for rediscovery, then cover requested categories.
         # Authority here selects URLs to fetch; it never accepts a claim by itself.
-        rows.sort(key=lambda row: not _trusted(row["url"]))
+        rows.sort(key=lambda row: (not row.get("previously_verified_url", False), not _trusted(row["url"])))
         chosen = []
         for category in sorted(categories):
             candidate = next((row for row in rows if row["category"] == category and _trusted(row["url"])), None)

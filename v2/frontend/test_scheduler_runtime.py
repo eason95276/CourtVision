@@ -334,6 +334,13 @@ def test_activation_binds_explicit_new_game_to_its_real_version_and_scope(tmp_pa
         validated = validate_activation(service.store.path, receipt, allow_real_execution=True)
         assert validated["allowed_game_ids"] == [row["game_id"]]
         assert validated["allowed_stages"] == ["FINAL_PREGAME"]
+        assert validated["forecast_model"] == "deepseek-v4-flash"
+        receipt.write_text(json.dumps({**payload, "forecast_model": "deepseek-v4-pro"}))
+        assert validate_activation(service.store.path, receipt, allow_real_execution=True)["forecast_model"] == "deepseek-v4-pro"
+        receipt.write_text(json.dumps({**payload, "forecast_model": "unqualified-model"}))
+        with pytest.raises(ValueError, match="activation_forecast_model_invalid"):
+            validate_activation(service.store.path, receipt, allow_real_execution=True)
+        receipt.write_text(json.dumps(payload))
         with pytest.raises(ValueError, match="matching_future_game"):
             validate_activation(service.store.path, receipt, allow_real_execution=True, required_game_id="different-game")
         receipt.write_text(json.dumps({**payload, "allowed_game_ids": ["different-game"]}))
@@ -654,3 +661,13 @@ def test_publication_pump_recovers_and_dispatches_without_generation(tmp_path, m
         assert delivered==['recovered-final']
         assert runner.active=={} and runner.public_jobs=={}
     finally:runner.shutdown()
+
+
+def test_cold_worker_limits_native_thread_pools_before_model_imports():
+    import os,subprocess,sys
+    names=('OPENBLAS_NUM_THREADS','OMP_NUM_THREADS','MKL_NUM_THREADS','NUMEXPR_NUM_THREADS')
+    env={k:v for k,v in os.environ.items()if k not in names}
+    result=subprocess.run([sys.executable,'-c',
+        'import os,json;import v2.frontend.scheduler_worker;print(json.dumps({k:os.environ.get(k)for k in '+repr(names)+'}))'],
+        cwd=Path(__file__).resolve().parents[2],env=env,capture_output=True,text=True,timeout=30,check=True)
+    assert json.loads(result.stdout)=={key:'1'for key in names}

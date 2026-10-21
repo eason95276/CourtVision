@@ -261,3 +261,22 @@ def test_search_provider_date_is_not_discarded_by_empty_fetch_metadata():
     assert p.validate_claim(claim())["accepted"]
     assert p.sources[URL]["published_at"]=="2026-09-22"
     assert p.sources[URL]["publication_time_source"]=="search_provider.datePublished"
+
+
+def test_si_onsi_article_keeps_provider_publication_date_not_retrieval_time():
+    url="https://www.si.com/nba/trailblazers/onsi/observations-and-takeaways-from-blazers-preseason-finale"
+    value=extract_temporal_metadata(url,provider={"published_date":"2026-10-20"},fetched_at="2026-10-21T16:20:34Z")
+    assert value['page_kind']=='article'
+    assert value['published_at']=='2026-10-20'and value['published_at_precision']=='date'
+    assert value['observed_at']is None
+
+
+@pytest.mark.parametrize('url',[
+    'https://www.si.com/nba/suns/onsi/author/a-reporter',
+    'https://www.si.com/nba/suns/onsi',
+    'https://www.si.com.evil.test/nba/suns/onsi/suns-roster-update',
+])
+def test_si_article_route_does_not_accept_authors_indexes_or_other_hosts(url):
+    value=extract_temporal_metadata(url,provider={"published_date":"2026-10-20"})
+    assert value['page_kind']!='article'
+    assert value['published_at']is None

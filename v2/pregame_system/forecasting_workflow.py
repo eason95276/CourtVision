@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import copy
 import json
+import os
 import math
 import re
 from datetime import datetime
@@ -750,8 +751,15 @@ def default_client(messages, schema):
         if timeout<5:raise ValueError('market_review_budget_insufficient')
     json_options = ({"response_format": {"type": "json_object"}}
                     if schema in {VersionedIndependentForecast, VersionedMarketReviewForecast} else {})
-    response = request_deepseek(messages, key, "deepseek-v4-flash", tokens,
-                               timeout_seconds=timeout, **json_options)
+    if schema is VersionedIndependentForecast and game.get('registered_game'):
+        from .strict_forecast_transport import request_strict_forecast
+        model = os.environ.get("COURTVISION_FORECAST_MODEL", "deepseek-v4-flash")
+        if model not in {"deepseek-v4-flash", "deepseek-v4-pro"}:
+            raise ValueError("unsupported_forecast_model")
+        response = request_strict_forecast(messages, key, model, schema, tokens, timeout)
+    else:
+        response = request_deepseek(messages, key, "deepseek-v4-flash", tokens,
+                                   timeout_seconds=timeout, **json_options)
     return response.content, {"usage": response.usage, "finish_reason": response.finish_reason,
                               "provider": getattr(response, "response_metadata", {})}
 
@@ -895,6 +903,9 @@ def _run_two_stage_impl(basketball: dict, market: dict, folder: Path, *, client=
                 "\n字段位置：prediction、factors、uncertainties、analysis_core、pregame_plan 是顶层兄弟字段。"
                 "uncertainties 只能放在顶层，不能放入 analysis_core；analysis_core 不接受 schema 以外的字段。"
                 "上面的对象片段只是 analysis_core 内部结构示意，不是整份响应。返回完整顶层 JSON。"
+                "按 schema 顺序先写 prediction、factors、uncertainties、pregame_plan，最后写 analysis_core。"
+                "pregame_plan 的对象必须先闭合，analysis_core 再作为根对象字段开始，二者不可嵌套。"
+                "flip_conditions 结束后闭合数组、analysis_core 对象和最外层根对象；返回前核对括号完整配对。"
             )
             if stage == "independent":
                 protocol += (
@@ -913,6 +924,8 @@ def _run_two_stage_impl(basketball: dict, market: dict, folder: Path, *, client=
         ]
         if messages_override is None and stage=='independent'and all(current_name_catalog(basketball).values()):
             messages[0]['content']+='\n身份输出协议：首发、候选与负荷计划中的球员，必须从allowed_current_players_by_side对应球队的当前名单逐字选择。home名单中的球员不可放入away阵容，反之亦然；历史分钟或旧交锋中的人名不证明当前归属。输出前逐人核对所属side；无法组出合法五人时使用unavailable，不替换或猜归属。'
+        strict_transport = (client is default_client and schema is VersionedIndependentForecast
+            and (basketball.get('game') or {}).get('registered_game') is True)
         label = stage if correction is None else stage + "_protocol_revision"
         if correction is not None and correction_index>1:label+='_'+str(correction_index)
         if correction is not None:
@@ -920,12 +933,20 @@ def _run_two_stage_impl(basketball: dict, market: dict, folder: Path, *, client=
                 "protocol_correction":correction, "allowed_evidence_ids":sorted(_ids(basketball)),
                 "instruction":"修正本次引用/首发basis协议错误，逐字复制允许的 evidence ID。source_expected/confirmed 需要对应首发来源覆盖列出的球员；只有部分来自报道、其余由你推断的阵容，应标为 agent_expected，不能声称来源确认。不能修改 prediction 数字，不得新增事实。返回完整 schema JSON。"
             },ensure_ascii=False)})
+        wire_schema = None
+        if strict_transport:
+            from .strict_forecast_transport import strict_schema
+            wire_context = json.loads(next(m["content"] for m in messages if m["role"] == "user"))
+            wire_context = wire_context.get("basketball") or wire_context
+            wire_schema = strict_schema(schema.model_json_schema(), wire_context.get("allowed_current_players_by_side"))
         save(folder / f"{label}_request.json", {"created_at": now(), "messages": messages,
-            "schema": request_schema, "validation_schema": schema.model_json_schema(), "input_hash": content_hash(messages),
-            "skill_hashes": prompt_skill_hashes(skill) if messages_override is None else {}, "model": "deepseek-v4-flash",
-            "transport": transport_label or ("injected" if client is not default_client else "configured_deepseek"),
+            "schema": request_schema, "validation_schema": schema.model_json_schema(), "strict_tool_wire_schema": wire_schema, "input_hash": content_hash(messages),
+            "skill_hashes": prompt_skill_hashes(skill) if messages_override is None else {},
+            "model": os.environ.get("COURTVISION_FORECAST_MODEL", "deepseek-v4-flash") if strict_transport else "deepseek-v4-flash",
+            "transport": transport_label or ("injected" if client is not default_client else "deepseek_strict_tool_v2" if strict_transport else "configured_deepseek"),
             "default_request_settings": {"temperature": 0.1, "thinking": "disabled",
-                                         "response_format": {"type": "json_object"} if require_analysis_core else None,
+                                         "response_format": {"type": "json_object"} if require_analysis_core and not strict_transport else None,
+                                         "strict_tool": strict_transport,
                                          "max_tokens": _forecast_max_tokens(schema, (basketball.get("game") or {}).get("game_type")),
                                          "timeout_seconds": 60 if (basketball.get("game") or {}).get("game_type") == "preseason" else 40},
             "schema_repair_call": messages_override is not None,

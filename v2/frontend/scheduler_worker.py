@@ -10,6 +10,10 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+# Bound native pools before importing the model stack, including spawned workers.
+for _thread_setting in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS", "NUMEXPR_NUM_THREADS"):
+    os.environ.setdefault(_thread_setting, "1")
+
 from v2.pregame_system.prediction_versions import PredictionVersionStore, VersionStoreError, _instant
 
 

@@ -280,3 +280,30 @@ def test_registered_planner_must_provide_a_core_analysis_question(tmp_path):
     with pytest.raises(WebResearchAgentError, match="core_analysis_question_missing"):
         AutonomousWebResearcher(searcher=SimpleNamespace(), client=client, root=tmp_path).investigate(
             game, "2026-10-20T18:55:00Z", categories={"game_story"})
+
+
+@pytest.mark.parametrize('second_bad',[False,True])
+def test_question_format_gets_one_revision_without_expanding_search_scope(tmp_path,second_bad):
+    from types import SimpleNamespace
+    game={**GAME,'registered_game':True}
+    stages=[];queries=[]
+    def client(stage,messages,tools,required):
+        stages.append(stage)
+        bad=stage=='search'or second_bad
+        return [{'name':'search_pregame_web','args':{'categories':['availability','market'],
+            'reason':'verify status','analysis_questions':[{'id':'q1','priority':'core',
+                'category':'availability','question':'x'*221 if bad else 'What is the current availability?'}]}}]
+    def search(*args,**kwargs):
+        queries.append(kwargs)
+        return {'status':'unavailable','records':[],'trace':[]}
+    researcher=AutonomousWebResearcher(searcher=SimpleNamespace(search=search),root=tmp_path,client=client)
+    if second_bad:
+        from .web_research_agent import WebResearchAgentError
+        with pytest.raises(WebResearchAgentError,match='research_agent_analysis_question_invalid'):
+            researcher.investigate(game,'2026-10-20T18:55:00Z',categories={'availability'})
+    else:
+        researcher.investigate(game,'2026-10-20T18:55:00Z',categories={'availability'})
+        assert queries[0]['categories']=={'availability'}
+        assert len(queries[0]['analysis_questions'][0]['question'])<=220
+    assert stages==['search','search_question_revision']
+    assert len(queries)==(0 if second_bad else 1)

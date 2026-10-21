@@ -1128,3 +1128,27 @@ def test_declared_pure_fallback_in_legacy_cache_remains_usable():
     game={'relationship':{'basketball':{'expected_margin':3.5},'market':None,'residual':None},
           'technical':{'prediction_method':'pure_basketball_fallback'}}
     assert _independent_prediction(game)=={'expected_margin':3.5}
+
+
+def test_registered_independent_uses_qualified_model_without_affecting_market_transport(monkeypatch):
+    import importlib
+    from types import SimpleNamespace
+    from .forecasting_workflow import default_client
+    strict=importlib.import_module(default_client.__module__.rsplit('.',1)[0]+'.strict_forecast_transport')
+    legacy=importlib.import_module('v2.agent.generate_historical_pregame_analysis')
+    import urllib.request
+    monkeypatch.setattr(urllib.request,'urlopen',lambda *args,**kwargs:pytest.fail('offline transport test reached network'))
+    seen=[]
+    def structured(messages,key,model,schema,tokens,timeout):
+        seen.append(('independent',model))
+        return SimpleNamespace(content='{}',usage={},finish_reason='tool_calls',response_metadata={})
+    def ordinary(messages,key,model,tokens,**kwargs):
+        seen.append(('market',model))
+        return SimpleNamespace(content='{}',usage={},finish_reason='stop',response_metadata={})
+    monkeypatch.setattr(strict,'request_strict_forecast',structured)
+    monkeypatch.setattr(legacy,'request_deepseek',ordinary)
+    monkeypatch.setenv('DEEPSEEK_API_KEY','fixture-key');monkeypatch.setenv('COURTVISION_FORECAST_MODEL','deepseek-v4-pro')
+    messages=[{'role':'user','content':json.dumps({'game':{'registered_game':True,'scheduled_tipoff':'2099-01-01T00:00:00Z'}})}]
+    default_client(messages,VersionedIndependentForecast)
+    default_client(messages,VersionedMarketReviewForecast)
+    assert seen==[('independent','deepseek-v4-pro'),('market','deepseek-v4-flash')]

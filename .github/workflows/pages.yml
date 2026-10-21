@@ -31,10 +31,12 @@ jobs:
       - run: pip install -r requirements-evaluation.txt
       - run: python -m unittest discover -s tests/public -v
       - run: python -m pytest v2/pregame_system/test_editorial_titles.py v2/pregame_system/test_publication_timing.py v2/frontend/test_publication_queue.py -q
-      - run: python -m pytest v2/pregame_system/test_editorial_contract.py -k "market_spread_in_neighboring_clause or position_and_scoring_option_counts or real_stat_values_remain_factual" -q
+      - run: python -m pytest v2/pregame_system/test_editorial_contract.py -k "market_spread_in_neighboring_clause or position_and_scoring_option_counts or real_stat_values_remain_factual or nearby_prose_numbers or compact_boxscore_numbers or reported_preseason_event or single_event_verification or verified_event_signature or long_term_injury_background or background_support" -q
       - run: python -m pytest v2/pregame_system/test_final_information.py v2/pregame_system/test_availability_display_identity.py v2/postgame_system/test_editorial_style.py v2/postgame_system/test_writer_retry.py -q
       - run: python -m pytest v2/postgame_system/test_article_contract.py v2/postgame_system/test_hupu_postgame.py v2/postgame_system/test_player_focus.py -q
       - run: python -m pytest evaluation/candidate_v4/test_contracts_v4.py evaluation/candidate_v2/test_contracts.py -k "not baseline" -q
+      - run: python -m pytest v2/pregame_system/test_source_temporal_metadata.py v2/pregame_system/test_source_body_fetch.py v2/pregame_system/test_research_evidence.py -q
+      - run: python -m pytest v2/pregame_system/test_strict_forecast_transport.py -q
       - run: node --check web/static-data.js
       - run: python scripts/build_public_site.py
       - uses: actions/configure-pages@v5

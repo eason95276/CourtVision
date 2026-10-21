@@ -611,7 +611,7 @@ def test_flip_condition_win_probability_is_not_a_historical_win_rate():
     ("尼克斯上季场均篮板45.2个。", "rebounds_per_game", "historical_current_factual_statistic"),
     ("最终预测尼克斯胜，胜率78%。", "win_rate", "locked_prediction_output"),
     ("尼克斯可能把领先扩大到8–12分。", "point_margin_per_game", "forecast_or_game_script_estimate"),
-    ("如果三分命中率降到30%，比赛可能改变。", "three_pct", "conditional_or_hypothetical_number"),
+    ("如果三分命中率降到30%，比赛可能改变。", "three_pct", "structural_or_count_expression"),
     ("中锋深度最薄的一环。", "rebounds_per_game", "structural_or_count_expression"),
     ("76 人将面对尼克斯。", None, "team_identity"),
 ])
@@ -1201,6 +1201,14 @@ def test_frozen_attempt_files_remain_unchanged(run):
 
 @pytest.mark.parametrize("text", [
     "公牛五号位的护框和篮板都打了折扣。",
+    "他也是教练点名要补篮板的人之一。",
+    "教练只答了一个词：篮板。",
+    "单次得分只是一两分，但每回合都要多补一次位。",
+    "公牛依靠组织与得分跟上，但三分不稳。",
+    "猛龙保留核心五人且防守与净效率占优。",
+    "开球后先看一件事：森林狼的篮板是不是真的守不住。",
+    "前场篮板补刀这三件事反复出现。",
+    "他补了一句季前赛球队篮板被打得很惨。",
     "揭幕战很难一上来就打出流畅的连续得分。",
     "独行侠护框和防守篮板的第一责任人。",
     "公牛5号位的护框和篮板都打了折扣。",
@@ -1220,3 +1228,101 @@ def test_real_stat_values_remain_factual_beside_position_fix(text, metric):
     from .editorial_hard_facts import _NUMBER_RE, classify_numeric_claim_type
     token = next(_NUMBER_RE.finditer(text))
     assert classify_numeric_claim_type(text, token.start(), token.end(), metric, {"game": GAME}) == "historical_current_factual_statistic"
+
+
+def test_percentage_value_after_three_point_label_stays_conditional():
+    from .editorial_hard_facts import _NUMBER_RE,classify_numeric_claim_type
+    text="如果三分命中率降到30%，比赛可能改变。"
+    value=next(token for token in _NUMBER_RE.finditer(text)if token.group()=="30")
+    assert classify_numeric_claim_type(text,value.start(),value.end(),"three_pct",{"game":GAME})=="conditional_or_hypothetical_number"
+
+
+@pytest.mark.parametrize('text',[
+    '他的体型是热火在篮板端压住对手的另一半。',
+    '两个人一起保护篮板。',
+    '球队篮板不是一个档次。',
+])
+def test_nearby_prose_numbers_do_not_become_statistics(text):
+    from .editorial_hard_facts import _stat_issues_for_text
+    projection={'game':GAME,'facts':[{'id':'stats','kind':'OBSERVATION','value':{
+        'metrics':{'points_for_per_game':20,'rebounds_per_game':15,'assists_per_game':9,'minutes_per_game':23}}}]}
+    assert _stat_issues_for_text(text,projection,'article')==[]
+
+
+def test_compact_boxscore_numbers_bind_to_their_own_units():
+    from .editorial_hard_facts import _stat_issues_for_text
+    projection={'game':GAME,'facts':[{'id':'stats','kind':'OBSERVATION','value':{
+        'metrics':{'points_for_per_game':20,'rebounds_per_game':15,'assists_per_game':9,'minutes_per_game':23}}}]}
+    assert _stat_issues_for_text('场均23分钟20分15篮板9助攻。',projection,'article')==[]
+    findings=_stat_issues_for_text('场均23分钟20分16篮板9助攻。',projection,'article')
+    assert [(r['metric'],r.get('stated_value'))for r in findings]==[('rebounds_per_game','16')]
+    findings=_stat_issues_for_text('场均篮板数值高达99.9个。',projection,'article')
+    assert any(r['code']=='exact_stat_value_mismatch'for r in findings)
+
+
+
+def _event_stat_projection():
+    return {'game':{'home':{'id':1,'name_zh':'热火'},'away':{'id':2,'name_zh':'森林狼'}},'facts':[
+        {'id':'roster','kind':'CURRENT','value':{'side':'home','team_id':1,'roster_snapshot':[
+            {'name':'Giannis Antetokounmpo'},{'name':'Bam Adebayo'}]}},
+        {'id':'event','kind':'CURRENT','value':{'claim_type':'practice_update','source_role':'professional','team_id':1,
+            'quote':'Antetokounmpo showed his potential in a preseason game by recording 20 points, 15 rebounds and nine assists in just 23 minutes.'}},
+        {'id':'average','kind':'HISTORICAL','value':{'side':'home','sample':'previous_last10','season_start':2025,
+            'metrics':{'rebounds_per_game':44.1,'assists_per_game':25.0,'points_for_per_game':112.0}}}]}
+
+
+def test_reported_preseason_event_is_not_compared_with_season_averages():
+    from .editorial_hard_facts import _stat_issues_for_text
+    projection=_event_stat_projection()
+    text='季前赛对篮网23分钟打出20分、15篮板、9助攻。'
+    assert _stat_issues_for_text(text,projection,'player_analysis.0.statement',player_name='Giannis Antetokounmpo')==[]
+    assert _stat_issues_for_text(text,projection,'article.0')==[]
+    assert any(r['code']=='exact_stat_value_mismatch'for r in _stat_issues_for_text('热火上季场均15篮板。',projection,'article'))
+
+
+@pytest.mark.parametrize('mode',['wrong_value','wrong_actor','non_fact','no_source','unnamed_single_metric'])
+def test_single_event_verification_stays_source_and_identity_bound(mode):
+    from .editorial_hard_facts import _stat_issues_for_text
+    projection=_event_stat_projection();name='Giannis Antetokounmpo'
+    text='季前赛23分钟20分15篮板9助攻。'
+    if mode=='wrong_value':text=text.replace('15篮板','16篮板')
+    if mode=='wrong_actor':name='Bam Adebayo'
+    if mode=='non_fact':projection['facts'][1]['kind']='UNKNOWN'
+    if mode=='no_source':projection['facts'].pop(1)
+    if mode=='unnamed_single_metric':text='季前赛拿下15篮板。';name=None
+    findings=_stat_issues_for_text(text,projection,'article',player_name=name)
+    assert len(findings)==1 and findings[0]['code']=='exact_stat_value_unverified'
+
+
+def test_verified_event_signature_does_not_hide_other_statistics_in_same_sentence():
+    from .editorial_hard_facts import _stat_issues_for_text
+    projection=_event_stat_projection()
+    projection['facts'][-1]['value']['metrics']['def_rating']=110.0
+    text='Giannis Antetokounmpo季前赛23分钟20分15篮板9助攻，热火上季防守效率150.0。'
+    findings=_stat_issues_for_text(text,projection,'article')
+    assert any(row.get('metric')=='def_rating'and row['code']=='exact_stat_value_mismatch'for row in findings)
+
+
+def _long_term_background_projection():
+    return {'game':{'home':{'id':1,'name_zh':'太阳'},'away':{'id':2,'name_zh':'开拓者'}},'facts':[
+        {'id':'home-roster','kind':'CURRENT','value':{'side':'home','team_id':1,'roster_snapshot':[{'name':'Mark Williams'}]}},
+        {'id':'away-roster','kind':'CURRENT','value':{'side':'away','team_id':2,'roster_snapshot':[{'name':'Robert Williams III'}]}},
+        {'id':'injury','kind':'BACKGROUND','value':{'claim_type':'long_term_injury','source_role':'professional',
+            'quote':'Mark Williams suffered a torn labrum in his left shoulder in the offseason that is expected to sideline him multiple months.'}}]}
+
+
+def test_long_term_injury_background_is_not_a_this_game_out_assertion():
+    from .editorial_hard_facts import _availability_issues_for_text
+    projection=_long_term_background_projection()
+    assert _availability_issues_for_text('太阳在 Mark Williams 因肩伤长期缺阵的背景下，内线轮换面临考验。',projection,'core_question')==[]
+
+
+@pytest.mark.parametrize('text',[
+    'Mark Williams 在长期缺阵背景下，今晚已经确认缺阵。',
+    'Robert Williams III 在长期缺阵的背景下如何恢复。',
+    'Mark Williams 长期缺阵。',
+    'Mark Williams 在长期缺阵背景下，本场限时20分钟。',
+])
+def test_background_support_does_not_replace_live_availability_identity_or_minutes(text):
+    from .editorial_hard_facts import _availability_issues_for_text
+    assert _availability_issues_for_text(text,_long_term_background_projection(),'article')

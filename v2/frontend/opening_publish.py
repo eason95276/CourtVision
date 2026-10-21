@@ -93,7 +93,16 @@ def publish_saved(job, *, public_root, queue_root, api_base='http://127.0.0.1:86
     subject=('Publish postgame review '+job['game_id']+' '+source['postgame']['version_id'][:8]
         if postgame else'Publish saved report '+job['game_id']+' '+job['version_id'])
     command(['git','-c','user.name='+name,'-c','user.email='+email,'commit','-m',subject],cwd=checkout)
-    command(['git','push','origin','HEAD:main'],cwd=checkout,timeout=120)
+    for push_attempt in range(3):
+        try:
+            command(['git','push','origin','HEAD:main'],cwd=checkout,timeout=120)
+            break
+        except RuntimeError:
+            if push_attempt == 2:
+                raise
+            # This isolated checkout owns only one saved delivery. Preserve remote
+            # schedule/README changes; never force-push or regenerate the report.
+            command(['git','pull','--rebase','origin','main'],cwd=checkout,timeout=120)
     return {'status':'pushed','game_id':job['game_id'],'version_id':job['version_id'],
         'commit':command(['git','rev-parse','HEAD'],cwd=checkout),'generation_calls':0,'deployment':'GitHub Pages Actions pending'}
 

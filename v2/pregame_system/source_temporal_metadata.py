@@ -17,6 +17,9 @@ def page_kind(url,title=""):
     # The Athletic's NYT-hosted URLs use /athletic/<id>/YYYY/MM/DD/slug,
     # which is an article route even though it does not contain /article/.
     if re.search(r"^/athletic/\d+/20\d{2}/\d{2}/\d{2}/",path):return "article"
+    if (parsed.hostname or "").casefold().removeprefix("www.") == "si.com" and re.fullmatch(
+            r"/nba/[^/]+/onsi/(?!author(?:/|$)|archive(?:/|$)|category(?:/|$))[^/]+/?", path):
+        return "article"
     if "roster" in path and re.search(r"roster|名单",title,re.I):return "current_roster_snapshot"
     if "depth" in path and re.search(r"depth|lineup|阵容",title,re.I):return "current_depth_snapshot"
     if re.search(r"/(?:game|gametracker|team|injuries)(?:/|$)",path):return "current_status_snapshot"
