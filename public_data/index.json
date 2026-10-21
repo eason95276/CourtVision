@@ -2,6 +2,128 @@
   "contract_version": "courtvision-public-v1",
   "games": [
     {
+      "game_id": "espn:401909092",
+      "file": "games/espn_401909092.json",
+      "tipoff": "2026-10-22T02:00:00+00:00",
+      "version_id": "b7971c94-c5cd-4ef7-93fc-999b155ca666",
+      "public_sha256": "28f71c309e2b46629f47c64e5ae72af67a2b4959e1b17890987fbde2f1bbf91b",
+      "home_record": {
+        "game": {
+          "away": {
+            "abbreviation": "GS",
+            "accent": "#1D428A",
+            "id": 1610612744,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/gs.png",
+            "name": "Golden State Warriors",
+            "name_zh": "勇士",
+            "espn_team_id": "9",
+            "score": null
+          },
+          "game_type": "regular_season",
+          "home": {
+            "abbreviation": "LAL",
+            "accent": "#552583",
+            "id": 1610612747,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/lal.png",
+            "name": "Los Angeles Lakers",
+            "name_zh": "湖人",
+            "espn_team_id": "13",
+            "score": null
+          },
+          "id": "espn:401909092",
+          "registered_game": true,
+          "schedule_revision": 1,
+          "status": "scheduled",
+          "tipoff": "2026-10-22T02:00:00+00:00",
+          "venue": "crypto.com Arena",
+          "season": 2027,
+          "schedule_catalog_fact": true,
+          "postgame": null,
+          "homepage_visible": true,
+          "public_summary": true
+        },
+        "prediction": {
+          "status": "current",
+          "game_id": "espn:401909092",
+          "version_id": "b7971c94-c5cd-4ef7-93fc-999b155ca666",
+          "state_revision": 2,
+          "locked_at": null,
+          "lock_reason": null,
+          "schedule_revision": 1,
+          "version": {
+            "analysis_contract_version": "two-stage-forecast-v1",
+            "base_input_hash": "e5d62111ecab2e643cd0a31dd1a72c518ff20cdd7bfd62ee9be9fbc9dc09ed4a",
+            "game_id": "espn:401909092",
+            "game_identity": {
+              "away_team_id": 1610612744,
+              "game_id": "espn:401909092",
+              "home_team_id": 1610612747,
+              "scheduled_tipoff": "2026-10-22T02:00:00+00:00"
+            },
+            "generated_at": "2026-10-21T15:14:20.053363+00:00",
+            "input_cutoff_at": "2026-10-21T15:14:08.642550+00:00",
+            "published_at": "2026-10-21T15:14:22.571251+00:00",
+            "schedule_revision": 1,
+            "stage": "EARLY_PREVIEW",
+            "version_id": "b7971c94-c5cd-4ef7-93fc-999b155ca666",
+            "payload_sha256": "593572a395ca0bd8471a9dc46ade4a28ffd99beb97c623a7c8350290015a183b",
+            "input_snapshot": {
+              "away": {
+                "abbreviation": "GS",
+                "accent": "#1D428A",
+                "id": 1610612744,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/gs.png",
+                "name": "Golden State Warriors",
+                "name_zh": "勇士"
+              },
+              "home": {
+                "abbreviation": "LAL",
+                "accent": "#552583",
+                "id": 1610612747,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/lal.png",
+                "name": "Los Angeles Lakers",
+                "name_zh": "湖人"
+              },
+              "id": "espn:401909092",
+              "schedule_revision": 1,
+              "tipoff": "2026-10-22T02:00:00+00:00"
+            },
+            "judgment": {
+              "final_prediction": {
+                "evidence_ids": [
+                  "0b55c8515d4c80a7d660b761a067d2bf17051a73153c0919f62dbe1d61d66d68",
+                  "411d7faaca0e4d640d5698f0e06258e374fcaf865a8938a7bc361f8a6f9f9096",
+                  "6651aae9d0e1741c681c2161368ebbf19125ddf61dee8fafcd5506559124206f",
+                  "66d0ee0a83f422d89e87d47b08cb33a22223cdb73801b48f04a9dc5f6ce7bd07",
+                  "7c524281e6208e773111dfd211b4050e1b38e994f5dabd5e9ae12377ef8bf0a7",
+                  "a201b566771b85e3d91906ba03de46a504f9553f12923f5f4d97bf121125fb6e",
+                  "d0e1547956597bca0a64127d09bc1f8586508f74c18d360f87b2dedb4130d8f0",
+                  "f04ddfd2f7401f9a321e1fe1ca78fb66b1d8c38394fe86d64fed4ec1fc378d69"
+                ],
+                "expected_margin": 4.5,
+                "expected_total": 226.5,
+                "win_probability": 0.63,
+                "winner_side": "home"
+              },
+              "pregame_story": {
+                "classification": "subjective_analysis",
+                "evidence_ids": [
+                  "0b55c8515d4c80a7d660b761a067d2bf17051a73153c0919f62dbe1d61d66d68",
+                  "411d7faaca0e4d640d5698f0e06258e374fcaf865a8938a7bc361f8a6f9f9096",
+                  "6651aae9d0e1741c681c2161368ebbf19125ddf61dee8fafcd5506559124206f",
+                  "66d0ee0a83f422d89e87d47b08cb33a22223cdb73801b48f04a9dc5f6ce7bd07",
+                  "7c524281e6208e773111dfd211b4050e1b38e994f5dabd5e9ae12377ef8bf0a7",
+                  "a201b566771b85e3d91906ba03de46a504f9553f12923f5f4d97bf121125fb6e"
+                ],
+                "statement": "湖人这个休赛期把阵容围着东契奇重建，揭幕战在主场迎库里和勇士，詹姆斯能否出战仍待确认。",
+                "title": "东契奇独挑开幕\n库里率众闯洛城"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
       "game_id": "espn:401909840",
       "file": "games/espn_401909840.json",
       "tipoff": "2026-10-22T00:30:00+00:00",
@@ -1066,5 +1188,5 @@
       }
     }
   ],
-  "published_at": "2026-10-21T15:14:11.453802+00:00"
+  "published_at": "2026-10-21T15:18:36.577947+00:00"
 }
