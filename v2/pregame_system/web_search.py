@@ -571,6 +571,45 @@ class PregameWebSearch:
             return False
         return cls._story_is_relevant(result, game)
 
+    def _prior_discovery_urls(self, game, cutoff_dt, categories, *, limit=8):
+        """Retry URLs from this game's recent discovery; no old claim becomes evidence."""
+        rows, seen = [], set()
+        paths = sorted(self.root.glob("*/evidence.json"), key=lambda p: p.parent.name, reverse=True)[:80]
+        for path in paths:
+            try:
+                previous = json.loads(path.read_text(encoding="utf-8"))
+                at = self._date(previous.get("captured_at"))
+                if (previous.get("replay") or previous.get("game_id") != game.get("game_id")
+                        or at is None or not cutoff_dt - timedelta(hours=12) <= at <= cutoff_dt):
+                    continue
+                for item in previous.get("records", []):
+                    url = item.get("url", "")
+                    if (item.get("category") not in categories or item.get("discovery_only") is not True
+                            or item.get("eligible_for_fact") is not False or url in seen
+                            or not item.get("title") or not _public_discovery_url(url)):
+                        continue
+                    seen.add(url)
+                    row = {key: item[key] for key in ("category", "url", "title", "domain", "snippet",
+                        "published_at", "captured_at", "provider_temporal_metadata") if key in item}
+                    row.update(id=content_hash({"category": item["category"], "url": url,
+                        "cutoff": cutoff_dt.isoformat(), "mode": "prior_discovery_url_retry"}),
+                        search_provider="prior_discovery_url_retry", eligible_for_fact=False,
+                        discovery_only=True, verification_status="prior_url_requires_fresh_fetch",
+                        prior_discovery_at=previous["captured_at"], discovery_retried_at=now())
+                    rows.append(row)
+            except (OSError, ValueError, TypeError, KeyError):
+                continue
+        # Prefer established sports providers for rediscovery, then cover requested categories.
+        # Authority here selects URLs to fetch; it never accepts a claim by itself.
+        rows.sort(key=lambda row: not _trusted(row["url"]))
+        chosen = []
+        for category in sorted(categories):
+            candidate = next((row for row in rows if row["category"] == category and _trusted(row["url"])), None)
+            if candidate is not None and len(chosen) < limit:
+                chosen.append(candidate)
+        chosen_ids = {row["id"] for row in chosen}
+        return (chosen + [row for row in rows if row["id"] not in chosen_ids])[:limit]
+
     def search(
         self,
         game: dict[str, Any],
@@ -812,6 +851,14 @@ class PregameWebSearch:
                     "accepted_semantics": "retained_discovery_candidates" if discovery else "accepted_evidence",
                 }
             )
+
+        if discovery and not records:
+            recovered = self._prior_discovery_urls(game, cutoff_dt, {category for category, _ in query_rows if category != "market"})
+            if recovered:
+                records.extend(recovered)
+                candidates.extend(recovered)
+                trace.append({"provider": "prior_discovery_url_retry", "accepted": len(recovered),
+                    "accepted_semantics": "discovery_urls_only_fresh_fetch_required"})
 
         artifact = {
             "status": "available" if records else "unavailable",

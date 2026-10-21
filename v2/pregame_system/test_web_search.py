@@ -196,6 +196,8 @@ def test_missing_local_search_and_tavily_degrades_without_network(monkeypatch, t
 
 
 def test_local_free_search_supplies_official_game_story_without_key(monkeypatch, tmp_path):
+    import sys
+    monkeypatch.setattr(sys.modules[PregameWebSearch.__module__], "now", lambda: "2026-10-20T18:50:00Z")
     class LocalSearch:
         def search_many(self, payloads):
             output = []
@@ -315,7 +317,9 @@ def test_dated_official_signing_is_roster_news_and_not_current_without_cutoff(tm
     assert after["records"][0]["publication_time_semantics"] == "date_only"
 
 
-def test_real_known_public_market_sample_preserves_home_spread_direction(tmp_path):
+def test_real_known_public_market_sample_preserves_home_spread_direction(monkeypatch, tmp_path):
+    import sys
+    monkeypatch.setattr(sys.modules[PregameWebSearch.__module__], "now", lambda: "2026-10-20T18:50:00Z")
     def transport(payload):
         assert payload["topic"] == "general"
         assert "betmgm.com" in payload["include_domains"]
@@ -452,3 +456,85 @@ def test_yearless_date_is_rejected_for_media_and_after_tipoff():
     assert parse_public_market_reference(
         result, GAME, captured_at="2026-10-21T00:00:00Z"
     ) is None
+
+
+def _saved_url_discovery(root, game_id=GAME["game_id"], at="2026-10-20T18:00:00Z", url="https://www.espn.com/nba/story/preview"):
+    import json
+    folder = root / "20261020T180000_saved"
+    folder.mkdir(parents=True, exist_ok=True)
+    original = {"game_id": game_id, "replay": False, "captured_at": at, "records": [{
+        "category": "availability", "url": url, "title": "76ers Knicks preview",
+        "snippet": "Philadelphia 76ers vs New York Knicks", "captured_at": at,
+        "discovery_only": True, "eligible_for_fact": False}]}
+    (folder / "evidence.json").write_text(json.dumps(original), encoding="utf-8")
+    return folder / "evidence.json"
+
+
+def test_recent_same_game_urls_are_rediscovery_only_and_require_new_fetch(tmp_path):
+    path = _saved_url_discovery(tmp_path)
+    before = path.read_bytes()
+    searcher = PregameWebSearch(tmp_path)
+    rows = searcher._prior_discovery_urls(GAME, searcher._date("2026-10-20T18:55:00Z"), {"availability"})
+    assert len(rows) == 1
+    assert rows[0]["eligible_for_fact"] is False and rows[0]["discovery_only"] is True
+    assert rows[0]["captured_at"] == "2026-10-20T18:00:00Z"
+    assert rows[0]["verification_status"] == "prior_url_requires_fresh_fetch"
+    assert path.read_bytes() == before
+
+
+@pytest.mark.parametrize("game_id,at,url", [
+    ("espn:other", "2026-10-20T18:00:00Z", "https://www.espn.com/nba/story/preview"),
+    (GAME["game_id"], "2026-10-20T19:00:00Z", "https://www.espn.com/nba/story/preview"),
+    (GAME["game_id"], "2026-10-19T18:00:00Z", "https://www.espn.com/nba/story/preview"),
+    (GAME["game_id"], "2026-10-20T18:00:00Z", "http://127.0.0.1/private"),
+])
+def test_prior_discovery_rejects_other_game_future_stale_and_private_urls(tmp_path, game_id, at, url):
+    _saved_url_discovery(tmp_path, game_id, at, url)
+    searcher = PregameWebSearch(tmp_path)
+    assert searcher._prior_discovery_urls(GAME, searcher._date("2026-10-20T18:55:00Z"), {"availability"}) == []
+
+
+def test_failed_live_search_can_recover_urls_but_replay_cannot(tmp_path):
+    _saved_url_discovery(tmp_path)
+    searcher = PregameWebSearch(tmp_path, transport=lambda _: {"results": []})
+    result = searcher.search({**GAME, "registered_game": True}, "2026-10-20T18:55:00Z", categories={"availability"})
+    assert len(result["records"]) == 1 and result["records"][0]["eligible_for_fact"] is False
+    replay = searcher.search({**GAME, "registered_game": True}, "2026-10-20T18:55:00Z", replay=True, categories={"availability"})
+    assert replay["records"] == []
+
+
+def test_live_discovery_does_not_retry_old_urls_when_new_candidates_exist(tmp_path, monkeypatch):
+    _saved_url_discovery(tmp_path)
+    searcher = PregameWebSearch(tmp_path, transport=lambda _: {"results": [{
+        "url": "https://www.nba.com/news/current-preview", "title": "Philadelphia 76ers latest", "content": "New York Knicks preview"}]})
+    def unwanted(*args, **kwargs):
+        pytest.fail("fresh discovery must not be supplemented from old URLs")
+    monkeypatch.setattr(searcher, "_prior_discovery_urls", unwanted)
+    result = searcher.search({**GAME, "registered_game": True}, "2026-10-20T18:55:00Z", categories={"availability"})
+    assert result["records"] and all(r["search_provider"] != "prior_discovery_url_retry" for r in result["records"])
+
+
+def test_prior_discovery_retry_is_bounded_and_deduplicated(tmp_path):
+    import json
+    path = _saved_url_discovery(tmp_path)
+    data = json.loads(path.read_text(encoding="utf-8"))
+    data["records"] = [{**data["records"][0], "url": f"https://www.espn.com/nba/story/{i}"} for i in range(12)]
+    data["records"] += data["records"]
+    path.write_text(json.dumps(data), encoding="utf-8")
+    searcher = PregameWebSearch(tmp_path)
+    rows = searcher._prior_discovery_urls(GAME, searcher._date("2026-10-20T18:55:00Z"), {"availability"})
+    assert len(rows) == len({r["url"] for r in rows}) == 8
+
+
+def test_prior_url_retry_prefers_sports_sources_over_generic_name_matches(tmp_path):
+    import json
+    path = _saved_url_discovery(tmp_path)
+    data = json.loads(path.read_text(encoding="utf-8"))
+    prototype = data["records"][0]
+    data["records"] = [{**prototype, "url": f"https://example.org/geography/{i}"} for i in range(12)]
+    data["records"].append({**prototype, "url": "https://www.espn.com/nba/preview"})
+    path.write_text(json.dumps(data), encoding="utf-8")
+    searcher = PregameWebSearch(tmp_path)
+    rows = searcher._prior_discovery_urls(GAME, searcher._date("2026-10-20T18:55:00Z"), {"availability"})
+    assert len(rows) == 8 and rows[0]["url"] == "https://www.espn.com/nba/preview"
+    assert all(row["eligible_for_fact"] is False for row in rows)

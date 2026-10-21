@@ -2,7 +2,7 @@ const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/st
 let now=Date.parse('2026-10-21T15:59:00Z');
 let tick=10;
 class ClockDate extends Date {constructor(...args){super(...(args.length?args:[now]));}static now(){return now;}}
-const game=(id,tip,selected=false)=>({id,tipoff:tip,status:'scheduled',report_selected:selected,home:{id:1},away:{id:2}});
+const game=(id,tip,selected=false)=>({id,tipoff:tip,status:'scheduled',source:{},missing:[],report_selected:selected,home:{id:1},away:{id:2}});
 const published={game:game('published','2026-10-21T01:30:00Z'),prediction:{version_id:'v1',version:{version_id:'v1',payload_sha256:'frozen',game_identity:{scheduled_tipoff:'2026-10-21T01:30:00Z'}}},public_sha256:'public-hash'};
 const original=JSON.stringify(published);
 const index={published_at:'now',games:[{game_id:'published',file:'games/published.json',public_sha256:'public-hash',home_record:published}]};
@@ -18,6 +18,16 @@ const call=async path=>(await context.window.fetch('https://example.test'+path))
   assert.equal(result.schedule_window.today,'2026-10-21');assert.equal(result.schedule_window.tomorrow,'2026-10-22');
   assert.equal(result.schedule_window.tomorrow_count,2);
   let detail=await call('/api/game?game_id=unselected');assert.equal(detail.status,'success');assert.equal(detail.prediction.version,null);assert.equal(detail.prediction.status,'unavailable');assert.equal(detail.game.technical.source_label,'尚无正式报告');assert.equal(detail.game.previous_season_team_stats.status,'unavailable');
+  const appCode=fs.readFileSync(process.argv[3],'utf8');
+  const technicalCode=appCode.slice(appCode.indexOf('function renderTechnical('),appCode.indexOf('function renderPredictionDisplay('));
+  let renderedRows=0;
+  const technicalContext=vm.createContext({
+    state:{currentAnalyses:new Map(),predictionStates:new Map()},
+    byId:()=>({replaceChildren(){},append(){renderedRows++;}}),
+    document:{createElement:()=>({append(){}})},text:()=>({}),formatCutoffForDisplay:()=> '未记录'});
+  vm.runInContext(technicalCode,technicalContext);
+  technicalContext.renderTechnical(detail.game);
+  assert.ok(renderedRows>=6,'facts-only detail must finish rendering without a Prediction Version');
   detail=await call('/api/game?game_id=selected');assert.equal(detail.prediction.status,'pending');assert.equal(detail.prediction.version,null);
   detail=await call('/api/game?game_id=published');assert.equal(detail.prediction.version.payload_sha256,'frozen');
   now=Date.parse('2026-10-21T16:01:00Z');result=await call('/api/schedule-window');

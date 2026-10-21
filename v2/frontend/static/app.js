@@ -1901,7 +1901,8 @@ function renderTechnical(game, selectedVersion = state.currentAnalyses.get(game.
   const container = byId("technical-content");
   container.replaceChildren();
   const displayProjection = selection?.display_projection;
-  const frozenCutoffs = displayProjection?.version_id === selectedVersion?.version_id
+  const frozenCutoffs = displayProjection && selectedVersion?.version_id &&
+    displayProjection.version_id === selectedVersion.version_id
     ? displayProjection.cutoffs || {}
     : {};
   const rows = [

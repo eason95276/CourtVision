@@ -79,4 +79,4 @@ class PublicSchedule(unittest.TestCase):
 
     def test_static_adapter_rollover_and_facts_only_detail(self):
         subprocess.run([shutil.which('node'),str(Path(__file__).with_name('public_schedule.cjs')),
-            str(ROOT/'web/static-data.js')],check=True,cwd=ROOT)
+            str(ROOT/'web/static-data.js'),str(ROOT/'v2/frontend/static/app.js')],check=True,cwd=ROOT)
