@@ -1,0 +1,53 @@
+name: Public schedule facts
+on:
+  schedule:
+    - cron: '15 * * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - config/daily_picks.json
+      - config/nba_teams.json
+      - scripts/sync_public_schedule.py
+      - .github/workflows/public-schedule.yml
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: public-schedule-facts
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -s tests/public -p test_public_schedule.py -v
+      - run: python scripts/sync_public_schedule.py
+      - name: Publish schedule facts only
+        run: |
+          if git diff --quiet -- public_data/schedule.json; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- public_data/schedule.json
+          git commit -m "Refresh public NBA schedule facts"
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            git pull --rebase origin main
+          done
+          exit 1
+  deploy:
+    needs: sync
+    uses: ./.github/workflows/pages.yml
+    with:
+      checkout_ref: main

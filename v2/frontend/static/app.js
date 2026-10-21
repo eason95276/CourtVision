@@ -21,7 +21,7 @@ const state = {
 
 // Temporary opening-day presentation only. No report activation or generation.
 const HOME_OPENING_PREVIEW = {
-  enabled: true,
+  enabled: false,
   date: "2026-10-21",
   gameIds: new Set(["espn:401909088", "espn:401909089", "espn:401909090"]),
 };
@@ -383,9 +383,9 @@ function homeCollectionOptions() {
     ];
   }
   return [
-    { key: "published", label: "已发布", subtitle: "赛前 / 赛后" },
     { key: state.todayDate, label: "今天", subtitle: displayDate(`${state.todayDate}T12:00:00+08:00`, false) },
     { key: state.tomorrowDate, label: "明天", subtitle: displayDate(`${state.tomorrowDate}T12:00:00+08:00`, false) },
+    { key: "published", label: "已发布", subtitle: "赛前 / 赛后" },
   ];
 }
 

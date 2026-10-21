@@ -12,7 +12,7 @@ START = '<!-- daily-picks:start -->'
 END = '<!-- daily-picks:end -->'
 TZ = ZoneInfo('Asia/Shanghai')
 STATUSES = {
-    'awaiting_preview': '待生成新文风试稿',
+    'awaiting_preview': '报告待生成',
     'awaiting_review': '单场试稿待人工确认',
     'preview_failed': '新试稿未通过校验，保留原报告',
     'approved_draft': '文风稿已确认，正式版尚未替换',
@@ -99,6 +99,10 @@ def update(root=ROOT, as_of=None):
     selection = load_selection(root)
     index = json.loads((root / 'public_data/index.json').read_text(encoding='utf-8'))
     records = {}
+    schedule=root/'public_data/schedule.json'
+    if schedule.is_file():
+        for game in json.loads(schedule.read_text(encoding='utf-8')).get('games',[]):
+            records[game['id']]={'game':game,'prediction':{'version':None}}
     public = (root / 'public_data').resolve()
     for item in index['games']:
         path = (public / item['file']).resolve()

@@ -118,6 +118,13 @@ def classify_numeric_claim_type(text: str, start: int, end: int, metric: str | N
     before = prefix + text[start:end] + suffix
 
     token = text[start:end]
+    # Position labels and a count of scoring options do not assert box-score values.
+    if (token in {"1", "2", "3", "4", "5", "一", "二", "三", "四", "五"}
+            and suffix.startswith("号位")
+            or re.match(r"个(?:稳定|可靠|主要|重要|外线|内线)?得分点", suffix)
+            or token in {"一", "1"} and re.search(r"(?:多|少)$", prefix)
+            and suffix.startswith("个") and "得分点" in prefix[-30:]):
+        return "structural_or_count_expression"
     # A count of tactical options is not a score, even beside the word 得分.
     if re.match(r"条(?:得分|进攻|突破|组织)?(?:路|路线|路径)|套(?:进攻|防守)?(?:方案|打法|配合)|种(?:进攻|防守)?(?:办法|选择|打法)", suffix):
         return "structural_or_count_expression"
@@ -1065,7 +1072,7 @@ def _locked_forecast_issues(text: str, projection: dict, unit_id: str) -> list[d
                     "fact_ids": fact_ids})
     number = r"([0-9]+(?:\.[0-9]+)?|[零〇一二两三四五六七八九十百]+(?:点[零〇一二两三四五六七八九]+)?)"
     checks = (("win_probability", rf"(?:胜率|胜出概率|获胜概率)(?:百分之)?\s*[:：为约]?\s*{number}\s*[%％]?", 100),
-              ("expected_margin", rf"(?:预计|预测|净胜|分差|赢|获胜)[^。！？!?]{{0,14}}?{number}\s*分", 1),
+              ("expected_margin", rf"(?:预计|预测|净胜|分差|赢(?!球)|获胜)[^。！？!?，,；;]{{0,14}}?{number}\s*分", 1),
               ("expected_total", rf"(?:预计|预测)?总分\s*[:：为约]?\s*{number}", 1))
     for field, pattern, scale in checks:
         if field == "expected_margin":

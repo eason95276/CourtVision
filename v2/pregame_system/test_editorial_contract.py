@@ -7,6 +7,16 @@ from pathlib import Path
 
 import pytest
 
+
+def test_market_spread_in_neighboring_clause_is_not_the_locked_margin():
+    from .editorial_hard_facts import _locked_forecast_issues
+    projection={'game':{'home':{'name_zh':'魔术'},'away':{'name_zh':'老鹰'}},'facts':[
+        {'id':'locked','kind':'PUBLIC_DECISION','value':{'numbers':{'winner_side':'home','win_probability':.6,
+            'expected_margin':3.5,'expected_total':220.5}}}]}
+    assert _locked_forecast_issues('我选魔术赢球，让2.5分也站主队这边，预计分差能到3.5分左右。',projection,'article')==[]
+    assert any(r['field']=='expected_margin'for r in
+        _locked_forecast_issues('我选魔术赢球，让2.5分也站主队这边，预计分差能到5.5分左右。',projection,'article'))
+
 from .editorial_contract import build_editorial_projection, model_view, public_visibility_issues
 from .editorial_hard_facts import validate_publication_hard_facts
 
@@ -1187,3 +1197,24 @@ def test_frozen_attempt_files_remain_unchanged(run):
                   "evidence_ids": []}
         assert build_editorial_projection(context, locked)["game_id"] == context["game"]["game_id"]
     assert all(digest(path) == value for path, value in before.items())
+
+
+@pytest.mark.parametrize("text", [
+    "公牛五号位的护框和篮板都打了折扣。",
+    "公牛5号位的护框和篮板都打了折扣。",
+    "猛龙进攻端多一个稳定得分点还是少一个。",
+])
+def test_position_and_scoring_option_counts_are_not_boxscore_values(text):
+    from .editorial_hard_facts import _stat_issues_for_text
+    projection = {"game": deepcopy(GAME), "facts": []}
+    assert _stat_issues_for_text(text, projection, "article") == []
+
+
+@pytest.mark.parametrize("text,metric", [
+    ("公牛上季场均篮板5个。", "rebounds_per_game"),
+    ("猛龙上季场均得分1分。", "points_for_per_game"),
+])
+def test_real_stat_values_remain_factual_beside_position_fix(text, metric):
+    from .editorial_hard_facts import _NUMBER_RE, classify_numeric_claim_type
+    token = next(_NUMBER_RE.finditer(text))
+    assert classify_numeric_claim_type(text, token.start(), token.end(), metric, {"game": GAME}) == "historical_current_factual_statistic"
