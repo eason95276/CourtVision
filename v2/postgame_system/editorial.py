@@ -520,6 +520,8 @@ def _messages(context: dict[str, Any], skill_text: str) -> list[dict[str, str]]:
         "点赞数不代表事实正确或全体球迷共识；评论里的球员数据、战术、伤病和指控不能直接采信。"
         "正文目标600至800个字符（含标点、数字、字母），最多六段；以球星具体表现带读者进入比赛。"
         "主要篇幅讲比赛，最后一个短段落复核赛前判断，不写成成绩单。"
+        "大小分只简述赛前方向和是否命中，再对照赛前真实理由与赛后表现；默认不写总分点估计高估、低估或差多少。"
+        "节奏和投篮效率分开，不能用低总分证明慢节奏；方向对但主要成因不同，也要如实说明，不替命中编理由。"
         "赛后确认的 DNP、分钟、首发不能倒写成赛前已经确认。"
         "不输出内部模型或 Agent 名、阶段名、hash、误差字段、QA 状态或投注指令。"
         "只返回严格 JSON，字段恰为 title、short_review、article；article 是一篇连贯中文正文，段落之间用两个换行。"
@@ -528,6 +530,8 @@ def _messages(context: dict[str, Any], skill_text: str) -> list[dict[str, str]]:
     writer_context = json.loads(json.dumps(context, ensure_ascii=False))
     from .article_contract import public_verdicts
     writer_context['verified_public_verdicts']=public_verdicts(context)
+    for key in ('total_absolute_error','margin_absolute_error','total_prediction_relation'):
+        writer_context['verified_public_verdicts'].pop(key,None)
     writer_context.pop("provenance", None)
     writer_context.get("game", {}).pop("game_id", None)
     writer_context["game"]["actual_winner"] = (
@@ -545,7 +549,8 @@ def _messages(context: dict[str, Any], skill_text: str) -> list[dict[str, str]]:
         abs(forecast["predicted_home_margin"])
         if forecast["predicted_home_margin"] is not None else None
     )
-    forecast["predicted_total"] = forecast.pop("expected_total", None)
+    forecast.pop("expected_total", None)
+    forecast['pregame_total_direction']=writer_context['verified_public_verdicts']['selected_total']
     forecast["pregame_winner_direction"] = "命中" if forecast.pop("winner_correct", False) else "未命中"
     forecast.pop("winner_team_id", None)
     forecast.pop("margin_error", None)
@@ -593,6 +598,7 @@ def _messages(context: dict[str, Any], skill_text: str) -> list[dict[str, str]]:
     for review_type in ("spread", "total"):
         review = writer_context.get("public_market_reference_review", {}).get(review_type) or {}
         review.pop("semantics", None)
+        if review_type=='total':review.pop('expected_total',None)
     user = (
         "请遵守 system 中的 Postgame Skill，并基于下面冻结材料写一篇真正解释比赛走向的赛后复盘。"
         "正文优先解释比赛实际如何形成结果，"
