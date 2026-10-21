@@ -25,8 +25,13 @@ def plan(planner,db,game,state,policy,at):
     if payload.get('stage')=='FINAL_PREGAME':return []
     result=[ensure('FINAL_PREGAME',final_at,tip,'t_minus_20_readiness_window')]
     if payload.get('stage')not in {'EARLY_PREVIEW','UPDATED_PREVIEW'} and at<final_at:
-        due=next_off_peak(max(at,start),final_at,policy.get('price_holidays',()))if policy.get('prefer_off_peak',True)else max(at,start)
-        result.append(ensure('EARLY_PREVIEW',due,final_at,'off_peak_initial_judgment'))
+        earliest=max(at,start)
+        hour=policy.get('early_release_hour_beijing')
+        if hour is not None:
+            from .publication_timing import preview_evening
+            earliest=max(earliest,preview_evening(tip,start,hour=hour,preheat=policy.get('preheat_enabled',False)))
+        due=next_off_peak(earliest,final_at,policy.get('price_holidays',()))if policy.get('prefer_off_peak',True)else earliest
+        result.append(ensure('EARLY_PREVIEW',due,final_at,'evening_initial_judgment'if hour is not None else'off_peak_initial_judgment'))
     return result
 
 def readiness_for_task(versions,task,collector=None,*,prewarm=False):

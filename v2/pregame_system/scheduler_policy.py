@@ -35,6 +35,11 @@ def normalized_policy(value=None):
         result.update(lifecycle='early-final-v1',early_requested_at=requested,
             prefer_off_peak=value.get('prefer_off_peak',True),price_holidays=value.get('price_holidays',[]))
         if not isinstance(result['prefer_off_peak'],bool):raise VersionStoreError('off_peak_flag_invalid')
+        if 'early_release_hour_beijing' in value:
+            hour=value['early_release_hour_beijing']
+            if hour is not None and (isinstance(hour,bool) or not isinstance(hour,int) or not 0<=hour<=23):
+                raise VersionStoreError('early_release_hour_invalid')
+            result['early_release_hour_beijing']=hour
         if 'final_information_policy' in value:
             mode=value['final_information_policy']
             if mode not in {'confirmed_only','latest_verified'}:raise VersionStoreError('final_information_policy_invalid')
@@ -129,6 +134,7 @@ class SchedulerPolicyPlanner:
         configuration=dict(configuration)
         if configuration.get('lifecycle')=='early-final-v1':
             configuration.setdefault('final_information_policy','latest_verified')
+            configuration.setdefault('early_release_hour_beijing',20)
         policy = normalized_policy(configuration)
         at = _clock_instant(self.tasks.clock)
         with self.tasks.transaction() as db:

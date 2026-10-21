@@ -13,7 +13,7 @@ def initialize_writer_attempts(store):
 
 
 def attempt_postgame_writer(store, postgame, generator, *, clock=None, output_root=DEFAULT_OUTPUT_ROOT,
-                            prefer_off_peak=True, holidays=()):
+                            prefer_off_peak=True, holidays=(), evening_hour=20):
     clock=clock or (lambda:datetime.now(timezone.utc))
     at=clock();version_id=postgame['version_id']
     initialize_writer_attempts(store)
@@ -29,15 +29,24 @@ def attempt_postgame_writer(store, postgame, generator, *, clock=None, output_ro
               (version_id,postgame['game_id'],artifact['artifact_sha256'],at.isoformat()))
         return {'editorial_status':'already_exists'}
     from v2.pregame_system.cost_ledger import peak,next_off_peak,production_scope,component
-    if prefer_off_peak and peak(at,holidays):
-        due=next_off_peak(at,at+timedelta(days=1),holidays).isoformat()
+    due=at
+    waiting_status=None
+    if evening_hour is not None:
+        from v2.pregame_system.publication_timing import next_evening
+        due=next_evening(at,evening_hour)
+        if due>at:waiting_status='waiting_evening'
+    if prefer_off_peak and peak(due,holidays):
+        due=next_off_peak(due,due+timedelta(days=1),holidays)
+        waiting_status=waiting_status or 'waiting_off_peak'
+    if waiting_status:
+        due=due.isoformat()
         with store.connect() as db:
             db.execute('''INSERT INTO postgame_writer_attempts VALUES(?,?,'waiting',0,?,NULL,NULL,NULL,?)
               ON CONFLICT(postgame_version_id) DO UPDATE SET next_attempt_at=excluded.next_attempt_at,
               updated_at=excluded.updated_at WHERE postgame_writer_attempts.status!='succeeded'
               AND (postgame_writer_attempts.lease_until IS NULL OR postgame_writer_attempts.lease_until<=excluded.updated_at)''',
               (version_id,postgame['game_id'],due,at.isoformat()))
-        return {'editorial_status':'waiting_off_peak','next_attempt_at':due}
+        return {'editorial_status':waiting_status,'next_attempt_at':due}
     with store.connect() as db:
         db.execute('BEGIN IMMEDIATE')
         row=db.execute('SELECT * FROM postgame_writer_attempts WHERE postgame_version_id=?',(version_id,)).fetchone()

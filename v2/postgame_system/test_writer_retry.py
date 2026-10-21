@@ -8,7 +8,7 @@ from . import writer_retry
 @pytest.mark.parametrize('succeed',[True,False])
 def test_retry_survives_restart_and_bounds_calls(tmp_path,monkeypatch,succeed):
     store=PredictionVersionStore(tmp_path/'db.sqlite')
-    at=[datetime(2026,10,9,tzinfo=timezone.utc)]
+    at=[datetime(2026,10,9,12,tzinfo=timezone.utc)]
     post={'version_id':'non-lal-postgame','game_id':'espn:401902644'}
     artifact=[None];calls=[]
     monkeypatch.setattr(writer_retry,'load_postgame_editorial',lambda *args,**kwargs:artifact[0])
@@ -37,12 +37,12 @@ def test_returned_success_without_artifact_is_not_success(tmp_path,monkeypatch):
     monkeypatch.setattr(writer_retry,'load_postgame_editorial',lambda *args,**kwargs:None)
     result=writer_retry.attempt_postgame_writer(store,{'version_id':'test','game_id':'espn:test'},
         lambda *args,**kwargs:SimpleNamespace(status='success'),output_root=tmp_path,
-        clock=lambda:datetime(2026,10,21,0,tzinfo=timezone.utc))
+        clock=lambda:datetime(2026,10,21,12,tzinfo=timezone.utc))
     assert result['editorial_status']=='failed'
     assert 'without_verified_artifact' in result['editorial_error_type']
 
 
-def test_peak_defers_article_without_consuming_attempt_or_blocking_record(tmp_path,monkeypatch):
+def test_daytime_defers_article_until_evening_without_consuming_attempt(tmp_path,monkeypatch):
     store=PredictionVersionStore(tmp_path/'db.sqlite')
     at=[datetime(2026,10,21,2,tzinfo=timezone.utc)]  # Wednesday 10:00 Beijing
     post={'version_id':'postgame-peak','game_id':'espn:123'}
@@ -51,11 +51,34 @@ def test_peak_defers_article_without_consuming_attempt_or_blocking_record(tmp_pa
     def generate(*args,**kwargs):
         calls.append(1);return SimpleNamespace(status='failed',error_type='temporary')
     result=writer_retry.attempt_postgame_writer(store,post,generate,clock=lambda:at[0],output_root=tmp_path)
-    assert result['editorial_status']=='waiting_off_peak' and calls==[]
+    assert result['editorial_status']=='waiting_evening' and calls==[]
+    assert result['next_attempt_at']=='2026-10-21T12:00:00+00:00'
     with store.connect() as db:assert db.execute('SELECT attempt_count FROM postgame_writer_attempts').fetchone()[0]==0
     at[0]=datetime(2026,10,21,4,tzinfo=timezone.utc)  # 12:00 Beijing
     result=writer_retry.attempt_postgame_writer(store,post,generate,clock=lambda:at[0],output_root=tmp_path)
+    assert result['editorial_status']=='waiting_evening' and calls==[]
+    at[0]=datetime(2026,10,21,12,tzinfo=timezone.utc)
+    result=writer_retry.attempt_postgame_writer(store,post,generate,clock=lambda:at[0],output_root=tmp_path)
     assert calls==[1] and result['editorial_attempt']==1
+
+
+def test_late_finished_game_runs_same_evening(tmp_path,monkeypatch):
+    store=PredictionVersionStore(tmp_path/'db.sqlite')
+    monkeypatch.setattr(writer_retry,'load_postgame_editorial',lambda *a,**k:None)
+    calls=[]
+    result=writer_retry.attempt_postgame_writer(store,{'version_id':'late','game_id':'espn:late'},
+        lambda *a,**k:(calls.append(1)or SimpleNamespace(status='failed',error_type='fixture')),
+        clock=lambda:datetime(2026,10,21,14,30,tzinfo=timezone.utc),output_root=tmp_path)
+    assert calls==[1] and result['editorial_attempt']==1
+
+
+def test_existing_article_is_not_rewritten_or_delayed_by_evening_policy(tmp_path,monkeypatch):
+    store=PredictionVersionStore(tmp_path/'db.sqlite')
+    monkeypatch.setattr(writer_retry,'load_postgame_editorial',lambda *a,**k:{'artifact_sha256':'a'*64})
+    def forbidden(*a,**k):raise AssertionError('existing article must not regenerate')
+    result=writer_retry.attempt_postgame_writer(store,{'version_id':'old','game_id':'espn:old'},forbidden,
+        clock=lambda:datetime(2026,10,21,2,tzinfo=timezone.utc),output_root=tmp_path)
+    assert result['editorial_status']=='already_exists'
 
 @pytest.mark.parametrize('winner_correct,spread,total,expected',[
     (True,'loss','win','胜负看对，让分看错，大小分看对。'),

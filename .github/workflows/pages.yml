@@ -23,7 +23,7 @@ jobs:
       - run: python scripts/check_public_release.py --history
       - run: pip install -r requirements-evaluation.txt
       - run: python -m unittest discover -s tests/public -v
-      - run: python -m pytest v2/pregame_system/test_editorial_titles.py v2/frontend/test_publication_queue.py -q
+      - run: python -m pytest v2/pregame_system/test_editorial_titles.py v2/pregame_system/test_publication_timing.py v2/frontend/test_publication_queue.py -q
       - run: python -m pytest v2/pregame_system/test_final_information.py v2/pregame_system/test_availability_display_identity.py v2/postgame_system/test_editorial_style.py v2/postgame_system/test_writer_retry.py -q
       - run: python -m pytest v2/postgame_system/test_article_contract.py -q
       - run: python -m pytest evaluation/candidate_v4/test_contracts_v4.py evaluation/candidate_v2/test_contracts.py -k "not baseline" -q

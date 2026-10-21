@@ -86,7 +86,7 @@ class FakePostgame:
 
 def _fixture(tmp_path, *, with_prediction=True):
     path=tmp_path/"postgame.sqlite"
-    clock=lambda:datetime(2026,10,6,0,5,tzinfo=timezone.utc)
+    clock=lambda:datetime(2026,10,6,12,5,tzinfo=timezone.utc)
     catalog=ScheduleCatalog(path,clock=clock)
     catalog.ingest("scoreboard",[_response(_final_event())],include_game_types={"preseason"})
     store=FakeStore(path)
