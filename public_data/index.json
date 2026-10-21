@@ -242,6 +242,128 @@
       }
     },
     {
+      "game_id": "espn:401909838",
+      "file": "games/espn_401909838.json",
+      "tipoff": "2026-10-22T00:00:00+00:00",
+      "version_id": "3db4d66a-03ca-45b3-a98c-7a2506326d5f",
+      "public_sha256": "a9f91bbe850ed06ee36020f515b836a12b75ba69e1b78395af821cd204697408",
+      "home_record": {
+        "game": {
+          "away": {
+            "abbreviation": "UTAH",
+            "accent": "#F9A01B",
+            "id": 1610612762,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/utah.png",
+            "name": "Utah Jazz",
+            "name_zh": "爵士",
+            "espn_team_id": "26",
+            "score": null
+          },
+          "game_type": "regular_season",
+          "home": {
+            "abbreviation": "MEM",
+            "accent": "#5D76A9",
+            "id": 1610612763,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/mem.png",
+            "name": "Memphis Grizzlies",
+            "name_zh": "灰熊",
+            "espn_team_id": "29",
+            "score": null
+          },
+          "id": "espn:401909838",
+          "registered_game": true,
+          "schedule_revision": 1,
+          "status": "scheduled",
+          "tipoff": "2026-10-22T00:00:00+00:00",
+          "venue": "FedExForum",
+          "season": 2027,
+          "schedule_catalog_fact": true,
+          "postgame": null,
+          "homepage_visible": true,
+          "public_summary": true
+        },
+        "prediction": {
+          "status": "current",
+          "game_id": "espn:401909838",
+          "version_id": "3db4d66a-03ca-45b3-a98c-7a2506326d5f",
+          "state_revision": 2,
+          "locked_at": null,
+          "lock_reason": null,
+          "schedule_revision": 1,
+          "version": {
+            "analysis_contract_version": "two-stage-forecast-v1",
+            "base_input_hash": "f0d03f150781015c1782b2ce67169d006889655066202786eb15bcd2987f4d2e",
+            "game_id": "espn:401909838",
+            "game_identity": {
+              "away_team_id": 1610612762,
+              "game_id": "espn:401909838",
+              "home_team_id": 1610612763,
+              "scheduled_tipoff": "2026-10-22T00:00:00+00:00"
+            },
+            "generated_at": "2026-10-21T14:45:45.315658+00:00",
+            "input_cutoff_at": "2026-10-21T14:45:34.267523+00:00",
+            "published_at": "2026-10-21T14:45:46.851150+00:00",
+            "schedule_revision": 1,
+            "stage": "EARLY_PREVIEW",
+            "version_id": "3db4d66a-03ca-45b3-a98c-7a2506326d5f",
+            "payload_sha256": "626491a015e32ab5de13fb128dabe292eed667d76a42844eebd34b4e9b51b68e",
+            "input_snapshot": {
+              "away": {
+                "abbreviation": "UTAH",
+                "accent": "#F9A01B",
+                "id": 1610612762,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/utah.png",
+                "name": "Utah Jazz",
+                "name_zh": "爵士"
+              },
+              "home": {
+                "abbreviation": "MEM",
+                "accent": "#5D76A9",
+                "id": 1610612763,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/mem.png",
+                "name": "Memphis Grizzlies",
+                "name_zh": "灰熊"
+              },
+              "id": "espn:401909838",
+              "schedule_revision": 1,
+              "tipoff": "2026-10-22T00:00:00+00:00"
+            },
+            "judgment": {
+              "final_prediction": {
+                "evidence_ids": [
+                  "16edfee6e84f7cecd14d1ff47b385e478a1ca767c20cf6935f7460d385df9022",
+                  "3ebae06af15302a8f5bac85cd6e7926ce25826926fcb6ffc2459d4f2a866d32f",
+                  "6c48c01a29c95e6787760057d3bbff8aeb3472bb25dbf29243e7989db5bc6d39",
+                  "7d54469415e13fa3b6bde7887cbe29011a4bf56970c70cdec6cae2790d0253de",
+                  "de935e8ebdd6ce12e64ddb731f99b90a74a7ea4c3dbfc6cda9460128ea8c2dd3",
+                  "e6cb87b7160c9e8724e71a3834548e22c04936e1966508a1fe3c498d087d6e71",
+                  "f1857786a369aa95d9bc83d7f0d67e3bb47907379058d15b89145ec09997dadf",
+                  "f8ab9f3a9dbb0b8d5a36d8686e5d9ceffb6a321c655c73c19b48668324f2569a"
+                ],
+                "expected_margin": 2.0,
+                "expected_total": 238.5,
+                "win_probability": 0.56,
+                "winner_side": "away"
+              },
+              "pregame_story": {
+                "classification": "subjective_analysis",
+                "evidence_ids": [
+                  "16edfee6e84f7cecd14d1ff47b385e478a1ca767c20cf6935f7460d385df9022",
+                  "3ebae06af15302a8f5bac85cd6e7926ce25826926fcb6ffc2459d4f2a866d32f",
+                  "6c48c01a29c95e6787760057d3bbff8aeb3472bb25dbf29243e7989db5bc6d39",
+                  "7d54469415e13fa3b6bde7887cbe29011a4bf56970c70cdec6cae2790d0253de",
+                  "de935e8ebdd6ce12e64ddb731f99b90a74a7ea4c3dbfc6cda9460128ea8c2dd3",
+                  "e6cb87b7160c9e8724e71a3834548e22c04936e1966508a1fe3c498d087d6e71"
+                ],
+                "statement": "灰熊把重建的钥匙交给布泽，爵士则带着新援杰克逊上门，揭幕夜就看这两套新阵容谁先站稳。",
+                "title": "灰熊换血迎新季\n爵士杰克逊登门"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
       "game_id": "espn:401909834",
       "file": "games/espn_401909834.json",
       "tipoff": "2026-10-21T23:00:00+00:00",
@@ -1188,5 +1310,5 @@
       }
     }
   ],
-  "published_at": "2026-10-21T15:18:36.577947+00:00"
+  "published_at": "2026-10-21T15:22:35.614666+00:00"
 }
