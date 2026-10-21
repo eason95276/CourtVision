@@ -124,6 +124,126 @@
       }
     },
     {
+      "game_id": "espn:401909841",
+      "file": "games/espn_401909841.json",
+      "tipoff": "2026-10-22T02:00:00+00:00",
+      "version_id": "17cf838a-2fc4-4e77-846a-951a073f26ed",
+      "public_sha256": "fc270ffb94e14c230d31ec85077f9f55270dda3c8c38d1dbb8cee045d7edfadd",
+      "home_record": {
+        "game": {
+          "away": {
+            "abbreviation": "PHX",
+            "accent": "#E56020",
+            "id": 1610612756,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/phx.png",
+            "name": "Phoenix Suns",
+            "name_zh": "太阳",
+            "espn_team_id": "21",
+            "score": null
+          },
+          "game_type": "regular_season",
+          "home": {
+            "abbreviation": "POR",
+            "accent": "#E03A3E",
+            "id": 1610612757,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/por.png",
+            "name": "Portland Trail Blazers",
+            "name_zh": "开拓者",
+            "espn_team_id": "22",
+            "score": null
+          },
+          "id": "espn:401909841",
+          "registered_game": true,
+          "schedule_revision": 1,
+          "status": "scheduled",
+          "tipoff": "2026-10-22T02:00:00+00:00",
+          "venue": "Moda Center",
+          "season": 2027,
+          "schedule_catalog_fact": true,
+          "postgame": null,
+          "homepage_visible": true,
+          "public_summary": true
+        },
+        "prediction": {
+          "status": "current",
+          "game_id": "espn:401909841",
+          "version_id": "17cf838a-2fc4-4e77-846a-951a073f26ed",
+          "state_revision": 2,
+          "locked_at": null,
+          "lock_reason": null,
+          "schedule_revision": 1,
+          "version": {
+            "analysis_contract_version": "two-stage-forecast-v1",
+            "base_input_hash": "ab6bc5a7a6cbb843ca5d6c3fab92d8258a43a2bff36923e539184afc40b043a9",
+            "game_id": "espn:401909841",
+            "game_identity": {
+              "away_team_id": 1610612756,
+              "game_id": "espn:401909841",
+              "home_team_id": 1610612757,
+              "scheduled_tipoff": "2026-10-22T02:00:00+00:00"
+            },
+            "generated_at": "2026-10-21T18:27:20.655373+00:00",
+            "input_cutoff_at": "2026-10-21T18:27:06.969034+00:00",
+            "published_at": "2026-10-21T18:27:22.137972+00:00",
+            "schedule_revision": 1,
+            "stage": "EARLY_PREVIEW",
+            "version_id": "17cf838a-2fc4-4e77-846a-951a073f26ed",
+            "payload_sha256": "dd7274137390b0c1abb9b7379f2139c1edf57415ccd4d18a58f08c126929df38",
+            "input_snapshot": {
+              "away": {
+                "abbreviation": "PHX",
+                "accent": "#E56020",
+                "id": 1610612756,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/phx.png",
+                "name": "Phoenix Suns",
+                "name_zh": "太阳"
+              },
+              "home": {
+                "abbreviation": "POR",
+                "accent": "#E03A3E",
+                "id": 1610612757,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/por.png",
+                "name": "Portland Trail Blazers",
+                "name_zh": "开拓者"
+              },
+              "id": "espn:401909841",
+              "schedule_revision": 1,
+              "tipoff": "2026-10-22T02:00:00+00:00"
+            },
+            "judgment": {
+              "final_prediction": {
+                "evidence_ids": [
+                  "2f724efdad2b14a82fc295e3f436ed0e8f713d740a4cb11f7172aea5bc874e41",
+                  "7d309a92250aa734390566eeaaab316ea94c5de8d1b45271e08e2ea09671eeaf",
+                  "afd2896f2d29a330a10ea16dc4ba82ce6a8007996521050acca2417147c8b3fb",
+                  "cc6a047c53f6d9662b1ef9c543ef8e145472806cb6aa7d831d3ce3d4bb761aae",
+                  "cf8cd0053ecc196f81d51c83e017aa3f9d1e5daa07b0d33bac4fd53ca21886f2",
+                  "f39134a7ee44ee1851ae1fe46f5d8ad2b2bcf2108ae76544e583c88a724f7f98"
+                ],
+                "expected_margin": 3.0,
+                "expected_total": 227.5,
+                "win_probability": 0.56,
+                "winner_side": "home"
+              },
+              "pregame_story": {
+                "classification": "subjective_analysis",
+                "evidence_ids": [
+                  "2f724efdad2b14a82fc295e3f436ed0e8f713d740a4cb11f7172aea5bc874e41",
+                  "7d309a92250aa734390566eeaaab316ea94c5de8d1b45271e08e2ea09671eeaf",
+                  "afd2896f2d29a330a10ea16dc4ba82ce6a8007996521050acca2417147c8b3fb",
+                  "cc6a047c53f6d9662b1ef9c543ef8e145472806cb6aa7d831d3ce3d4bb761aae",
+                  "cf8cd0053ecc196f81d51c83e017aa3f9d1e5daa07b0d33bac4fd53ca21886f2",
+                  "f39134a7ee44ee1851ae1fe46f5d8ad2b2bcf2108ae76544e583c88a724f7f98"
+                ],
+                "statement": "太阳带着一条缺了主心骨的内线来波特兰打揭幕战，开拓者则第一次把利拉德和莫兰特一起摆上场，这场球看的就是谁先把自己的短板藏住。",
+                "title": "开拓者主场迎敌\n太阳内线缺人手"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
       "game_id": "espn:401909840",
       "file": "games/espn_401909840.json",
       "tipoff": "2026-10-22T00:30:00+00:00",
@@ -1554,5 +1674,5 @@
       }
     }
   ],
-  "published_at": "2026-10-21T17:40:42.524609+00:00"
+  "published_at": "2026-10-21T18:27:58.647828+00:00"
 }
