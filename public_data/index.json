@@ -731,8 +731,8 @@
       "game_id": "espn:401909834",
       "file": "games/espn_401909834.json",
       "tipoff": "2026-10-21T23:00:00+00:00",
-      "version_id": "7e27ff9e-2383-41cb-b8f3-40c589bb9592",
-      "public_sha256": "4e575b8a982ed10d555622a9320051e1cfe58e7ac8a3cc213bd253f4cf684673",
+      "version_id": "4256d35e-43f2-4fa3-89bd-ddeb49fb557d",
+      "public_sha256": "de97f598b11f9ec93d46d4a30b2ddafff61aeaed068e65e8a239805ee8176044",
       "home_record": {
         "game": {
           "id": "espn:401909834",
@@ -771,14 +771,14 @@
         "prediction": {
           "status": "current",
           "game_id": "espn:401909834",
-          "version_id": "7e27ff9e-2383-41cb-b8f3-40c589bb9592",
-          "state_revision": 2,
+          "version_id": "4256d35e-43f2-4fa3-89bd-ddeb49fb557d",
+          "state_revision": 3,
           "locked_at": null,
           "lock_reason": null,
           "schedule_revision": 1,
           "version": {
             "analysis_contract_version": "two-stage-forecast-v1",
-            "base_input_hash": "3b9464af2748ef4dc16b3b05a36e7fe25697b309d01f30f15f12468ff3fa829f",
+            "base_input_hash": "f4e8652dcc7f204f77860c6e83eba187021d93f196d74c6b23dbd3d32119d334",
             "game_id": "espn:401909834",
             "game_identity": {
               "away_team_id": 1610612737,
@@ -786,13 +786,13 @@
               "home_team_id": 1610612753,
               "scheduled_tipoff": "2026-10-21T23:00:00+00:00"
             },
-            "generated_at": "2026-10-21T14:34:39.150408+00:00",
-            "input_cutoff_at": "2026-10-21T14:34:26.843222+00:00",
-            "published_at": "2026-10-21T14:34:41.464682+00:00",
+            "generated_at": "2026-10-21T22:40:35.442983+00:00",
+            "input_cutoff_at": "2026-10-21T22:40:12.753764+00:00",
+            "published_at": "2026-10-21T22:40:37.620109+00:00",
             "schedule_revision": 1,
-            "stage": "EARLY_PREVIEW",
-            "version_id": "7e27ff9e-2383-41cb-b8f3-40c589bb9592",
-            "payload_sha256": "5d197a954770d7db1090fbdd4c0d2861842368a09481c7fbb0cc9e2b217daf05",
+            "stage": "FINAL_PREGAME",
+            "version_id": "4256d35e-43f2-4fa3-89bd-ddeb49fb557d",
+            "payload_sha256": "16a06cc39d3f1785d393d75b2b1cd9a64de5699e36c36441f72824b71f9159fa",
             "input_snapshot": {
               "away": {
                 "abbreviation": "ATL",
@@ -819,32 +819,32 @@
             "judgment": {
               "final_prediction": {
                 "evidence_ids": [
-                  "384264444e87986e3aa86ceb0d8a7fb96f5af0f5d08269f2ab8728f1c3eb9444",
-                  "80d6f48f2d95c943e3455d653cdfa4e2b6d542acad5f535c9ff4f6f6b68d0541",
-                  "8380df1df3ae1601b0036d4c401ae80a7fc718a50f8cc5aea06d508d66950fbe",
+                  "1db35e8291df57ac9777d1118174c372114d36a1dabab2446d1a138251726395",
                   "95c515fc7e7388814a432e2cbf2b27d2c8b7f38c205c8312a9bd9edf3ad56c7c",
                   "9f18128f20413ae44846dea7217884920c6ff22a7d7d30c80bccfe81d5b35866",
                   "bba89f524a46a7476b218720bda6322be223529ec8a61ec0900235dc0b288fea",
-                  "d0df5dd4a5b7707ef96a74d7e748575b27395c3092026ce593fba3d11ef0fa7b",
-                  "f2ff4aa867b1439bf1428b34dd11779c1a59d9313c2f01e1c7986ecd57459a0d"
+                  "final-availability-293ef1f1bbbf3babd92e",
+                  "final-availability-582c0c3b318866e86e81",
+                  "final-availability-a99b01240ddee54f808a",
+                  "final-availability-aa6694e450a0d2100ce8"
                 ],
-                "expected_margin": 4.5,
-                "expected_total": 219.5,
-                "win_probability": 0.6,
+                "expected_margin": 4.0,
+                "expected_total": 218.5,
+                "win_probability": 0.58,
                 "winner_side": "home"
               },
               "pregame_story": {
                 "classification": "subjective_analysis",
                 "evidence_ids": [
-                  "384264444e87986e3aa86ceb0d8a7fb96f5af0f5d08269f2ab8728f1c3eb9444",
-                  "80d6f48f2d95c943e3455d653cdfa4e2b6d542acad5f535c9ff4f6f6b68d0541",
-                  "8380df1df3ae1601b0036d4c401ae80a7fc718a50f8cc5aea06d508d66950fbe",
+                  "1db35e8291df57ac9777d1118174c372114d36a1dabab2446d1a138251726395",
                   "95c515fc7e7388814a432e2cbf2b27d2c8b7f38c205c8312a9bd9edf3ad56c7c",
                   "9f18128f20413ae44846dea7217884920c6ff22a7d7d30c80bccfe81d5b35866",
-                  "bba89f524a46a7476b218720bda6322be223529ec8a61ec0900235dc0b288fea"
+                  "bba89f524a46a7476b218720bda6322be223529ec8a61ec0900235dc0b288fea",
+                  "final-availability-293ef1f1bbbf3babd92e",
+                  "final-availability-582c0c3b318866e86e81"
                 ],
-                "statement": "魔术几乎原封不动地带着上季那套防守班底开季，老鹰却换了大半条侧翼——首战就看新拼图能不能在奥兰多顶住。",
-                "title": "魔术主场迎旧敌\n老鹰新阵试锋芒"
+                "statement": "魔术带着熟悉的双翼和防守体系在主场开局，老鹰则把多特、威金斯、麦科勒姆这批新面孔第一次摆上台面，看谁先找到自己的节奏。",
+                "title": "魔术双翼迎旧敌\n老鹰新阵试锋芒"
               }
             }
           }
@@ -1674,5 +1674,5 @@
       }
     }
   ],
-  "published_at": "2026-10-21T18:27:58.647828+00:00"
+  "published_at": "2026-10-21T22:41:36.799859+00:00"
 }
