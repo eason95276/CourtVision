@@ -220,7 +220,7 @@
                   "cf8cd0053ecc196f81d51c83e017aa3f9d1e5daa07b0d33bac4fd53ca21886f2",
                   "f39134a7ee44ee1851ae1fe46f5d8ad2b2bcf2108ae76544e583c88a724f7f98"
                 ],
-                "expected_margin": 3,
+                "expected_margin": 3.0,
                 "expected_total": 227.5,
                 "win_probability": 0.56,
                 "winner_side": "home"
@@ -462,7 +462,7 @@
                   "final-availability-df92fce4ca76a15e38ae",
                   "final-availability-e86fb7fc4e6c410a7481"
                 ],
-                "expected_margin": 2,
+                "expected_margin": 2.0,
                 "expected_total": 238.5,
                 "win_probability": 0.56,
                 "winner_side": "away"
@@ -710,7 +710,7 @@
                   "567fed0bf8dc3b55fa1d686f12dec4a7bc7c5928821fb4d6687d2273d7c6c60d",
                   "final-availability-983b05e7d38c401965e3"
                 ],
-                "expected_margin": 3,
+                "expected_margin": 3.0,
                 "expected_total": 224.5,
                 "win_probability": 0.56,
                 "winner_side": "home"
@@ -834,7 +834,7 @@
                   "final-availability-a99b01240ddee54f808a",
                   "final-availability-aa6694e450a0d2100ce8"
                 ],
-                "expected_margin": 4,
+                "expected_margin": 4.0,
                 "expected_total": 218.5,
                 "win_probability": 0.58,
                 "winner_side": "home"
@@ -1125,7 +1125,7 @@
             "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/det.png",
             "accent": "#C8102E",
             "espn_team_id": "8",
-            "score": 121
+            "score": 121.0
           },
           "away": {
             "id": 1610612738,
@@ -1135,7 +1135,7 @@
             "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/bos.png",
             "accent": "#007A33",
             "espn_team_id": "2",
-            "score": 113
+            "score": 113.0
           },
           "postgame": {
             "status": "available",
@@ -1277,7 +1277,7 @@
             "name": "Los Angeles Lakers",
             "name_zh": "湖人",
             "espn_team_id": "13",
-            "score": 98
+            "score": 98.0
           },
           "game_type": "preseason",
           "home": {
@@ -1288,7 +1288,7 @@
             "name": "Golden State Warriors",
             "name_zh": "勇士",
             "espn_team_id": "9",
-            "score": 124
+            "score": 124.0
           },
           "id": "espn:401898390",
           "registered_game": true,
@@ -1368,7 +1368,7 @@
                   "f0c01aa069ff22d252cd1b2ad73d6bca9e9a5e5fcfe9d3bb1a991fb8af80f606",
                   "f979801b7972d7a2ec2fac5ba3eacd1b953240a8307c9461788eaa6f98f40678"
                 ],
-                "expected_margin": 3,
+                "expected_margin": 3.0,
                 "expected_total": 223.5,
                 "win_probability": 0.55,
                 "winner_side": "home"
@@ -1432,7 +1432,7 @@
             "name": "New York Knicks",
             "name_zh": "尼克斯",
             "espn_team_id": "18",
-            "score": 97
+            "score": 97.0
           },
           "game_type": "preseason",
           "home": {
@@ -1443,7 +1443,7 @@
             "name": "Philadelphia 76ers",
             "name_zh": "76人",
             "espn_team_id": "20",
-            "score": 120
+            "score": 120.0
           },
           "id": "espn:401914101",
           "registered_game": true,
@@ -1562,7 +1562,7 @@
             "name": "Miami Heat",
             "name_zh": "热火",
             "espn_team_id": "14",
-            "score": 129
+            "score": 129.0
           },
           "game_type": "preseason",
           "home": {
@@ -1573,7 +1573,7 @@
             "name": "Toronto Raptors",
             "name_zh": "猛龙",
             "espn_team_id": "28",
-            "score": 105
+            "score": 105.0
           },
           "id": "espn:401902644",
           "registered_game": true,
@@ -1656,7 +1656,7 @@
                   "f837855677b1d323b85281145d980022e35697083c3cffaf78eb02824bcb6f51",
                   "f9a5669250e08583d7c8f3400f1d174ef13dde182c600ffbc142d2f67679507e"
                 ],
-                "expected_margin": 3,
+                "expected_margin": 3.0,
                 "expected_total": 228.5,
                 "win_probability": 0.58,
                 "winner_side": "home"

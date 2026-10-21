@@ -665,7 +665,7 @@
       "winner_team_id": 1610612762
     },
     "public_market_reference": {
-      "away_moneyline": 105,
+      "away_moneyline": 105.0,
       "away_spread": 1.5,
       "captured_at": "2026-10-21T23:40:02.717413+00:00",
       "eligible_prediction_input": false,
@@ -680,7 +680,7 @@
         "registered_game": true,
         "scheduled_tipoff": "2026-10-22T00:00Z"
       },
-      "home_moneyline": -125,
+      "home_moneyline": -125.0,
       "home_spread": -1.5,
       "observed_at": "2026-10-21T23:40:02.717413+00:00",
       "published_at": null,
@@ -1648,7 +1648,7 @@
         "spread": {
           "status": "available",
           "margin_perspective": "home_minus_away",
-          "model_home_margin": -2,
+          "model_home_margin": -2.0,
           "market_implied_home_margin": 1.5,
           "spread_edge": -3.5,
           "ats_lean": "away",
@@ -1665,7 +1665,7 @@
           "status": "available",
           "model_total": 238.5,
           "market_total": 240.5,
-          "total_edge": -2,
+          "total_edge": -2.0,
           "total_lean": "under",
           "market_quote_id": "3e14bcedfdc8323653330544ba8e96605912fed9e7672994052d6a437f4fc720"
         }
@@ -2532,7 +2532,7 @@
           "winner_team_id": 1610612762
         },
         "public_market_reference": {
-          "away_moneyline": 105,
+          "away_moneyline": 105.0,
           "away_spread": 1.5,
           "captured_at": "2026-10-21T23:40:02.717413+00:00",
           "eligible_prediction_input": false,
@@ -2547,7 +2547,7 @@
             "registered_game": true,
             "scheduled_tipoff": "2026-10-22T00:00Z"
           },
-          "home_moneyline": -125,
+          "home_moneyline": -125.0,
           "home_spread": -1.5,
           "observed_at": "2026-10-21T23:40:02.717413+00:00",
           "published_at": null,
@@ -3020,7 +3020,7 @@
                 "games": 10,
                 "last_game_date": "2026-04-12T20:30:00",
                 "point_margin_per_game": -20.4,
-                "points_against_per_game": 132,
+                "points_against_per_game": 132.0,
                 "points_for_per_game": 111.6,
                 "rebounds_per_game": 35.8,
                 "status": "available",
@@ -3096,7 +3096,7 @@
             "final-availability-df92fce4ca76a15e38ae",
             "final-availability-e86fb7fc4e6c410a7481"
           ],
-          "expected_margin": 2,
+          "expected_margin": 2.0,
           "expected_total": 238.5,
           "win_probability": 0.56,
           "winner_side": "away"
@@ -3298,7 +3298,7 @@
         "tipoff_time": "2026-10-22T00:00:00+00:00"
       },
       "public_market_reference": {
-        "away_moneyline": 105,
+        "away_moneyline": 105.0,
         "away_spread": 1.5,
         "captured_at": "2026-10-21T23:40:02.717413+00:00",
         "eligible_prediction_input": false,
@@ -3313,7 +3313,7 @@
           "registered_game": true,
           "scheduled_tipoff": "2026-10-22T00:00Z"
         },
-        "home_moneyline": -125,
+        "home_moneyline": -125.0,
         "home_spread": -1.5,
         "observed_at": "2026-10-21T23:40:02.717413+00:00",
         "published_at": null,
@@ -3639,7 +3639,7 @@
     "status": "available",
     "game_id": "espn:401909838",
     "public_market_reference": {
-      "away_moneyline": 105,
+      "away_moneyline": 105.0,
       "away_spread": 2.5,
       "captured_at": "2026-10-21T14:45:24.512122+00:00",
       "eligible_prediction_input": false,
@@ -3650,7 +3650,7 @@
         "home_team_id": 1610612763,
         "scheduled_tipoff": "2026-10-22T00:00:00+00:00"
       },
-      "home_moneyline": -125,
+      "home_moneyline": -125.0,
       "home_spread": -2.5,
       "observed_at": "2026-10-21T14:45:24.512122+00:00",
       "published_at": null,
