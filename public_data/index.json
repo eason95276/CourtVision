@@ -127,8 +127,8 @@
       "game_id": "espn:401909841",
       "file": "games/espn_401909841.json",
       "tipoff": "2026-10-22T02:00:00+00:00",
-      "version_id": "17cf838a-2fc4-4e77-846a-951a073f26ed",
-      "public_sha256": "fc270ffb94e14c230d31ec85077f9f55270dda3c8c38d1dbb8cee045d7edfadd",
+      "version_id": "09733441-95e7-44c6-94b1-29e45828f35d",
+      "public_sha256": "be85c4473ad6a4c1803ad89231d4b9b8754c47a845288a5e08fc1038d118d904",
       "home_record": {
         "game": {
           "away": {
@@ -167,14 +167,14 @@
         "prediction": {
           "status": "current",
           "game_id": "espn:401909841",
-          "version_id": "17cf838a-2fc4-4e77-846a-951a073f26ed",
-          "state_revision": 2,
+          "version_id": "09733441-95e7-44c6-94b1-29e45828f35d",
+          "state_revision": 3,
           "locked_at": null,
           "lock_reason": null,
           "schedule_revision": 1,
           "version": {
             "analysis_contract_version": "two-stage-forecast-v1",
-            "base_input_hash": "ab6bc5a7a6cbb843ca5d6c3fab92d8258a43a2bff36923e539184afc40b043a9",
+            "base_input_hash": "279a7d726c25b85a5e6f926566fc9479c8302d807f24e8773c22056e2fd0c586",
             "game_id": "espn:401909841",
             "game_identity": {
               "away_team_id": 1610612756,
@@ -182,13 +182,13 @@
               "home_team_id": 1610612757,
               "scheduled_tipoff": "2026-10-22T02:00:00+00:00"
             },
-            "generated_at": "2026-10-21T18:27:20.655373+00:00",
-            "input_cutoff_at": "2026-10-21T18:27:06.969034+00:00",
-            "published_at": "2026-10-21T18:27:22.137972+00:00",
+            "generated_at": "2026-10-22T01:40:39.303137+00:00",
+            "input_cutoff_at": "2026-10-22T01:40:13.635255+00:00",
+            "published_at": "2026-10-22T01:40:41.752913+00:00",
             "schedule_revision": 1,
-            "stage": "EARLY_PREVIEW",
-            "version_id": "17cf838a-2fc4-4e77-846a-951a073f26ed",
-            "payload_sha256": "dd7274137390b0c1abb9b7379f2139c1edf57415ccd4d18a58f08c126929df38",
+            "stage": "FINAL_PREGAME",
+            "version_id": "09733441-95e7-44c6-94b1-29e45828f35d",
+            "payload_sha256": "7bef412279507c85397c96b22fdf77a3bbe91bbef1c70cc79cf5a7de5dc742dd",
             "input_snapshot": {
               "away": {
                 "abbreviation": "PHX",
@@ -214,29 +214,33 @@
               "final_prediction": {
                 "evidence_ids": [
                   "2f724efdad2b14a82fc295e3f436ed0e8f713d740a4cb11f7172aea5bc874e41",
-                  "7d309a92250aa734390566eeaaab316ea94c5de8d1b45271e08e2ea09671eeaf",
                   "afd2896f2d29a330a10ea16dc4ba82ce6a8007996521050acca2417147c8b3fb",
                   "cc6a047c53f6d9662b1ef9c543ef8e145472806cb6aa7d831d3ce3d4bb761aae",
                   "cf8cd0053ecc196f81d51c83e017aa3f9d1e5daa07b0d33bac4fd53ca21886f2",
-                  "f39134a7ee44ee1851ae1fe46f5d8ad2b2bcf2108ae76544e583c88a724f7f98"
+                  "f39134a7ee44ee1851ae1fe46f5d8ad2b2bcf2108ae76544e583c88a724f7f98",
+                  "final-availability-0e085d4c2d6b23d5efbb",
+                  "final-availability-145aa1cbcec8e805b1ea",
+                  "final-availability-9e35ad834b97f127dcea",
+                  "final-availability-a7a78c0814b948ba0c65",
+                  "final-availability-e806df6817264af0c235"
                 ],
                 "expected_margin": 3.0,
-                "expected_total": 227.5,
-                "win_probability": 0.56,
+                "expected_total": 226.5,
+                "win_probability": 0.57,
                 "winner_side": "home"
               },
               "pregame_story": {
                 "classification": "subjective_analysis",
                 "evidence_ids": [
                   "2f724efdad2b14a82fc295e3f436ed0e8f713d740a4cb11f7172aea5bc874e41",
-                  "7d309a92250aa734390566eeaaab316ea94c5de8d1b45271e08e2ea09671eeaf",
                   "afd2896f2d29a330a10ea16dc4ba82ce6a8007996521050acca2417147c8b3fb",
                   "cc6a047c53f6d9662b1ef9c543ef8e145472806cb6aa7d831d3ce3d4bb761aae",
                   "cf8cd0053ecc196f81d51c83e017aa3f9d1e5daa07b0d33bac4fd53ca21886f2",
-                  "f39134a7ee44ee1851ae1fe46f5d8ad2b2bcf2108ae76544e583c88a724f7f98"
+                  "f39134a7ee44ee1851ae1fe46f5d8ad2b2bcf2108ae76544e583c88a724f7f98",
+                  "final-availability-0e085d4c2d6b23d5efbb"
                 ],
-                "statement": "太阳带着一条缺了主心骨的内线来波特兰打揭幕战，开拓者则第一次把利拉德和莫兰特一起摆上场，这场球看的就是谁先把自己的短板藏住。",
-                "title": "开拓者主场迎敌\n太阳内线缺人手"
+                "statement": "太阳内线少了马克·威廉姆斯，开拓者自己也没了夏普，揭幕夜就看波特兰的篮板能不能把这场球攥住。",
+                "title": "开拓者内线守家\n太阳残阵试新锋"
               }
             }
           }
@@ -1687,5 +1691,5 @@
       }
     }
   ],
-  "published_at": "2026-10-22T00:14:50.607046+00:00"
+  "published_at": "2026-10-22T01:54:03.169794+00:00"
 }
