@@ -2,6 +2,127 @@
   "contract_version": "courtvision-public-v1",
   "games": [
     {
+      "game_id": "espn:401909094",
+      "file": "games/espn_401909094.json",
+      "tipoff": "2026-10-23T01:30:00+00:00",
+      "version_id": "d48edadf-6a15-410e-9aeb-24b7893ff71b",
+      "public_sha256": "262c605a4ee9aec0afd1aa44e74570422176308934248b4934b24fb04b68db33",
+      "home_record": {
+        "game": {
+          "away": {
+            "abbreviation": "DEN",
+            "accent": "#0E2240",
+            "id": 1610612743,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/den.png",
+            "name": "Denver Nuggets",
+            "name_zh": "掘金",
+            "espn_team_id": "7",
+            "score": null
+          },
+          "game_type": "regular_season",
+          "home": {
+            "abbreviation": "OKC",
+            "accent": "#007AC1",
+            "id": 1610612760,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/okc.png",
+            "name": "Oklahoma City Thunder",
+            "name_zh": "雷霆",
+            "espn_team_id": "25",
+            "score": null
+          },
+          "id": "espn:401909094",
+          "registered_game": true,
+          "schedule_revision": 1,
+          "status": "scheduled",
+          "tipoff": "2026-10-23T01:30:00+00:00",
+          "venue": "Paycom Center",
+          "season": 2027,
+          "schedule_catalog_fact": true,
+          "postgame": null,
+          "homepage_visible": true,
+          "public_summary": true
+        },
+        "prediction": {
+          "status": "current",
+          "game_id": "espn:401909094",
+          "version_id": "d48edadf-6a15-410e-9aeb-24b7893ff71b",
+          "state_revision": 2,
+          "locked_at": null,
+          "lock_reason": null,
+          "schedule_revision": 1,
+          "version": {
+            "analysis_contract_version": "two-stage-forecast-v1",
+            "base_input_hash": "6a9cd04793765f84e4f59d691da9f55b166e7eae47cae09844d5336dd0febe12",
+            "game_id": "espn:401909094",
+            "game_identity": {
+              "away_team_id": 1610612743,
+              "game_id": "espn:401909094",
+              "home_team_id": 1610612760,
+              "scheduled_tipoff": "2026-10-23T01:30:00+00:00"
+            },
+            "generated_at": "2026-10-22T18:43:42.100204+00:00",
+            "input_cutoff_at": "2026-10-22T18:43:29.312848+00:00",
+            "published_at": "2026-10-22T18:43:44.855657+00:00",
+            "schedule_revision": 1,
+            "stage": "EARLY_PREVIEW",
+            "version_id": "d48edadf-6a15-410e-9aeb-24b7893ff71b",
+            "payload_sha256": "403ba78f08379883dd1e259a1d79b585a3667b3006a86fdb93e2d95412420777",
+            "input_snapshot": {
+              "away": {
+                "abbreviation": "DEN",
+                "accent": "#0E2240",
+                "id": 1610612743,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/den.png",
+                "name": "Denver Nuggets",
+                "name_zh": "掘金"
+              },
+              "home": {
+                "abbreviation": "OKC",
+                "accent": "#007AC1",
+                "id": 1610612760,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/okc.png",
+                "name": "Oklahoma City Thunder",
+                "name_zh": "雷霆"
+              },
+              "id": "espn:401909094",
+              "schedule_revision": 1,
+              "tipoff": "2026-10-23T01:30:00+00:00"
+            },
+            "judgment": {
+              "final_prediction": {
+                "evidence_ids": [
+                  "2f798a84e8a17200b0d2c4e0bb7789d80268eabb39ccdf82bf037bc4f7796d9b",
+                  "6ebdf3cbf305be3446cddc3f701d5676c33c4c981cf652df963ab585ed04daea",
+                  "77ad9ca78d5be2e00ecc5e76794270ead8d8b54e7fabd924f167435499f2b176",
+                  "a4020582993ec66518872bd6fa8c12fe07b38358f75bd5783662e23d6b28f26a",
+                  "c68a1ce5d49724a96585c453cdcffcb180000c8b9596315b3c5db966ead2e3b0",
+                  "d2277178aa24adecda36f95e654b81dd69383d7f60b60f9f8e34f76597c719f9",
+                  "e9feb4370d910cf99a12f65f2f203530eb40bfe46827ded914cba88f56c553c6"
+                ],
+                "expected_margin": 4.5,
+                "expected_total": 229.5,
+                "win_probability": 0.66,
+                "winner_side": "home"
+              },
+              "pregame_story": {
+                "classification": "subjective_analysis",
+                "evidence_ids": [
+                  "2f798a84e8a17200b0d2c4e0bb7789d80268eabb39ccdf82bf037bc4f7796d9b",
+                  "6ebdf3cbf305be3446cddc3f701d5676c33c4c981cf652df963ab585ed04daea",
+                  "77ad9ca78d5be2e00ecc5e76794270ead8d8b54e7fabd924f167435499f2b176",
+                  "a4020582993ec66518872bd6fa8c12fe07b38358f75bd5783662e23d6b28f26a",
+                  "c68a1ce5d49724a96585c453cdcffcb180000c8b9596315b3c5db966ead2e3b0",
+                  "d2277178aa24adecda36f95e654b81dd69383d7f60b60f9f8e34f76597c719f9"
+                ],
+                "statement": "雷霆刚在揭幕战客场拿下马刺，转身就要在主场迎战保留核心五人的掘金，约基奇和SGA谁先让对方防线变形，是这场球最实在的看点。",
+                "title": "雷霆主场迎掘金\n约基奇再战雷霆"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
       "game_id": "espn:401909841",
       "file": "games/espn_401909841.json",
       "tipoff": "2026-10-22T02:00:00+00:00",
@@ -1765,5 +1886,5 @@
       }
     }
   ],
-  "published_at": "2026-10-22T18:43:54.256426+00:00"
+  "published_at": "2026-10-22T18:46:11.371050+00:00"
 }
