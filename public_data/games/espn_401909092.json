@@ -9,7 +9,7 @@
       "name": "Golden State Warriors",
       "name_zh": "勇士",
       "espn_team_id": "9",
-      "score": null
+      "score": 100.0
     },
     "background": {
       "availability": {
@@ -75,7 +75,7 @@
       "name": "Los Angeles Lakers",
       "name_zh": "湖人",
       "espn_team_id": "13",
-      "score": null
+      "score": 127.0
     },
     "id": "espn:401909092",
     "matchup_history": {
@@ -976,9 +976,9 @@
     },
     "season_start": 2026,
     "source": {
-      "schedule_captured_at": "2026-10-21T15:18:11.388815+00:00"
+      "schedule_captured_at": "2026-10-22T04:39:02.493967+00:00"
     },
-    "status": "scheduled",
+    "status": "in_progress",
     "technical": {
       "cutoff": "2026-10-21T15:10:40.651678+00:00",
       "fact_context_cutoff": "2026-10-21T15:10:40.651678+00:00",
@@ -1173,15 +1173,15 @@
     },
     "official_injury_report": {
       "game_id": "espn:401909092",
-      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_11_15AM.pdf",
-      "source_published_at": "2026-10-21T15:15:00+00:00",
-      "captured_at": "2026-10-21T15:18:19.086405+00:00",
-      "source_sha256": "d8804c04ff9cbab653c46bc4d9a2325f520ad89c2165206ddc521365c35150b9",
+      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_10_00PM.pdf",
+      "source_published_at": "2026-10-22T02:00:00+00:00",
+      "captured_at": "2026-10-22T02:07:29.330743+00:00",
+      "source_sha256": "8ee77038271aa7ff990c1f29b9c635cc5be92e9ebd0690af8eb1384774e632d6",
       "parser_version": "nba-official-injury-live-v3",
       "status": "published",
-      "report_id": "e8b5899c19d0f80101ac233dce4d95320a4acb0449df0861a0247474a127d614",
+      "report_id": "b20f66c9c50d2c923a85a1978b9ea5b13cedeee457780f33d07a417b228ff9ce",
       "report_date": "2026-10-21",
-      "report_time": "11:15",
+      "report_time": "22:00",
       "coverage": "complete",
       "records": [
         {
@@ -1190,22 +1190,22 @@
           "status": "out",
           "reason": "Injury/Illness - Bilateral Low Back Soreness",
           "game_id": "espn:401909092",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_11_15AM.pdf",
-          "source_published_at": "2026-10-21T15:15:00+00:00",
-          "captured_at": "2026-10-21T15:18:19.086405+00:00",
-          "source_sha256": "d8804c04ff9cbab653c46bc4d9a2325f520ad89c2165206ddc521365c35150b9",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_10_00PM.pdf",
+          "source_published_at": "2026-10-22T02:00:00+00:00",
+          "captured_at": "2026-10-22T02:07:29.330743+00:00",
+          "source_sha256": "8ee77038271aa7ff990c1f29b9c635cc5be92e9ebd0690af8eb1384774e632d6",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
           "team_id": 1610612744,
           "player_name": "Charles Bassey",
-          "status": "questionable",
+          "status": "out",
           "reason": "Injury/Illness - Right Patellar Tendinopathy",
           "game_id": "espn:401909092",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_11_15AM.pdf",
-          "source_published_at": "2026-10-21T15:15:00+00:00",
-          "captured_at": "2026-10-21T15:18:19.086405+00:00",
-          "source_sha256": "d8804c04ff9cbab653c46bc4d9a2325f520ad89c2165206ddc521365c35150b9",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_10_00PM.pdf",
+          "source_published_at": "2026-10-22T02:00:00+00:00",
+          "captured_at": "2026-10-22T02:07:29.330743+00:00",
+          "source_sha256": "8ee77038271aa7ff990c1f29b9c635cc5be92e9ebd0690af8eb1384774e632d6",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1214,10 +1214,10 @@
           "status": "out",
           "reason": "Injury/Illness - Right ACLRepair/ Surgery",
           "game_id": "espn:401909092",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_11_15AM.pdf",
-          "source_published_at": "2026-10-21T15:15:00+00:00",
-          "captured_at": "2026-10-21T15:18:19.086405+00:00",
-          "source_sha256": "d8804c04ff9cbab653c46bc4d9a2325f520ad89c2165206ddc521365c35150b9",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_10_00PM.pdf",
+          "source_published_at": "2026-10-22T02:00:00+00:00",
+          "captured_at": "2026-10-22T02:07:29.330743+00:00",
+          "source_sha256": "8ee77038271aa7ff990c1f29b9c635cc5be92e9ebd0690af8eb1384774e632d6",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1226,10 +1226,10 @@
           "status": "out",
           "reason": "Not With Team",
           "game_id": "espn:401909092",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_11_15AM.pdf",
-          "source_published_at": "2026-10-21T15:15:00+00:00",
-          "captured_at": "2026-10-21T15:18:19.086405+00:00",
-          "source_sha256": "d8804c04ff9cbab653c46bc4d9a2325f520ad89c2165206ddc521365c35150b9",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_10_00PM.pdf",
+          "source_published_at": "2026-10-22T02:00:00+00:00",
+          "captured_at": "2026-10-22T02:07:29.330743+00:00",
+          "source_sha256": "8ee77038271aa7ff990c1f29b9c635cc5be92e9ebd0690af8eb1384774e632d6",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1238,22 +1238,22 @@
           "status": "out",
           "reason": "Injury/Illness - Left Patellar Tendon Repair/Surgery",
           "game_id": "espn:401909092",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_11_15AM.pdf",
-          "source_published_at": "2026-10-21T15:15:00+00:00",
-          "captured_at": "2026-10-21T15:18:19.086405+00:00",
-          "source_sha256": "d8804c04ff9cbab653c46bc4d9a2325f520ad89c2165206ddc521365c35150b9",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_10_00PM.pdf",
+          "source_published_at": "2026-10-22T02:00:00+00:00",
+          "captured_at": "2026-10-22T02:07:29.330743+00:00",
+          "source_sha256": "8ee77038271aa7ff990c1f29b9c635cc5be92e9ebd0690af8eb1384774e632d6",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
           "team_id": 1610612744,
           "player_name": "Stephen Curry",
-          "status": "probable",
-          "reason": "Injury/Illness - Right Ankle Soreness",
+          "status": "available",
+          "reason": "-",
           "game_id": "espn:401909092",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_11_15AM.pdf",
-          "source_published_at": "2026-10-21T15:15:00+00:00",
-          "captured_at": "2026-10-21T15:18:19.086405+00:00",
-          "source_sha256": "d8804c04ff9cbab653c46bc4d9a2325f520ad89c2165206ddc521365c35150b9",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_10_00PM.pdf",
+          "source_published_at": "2026-10-22T02:00:00+00:00",
+          "captured_at": "2026-10-22T02:07:29.330743+00:00",
+          "source_sha256": "8ee77038271aa7ff990c1f29b9c635cc5be92e9ebd0690af8eb1384774e632d6",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1262,10 +1262,10 @@
           "status": "out",
           "reason": "Injury/Illness - Left Knee Effusion/ Swelling",
           "game_id": "espn:401909092",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_11_15AM.pdf",
-          "source_published_at": "2026-10-21T15:15:00+00:00",
-          "captured_at": "2026-10-21T15:18:19.086405+00:00",
-          "source_sha256": "d8804c04ff9cbab653c46bc4d9a2325f520ad89c2165206ddc521365c35150b9",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_10_00PM.pdf",
+          "source_published_at": "2026-10-22T02:00:00+00:00",
+          "captured_at": "2026-10-22T02:07:29.330743+00:00",
+          "source_sha256": "8ee77038271aa7ff990c1f29b9c635cc5be92e9ebd0690af8eb1384774e632d6",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1274,22 +1274,22 @@
           "status": "out",
           "reason": "Injury/Illness - Right Oblique Strain",
           "game_id": "espn:401909092",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_11_15AM.pdf",
-          "source_published_at": "2026-10-21T15:15:00+00:00",
-          "captured_at": "2026-10-21T15:18:19.086405+00:00",
-          "source_sha256": "d8804c04ff9cbab653c46bc4d9a2325f520ad89c2165206ddc521365c35150b9",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_10_00PM.pdf",
+          "source_published_at": "2026-10-22T02:00:00+00:00",
+          "captured_at": "2026-10-22T02:07:29.330743+00:00",
+          "source_sha256": "8ee77038271aa7ff990c1f29b9c635cc5be92e9ebd0690af8eb1384774e632d6",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
           "team_id": 1610612747,
           "player_name": "Collin Sexton",
-          "status": "questionable",
+          "status": "out",
           "reason": "Injury/Illness - Right Soleus Strain",
           "game_id": "espn:401909092",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_11_15AM.pdf",
-          "source_published_at": "2026-10-21T15:15:00+00:00",
-          "captured_at": "2026-10-21T15:18:19.086405+00:00",
-          "source_sha256": "d8804c04ff9cbab653c46bc4d9a2325f520ad89c2165206ddc521365c35150b9",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_10_00PM.pdf",
+          "source_published_at": "2026-10-22T02:00:00+00:00",
+          "captured_at": "2026-10-22T02:07:29.330743+00:00",
+          "source_sha256": "8ee77038271aa7ff990c1f29b9c635cc5be92e9ebd0690af8eb1384774e632d6",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1298,10 +1298,10 @@
           "status": "available",
           "reason": "Injury/Illness - Left Finger Splint",
           "game_id": "espn:401909092",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_11_15AM.pdf",
-          "source_published_at": "2026-10-21T15:15:00+00:00",
-          "captured_at": "2026-10-21T15:18:19.086405+00:00",
-          "source_sha256": "d8804c04ff9cbab653c46bc4d9a2325f520ad89c2165206ddc521365c35150b9",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_10_00PM.pdf",
+          "source_published_at": "2026-10-22T02:00:00+00:00",
+          "captured_at": "2026-10-22T02:07:29.330743+00:00",
+          "source_sha256": "8ee77038271aa7ff990c1f29b9c635cc5be92e9ebd0690af8eb1384774e632d6",
           "parser_version": "nba-official-injury-live-v3"
         }
       ]
@@ -1310,12 +1310,12 @@
     "homepage_visible": true
   },
   "prediction": {
-    "status": "current",
+    "status": "locked",
     "game_id": "espn:401909092",
     "version_id": "b7971c94-c5cd-4ef7-93fc-999b155ca666",
-    "state_revision": 2,
-    "locked_at": null,
-    "lock_reason": null,
+    "state_revision": 3,
+    "locked_at": "2026-10-22T02:00:16.967024+00:00",
+    "lock_reason": "scheduled_tipoff_reached",
     "schedule_revision": 1,
     "fact_view": {
       "schema_version": "pregame-fact-view-v1",
@@ -1595,6 +1595,169 @@
         "input_cutoff_at": "2026-10-21T15:14:08.642550+00:00",
         "feature_cutoff_at": "2026-10-21T15:10:40.651678+00:00",
         "roster_context_cutoff_at": "2026-10-21T15:10:40.651678+00:00"
+      },
+      "portfolio_editorial": {
+        "schema_version": "portfolio-editorial-v1",
+        "base_prediction_version_id": "b7971c94-c5cd-4ef7-93fc-999b155ca666",
+        "base_prediction_payload_sha256": "593572a395ca0bd8471a9dc46ade4a28ffd99beb97c623a7c8350290015a183b",
+        "editorial_sha256": "cf4f20c1639c67646e31d071ac533ecfc6c98709b75bfea2718492a446858f09",
+        "generated_at": "2026-10-22T04:17:30.838556+00:00",
+        "editorial": {
+          "pregame_story": {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "0b55c8515d4c80a7d660b761a067d2bf17051a73153c0919f62dbe1d61d66d68",
+              "411d7faaca0e4d640d5698f0e06258e374fcaf865a8938a7bc361f8a6f9f9096",
+              "6651aae9d0e1741c681c2161368ebbf19125ddf61dee8fafcd5506559124206f",
+              "66d0ee0a83f422d89e87d47b08cb33a22223cdb73801b48f04a9dc5f6ce7bd07",
+              "7c524281e6208e773111dfd211b4050e1b38e994f5dabd5e9ae12377ef8bf0a7",
+              "a201b566771b85e3d91906ba03de46a504f9553f12923f5f4d97bf121125fb6e"
+            ],
+            "statement": "湖人围绕东契奇重建阵容，在主场迎战库里领衔的勇士。内容更正：原预览出现球员归属错误，相关表述已更正，原预测保留供复盘。",
+            "title": "东契奇独挑开幕\n库里率众闯洛城"
+          },
+          "analysis_article": "内容更正：原预览出现球员归属错误，相关表述已更正，原预测保留供复盘。\n\n湖人这个休赛期把阵容彻底围着东契奇重建，揭幕战就在主场迎上勇士。对面是库里领衔的勇士，一支前场偏年轻、老将都坐在替补席上的球队。这场球最值得看的，就是东契奇一个人能把这套新阵容带到什么程度。\n\n我最想看的是东契奇叫挡拆之后，勇士怎么接。格林预计顶在中锋位置，换防东契奇是他的老本行：他能顶住第一步，也能在持球人分球时回身补位。可一旦格林被拉出禁区，勇士篮下就只剩伦德博格、桑托斯这些年轻人，凯斯勒在篮板和二次进攻上的优势就会显出来。东契奇要做的，是把这道选择题反复摆到格林面前——你换防，我就找内线；你收缩，我就自己在中距离停下来。\n\n里夫斯和格莱姆斯是这套进攻的第二层。里夫斯要分担东契奇的持球任务，格莱姆斯则要在东契奇被夹击时接住外线机会。湖人能不能把优势攒起来，很大程度上看这两个人能不能让勇士不敢只盯着东契奇一个人。\n\n所以胜负我站湖人，但让分我不跟。预计湖人赢4.5分，市场却把湖人放到让6.5的位置，这个差距我不认。原因很直接：这是双方本赛季第一场正式比赛，湖人这套首发里格莱姆斯和凯斯勒都是新面孔，东契奇和他们之间能打出多少默契，现在没有样本可看。勇士那边，波尔津吉斯、巴特勒、霍福德都列在替补候选里，实际打多久没人知道；如果他们真的大量出场，勇士前场的质量和体型会立刻不一样，格林也不用一个人扛内线。这些变数都指向分差不会轻易拉开，所以我更愿意站勇士受让6.5分这一边。\n\n总分我偏小，而且比让分更有把握。湖人这套阵容的进攻重心在东契奇手里，半场阵地会打得比较耐心；勇士如果让格林打中锋，内线高度不足，进攻端也更依赖库里的外线手感，而不是持续冲击篮下。两边都不像能轻松把回合数推高的样子。\n\n当然，反例也很清楚：只要库里手感一热，格林拿下篮板就推反击，比赛随时可能快起来，小分就站不住。开球后先看一件事——格林换防东契奇时，湖人能不能稳定找到凯斯勒这个出口。这一条走通了，湖人的半场优势才真正成立。",
+          "watch_themes": [
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "0b55c8515d4c80a7d660b761a067d2bf17051a73153c0919f62dbe1d61d66d68",
+                "411d7faaca0e4d640d5698f0e06258e374fcaf865a8938a7bc361f8a6f9f9096",
+                "6651aae9d0e1741c681c2161368ebbf19125ddf61dee8fafcd5506559124206f",
+                "66d0ee0a83f422d89e87d47b08cb33a22223cdb73801b48f04a9dc5f6ce7bd07",
+                "7c524281e6208e773111dfd211b4050e1b38e994f5dabd5e9ae12377ef8bf0a7",
+                "a201b566771b85e3d91906ba03de46a504f9553f12923f5f4d97bf121125fb6e"
+              ],
+              "statement": "格林顶中锋换防东契奇，能不能同时切断他的分球，决定湖人进攻的上限。",
+              "title": "格林换防东契奇"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "0b55c8515d4c80a7d660b761a067d2bf17051a73153c0919f62dbe1d61d66d68",
+                "411d7faaca0e4d640d5698f0e06258e374fcaf865a8938a7bc361f8a6f9f9096",
+                "6651aae9d0e1741c681c2161368ebbf19125ddf61dee8fafcd5506559124206f",
+                "66d0ee0a83f422d89e87d47b08cb33a22223cdb73801b48f04a9dc5f6ce7bd07",
+                "7c524281e6208e773111dfd211b4050e1b38e994f5dabd5e9ae12377ef8bf0a7",
+                "a201b566771b85e3d91906ba03de46a504f9553f12923f5f4d97bf121125fb6e"
+              ],
+              "statement": "勇士前场偏年轻，凯斯勒在篮板和二次进攻上能否持续占便宜，是湖人拉开分差的关键。",
+              "title": "凯斯勒的禁区优势"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "0b55c8515d4c80a7d660b761a067d2bf17051a73153c0919f62dbe1d61d66d68",
+                "411d7faaca0e4d640d5698f0e06258e374fcaf865a8938a7bc361f8a6f9f9096",
+                "6651aae9d0e1741c681c2161368ebbf19125ddf61dee8fafcd5506559124206f",
+                "66d0ee0a83f422d89e87d47b08cb33a22223cdb73801b48f04a9dc5f6ce7bd07",
+                "7c524281e6208e773111dfd211b4050e1b38e994f5dabd5e9ae12377ef8bf0a7",
+                "a201b566771b85e3d91906ba03de46a504f9553f12923f5f4d97bf121125fb6e"
+              ],
+              "statement": "波尔津吉斯、巴特勒、霍福德都只是替补候选，他们打多久会直接改变勇士前场的质量。",
+              "title": "勇士老将的实际负荷"
+            }
+          ],
+          "player_analysis": [
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "0b55c8515d4c80a7d660b761a067d2bf17051a73153c0919f62dbe1d61d66d68",
+                "411d7faaca0e4d640d5698f0e06258e374fcaf865a8938a7bc361f8a6f9f9096",
+                "e7a0bfd77a56ea64c35e4ccc7c1e753cdc7ca5ab6de5d3caa11ee951ee3834ba"
+              ],
+              "player_name": "Luka Doncic",
+              "statement": "湖人进攻的主要发动机，挡拆后的每一次选择都决定湖人能得多少分。"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "0b55c8515d4c80a7d660b761a067d2bf17051a73153c0919f62dbe1d61d66d68",
+                "e7a0bfd77a56ea64c35e4ccc7c1e753cdc7ca5ab6de5d3caa11ee951ee3834ba"
+              ],
+              "player_name": "Austin Reaves",
+              "statement": "他要分担东契奇的持球任务，让勇士不敢把防守全部压向东契奇。"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "0b55c8515d4c80a7d660b761a067d2bf17051a73153c0919f62dbe1d61d66d68",
+                "e7a0bfd77a56ea64c35e4ccc7c1e753cdc7ca5ab6de5d3caa11ee951ee3834ba",
+                "f04ddfd2f7401f9a321e1fe1ca78fb66b1d8c38394fe86d64fed4ec1fc378d69"
+              ],
+              "player_name": "Walker Kessler",
+              "statement": "新首发中锋，勇士前场体型偏小，他的护框和篮板是湖人最实在的优势来源。"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "0b55c8515d4c80a7d660b761a067d2bf17051a73153c0919f62dbe1d61d66d68",
+                "e7a0bfd77a56ea64c35e4ccc7c1e753cdc7ca5ab6de5d3caa11ee951ee3834ba",
+                "f04ddfd2f7401f9a321e1fe1ca78fb66b1d8c38394fe86d64fed4ec1fc378d69"
+              ],
+              "player_name": "Quentin Grimes",
+              "statement": "新加入的首发后卫，东契奇被夹击时他能不能接住外线机会，决定湖人进攻的宽度。"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "7c524281e6208e773111dfd211b4050e1b38e994f5dabd5e9ae12377ef8bf0a7",
+                "e7a0bfd77a56ea64c35e4ccc7c1e753cdc7ca5ab6de5d3caa11ee951ee3834ba"
+              ],
+              "player_name": "Stephen Curry",
+              "statement": "勇士进攻的起点，他的手感决定比赛是半场拉锯还是被推成快节奏。"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "7c524281e6208e773111dfd211b4050e1b38e994f5dabd5e9ae12377ef8bf0a7",
+                "e7a0bfd77a56ea64c35e4ccc7c1e753cdc7ca5ab6de5d3caa11ee951ee3834ba"
+              ],
+              "player_name": "Draymond Green",
+              "statement": "预计打中锋，既要换防东契奇又要组织进攻，是勇士这套阵容的支点。"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "7c524281e6208e773111dfd211b4050e1b38e994f5dabd5e9ae12377ef8bf0a7",
+                "e7a0bfd77a56ea64c35e4ccc7c1e753cdc7ca5ab6de5d3caa11ee951ee3834ba"
+              ],
+              "player_name": "De'Anthony Melton",
+              "statement": "预计首发后场，要在防守端替库里分担东契奇或里夫斯的持球压力。"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "7c524281e6208e773111dfd211b4050e1b38e994f5dabd5e9ae12377ef8bf0a7",
+                "e7a0bfd77a56ea64c35e4ccc7c1e753cdc7ca5ab6de5d3caa11ee951ee3834ba"
+              ],
+              "player_name": "Kristaps Porzingis",
+              "statement": "列在替补候选，若实际出场，勇士内线高度和护框会明显不同。"
+            },
+            {
+              "classification": "subjective_analysis",
+              "evidence_ids": [
+                "7c524281e6208e773111dfd211b4050e1b38e994f5dabd5e9ae12377ef8bf0a7",
+                "e7a0bfd77a56ea64c35e4ccc7c1e753cdc7ca5ab6de5d3caa11ee951ee3834ba"
+              ],
+              "player_name": "Jimmy Butler III",
+              "statement": "替补候选中的老将，出场时间和状态未知，但一旦上场能提供勇士缺少的持球冲击。"
+            }
+          ],
+          "central_thesis": {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "6651aae9d0e1741c681c2161368ebbf19125ddf61dee8fafcd5506559124206f",
+              "66d0ee0a83f422d89e87d47b08cb33a22223cdb73801b48f04a9dc5f6ce7bd07",
+              "0b55c8515d4c80a7d660b761a067d2bf17051a73153c0919f62dbe1d61d66d68",
+              "7c524281e6208e773111dfd211b4050e1b38e994f5dabd5e9ae12377ef8bf0a7"
+            ],
+            "statement": "湖人以东契奇为轴、里夫斯与格莱姆斯提供外线、凯斯勒补强护框，整体结构支持主队小幅领先；但首战零样本、勇士老将负荷未知，使优势不宜放大。"
+          },
+          "core_question": "在湖人围绕东契奇重建的首战，湖人新阵容能否在主场压过勇士偏年轻的前场？",
+          "game_script": "首战双方都在磨合，湖人以东契奇持球组织、凯斯勒护框建立半场优势，勇士靠库里外线与快节奏咬住比分。若勇士老将前场出场有限，湖人内线与篮板优势会在下半场拉开小幅差距；若库里手感火热且格林限制住东契奇挡拆，比赛将进入最后几分钟的拉锯。",
+          "model_risk": "如果波尔津吉斯、巴特勒、霍福德等勇士老将实际大量出场并保持健康状态，则勇士前场质量显著提升，分差收窄甚至翻转胜负方向。；如果东契奇受负荷限制或状态不佳，湖人进攻组织明显受阻，则湖人优势大幅缩水，胜率向五五开靠拢。"
+        }
       }
     },
     "version": {
@@ -3235,10 +3398,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-21T15:18:36.577947+00:00",
+    "exported_at": "2026-10-22T04:39:21.454313+00:00",
     "source_prediction_version_id": "b7971c94-c5cd-4ef7-93fc-999b155ca666",
     "source_prediction_payload_sha256": "593572a395ca0bd8471a9dc46ade4a28ffd99beb97c623a7c8350290015a183b",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "28f71c309e2b46629f47c64e5ae72af67a2b4959e1b17890987fbde2f1bbf91b"
+  "public_sha256": "baee0d30ece64c7759f77d84bc1274c6aec9d0986ebff0fe459f19a0ffe637fe"
 }
