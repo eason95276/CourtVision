@@ -402,7 +402,7 @@
       "file": "games/espn_401909838.json",
       "tipoff": "2026-10-22T00:00:00+00:00",
       "version_id": "de41cb5f-9d75-4805-8a72-3032a3af513d",
-      "public_sha256": "bd05a79f728a1e70db5c2d4a296fb14735ee06f6360d67778993aa6a47769513",
+      "public_sha256": "5109288d8e01480239ff36e7582c4d576b9e37423381ecf5965236a08ae6a606",
       "home_record": {
         "game": {
           "away": {
@@ -413,7 +413,7 @@
             "name": "Utah Jazz",
             "name_zh": "爵士",
             "espn_team_id": "26",
-            "score": null
+            "score": 103.0
           },
           "game_type": "regular_season",
           "home": {
@@ -424,27 +424,34 @@
             "name": "Memphis Grizzlies",
             "name_zh": "灰熊",
             "espn_team_id": "29",
-            "score": null
+            "score": 123.0
           },
           "id": "espn:401909838",
           "registered_game": true,
           "schedule_revision": 1,
-          "status": "scheduled",
+          "status": "final",
           "tipoff": "2026-10-22T00:00:00+00:00",
           "venue": "FedExForum",
+          "postgame": {
+            "status": "available",
+            "version_id": "4b5bcc89-4861-4b1d-ac9a-5fa75ec8d20d",
+            "score_text": "爵士 103 — 123 灰熊",
+            "summary": "泰·杰罗姆45分打穿爵士后卫线，灰熊靠进攻篮板和失误控制把比赛打成一边倒，赛前看好爵士让分的判断被彻底推翻。",
+            "prediction_summary": "赛前看好爵士 · 胜率56% · 预计赢2分；赛果灰熊赢20分",
+            "market_summary": "让分方向 爵士 +1.5 · 未命中；总分 小分 · 命中"
+          },
           "season": 2027,
           "schedule_catalog_fact": true,
-          "postgame": null,
           "homepage_visible": true,
           "public_summary": true
         },
         "prediction": {
-          "status": "current",
+          "status": "locked",
           "game_id": "espn:401909838",
           "version_id": "de41cb5f-9d75-4805-8a72-3032a3af513d",
-          "state_revision": 3,
-          "locked_at": null,
-          "lock_reason": null,
+          "state_revision": 5,
+          "locked_at": "2026-10-22T00:00:13.792966+00:00",
+          "lock_reason": "scheduled_tipoff_reached",
           "schedule_revision": 1,
           "version": {
             "analysis_contract_version": "two-stage-forecast-v1",
@@ -1716,5 +1723,5 @@
       }
     }
   ],
-  "published_at": "2026-10-22T04:39:21.454313+00:00"
+  "published_at": "2026-10-22T12:11:13.579508+00:00"
 }
