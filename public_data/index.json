@@ -123,6 +123,122 @@
       }
     },
     {
+      "game_id": "espn:401909093",
+      "file": "games/espn_401909093.json",
+      "tipoff": "2026-10-22T23:00:00+00:00",
+      "version_id": "a63c8cdd-3b77-4ac3-a853-8cf3cc5e01e8",
+      "public_sha256": "965a8a3ac54b6954787640b20362ba37aa61860eb6e432650edd088f5f79dab3",
+      "home_record": {
+        "game": {
+          "away": {
+            "abbreviation": "CLE",
+            "accent": "#860038",
+            "id": 1610612739,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/cle.png",
+            "name": "Cleveland Cavaliers",
+            "name_zh": "骑士",
+            "espn_team_id": "5",
+            "score": null
+          },
+          "game_type": "regular_season",
+          "home": {
+            "abbreviation": "PHI",
+            "accent": "#006BB6",
+            "id": 1610612755,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/phi.png",
+            "name": "Philadelphia 76ers",
+            "name_zh": "76人",
+            "espn_team_id": "20",
+            "score": null
+          },
+          "id": "espn:401909093",
+          "registered_game": true,
+          "schedule_revision": 1,
+          "status": "scheduled",
+          "tipoff": "2026-10-22T23:00:00+00:00",
+          "venue": "Xfinity Mobile Arena",
+          "season": 2027,
+          "schedule_catalog_fact": true,
+          "postgame": null,
+          "homepage_visible": true,
+          "public_summary": true
+        },
+        "prediction": {
+          "status": "current",
+          "game_id": "espn:401909093",
+          "version_id": "a63c8cdd-3b77-4ac3-a853-8cf3cc5e01e8",
+          "state_revision": 2,
+          "locked_at": null,
+          "lock_reason": null,
+          "schedule_revision": 1,
+          "version": {
+            "analysis_contract_version": "two-stage-forecast-v1",
+            "base_input_hash": "e3ee498fbfc6324e7bfaff275fcb8c4e6ed9e36fd8b16bd8d3a075e4350715b2",
+            "game_id": "espn:401909093",
+            "game_identity": {
+              "away_team_id": 1610612739,
+              "game_id": "espn:401909093",
+              "home_team_id": 1610612755,
+              "scheduled_tipoff": "2026-10-22T23:00:00+00:00"
+            },
+            "generated_at": "2026-10-22T18:40:02.592431+00:00",
+            "input_cutoff_at": "2026-10-22T18:39:50.834576+00:00",
+            "published_at": "2026-10-22T18:40:05.952522+00:00",
+            "schedule_revision": 1,
+            "stage": "EARLY_PREVIEW",
+            "version_id": "a63c8cdd-3b77-4ac3-a853-8cf3cc5e01e8",
+            "payload_sha256": "12cc41f5313328a541bc816092ee4779977c3f3e0347e66e716941f296ef2764",
+            "input_snapshot": {
+              "away": {
+                "abbreviation": "CLE",
+                "accent": "#860038",
+                "id": 1610612739,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/cle.png",
+                "name": "Cleveland Cavaliers",
+                "name_zh": "骑士"
+              },
+              "home": {
+                "abbreviation": "PHI",
+                "accent": "#006BB6",
+                "id": 1610612755,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/phi.png",
+                "name": "Philadelphia 76ers",
+                "name_zh": "76人"
+              },
+              "id": "espn:401909093",
+              "schedule_revision": 1,
+              "tipoff": "2026-10-22T23:00:00+00:00"
+            },
+            "judgment": {
+              "final_prediction": {
+                "evidence_ids": [
+                  "6645163ca1ba29da18eaebc412e4cfa6bd58e83bcd4b069e8698d770e4633e68",
+                  "90a7006897bbfacfd26441683ae713da0db99f62f64adb8e2408d6323582d1e6",
+                  "97803ebd514486dade04838c67ae48cf8a0e83a9948fdf10e0f85bc050423770",
+                  "fabdddfb410f2ecc3232a217de3650352e7c27a0504ff98257834b59ec04b89c"
+                ],
+                "expected_margin": 2.0,
+                "expected_total": 221.5,
+                "win_probability": 0.55,
+                "winner_side": "away"
+              },
+              "pregame_story": {
+                "classification": "subjective_analysis",
+                "evidence_ids": [
+                  "6645163ca1ba29da18eaebc412e4cfa6bd58e83bcd4b069e8698d770e4633e68",
+                  "90a7006897bbfacfd26441683ae713da0db99f62f64adb8e2408d6323582d1e6",
+                  "97803ebd514486dade04838c67ae48cf8a0e83a9948fdf10e0f85bc050423770",
+                  "fabdddfb410f2ecc3232a217de3650352e7c27a0504ff98257834b59ec04b89c"
+                ],
+                "statement": "费城一口气换了大半套阵容，主场揭幕就撞上保留核心、又添了哈登的骑士，磨合和延续性谁先说话，这场就能看出点眉目。",
+                "title": "费城新阵迎旧敌\n骑士双塔试深浅"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
       "game_id": "espn:401909841",
       "file": "games/espn_401909841.json",
       "tipoff": "2026-10-22T02:00:00+00:00",
@@ -1886,5 +2002,5 @@
       }
     }
   ],
-  "published_at": "2026-10-22T18:46:11.371050+00:00"
+  "published_at": "2026-10-22T18:48:19.543254+00:00"
 }
