@@ -665,11 +665,11 @@
       "file": "games/espn_401909091.json",
       "tipoff": "2026-10-21T23:30:00+00:00",
       "version_id": "ff077f81-86ad-4191-8cea-3ca538b399de",
-      "public_sha256": "c2d678a37dcf5bf68a12e5b4066ead28006321b973a21fa1f843d0c31e0af617",
+      "public_sha256": "25f43ffb57f6259c0dddc9dd06d457c2e73e377f9175bb236db9b2d537f80ce6",
       "home_record": {
         "game": {
           "id": "espn:401909091",
-          "status": "scheduled",
+          "status": "final",
           "tipoff": "2026-10-21T23:30:00+00:00",
           "home": {
             "id": 1610612748,
@@ -679,7 +679,7 @@
             "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
             "accent": "#98002E",
             "espn_team_id": "14",
-            "score": null
+            "score": 106.0
           },
           "away": {
             "id": 1610612750,
@@ -689,9 +689,16 @@
             "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/min.png",
             "accent": "#0C2340",
             "espn_team_id": "16",
-            "score": null
+            "score": 131.0
           },
-          "postgame": null,
+          "postgame": {
+            "status": "available",
+            "version_id": "e2d9f1a1-8065-4ca5-b856-6903881a0e3e",
+            "score_text": "森林狼 131 — 106 热火",
+            "summary": "爱德华兹45分打穿热火防线，字母哥首秀35分难掩篮板与失误的全面劣势，赛前看好热火让分落空，小分方向命中。",
+            "prediction_summary": "赛前看好热火 · 胜率56% · 预计赢3分；赛果森林狼赢25分",
+            "market_summary": "让分方向 热火 -1.5 · 未命中；总分 小分 · 命中"
+          },
           "game_type": "regular_season",
           "schedule_revision": 1,
           "registered_game": true,
@@ -702,12 +709,12 @@
           "public_summary": true
         },
         "prediction": {
-          "status": "current",
+          "status": "locked",
           "game_id": "espn:401909091",
           "version_id": "ff077f81-86ad-4191-8cea-3ca538b399de",
-          "state_revision": 3,
-          "locked_at": null,
-          "lock_reason": null,
+          "state_revision": 5,
+          "locked_at": "2026-10-21T23:30:28.151297+00:00",
+          "lock_reason": "scheduled_tipoff_reached",
           "schedule_revision": 1,
           "version": {
             "analysis_contract_version": "two-stage-forecast-v1",
@@ -1730,5 +1737,5 @@
       }
     }
   ],
-  "published_at": "2026-10-22T12:12:43.624163+00:00"
+  "published_at": "2026-10-22T12:39:09.337457+00:00"
 }

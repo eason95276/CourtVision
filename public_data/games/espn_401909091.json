@@ -2,7 +2,7 @@
   "contract_version": "courtvision-public-v1",
   "game": {
     "id": "espn:401909091",
-    "status": "scheduled",
+    "status": "final",
     "tipoff": "2026-10-21T23:30:00+00:00",
     "home": {
       "id": 1610612748,
@@ -12,7 +12,7 @@
       "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
       "accent": "#98002E",
       "espn_team_id": "14",
-      "score": null
+      "score": 106.0
     },
     "away": {
       "id": 1610612750,
@@ -22,7 +22,7 @@
       "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/min.png",
       "accent": "#0C2340",
       "espn_team_id": "16",
-      "score": null
+      "score": 131.0
     },
     "prediction": {
       "available": true,
@@ -87,7 +87,7 @@
       "source_label": "开发期赛前预测快照"
     },
     "source": {
-      "schedule_captured_at": "2026-10-21T23:09:42.086513+00:00"
+      "schedule_captured_at": "2026-10-22T12:25:00.645313+00:00"
     },
     "roster_context": {
       "teams": {
@@ -357,7 +357,14 @@
         }
       }
     },
-    "postgame": null,
+    "postgame": {
+      "status": "available",
+      "version_id": "e2d9f1a1-8065-4ca5-b856-6903881a0e3e",
+      "score_text": "森林狼 131 — 106 热火",
+      "summary": "爱德华兹45分打穿热火防线，字母哥首秀35分难掩篮板与失误的全面劣势，赛前看好热火让分落空，小分方向命中。",
+      "prediction_summary": "赛前看好热火 · 胜率56% · 预计赢3分；赛果森林狼赢25分",
+      "market_summary": "让分方向 热火 -1.5 · 未命中；总分 小分 · 命中"
+    },
     "matchup_history": {
       "status": "available",
       "game_id": "espn:401909091",
@@ -1090,15 +1097,15 @@
     },
     "official_injury_report": {
       "game_id": "espn:401909091",
-      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_00PM.pdf",
-      "source_published_at": "2026-10-21T23:00:00+00:00",
-      "captured_at": "2026-10-21T23:04:36.642677+00:00",
-      "source_sha256": "78829badd6c56b9a327bffdc19cf0e9ad2d6afb5a8b54df5022c5450320680de",
+      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_30PM.pdf",
+      "source_published_at": "2026-10-21T23:30:00+00:00",
+      "captured_at": "2026-10-21T23:36:02.155508+00:00",
+      "source_sha256": "dacec67dd7cbc9be798d383b74bb701f97246082adebe91d6be657b8e3509fb9",
       "parser_version": "nba-official-injury-live-v3",
       "status": "published",
-      "report_id": "e72f6bc8102ac28adf9970ffd3351d499e9ff9099e97e52265586bc2673563fc",
+      "report_id": "b8c0bacfd6643bfe0c30cb36de7b3920142cff4db4eaa30200b0cf26c4fee845",
       "report_date": "2026-10-21",
-      "report_time": "19:00",
+      "report_time": "19:30",
       "coverage": "complete",
       "records": [
         {
@@ -1107,10 +1114,10 @@
           "status": "available",
           "reason": "Injury/Illness - Right Calf Strain",
           "game_id": "espn:401909091",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_00PM.pdf",
-          "source_published_at": "2026-10-21T23:00:00+00:00",
-          "captured_at": "2026-10-21T23:04:36.642677+00:00",
-          "source_sha256": "78829badd6c56b9a327bffdc19cf0e9ad2d6afb5a8b54df5022c5450320680de",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_30PM.pdf",
+          "source_published_at": "2026-10-21T23:30:00+00:00",
+          "captured_at": "2026-10-21T23:36:02.155508+00:00",
+          "source_sha256": "dacec67dd7cbc9be798d383b74bb701f97246082adebe91d6be657b8e3509fb9",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1119,10 +1126,10 @@
           "status": "available",
           "reason": "Injury/Illness - Right Ankle Sprain",
           "game_id": "espn:401909091",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_00PM.pdf",
-          "source_published_at": "2026-10-21T23:00:00+00:00",
-          "captured_at": "2026-10-21T23:04:36.642677+00:00",
-          "source_sha256": "78829badd6c56b9a327bffdc19cf0e9ad2d6afb5a8b54df5022c5450320680de",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_30PM.pdf",
+          "source_published_at": "2026-10-21T23:30:00+00:00",
+          "captured_at": "2026-10-21T23:36:02.155508+00:00",
+          "source_sha256": "dacec67dd7cbc9be798d383b74bb701f97246082adebe91d6be657b8e3509fb9",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1131,10 +1138,10 @@
           "status": "available",
           "reason": "-",
           "game_id": "espn:401909091",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_00PM.pdf",
-          "source_published_at": "2026-10-21T23:00:00+00:00",
-          "captured_at": "2026-10-21T23:04:36.642677+00:00",
-          "source_sha256": "78829badd6c56b9a327bffdc19cf0e9ad2d6afb5a8b54df5022c5450320680de",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_30PM.pdf",
+          "source_published_at": "2026-10-21T23:30:00+00:00",
+          "captured_at": "2026-10-21T23:36:02.155508+00:00",
+          "source_sha256": "dacec67dd7cbc9be798d383b74bb701f97246082adebe91d6be657b8e3509fb9",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1143,10 +1150,10 @@
           "status": "out",
           "reason": "Injury/Illness - Right Achilles Tendon Repair/Surgery",
           "game_id": "espn:401909091",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_00PM.pdf",
-          "source_published_at": "2026-10-21T23:00:00+00:00",
-          "captured_at": "2026-10-21T23:04:36.642677+00:00",
-          "source_sha256": "78829badd6c56b9a327bffdc19cf0e9ad2d6afb5a8b54df5022c5450320680de",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_30PM.pdf",
+          "source_published_at": "2026-10-21T23:30:00+00:00",
+          "captured_at": "2026-10-21T23:36:02.155508+00:00",
+          "source_sha256": "dacec67dd7cbc9be798d383b74bb701f97246082adebe91d6be657b8e3509fb9",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1155,10 +1162,10 @@
           "status": "out",
           "reason": "G League - Two-Way",
           "game_id": "espn:401909091",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_00PM.pdf",
-          "source_published_at": "2026-10-21T23:00:00+00:00",
-          "captured_at": "2026-10-21T23:04:36.642677+00:00",
-          "source_sha256": "78829badd6c56b9a327bffdc19cf0e9ad2d6afb5a8b54df5022c5450320680de",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_30PM.pdf",
+          "source_published_at": "2026-10-21T23:30:00+00:00",
+          "captured_at": "2026-10-21T23:36:02.155508+00:00",
+          "source_sha256": "dacec67dd7cbc9be798d383b74bb701f97246082adebe91d6be657b8e3509fb9",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1167,10 +1174,10 @@
           "status": "out",
           "reason": "G League - Two-Way",
           "game_id": "espn:401909091",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_00PM.pdf",
-          "source_published_at": "2026-10-21T23:00:00+00:00",
-          "captured_at": "2026-10-21T23:04:36.642677+00:00",
-          "source_sha256": "78829badd6c56b9a327bffdc19cf0e9ad2d6afb5a8b54df5022c5450320680de",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_30PM.pdf",
+          "source_published_at": "2026-10-21T23:30:00+00:00",
+          "captured_at": "2026-10-21T23:36:02.155508+00:00",
+          "source_sha256": "dacec67dd7cbc9be798d383b74bb701f97246082adebe91d6be657b8e3509fb9",
           "parser_version": "nba-official-injury-live-v3"
         }
       ]
@@ -1178,12 +1185,12 @@
     "homepage_visible": true
   },
   "prediction": {
-    "status": "current",
+    "status": "locked",
     "game_id": "espn:401909091",
     "version_id": "ff077f81-86ad-4191-8cea-3ca538b399de",
-    "state_revision": 3,
-    "locked_at": null,
-    "lock_reason": null,
+    "state_revision": 5,
+    "locked_at": "2026-10-21T23:30:28.151297+00:00",
+    "lock_reason": "scheduled_tipoff_reached",
     "schedule_revision": 1,
     "fact_view": {
       "schema_version": "pregame-fact-view-v1",
@@ -3240,8 +3247,119 @@
     "public_contract": "courtvision-public-v1"
   },
   "postgame": {
-    "status": "unavailable",
-    "postgame": null
+    "status": "available",
+    "postgame": {
+      "game_id": "espn:401909091",
+      "version_id": "e2d9f1a1-8065-4ca5-b856-6903881a0e3e",
+      "title": "华子单骑破热火\n字母首秀空留憾",
+      "short_review": "爱德华兹45分打穿热火防线，字母哥首秀35分难掩篮板与失误的全面劣势，赛前看好热火让分落空，小分方向命中。",
+      "settlement_summary": "胜负看错，让分看错，大小分看对。",
+      "article": "热火主场揭幕，字母哥第一次穿热火球衣打正式比赛，结果被爱德华兹用45分抢了风头。131比106，森林狼从第二节起就把比赛攥在手里，热火的内线优势没打出来，反倒被对手的冲击力压了一头。\n\n爱德华兹这场29投16中，三分17投9中，33分钟拿45分10篮板。首节12分、次节9分、第三节15分，几乎每一节都在给热火的防守出难题。热火外线没人能真正按住他，维金斯对位效果有限，内线补防又总慢一步。森林狼全场21记三分，爱德华兹一个人就占了9个，这种产量让热火根本不敢收缩。\n\n字母哥的数据不差，19投13中拿35分6篮板，但只有1次助攻、3次失误。他往里打，森林狼用戈贝尔和麦克丹尼尔斯轮番消耗，逼他出球，而热火的接应点没能把机会转化成得分。阿德巴约15分7篮板4助攻，中规中矩，可热火全队三分33投8中，克莱6投3中拿10分，外线火力续不上，森林狼就更放心地收缩内线。\n\n真正拉开差距的是篮板和失误。森林狼抢了17个前场篮板，热火只有4个，二次进攻机会差了不止一个量级。热火18次失误也比对手多4次，森林狼利用这些多出来的球权反复推反击。第三节热火只拿22分，森林狼30分，分差从半场的10分直接奔着20分去。\n\n鲍尔21分6助攻，三分13投5中，和爱德华兹错开上场时间，芬奇赛后说轮换方案还在摸索。但这场球森林狼的进攻逻辑很清楚：爱德华兹主攻，鲍尔组织，麦克丹尼尔斯17分8篮板补上锋线产量，多孙穆替补16分。热火这边，米切尔11分11助攻但5次失误，串联有亮点，控制球权不够稳。\n\n赛前我站热火让1.5分，看中的是森林狼篮板软肋和字母哥的内线冲击，结果完全反了——森林狼前场篮板36.2%的进攻篮板率把热火压得死死的，字母哥的35分也没能带动全队。小分方向看对了，赛前理由说热火想把比赛拖进半场，实际节奏并不慢，森林狼的转换和三分把总分推高，只是热火自己进攻太铁，总分才停在237。方向命中，成因和预想的不一样。",
+      "score": {
+        "home": {
+          "name": "热火",
+          "score": 106
+        },
+        "away": {
+          "name": "森林狼",
+          "score": 131
+        },
+        "text": "森林狼 131 — 106 热火"
+      },
+      "prediction": {
+        "winner_name": "热火",
+        "winner_probability": 0.56,
+        "expected_winner_margin": 3.0,
+        "expected_total": 224.5,
+        "actual_winner_name": "森林狼",
+        "actual_winner_margin": 25,
+        "actual_total": 237
+      },
+      "market_reference": {
+        "status": "available",
+        "home_spread": -1.5,
+        "away_spread": 1.5,
+        "total": 240.5,
+        "home_team_name": "热火",
+        "away_team_name": "森林狼",
+        "source_title": "Draft Kings current odds",
+        "sportsbook": "Draft Kings",
+        "captured_at": "2026-10-21T23:10:01.098830+00:00",
+        "source_url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909091/competitions/401909091/odds",
+        "spread_review": {
+          "lean_side": "home",
+          "lean_line": -1.5,
+          "settlement": "loss"
+        },
+        "total_review": {
+          "lean": "under",
+          "settlement": "win",
+          "market_total": 240.5
+        }
+      },
+      "sources": [
+        {
+          "label": "比赛结果与球员数据",
+          "title": "ESPN 比赛数据",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=401909091",
+          "captured_at": "2026-10-22T02:28:31.803364+00:00"
+        },
+        {
+          "label": "公开早盘参考",
+          "title": "Draft Kings current odds",
+          "url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909091/competitions/401909091/odds",
+          "captured_at": "2026-10-21T23:10:01.098830+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "Minnesota Timberwolves vs. Miami Heat Live Score and Stats - October 21, 2026 Gametracker",
+          "url": "https://www.cbssports.com/nba/gametracker/preview/NBA_20261021_MIN@MIA",
+          "captured_at": "2026-10-21T17:39:31.487653+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "Minnesota Timberwolves Odds, Game Previews, & Lines | BetMGM",
+          "url": "https://sports.betmgm.com/en/blog/team/minnesota-timberwolves",
+          "captured_at": "2026-09-19T11:54:25.523962+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "赛前来源",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/14/roster",
+          "captured_at": "2026-10-21T23:10:04.889539+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "赛前来源",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/16/roster",
+          "captured_at": "2026-10-21T23:10:04.574151+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "赛前来源",
+          "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_00PM.pdf",
+          "captured_at": "2026-10-21T23:04:36.642677+00:00"
+        },
+        {
+          "source_id": "coach-9a1a5a30e5efd2989f",
+          "url": "https://bbs.hupu.com/643149435.html",
+          "title": "[流言板]为何错开华子和鲍尔的上场时间？芬奇：我还在摸索轮换方案-NBA新闻-虎扑社区",
+          "published_at": "2026-10-22T03:55:22+00:00",
+          "captured_at": "2026-10-22T12:26:20.578575+00:00",
+          "classification": "source_attributed_coach_statement"
+        },
+        {
+          "source_id": "hupu-d792d15f50f41fe388",
+          "url": "https://bbs.hupu.com/643148572.html",
+          "title": "[流言板]美记：在爱德华兹的带领下，森林狼是一支极具威胁的球队-NBA新闻-虎扑社区",
+          "published_at": "2026-10-22T03:30:13+00:00",
+          "captured_at": "2026-10-22T12:26:20.578575+00:00",
+          "classification": "community_discussion",
+          "not_a_fact_source": true
+        }
+      ],
+      "generated_at": "2026-10-22T12:27:21.946196+00:00"
+    }
   },
   "market": {
     "status": "available",
@@ -3280,10 +3398,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-21T23:13:12.293806+00:00",
+    "exported_at": "2026-10-22T12:39:09.337457+00:00",
     "source_prediction_version_id": "ff077f81-86ad-4191-8cea-3ca538b399de",
     "source_prediction_payload_sha256": "6f58d066f0867ba77f8bda59b322799430d6a8410e963372fdaf5f00ecfeb863",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "c2d678a37dcf5bf68a12e5b4066ead28006321b973a21fa1f843d0c31e0af617"
+  "public_sha256": "25f43ffb57f6259c0dddc9dd06d457c2e73e377f9175bb236db9b2d537f80ce6"
 }
