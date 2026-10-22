@@ -2,7 +2,7 @@
   "contract_version": "courtvision-public-v1",
   "game": {
     "id": "espn:401909834",
-    "status": "scheduled",
+    "status": "final",
     "tipoff": "2026-10-21T23:00:00+00:00",
     "home": {
       "id": 1610612753,
@@ -12,7 +12,7 @@
       "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/orl.png",
       "accent": "#0077C0",
       "espn_team_id": "19",
-      "score": null
+      "score": 125.0
     },
     "away": {
       "id": 1610612737,
@@ -22,7 +22,7 @@
       "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/atl.png",
       "accent": "#E03A3E",
       "espn_team_id": "1",
-      "score": null
+      "score": 132.0
     },
     "prediction": {
       "available": true,
@@ -87,7 +87,7 @@
       "source_label": "开发期赛前预测快照"
     },
     "source": {
-      "schedule_captured_at": "2026-10-21T22:38:18.485243+00:00"
+      "schedule_captured_at": "2026-10-22T12:25:00.645313+00:00"
     },
     "roster_context": {
       "teams": {
@@ -357,7 +357,14 @@
         }
       }
     },
-    "postgame": null,
+    "postgame": {
+      "status": "available",
+      "version_id": "c1b06c03-f555-4f4f-b3cf-02c5bebac51b",
+      "score_text": "老鹰 132 — 125 魔术",
+      "summary": "班凯罗35分10助攻的高效之夜被老鹰的深度与亚历山大-沃克的31分淹没，魔术末节崩盘，赛前看好魔术让分与小分的判断双双落空。",
+      "prediction_summary": "赛前看好魔术 · 胜率58% · 预计赢4分；赛果老鹰赢7分",
+      "market_summary": "让分方向 魔术 -2.5 · 未命中；总分 小分 · 未命中"
+    },
     "matchup_history": {
       "status": "available",
       "game_id": "espn:401909834",
@@ -1095,15 +1102,15 @@
     },
     "official_injury_report": {
       "game_id": "espn:401909834",
-      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_30PM.pdf",
-      "source_published_at": "2026-10-21T22:30:00+00:00",
-      "captured_at": "2026-10-21T22:33:13.023203+00:00",
-      "source_sha256": "0d1926b0db6a79f1e355c33fad645bd3a489884321f07231d5184d4c78750391",
+      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_00PM.pdf",
+      "source_published_at": "2026-10-21T23:00:00+00:00",
+      "captured_at": "2026-10-21T23:04:36.642677+00:00",
+      "source_sha256": "78829badd6c56b9a327bffdc19cf0e9ad2d6afb5a8b54df5022c5450320680de",
       "parser_version": "nba-official-injury-live-v3",
       "status": "published",
-      "report_id": "aaeaacf0a3946db56a4d949180cf3100bdbfe512206b226c0ddbe71f4893908c",
+      "report_id": "e72f6bc8102ac28adf9970ffd3351d499e9ff9099e97e52265586bc2673563fc",
       "report_date": "2026-10-21",
-      "report_time": "18:30",
+      "report_time": "19:00",
       "coverage": "complete",
       "records": [
         {
@@ -1112,10 +1119,10 @@
           "status": "out",
           "reason": "Injury/Illness - Right ACLTear",
           "game_id": "espn:401909834",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_30PM.pdf",
-          "source_published_at": "2026-10-21T22:30:00+00:00",
-          "captured_at": "2026-10-21T22:33:13.023203+00:00",
-          "source_sha256": "0d1926b0db6a79f1e355c33fad645bd3a489884321f07231d5184d4c78750391",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_00PM.pdf",
+          "source_published_at": "2026-10-21T23:00:00+00:00",
+          "captured_at": "2026-10-21T23:04:36.642677+00:00",
+          "source_sha256": "78829badd6c56b9a327bffdc19cf0e9ad2d6afb5a8b54df5022c5450320680de",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1124,10 +1131,10 @@
           "status": "out",
           "reason": "G League - Two-Way",
           "game_id": "espn:401909834",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_30PM.pdf",
-          "source_published_at": "2026-10-21T22:30:00+00:00",
-          "captured_at": "2026-10-21T22:33:13.023203+00:00",
-          "source_sha256": "0d1926b0db6a79f1e355c33fad645bd3a489884321f07231d5184d4c78750391",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_00PM.pdf",
+          "source_published_at": "2026-10-21T23:00:00+00:00",
+          "captured_at": "2026-10-21T23:04:36.642677+00:00",
+          "source_sha256": "78829badd6c56b9a327bffdc19cf0e9ad2d6afb5a8b54df5022c5450320680de",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1136,10 +1143,10 @@
           "status": "out",
           "reason": "G League - Two-Way",
           "game_id": "espn:401909834",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_30PM.pdf",
-          "source_published_at": "2026-10-21T22:30:00+00:00",
-          "captured_at": "2026-10-21T22:33:13.023203+00:00",
-          "source_sha256": "0d1926b0db6a79f1e355c33fad645bd3a489884321f07231d5184d4c78750391",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_00PM.pdf",
+          "source_published_at": "2026-10-21T23:00:00+00:00",
+          "captured_at": "2026-10-21T23:04:36.642677+00:00",
+          "source_sha256": "78829badd6c56b9a327bffdc19cf0e9ad2d6afb5a8b54df5022c5450320680de",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1148,10 +1155,10 @@
           "status": "out",
           "reason": "Injury/Illness - Left Foot Fracture",
           "game_id": "espn:401909834",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_30PM.pdf",
-          "source_published_at": "2026-10-21T22:30:00+00:00",
-          "captured_at": "2026-10-21T22:33:13.023203+00:00",
-          "source_sha256": "0d1926b0db6a79f1e355c33fad645bd3a489884321f07231d5184d4c78750391",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_00PM.pdf",
+          "source_published_at": "2026-10-21T23:00:00+00:00",
+          "captured_at": "2026-10-21T23:04:36.642677+00:00",
+          "source_sha256": "78829badd6c56b9a327bffdc19cf0e9ad2d6afb5a8b54df5022c5450320680de",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1160,10 +1167,10 @@
           "status": "out",
           "reason": "G League - Two-Way",
           "game_id": "espn:401909834",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_30PM.pdf",
-          "source_published_at": "2026-10-21T22:30:00+00:00",
-          "captured_at": "2026-10-21T22:33:13.023203+00:00",
-          "source_sha256": "0d1926b0db6a79f1e355c33fad645bd3a489884321f07231d5184d4c78750391",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_00PM.pdf",
+          "source_published_at": "2026-10-21T23:00:00+00:00",
+          "captured_at": "2026-10-21T23:04:36.642677+00:00",
+          "source_sha256": "78829badd6c56b9a327bffdc19cf0e9ad2d6afb5a8b54df5022c5450320680de",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1172,10 +1179,10 @@
           "status": "out",
           "reason": "Injury/Illness - Right Ankle Sprain",
           "game_id": "espn:401909834",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_30PM.pdf",
-          "source_published_at": "2026-10-21T22:30:00+00:00",
-          "captured_at": "2026-10-21T22:33:13.023203+00:00",
-          "source_sha256": "0d1926b0db6a79f1e355c33fad645bd3a489884321f07231d5184d4c78750391",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_00PM.pdf",
+          "source_published_at": "2026-10-21T23:00:00+00:00",
+          "captured_at": "2026-10-21T23:04:36.642677+00:00",
+          "source_sha256": "78829badd6c56b9a327bffdc19cf0e9ad2d6afb5a8b54df5022c5450320680de",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1184,10 +1191,10 @@
           "status": "out",
           "reason": "Injury/Illness - Left Ankle Injury Recovery",
           "game_id": "espn:401909834",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_30PM.pdf",
-          "source_published_at": "2026-10-21T22:30:00+00:00",
-          "captured_at": "2026-10-21T22:33:13.023203+00:00",
-          "source_sha256": "0d1926b0db6a79f1e355c33fad645bd3a489884321f07231d5184d4c78750391",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_00PM.pdf",
+          "source_published_at": "2026-10-21T23:00:00+00:00",
+          "captured_at": "2026-10-21T23:04:36.642677+00:00",
+          "source_sha256": "78829badd6c56b9a327bffdc19cf0e9ad2d6afb5a8b54df5022c5450320680de",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1196,10 +1203,10 @@
           "status": "out",
           "reason": "Injury/Illness - Left Knee Injury Management",
           "game_id": "espn:401909834",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_30PM.pdf",
-          "source_published_at": "2026-10-21T22:30:00+00:00",
-          "captured_at": "2026-10-21T22:33:13.023203+00:00",
-          "source_sha256": "0d1926b0db6a79f1e355c33fad645bd3a489884321f07231d5184d4c78750391",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_00PM.pdf",
+          "source_published_at": "2026-10-21T23:00:00+00:00",
+          "captured_at": "2026-10-21T23:04:36.642677+00:00",
+          "source_sha256": "78829badd6c56b9a327bffdc19cf0e9ad2d6afb5a8b54df5022c5450320680de",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1208,10 +1215,10 @@
           "status": "out",
           "reason": "Injury/Illness - Right Partiallytorn hamstring",
           "game_id": "espn:401909834",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_30PM.pdf",
-          "source_published_at": "2026-10-21T22:30:00+00:00",
-          "captured_at": "2026-10-21T22:33:13.023203+00:00",
-          "source_sha256": "0d1926b0db6a79f1e355c33fad645bd3a489884321f07231d5184d4c78750391",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_00PM.pdf",
+          "source_published_at": "2026-10-21T23:00:00+00:00",
+          "captured_at": "2026-10-21T23:04:36.642677+00:00",
+          "source_sha256": "78829badd6c56b9a327bffdc19cf0e9ad2d6afb5a8b54df5022c5450320680de",
           "parser_version": "nba-official-injury-live-v3"
         }
       ]
@@ -1219,12 +1226,12 @@
     "homepage_visible": true
   },
   "prediction": {
-    "status": "current",
+    "status": "locked",
     "game_id": "espn:401909834",
     "version_id": "4256d35e-43f2-4fa3-89bd-ddeb49fb557d",
-    "state_revision": 3,
-    "locked_at": null,
-    "lock_reason": null,
+    "state_revision": 5,
+    "locked_at": "2026-10-21T23:00:40.175962+00:00",
+    "lock_reason": "scheduled_tipoff_reached",
     "schedule_revision": 1,
     "fact_view": {
       "schema_version": "pregame-fact-view-v1",
@@ -3574,8 +3581,129 @@
     "public_contract": "courtvision-public-v1"
   },
   "postgame": {
-    "status": "unavailable",
-    "postgame": null
+    "status": "available",
+    "postgame": {
+      "game_id": "espn:401909834",
+      "version_id": "c1b06c03-f555-4f4f-b3cf-02c5bebac51b",
+      "title": "班凯罗空砍难救\n老鹰群翼破魔术",
+      "short_review": "班凯罗35分10助攻的高效之夜被老鹰的深度与亚历山大-沃克的31分淹没，魔术末节崩盘，赛前看好魔术让分与小分的判断双双落空。",
+      "settlement_summary": "胜负看错，让分看错，大小分看错。",
+      "article": "班凯罗打出了近乎完美的个人进攻，魔术却在家门口丢了胜利。35分7篮板10助攻，12投10中，三分4中3，这样的效率放在任何夜晚都该带走比赛。但老鹰用132比125的客场胜利证明，篮球不是一个人的高效就能填平的沟壑。\n\n老鹰的回应来自亚历山大-沃克。31分4篮板3助攻，15投8中，三分8中5，他在末节独取11分，包括最后1分27秒和51.4秒两记杀死悬念的三分，第二球来自杰伦·约翰逊的助攻。约翰逊自己20分14篮板6助攻，数据不算炸裂，但14个篮板里有5个前场篮板，给老鹰多挣了二次进攻的机会。麦科勒姆19分，9投7中，三分6中4，用极少的出手撑起了外线火力。\n\n魔术的问题不在班凯罗，而在班凯罗之外。瓦格纳22分但20投9中，贝恩18分却15投5中、三分10中3，外线准星集体失偏。全队三分40投13中，命中率32.5%，而老鹰36投14中，差距不大，但老鹰的罚球36罚30中，比魔术多罚进0个，真正拉开的是运动战进球：老鹰44个，魔术41个，加上老鹰多出的5个前场篮板和更少的失误（17比20），球权差距在末节被放大。\n\n末节比分33比25，老鹰在最后12分钟净胜8分。班凯罗末节7分3助攻，但6次失误中有2次出现在第四节，魔术的进攻在关键时刻开始滞涩。老鹰则把球交到亚历山大-沃克手里，他用两记三分回应了魔术的追分。\n\n赛前我支持魔术让2.5分，判断错了。我太相信魔术的防守延续性和老鹰新阵的磨合生涩，但老鹰的深度——威金斯16分、丹尼尔斯20分——让新阵的磨合问题被得分掩盖。小分方向也错了，赛前理由是老鹰新阵容拖慢节奏、魔术进攻集中，但实际老鹰的转换和二次进攻把总分推到了257。方向错了就是错了，没有借口。",
+      "score": {
+        "home": {
+          "name": "魔术",
+          "score": 125
+        },
+        "away": {
+          "name": "老鹰",
+          "score": 132
+        },
+        "text": "老鹰 132 — 125 魔术"
+      },
+      "prediction": {
+        "winner_name": "魔术",
+        "winner_probability": 0.58,
+        "expected_winner_margin": 4.0,
+        "expected_total": 218.5,
+        "actual_winner_name": "老鹰",
+        "actual_winner_margin": 7,
+        "actual_total": 257
+      },
+      "market_reference": {
+        "status": "available",
+        "home_spread": -2.5,
+        "away_spread": 2.5,
+        "total": 233.5,
+        "home_team_name": "魔术",
+        "away_team_name": "老鹰",
+        "source_title": "Draft Kings current odds",
+        "sportsbook": "Draft Kings",
+        "captured_at": "2026-10-21T22:40:05.048609+00:00",
+        "source_url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909834/competitions/401909834/odds",
+        "spread_review": {
+          "lean_side": "home",
+          "lean_line": -2.5,
+          "settlement": "loss"
+        },
+        "total_review": {
+          "lean": "under",
+          "settlement": "loss",
+          "market_total": 233.5
+        }
+      },
+      "sources": [
+        {
+          "label": "比赛结果与球员数据",
+          "title": "ESPN 比赛数据",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=401909834",
+          "captured_at": "2026-10-22T01:57:08.927705+00:00"
+        },
+        {
+          "label": "公开早盘参考",
+          "title": "Draft Kings current odds",
+          "url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909834/competitions/401909834/odds",
+          "captured_at": "2026-10-21T22:40:05.048609+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "Atlanta Hawks season preview: Opening schedule, win projection and everything to know for 2026-27 - Yahoo Sports",
+          "url": "https://sports.yahoo.com/nba/article/atlanta-hawks-season-preview-opening-schedule-win-projection-and-everything-to-know-for-2026-27-141134823.html",
+          "captured_at": "2026-10-21T14:33:04.343589+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "Full Season Schedule | Orlando Magic",
+          "url": "https://www.nba.com/magic/schedule",
+          "captured_at": "2026-10-21T14:33:08.428629+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "Orlando Magic season preview: Opening schedule, win projection and everything to know for 2026-27 - Yahoo Sports",
+          "url": "https://sports.yahoo.com/nba/article/orlando-magic-season-preview-opening-schedule-win-projection-and-everything-to-know-for-2026-27-141545868.html",
+          "captured_at": "2026-10-21T14:33:48.980669+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "Orlando Magic season preview: Opening schedule, win projection and what to know for 2026-27 - Yahoo Sports",
+          "url": "https://sports.yahoo.com/nba/article/orlando-magic-season-preview-opening-schedule-win-projection-and-what-to-know-for-2026-27-143658875.html",
+          "captured_at": "2026-10-21T14:33:49.627866+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "NBA preview 2026-27: What Bobby Marks is watching at 30 training camps - ESPN",
+          "url": "https://www.espn.com/nba/story/_/id/50061973/nba-preview-2026-27-bobby-marks-training-camp-guide-duren-pistons-lebron-76ers-30-teams",
+          "captured_at": "2026-10-21T14:33:48.634273+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "赛前来源",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/19/roster",
+          "captured_at": "2026-10-21T22:40:04.595310+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "赛前来源",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/1/roster",
+          "captured_at": "2026-10-21T22:40:04.619452+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "赛前来源",
+          "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_30PM.pdf",
+          "captured_at": "2026-10-21T22:33:13.023203+00:00"
+        },
+        {
+          "source_id": "hupu-b3c8c4fae83ee721a9",
+          "url": "https://bbs.hupu.com/643144284.html",
+          "title": "[赛后]老鹰132-125魔术，沃克31分4板3助，班凯罗35分7板10助-NBA专区-虎扑社区",
+          "published_at": "2026-10-22T01:55:35+00:00",
+          "captured_at": "2026-10-22T12:25:10.024568+00:00",
+          "classification": "community_discussion",
+          "not_a_fact_source": true
+        }
+      ],
+      "generated_at": "2026-10-22T12:26:20.461328+00:00"
+    }
   },
   "market": {
     "status": "available",
@@ -3614,10 +3742,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-21T22:41:36.799859+00:00",
+    "exported_at": "2026-10-22T12:40:19.459295+00:00",
     "source_prediction_version_id": "4256d35e-43f2-4fa3-89bd-ddeb49fb557d",
     "source_prediction_payload_sha256": "16a06cc39d3f1785d393d75b2b1cd9a64de5699e36c36441f72824b71f9159fa",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "de97f598b11f9ec93d46d4a30b2ddafff61aeaed068e65e8a239805ee8176044"
+  "public_sha256": "3b85d0b00eeed2b79f11b444b8674c9c9867f8b46070dd6723d069daf034f05e"
 }

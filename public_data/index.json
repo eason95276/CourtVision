@@ -795,11 +795,11 @@
       "file": "games/espn_401909834.json",
       "tipoff": "2026-10-21T23:00:00+00:00",
       "version_id": "4256d35e-43f2-4fa3-89bd-ddeb49fb557d",
-      "public_sha256": "de97f598b11f9ec93d46d4a30b2ddafff61aeaed068e65e8a239805ee8176044",
+      "public_sha256": "3b85d0b00eeed2b79f11b444b8674c9c9867f8b46070dd6723d069daf034f05e",
       "home_record": {
         "game": {
           "id": "espn:401909834",
-          "status": "scheduled",
+          "status": "final",
           "tipoff": "2026-10-21T23:00:00+00:00",
           "home": {
             "id": 1610612753,
@@ -809,7 +809,7 @@
             "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/orl.png",
             "accent": "#0077C0",
             "espn_team_id": "19",
-            "score": null
+            "score": 125.0
           },
           "away": {
             "id": 1610612737,
@@ -819,9 +819,16 @@
             "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/atl.png",
             "accent": "#E03A3E",
             "espn_team_id": "1",
-            "score": null
+            "score": 132.0
           },
-          "postgame": null,
+          "postgame": {
+            "status": "available",
+            "version_id": "c1b06c03-f555-4f4f-b3cf-02c5bebac51b",
+            "score_text": "老鹰 132 — 125 魔术",
+            "summary": "班凯罗35分10助攻的高效之夜被老鹰的深度与亚历山大-沃克的31分淹没，魔术末节崩盘，赛前看好魔术让分与小分的判断双双落空。",
+            "prediction_summary": "赛前看好魔术 · 胜率58% · 预计赢4分；赛果老鹰赢7分",
+            "market_summary": "让分方向 魔术 -2.5 · 未命中；总分 小分 · 未命中"
+          },
           "game_type": "regular_season",
           "schedule_revision": 1,
           "registered_game": true,
@@ -832,12 +839,12 @@
           "public_summary": true
         },
         "prediction": {
-          "status": "current",
+          "status": "locked",
           "game_id": "espn:401909834",
           "version_id": "4256d35e-43f2-4fa3-89bd-ddeb49fb557d",
-          "state_revision": 3,
-          "locked_at": null,
-          "lock_reason": null,
+          "state_revision": 5,
+          "locked_at": "2026-10-21T23:00:40.175962+00:00",
+          "lock_reason": "scheduled_tipoff_reached",
           "schedule_revision": 1,
           "version": {
             "analysis_contract_version": "two-stage-forecast-v1",
@@ -1737,5 +1744,5 @@
       }
     }
   ],
-  "published_at": "2026-10-22T12:39:09.337457+00:00"
+  "published_at": "2026-10-22T12:40:19.459295+00:00"
 }
