@@ -247,8 +247,8 @@
       "game_id": "espn:401909840",
       "file": "games/espn_401909840.json",
       "tipoff": "2026-10-22T00:30:00+00:00",
-      "version_id": "d4becef7-6f4b-4ada-ba2b-0020bdf7e25f",
-      "public_sha256": "f718dd85e0c47f7f40ee167550a9a1c874a39d8805bd67e1364f797c4faecedf",
+      "version_id": "a8c89dd4-b49d-4850-96f2-6a65c6bd1ba7",
+      "public_sha256": "b298eeca60d97437c0dccdd91a3ef0eff007b278347f484cef7575d904f03e08",
       "home_record": {
         "game": {
           "away": {
@@ -287,14 +287,14 @@
         "prediction": {
           "status": "current",
           "game_id": "espn:401909840",
-          "version_id": "d4becef7-6f4b-4ada-ba2b-0020bdf7e25f",
-          "state_revision": 2,
+          "version_id": "a8c89dd4-b49d-4850-96f2-6a65c6bd1ba7",
+          "state_revision": 3,
           "locked_at": null,
           "lock_reason": null,
           "schedule_revision": 1,
           "version": {
             "analysis_contract_version": "two-stage-forecast-v1",
-            "base_input_hash": "0c80580bccff3414cc2dfcb4b1c8cead78bd0850bd760cec64282d91aba7cb4d",
+            "base_input_hash": "171321adc75adffccb02d6a660b32abf58920d5ab263c049cc2cfe2ac39ada6f",
             "game_id": "espn:401909840",
             "game_identity": {
               "away_team_id": 1610612742,
@@ -302,13 +302,13 @@
               "home_team_id": 1610612745,
               "scheduled_tipoff": "2026-10-22T00:30:00+00:00"
             },
-            "generated_at": "2026-10-21T15:00:58.494129+00:00",
-            "input_cutoff_at": "2026-10-21T15:00:46.145234+00:00",
-            "published_at": "2026-10-21T15:01:00.282913+00:00",
+            "generated_at": "2026-10-22T00:10:54.058616+00:00",
+            "input_cutoff_at": "2026-10-22T00:10:32.996581+00:00",
+            "published_at": "2026-10-22T00:10:55.688990+00:00",
             "schedule_revision": 1,
-            "stage": "EARLY_PREVIEW",
-            "version_id": "d4becef7-6f4b-4ada-ba2b-0020bdf7e25f",
-            "payload_sha256": "4b284b99217c0cda5423fb082e6b437981309c20a7c197c6c7737775b29c1d0d",
+            "stage": "FINAL_PREGAME",
+            "version_id": "a8c89dd4-b49d-4850-96f2-6a65c6bd1ba7",
+            "payload_sha256": "3ba68d1a52ce0f3388e7004bc3879122383704dc6a094c10119844010e6a44cc",
             "input_snapshot": {
               "away": {
                 "abbreviation": "DAL",
@@ -337,11 +337,17 @@
                   "521605e99173f502e673bb2fda499819d8554baed1575af4cd88caee3eaaa487",
                   "548f5ed2782b5a657e6a417e3d3ea8b9a7ca83de247ed5cc10eae922d54fa56d",
                   "9f840164900dc811a0e519507626f8977cd0c0aebb49619bc84b60d012c2ae56",
-                  "b673f0cc08fa90fcd9fe6d297a4fff2ad68f819153a2197a2d0576bbd3508d49"
+                  "b673f0cc08fa90fcd9fe6d297a4fff2ad68f819153a2197a2d0576bbd3508d49",
+                  "final-availability-1448c30c9eb135a5bffe",
+                  "final-availability-1e2a09e8f5b0001f3e10",
+                  "final-availability-333b21747b42e6d65a47",
+                  "final-availability-4006c796b2670709cc71",
+                  "final-availability-4626a01a4e8ae6af7e19",
+                  "final-availability-6db8e555eeb977a4ab26"
                 ],
-                "expected_margin": 8.5,
-                "expected_total": 228.5,
-                "win_probability": 0.7,
+                "expected_margin": 9.0,
+                "expected_total": 227.5,
+                "win_probability": 0.71,
                 "winner_side": "home"
               },
               "pregame_story": {
@@ -351,10 +357,11 @@
                   "521605e99173f502e673bb2fda499819d8554baed1575af4cd88caee3eaaa487",
                   "548f5ed2782b5a657e6a417e3d3ea8b9a7ca83de247ed5cc10eae922d54fa56d",
                   "9f840164900dc811a0e519507626f8977cd0c0aebb49619bc84b60d012c2ae56",
-                  "b673f0cc08fa90fcd9fe6d297a4fff2ad68f819153a2197a2d0576bbd3508d49"
+                  "b673f0cc08fa90fcd9fe6d297a4fff2ad68f819153a2197a2d0576bbd3508d49",
+                  "final-availability-1448c30c9eb135a5bffe"
                 ],
-                "statement": "赛季首战，火箭带着上季的班底在主场等独行侠，对面却是一套刚拼起来的新阵容——延续性对天赋，这场球从跳球就有得看。",
-                "title": "火箭主场迎旧敌\n独行侠新阵试锋"
+                "statement": "独行侠内线轮换偏薄，火箭主场首战能不能把篮板和禁区优势变成一场稳稳的胜利？",
+                "title": "火箭内线迎残阵\n独行侠客场试深"
               }
             }
           }
@@ -1680,5 +1687,5 @@
       }
     }
   ],
-  "published_at": "2026-10-21T23:44:55.280989+00:00"
+  "published_at": "2026-10-22T00:14:50.607046+00:00"
 }
