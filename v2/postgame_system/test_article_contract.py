@@ -69,6 +69,7 @@ def test_bench_scoring_comparison_is_not_the_final_score():
 def test_minutes_do_not_become_points_but_actual_wrong_points_still_fail():
     value=context();value['key_players']=[{'name':'凯里·欧文','points':15,'field_goals':[5,12]}]
     assert validate_article({'article':'欧文24分钟15分。'},value)==[]
+    assert any(i['code']=='player_points_mismatch'for i in validate_article({'article':'欧文24分钟16分。'},value))
     assert any(i['code']=='player_points_mismatch'for i in validate_article({'article':'欧文24分。'},value))
     assert any(i['code']=='player_shooting_mismatch'for i in validate_article({'article':'欧文5投12中。'},value))
 

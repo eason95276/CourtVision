@@ -110,7 +110,8 @@ def validate_article(editorial,context):
                 actual=(sum(r['fga']for r in scoped),sum(r['fgm']for r in scoped))if verified else tuple(reversed(row.get('field_goals')or[None,None]))
                 if None not in actual and tuple(map(int,shooting.groups()))!=actual:
                     issues.append({'code':'player_shooting_mismatch','quote':shooting[0],'expected':actual})
-            match=re.search(re.escape(alias)+r'(?:全场|拿到|得到|贡献|砍下|交出)?\s*(\d+(?:\.\d+)?)\s*分(?!钟)',clause)
+            match=re.search(re.escape(alias)+r'(?:(?:全场|本场|出场|上场|出战)?\s*\d+(?:\.\d+)?\s*分钟)?'
+                r'(?:全场|拿到|拿下|得到|贡献|砍下|交出)?\s*(\d+(?:\.\d+)?)\s*分(?!钟)',clause)
             expected=sum(r['points']for r in scoped)if verified else row.get('points')
             if match and expected is not None and (not periods or verified)and abs(float(match[1])-expected)>0.001:
                 issues.append({'code':'player_points_mismatch','quote':match[0],'expected':expected})
