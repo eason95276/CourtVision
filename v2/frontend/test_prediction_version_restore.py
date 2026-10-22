@@ -27,7 +27,7 @@ NODE_FRONTEND_PROBE = r"""
 const fs = require('node:fs');
 const vm = require('node:vm');
 const {game, response} = JSON.parse(fs.readFileSync(0, 'utf8'));
-const app = fs.readFileSync(process.argv[1], 'utf8');
+const app = fs.readFileSync(process.argv[1], 'utf8').replace(/\r\n/g, '\n');
 const names = ['activePrediction', 'acceptPredictionSelection', 'analysisCompatible', 'loadCurrentAnalyses'];
 const functions = names.map((name) => {
   const prefix = name === 'loadCurrentAnalyses' ? 'async function ' : 'function ';

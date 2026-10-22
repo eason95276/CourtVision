@@ -37,6 +37,7 @@ jobs:
       - run: python -m pytest evaluation/candidate_v4/test_contracts_v4.py evaluation/candidate_v2/test_contracts.py -k "not baseline" -q
       - run: python -m pytest v2/pregame_system/test_source_temporal_metadata.py v2/pregame_system/test_source_body_fetch.py v2/pregame_system/test_research_evidence.py -q
       - run: python -m pytest v2/pregame_system/test_strict_forecast_transport.py -q
+      - run: python -m pytest v2/pregame_system/test_claim_repair_contract.py v2/pregame_system/test_availability_subjects.py -q
       - run: node --check web/static-data.js
       - run: python scripts/build_public_site.py
       - uses: actions/configure-pages@v5

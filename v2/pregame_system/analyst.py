@@ -15,6 +15,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from .storage import BASE, clean, content_hash, now, save
 from .skill_provenance import prompt_skill_hashes
+from .claim_limits import MAX_CLAIM_EVIDENCE
 
 
 class DomainAnalysisPerspective(BaseModel):
@@ -61,7 +62,7 @@ class AnalysisClaim(BaseModel):
 
     statement: str = Field(min_length=1, max_length=260)
     classification: Literal["source_fact", "data_inference", "subjective_analysis"]
-    evidence_ids: list[str] = Field(default_factory=list, max_length=6)
+    evidence_ids: list[str] = Field(default_factory=list, max_length=MAX_CLAIM_EVIDENCE)
 
 
 class CentralThesisClaim(AnalysisClaim):

@@ -1044,25 +1044,32 @@ def _supported_long_term_background(text, projection):
     return True
 
 
-def _availability_issues_for_text(text: str, projection: dict, unit_id: str) -> list[dict]:
-    sentences=[part for part in re.split(r'(?<=[。！？；])',text)if part.strip()]
-    if len(sentences)>1:
-        return [issue for sentence in sentences for issue in _availability_issues_for_text(sentence,projection,unit_id)]
-    clauses=[part for part in re.split(r'[：:，,]',text)if part.strip()]
-    status_clauses=[part for part in clauses if re.search(r'缺阵|出战|首发|分钟限制|限时|\bout\b|available|questionable|doubtful|probable|inactive|minutes? restriction',part,re.I)]
-    if len(clauses)>1 and status_clauses and all(_mentioned_people(part,projection)for part in status_clauses):
-        return [issue for clause in clauses for issue in _availability_issues_for_text(clause,projection,unit_id)]
+def _availability_issues_for_text(text: str, projection: dict, unit_id: str,
+                                  player_name=None, *, _subjects=None, _scoped=False) -> list[dict]:
+    from .availability_text import claim_scopes, supported_team_absence
+    if not _scoped:
+        issues = []
+        for clause, subjects, has_status in claim_scopes(text, projection, player_name):
+            if not has_status and not re.search(r'核心齐整|全员健康|完整核心|全员可用|全队健康|全员出战|全部正常出战', clause):
+                continue
+            issues.extend(_availability_issues_for_text(clause, projection, unit_id,
+                _subjects=subjects, _scoped=True))
+        return issues
+    clauses = [text]
+    status_clauses = [text]
     # Match assertions, not words inside a negated/unknown-status disclosure.
     # Mask only that clause; an actual assertion later in the unit still counts.
     text_for_claims = re.sub(
-        r"(?:没有|并无|尚无|暂无|未有|均无)(?:可靠)?(?:分钟限制|首发|出战)(?:来源|信息|消息)"
+        r"(?:未|尚未|没有|并未)(?:正式)?确认[^。！？；，,]{0,12}(?:缺阵|出战)"
+        r"|(?:缺阵|出战)(?:的)?(?:消息|状态)?(?:尚未|还未|未获|未被)(?:正式)?确认"
+        r"|(?:没有|并无|尚无|暂无|未有|均无)(?:可靠)?(?:分钟限制|首发|出战)(?:来源|信息|消息)"
         r"|(?:没有|未见|暂无|均无|尚无)(?:明确的?|可靠的?)?缺阵(?:报告|消息|记录|通知)"
         r"|(?:没有|并无|尚无|暂无|未有|均无)(?:可靠)?(?:已)?确认(?:的)?(?:分钟限制|首发|出战(?:信息|名单)?)"
         r"|(?:未确认|尚未确认|尚未公布|not confirmed|unconfirmed)[^。！？；，,;.!?]{0,14}(?:分钟限制|限时出场|首发|minutes? restriction)",
         lambda m:" "*len(m.group()), text, flags=re.I)
     issues = []
     facts = projection.get("facts", [])
-    names = _mentioned_people(text,projection)
+    names = list(_subjects or [])
     speculative = bool(re.search(r"如果|假如|若|我预计|预计|可能|或许|我认为|if\b|might\b|could\b", text, re.I))
     full_strength=re.search(r'核心齐整|全员健康|完整核心|全员可用|全队健康|全员出战|全部正常出战',text)
     if full_strength and (projection.get('limits')or{}).get('unconfirmed_player_availability')and not speculative:
@@ -1070,22 +1077,28 @@ def _availability_issues_for_text(text: str, projection: dict, unit_id: str) -> 
         if not re.search(r'并非|不是|未能确认|不意味着|不能说|不能据此|尚未确认',prefix):
             issues.append({'unit_id':unit_id,'code':'current_availability_unverified','quote':text,
                 'reason':'unknown_availability_cannot_be_full_strength'})
-    minutes_claim = re.search(r"限制(?:在)?\s*\d{1,2}\s*分钟|受限.{0,8}\d{1,2}\s*分钟|(?:有|存在|受到|处于).{0,5}(?:分钟限制|限时出场)|(?:分钟限制|限时出场).{0,5}(?:已确认|确有|正式宣布)|(?:has|is on|was placed on|has been placed on).{0,12}(?:a )?minutes? restriction|\d{1,2}[- ]minute restriction|limited to\s*\d{1,2}\s*minutes?|capped at\s*\d{1,2}\s*minutes?", text_for_claims, re.I)
+    minutes_claim = re.search(r"限时\s*\d{1,2}\s*分钟|限制(?:在)?\s*\d{1,2}\s*分钟|受限.{0,8}\d{1,2}\s*分钟|(?:有|存在|受到|处于).{0,5}(?:分钟限制|限时出场)|(?:分钟限制|限时出场).{0,5}(?:已确认|确有|正式宣布)|(?:has|is on|was placed on|has been placed on).{0,12}(?:a )?minutes? restriction|\d{1,2}[- ]minute restriction|limited to\s*\d{1,2}\s*minutes?|capped at\s*\d{1,2}\s*minutes?", text_for_claims, re.I)
     unconfirmed_minutes = re.search(r"(?:未确认|尚未公布|尚无|暂无|未知|不确定|没有可靠信息|unconfirmed|not confirmed|unknown|unavailable).{0,14}(?:分钟限制|限时出场|minutes? restriction)|(?:分钟限制|限时出场|minutes? restriction).{0,14}(?:未确认|尚未公布|尚无|暂无|未知|不确定|unconfirmed|not confirmed|unknown|unavailable)", text, re.I)
     if unconfirmed_minutes and minutes_claim and unconfirmed_minutes.start() <= minutes_claim.start() < unconfirmed_minutes.end():
         minutes_claim = None
-    status_claim = re.search(r"(?:已确认|官方宣布|正式确认).{0,10}(?:缺阵|缺席|出战|上场|首发|\bout\b|\bavailable\b)|已获准|获准|可以出战|确认出战|缺阵|无法出战|不会出场|出战成疑|\bquestionable\b|\bdoubtful\b|\bprobable\b|\bavailable\b|ruled out|\binactive\b|\bdnp\b|\bout\b", text_for_claims, re.I) or minutes_claim
+    status_claim = re.search(r"(?:已确认|官方宣布|正式确认).{0,10}(?:缺阵|缺席|出战|上场|首发|\bout\b|\bavailable\b)|已获准|获准|可以出战|确认出战|可打|cleared to play|can play|不能出战|不可以出战|不可出战|缺阵|无法出战|不会出场|出战成疑|\bquestionable\b|\bdoubtful\b|\bprobable\b|\bavailable\b|ruled out|\binactive\b|\bdnp\b|\bout\b", text_for_claims, re.I) or minutes_claim
     if status_claim and not minutes_claim and _supported_long_term_background(text, projection):
         status_claim = None
     if minutes_claim and not speculative and not names:
         issues.append({"unit_id": unit_id, "code": "current_minutes_restriction_unverified", "quote": text})
-    if status_claim and not speculative and not names:
+    unbound_confirmation=any(re.match(r'^(?:已经确认|已确认|官方宣布|正式确认)',part.strip())
+        for part in status_clauses)
+    aggregate_supported = bool(status_claim and re.search(r'缺阵|\bout\b|inactive', text_for_claims, re.I)
+        and supported_team_absence(text, projection, _mentioned_side(text, projection.get('game') or {})))
+    if status_claim and not names and not aggregate_supported and (not speculative or unbound_confirmation):
         issues.append({"unit_id": unit_id, "code": "current_availability_unverified", "quote": text})
     for player in names:
         matching = [fact for fact in facts if fact.get("kind") == "LIVE" and fact.get("game_specific")
-                    and (player.casefold() in str((fact.get("value") or {}).get("player_name") or "").casefold()
-                         or str((fact.get("value") or {}).get("player_name") or "").casefold() in player.casefold())]
-        if status_claim and not speculative and not matching:
+                    and str((fact.get("value") or {}).get("player_name") or "").strip().casefold() == player.strip().casefold()]
+        availability_matching = [fact for fact in matching
+            if (fact.get("value") or {}).get("status")
+            or (fact.get("value") or {}).get("claim_type") == "availability"]
+        if status_claim and not minutes_claim and not speculative and not availability_matching:
             issues.append({"unit_id": unit_id, "code": "current_availability_unverified",
                            "quote": text, "player": player})
         if minutes_claim and not speculative:
@@ -1104,7 +1117,9 @@ def _availability_issues_for_text(text: str, projection: dict, unit_id: str) -> 
                                    "quote": text, "player": player,
                                    "claimed_minutes": sorted(claimed_minutes),
                                    "source_minutes": sorted(sourced_minutes)})
-        for fact in matching:
+        for fact in availability_matching:
+            if re.search(r"如果|假如|若|\bif\b", text, re.I):
+                continue
             value = fact.get("value") or {}
             status = str(value.get("status") or "").casefold()
             if not status and str(value.get("claim_type") or "").casefold() == "availability":
@@ -1115,12 +1130,18 @@ def _availability_issues_for_text(text: str, projection: dict, unit_id: str) -> 
                     status = "out"
                 elif "questionable" in quote:
                     status = "questionable"
-            claims_out = bool(re.search(r"缺阵|无法出战|不会出场|ruled out|\binactive\b|\bdnp\b|\bout\b", text_for_claims, re.I))
-            claims_available = bool(re.search(r"获准|可以出战|确认出战|\bavailable\b|cleared to play", text_for_claims, re.I))
-            claims_questionable = bool(re.search(r"出战成疑|\bquestionable\b|\bdoubtful\b|\bprobable\b", text_for_claims, re.I))
+            if not status and not status_claim:
+                continue
+            claims_out = bool(status_claim and re.search(r"缺阵|无法出战|不会出场|ruled out|\binactive\b|\bdnp\b|\bout\b", text_for_claims, re.I))
+            claims_available = bool(status_claim and re.search(r"获准|可以出战|确认出战|可打|\bavailable\b|cleared to play|can play", text_for_claims, re.I))
+            claims_questionable = bool(status_claim and re.search(r"出战成疑|\bquestionable\b|\bdoubtful\b|\bprobable\b", text_for_claims, re.I))
+            negative_out = bool(re.search(r"(?:不会|不是|并非|没有|并未)(?:已经|已确认)?缺阵|\bnot\s+(?:ruled\s+)?out\b", text_for_claims, re.I))
+            negative_available = bool(re.search(r"不能出战|不可以出战|不可出战|\bnot\s+(?:available|cleared to play)\b", text_for_claims, re.I))
+            claims_out = (claims_out and not negative_out) or bool(status_claim and negative_available)
+            claims_available = (claims_available and not negative_available) or bool(status_claim and negative_out)
             out_status = {"out", "inactive", "suspended", "dnp"}
             if ((claims_out and status not in out_status)
-                    or (claims_available and status in out_status)
+                    or (claims_available and status not in {"available", "active"})
                     or (claims_questionable and status not in {"questionable", "doubtful", "probable"})):
                 issues.append({"unit_id": unit_id, "code": "confirmed_availability_source_conflict",
                                "quote": text, "fact_ids": [fact["id"]], "player": player, "status": status})
@@ -1547,7 +1568,7 @@ def validate_publication_hard_facts(judgment: dict, projection: dict) -> list[di
         issues.extend(_stat_issues_for_text(text, projection, unit_id, player_name=player_name))
         issues.extend(_venue_issues_for_text(text, projection, unit_id))
         issues.extend(_coach_quote_issues_for_text(text, projection, unit_id))
-        issues.extend(_availability_issues_for_text(text, projection, unit_id))
+        issues.extend(_availability_issues_for_text(text, projection, unit_id, player_name))
         issues.extend(_transaction_issues_for_text(text, projection, unit_id))
         issues.extend(_roster_claim_issues_for_text(text, projection, unit_id))
         issues.extend(_rest_day_issues_for_text(

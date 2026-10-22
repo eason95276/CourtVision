@@ -23,6 +23,26 @@ from .editorial_hard_facts import validate_publication_hard_facts
 
 LOCKED = {"winner_side": "away", "win_probability": 0.56, "expected_margin": 3.5,
           "expected_total": 228.5, "evidence_ids": ["prediction", "form", "roster"]}
+
+
+@pytest.mark.parametrize('text,conflict',[
+    ('若进入预计首发后场，在Jimmy Butler缺阵的情况下，他需要替Stephen Curry分担持球压力。',False),
+    ('若进入预计首发后场，Stephen Curry缺阵后，他需要分担持球压力。',True),
+])
+def test_projected_heading_does_not_transfer_another_players_absence(text,conflict):
+    from .editorial_hard_facts import _availability_issues_for_text
+    p={'facts':[{'id':'curry','kind':'LIVE','game_specific':True,'value':{
+        'player_name':'Stephen Curry','claim_type':'availability','status':'available'}},
+        {'id':'butler','kind':'LIVE','game_specific':True,'value':{
+        'player_name':'Jimmy Butler','claim_type':'availability','status':'out'}}]}
+    findings=_availability_issues_for_text(text,p,'card')
+    assert any(x['code']=='confirmed_availability_source_conflict'and x.get('player')=='Stephen Curry'for x in findings)==conflict
+
+
+def test_projected_heading_does_not_hide_unbound_confirmed_status():
+    from .editorial_hard_facts import _availability_issues_for_text
+    assert any(x['code']=='current_availability_unverified'for x in
+        _availability_issues_for_text('预计首发后场，已经确认无法出战。',{'facts':[]},'card'))
 GAME = {"game_id": "espn:fixture", "home": {"id": 1, "name": "Toronto Raptors", "name_zh": "猛龙"},
         "away": {"id": 2, "name": "Miami Heat", "name_zh": "热火"},
         "scheduled_tipoff": "2026-10-04T07:00:00+08:00", "cutoff": "2026-10-03T02:39:04+08:00",

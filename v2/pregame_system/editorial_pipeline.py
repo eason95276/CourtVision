@@ -245,7 +245,7 @@ def draft_judgment(draft, context, numbers, projection=None):
                 "statement": statement[:900],
                 "classification": {"source_fact": "source_fact", "model_output": "data_inference",
                                     "inference": "subjective_analysis"}.get(item.get("classification"), "subjective_analysis"),
-                "evidence_ids": refs[:6],
+                "evidence_ids": refs,
             })
         structured_core["key_matchup_variables"] = matchups
     pure = c.get("pure_prediction") or {}
@@ -493,6 +493,19 @@ def inspect_repair_patches(draft, units, patches, allowed_unit_ids, projection=N
             "duplicate_targets": [row["unit_id"] for row in rejected if "duplicate_target" in row["reasons"]]}
 
 
+def effective_repair_patches(draft, units, patches, allowed_unit_ids, projection):
+    validation = inspect_repair_patches(draft, units, patches, allowed_unit_ids, projection)
+    rejected = validation.get('rejected_patches') or []
+    if (rejected and all(row['reasons'] == ['no_op'] for row in rejected)
+            and len(rejected) < len(patches)):
+        skipped = {row['patch_index'] for row in rejected}
+        effective = [patch for index, patch in enumerate(patches) if index not in skipped]
+        checked = inspect_repair_patches(draft, units, effective, allowed_unit_ids, projection)
+        return effective, {**checked, 'response_patch_count': len(patches),
+                           'deferred_no_op_patches': rejected}
+    return patches, validation
+
+
 def apply_patches(draft, units, patches, allowed_unit_ids, *, include_judgment_overrides=False, projection=None):
     """Apply scoped public-text repairs while preserving the frozen forecast.
 
@@ -622,6 +635,10 @@ _REPAIR_FINDING_GUIDANCE = {
         "删除交易关系断言；不能从名单变化或球员身份推断交易细节。"),
     "current_availability_unverified": ("没有本场已确认的出战/缺阵依据；长期伤病背景不等于本场官方状态。",
         "删除确定的本场出战或长期缺阵断言。可以保留 BACKGROUND 明确支持的伤病事件本身，再作预计/条件判断；不能把受伤自动升级成已确认 OUT。"),
+    "confirmed_availability_source_conflict": ("出战状态用词与所指球员的冻结状态冲突，或把其他人的缺阵错误连到了本句提及的球员。",
+        "整句改写成该球员的篮球角色或对位分析，删除本句所有缺阵、出战、可打、首发确认等状态表述；不要重复原句或只追加解释，不改事实源或预测数字。"),
+    "unverified_global_season_count": ("没有完整赛季日历证据支持本赛季第一场等精确场次断言。",
+        "完整删除本赛季第一场、首场、揭幕战等场次表述，改写为新组合或轮换磨合的分析；不能仅改同一句中的分差数字。"),
     "locked_forecast_text_mismatch": ("句中第25秒最终预测数字与锁定 Final 不一致。",
         "只将用户侧文字改成 projection.locked_prediction / PUBLIC_DECISION 的值；绝不修改预测对象。"),
 }
@@ -844,16 +861,10 @@ def run_editorial(context, locked_forecast, folder, *, writer_client=None, revie
                 "repair_provenance": [], "repair_validation": response_validation, "stages": metadata})
             raise ValueError("editorial_repair_response_invalid:" + type(exc).__name__) from exc
         metadata.append({"stage": "repair1", **{k: v for k, v in meta.items() if k != "raw"}})
-        response_validation = inspect_repair_patches(
+        patches["patches"], response_validation = effective_repair_patches(
             draft, units, patches["patches"], affected, projection)
-        rejected = response_validation.get("rejected_patches") or []
-        if (rejected and all(row["reasons"] == ["no_op"] for row in rejected)
-                and len(rejected) < len(patches["patches"])):
-            skipped = {row["patch_index"] for row in rejected}
-            patches["patches"] = [patch for index, patch in enumerate(patches["patches"]) if index not in skipped]
-            response_validation = {**response_validation, "status": "accepted",
-                "deferred_no_op_patches": rejected, "rejected_patches": []}
-            metadata[-1]["deferred_no_op_patches"] = rejected
+        if response_validation.get("deferred_no_op_patches"):
+            metadata[-1]["deferred_no_op_patches"] = response_validation["deferred_no_op_patches"]
         if response_validation["status"] != "accepted":
             unchanged_findings = validate_publication_hard_facts(judgment, projection)
             metadata[-1]["status"] = "ineffective_or_out_of_scope"
@@ -894,7 +905,8 @@ def run_editorial(context, locked_forecast, folder, *, writer_client=None, revie
                     "hard_fact_blockers": residual, "affected_text": second_targets,
                     "finding_explanations": _repair_guidance(residual)}, ensure_ascii=False)}],
                 EditorialRepair, writer_client, max_tokens=1600)
-            second_validation = inspect_repair_patches(draft, units, second["patches"], second_affected, projection)
+            second["patches"], second_validation = effective_repair_patches(
+                draft, units, second["patches"], second_affected, projection)
             if second_validation["status"] != "accepted":
                 save(folder / "repair2_validation.json", second_validation)
                 raise ValueError("editorial_second_repair_invalid")

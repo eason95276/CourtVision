@@ -17,6 +17,7 @@ from .skill_provenance import prompt_skill_hashes
 from .storage import content_hash, now, save
 from .pregame_estimates import PregamePlan, validate_pregame_plan
 from .ats import ATS_EPSILON, build_spread_comparison
+from .claim_limits import MAX_CLAIM_EVIDENCE
 
 
 class ForecastNumbers(BaseModel):
@@ -40,7 +41,7 @@ class ForecastNumbers(BaseModel):
 class ForecastFactor(BaseModel):
     model_config = ConfigDict(extra="forbid")
     classification: Literal["source_fact", "model_output", "inference"]
-    evidence_ids: list[str] = Field(min_length=1, max_length=8)
+    evidence_ids: list[str] = Field(min_length=1, max_length=MAX_CLAIM_EVIDENCE)
     effect: Literal["home", "away", "higher_total", "lower_total", "uncertainty", "no_change"]
     summary: str = Field(min_length=1, max_length=600)
 
@@ -64,7 +65,7 @@ class ForecastClaim(BaseModel):
     statement: str = Field(min_length=1, max_length=300,
                            description="一到两句，给出本场最关键的篮球判断；不要复述 factors。")
     classification: Literal["source_fact", "inference"]
-    evidence_ids: list[str] = Field(min_length=1, max_length=8)
+    evidence_ids: list[str] = Field(min_length=1, max_length=MAX_CLAIM_EVIDENCE)
     confidence: Literal["low", "medium", "high"]
 
 
@@ -75,7 +76,7 @@ class KeyMatchup(BaseModel):
     why_it_matters: str = Field(min_length=1, max_length=220)
     expected_effect: str = Field(min_length=1, max_length=220)
     classification: Literal["source_fact", "inference"]
-    evidence_ids: list[str] = Field(min_length=1, max_length=8)
+    evidence_ids: list[str] = Field(min_length=1, max_length=MAX_CLAIM_EVIDENCE)
     confidence: Literal["low", "medium", "high"]
     uncertainty: str | None = Field(default=None, max_length=160)
 
@@ -84,7 +85,7 @@ class FlipCondition(BaseModel):
     model_config = ConfigDict(extra="forbid")
     condition: str = Field(min_length=1, max_length=220)
     judgment_effect: str = Field(min_length=1, max_length=220)
-    evidence_ids: list[str] = Field(min_length=1, max_length=8)
+    evidence_ids: list[str] = Field(min_length=1, max_length=MAX_CLAIM_EVIDENCE)
 
 
 class AnalysisCore(BaseModel):
