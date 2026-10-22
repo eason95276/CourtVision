@@ -2,130 +2,6 @@
   "contract_version": "courtvision-public-v1",
   "games": [
     {
-      "game_id": "espn:401909841",
-      "file": "games/espn_401909841.json",
-      "tipoff": "2026-10-22T02:00:00+00:00",
-      "version_id": "09733441-95e7-44c6-94b1-29e45828f35d",
-      "public_sha256": "be85c4473ad6a4c1803ad89231d4b9b8754c47a845288a5e08fc1038d118d904",
-      "home_record": {
-        "game": {
-          "away": {
-            "abbreviation": "PHX",
-            "accent": "#E56020",
-            "id": 1610612756,
-            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/phx.png",
-            "name": "Phoenix Suns",
-            "name_zh": "太阳",
-            "espn_team_id": "21",
-            "score": null
-          },
-          "game_type": "regular_season",
-          "home": {
-            "abbreviation": "POR",
-            "accent": "#E03A3E",
-            "id": 1610612757,
-            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/por.png",
-            "name": "Portland Trail Blazers",
-            "name_zh": "开拓者",
-            "espn_team_id": "22",
-            "score": null
-          },
-          "id": "espn:401909841",
-          "registered_game": true,
-          "schedule_revision": 1,
-          "status": "scheduled",
-          "tipoff": "2026-10-22T02:00:00+00:00",
-          "venue": "Moda Center",
-          "season": 2027,
-          "schedule_catalog_fact": true,
-          "postgame": null,
-          "homepage_visible": true,
-          "public_summary": true
-        },
-        "prediction": {
-          "status": "current",
-          "game_id": "espn:401909841",
-          "version_id": "09733441-95e7-44c6-94b1-29e45828f35d",
-          "state_revision": 3,
-          "locked_at": null,
-          "lock_reason": null,
-          "schedule_revision": 1,
-          "version": {
-            "analysis_contract_version": "two-stage-forecast-v1",
-            "base_input_hash": "279a7d726c25b85a5e6f926566fc9479c8302d807f24e8773c22056e2fd0c586",
-            "game_id": "espn:401909841",
-            "game_identity": {
-              "away_team_id": 1610612756,
-              "game_id": "espn:401909841",
-              "home_team_id": 1610612757,
-              "scheduled_tipoff": "2026-10-22T02:00:00+00:00"
-            },
-            "generated_at": "2026-10-22T01:40:39.303137+00:00",
-            "input_cutoff_at": "2026-10-22T01:40:13.635255+00:00",
-            "published_at": "2026-10-22T01:40:41.752913+00:00",
-            "schedule_revision": 1,
-            "stage": "FINAL_PREGAME",
-            "version_id": "09733441-95e7-44c6-94b1-29e45828f35d",
-            "payload_sha256": "7bef412279507c85397c96b22fdf77a3bbe91bbef1c70cc79cf5a7de5dc742dd",
-            "input_snapshot": {
-              "away": {
-                "abbreviation": "PHX",
-                "accent": "#E56020",
-                "id": 1610612756,
-                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/phx.png",
-                "name": "Phoenix Suns",
-                "name_zh": "太阳"
-              },
-              "home": {
-                "abbreviation": "POR",
-                "accent": "#E03A3E",
-                "id": 1610612757,
-                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/por.png",
-                "name": "Portland Trail Blazers",
-                "name_zh": "开拓者"
-              },
-              "id": "espn:401909841",
-              "schedule_revision": 1,
-              "tipoff": "2026-10-22T02:00:00+00:00"
-            },
-            "judgment": {
-              "final_prediction": {
-                "evidence_ids": [
-                  "2f724efdad2b14a82fc295e3f436ed0e8f713d740a4cb11f7172aea5bc874e41",
-                  "afd2896f2d29a330a10ea16dc4ba82ce6a8007996521050acca2417147c8b3fb",
-                  "cc6a047c53f6d9662b1ef9c543ef8e145472806cb6aa7d831d3ce3d4bb761aae",
-                  "cf8cd0053ecc196f81d51c83e017aa3f9d1e5daa07b0d33bac4fd53ca21886f2",
-                  "f39134a7ee44ee1851ae1fe46f5d8ad2b2bcf2108ae76544e583c88a724f7f98",
-                  "final-availability-0e085d4c2d6b23d5efbb",
-                  "final-availability-145aa1cbcec8e805b1ea",
-                  "final-availability-9e35ad834b97f127dcea",
-                  "final-availability-a7a78c0814b948ba0c65",
-                  "final-availability-e806df6817264af0c235"
-                ],
-                "expected_margin": 3.0,
-                "expected_total": 226.5,
-                "win_probability": 0.57,
-                "winner_side": "home"
-              },
-              "pregame_story": {
-                "classification": "subjective_analysis",
-                "evidence_ids": [
-                  "2f724efdad2b14a82fc295e3f436ed0e8f713d740a4cb11f7172aea5bc874e41",
-                  "afd2896f2d29a330a10ea16dc4ba82ce6a8007996521050acca2417147c8b3fb",
-                  "cc6a047c53f6d9662b1ef9c543ef8e145472806cb6aa7d831d3ce3d4bb761aae",
-                  "cf8cd0053ecc196f81d51c83e017aa3f9d1e5daa07b0d33bac4fd53ca21886f2",
-                  "f39134a7ee44ee1851ae1fe46f5d8ad2b2bcf2108ae76544e583c88a724f7f98",
-                  "final-availability-0e085d4c2d6b23d5efbb"
-                ],
-                "statement": "太阳内线少了马克·威廉姆斯，开拓者自己也没了夏普，揭幕夜就看波特兰的篮板能不能把这场球攥住。",
-                "title": "开拓者内线守家\n太阳残阵试新锋"
-              }
-            }
-          }
-        }
-      }
-    },
-    {
       "game_id": "espn:401909092",
       "file": "games/espn_401909092.json",
       "tipoff": "2026-10-22T02:00:00+00:00",
@@ -266,6 +142,137 @@
                   "title": "东契奇独挑开幕\n库里率众闯洛城"
                 },
                 "analysis_article": "内容更正：原预览出现球员归属错误，相关表述已更正，原预测保留供复盘。\n\n湖人这个休赛期把阵容彻底围着东契奇重建，揭幕战就在主场迎上勇士。对面是库里领衔的勇士，一支前场偏年轻、老将都坐在替补席上的球队。这场球最值得看的，就是东契奇一个人能把这套新阵容带到什么程度。\n\n我最想看的是东契奇叫挡拆之后，勇士怎么接。格林预计顶在中锋位置，换防东契奇是他的老本行：他能顶住第一步，也能在持球人分球时回身补位。可一旦格林被拉出禁区，勇士篮下就只剩伦德博格、桑托斯这些年轻人，凯斯勒在篮板和二次进攻上的优势就会显出来。东契奇要做的，是把这道选择题反复摆到格林面前——你换防，我就找内线；你收缩，我就自己在中距离停下来。\n\n里夫斯和格莱姆斯是这套进攻的第二层。里夫斯要分担东契奇的持球任务，格莱姆斯则要在东契奇被夹击时接住外线机会。湖人能不能把优势攒起来，很大程度上看这两个人能不能让勇士不敢只盯着东契奇一个人。\n\n所以胜负我站湖人，但让分我不跟。预计湖人赢4.5分，市场却把湖人放到让6.5的位置，这个差距我不认。原因很直接：这是双方本赛季第一场正式比赛，湖人这套首发里格莱姆斯和凯斯勒都是新面孔，东契奇和他们之间能打出多少默契，现在没有样本可看。勇士那边，波尔津吉斯、巴特勒、霍福德都列在替补候选里，实际打多久没人知道；如果他们真的大量出场，勇士前场的质量和体型会立刻不一样，格林也不用一个人扛内线。这些变数都指向分差不会轻易拉开，所以我更愿意站勇士受让6.5分这一边。\n\n总分我偏小，而且比让分更有把握。湖人这套阵容的进攻重心在东契奇手里，半场阵地会打得比较耐心；勇士如果让格林打中锋，内线高度不足，进攻端也更依赖库里的外线手感，而不是持续冲击篮下。两边都不像能轻松把回合数推高的样子。\n\n当然，反例也很清楚：只要库里手感一热，格林拿下篮板就推反击，比赛随时可能快起来，小分就站不住。开球后先看一件事——格林换防东契奇时，湖人能不能稳定找到凯斯勒这个出口。这一条走通了，湖人的半场优势才真正成立。"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": "espn:401909841",
+      "file": "games/espn_401909841.json",
+      "tipoff": "2026-10-22T02:00:00+00:00",
+      "version_id": "09733441-95e7-44c6-94b1-29e45828f35d",
+      "public_sha256": "0e997c074296d434492560fea9fa8f757d23f2012c65378b1030a1e475bf375f",
+      "home_record": {
+        "game": {
+          "away": {
+            "abbreviation": "PHX",
+            "accent": "#E56020",
+            "id": 1610612756,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/phx.png",
+            "name": "Phoenix Suns",
+            "name_zh": "太阳",
+            "espn_team_id": "21",
+            "score": 83.0
+          },
+          "game_type": "regular_season",
+          "home": {
+            "abbreviation": "POR",
+            "accent": "#E03A3E",
+            "id": 1610612757,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/por.png",
+            "name": "Portland Trail Blazers",
+            "name_zh": "开拓者",
+            "espn_team_id": "22",
+            "score": 124.0
+          },
+          "id": "espn:401909841",
+          "registered_game": true,
+          "schedule_revision": 1,
+          "status": "final",
+          "tipoff": "2026-10-22T02:00:00+00:00",
+          "venue": "Moda Center",
+          "postgame": {
+            "status": "available",
+            "version_id": "a7e896ed-4fbf-450e-a367-8cccabcb58e1",
+            "score_text": "太阳 83 — 124 开拓者",
+            "summary": "利拉德用25分和6记三分把比赛早早拉开，太阳全队命中率崩盘，让分方向看错，小分方向看对。",
+            "prediction_summary": "赛前看好开拓者 · 胜率57% · 预计赢3分；赛果开拓者赢41分",
+            "market_summary": "让分方向 太阳 +3.5 · 未命中；总分 小分 · 命中"
+          },
+          "season": 2027,
+          "schedule_catalog_fact": true,
+          "homepage_visible": true,
+          "public_summary": true
+        },
+        "prediction": {
+          "status": "locked",
+          "game_id": "espn:401909841",
+          "version_id": "09733441-95e7-44c6-94b1-29e45828f35d",
+          "state_revision": 5,
+          "locked_at": "2026-10-22T02:00:16.993446+00:00",
+          "lock_reason": "scheduled_tipoff_reached",
+          "schedule_revision": 1,
+          "version": {
+            "analysis_contract_version": "two-stage-forecast-v1",
+            "base_input_hash": "279a7d726c25b85a5e6f926566fc9479c8302d807f24e8773c22056e2fd0c586",
+            "game_id": "espn:401909841",
+            "game_identity": {
+              "away_team_id": 1610612756,
+              "game_id": "espn:401909841",
+              "home_team_id": 1610612757,
+              "scheduled_tipoff": "2026-10-22T02:00:00+00:00"
+            },
+            "generated_at": "2026-10-22T01:40:39.303137+00:00",
+            "input_cutoff_at": "2026-10-22T01:40:13.635255+00:00",
+            "published_at": "2026-10-22T01:40:41.752913+00:00",
+            "schedule_revision": 1,
+            "stage": "FINAL_PREGAME",
+            "version_id": "09733441-95e7-44c6-94b1-29e45828f35d",
+            "payload_sha256": "7bef412279507c85397c96b22fdf77a3bbe91bbef1c70cc79cf5a7de5dc742dd",
+            "input_snapshot": {
+              "away": {
+                "abbreviation": "PHX",
+                "accent": "#E56020",
+                "id": 1610612756,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/phx.png",
+                "name": "Phoenix Suns",
+                "name_zh": "太阳"
+              },
+              "home": {
+                "abbreviation": "POR",
+                "accent": "#E03A3E",
+                "id": 1610612757,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/por.png",
+                "name": "Portland Trail Blazers",
+                "name_zh": "开拓者"
+              },
+              "id": "espn:401909841",
+              "schedule_revision": 1,
+              "tipoff": "2026-10-22T02:00:00+00:00"
+            },
+            "judgment": {
+              "final_prediction": {
+                "evidence_ids": [
+                  "2f724efdad2b14a82fc295e3f436ed0e8f713d740a4cb11f7172aea5bc874e41",
+                  "afd2896f2d29a330a10ea16dc4ba82ce6a8007996521050acca2417147c8b3fb",
+                  "cc6a047c53f6d9662b1ef9c543ef8e145472806cb6aa7d831d3ce3d4bb761aae",
+                  "cf8cd0053ecc196f81d51c83e017aa3f9d1e5daa07b0d33bac4fd53ca21886f2",
+                  "f39134a7ee44ee1851ae1fe46f5d8ad2b2bcf2108ae76544e583c88a724f7f98",
+                  "final-availability-0e085d4c2d6b23d5efbb",
+                  "final-availability-145aa1cbcec8e805b1ea",
+                  "final-availability-9e35ad834b97f127dcea",
+                  "final-availability-a7a78c0814b948ba0c65",
+                  "final-availability-e806df6817264af0c235"
+                ],
+                "expected_margin": 3.0,
+                "expected_total": 226.5,
+                "win_probability": 0.57,
+                "winner_side": "home"
+              },
+              "pregame_story": {
+                "classification": "subjective_analysis",
+                "evidence_ids": [
+                  "2f724efdad2b14a82fc295e3f436ed0e8f713d740a4cb11f7172aea5bc874e41",
+                  "afd2896f2d29a330a10ea16dc4ba82ce6a8007996521050acca2417147c8b3fb",
+                  "cc6a047c53f6d9662b1ef9c543ef8e145472806cb6aa7d831d3ce3d4bb761aae",
+                  "cf8cd0053ecc196f81d51c83e017aa3f9d1e5daa07b0d33bac4fd53ca21886f2",
+                  "f39134a7ee44ee1851ae1fe46f5d8ad2b2bcf2108ae76544e583c88a724f7f98",
+                  "final-availability-0e085d4c2d6b23d5efbb"
+                ],
+                "statement": "太阳内线少了马克·威廉姆斯，开拓者自己也没了夏普，揭幕夜就看波特兰的篮板能不能把这场球攥住。",
+                "title": "开拓者内线守家\n太阳残阵试新锋"
               }
             }
           }
@@ -1723,5 +1730,5 @@
       }
     }
   ],
-  "published_at": "2026-10-22T12:11:13.579508+00:00"
+  "published_at": "2026-10-22T12:12:43.624163+00:00"
 }
