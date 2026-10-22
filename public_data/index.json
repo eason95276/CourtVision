@@ -536,131 +536,6 @@
       }
     },
     {
-      "game_id": "espn:401909837",
-      "file": "games/espn_401909837.json",
-      "tipoff": "2026-10-21T23:30:00+00:00",
-      "version_id": "8eb885a3-d32f-436f-84af-4ab2bdde0e4f",
-      "public_sha256": "703393507825691c83fef091aca4bae83631094fedb0ccfca2d3e04e15b5c4e8",
-      "home_record": {
-        "game": {
-          "id": "espn:401909837",
-          "status": "scheduled",
-          "tipoff": "2026-10-21T23:30:00+00:00",
-          "home": {
-            "id": 1610612761,
-            "name": "Toronto Raptors",
-            "name_zh": "猛龙",
-            "abbreviation": "TOR",
-            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/tor.png",
-            "accent": "#CE1141",
-            "espn_team_id": "28",
-            "score": null
-          },
-          "away": {
-            "id": 1610612741,
-            "name": "Chicago Bulls",
-            "name_zh": "公牛",
-            "abbreviation": "CHI",
-            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/chi.png",
-            "accent": "#CE1141",
-            "espn_team_id": "4",
-            "score": null
-          },
-          "postgame": null,
-          "game_type": "regular_season",
-          "schedule_revision": 1,
-          "registered_game": true,
-          "season": 2027,
-          "schedule_catalog_fact": true,
-          "venue": "Scotiabank Arena",
-          "homepage_visible": true,
-          "public_summary": true
-        },
-        "prediction": {
-          "status": "current",
-          "game_id": "espn:401909837",
-          "version_id": "8eb885a3-d32f-436f-84af-4ab2bdde0e4f",
-          "state_revision": 3,
-          "locked_at": null,
-          "lock_reason": null,
-          "schedule_revision": 1,
-          "version": {
-            "analysis_contract_version": "two-stage-forecast-v1",
-            "base_input_hash": "6eebb23790c140d1f9b5f580f644c273608e371d8f6d6d7ff844616a4f6d3001",
-            "game_id": "espn:401909837",
-            "game_identity": {
-              "away_team_id": 1610612741,
-              "game_id": "espn:401909837",
-              "home_team_id": 1610612761,
-              "scheduled_tipoff": "2026-10-21T23:30:00+00:00"
-            },
-            "generated_at": "2026-10-21T23:10:55.310256+00:00",
-            "input_cutoff_at": "2026-10-21T23:10:33.523646+00:00",
-            "published_at": "2026-10-21T23:11:01.034677+00:00",
-            "schedule_revision": 1,
-            "stage": "FINAL_PREGAME",
-            "version_id": "8eb885a3-d32f-436f-84af-4ab2bdde0e4f",
-            "payload_sha256": "477b9e6a24d7ed35d2f4602b673d967332188e230ed8dec7d53259a29012fc79",
-            "input_snapshot": {
-              "away": {
-                "abbreviation": "CHI",
-                "accent": "#CE1141",
-                "espn_team_id": "4",
-                "id": 1610612741,
-                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/chi.png",
-                "name": "Chicago Bulls",
-                "name_zh": "公牛"
-              },
-              "home": {
-                "abbreviation": "TOR",
-                "accent": "#CE1141",
-                "espn_team_id": "28",
-                "id": 1610612761,
-                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/tor.png",
-                "name": "Toronto Raptors",
-                "name_zh": "猛龙"
-              },
-              "id": "espn:401909837",
-              "schedule_revision": 1,
-              "tipoff": "2026-10-21T23:30:00+00:00"
-            },
-            "judgment": {
-              "final_prediction": {
-                "evidence_ids": [
-                  "4a09518b016b0e605606f65bbd9bfaf47a8617381045c2605d17892e70f68759",
-                  "81a645481d99dfb21f0a997bcbc96bea3f7a18ce506601e72537a4d786c4941f",
-                  "9789b15d37081ea20a15f46c38f3c9d8bbe3ae9a9a60a455a1cde7b4dd4ca381",
-                  "e95915ec5fb4326b0182eb9793994674ed6b51fc3c8ea3a27810a15bb678cb57",
-                  "final-availability-67b6d378e1402bde2ac0",
-                  "final-availability-ac9018d17875a41b5acc",
-                  "final-availability-ee1fe2f2f1fbf5452c26",
-                  "final-lineup-e446517f74ec8e526a62",
-                  "final-lineup-f5cc6d4a66469529f8e1"
-                ],
-                "expected_margin": 7.5,
-                "expected_total": 231.5,
-                "win_probability": 0.64,
-                "winner_side": "home"
-              },
-              "pregame_story": {
-                "classification": "subjective_analysis",
-                "evidence_ids": [
-                  "4a09518b016b0e605606f65bbd9bfaf47a8617381045c2605d17892e70f68759",
-                  "81a645481d99dfb21f0a997bcbc96bea3f7a18ce506601e72537a4d786c4941f",
-                  "9789b15d37081ea20a15f46c38f3c9d8bbe3ae9a9a60a455a1cde7b4dd4ca381",
-                  "e95915ec5fb4326b0182eb9793994674ed6b51fc3c8ea3a27810a15bb678cb57",
-                  "final-availability-67b6d378e1402bde2ac0",
-                  "final-availability-ac9018d17875a41b5acc"
-                ],
-                "statement": "猛龙在主场揭幕战迎来阵容重组的公牛，莱昂纳德与巴恩斯的侧翼组合第一次正式亮相，对面则要在内线减员的情况下撑住四十八分钟。",
-                "title": "猛龙开幕迎公牛\n莱昂纳德试新阵"
-              }
-            }
-          }
-        }
-      }
-    },
-    {
       "game_id": "espn:401909091",
       "file": "games/espn_401909091.json",
       "tipoff": "2026-10-21T23:30:00+00:00",
@@ -784,6 +659,138 @@
                 ],
                 "statement": "字母哥第一次以热火球员身份打正式比赛，对面森林狼偏偏是主帅芬奇自己承认篮板最让人不放心的那支球队。",
                 "title": "字母哥首秀热火\n狼队内线待检验"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": "espn:401909837",
+      "file": "games/espn_401909837.json",
+      "tipoff": "2026-10-21T23:30:00+00:00",
+      "version_id": "8eb885a3-d32f-436f-84af-4ab2bdde0e4f",
+      "public_sha256": "9f465f80168f771d251d9076dd7b00e84a23af7501e3c4f0db1f619beb3a07a8",
+      "home_record": {
+        "game": {
+          "id": "espn:401909837",
+          "status": "final",
+          "tipoff": "2026-10-21T23:30:00+00:00",
+          "home": {
+            "id": 1610612761,
+            "name": "Toronto Raptors",
+            "name_zh": "猛龙",
+            "abbreviation": "TOR",
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/tor.png",
+            "accent": "#CE1141",
+            "espn_team_id": "28",
+            "score": 135.0
+          },
+          "away": {
+            "id": 1610612741,
+            "name": "Chicago Bulls",
+            "name_zh": "公牛",
+            "abbreviation": "CHI",
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/chi.png",
+            "accent": "#CE1141",
+            "espn_team_id": "4",
+            "score": 92.0
+          },
+          "postgame": {
+            "status": "available",
+            "version_id": "0f8d707a-96fa-4c09-94ed-72770d647260",
+            "score_text": "公牛 92 — 135 猛龙",
+            "summary": "猛龙用首节43分和全场压迫防守把比赛早早打花，公牛进攻效率与失误双重崩盘，赛前让分方向看错，小分方向命中但成因与预想不同。",
+            "prediction_summary": "赛前看好猛龙 · 胜率64% · 预计赢7.5分；赛果猛龙赢43分",
+            "market_summary": "让分方向 公牛 +10.5 · 未命中；总分 小分 · 命中"
+          },
+          "game_type": "regular_season",
+          "schedule_revision": 1,
+          "registered_game": true,
+          "season": 2027,
+          "schedule_catalog_fact": true,
+          "venue": "Scotiabank Arena",
+          "homepage_visible": true,
+          "public_summary": true
+        },
+        "prediction": {
+          "status": "locked",
+          "game_id": "espn:401909837",
+          "version_id": "8eb885a3-d32f-436f-84af-4ab2bdde0e4f",
+          "state_revision": 5,
+          "locked_at": "2026-10-21T23:30:28.174287+00:00",
+          "lock_reason": "scheduled_tipoff_reached",
+          "schedule_revision": 1,
+          "version": {
+            "analysis_contract_version": "two-stage-forecast-v1",
+            "base_input_hash": "6eebb23790c140d1f9b5f580f644c273608e371d8f6d6d7ff844616a4f6d3001",
+            "game_id": "espn:401909837",
+            "game_identity": {
+              "away_team_id": 1610612741,
+              "game_id": "espn:401909837",
+              "home_team_id": 1610612761,
+              "scheduled_tipoff": "2026-10-21T23:30:00+00:00"
+            },
+            "generated_at": "2026-10-21T23:10:55.310256+00:00",
+            "input_cutoff_at": "2026-10-21T23:10:33.523646+00:00",
+            "published_at": "2026-10-21T23:11:01.034677+00:00",
+            "schedule_revision": 1,
+            "stage": "FINAL_PREGAME",
+            "version_id": "8eb885a3-d32f-436f-84af-4ab2bdde0e4f",
+            "payload_sha256": "477b9e6a24d7ed35d2f4602b673d967332188e230ed8dec7d53259a29012fc79",
+            "input_snapshot": {
+              "away": {
+                "abbreviation": "CHI",
+                "accent": "#CE1141",
+                "espn_team_id": "4",
+                "id": 1610612741,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/chi.png",
+                "name": "Chicago Bulls",
+                "name_zh": "公牛"
+              },
+              "home": {
+                "abbreviation": "TOR",
+                "accent": "#CE1141",
+                "espn_team_id": "28",
+                "id": 1610612761,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/tor.png",
+                "name": "Toronto Raptors",
+                "name_zh": "猛龙"
+              },
+              "id": "espn:401909837",
+              "schedule_revision": 1,
+              "tipoff": "2026-10-21T23:30:00+00:00"
+            },
+            "judgment": {
+              "final_prediction": {
+                "evidence_ids": [
+                  "4a09518b016b0e605606f65bbd9bfaf47a8617381045c2605d17892e70f68759",
+                  "81a645481d99dfb21f0a997bcbc96bea3f7a18ce506601e72537a4d786c4941f",
+                  "9789b15d37081ea20a15f46c38f3c9d8bbe3ae9a9a60a455a1cde7b4dd4ca381",
+                  "e95915ec5fb4326b0182eb9793994674ed6b51fc3c8ea3a27810a15bb678cb57",
+                  "final-availability-67b6d378e1402bde2ac0",
+                  "final-availability-ac9018d17875a41b5acc",
+                  "final-availability-ee1fe2f2f1fbf5452c26",
+                  "final-lineup-e446517f74ec8e526a62",
+                  "final-lineup-f5cc6d4a66469529f8e1"
+                ],
+                "expected_margin": 7.5,
+                "expected_total": 231.5,
+                "win_probability": 0.64,
+                "winner_side": "home"
+              },
+              "pregame_story": {
+                "classification": "subjective_analysis",
+                "evidence_ids": [
+                  "4a09518b016b0e605606f65bbd9bfaf47a8617381045c2605d17892e70f68759",
+                  "81a645481d99dfb21f0a997bcbc96bea3f7a18ce506601e72537a4d786c4941f",
+                  "9789b15d37081ea20a15f46c38f3c9d8bbe3ae9a9a60a455a1cde7b4dd4ca381",
+                  "e95915ec5fb4326b0182eb9793994674ed6b51fc3c8ea3a27810a15bb678cb57",
+                  "final-availability-67b6d378e1402bde2ac0",
+                  "final-availability-ac9018d17875a41b5acc"
+                ],
+                "statement": "猛龙在主场揭幕战迎来阵容重组的公牛，莱昂纳德与巴恩斯的侧翼组合第一次正式亮相，对面则要在内线减员的情况下撑住四十八分钟。",
+                "title": "猛龙开幕迎公牛\n莱昂纳德试新阵"
               }
             }
           }
@@ -1744,5 +1751,5 @@
       }
     }
   ],
-  "published_at": "2026-10-22T12:40:19.459295+00:00"
+  "published_at": "2026-10-22T12:53:50.298062+00:00"
 }

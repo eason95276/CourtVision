@@ -2,7 +2,7 @@
   "contract_version": "courtvision-public-v1",
   "game": {
     "id": "espn:401909837",
-    "status": "scheduled",
+    "status": "final",
     "tipoff": "2026-10-21T23:30:00+00:00",
     "home": {
       "id": 1610612761,
@@ -12,7 +12,7 @@
       "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/tor.png",
       "accent": "#CE1141",
       "espn_team_id": "28",
-      "score": null
+      "score": 135.0
     },
     "away": {
       "id": 1610612741,
@@ -22,7 +22,7 @@
       "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/chi.png",
       "accent": "#CE1141",
       "espn_team_id": "4",
-      "score": null
+      "score": 92.0
     },
     "prediction": {
       "available": true,
@@ -87,7 +87,7 @@
       "source_label": "开发期赛前预测快照"
     },
     "source": {
-      "schedule_captured_at": "2026-10-21T23:09:42.086513+00:00"
+      "schedule_captured_at": "2026-10-22T12:41:04.376808+00:00"
     },
     "roster_context": {
       "teams": {
@@ -345,7 +345,14 @@
         }
       }
     },
-    "postgame": null,
+    "postgame": {
+      "status": "available",
+      "version_id": "0f8d707a-96fa-4c09-94ed-72770d647260",
+      "score_text": "公牛 92 — 135 猛龙",
+      "summary": "猛龙用首节43分和全场压迫防守把比赛早早打花，公牛进攻效率与失误双重崩盘，赛前让分方向看错，小分方向命中但成因与预想不同。",
+      "prediction_summary": "赛前看好猛龙 · 胜率64% · 预计赢7.5分；赛果猛龙赢43分",
+      "market_summary": "让分方向 公牛 +10.5 · 未命中；总分 小分 · 命中"
+    },
     "matchup_history": {
       "status": "available",
       "game_id": "espn:401909837",
@@ -1077,15 +1084,15 @@
     },
     "official_injury_report": {
       "game_id": "espn:401909837",
-      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_00PM.pdf",
-      "source_published_at": "2026-10-21T23:00:00+00:00",
-      "captured_at": "2026-10-21T23:04:36.642677+00:00",
-      "source_sha256": "78829badd6c56b9a327bffdc19cf0e9ad2d6afb5a8b54df5022c5450320680de",
+      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_30PM.pdf",
+      "source_published_at": "2026-10-21T23:30:00+00:00",
+      "captured_at": "2026-10-21T23:36:02.155508+00:00",
+      "source_sha256": "dacec67dd7cbc9be798d383b74bb701f97246082adebe91d6be657b8e3509fb9",
       "parser_version": "nba-official-injury-live-v3",
       "status": "published",
-      "report_id": "e72f6bc8102ac28adf9970ffd3351d499e9ff9099e97e52265586bc2673563fc",
+      "report_id": "b8c0bacfd6643bfe0c30cb36de7b3920142cff4db4eaa30200b0cf26c4fee845",
       "report_date": "2026-10-21",
-      "report_time": "19:00",
+      "report_time": "19:30",
       "coverage": "complete",
       "records": [
         {
@@ -1094,10 +1101,10 @@
           "status": "out",
           "reason": "Injury/Illness - Gastrointestinal Illness",
           "game_id": "espn:401909837",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_00PM.pdf",
-          "source_published_at": "2026-10-21T23:00:00+00:00",
-          "captured_at": "2026-10-21T23:04:36.642677+00:00",
-          "source_sha256": "78829badd6c56b9a327bffdc19cf0e9ad2d6afb5a8b54df5022c5450320680de",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_30PM.pdf",
+          "source_published_at": "2026-10-21T23:30:00+00:00",
+          "captured_at": "2026-10-21T23:36:02.155508+00:00",
+          "source_sha256": "dacec67dd7cbc9be798d383b74bb701f97246082adebe91d6be657b8e3509fb9",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1106,10 +1113,10 @@
           "status": "available",
           "reason": "-",
           "game_id": "espn:401909837",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_00PM.pdf",
-          "source_published_at": "2026-10-21T23:00:00+00:00",
-          "captured_at": "2026-10-21T23:04:36.642677+00:00",
-          "source_sha256": "78829badd6c56b9a327bffdc19cf0e9ad2d6afb5a8b54df5022c5450320680de",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_30PM.pdf",
+          "source_published_at": "2026-10-21T23:30:00+00:00",
+          "captured_at": "2026-10-21T23:36:02.155508+00:00",
+          "source_sha256": "dacec67dd7cbc9be798d383b74bb701f97246082adebe91d6be657b8e3509fb9",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1118,10 +1125,10 @@
           "status": "out",
           "reason": "Injury/Illness - Gastrointestinal Illness",
           "game_id": "espn:401909837",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_00PM.pdf",
-          "source_published_at": "2026-10-21T23:00:00+00:00",
-          "captured_at": "2026-10-21T23:04:36.642677+00:00",
-          "source_sha256": "78829badd6c56b9a327bffdc19cf0e9ad2d6afb5a8b54df5022c5450320680de",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_30PM.pdf",
+          "source_published_at": "2026-10-21T23:30:00+00:00",
+          "captured_at": "2026-10-21T23:36:02.155508+00:00",
+          "source_sha256": "dacec67dd7cbc9be798d383b74bb701f97246082adebe91d6be657b8e3509fb9",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1130,10 +1137,10 @@
           "status": "available",
           "reason": "-",
           "game_id": "espn:401909837",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_00PM.pdf",
-          "source_published_at": "2026-10-21T23:00:00+00:00",
-          "captured_at": "2026-10-21T23:04:36.642677+00:00",
-          "source_sha256": "78829badd6c56b9a327bffdc19cf0e9ad2d6afb5a8b54df5022c5450320680de",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_30PM.pdf",
+          "source_published_at": "2026-10-21T23:30:00+00:00",
+          "captured_at": "2026-10-21T23:36:02.155508+00:00",
+          "source_sha256": "dacec67dd7cbc9be798d383b74bb701f97246082adebe91d6be657b8e3509fb9",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1142,10 +1149,10 @@
           "status": "out",
           "reason": "Injury/Illness - Left Hamstring Strain",
           "game_id": "espn:401909837",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_00PM.pdf",
-          "source_published_at": "2026-10-21T23:00:00+00:00",
-          "captured_at": "2026-10-21T23:04:36.642677+00:00",
-          "source_sha256": "78829badd6c56b9a327bffdc19cf0e9ad2d6afb5a8b54df5022c5450320680de",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_30PM.pdf",
+          "source_published_at": "2026-10-21T23:30:00+00:00",
+          "captured_at": "2026-10-21T23:36:02.155508+00:00",
+          "source_sha256": "dacec67dd7cbc9be798d383b74bb701f97246082adebe91d6be657b8e3509fb9",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1154,10 +1161,10 @@
           "status": "available",
           "reason": "-",
           "game_id": "espn:401909837",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_00PM.pdf",
-          "source_published_at": "2026-10-21T23:00:00+00:00",
-          "captured_at": "2026-10-21T23:04:36.642677+00:00",
-          "source_sha256": "78829badd6c56b9a327bffdc19cf0e9ad2d6afb5a8b54df5022c5450320680de",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_30PM.pdf",
+          "source_published_at": "2026-10-21T23:30:00+00:00",
+          "captured_at": "2026-10-21T23:36:02.155508+00:00",
+          "source_sha256": "dacec67dd7cbc9be798d383b74bb701f97246082adebe91d6be657b8e3509fb9",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1166,10 +1173,10 @@
           "status": "available",
           "reason": "-",
           "game_id": "espn:401909837",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_00PM.pdf",
-          "source_published_at": "2026-10-21T23:00:00+00:00",
-          "captured_at": "2026-10-21T23:04:36.642677+00:00",
-          "source_sha256": "78829badd6c56b9a327bffdc19cf0e9ad2d6afb5a8b54df5022c5450320680de",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_30PM.pdf",
+          "source_published_at": "2026-10-21T23:30:00+00:00",
+          "captured_at": "2026-10-21T23:36:02.155508+00:00",
+          "source_sha256": "dacec67dd7cbc9be798d383b74bb701f97246082adebe91d6be657b8e3509fb9",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1178,10 +1185,10 @@
           "status": "out",
           "reason": "G League - Two-Way",
           "game_id": "espn:401909837",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_00PM.pdf",
-          "source_published_at": "2026-10-21T23:00:00+00:00",
-          "captured_at": "2026-10-21T23:04:36.642677+00:00",
-          "source_sha256": "78829badd6c56b9a327bffdc19cf0e9ad2d6afb5a8b54df5022c5450320680de",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_30PM.pdf",
+          "source_published_at": "2026-10-21T23:30:00+00:00",
+          "captured_at": "2026-10-21T23:36:02.155508+00:00",
+          "source_sha256": "dacec67dd7cbc9be798d383b74bb701f97246082adebe91d6be657b8e3509fb9",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1190,10 +1197,10 @@
           "status": "out",
           "reason": "Injury/Illness - Right Foot Avulsion Fracture",
           "game_id": "espn:401909837",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_00PM.pdf",
-          "source_published_at": "2026-10-21T23:00:00+00:00",
-          "captured_at": "2026-10-21T23:04:36.642677+00:00",
-          "source_sha256": "78829badd6c56b9a327bffdc19cf0e9ad2d6afb5a8b54df5022c5450320680de",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_30PM.pdf",
+          "source_published_at": "2026-10-21T23:30:00+00:00",
+          "captured_at": "2026-10-21T23:36:02.155508+00:00",
+          "source_sha256": "dacec67dd7cbc9be798d383b74bb701f97246082adebe91d6be657b8e3509fb9",
           "parser_version": "nba-official-injury-live-v3"
         }
       ]
@@ -1201,12 +1208,12 @@
     "homepage_visible": true
   },
   "prediction": {
-    "status": "current",
+    "status": "locked",
     "game_id": "espn:401909837",
     "version_id": "8eb885a3-d32f-436f-84af-4ab2bdde0e4f",
-    "state_revision": 3,
-    "locked_at": null,
-    "lock_reason": null,
+    "state_revision": 5,
+    "locked_at": "2026-10-21T23:30:28.174287+00:00",
+    "lock_reason": "scheduled_tipoff_reached",
     "schedule_revision": 1,
     "fact_view": {
       "schema_version": "pregame-fact-view-v1",
@@ -3258,8 +3265,107 @@
     "public_contract": "courtvision-public-v1"
   },
   "postgame": {
-    "status": "unavailable",
-    "postgame": null
+    "status": "available",
+    "postgame": {
+      "game_id": "espn:401909837",
+      "version_id": "0f8d707a-96fa-4c09-94ed-72770d647260",
+      "title": "猛龙揭幕大胜牛\n伦纳德首秀定调",
+      "short_review": "猛龙用首节43分和全场压迫防守把比赛早早打花，公牛进攻效率与失误双重崩盘，赛前让分方向看错，小分方向命中但成因与预想不同。",
+      "settlement_summary": "胜负看对，让分看错，大小分看对。",
+      "article": "揭幕夜的多伦多没有给公牛任何适应时间。首节43比23，比赛在第一节就失去了悬念，最终135比92的比分把这场球变成了一边倒的展示。伦纳德重回猛龙的首秀拿到23分6篮板，17投5中的效率不算漂亮，但他在场上的侵略性和防守存在感，正是猛龙想要的基调。\n\n真正让比赛失控的是猛龙的防守压迫。公牛全场出现27次失误，猛龙只有10次，这个差距直接转化成了大量轻松得分机会。巴雷特对吉迪的领防从开局就见效，吉迪全场10投1中只拿2分，还送出5次失误，公牛的组织核心被掐住，进攻自然运转不起来。奎克利则打出了23分7助攻的全面表现，首节独得14分，和伦纳德、巴恩斯一起把分差迅速拉开。\n\n公牛这边，布泽利斯17分6篮板的数据看着还行，但8投2中的运动战命中率说明他的得分大量来自罚球，前三节几乎隐形，末节14分更像是在垃圾时间里的补课。威尔逊16分却用了21次出手，还搭上9次失误，年轻球员在猛龙的防守强度面前明显准备不足。全队三分36投4中，这样的外线效率让追分变成奢望。\n\n猛龙主帅拉贾科维奇赛后把功劳给了开局就拉满的防守强度，特别提到巴雷特对吉迪的限制。伦纳德末节主动要求多打几分钟找节奏，也说明他的状态还在往上走。\n\n赛前我判断猛龙赢球但让10.5分太深，选了公牛受让，结果猛龙赢了43分，这个方向错得彻底。小分方向倒是命中，但赛前我担心的是公牛内线减员拖慢节奏，实际却是公牛失误爆炸、投篮低效把总分压了下来，和预想的成因并不一样。",
+      "score": {
+        "home": {
+          "name": "猛龙",
+          "score": 135
+        },
+        "away": {
+          "name": "公牛",
+          "score": 92
+        },
+        "text": "公牛 92 — 135 猛龙"
+      },
+      "prediction": {
+        "winner_name": "猛龙",
+        "winner_probability": 0.64,
+        "expected_winner_margin": 7.5,
+        "expected_total": 231.5,
+        "actual_winner_name": "猛龙",
+        "actual_winner_margin": 43,
+        "actual_total": 227
+      },
+      "market_reference": {
+        "status": "available",
+        "home_spread": -10.5,
+        "away_spread": 10.5,
+        "total": 237.5,
+        "home_team_name": "猛龙",
+        "away_team_name": "公牛",
+        "source_title": "Draft Kings current odds",
+        "sportsbook": "Draft Kings",
+        "captured_at": "2026-10-21T23:10:00.968789+00:00",
+        "source_url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909837/competitions/401909837/odds",
+        "spread_review": {
+          "lean_side": "away",
+          "lean_line": 10.5,
+          "settlement": "loss"
+        },
+        "total_review": {
+          "lean": "under",
+          "settlement": "win",
+          "market_total": 237.5
+        }
+      },
+      "sources": [
+        {
+          "label": "比赛结果与球员数据",
+          "title": "ESPN 比赛数据",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=401909837",
+          "captured_at": "2026-10-22T02:28:32.110261+00:00"
+        },
+        {
+          "label": "公开早盘参考",
+          "title": "Draft Kings current odds",
+          "url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909837/competitions/401909837/odds",
+          "captured_at": "2026-10-21T23:10:00.968789+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "Raptors reveal opening-night roster",
+          "url": "https://www.sportsnet.ca/nba/article/raptors-reveal-opening-night-roster-for-2026-27-season",
+          "captured_at": "2026-10-21T16:28:17.602413+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "赛前来源",
+          "url": "https://www.si.com/nba/bulls/onsi/bulls-vs-raptors-6-30-ct-caleb-wilson-s-debut-starting-lineups-injury-updates-21",
+          "captured_at": "2026-10-21T23:10:22.538626+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "赛前来源",
+          "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_07_00PM.pdf",
+          "captured_at": "2026-10-21T23:04:36.642677+00:00"
+        },
+        {
+          "source_id": "coach-71decbc717df71eb22",
+          "url": "https://bbs.hupu.com/643151172.html",
+          "title": "[流言板]猛龙主帅采访全文：强硬防守助队取胜，伦纳德状态在提升-NBA新闻-虎扑社区",
+          "published_at": "2026-10-22T04:45:56+00:00",
+          "captured_at": "2026-10-22T12:01:12.610872+00:00",
+          "classification": "source_attributed_coach_statement"
+        },
+        {
+          "source_id": "hupu-fa48e2df614f4381d3",
+          "url": "https://bbs.hupu.com/643145559.html",
+          "title": "[赛后]公牛92-135猛龙，史密斯15分8板1冒，奎克利23分4板7助-NBA专区-虎扑社区",
+          "published_at": "2026-10-22T02:26:01+00:00",
+          "captured_at": "2026-10-22T12:01:12.610872+00:00",
+          "classification": "community_discussion",
+          "not_a_fact_source": true
+        }
+      ],
+      "generated_at": "2026-10-22T12:27:27.270404+00:00"
+    }
   },
   "market": {
     "status": "available",
@@ -3298,10 +3404,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-21T23:11:10.695062+00:00",
+    "exported_at": "2026-10-22T12:53:50.298062+00:00",
     "source_prediction_version_id": "8eb885a3-d32f-436f-84af-4ab2bdde0e4f",
     "source_prediction_payload_sha256": "477b9e6a24d7ed35d2f4602b673d967332188e230ed8dec7d53259a29012fc79",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "703393507825691c83fef091aca4bae83631094fedb0ccfca2d3e04e15b5c4e8"
+  "public_sha256": "9f465f80168f771d251d9076dd7b00e84a23af7501e3c4f0db1f619beb3a07a8"
 }
