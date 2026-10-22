@@ -14,10 +14,25 @@ from pathlib import Path
 from v2.pregame_system.prediction_versions import _instant, game_identity
 
 STAGES = {"EARLY_PREVIEW", "UPDATED_PREVIEW", "FINAL_PREGAME"}
+DEFAULT_PORTFOLIO_EDITORIAL_DIR = Path(__file__).parent / 'output' / 'editorial-overrides'
 
 
 def saved_publication(database, game_id, version_id):
     """Read a published row without initializing its database."""
+    if '::editorial::' in version_id:
+        base_id,expected=version_id.split('::editorial::',1)
+        base=saved_publication(database,game_id,base_id)
+        from v2.pregame_system.storage import content_hash
+        artifact=json.loads((DEFAULT_PORTFOLIO_EDITORIAL_DIR/(base_id+'.json')).read_text(encoding='utf-8'))
+        editorial=artifact.get('editorial')or{}
+        if (artifact.get('purpose')!='factual_correction' or artifact.get('base_prediction_version_id')!=base_id
+                or artifact.get('base_prediction_payload_sha256')!=base['payload_sha256']
+                or content_hash(editorial)!=artifact.get('editorial_sha256')):
+            raise ValueError('public_release_editorial_correction_invalid')
+        if artifact['editorial_sha256']!=expected:raise ValueError('public_release_article_selection_changed')
+        return {**base,'prediction_payload_sha256':base['payload_sha256'],
+            'payload_sha256':content_hash({'base':base['payload_sha256'],'editorial':expected}),
+            'editorial_sha256':expected}
     if '::postgame::' in version_id:
         base_id,post_key=version_id.split('::postgame::',1)
         post_key,_,requested_view=post_key.partition('::view::')
@@ -182,6 +197,9 @@ class PublicationQueue:
         with self.connect() as db:
             changed = db.execute("UPDATE publication_jobs SET status=?,next_attempt_at=?,owner_token=NULL,lease_until=NULL,last_error=?,result_json=?,finished_at=? WHERE version_id=? AND status='running' AND owner_token=? AND lease_until>?", (status, next_at.isoformat(), str(error)[:300] if error else None, json.dumps(result, ensure_ascii=False) if result else None, at.isoformat() if status in {'succeeded','superseded','failed'} else None, job['version_id'], job['owner_token'], at.isoformat())).rowcount
         if not changed: raise ValueError('publication_claim_lost')
+        if status=='succeeded' and result.get('commit'):
+            from .publication_deployment import DeploymentChecks
+            DeploymentChecks(self).enqueue(job,result)
         return {'status': status, 'version_id': job['version_id'], 'attempts': job['attempts'], 'result': result}
 
     def run(self, job, publisher):

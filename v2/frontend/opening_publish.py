@@ -14,7 +14,29 @@ from .publication_queue import PublicationQueue, saved_publication
 REMOTE = 'https://github.com/eason95276/CourtVision.git'
 
 
-def publish_saved(job, *, public_root, queue_root, api_base='http://127.0.0.1:8625', runner=None, run_checks=True, remote=REMOTE):
+class GitDeliveryError(RuntimeError):
+    pass
+
+
+def publish_saved(job, *, public_root, queue_root, api_base='http://127.0.0.1:8625', runner=None,
+                  run_checks=True, remote=REMOTE, api_factory=None):
+    if os.environ.get('COURTVISION_PUBLIC_TRANSPORT')=='api':
+        if remote!=REMOTE:raise ValueError('public_release_correction_repository_invalid')
+        from .github_delivery import GitHubAPI,publish_api
+        return publish_api(job,public_root=public_root,queue_root=queue_root,api_base=api_base,
+                           api=api_factory() if api_factory else GitHubAPI())
+    try:
+        return _publish_saved_git(job,public_root=public_root,queue_root=queue_root,
+            api_base=api_base,runner=runner,run_checks=run_checks,remote=remote)
+    except (GitDeliveryError,subprocess.TimeoutExpired) as exc:
+        if remote!=REMOTE:raise
+        if isinstance(exc,subprocess.TimeoutExpired) and (not exc.cmd or exc.cmd[0]!='git'):raise
+        from .github_delivery import GitHubAPI,publish_api
+        return publish_api(job,public_root=public_root,queue_root=queue_root,api_base=api_base,
+                           api=api_factory() if api_factory else GitHubAPI())
+
+
+def _publish_saved_git(job, *, public_root, queue_root, api_base='http://127.0.0.1:8625', runner=None, run_checks=True, remote=REMOTE):
     source = saved_publication(job['source_database'], job['game_id'], job['version_id'])
     if source['payload_sha256'] != job['payload_sha256']:
         raise ValueError('public_release_queued_hash_changed')
@@ -32,6 +54,9 @@ def publish_saved(job, *, public_root, queue_root, api_base='http://127.0.0.1:86
     def command(args, *, cwd, timeout=90):
         result = (runner or subprocess.run)(args, cwd=cwd, capture_output=True, text=True,
             encoding='utf-8', errors='replace', timeout=timeout, env=env)
+        operation=next((x for x in args[1:]if x in {'clone','push','pull','fetch'}),None) if args[0]=='git' else None
+        if result.returncode and operation:
+            raise GitDeliveryError('public_release_git_transport_failed:'+operation)
         if result.returncode:
             raise RuntimeError('public_release_command_failed:' + args[0] + ':' + (args[1] if len(args)>1 else ''))
         return result.stdout.strip()
@@ -41,13 +66,15 @@ def publish_saved(job, *, public_root, queue_root, api_base='http://127.0.0.1:86
     work = Path(queue_root).resolve() / 'workspaces' / str(uuid.uuid4())
     work.mkdir(parents=True, exist_ok=False)
     checkout = work / 'repository'
-    command(['git','clone','--single-branch','--branch','main',configured,str(checkout)], cwd=work, timeout=120)
+    command(['git','clone','--single-branch','--branch','main',configured,str(checkout)], cwd=work, timeout=20)
     slug = job['game_id'].replace(':','_')
     path = checkout / 'public_data/games' / (slug+'.json')
     if path.is_file():
         old = json.loads(path.read_text(encoding='utf-8'))
         previous = (old.get('prediction') or {}).get('version') or {}
-        if previous.get('version_id') == prediction_id and (not postgame or postgame_matches(old)):
+        old_editorial=((old.get('prediction')or{}).get('display_projection')or{}).get('portfolio_editorial')or{}
+        editorial_matches=not source.get('editorial_sha256')or old_editorial.get('editorial_sha256')==source['editorial_sha256']
+        if previous.get('version_id') == prediction_id and (not postgame or postgame_matches(old))and editorial_matches:
             if previous.get('payload_sha256') != source.get('prediction_payload_sha256',source['payload_sha256']):
                 raise ValueError('public_release_remote_version_hash_conflict')
             clean = {key:value for key,value in old.items() if key != 'public_sha256'}
@@ -58,8 +85,8 @@ def publish_saved(job, *, public_root, queue_root, api_base='http://127.0.0.1:86
                     or entry.get('version_id') != prediction_id):
                 raise ValueError('public_release_remote_record_integrity_failed')
             return {'status':'already_published','version_id':job['version_id'],
-                    'commit':command(['git','rev-parse','HEAD'],cwd=checkout)}
-        if previous.get('published_at') and (not postgame or previous.get('version_id')!=prediction_id) and _instant(previous['published_at'],'remote_published_at') >= _instant(source['version']['published_at'],'published_at'):
+                    'commit':command(['git','rev-parse','HEAD'],cwd=checkout),'public_sha256':old['public_sha256']}
+        if previous.get('published_at') and previous.get('version_id')!=prediction_id and _instant(previous['published_at'],'remote_published_at') >= _instant(source['version']['published_at'],'published_at'):
             return {'status':'superseded','version_id':job['version_id'],'remote_version_id':previous.get('version_id')}
     command([sys.executable,str(checkout/'publish_game.py'),job['game_id'],'--destination',str(checkout/'public_data'),'--api-base',api_base],cwd=checkout,timeout=60)
     record = json.loads(path.read_text(encoding='utf-8'))
@@ -95,7 +122,7 @@ def publish_saved(job, *, public_root, queue_root, api_base='http://127.0.0.1:86
     command(['git','-c','user.name='+name,'-c','user.email='+email,'commit','-m',subject],cwd=checkout)
     for push_attempt in range(3):
         try:
-            command(['git','push','origin','HEAD:main'],cwd=checkout,timeout=120)
+            command(['git','push','origin','HEAD:main'],cwd=checkout,timeout=20)
             break
         except RuntimeError:
             if push_attempt == 2:
@@ -103,9 +130,9 @@ def publish_saved(job, *, public_root, queue_root, api_base='http://127.0.0.1:86
             # This isolated checkout owns only one saved delivery. Preserve remote
             # schedule/README changes; never force-push or regenerate the report.
             command(['git','-c','user.name='+name,'-c','user.email='+email,
-                     'pull','--rebase','origin','main'],cwd=checkout,timeout=120)
+                     'pull','--rebase','origin','main'],cwd=checkout,timeout=20)
     return {'status':'pushed','game_id':job['game_id'],'version_id':job['version_id'],
-        'commit':command(['git','rev-parse','HEAD'],cwd=checkout),'generation_calls':0,'deployment':'GitHub Pages Actions pending'}
+        'commit':command(['git','rev-parse','HEAD'],cwd=checkout),'generation_calls':0,'deployment':'GitHub Pages Actions pending','public_sha256':record['public_sha256']}
 
 
 def publication_queue(database=DEFAULT_DATABASE):

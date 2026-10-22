@@ -528,6 +528,8 @@ def build_editorial_projection(context, locked_prediction, analyst_reasoning=Non
         body["visibility_policy"] = {"public": "may support user-facing explanation",
             "writer_internal": "may guide reasoning but is not itself a public fact or required wording",
             "audit_only": "retained for audit and excluded from Writer input"}
+    if game.get('player_identity_lexicon'):
+        body['player_identity_lexicon'] = clean(game['player_identity_lexicon'])
     if game.get('player_display_names'):
         body['player_display_names']=[{k:r[k]for k in ('canonical_name_en','display_name_zh')if k in r}
             for r in game['player_display_names']if isinstance(r,dict)]

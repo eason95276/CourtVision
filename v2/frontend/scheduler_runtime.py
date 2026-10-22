@@ -127,6 +127,8 @@ def status_report(database, *, config=None, at=None):
             with closing(readonly_connection(queue_path)) as db:
                 report['publications'] = [dict(row) for row in db.execute(
                     'SELECT version_id,game_id,status,attempts,next_attempt_at,last_error FROM publication_jobs ORDER BY created_at DESC LIMIT 20')]
+                if db.execute("SELECT 1 FROM sqlite_master WHERE name='deployment_checks'").fetchone():
+                    report['website_verifications']=[dict(r)for r in db.execute("SELECT version_id,game_id,status,attempts,commit_sha,last_error,result_json FROM deployment_checks ORDER BY created_at DESC LIMIT 20")]
         except sqlite3.Error:
             report['publication_status'] = 'unavailable'
     return report
@@ -147,7 +149,8 @@ class ActiveWorker:
 class PersistentScheduler:
     """A bounded dispatcher. No unbounded executor queue, no shared AI clients."""
     def __init__(self, service, *, config=None, data_source=None, process_context=None,
-                 worker_target=generation_worker, service_builder=None, allowed_game_ids=None, allowed_stages=None, health_clock=None):
+                 worker_target=generation_worker, service_builder=None, allowed_game_ids=None, allowed_stages=None, health_clock=None,
+                 deployment_checks_factory=None, activation_receipt=None):
         self.service = service
         self.tasks = service.tasks
         self.config = config or RuntimeConfig()
@@ -165,8 +168,14 @@ class PersistentScheduler:
         if os.environ.get('COURTVISION_PUBLIC_PUBLISH_ROOT'):
             from .opening_publish import publication_queue
             self.publication_queue = publication_queue(service.store.path)
+        self.deployment_checks = None
+        if self.publication_queue is not None:
+            from .publication_deployment import DeploymentChecks
+            self.deployment_checks = (deployment_checks_factory or DeploymentChecks)(self.publication_queue)
         self.allowed_game_ids = None if allowed_game_ids is None else frozenset(allowed_game_ids)
         self.allowed_stages = None if allowed_stages is None else frozenset(allowed_stages)
+        self.activation_receipt = Path(activation_receipt) if activation_receipt else None
+        self.activation_digest = None
         # Process liveness is real wall time; offline business clocks may compress
         # a 141-second generation into a fraction of a second.
         self.health_clock = health_clock or (lambda: datetime.now(timezone.utc))
@@ -326,6 +335,7 @@ class PersistentScheduler:
             if result['errors']:
                 self._event('saved_report_discovery_failed', detail=result)
             self.last_publication_discovery = at
+            self.deployment_checks.backfill(self.allowed_game_ids)
         if not self.public_jobs:
             job = self.publication_queue.claim(game_ids=self.allowed_game_ids)
             if job:
@@ -335,6 +345,12 @@ class PersistentScheduler:
                         queue_root=self.publication_queue.root,
                         api_base=os.environ.get('COURTVISION_PUBLIC_API_BASE', 'http://127.0.0.1:8625'))
                 self.public_jobs[job['version_id']] = self.public_pool.submit(self.publication_queue.run, job, deliver)
+            else:
+                checks=self.deployment_checks
+                check=checks.claim()
+                if check:
+                    self.public_jobs['website:'+check['version_id']]=self.public_pool.submit(checks.run,check,
+                        site_url=os.environ.get('COURTVISION_PUBLIC_SITE_URL','https://nba.weitao.si'))
 
     def _warm_final_information(self, at):
         if self.allowed_stages is not None and 'FINAL_PREGAME' not in self.allowed_stages:
@@ -375,6 +391,14 @@ class PersistentScheduler:
                 self.stop_event.set()
                 return {"status": "leader_unavailable", "dispatched": 0}
             self._reap()
+            if self.activation_receipt is not None:
+                digest=hashlib.sha256(self.activation_receipt.read_bytes()).hexdigest()
+                if digest!=self.activation_digest:
+                    scope=validate_activation(self.service.store.path,self.activation_receipt,allow_real_execution=True)
+                    self.allowed_game_ids=frozenset(scope['allowed_game_ids'])
+                    self.allowed_stages=frozenset(scope['allowed_stages']) if scope['allowed_stages'] is not None else None
+                    os.environ['COURTVISION_FORECAST_MODEL']=scope['forecast_model']
+                    self.activation_digest=digest
             try:
                 self._pump_publications()
             except (OSError, ValueError, sqlite3.Error) as error:
@@ -570,7 +594,8 @@ def main(argv=None):
         service = build_service(args.database, config)
         runner = PersistentScheduler(service, config=config,
             data_source=lambda: read_json(args.data) if args.data.is_file() else {"games": []},
-            allowed_game_ids=activation["allowed_game_ids"], allowed_stages=activation["allowed_stages"])
+            allowed_game_ids=activation["allowed_game_ids"], allowed_stages=activation["allowed_stages"],
+            activation_receipt=args.activation_receipt)
         for signum in (signal.SIGINT, signal.SIGTERM):
             signal.signal(signum, lambda *_: runner.stop_event.set())
         if args.once:

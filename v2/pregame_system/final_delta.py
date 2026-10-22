@@ -255,6 +255,8 @@ def run_incremental(early,readiness,analyst,folder,*,before_writer=None,client=N
             'allowed_evidence':[{k:r[k]for k in ('id','section','value')}for r in basketball['evidence']
                 if isinstance(r.get('value'),dict)and r.get('section')!='early_assumption'and r['value'].get('claim_type')!='market_reference']},DeltaAssessment,folder,'Change Assessment',client)
         if not set(value['evidence_ids'])<=set(context.evidence_index):raise ValueError('final_delta_unknown_evidence')
+        from .player_identity import validate_forecast_identity
+        validate_forecast_identity(value,basketball)
         prediction=ForecastNumbers.model_validate(value['prediction']).model_dump();forecast['final_prediction']=prediction;forecast['review']['prediction']=prediction
         if delta['uncertainty_updated']and forecast.get('final_analysis_core')and not value.get('analysis_core'):
             raise ValueError('final_uncertainty_requires_current_analysis_core')
@@ -272,6 +274,8 @@ def run_incremental(early,readiness,analyst,folder,*,before_writer=None,client=N
             'early_basis':early.get('editorial_material',[]),'deterministic_spread_comparison':comparison,
             'tie_break_required':tie,'allowed_evidence_ids':list(context.evidence_index)},DeltaAssessment,folder,'Market Review',client)
         if not set(value['evidence_ids'])<=set(context.evidence_index):raise ValueError('final_market_unknown_evidence')
+        from .player_identity import validate_forecast_identity
+        validate_forecast_identity(value,basketball)
         forecast['final_prediction']=ForecastNumbers.model_validate(value['prediction']).model_dump();forecast['review']['prediction']=forecast['final_prediction']
         forecast['review']['factors'].append({'classification':'inference','evidence_ids':value['evidence_ids'],'effect':'uncertainty','summary':value['rationale']})
         if value.get('analysis_core'):forecast['final_analysis_core']=value['analysis_core']

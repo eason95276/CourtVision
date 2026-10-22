@@ -1568,6 +1568,8 @@ def validate_publication_hard_facts(judgment: dict, projection: dict) -> list[di
         issues.extend(_stat_issues_for_text(text, projection, unit_id, player_name=player_name))
         issues.extend(_venue_issues_for_text(text, projection, unit_id))
         issues.extend(_coach_quote_issues_for_text(text, projection, unit_id))
+        from .player_identity import identity_issues
+        issues.extend(identity_issues(text, projection, unit_id, player_name))
         issues.extend(_availability_issues_for_text(text, projection, unit_id, player_name))
         issues.extend(_transaction_issues_for_text(text, projection, unit_id))
         issues.extend(_roster_claim_issues_for_text(text, projection, unit_id))

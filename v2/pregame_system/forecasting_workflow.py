@@ -892,6 +892,11 @@ def _run_two_stage_impl(basketball: dict, market: dict, folder: Path, *, client=
                 "expected_total、因素、证据、uncertainties、analysis_core 和 pregame_plan 必须原样保留；"
                 "按实际方向更新 decision / revision_reason，并在 rationale 解释基于现有篮球分析为何选择该侧。"
             )
+        if correction and str(correction.get('error','')).startswith('forecast_current_player_identity:'):
+            protocol += ('\n这是独立阶段的身份假设纠错：先前候选尚未通过验证，未冻结为正式判断。'
+                '必须根据CURRENT本场两队名单重新分析；可重判独立候选数字，但不得接触或猜测市场。'
+                '历史球员或其他队球员不能写成本场出战、首发、轮换变量，待确认/如果/预计不能代替身份核对。'
+                '姓名词典仅帮助解析名字，不证明球队归属。without某球员不等于该球员因伤缺阵。')
         if (basketball.get("game") or {}).get("game_type") == "preseason":
             if require_analysis_core and stage in {"market_review", "market_review_tiebreak", "market_review_text_revision"}:
                 protocol += "\n独立阶段的 pregame_plan 已冻结并会被原样复用；本阶段不输出、不改写首发或分钟计划。"
@@ -958,7 +963,8 @@ def _run_two_stage_impl(basketball: dict, market: dict, folder: Path, *, client=
         if correction is not None:
             messages.append({"role":"user", "content":json.dumps({
                 "protocol_correction":correction, "allowed_evidence_ids":sorted(_ids(basketball)),
-                "instruction":"修正本次引用/阵容与负荷basis协议错误，逐字复制允许的 evidence ID。source_expected/confirmed 需要对应首发来源覆盖列出的球员；只有部分来自报道、其余由你推断的阵容，应标为 agent_expected，不能声称来源确认。同时核对所有首发与负荷的来源标签。source_confirmed 的分钟范围必须由本场 minutes_restriction 原文支持，否则只改为 agent_estimate 并说明是分析估计；保留同一球员的分钟上下限，不得改成已确认。不改 prediction 数字，不新增事实。返回完整 schema JSON。"
+                "instruction":("修正名单身份错误。上一候选无效；只按CURRENT本场两队名单重判独立候选，可相应修改独立prediction和分析估计分钟。不能把姓名词典、历史效力或without表述当本场伤病/出战证据，不能接触市场或改Official数值。引用现有证据，返回完整schema。" if str(correction.get('error','')).startswith('forecast_current_player_identity:') else
+                "修正本次引用/阵容与负荷basis协议错误，逐字复制允许的 evidence ID。source_expected/confirmed 需要对应首发来源覆盖列出的球员；只有部分来自报道、其余由你推断的阵容，应标为 agent_expected，不能声称来源确认。同时核对所有首发与负荷的来源标签。source_confirmed 的分钟范围必须由本场 minutes_restriction 原文支持，否则只改为 agent_estimate 并说明是分析估计；保留同一球员的分钟上下限，不得改成已确认。不改 prediction 数字，不新增事实。返回完整 schema JSON。")
             },ensure_ascii=False)})
         wire_schema = None
         if strict_transport:
@@ -1133,6 +1139,8 @@ def _run_two_stage_impl(basketball: dict, market: dict, folder: Path, *, client=
         _validate_evidence(candidate, _ids(basketball))
         validate_independent_market_boundary(candidate)
         validate_pregame_plan(candidate.pregame_plan, basketball)
+        from .player_identity import validate_forecast_identity
+        validate_forecast_identity(candidate, basketball)
 
     original_prediction = independent.prediction.model_dump()
     repaired=set()
@@ -1151,7 +1159,7 @@ def _run_two_stage_impl(basketball: dict, market: dict, folder: Path, *, client=
                 })
                 save(folder / "schema_repair_provenance.json", schema_repair_provenance)
                 raise ValueError("forecast_schema_repair_output_invalid") from exc
-            category='references' if str(exc) in {'unknown_plan_evidence','unknown_forecast_evidence'} else 'plan_basis' if str(exc).startswith('lineup_basis_source_unverified:') or str(exc)=='confirmed_minutes_source_unverified' else None
+            category='references' if str(exc) in {'unknown_plan_evidence','unknown_forecast_evidence'} else 'plan_basis' if str(exc).startswith('lineup_basis_source_unverified:') or str(exc)=='confirmed_minutes_source_unverified' else 'identity' if str(exc).startswith('forecast_current_player_identity:') else None
             # At most once per protocol class. A reference repair must not
             # consume the separate basis repair; repeated failures stop.
             if category is None or category in repaired:raise
@@ -1159,7 +1167,12 @@ def _run_two_stage_impl(basketball: dict, market: dict, folder: Path, *, client=
             before_usage = sorted((row.side,row.player_name,row.minutes_min,row.minutes_max)for row in (independent.pregame_plan.player_usage if independent.pregame_plan else []))
             independent = call('independent',basketball,independent_schema,correction_index=len(repaired),
                 correction={'error':str(exc),'candidate':independent.model_dump()})
-            if independent.prediction.model_dump()!=original_prediction:
+            if category == 'identity':
+                save(folder/'independent_identity_reassessment.json',{
+                    'reason':str(exc),'prior_invalid_prediction':original_prediction,
+                    'reassessed_prediction':independent.prediction.model_dump(),'market_exposed':False})
+                original_prediction=independent.prediction.model_dump()
+            elif independent.prediction.model_dump()!=original_prediction:
                 raise ValueError('protocol_revision_changed_prediction')
             if category=='plan_basis'and sorted((row.side,row.player_name,row.minutes_min,row.minutes_max)for row in (independent.pregame_plan.player_usage if independent.pregame_plan else []))!=before_usage:
                 raise ValueError('protocol_revision_changed_minutes')

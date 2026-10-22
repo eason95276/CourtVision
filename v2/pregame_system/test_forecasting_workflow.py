@@ -160,6 +160,33 @@ def test_v2_schema_repair_converts_thesis_shape_once_and_preserves_prediction(tm
     assert json.loads((root / "schema_repair_provenance.json").read_text(encoding="utf-8"))["schema_repair_used"] is True
 
 
+@pytest.mark.parametrize('corrected',[True,False])
+def test_identity_reassessment_is_bounded_and_keeps_market_out(tmp_path,corrected):
+    basketball=v2_schema_repair_fixture_basketball()
+    basketball['evidence'].append({'id':'roster.current','section':'roster_context','value':{'teams':{
+        'home':{'official_team_roster':{'status':'verified','players':[{'name':'Luka Doncic'},{'name':'Bronny James'}]}},
+        'away':{'official_team_roster':{'status':'verified','players':[{'name':'Stephen Curry'},{'name':'Draymond Green'}]}}
+    }}})
+    calls=[]
+    def client(messages,schema):
+        calls.append(messages)
+        assert 'market.quote' not in json.dumps(messages) and '228.5' not in json.dumps(messages)
+        value=versioned_output(4.5 if len(calls)==1 else 2.5)
+        value['factors'][0]['summary']='LeBron James availability remains unconfirmed.' if len(calls)==1 or not corrected else 'Luka Doncic availability remains unconfirmed.'
+        return json.dumps(value),{}
+    if not corrected:
+        with pytest.raises(ValueError,match='forecast_current_player_identity'):
+            run_two_stage(basketball,{'evidence':[]},tmp_path/'run',client=client,skill_loader=lambda:'FORECAST',require_analysis_core=True)
+        assert not (tmp_path/'run/independent.json').exists()
+    else:
+        result=run_two_stage(basketball,{'evidence':[]},tmp_path/'run',client=client,skill_loader=lambda:'FORECAST',require_analysis_core=True)
+        assert result['independent']['prediction']['expected_home_margin']==2.5
+        receipt=json.loads((tmp_path/'run/independent_identity_reassessment.json').read_text())
+        assert receipt['market_exposed'] is False
+        assert receipt['prior_invalid_prediction']['expected_home_margin']==4.5
+    assert len(calls)==2
+
+
 @pytest.mark.parametrize("mutation", ["winner", "probability", "margin", "total", "thesis_text"])
 def test_v2_schema_repair_rejects_changed_prediction_or_judgment(tmp_path, mutation):
     original = invalid_v2_thesis_output()

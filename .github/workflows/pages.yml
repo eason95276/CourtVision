@@ -38,6 +38,7 @@ jobs:
       - run: python -m pytest v2/pregame_system/test_source_temporal_metadata.py v2/pregame_system/test_source_body_fetch.py v2/pregame_system/test_research_evidence.py -q
       - run: python -m pytest v2/pregame_system/test_strict_forecast_transport.py -q
       - run: python -m pytest v2/pregame_system/test_claim_repair_contract.py v2/pregame_system/test_availability_subjects.py -q
+      - run: python -m pytest v2/pregame_system/test_player_identity_gate.py v2/frontend/test_github_delivery.py -q
       - run: node --check web/static-data.js
       - run: python scripts/build_public_site.py
       - uses: actions/configure-pages@v5

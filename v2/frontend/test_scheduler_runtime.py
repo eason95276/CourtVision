@@ -399,6 +399,27 @@ def test_migration_idempotent_and_preserves_version_rows(tmp_path):
     finally:runner.shutdown()
 
 
+def test_changed_activation_is_validated_before_publication_and_without_restart(tmp_path,monkeypatch):
+    from . import scheduler_runtime
+    runner,service,clock=setup_runtime(tmp_path)
+    receipt=tmp_path/'selection.json';receipt.write_text('first')
+    runner.activation_receipt=receipt
+    runner.allowed_stages=frozenset({'UPDATED_PREVIEW'})
+    approved=[make_game(1)['id']]
+    def validate(*args,**kwargs):
+        if receipt.read_text()=='invalid':raise ValueError('activation_authorization_and_read_acceptance_required')
+        return {'allowed_game_ids':approved,'allowed_stages':['UPDATED_PREVIEW'],'forecast_model':'deepseek-v4-flash'}
+    monkeypatch.setattr(scheduler_runtime,'validate_activation',validate)
+    seen=[];monkeypatch.setattr(runner,'_pump_publications',lambda:seen.append(runner.allowed_game_ids))
+    try:
+        runner.tick();assert seen==[frozenset(approved)] and not runner.active
+        approved.append(make_game(2)['id']);receipt.write_text('second')
+        runner.tick();assert seen[-1]==frozenset(approved) and not runner.active
+        receipt.write_text('invalid');count=len(seen)
+        runner.tick();assert len(seen)==count and not runner.active
+    finally:runner.shutdown()
+
+
 @pytest.mark.parametrize("error,phase,expected",[
     ("bad","claim","claim_failure"),("bad","research","research_failure"),
     ("bad","forecasting","forecasting_failure"),("bad","editorial","editorial_failure"),
@@ -665,6 +686,11 @@ def test_short_final_budget_declines_without_any_provider_phase(tmp_path):
 
 def test_publication_pump_recovers_and_dispatches_without_generation(tmp_path, monkeypatch):
     from . import opening_publish
+    from . import publication_deployment
+    class Checks:
+        def backfill(self,scope):pass
+        def claim(self):return None
+    monkeypatch.setattr(publication_deployment,'DeploymentChecks',lambda queue:Checks())
     delivered = []
     class Queue:
         root = tmp_path/'delivery'

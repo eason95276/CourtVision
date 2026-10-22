@@ -731,13 +731,21 @@ class SavedGameAnalysisService:
         if players and self.display_name_store is not None:
             game['player_display_names']=self.display_name_store.ensure(players)['names']
         matchup = f"{game['away']['name_zh']}对{game['home']['name_zh']}"
+        if self.display_name_store is not None and hasattr(self.display_name_store, 'versions'):
+            from .player_display_names import catalog
+            naming_rows = catalog(self.display_name_store.versions)
+            naming_context = json.dumps({'roster': game.get('roster_context'),
+                'evidence': [e for e in evidence if e.get('section') != 'market'
+                    and (e.get('value') or {}).get('category') != 'market']}, ensure_ascii=False).casefold()
+            game['player_identity_lexicon'] = [{k: row[k] for k in ('canonical_name_en','display_name_zh')}
+                for row in naming_rows if row.get('canonical_name_en','').casefold() in naming_context]
         context = build_analyst_context(
             prediction_layers(game),
             evidence,
             missing_data=missing,
             game={"game_id": game_id, "home": game["home"], "away": game["away"],
                   "scheduled_tipoff": game.get("tipoff"), "cutoff": cutoff,
-                  **{key: clean(game[key]) for key in ("venue", "neutral_site", "schedule_revision", "game_type", "registered_game", "season_event", "player_display_names") if key in game}},
+                  **{key: clean(game[key]) for key in ("venue", "neutral_site", "schedule_revision", "game_type", "registered_game", "season_event", "player_display_names", "player_identity_lexicon") if key in game}},
             analysis_request=(
                 f"生成{matchup}的第25秒赛前分析。使用本次 AnalystContext 与 objective_evidence，"
                 "生成 final_prediction，并严格遵守 ProductAnalystOutput schema、字段格式和 evidence ID 协议。"

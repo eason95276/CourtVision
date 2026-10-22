@@ -6,7 +6,7 @@ param(
     [Parameter(Mandatory=$true)][string]$ActivationReceipt,
     [Parameter(Mandatory=$true)][string]$RuntimeRoot,
     [Parameter(Mandatory=$true)][string]$PublicRoot,
-    [Parameter(Mandatory=$true)][string]$StopAt
+    [string]$StopAt
 )
 $ErrorActionPreference='Stop'
 $env:COURTVISION_PUBLIC_PUBLISH_ROOT=(Resolve-Path -LiteralPath $PublicRoot).Path

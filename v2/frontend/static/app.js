@@ -644,6 +644,10 @@ function displayedJudgment(payload) {
     analysis_article: editorial.analysis_article ?? judgment.analysis_article,
     watch_themes: editorial.watch_themes ?? judgment.watch_themes,
     player_analysis: editorial.player_analysis ?? judgment.player_analysis,
+    central_thesis: editorial.central_thesis ?? judgment.central_thesis,
+    core_question: editorial.core_question ?? judgment.core_question,
+    game_script: editorial.game_script ?? judgment.game_script,
+    model_risk: editorial.model_risk ?? judgment.model_risk,
   };
 }
 
