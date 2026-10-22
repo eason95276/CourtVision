@@ -9,7 +9,7 @@
       "name": "Golden State Warriors",
       "name_zh": "勇士",
       "espn_team_id": "9",
-      "score": 100.0
+      "score": 105.0
     },
     "background": {
       "availability": {
@@ -976,9 +976,9 @@
     },
     "season_start": 2026,
     "source": {
-      "schedule_captured_at": "2026-10-22T04:39:02.493967+00:00"
+      "schedule_captured_at": "2026-10-22T18:40:43.770772+00:00"
     },
-    "status": "in_progress",
+    "status": "final",
     "technical": {
       "cutoff": "2026-10-21T15:10:40.651678+00:00",
       "fact_context_cutoff": "2026-10-21T15:10:40.651678+00:00",
@@ -986,6 +986,14 @@
     },
     "tipoff": "2026-10-22T02:00:00+00:00",
     "venue": "crypto.com Arena",
+    "postgame": {
+      "status": "available",
+      "version_id": "192793d2-144e-4324-a408-4e8751e04012",
+      "score_text": "勇士 105 — 127 湖人",
+      "summary": "湖人用三节碾压证明围绕东契奇的重建首秀成功，而勇士的年轻前场和受限的库里时间让比赛早早失去悬念。",
+      "prediction_summary": "赛前看好湖人 · 胜率63% · 预计赢4.5分；赛果湖人赢22分",
+      "market_summary": "让分方向 勇士 +6.5 · 未命中；总分 小分 · 命中"
+    },
     "season": 2027,
     "schedule_catalog_fact": true,
     "nba_game_id": null,
@@ -1306,14 +1314,13 @@
         }
       ]
     },
-    "postgame": null,
     "homepage_visible": true
   },
   "prediction": {
     "status": "locked",
     "game_id": "espn:401909092",
     "version_id": "b7971c94-c5cd-4ef7-93fc-999b155ca666",
-    "state_revision": 3,
+    "state_revision": 4,
     "locked_at": "2026-10-22T02:00:16.967024+00:00",
     "lock_reason": "scheduled_tipoff_reached",
     "schedule_revision": 1,
@@ -3358,8 +3365,84 @@
     "public_contract": "courtvision-public-v1"
   },
   "postgame": {
-    "status": "unavailable",
-    "postgame": null
+    "status": "available",
+    "postgame": {
+      "game_id": "espn:401909092",
+      "version_id": "192793d2-144e-4324-a408-4e8751e04012",
+      "title": "库里首节独木难\n湖人三节锁胜局",
+      "short_review": "湖人用三节碾压证明围绕东契奇的重建首秀成功，而勇士的年轻前场和受限的库里时间让比赛早早失去悬念。",
+      "settlement_summary": "胜负看对，让分看错，大小分看对。湖人用三节碾压证明围绕东契奇的重建首秀成功，而勇士的年轻前场和受限的库里时间让比赛早早失去悬念。",
+      "article": "湖人主场127比105大胜勇士，揭幕战在第三节就失去了悬念。最刺眼的反差来自库里：首节9投7中轰下16分，几乎以一己之力咬住比分，但此后三节合计仅得7分，全场21分钟23分。当勇士最需要他续上火力时，他没能再站出来。\n\n东契奇用28分8篮板7助攻的全面表现掌控了比赛，尽管18投7中的效率不算漂亮，但5记三分和7次助攻盘活了全队。真正让湖人拉开差距的是凯斯勒——12投全中砍下26分9篮板，把勇士年轻前场的身高劣势打成了提款机。里夫斯23分6助攻分担了持球压力，湖人全场有效投篮命中率高达63.6%，而勇士只有45.7%。\n\n格林打了21分钟，8次助攻但4次失误，进攻端几乎隐形。勇士的替补群贡献了56分，布兰登·威廉姆斯14分、佩顿二世10分，但这更像是垃圾时间前的零敲碎打。湖人第三节单节36比16彻底终结悬念，三节打完已经领先31分。\n\n赛前我判断湖人赢4.5分但站勇士受让6.5分，结果湖人赢了22分，让分方向完全错了。我低估了凯斯勒在内线的终结效率，也高估了勇士老将替补的实际负荷——波尔津吉斯、巴特勒、霍福德都没有改变前场体型劣势。小分方向看对了，232分低于234.5的盘口线，但主要原因是勇士后三节进攻崩盘，而非我预想的半场耐心拉锯。胜负看对，让分和大小分一错一对，这场揭幕战给湖人的新阵容开了个好头。",
+      "score": {
+        "home": {
+          "name": "湖人",
+          "score": 127
+        },
+        "away": {
+          "name": "勇士",
+          "score": 105
+        },
+        "text": "勇士 105 — 127 湖人"
+      },
+      "prediction": {
+        "winner_name": "湖人",
+        "winner_probability": 0.63,
+        "expected_winner_margin": 4.5,
+        "expected_total": 226.5,
+        "actual_winner_name": "湖人",
+        "actual_winner_margin": 22,
+        "actual_total": 232
+      },
+      "market_reference": {
+        "status": "available",
+        "home_spread": -6.5,
+        "away_spread": 6.5,
+        "total": 234.5,
+        "home_team_name": "湖人",
+        "away_team_name": "勇士",
+        "source_title": "Draft Kings current odds",
+        "sportsbook": "Draft Kings",
+        "captured_at": "2026-10-21T15:13:59.249391+00:00",
+        "source_url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909092/competitions/401909092/odds",
+        "spread_review": {
+          "lean_side": "away",
+          "lean_line": 6.5,
+          "settlement": "loss"
+        },
+        "total_review": {
+          "lean": "under",
+          "settlement": "win",
+          "market_total": 234.5
+        }
+      },
+      "sources": [
+        {
+          "label": "比赛结果与球员数据",
+          "title": "ESPN 比赛数据",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=401909092",
+          "captured_at": "2026-10-22T04:49:41.541794+00:00"
+        },
+        {
+          "label": "公开早盘参考",
+          "title": "Draft Kings current odds",
+          "url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909092/competitions/401909092/odds",
+          "captured_at": "2026-10-21T15:13:59.249391+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "Warriors at Lakers: How to watch, stream, lineups, injury report for Wednesday's season opener - Yahoo Sports",
+          "url": "https://sports.yahoo.com/articles/warriors-lakers-watch-stream-lineups-122606120.html",
+          "captured_at": "2026-10-21T15:12:41.344107+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "Quentin Grimes Explains What Makes New-Look Lakers Better Than Before - Yahoo Sports",
+          "url": "https://sports.yahoo.com/articles/quentin-grimes-explains-makes-look-130036774.html",
+          "captured_at": "2026-10-21T15:13:13.704943+00:00"
+        }
+      ],
+      "generated_at": "2026-10-22T18:38:43.081350+00:00"
+    }
   },
   "market": {
     "status": "available",
@@ -3398,10 +3481,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-22T04:39:21.454313+00:00",
+    "exported_at": "2026-10-22T18:43:54.256426+00:00",
     "source_prediction_version_id": "b7971c94-c5cd-4ef7-93fc-999b155ca666",
     "source_prediction_payload_sha256": "593572a395ca0bd8471a9dc46ade4a28ffd99beb97c623a7c8350290015a183b",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "baee0d30ece64c7759f77d84bc1274c6aec9d0986ebff0fe459f19a0ffe637fe"
+  "public_sha256": "604365fd0b7099baa4560e485eff1288f40ad2156692941849ae51808f1a7d9e"
 }
