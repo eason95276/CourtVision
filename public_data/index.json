@@ -284,7 +284,7 @@
       "file": "games/espn_401909840.json",
       "tipoff": "2026-10-22T00:30:00+00:00",
       "version_id": "a8c89dd4-b49d-4850-96f2-6a65c6bd1ba7",
-      "public_sha256": "b298eeca60d97437c0dccdd91a3ef0eff007b278347f484cef7575d904f03e08",
+      "public_sha256": "6b5d47e8a837f6677e3207adeaa651545d40baffa356fc44d8c93d7e1e752178",
       "home_record": {
         "game": {
           "away": {
@@ -295,7 +295,7 @@
             "name": "Dallas Mavericks",
             "name_zh": "独行侠",
             "espn_team_id": "6",
-            "score": null
+            "score": 110.0
           },
           "game_type": "regular_season",
           "home": {
@@ -306,27 +306,34 @@
             "name": "Houston Rockets",
             "name_zh": "火箭",
             "espn_team_id": "10",
-            "score": null
+            "score": 128.0
           },
           "id": "espn:401909840",
           "registered_game": true,
           "schedule_revision": 1,
-          "status": "scheduled",
+          "status": "final",
           "tipoff": "2026-10-22T00:30:00+00:00",
           "venue": "Toyota Center (Houston)",
+          "postgame": {
+            "status": "available",
+            "version_id": "268c510d-ec28-463f-a2d9-9caddd1f0b74",
+            "score_text": "独行侠 110 — 128 火箭",
+            "summary": "火箭靠第二节38比12的冲击波打花比赛，杜兰特和史密斯各30分，弗拉格32分只能空砍。",
+            "prediction_summary": "赛前看好火箭 · 胜率71% · 预计赢9分；赛果火箭赢18分",
+            "market_summary": "让分方向 独行侠 +9.5 · 未命中；总分 小分 · 未命中"
+          },
           "season": 2027,
           "schedule_catalog_fact": true,
-          "postgame": null,
           "homepage_visible": true,
           "public_summary": true
         },
         "prediction": {
-          "status": "current",
+          "status": "locked",
           "game_id": "espn:401909840",
           "version_id": "a8c89dd4-b49d-4850-96f2-6a65c6bd1ba7",
-          "state_revision": 3,
-          "locked_at": null,
-          "lock_reason": null,
+          "state_revision": 5,
+          "locked_at": "2026-10-22T00:30:01.678987+00:00",
+          "lock_reason": "scheduled_tipoff_reached",
           "schedule_revision": 1,
           "version": {
             "analysis_contract_version": "two-stage-forecast-v1",
@@ -1751,5 +1758,5 @@
       }
     }
   ],
-  "published_at": "2026-10-22T12:53:50.298062+00:00"
+  "published_at": "2026-10-22T18:41:20.041579+00:00"
 }
