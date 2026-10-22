@@ -343,6 +343,15 @@ class PersistentScheduler:
             candidates=[dict(r)for r in db.execute("SELECT * FROM generation_tasks WHERE stage='FINAL_PREGAME' AND status='pending' AND scheduled_for>? AND deadline_at<=?",
                 (_utc(at),_utc(at+timedelta(minutes=60))))]
         from v2.pregame_system.two_stage_lifecycle import readiness_for_task
+        current_keys={'warm:'+task['task_id']for task in candidates}
+        for key,future in list(self.readiness_jobs.items()):
+            if key.startswith('warm:') and key not in current_keys and future.done():
+                try:future.result()
+                except Exception as exc:
+                    self._event('final_information_warmup_failed',detail={
+                        'task_id':key.removeprefix('warm:'),'error_type':type(exc).__name__,
+                        'retired_prewarm':True})
+                del self.readiness_jobs[key]
         for task in candidates:
             if self.allowed_game_ids is not None and task['game_id'] not in self.allowed_game_ids:
                 continue

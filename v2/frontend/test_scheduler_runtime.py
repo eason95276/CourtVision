@@ -159,6 +159,40 @@ def task_rows(service, stage="FINAL_PREGAME"):
         return [dict(row) for row in db.execute("SELECT * FROM generation_tasks WHERE stage=? ORDER BY game_id", (stage,))]
 
 
+@pytest.mark.parametrize('old_state',['completed','failed','running'])
+def test_old_prewarm_slots_do_not_starve_later_games(tmp_path,monkeypatch,old_state):
+    from concurrent.futures import Future
+    from v2.pregame_system import two_stage_lifecycle
+    runner,service,clock=setup_runtime(tmp_path)
+    clock.at=TIP-timedelta(minutes=40)
+    with service.store.connect()as db:
+        db.execute("UPDATE generation_tasks SET metadata_json=? WHERE stage='FINAL_PREGAME'",
+                   (json.dumps({'lifecycle':'early-final-v1'}),))
+    called=[]
+    def ready(_store,task,_collector,*,prewarm):
+        assert prewarm is True
+        called.append(task['task_id'])
+        return {'ready':False,'reasons':['offline_unconfirmed']}
+    monkeypatch.setattr(two_stage_lifecycle,'readiness_for_task',ready)
+    for index in range(2):
+        future=Future()
+        if old_state=='completed':future.set_result({'ready':True})
+        elif old_state=='failed':future.set_exception(ValueError('offline_old_prewarm'))
+        runner.readiness_jobs['warm:finished-game-'+str(index)]=future
+    try:
+        runner._warm_final_information(clock.at)
+        if old_state=='running':
+            assert not called
+            assert set(runner.readiness_jobs)=={'warm:finished-game-0','warm:finished-game-1'}
+        else:
+            for future in runner.readiness_jobs.values():future.result(timeout=2)
+            expected={'warm:'+r['task_id']for r in task_rows(service)}
+            assert set(runner.readiness_jobs)==expected
+            assert set(called)=={r['task_id']for r in task_rows(service)}
+            assert service.tasks.attempts_snapshot()==[]
+    finally:runner.shutdown()
+
+
 @publication_integration
 def test_two_same_time_finals_publish_independent_versions_and_restore(tmp_path):
     runner, service, clock = setup_runtime(tmp_path)
