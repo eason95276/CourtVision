@@ -60,6 +60,19 @@ def test_final_score_cannot_be_borrowed_from_style_reference():
     assert any(i['code']=='final_score_mismatch'for i in validate_article({'article':'活塞128比110拿下比赛。'},value))
 
 
+def test_bench_scoring_comparison_is_not_the_final_score():
+    value=context();value['game'].update(home_score=127,away_score=105)
+    assert validate_article({'article':'活塞替补得分56比38占优。'},value)==[]
+    assert any(i['code']=='final_score_mismatch'for i in validate_article({'article':'活塞全场126比105获胜。'},value))
+
+
+def test_minutes_do_not_become_points_but_actual_wrong_points_still_fail():
+    value=context();value['key_players']=[{'name':'凯里·欧文','points':15,'field_goals':[5,12]}]
+    assert validate_article({'article':'欧文24分钟15分。'},value)==[]
+    assert any(i['code']=='player_points_mismatch'for i in validate_article({'article':'欧文24分。'},value))
+    assert any(i['code']=='player_shooting_mismatch'for i in validate_article({'article':'欧文5投12中。'},value))
+
+
 def test_total_direction_hit_does_not_reverse_numeric_error_direction():
     value=context();value['game']['actual_total']=206;value['prediction']['expected_total']=228.5
     assert public_verdicts(value)['total_prediction_relation']=='总分预测高于实际22.5分'

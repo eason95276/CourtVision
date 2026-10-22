@@ -76,6 +76,8 @@ def validate_article(editorial,context):
                 issues.append({'code':'selected_spread_direction_mismatch','quote':match[0]})
         score_pattern=re.escape(team)+r'.{0,6}?(\d{2,3})\s*(?:比|[-—–：:])\s*(\d{2,3})'
         for match in re.finditer(score_pattern,body):
+            qualifier=body[match.start()+len(team):match.start(1)]
+            if re.search(r'替补|板凳|篮板|禁区|快攻|二次进攻',qualifier):continue
             nearby=body[max(0,match.start()-12):min(len(body),match.end()+8)]
             if re.search(r'半场|中场|首节|次节|末节|第[一二三四1234]节|赛前|预计|预测|去年|上季|上赛季',nearby):continue
             expected=(game.get(side+'_score'),game.get(('away'if side=='home'else'home')+'_score'))
@@ -108,7 +110,7 @@ def validate_article(editorial,context):
                 actual=(sum(r['fga']for r in scoped),sum(r['fgm']for r in scoped))if verified else tuple(reversed(row.get('field_goals')or[None,None]))
                 if None not in actual and tuple(map(int,shooting.groups()))!=actual:
                     issues.append({'code':'player_shooting_mismatch','quote':shooting[0],'expected':actual})
-            match=re.search(re.escape(alias)+r'(?:全场|拿到|得到|贡献|砍下|交出)?\s*(\d+(?:\.\d+)?)\s*分',clause)
+            match=re.search(re.escape(alias)+r'(?:全场|拿到|得到|贡献|砍下|交出)?\s*(\d+(?:\.\d+)?)\s*分(?!钟)',clause)
             expected=sum(r['points']for r in scoped)if verified else row.get('points')
             if match and expected is not None and (not periods or verified)and abs(float(match[1])-expected)>0.001:
                 issues.append({'code':'player_points_mismatch','quote':match[0],'expected':expected})

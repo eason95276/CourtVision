@@ -413,8 +413,11 @@ def test_changed_activation_is_validated_before_publication_and_without_restart(
     seen=[];monkeypatch.setattr(runner,'_pump_publications',lambda:seen.append(runner.allowed_game_ids))
     try:
         runner.tick();assert seen==[frozenset(approved)] and not runner.active
-        approved.append(make_game(2)['id']);receipt.write_text('second')
+        new_game=make_game(3)
+        service.tasks.register_game(new_game)
+        approved.append(new_game['id']);receipt.write_text('second')
         runner.tick();assert seen[-1]==frozenset(approved) and not runner.active
+        assert new_game['id']in {g['id']for g in runner.runtime_data['games']}
         receipt.write_text('invalid');count=len(seen)
         runner.tick();assert len(seen)==count and not runner.active
     finally:runner.shutdown()

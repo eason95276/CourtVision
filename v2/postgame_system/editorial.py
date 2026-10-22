@@ -849,15 +849,22 @@ def generate_postgame_editorial(
         if not isinstance(raw, str) or not raw.strip():
             raise ValueError("postgame_editorial_empty_response")
         save(run_dir / "response.json", {"received_at": now(), "content": raw})
-        editorial = _parse_editorial(raw, _display_names(postgame))
         from .article_contract import validate_article
-        findings=validate_article(editorial,context)
+        try:
+            editorial = _parse_editorial(raw, _display_names(postgame))
+            findings=validate_article(editorial,context)
+        except ValueError as parse_error:
+            if str(parse_error)!='postgame_editorial_wrong_fields':raise
+            editorial={'unaccepted_raw_response':raw}
+            findings=[{'code':'postgame_editorial_wrong_fields','required_fields':['title','short_review','article']}]
         if findings:
             revision_messages=[{'role':'system','content':system['content']}for system in messages[:1]]
             revision_messages.append({'role':'user','content':json.dumps({'task':
                 '只修正明确问题。正文压缩到500至650个字符（包括标点、数字和字母），最多六段，每段不超过110字符。'
                 '不要保留原文的全部段落和信息；只保留比赛主线、最关键数据、一次结算，删除其余。'
                 '返回title、short_review、article三个字段。'
+                '不允许_note、解释或任何额外字段。球员得分错误必须以findings中的expected为准；'
+                '投篮expected是[出手数,命中数]，例如[16,10]应写16投10中，不能倒写成10投16中。'
                 '盘口受让和让分严格抄verified_public_verdicts，不自己翻译正负号。没有球员分节统计，不能写半场个人表现；'
                 '没有逐回合资料，不写关键时段爆发、对位已经兑现或教练何时调整。保留最重要的2至4名球员，删除重复结算与方法说明。',
                 'findings':findings,'candidate':editorial,'frozen_input':json.loads(messages[-1]['content'].split('<frozen_postgame_context>\n',1)[1].split('\n</frozen_postgame_context>',1)[0])},ensure_ascii=False)})

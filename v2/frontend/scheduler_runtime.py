@@ -399,6 +399,7 @@ class PersistentScheduler:
                     self.allowed_stages=frozenset(scope['allowed_stages']) if scope['allowed_stages'] is not None else None
                     os.environ['COURTVISION_FORECAST_MODEL']=scope['forecast_model']
                     self.activation_digest=digest
+                    self.last_plan_at=None
             try:
                 self._pump_publications()
             except (OSError, ValueError, sqlite3.Error) as error:

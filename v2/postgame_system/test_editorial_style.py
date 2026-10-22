@@ -57,3 +57,16 @@ def test_writer_keeps_direction_and_game_facts_without_numeric_forecast_grading(
     assert 'total_absolute_error'not in view['verified_public_verdicts']
     assert 'predicted_total'not in view['prediction']
     assert context==before and context['prediction']['expected_total']==223.5
+
+
+def test_extra_writer_metadata_requires_one_strict_schema_repair(tmp_path):
+    store=fixture_store(tmp_path);calls=[]
+    def client(messages,*args):
+        calls.append(messages)
+        value={'title':'双星缺阵添变数\n勇士主场定乾坤','short_review':'回看比赛。','article':'勇士赢下比赛。'}
+        if len(calls)==1:value['_note']='This is metadata, not user article.'
+        return json.dumps(value,ensure_ascii=False)
+    result=generate_postgame_editorial(store,GAME_ID,api_client=client,api_key='fixture',output_root=tmp_path/'articles')
+    assert result.status=='success'and len(calls)==2
+    artifact=json.loads(result.artifact_path.read_text(encoding='utf-8'))
+    assert set(artifact['editorial'])=={'title','short_review','article'}
