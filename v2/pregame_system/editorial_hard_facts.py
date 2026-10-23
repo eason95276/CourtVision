@@ -1449,6 +1449,13 @@ def _historical_score_issues(text: str, projection: dict, unit_id: str) -> list[
              for fact in projection.get("facts", []) if fact.get("kind") == "HISTORICAL"
              for row in ((fact.get("value") or {}).get("meetings") or [])
              if isinstance(row.get("home_score"), (int, float)) and isinstance(row.get("away_score"), (int, float))}
+    for fact in projection.get("facts", []):
+        if fact.get("kind")!="OBSERVATION" or not re.fullmatch(r"/season_form/teams/(home|away)/recent_games",fact.get("source_path")or""):
+            continue
+        for row in (fact.get("value")or{}).get("recent_games")or[]:
+            if (row.get("captured_at") and (row.get("source_payload_sha256")or row.get("source_url"))
+                    and isinstance(row.get("team_score"),(int,float)) and isinstance(row.get("opponent_score"),(int,float))):
+                pairs.add((int(row["team_score"]),int(row["opponent_score"])))
     findings = []
     for match in re.finditer(score_pattern, text):
         pair = (int(match.group(1)), int(match.group(2)))
@@ -1472,7 +1479,8 @@ def _season_scope_issues(text: str, projection: dict, unit_id: str) -> list[dict
         issues.append({"unit_id": unit_id, "code": "unverified_global_season_count", "quote": text})
 
     opener = re.search(r"本场.{0,10}(?:揭幕战|首战)|(?:揭幕战|本赛季首战|季前赛首战).{0,12}(?:就是|是|开启|到来|本场)|opening night|season opener|first game of (?:the )?season", text, re.I)
-    if opener and not re.search(r"可能|或许|潜在|值得观察.*是否|question mark|potential", text, re.I):
+    denied=re.search(r"误写.{0,18}(?:揭幕战|首战)|并非.{0,12}(?:揭幕战|首战)|不是.{0,12}(?:揭幕战|首战)",text)
+    if opener and not denied and not re.search(r"可能|或许|潜在|值得观察.*是否|question mark|potential", text, re.I):
         verified = any(f.get("game_specific") and re.search(
             r"揭幕战|首战|opening night|season opener|first game of (?:the )?season",
             json.dumps(f.get("value") or {}, ensure_ascii=False), re.I) for f in facts)

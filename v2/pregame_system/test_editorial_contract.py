@@ -1192,6 +1192,19 @@ def test_historical_score_claim_must_match_a_provided_matchup_record():
     assert any(item["code"] == "historical_score_mismatch" for item in invalid)
 
 
+def test_captured_current_season_result_supports_a_correction_without_inventing_a_score():
+    from .editorial_hard_facts import _historical_score_issues,_season_scope_issues
+    projection={'facts':[{'kind':'OBSERVATION','source_path':'/season_form/teams/home/recent_games',
+        'value':{'recent_games':[{'captured_at':'2026-10-21T02:02:50+00:00',
+            'source_payload_sha256':'saved-result-hash','team_score':106,'opponent_score':100}]}}]}
+    assert _historical_score_issues('上一场76人106比100击败尼克斯。',projection,'lead')==[]
+    assert any(item['code']=='historical_score_mismatch'for item in
+        _historical_score_issues('上一场76人116比100击败尼克斯。',projection,'lead'))
+    assert _season_scope_issues('原预览误写成本场是76人的揭幕战。',projection,'notice')==[]
+    assert any(item['code']=='unsupported_season_opener_claim'for item in
+        _season_scope_issues('本场是76人的揭幕战。',projection,'lead'))
+
+
 def test_exact_win_loss_record_must_match_structured_season_form():
     c = editorial_context()
     c["season_form"]["teams"]["away"]["previous_last10"].update({"wins": 4, "losses": 6})
