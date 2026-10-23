@@ -125,6 +125,126 @@
       }
     },
     {
+      "game_id": "espn:401909851",
+      "file": "games/espn_401909851.json",
+      "tipoff": "2026-10-24T02:00:00+00:00",
+      "version_id": "52a29541-8194-4816-9b3a-ab8beb98cc48",
+      "public_sha256": "a7b7f84f08d9c709ea56541a2c0642b4d18b976cf6f6a09100883c0407034639",
+      "home_record": {
+        "game": {
+          "away": {
+            "abbreviation": "LAC",
+            "accent": "#C8102E",
+            "espn_team_id": "12",
+            "id": 1610612746,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/lac.png",
+            "name": "LA Clippers",
+            "name_zh": "快船",
+            "score": null
+          },
+          "game_type": "regular_season",
+          "home": {
+            "abbreviation": "LAL",
+            "accent": "#552583",
+            "espn_team_id": "13",
+            "id": 1610612747,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/lal.png",
+            "name": "Los Angeles Lakers",
+            "name_zh": "湖人",
+            "score": null
+          },
+          "id": "espn:401909851",
+          "registered_game": true,
+          "schedule_revision": 1,
+          "season": 2027,
+          "status": "scheduled",
+          "tipoff": "2026-10-24T02:00:00+00:00",
+          "venue": "crypto.com Arena",
+          "schedule_catalog_fact": true,
+          "postgame": null,
+          "homepage_visible": true,
+          "public_summary": true
+        },
+        "prediction": {
+          "status": "current",
+          "game_id": "espn:401909851",
+          "version_id": "52a29541-8194-4816-9b3a-ab8beb98cc48",
+          "state_revision": 2,
+          "locked_at": null,
+          "lock_reason": null,
+          "schedule_revision": 1,
+          "version": {
+            "analysis_contract_version": "two-stage-forecast-v1",
+            "base_input_hash": "e17e7763e6617fdb26874e05777f0543d2c6625ddde2b750565bbcdb92f72bde",
+            "game_id": "espn:401909851",
+            "game_identity": {
+              "away_team_id": 1610612746,
+              "game_id": "espn:401909851",
+              "home_team_id": 1610612747,
+              "scheduled_tipoff": "2026-10-24T02:00:00+00:00"
+            },
+            "generated_at": "2026-10-23T18:20:05.414906+00:00",
+            "input_cutoff_at": "2026-10-23T18:19:47.774122+00:00",
+            "published_at": "2026-10-23T18:20:10.383479+00:00",
+            "schedule_revision": 1,
+            "stage": "EARLY_PREVIEW",
+            "version_id": "52a29541-8194-4816-9b3a-ab8beb98cc48",
+            "payload_sha256": "1c7cb2a337c6f1d250a3274744d28f2cb4dc3fec5a34dc01842d6cf5b455611a",
+            "input_snapshot": {
+              "away": {
+                "abbreviation": "LAC",
+                "accent": "#C8102E",
+                "espn_team_id": "12",
+                "id": 1610612746,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/lac.png",
+                "name": "LA Clippers",
+                "name_zh": "快船"
+              },
+              "home": {
+                "abbreviation": "LAL",
+                "accent": "#552583",
+                "espn_team_id": "13",
+                "id": 1610612747,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/lal.png",
+                "name": "Los Angeles Lakers",
+                "name_zh": "湖人"
+              },
+              "id": "espn:401909851",
+              "schedule_revision": 1,
+              "tipoff": "2026-10-24T02:00:00+00:00"
+            },
+            "judgment": {
+              "final_prediction": {
+                "evidence_ids": [
+                  "21c8ab880c00855eae00c992d051b2d01b87a7e542639450d48be64919f87d69",
+                  "407fd67b659e793a19d1f008b66681a5f10182ffa681a4d075968fd978bc4e0a",
+                  "54c7c950256b06dc471ad783743b2810d1b5b15b1f17af88d80959fbca10355b",
+                  "95ebf158d1e02ce53a257514d4ebe542808ca5f9f67e357cc99467f80a64c2e8",
+                  "a77bc728f0b5050bd932794182d6c40794297ac7e75d84a58f9b9e386ca79122"
+                ],
+                "expected_margin": 5.0,
+                "expected_total": 226.5,
+                "win_probability": 0.6,
+                "winner_side": "home"
+              },
+              "pregame_story": {
+                "classification": "subjective_analysis",
+                "evidence_ids": [
+                  "21c8ab880c00855eae00c992d051b2d01b87a7e542639450d48be64919f87d69",
+                  "407fd67b659e793a19d1f008b66681a5f10182ffa681a4d075968fd978bc4e0a",
+                  "54c7c950256b06dc471ad783743b2810d1b5b15b1f17af88d80959fbca10355b",
+                  "95ebf158d1e02ce53a257514d4ebe542808ca5f9f67e357cc99467f80a64c2e8",
+                  "a77bc728f0b5050bd932794182d6c40794297ac7e75d84a58f9b9e386ca79122"
+                ],
+                "statement": "两队揭幕战都大胜，同城德比立刻检验谁的火热是真的。",
+                "title": "洛城德比同开火\n凯斯勒篮下试船"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
       "game_id": "espn:401909847",
       "file": "games/espn_401909847.json",
       "tipoff": "2026-10-24T00:00:00+00:00",
@@ -2772,5 +2892,5 @@
       }
     }
   ],
-  "published_at": "2026-10-23T18:04:17.634608+00:00"
+  "published_at": "2026-10-23T18:20:19.966582+00:00"
 }
