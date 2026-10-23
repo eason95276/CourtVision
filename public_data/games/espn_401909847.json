@@ -266,6 +266,93 @@
       }
     ],
     "neutral_site": 0,
+    "official_injury_report": {
+      "game_id": "espn:401909847",
+      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_30PM.pdf",
+      "source_published_at": "2026-10-23T23:30:00+00:00",
+      "captured_at": "2026-10-23T23:35:17.160027+00:00",
+      "source_sha256": "ef9434138eeb2551cdedaba44231b79e924c905716ee14ace36bfa94ce4aa8c7",
+      "parser_version": "nba-official-injury-live-v3",
+      "status": "published",
+      "report_id": "9b0810286f5a07899018afa55145a504889af81a640ffa24e55401df53e5d73a",
+      "report_date": "2026-10-23",
+      "report_time": "19:30",
+      "coverage": "complete",
+      "records": [
+        {
+          "team_id": 1610612748,
+          "player_name": "Dru Smith",
+          "status": "available",
+          "reason": "Injury/Illness - Right Calf Strain",
+          "game_id": "espn:401909847",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_30PM.pdf",
+          "source_published_at": "2026-10-23T23:30:00+00:00",
+          "captured_at": "2026-10-23T23:35:17.160027+00:00",
+          "source_sha256": "ef9434138eeb2551cdedaba44231b79e924c905716ee14ace36bfa94ce4aa8c7",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612748,
+          "player_name": "Vladislav Goldin",
+          "status": "available",
+          "reason": "Injury/Illness - Right Ankle Sprain",
+          "game_id": "espn:401909847",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_30PM.pdf",
+          "source_published_at": "2026-10-23T23:30:00+00:00",
+          "captured_at": "2026-10-23T23:35:17.160027+00:00",
+          "source_sha256": "ef9434138eeb2551cdedaba44231b79e924c905716ee14ace36bfa94ce4aa8c7",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612765,
+          "player_name": "Elijah Harkless",
+          "status": "out",
+          "reason": "G League - Two-Way",
+          "game_id": "espn:401909847",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_30PM.pdf",
+          "source_published_at": "2026-10-23T23:30:00+00:00",
+          "captured_at": "2026-10-23T23:35:17.160027+00:00",
+          "source_sha256": "ef9434138eeb2551cdedaba44231b79e924c905716ee14ace36bfa94ce4aa8c7",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612765,
+          "player_name": "Isaac Jones",
+          "status": "out",
+          "reason": "G League - Two-Way",
+          "game_id": "espn:401909847",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_30PM.pdf",
+          "source_published_at": "2026-10-23T23:30:00+00:00",
+          "captured_at": "2026-10-23T23:35:17.160027+00:00",
+          "source_sha256": "ef9434138eeb2551cdedaba44231b79e924c905716ee14ace36bfa94ce4aa8c7",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612765,
+          "player_name": "Taurean Prince",
+          "status": "available",
+          "reason": "Personal Reasons",
+          "game_id": "espn:401909847",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_30PM.pdf",
+          "source_published_at": "2026-10-23T23:30:00+00:00",
+          "captured_at": "2026-10-23T23:35:17.160027+00:00",
+          "source_sha256": "ef9434138eeb2551cdedaba44231b79e924c905716ee14ace36bfa94ce4aa8c7",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612765,
+          "player_name": "Ugonna Onyenso",
+          "status": "out",
+          "reason": "G League - Two-Way",
+          "game_id": "espn:401909847",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_30PM.pdf",
+          "source_published_at": "2026-10-23T23:30:00+00:00",
+          "captured_at": "2026-10-23T23:35:17.160027+00:00",
+          "source_sha256": "ef9434138eeb2551cdedaba44231b79e924c905716ee14ace36bfa94ce4aa8c7",
+          "parser_version": "nba-official-injury-live-v3"
+        }
+      ]
+    },
     "player_display_names": [
       {
         "player_id": "name:bam adebayo",
@@ -322,14 +409,6 @@
         "display_name_zh": "戴维恩·米切尔",
         "translation_source": "known_mapping",
         "created_at": "2026-10-21T14:25:13.718742+00:00"
-      },
-      {
-        "player_id": "name:bobby portis jr",
-        "canonical_name_en": "Bobby Portis Jr.",
-        "name_key": "bobby portis jr",
-        "display_name_zh": "博比·波蒂斯",
-        "translation_source": "known_mapping",
-        "created_at": "2026-10-21T14:25:13.719370+00:00"
       },
       {
         "player_id": "name:dru smith",
@@ -402,6 +481,14 @@
         "display_name_zh": "尼克·理查兹",
         "translation_source": "llm_transliteration",
         "created_at": "2026-10-21T14:25:13.720084+00:00"
+      },
+      {
+        "player_id": "espn:3064482",
+        "canonical_name_en": "Bobby Portis",
+        "name_key": "bobby portis",
+        "display_name_zh": "博比·波蒂斯",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-04T06:24:01.733139+00:00"
       },
       {
         "player_id": "name:john collins",
@@ -560,14 +647,14 @@
     "public_market_reference": {
       "away_moneyline": -125.0,
       "away_spread": -1.5,
-      "captured_at": "2026-10-23T17:30:23.671025+00:00",
+      "captured_at": "2026-10-23T23:45:06.735670+00:00",
       "eligible_prediction_input": false,
       "expected_home_margin": -1.5,
       "game_identity": {
         "away_team": "Detroit Pistons",
         "away_team_id": 1610612765,
         "game_id": "espn:401909847",
-        "game_type": "regular_season",
+        "game_type": null,
         "home_team": "Miami Heat",
         "home_team_id": 1610612748,
         "registered_game": true,
@@ -575,7 +662,7 @@
       },
       "home_moneyline": 105.0,
       "home_spread": 1.5,
-      "observed_at": "2026-10-23T17:30:23.671025+00:00",
+      "observed_at": "2026-10-23T23:45:06.735670+00:00",
       "published_at": null,
       "source_tier": 1,
       "source_title": "Draft Kings current odds",
@@ -590,265 +677,321 @@
     "roster_context": {
       "teams": {
         "away": {
-          "confirmed_starters": null,
+          "confirmed_starters": [],
+          "confirmed_starters_evidence_ids": [],
           "current_rotation": null,
           "current_team_roster": {
             "observed_at": "2026-10-23T17:27:25.529843+00:00",
             "players": [
               {
-                "name": "John Collins",
-                "player_id": null,
-                "team_id": 1610612765,
-                "display_name": "约翰·科林斯"
+                "name": "John Collins"
               },
               {
-                "name": "Cade Cunningham",
-                "player_id": null,
-                "team_id": 1610612765,
-                "display_name": "凯德·坎宁安"
+                "name": "Cade Cunningham"
               },
               {
-                "name": "Jalen Duren",
-                "player_id": null,
-                "team_id": 1610612765,
-                "display_name": "杰伦·杜伦"
+                "name": "Jalen Duren"
               },
               {
-                "name": "Javonte Green",
-                "player_id": null,
-                "team_id": 1610612765,
-                "display_name": "贾文特·格林"
+                "name": "Javonte Green"
               },
               {
-                "name": "Elijah Harkless",
-                "player_id": null,
-                "team_id": 1610612765,
-                "display_name": "以利亚·哈克利斯"
+                "name": "Elijah Harkless"
               },
               {
-                "name": "Ronald Holland II",
-                "player_id": null,
-                "team_id": 1610612765,
-                "display_name": "罗纳德·霍兰德二世"
+                "name": "Ronald Holland II"
               },
               {
-                "name": "Kevin Huerter",
-                "player_id": null,
-                "team_id": 1610612765,
-                "display_name": "凯文·赫尔特"
+                "name": "Kevin Huerter"
               },
               {
-                "name": "Daniss Jenkins",
-                "player_id": null,
-                "team_id": 1610612765,
-                "display_name": "丹尼斯·詹金斯"
+                "name": "Daniss Jenkins"
               },
               {
-                "name": "Isaiah Joe",
-                "player_id": null,
-                "team_id": 1610612765,
-                "display_name": "以赛亚·乔"
+                "name": "Isaiah Joe"
               },
               {
-                "name": "Isaac Jones",
-                "player_id": null,
-                "team_id": 1610612765,
-                "display_name": "艾萨克·琼斯"
+                "name": "Isaac Jones"
               },
               {
-                "name": "Chaz Lanier",
-                "player_id": null,
-                "team_id": 1610612765,
-                "display_name": "查兹·拉尼尔"
+                "name": "Chaz Lanier"
               },
               {
-                "name": "Ebuka Okorie",
-                "player_id": null,
-                "team_id": 1610612765,
-                "display_name": "埃布卡·奥科里"
+                "name": "Ebuka Okorie"
               },
               {
-                "name": "Ugonna Onyenso",
-                "player_id": null,
-                "team_id": 1610612765,
-                "display_name": "乌戈纳·奥涅恩索"
+                "name": "Ugonna Onyenso"
               },
               {
-                "name": "Taurean Prince",
-                "player_id": null,
-                "team_id": 1610612765,
-                "display_name": "托里恩·普林斯"
+                "name": "Taurean Prince"
               },
               {
-                "name": "Paul Reed",
-                "player_id": null,
-                "team_id": 1610612765,
-                "display_name": "保罗·里德"
+                "name": "Paul Reed"
               },
               {
-                "name": "Duncan Robinson",
-                "player_id": null,
-                "team_id": 1610612765,
-                "display_name": "邓肯·罗宾逊"
+                "name": "Duncan Robinson"
               },
               {
-                "name": "Tolu Smith",
-                "player_id": null,
-                "team_id": 1610612765,
-                "display_name": "托卢·史密斯"
+                "name": "Tolu Smith"
               },
               {
-                "name": "Ausar Thompson",
-                "player_id": null,
-                "team_id": 1610612765,
-                "display_name": "奥萨尔·汤普森"
+                "name": "Ausar Thompson"
               }
             ],
             "source": {
               "captured_at": "2026-10-23T17:27:25.529843+00:00",
-              "http_status": 200,
               "observed_at": "2026-10-23T17:27:25.529843+00:00",
               "parser_version": "official-team-rendered-roster-v1",
-              "retry_count": 0,
               "sha256": "d0e6b7e0b7b8b00d828261ae52a970f610deff7a96cf6c8e8a3a951fc813f3cc",
               "source_type": "espn_current_team_roster",
               "status": "success",
-              "temporal_basis": "observed_at",
               "url": "https://www.espn.com/nba/team/roster/_/name/det/detroit-pistons"
             },
-            "status": "available",
-            "team_id": 1610612765
+            "status": "available"
           },
-          "official_team_roster": null,
-          "projected_starters": null,
+          "official_team_roster": {
+            "observed_at": "2026-10-23T23:45:07.880277+00:00",
+            "players": [
+              {
+                "name": "John Collins",
+                "display_name": "约翰·科林斯"
+              },
+              {
+                "name": "Cade Cunningham",
+                "display_name": "凯德·坎宁安"
+              },
+              {
+                "name": "Jalen Duren",
+                "display_name": "杰伦·杜伦"
+              },
+              {
+                "name": "Javonte Green",
+                "display_name": "贾文特·格林"
+              },
+              {
+                "name": "Elijah Harkless",
+                "display_name": "以利亚·哈克利斯"
+              },
+              {
+                "name": "Ronald Holland II",
+                "display_name": "罗纳德·霍兰德二世"
+              },
+              {
+                "name": "Kevin Huerter",
+                "display_name": "凯文·赫尔特"
+              },
+              {
+                "name": "Daniss Jenkins",
+                "display_name": "丹尼斯·詹金斯"
+              },
+              {
+                "name": "Isaiah Joe",
+                "display_name": "以赛亚·乔"
+              },
+              {
+                "name": "Isaac Jones",
+                "display_name": "艾萨克·琼斯"
+              },
+              {
+                "name": "Chaz Lanier",
+                "display_name": "查兹·拉尼尔"
+              },
+              {
+                "name": "Ebuka Okorie",
+                "display_name": "埃布卡·奥科里"
+              },
+              {
+                "name": "Ugonna Onyenso",
+                "display_name": "乌戈纳·奥涅恩索"
+              },
+              {
+                "name": "Taurean Prince",
+                "display_name": "托里恩·普林斯"
+              },
+              {
+                "name": "Paul Reed",
+                "display_name": "保罗·里德"
+              },
+              {
+                "name": "Duncan Robinson",
+                "display_name": "邓肯·罗宾逊"
+              },
+              {
+                "name": "Tolu Smith",
+                "display_name": "托卢·史密斯"
+              },
+              {
+                "name": "Ausar Thompson",
+                "display_name": "奥萨尔·汤普森"
+              }
+            ],
+            "source": {
+              "captured_at": "2026-10-23T23:45:07.880277+00:00",
+              "source_type": "current_team_roster_not_game_active_list",
+              "source_url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/8/roster"
+            },
+            "status": "available"
+          },
+          "projected_starters": [
+            {
+              "evidence_ids": [
+                "final-lineup-ed93f0985bf0b89ed7d9"
+              ],
+              "name": "Cade Cunningham",
+              "team_id": 1610612765
+            },
+            {
+              "evidence_ids": [
+                "final-lineup-ed93f0985bf0b89ed7d9"
+              ],
+              "name": "Duncan Robinson",
+              "team_id": 1610612765
+            },
+            {
+              "evidence_ids": [
+                "final-lineup-ed93f0985bf0b89ed7d9"
+              ],
+              "name": "Ausar Thompson",
+              "team_id": 1610612765
+            },
+            {
+              "evidence_ids": [
+                "final-lineup-ed93f0985bf0b89ed7d9"
+              ],
+              "name": "John Collins",
+              "team_id": 1610612765
+            },
+            {
+              "evidence_ids": [
+                "final-lineup-ed93f0985bf0b89ed7d9"
+              ],
+              "name": "Jalen Duren",
+              "team_id": 1610612765
+            }
+          ],
           "team_id": 1610612765
         },
         "home": {
-          "confirmed_starters": null,
+          "confirmed_starters": [],
+          "confirmed_starters_evidence_ids": [],
           "current_rotation": null,
           "current_team_roster": null,
           "official_team_roster": {
-            "observed_at": "2026-10-23T17:27:24.131998+00:00",
+            "observed_at": "2026-10-23T23:45:07.736132+00:00",
             "players": [
               {
                 "name": "Bam Adebayo",
-                "player_id": null,
-                "team_id": 1610612748,
                 "display_name": "巴姆·阿德巴约"
               },
               {
                 "name": "Giannis Antetokounmpo",
-                "player_id": null,
-                "team_id": 1610612748,
                 "display_name": "扬尼斯·阿德托昆博"
               },
               {
                 "name": "Ryan Conwell",
-                "player_id": null,
-                "team_id": 1610612748,
                 "display_name": "瑞安·康威尔"
               },
               {
                 "name": "Tre Donaldson",
-                "player_id": null,
-                "team_id": 1610612748,
                 "display_name": "特雷·唐纳森"
               },
               {
                 "name": "Simone Fontecchio",
-                "player_id": null,
-                "team_id": 1610612748,
                 "display_name": "西蒙尼·丰泰基奥"
               },
               {
                 "name": "Myron Gardner",
-                "player_id": null,
-                "team_id": 1610612748,
                 "display_name": "迈伦·加德纳"
               },
               {
                 "name": "Vladislav Goldin",
-                "player_id": null,
-                "team_id": 1610612748,
                 "display_name": "弗拉迪斯拉夫·戈尔丁"
               },
               {
                 "name": "Tim Hardaway Jr.",
-                "player_id": null,
-                "team_id": 1610612748,
                 "display_name": "蒂姆·哈达威二世"
               },
               {
                 "name": "Keshad Johnson",
-                "player_id": null,
-                "team_id": 1610612748,
                 "display_name": "凯沙德·约翰逊"
               },
               {
-                "name": "Nikola Jović",
-                "player_id": null,
-                "team_id": 1610612748,
+                "name": "Nikola Jovic",
                 "display_name": "尼古拉·约维奇"
               },
               {
                 "name": "Pelle Larsson",
-                "player_id": null,
-                "team_id": 1610612748,
                 "display_name": "佩莱·拉松"
               },
               {
                 "name": "Davion Mitchell",
-                "player_id": null,
-                "team_id": 1610612748,
                 "display_name": "戴维恩·米切尔"
               },
               {
-                "name": "Bobby Portis Jr.",
-                "player_id": null,
-                "team_id": 1610612748,
+                "name": "Bobby Portis",
                 "display_name": "博比·波蒂斯"
               },
               {
                 "name": "Nick Richards",
-                "player_id": null,
-                "team_id": 1610612748,
                 "display_name": "尼克·理查兹"
               },
               {
                 "name": "Dru Smith",
-                "player_id": null,
-                "team_id": 1610612748,
                 "display_name": "德鲁·史密斯"
               },
               {
                 "name": "Klay Thompson",
-                "player_id": null,
-                "team_id": 1610612748,
                 "display_name": "克莱·汤普森"
               },
               {
                 "name": "Andrew Wiggins",
-                "player_id": null,
-                "team_id": 1610612748,
                 "display_name": "安德鲁·维金斯"
               }
             ],
             "source": {
-              "captured_at": "2026-10-23T17:27:24.131998+00:00",
-              "http_status": 200,
-              "observed_at": "2026-10-23T17:27:24.131998+00:00",
-              "parser_version": "official-team-rendered-roster-v1",
-              "retry_count": 0,
-              "sha256": "9eee7baed37938d5245551fd91acba11195b02014b239678aa21eb6ab6d4e2a5",
-              "source_type": "official_team_roster_page",
-              "status": "success",
-              "temporal_basis": "observed_at",
-              "url": "https://www.nba.com/heat/roster"
+              "captured_at": "2026-10-23T23:45:07.736132+00:00",
+              "source_type": "current_team_roster_not_game_active_list",
+              "source_url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/14/roster"
             },
-            "status": "available",
-            "team_id": 1610612748
+            "status": "available"
           },
-          "projected_starters": null,
+          "projected_starters": [
+            {
+              "evidence_ids": [
+                "final-lineup-0d64d15fa4f53c7f1a6a"
+              ],
+              "name": "Davion Mitchell",
+              "team_id": 1610612748
+            },
+            {
+              "evidence_ids": [
+                "final-lineup-0d64d15fa4f53c7f1a6a"
+              ],
+              "name": "Klay Thompson",
+              "team_id": 1610612748
+            },
+            {
+              "evidence_ids": [
+                "final-lineup-0d64d15fa4f53c7f1a6a"
+              ],
+              "name": "Andrew Wiggins",
+              "team_id": 1610612748
+            },
+            {
+              "evidence_ids": [
+                "final-lineup-0d64d15fa4f53c7f1a6a"
+              ],
+              "name": "Giannis Antetokounmpo",
+              "team_id": 1610612748
+            },
+            {
+              "evidence_ids": [
+                "final-lineup-0d64d15fa4f53c7f1a6a"
+              ],
+              "name": "Bam Adebayo",
+              "team_id": 1610612748
+            }
+          ],
           "team_id": 1610612748
         }
       }
@@ -858,7 +1001,7 @@
     "season_form": {
       "status": "available",
       "game_id": "espn:401909847",
-      "cutoff": "2026-10-23T17:30:35.622262+00:00",
+      "cutoff": "2026-10-23T23:48:49.980004+00:00",
       "season_start": 2026,
       "competition_scope": "all_game_types_in_current_season",
       "source": "schedule_catalog_final_games",
@@ -950,7 +1093,7 @@
           }
         }
       },
-      "context_hash": "138729eb67fd35ff12ce948fc653b76fde608df9db1927e6b1f97af6b48dcbb7"
+      "context_hash": "f7aea1cb38f900ce4f72c9b682f9186dbd3f8dbedab7e29da1739f6e1b3b8283"
     },
     "season_phase": {
       "away_current_season_games": 1,
@@ -963,7 +1106,7 @@
     },
     "season_start": 2026,
     "source": {
-      "schedule_captured_at": "2026-10-23T17:29:31.502663+00:00"
+      "schedule_captured_at": "2026-10-23T23:46:02.302060+00:00"
     },
     "status": "scheduled",
     "technical": {
@@ -1157,109 +1300,22 @@
         }
       }
     },
-    "official_injury_report": {
-      "game_id": "espn:401909847",
-      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_01_15PM.pdf",
-      "source_published_at": "2026-10-23T17:15:00+00:00",
-      "captured_at": "2026-10-23T17:18:51.507991+00:00",
-      "source_sha256": "5f0fed6a1dfea0992bc42963de8995d490a75e06c49f122aff2ce5f446f74004",
-      "parser_version": "nba-official-injury-live-v3",
-      "status": "published",
-      "report_id": "89493b1d7d45332ec2067d69f3d33e30550238718221c3b2820196321b4b6474",
-      "report_date": "2026-10-23",
-      "report_time": "13:15",
-      "coverage": "complete",
-      "records": [
-        {
-          "team_id": 1610612748,
-          "player_name": "Dru Smith",
-          "status": "available",
-          "reason": "Injury/Illness - Right Calf Strain",
-          "game_id": "espn:401909847",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_01_15PM.pdf",
-          "source_published_at": "2026-10-23T17:15:00+00:00",
-          "captured_at": "2026-10-23T17:18:51.507991+00:00",
-          "source_sha256": "5f0fed6a1dfea0992bc42963de8995d490a75e06c49f122aff2ce5f446f74004",
-          "parser_version": "nba-official-injury-live-v3"
-        },
-        {
-          "team_id": 1610612748,
-          "player_name": "Vladislav Goldin",
-          "status": "available",
-          "reason": "Injury/Illness - Right Ankle Sprain",
-          "game_id": "espn:401909847",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_01_15PM.pdf",
-          "source_published_at": "2026-10-23T17:15:00+00:00",
-          "captured_at": "2026-10-23T17:18:51.507991+00:00",
-          "source_sha256": "5f0fed6a1dfea0992bc42963de8995d490a75e06c49f122aff2ce5f446f74004",
-          "parser_version": "nba-official-injury-live-v3"
-        },
-        {
-          "team_id": 1610612765,
-          "player_name": "Elijah Harkless",
-          "status": "out",
-          "reason": "G League - Two-Way",
-          "game_id": "espn:401909847",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_01_15PM.pdf",
-          "source_published_at": "2026-10-23T17:15:00+00:00",
-          "captured_at": "2026-10-23T17:18:51.507991+00:00",
-          "source_sha256": "5f0fed6a1dfea0992bc42963de8995d490a75e06c49f122aff2ce5f446f74004",
-          "parser_version": "nba-official-injury-live-v3"
-        },
-        {
-          "team_id": 1610612765,
-          "player_name": "Isaac Jones",
-          "status": "out",
-          "reason": "G League - Two-Way",
-          "game_id": "espn:401909847",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_01_15PM.pdf",
-          "source_published_at": "2026-10-23T17:15:00+00:00",
-          "captured_at": "2026-10-23T17:18:51.507991+00:00",
-          "source_sha256": "5f0fed6a1dfea0992bc42963de8995d490a75e06c49f122aff2ce5f446f74004",
-          "parser_version": "nba-official-injury-live-v3"
-        },
-        {
-          "team_id": 1610612765,
-          "player_name": "Taurean Prince",
-          "status": "available",
-          "reason": "Personal Reasons",
-          "game_id": "espn:401909847",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_01_15PM.pdf",
-          "source_published_at": "2026-10-23T17:15:00+00:00",
-          "captured_at": "2026-10-23T17:18:51.507991+00:00",
-          "source_sha256": "5f0fed6a1dfea0992bc42963de8995d490a75e06c49f122aff2ce5f446f74004",
-          "parser_version": "nba-official-injury-live-v3"
-        },
-        {
-          "team_id": 1610612765,
-          "player_name": "Ugonna Onyenso",
-          "status": "out",
-          "reason": "G League - Two-Way",
-          "game_id": "espn:401909847",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_01_15PM.pdf",
-          "source_published_at": "2026-10-23T17:15:00+00:00",
-          "captured_at": "2026-10-23T17:18:51.507991+00:00",
-          "source_sha256": "5f0fed6a1dfea0992bc42963de8995d490a75e06c49f122aff2ce5f446f74004",
-          "parser_version": "nba-official-injury-live-v3"
-        }
-      ]
-    },
     "postgame": null,
     "homepage_visible": true
   },
   "prediction": {
     "status": "current",
     "game_id": "espn:401909847",
-    "version_id": "2d84f1be-22b4-4893-85b5-ddce69412bd8",
-    "state_revision": 2,
+    "version_id": "39f17647-74cd-42e9-ba99-24b3d33bbee5",
+    "state_revision": 3,
     "locked_at": null,
     "lock_reason": null,
     "schedule_revision": 1,
     "fact_view": {
       "schema_version": "pregame-fact-view-v1",
       "game_id": "espn:401909847",
-      "version_id": "2d84f1be-22b4-4893-85b5-ddce69412bd8",
-      "source_payload_sha256": "26953a91125bd61fdd708d0104ef5f79a39d4ac2759c7c17302ec841d20469ef",
+      "version_id": "39f17647-74cd-42e9-ba99-24b3d33bbee5",
+      "source_payload_sha256": "b92ea353a09b0ae22e883b1cf69b15f164168b0d1012112eede899523cc73d3e",
       "origin": "new_frozen",
       "context": {
         "feature_cutoff": "2026-10-23T17:27:25.693902+00:00",
@@ -1501,7 +1557,7 @@
     },
     "display_projection": {
       "schema_version": "prediction-display-cutoffs-v1",
-      "version_id": "2d84f1be-22b4-4893-85b5-ddce69412bd8",
+      "version_id": "39f17647-74cd-42e9-ba99-24b3d33bbee5",
       "market_interpretation": {
         "schema_version": "writer-market-interpretation-v1",
         "spread": {
@@ -1518,49 +1574,42 @@
             "line": -1.5,
             "display": "活塞 -1.5"
           },
-          "market_quote_id": "e6d5e7b1f5bf4068cbcd147bf3b49512b750781b42f4b4280cb2266dfd8ea1db"
+          "market_quote_id": "5105c74c61fc8d49f83e4271350aa03c1a29fe78e459ae3ee51d1174f58ed975"
         },
         "total": {
           "status": "available",
-          "model_total": 232.5,
+          "model_total": 231.5,
           "market_total": 235.5,
-          "total_edge": -3.0,
+          "total_edge": -4.0,
           "total_lean": "under",
-          "market_quote_id": "e6d5e7b1f5bf4068cbcd147bf3b49512b750781b42f4b4280cb2266dfd8ea1db"
+          "market_quote_id": "5105c74c61fc8d49f83e4271350aa03c1a29fe78e459ae3ee51d1174f58ed975"
         }
       },
       "cutoffs": {
-        "input_cutoff_at": "2026-10-23T17:30:35.622262+00:00",
+        "input_cutoff_at": "2026-10-23T23:48:49.980004+00:00",
         "feature_cutoff_at": "2026-10-23T17:27:25.693902+00:00",
         "roster_context_cutoff_at": "2026-10-23T17:27:25.693902+00:00"
       }
     },
     "version": {
       "analysis_contract_version": "two-stage-forecast-v1",
-      "base_input_hash": "5d372662b455db8946e5b3e9a2eb1f5d7a6127c93563251ec1844f66cd3d8afc",
+      "base_input_hash": "717b3e986196b3bd7deca4ec9e54457378f2ebbaae7d2210180872815b6548fc",
+      "baseline_version_id": "2d84f1be-22b4-4893-85b5-ddce69412bd8",
       "editorial_material": [
         {
           "effect": "uncertainty",
           "evidence_ids": [
-            "1044a5be33286e8b1fe016ebb202b2b200adb1cef74045864a51fc67f2aad1a4",
-            "638b37f84ba571a9e5de2b970aebd273fed8d1aaf099ca7b5df94dc88b0383f4",
-            "f28b2b29e6eda4e159fdb276a067ff307189602fb3e96c9bc0e6c387fc2d14d4"
+            "final-lineup-0d64d15fa4f53c7f1a6a",
+            "final-lineup-ed93f0985bf0b89ed7d9",
+            "final-roster-73c2451d34ae011637dd"
           ],
           "pregame_plan": {
             "key_matchup": "Giannis/Bam 内线 vs Duren/Collins 篮板与护框",
             "lineups": [
               {
                 "basis": "agent_expected",
-                "candidates": [
-                  "Tim Hardaway Jr.",
-                  "Nikola Jović",
-                  "Pelle Larsson",
-                  "Nick Richards",
-                  "Simone Fontecchio"
-                ],
                 "evidence_ids": [
-                  "638b37f84ba571a9e5de2b970aebd273fed8d1aaf099ca7b5df94dc88b0383f4",
-                  "1044a5be33286e8b1fe016ebb202b2b200adb1cef74045864a51fc67f2aad1a4"
+                  "final-lineup-0d64d15fa4f53c7f1a6a"
                 ],
                 "players": [
                   "Davion Mitchell",
@@ -1569,21 +1618,13 @@
                   "Giannis Antetokounmpo",
                   "Bam Adebayo"
                 ],
-                "rationale": "揭幕战 Giannis、Bam、Wiggins、Davion Mitchell 均首发并承担主要负荷，Klay 作为新援外线首发合理；无确认首发，属篮球推断。",
+                "rationale": "沿用已发布首发预期，并核对当前归属及明确缺阵信息；本次尚未取得确认首发。",
                 "side": "home"
               },
               {
                 "basis": "agent_expected",
-                "candidates": [
-                  "Javonte Green",
-                  "Isaiah Joe",
-                  "Ronald Holland II",
-                  "Kevin Huerter",
-                  "Paul Reed"
-                ],
                 "evidence_ids": [
-                  "638b37f84ba571a9e5de2b970aebd273fed8d1aaf099ca7b5df94dc88b0383f4",
-                  "f28b2b29e6eda4e159fdb276a067ff307189602fb3e96c9bc0e6c387fc2d14d4"
+                  "final-lineup-ed93f0985bf0b89ed7d9"
                 ],
                 "players": [
                   "Cade Cunningham",
@@ -1592,7 +1633,7 @@
                   "John Collins",
                   "Jalen Duren"
                 ],
-                "rationale": "揭幕战 Cunningham、Duren、Robinson、Green 均出战并发挥，John Collins 与 Isaiah Joe 为新援；无确认首发，属篮球推断。",
+                "rationale": "沿用已发布首发预期，并核对当前归属及明确缺阵信息；本次尚未取得确认首发。",
                 "side": "away"
               }
             ],
@@ -1600,50 +1641,46 @@
               {
                 "basis": "agent_estimate",
                 "evidence_ids": [
-                  "638b37f84ba571a9e5de2b970aebd273fed8d1aaf099ca7b5df94dc88b0383f4"
+                  "final-roster-73c2451d34ae011637dd"
                 ],
                 "minutes_max": 36,
                 "minutes_min": 30,
                 "player_name": "Giannis Antetokounmpo",
-                "rationale": "揭幕战打 30 分钟，作为核心预计维持高负荷，新阵容磨合期可能略有波动。",
+                "rationale": "沿用此前负荷估计，并核对当前归属与缺阵消息；该范围不是本场确认安排。",
                 "side": "home"
               },
               {
                 "basis": "agent_estimate",
                 "evidence_ids": [
-                  "638b37f84ba571a9e5de2b970aebd273fed8d1aaf099ca7b5df94dc88b0383f4"
+                  "final-roster-73c2451d34ae011637dd"
                 ],
                 "minutes_max": 38,
                 "minutes_min": 33,
                 "player_name": "Cade Cunningham",
-                "rationale": "揭幕战打 35 分钟，作为球队核心持球点预计维持高负荷。",
+                "rationale": "沿用此前负荷估计，并核对当前归属与缺阵消息；该范围不是本场确认安排。",
                 "side": "away"
               },
               {
                 "basis": "agent_estimate",
                 "evidence_ids": [
-                  "638b37f84ba571a9e5de2b970aebd273fed8d1aaf099ca7b5df94dc88b0383f4"
+                  "final-roster-73c2451d34ae011637dd"
                 ],
                 "minutes_max": 32,
                 "minutes_min": 26,
                 "player_name": "Jalen Duren",
-                "rationale": "揭幕战打 28 分钟，作为内线核心预计维持主力负荷。",
+                "rationale": "沿用此前负荷估计，并核对当前归属与缺阵消息；该范围不是本场确认安排。",
                 "side": "away"
               }
             ],
             "uncertainty": [
-              "双方首发与轮换均未确认，属篮球推断",
-              "无伤病/出战状态信息，核心球员负荷存在不确定性"
+              "首发仍有预计项，尚未取得完整确认。",
+              "部分球员本场出战状态尚未明确，负荷和出场安排只能作条件分析。"
             ]
           },
           "summary": "本场预计首发与核心球员负荷"
         }
       ],
       "evidence_index": {
-        "02f233d9d00625a921d920389e45ffe933ddbbc2f3a182b778008194d289151a": {
-          "section": "game_identity",
-          "source_type": "Fact"
-        },
         "0b3dc92835f91718b9a0d10056da016ba94edebf07c9d48bf6af94f963d389ef": {
           "section": "fact_context",
           "source_type": "Context"
@@ -1652,21 +1689,13 @@
           "section": "web_context",
           "source_type": "Fact"
         },
-        "1b6dba6f2e0c1deeea9a548ff3bcd4e92a14cfe641e8910c756ad2a4121bdb2a": {
-          "section": "research_status",
-          "source_type": "Context"
-        },
-        "32dd7fcd9f286d4376955f286adc339116ccbf6a27a1b4cd289bd6ae0d682716": {
-          "section": "web_context",
-          "source_type": "Fact"
-        },
         "638b37f84ba571a9e5de2b970aebd273fed8d1aaf099ca7b5df94dc88b0383f4": {
           "section": "season_form",
           "source_type": "Fact"
         },
         "6beceabdee967d1d29e253f0c4ba443a66e98071ede3eb89ebdd0e5c7a95f582": {
-          "section": "roster_context",
-          "source_type": "Fact"
+          "section": "early_assumption",
+          "source_type": "BaselineContext"
         },
         "6eb1d00e5eac1d4f31e6a34b3a1d7cf82efc95c8247cd85f3e769d37a9bf76fe": {
           "section": "web_context",
@@ -1677,18 +1706,6 @@
           "source_type": "Fact"
         },
         "7401c489774f4ec157538985b2d524d3ede2959d1e50f10ac5c3b06724daaee4": {
-          "section": "web_context",
-          "source_type": "Fact"
-        },
-        "7833544892312c2dfa123f4c03c4195bc4f4fabe0224f943f2c32a17fb2bc34f": {
-          "section": "matchup",
-          "source_type": "Fact"
-        },
-        "81ce31cae7fff7f0492f10dfcc3c020787693f30455ea0aa34b65635bab1a303": {
-          "section": "web_context",
-          "source_type": "Fact"
-        },
-        "86a190e3062fd589df80227f0e6c44d15709950505266f623d11efc2145fc09c": {
           "section": "web_context",
           "source_type": "Fact"
         },
@@ -1712,17 +1729,9 @@
           "section": "season_phase",
           "source_type": "Fact"
         },
-        "e0fb7f1687100b84ba8cda4ae16858d282220609c9c180542824693b65ccee3b": {
-          "section": "model_facts",
-          "source_type": "Fact"
-        },
         "e6d5e7b1f5bf4068cbcd147bf3b49512b750781b42f4b4280cb2266dfd8ea1db": {
-          "section": "web_context",
-          "source_type": "MarketSnapshot"
-        },
-        "f1331bff6c85968097be4955019e13434e4dd3034a4593a7b0153b4a22c10464": {
-          "section": "matchup_history",
-          "source_type": "Fact"
+          "section": "early_assumption",
+          "source_type": "BaselineContext"
         },
         "f28b2b29e6eda4e159fdb276a067ff307189602fb3e96c9bc0e6c387fc2d14d4": {
           "section": "web_context",
@@ -1731,6 +1740,46 @@
         "ff40f9fe07cc9e96287ac2de83b7383848f10b08af6bcad4fe72335ae7189f4d": {
           "section": "web_context",
           "source_type": "Fact"
+        },
+        "final-availability-1b57d058dbd94729a77c": {
+          "section": "web_context",
+          "source_type": "SourceFact"
+        },
+        "final-availability-226d564270eec3515e47": {
+          "section": "web_context",
+          "source_type": "SourceFact"
+        },
+        "final-availability-666cc39d7cb1cc01d239": {
+          "section": "web_context",
+          "source_type": "SourceFact"
+        },
+        "final-availability-a854e053129d2e769445": {
+          "section": "web_context",
+          "source_type": "SourceFact"
+        },
+        "final-availability-cd6c65732537afe68392": {
+          "section": "web_context",
+          "source_type": "SourceFact"
+        },
+        "final-availability-efdaffbafdee463042b5": {
+          "section": "web_context",
+          "source_type": "SourceFact"
+        },
+        "final-lineup-0d64d15fa4f53c7f1a6a": {
+          "section": "web_context",
+          "source_type": "AnalystEstimate"
+        },
+        "final-lineup-ed93f0985bf0b89ed7d9": {
+          "section": "web_context",
+          "source_type": "AnalystEstimate"
+        },
+        "final-market-460042e821ac981bd8f5": {
+          "section": "web_context",
+          "source_type": "MarketSnapshot"
+        },
+        "final-roster-73c2451d34ae011637dd": {
+          "section": "roster_context",
+          "source_type": "SourceFact"
         }
       },
       "game_id": "espn:401909847",
@@ -1740,8 +1789,8 @@
         "home_team_id": 1610612748,
         "scheduled_tipoff": "2026-10-24T00:00:00+00:00"
       },
-      "generated_at": "2026-10-23T17:31:00.807588+00:00",
-      "input_cutoff_at": "2026-10-23T17:30:35.622262+00:00",
+      "generated_at": "2026-10-23T23:49:30.020463+00:00",
+      "input_cutoff_at": "2026-10-23T23:48:49.980004+00:00",
       "input_snapshot": {
         "away": {
           "abbreviation": "DET",
@@ -2006,6 +2055,93 @@
           }
         ],
         "neutral_site": false,
+        "official_injury_report": {
+          "captured_at": "2026-10-23T23:35:17.160027+00:00",
+          "coverage": "complete",
+          "game_id": "espn:401909847",
+          "parser_version": "nba-official-injury-live-v3",
+          "records": [
+            {
+              "captured_at": "2026-10-23T23:35:17.160027+00:00",
+              "game_id": "espn:401909847",
+              "parser_version": "nba-official-injury-live-v3",
+              "player_name": "Dru Smith",
+              "reason": "Injury/Illness - Right Calf Strain",
+              "source_published_at": "2026-10-23T23:30:00+00:00",
+              "source_sha256": "ef9434138eeb2551cdedaba44231b79e924c905716ee14ace36bfa94ce4aa8c7",
+              "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_30PM.pdf",
+              "status": "available",
+              "team_id": 1610612748
+            },
+            {
+              "captured_at": "2026-10-23T23:35:17.160027+00:00",
+              "game_id": "espn:401909847",
+              "parser_version": "nba-official-injury-live-v3",
+              "player_name": "Vladislav Goldin",
+              "reason": "Injury/Illness - Right Ankle Sprain",
+              "source_published_at": "2026-10-23T23:30:00+00:00",
+              "source_sha256": "ef9434138eeb2551cdedaba44231b79e924c905716ee14ace36bfa94ce4aa8c7",
+              "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_30PM.pdf",
+              "status": "available",
+              "team_id": 1610612748
+            },
+            {
+              "captured_at": "2026-10-23T23:35:17.160027+00:00",
+              "game_id": "espn:401909847",
+              "parser_version": "nba-official-injury-live-v3",
+              "player_name": "Elijah Harkless",
+              "reason": "G League - Two-Way",
+              "source_published_at": "2026-10-23T23:30:00+00:00",
+              "source_sha256": "ef9434138eeb2551cdedaba44231b79e924c905716ee14ace36bfa94ce4aa8c7",
+              "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_30PM.pdf",
+              "status": "out",
+              "team_id": 1610612765
+            },
+            {
+              "captured_at": "2026-10-23T23:35:17.160027+00:00",
+              "game_id": "espn:401909847",
+              "parser_version": "nba-official-injury-live-v3",
+              "player_name": "Isaac Jones",
+              "reason": "G League - Two-Way",
+              "source_published_at": "2026-10-23T23:30:00+00:00",
+              "source_sha256": "ef9434138eeb2551cdedaba44231b79e924c905716ee14ace36bfa94ce4aa8c7",
+              "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_30PM.pdf",
+              "status": "out",
+              "team_id": 1610612765
+            },
+            {
+              "captured_at": "2026-10-23T23:35:17.160027+00:00",
+              "game_id": "espn:401909847",
+              "parser_version": "nba-official-injury-live-v3",
+              "player_name": "Taurean Prince",
+              "reason": "Personal Reasons",
+              "source_published_at": "2026-10-23T23:30:00+00:00",
+              "source_sha256": "ef9434138eeb2551cdedaba44231b79e924c905716ee14ace36bfa94ce4aa8c7",
+              "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_30PM.pdf",
+              "status": "available",
+              "team_id": 1610612765
+            },
+            {
+              "captured_at": "2026-10-23T23:35:17.160027+00:00",
+              "game_id": "espn:401909847",
+              "parser_version": "nba-official-injury-live-v3",
+              "player_name": "Ugonna Onyenso",
+              "reason": "G League - Two-Way",
+              "source_published_at": "2026-10-23T23:30:00+00:00",
+              "source_sha256": "ef9434138eeb2551cdedaba44231b79e924c905716ee14ace36bfa94ce4aa8c7",
+              "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_30PM.pdf",
+              "status": "out",
+              "team_id": 1610612765
+            }
+          ],
+          "report_date": "2026-10-23",
+          "report_id": "9b0810286f5a07899018afa55145a504889af81a640ffa24e55401df53e5d73a",
+          "report_time": "19:30",
+          "source_published_at": "2026-10-23T23:30:00+00:00",
+          "source_sha256": "ef9434138eeb2551cdedaba44231b79e924c905716ee14ace36bfa94ce4aa8c7",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_30PM.pdf",
+          "status": "published"
+        },
         "player_display_names": [
           {
             "canonical_name_en": "Bam Adebayo",
@@ -2021,6 +2157,70 @@
             "display_name_zh": "扬尼斯·阿德托昆博",
             "name_key": "giannis antetokounmpo",
             "player_id": "name:giannis antetokounmpo",
+            "translation_source": "known_mapping"
+          },
+          {
+            "canonical_name_en": "Tim Hardaway Jr.",
+            "created_at": "2026-10-21T14:25:13.716078+00:00",
+            "display_name_zh": "蒂姆·哈达威二世",
+            "name_key": "tim hardaway jr",
+            "player_id": "name:tim hardaway jr",
+            "translation_source": "known_mapping"
+          },
+          {
+            "canonical_name_en": "Keshad Johnson",
+            "created_at": "2026-10-21T14:25:13.716756+00:00",
+            "display_name_zh": "凯沙德·约翰逊",
+            "name_key": "keshad johnson",
+            "player_id": "name:keshad johnson",
+            "translation_source": "known_mapping"
+          },
+          {
+            "canonical_name_en": "Nikola Jović",
+            "created_at": "2026-10-21T14:25:13.717496+00:00",
+            "display_name_zh": "尼古拉·约维奇",
+            "name_key": "nikola jovic",
+            "player_id": "name:nikola jovic",
+            "translation_source": "known_mapping"
+          },
+          {
+            "canonical_name_en": "Pelle Larsson",
+            "created_at": "2026-10-21T14:25:13.718120+00:00",
+            "display_name_zh": "佩莱·拉松",
+            "name_key": "pelle larsson",
+            "player_id": "name:pelle larsson",
+            "translation_source": "known_mapping"
+          },
+          {
+            "canonical_name_en": "Davion Mitchell",
+            "created_at": "2026-10-21T14:25:13.718742+00:00",
+            "display_name_zh": "戴维恩·米切尔",
+            "name_key": "davion mitchell",
+            "player_id": "name:davion mitchell",
+            "translation_source": "known_mapping"
+          },
+          {
+            "canonical_name_en": "Dru Smith",
+            "created_at": "2026-10-21T14:25:13.720744+00:00",
+            "display_name_zh": "德鲁·史密斯",
+            "name_key": "dru smith",
+            "player_id": "name:dru smith",
+            "translation_source": "known_mapping"
+          },
+          {
+            "canonical_name_en": "Klay Thompson",
+            "created_at": "2026-10-21T14:25:13.721363+00:00",
+            "display_name_zh": "克莱·汤普森",
+            "name_key": "klay thompson",
+            "player_id": "name:klay thompson",
+            "translation_source": "known_mapping"
+          },
+          {
+            "canonical_name_en": "Andrew Wiggins",
+            "created_at": "2026-10-21T14:25:13.722030+00:00",
+            "display_name_zh": "安德鲁·维金斯",
+            "name_key": "andrew wiggins",
+            "player_id": "name:andrew wiggins",
             "translation_source": "known_mapping"
           },
           {
@@ -2064,54 +2264,6 @@
             "translation_source": "llm_transliteration"
           },
           {
-            "canonical_name_en": "Tim Hardaway Jr.",
-            "created_at": "2026-10-21T14:25:13.716078+00:00",
-            "display_name_zh": "蒂姆·哈达威二世",
-            "name_key": "tim hardaway jr",
-            "player_id": "name:tim hardaway jr",
-            "translation_source": "known_mapping"
-          },
-          {
-            "canonical_name_en": "Keshad Johnson",
-            "created_at": "2026-10-21T14:25:13.716756+00:00",
-            "display_name_zh": "凯沙德·约翰逊",
-            "name_key": "keshad johnson",
-            "player_id": "name:keshad johnson",
-            "translation_source": "known_mapping"
-          },
-          {
-            "canonical_name_en": "Nikola Jović",
-            "created_at": "2026-10-21T14:25:13.717496+00:00",
-            "display_name_zh": "尼古拉·约维奇",
-            "name_key": "nikola jovic",
-            "player_id": "name:nikola jovic",
-            "translation_source": "known_mapping"
-          },
-          {
-            "canonical_name_en": "Pelle Larsson",
-            "created_at": "2026-10-21T14:25:13.718120+00:00",
-            "display_name_zh": "佩莱·拉松",
-            "name_key": "pelle larsson",
-            "player_id": "name:pelle larsson",
-            "translation_source": "known_mapping"
-          },
-          {
-            "canonical_name_en": "Davion Mitchell",
-            "created_at": "2026-10-21T14:25:13.718742+00:00",
-            "display_name_zh": "戴维恩·米切尔",
-            "name_key": "davion mitchell",
-            "player_id": "name:davion mitchell",
-            "translation_source": "known_mapping"
-          },
-          {
-            "canonical_name_en": "Bobby Portis Jr.",
-            "created_at": "2026-10-21T14:25:13.719370+00:00",
-            "display_name_zh": "博比·波蒂斯",
-            "name_key": "bobby portis jr",
-            "player_id": "name:bobby portis jr",
-            "translation_source": "known_mapping"
-          },
-          {
             "canonical_name_en": "Nick Richards",
             "created_at": "2026-10-21T14:25:13.720084+00:00",
             "display_name_zh": "尼克·理查兹",
@@ -2120,28 +2272,12 @@
             "translation_source": "llm_transliteration"
           },
           {
-            "canonical_name_en": "Dru Smith",
-            "created_at": "2026-10-21T14:25:13.720744+00:00",
-            "display_name_zh": "德鲁·史密斯",
-            "name_key": "dru smith",
-            "player_id": "name:dru smith",
-            "translation_source": "known_mapping"
-          },
-          {
-            "canonical_name_en": "Klay Thompson",
-            "created_at": "2026-10-21T14:25:13.721363+00:00",
-            "display_name_zh": "克莱·汤普森",
-            "name_key": "klay thompson",
-            "player_id": "name:klay thompson",
-            "translation_source": "known_mapping"
-          },
-          {
-            "canonical_name_en": "Andrew Wiggins",
-            "created_at": "2026-10-21T14:25:13.722030+00:00",
-            "display_name_zh": "安德鲁·维金斯",
-            "name_key": "andrew wiggins",
-            "player_id": "name:andrew wiggins",
-            "translation_source": "known_mapping"
+            "canonical_name_en": "Bobby Portis",
+            "created_at": "2026-10-04T06:24:01.733139+00:00",
+            "display_name_zh": "博比·波蒂斯",
+            "name_key": "bobby portis",
+            "player_id": "espn:3064482",
+            "translation_source": "llm_transliteration"
           },
           {
             "canonical_name_en": "John Collins",
@@ -2300,14 +2436,14 @@
         "public_market_reference": {
           "away_moneyline": -125.0,
           "away_spread": -1.5,
-          "captured_at": "2026-10-23T17:30:23.671025+00:00",
+          "captured_at": "2026-10-23T23:45:06.735670+00:00",
           "eligible_prediction_input": false,
           "expected_home_margin": -1.5,
           "game_identity": {
             "away_team": "Detroit Pistons",
             "away_team_id": 1610612765,
             "game_id": "espn:401909847",
-            "game_type": "regular_season",
+            "game_type": null,
             "home_team": "Miami Heat",
             "home_team_id": 1610612748,
             "registered_game": true,
@@ -2315,7 +2451,7 @@
           },
           "home_moneyline": 105.0,
           "home_spread": 1.5,
-          "observed_at": "2026-10-23T17:30:23.671025+00:00",
+          "observed_at": "2026-10-23T23:45:06.735670+00:00",
           "published_at": null,
           "source_tier": 1,
           "source_title": "Draft Kings current odds",
@@ -2330,230 +2466,286 @@
         "roster_context": {
           "teams": {
             "away": {
-              "confirmed_starters": null,
+              "confirmed_starters": [],
+              "confirmed_starters_evidence_ids": [],
               "current_rotation": null,
               "current_team_roster": {
                 "observed_at": "2026-10-23T17:27:25.529843+00:00",
                 "players": [
                   {
-                    "name": "John Collins",
-                    "player_id": null,
-                    "team_id": 1610612765
+                    "name": "John Collins"
                   },
                   {
-                    "name": "Cade Cunningham",
-                    "player_id": null,
-                    "team_id": 1610612765
+                    "name": "Cade Cunningham"
                   },
                   {
-                    "name": "Jalen Duren",
-                    "player_id": null,
-                    "team_id": 1610612765
+                    "name": "Jalen Duren"
                   },
                   {
-                    "name": "Javonte Green",
-                    "player_id": null,
-                    "team_id": 1610612765
+                    "name": "Javonte Green"
                   },
                   {
-                    "name": "Elijah Harkless",
-                    "player_id": null,
-                    "team_id": 1610612765
+                    "name": "Elijah Harkless"
                   },
                   {
-                    "name": "Ronald Holland II",
-                    "player_id": null,
-                    "team_id": 1610612765
+                    "name": "Ronald Holland II"
                   },
                   {
-                    "name": "Kevin Huerter",
-                    "player_id": null,
-                    "team_id": 1610612765
+                    "name": "Kevin Huerter"
                   },
                   {
-                    "name": "Daniss Jenkins",
-                    "player_id": null,
-                    "team_id": 1610612765
+                    "name": "Daniss Jenkins"
                   },
                   {
-                    "name": "Isaiah Joe",
-                    "player_id": null,
-                    "team_id": 1610612765
+                    "name": "Isaiah Joe"
                   },
                   {
-                    "name": "Isaac Jones",
-                    "player_id": null,
-                    "team_id": 1610612765
+                    "name": "Isaac Jones"
                   },
                   {
-                    "name": "Chaz Lanier",
-                    "player_id": null,
-                    "team_id": 1610612765
+                    "name": "Chaz Lanier"
                   },
                   {
-                    "name": "Ebuka Okorie",
-                    "player_id": null,
-                    "team_id": 1610612765
+                    "name": "Ebuka Okorie"
                   },
                   {
-                    "name": "Ugonna Onyenso",
-                    "player_id": null,
-                    "team_id": 1610612765
+                    "name": "Ugonna Onyenso"
                   },
                   {
-                    "name": "Taurean Prince",
-                    "player_id": null,
-                    "team_id": 1610612765
+                    "name": "Taurean Prince"
                   },
                   {
-                    "name": "Paul Reed",
-                    "player_id": null,
-                    "team_id": 1610612765
+                    "name": "Paul Reed"
                   },
                   {
-                    "name": "Duncan Robinson",
-                    "player_id": null,
-                    "team_id": 1610612765
+                    "name": "Duncan Robinson"
                   },
                   {
-                    "name": "Tolu Smith",
-                    "player_id": null,
-                    "team_id": 1610612765
+                    "name": "Tolu Smith"
                   },
                   {
-                    "name": "Ausar Thompson",
-                    "player_id": null,
-                    "team_id": 1610612765
+                    "name": "Ausar Thompson"
                   }
                 ],
                 "source": {
                   "captured_at": "2026-10-23T17:27:25.529843+00:00",
-                  "http_status": 200,
                   "observed_at": "2026-10-23T17:27:25.529843+00:00",
                   "parser_version": "official-team-rendered-roster-v1",
-                  "retry_count": 0,
                   "sha256": "d0e6b7e0b7b8b00d828261ae52a970f610deff7a96cf6c8e8a3a951fc813f3cc",
                   "source_type": "espn_current_team_roster",
                   "status": "success",
-                  "temporal_basis": "observed_at",
                   "url": "https://www.espn.com/nba/team/roster/_/name/det/detroit-pistons"
                 },
-                "status": "available",
-                "team_id": 1610612765
+                "status": "available"
               },
-              "official_team_roster": null,
-              "projected_starters": null,
-              "team_id": 1610612765
-            },
-            "home": {
-              "confirmed_starters": null,
-              "current_rotation": null,
-              "current_team_roster": null,
               "official_team_roster": {
-                "observed_at": "2026-10-23T17:27:24.131998+00:00",
+                "observed_at": "2026-10-23T23:45:07.880277+00:00",
                 "players": [
                   {
-                    "name": "Bam Adebayo",
-                    "player_id": null,
-                    "team_id": 1610612748
+                    "name": "John Collins"
                   },
                   {
-                    "name": "Giannis Antetokounmpo",
-                    "player_id": null,
-                    "team_id": 1610612748
+                    "name": "Cade Cunningham"
                   },
                   {
-                    "name": "Ryan Conwell",
-                    "player_id": null,
-                    "team_id": 1610612748
+                    "name": "Jalen Duren"
                   },
                   {
-                    "name": "Tre Donaldson",
-                    "player_id": null,
-                    "team_id": 1610612748
+                    "name": "Javonte Green"
                   },
                   {
-                    "name": "Simone Fontecchio",
-                    "player_id": null,
-                    "team_id": 1610612748
+                    "name": "Elijah Harkless"
                   },
                   {
-                    "name": "Myron Gardner",
-                    "player_id": null,
-                    "team_id": 1610612748
+                    "name": "Ronald Holland II"
                   },
                   {
-                    "name": "Vladislav Goldin",
-                    "player_id": null,
-                    "team_id": 1610612748
+                    "name": "Kevin Huerter"
                   },
                   {
-                    "name": "Tim Hardaway Jr.",
-                    "player_id": null,
-                    "team_id": 1610612748
+                    "name": "Daniss Jenkins"
                   },
                   {
-                    "name": "Keshad Johnson",
-                    "player_id": null,
-                    "team_id": 1610612748
+                    "name": "Isaiah Joe"
                   },
                   {
-                    "name": "Nikola Jović",
-                    "player_id": null,
-                    "team_id": 1610612748
+                    "name": "Isaac Jones"
                   },
                   {
-                    "name": "Pelle Larsson",
-                    "player_id": null,
-                    "team_id": 1610612748
+                    "name": "Chaz Lanier"
                   },
                   {
-                    "name": "Davion Mitchell",
-                    "player_id": null,
-                    "team_id": 1610612748
+                    "name": "Ebuka Okorie"
                   },
                   {
-                    "name": "Bobby Portis Jr.",
-                    "player_id": null,
-                    "team_id": 1610612748
+                    "name": "Ugonna Onyenso"
                   },
                   {
-                    "name": "Nick Richards",
-                    "player_id": null,
-                    "team_id": 1610612748
+                    "name": "Taurean Prince"
                   },
                   {
-                    "name": "Dru Smith",
-                    "player_id": null,
-                    "team_id": 1610612748
+                    "name": "Paul Reed"
                   },
                   {
-                    "name": "Klay Thompson",
-                    "player_id": null,
-                    "team_id": 1610612748
+                    "name": "Duncan Robinson"
                   },
                   {
-                    "name": "Andrew Wiggins",
-                    "player_id": null,
-                    "team_id": 1610612748
+                    "name": "Tolu Smith"
+                  },
+                  {
+                    "name": "Ausar Thompson"
                   }
                 ],
                 "source": {
-                  "captured_at": "2026-10-23T17:27:24.131998+00:00",
-                  "http_status": 200,
-                  "observed_at": "2026-10-23T17:27:24.131998+00:00",
-                  "parser_version": "official-team-rendered-roster-v1",
-                  "retry_count": 0,
-                  "sha256": "9eee7baed37938d5245551fd91acba11195b02014b239678aa21eb6ab6d4e2a5",
-                  "source_type": "official_team_roster_page",
-                  "status": "success",
-                  "temporal_basis": "observed_at",
-                  "url": "https://www.nba.com/heat/roster"
+                  "captured_at": "2026-10-23T23:45:07.880277+00:00",
+                  "source_type": "current_team_roster_not_game_active_list",
+                  "source_url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/8/roster"
                 },
-                "status": "available",
-                "team_id": 1610612748
+                "status": "available"
               },
-              "projected_starters": null,
+              "projected_starters": [
+                {
+                  "evidence_ids": [
+                    "final-lineup-ed93f0985bf0b89ed7d9"
+                  ],
+                  "name": "Cade Cunningham",
+                  "team_id": 1610612765
+                },
+                {
+                  "evidence_ids": [
+                    "final-lineup-ed93f0985bf0b89ed7d9"
+                  ],
+                  "name": "Duncan Robinson",
+                  "team_id": 1610612765
+                },
+                {
+                  "evidence_ids": [
+                    "final-lineup-ed93f0985bf0b89ed7d9"
+                  ],
+                  "name": "Ausar Thompson",
+                  "team_id": 1610612765
+                },
+                {
+                  "evidence_ids": [
+                    "final-lineup-ed93f0985bf0b89ed7d9"
+                  ],
+                  "name": "John Collins",
+                  "team_id": 1610612765
+                },
+                {
+                  "evidence_ids": [
+                    "final-lineup-ed93f0985bf0b89ed7d9"
+                  ],
+                  "name": "Jalen Duren",
+                  "team_id": 1610612765
+                }
+              ],
+              "team_id": 1610612765
+            },
+            "home": {
+              "confirmed_starters": [],
+              "confirmed_starters_evidence_ids": [],
+              "current_rotation": null,
+              "current_team_roster": null,
+              "official_team_roster": {
+                "observed_at": "2026-10-23T23:45:07.736132+00:00",
+                "players": [
+                  {
+                    "name": "Bam Adebayo"
+                  },
+                  {
+                    "name": "Giannis Antetokounmpo"
+                  },
+                  {
+                    "name": "Ryan Conwell"
+                  },
+                  {
+                    "name": "Tre Donaldson"
+                  },
+                  {
+                    "name": "Simone Fontecchio"
+                  },
+                  {
+                    "name": "Myron Gardner"
+                  },
+                  {
+                    "name": "Vladislav Goldin"
+                  },
+                  {
+                    "name": "Tim Hardaway Jr."
+                  },
+                  {
+                    "name": "Keshad Johnson"
+                  },
+                  {
+                    "name": "Nikola Jovic"
+                  },
+                  {
+                    "name": "Pelle Larsson"
+                  },
+                  {
+                    "name": "Davion Mitchell"
+                  },
+                  {
+                    "name": "Bobby Portis"
+                  },
+                  {
+                    "name": "Nick Richards"
+                  },
+                  {
+                    "name": "Dru Smith"
+                  },
+                  {
+                    "name": "Klay Thompson"
+                  },
+                  {
+                    "name": "Andrew Wiggins"
+                  }
+                ],
+                "source": {
+                  "captured_at": "2026-10-23T23:45:07.736132+00:00",
+                  "source_type": "current_team_roster_not_game_active_list",
+                  "source_url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/14/roster"
+                },
+                "status": "available"
+              },
+              "projected_starters": [
+                {
+                  "evidence_ids": [
+                    "final-lineup-0d64d15fa4f53c7f1a6a"
+                  ],
+                  "name": "Davion Mitchell",
+                  "team_id": 1610612748
+                },
+                {
+                  "evidence_ids": [
+                    "final-lineup-0d64d15fa4f53c7f1a6a"
+                  ],
+                  "name": "Klay Thompson",
+                  "team_id": 1610612748
+                },
+                {
+                  "evidence_ids": [
+                    "final-lineup-0d64d15fa4f53c7f1a6a"
+                  ],
+                  "name": "Andrew Wiggins",
+                  "team_id": 1610612748
+                },
+                {
+                  "evidence_ids": [
+                    "final-lineup-0d64d15fa4f53c7f1a6a"
+                  ],
+                  "name": "Giannis Antetokounmpo",
+                  "team_id": 1610612748
+                },
+                {
+                  "evidence_ids": [
+                    "final-lineup-0d64d15fa4f53c7f1a6a"
+                  ],
+                  "name": "Bam Adebayo",
+                  "team_id": 1610612748
+                }
+              ],
               "team_id": 1610612748
             }
           }
@@ -2968,31 +3160,39 @@
         "venue": "Kaseya Center"
       },
       "judgment": {
-        "analysis_article": "热火的新赛季开局不太好看。主场对森林狼，字母哥拿了35分，球队还是106比131输了25分。这不是某个人没打好，而是整条防线在换人、补位、退防上都没接上。现在第二场就来了，对手还是刚在主场逆转凯尔特人的活塞。\n\n我最想看的是热火怎么处理坎宁安。他是活塞进攻的起点，上一场22分，球在他手里，杜伦的顺下、外线几个人的空位都跟着活。热火这边能派米切尔去缠他，米切尔也是热火外线最靠得住的防守人，但一个人贴住不够，挡拆之后谁上提、谁补篮下、弱侧谁轮转，这些才是热火上一场没做好的部分。如果坎宁安每次叫掩护都能逼出一次犹豫，活塞的进攻就会一直有第二条路。\n\n活塞上一场赢球的方式也值得注意。杜伦22分，罗宾逊21分里有15分在第四节，格林19分全在下半场。这说明他们不是靠一个人硬撑，而是有人能在比赛后段接上火力。热火要防的就不只是坎宁安一个点。\n\n但让我选方向，我还是站活塞，让1.5分可以支持。\n\n原因不在字母哥不够强，而在他身边的人还没形成稳定的回应。阿德巴约上一场15分，威金斯11分，克莱三分线外进了三个球拿10分，这些都不算差，可热火的进攻还是太依赖字母哥自己往里冲。活塞有杜伦和柯林斯守内线，篮板这一块不会轻易让出去，字母哥冲进去之后，二次进攻和罚球之外的机会未必多。\n\n我更在意的是热火防守端的持续性。一支新拼起来的阵容，第一场被打出131分，第二场就要面对一个持球核心明确、内线有终结点、外线有人能投的对手，这不是靠一场调整就能补上的。活塞只要把坎宁安和杜伦的配合反复提出来，逼热火在换防和收缩之间做选择，分差就有机会一点点攒起来。让1.5分不算高，关键是活塞能不能在客场把这种优势维持住。\n\n总分我更偏小，但看得没有让分那么重。热火上一场丢了131分，听起来像要打快，可那更多是防守崩了之后的追分回合。如果这场热火愿意把节奏压下来，让字母哥在半场里一次次冲击，活塞也得跟着落阵地，回合数就不会太多。反过来，只要坎宁安拿下篮板就推、罗宾逊和格林早早跑出去，比赛就可能被拉快，这是小分最直接的反例。\n\n所以我更支持活塞的让分方向，小分只是次选。开球后先看一件事：坎宁安叫挡拆时，热火是能稳定地把球逼出去，还是又一次在补位上慢半拍。这个答案会决定比赛往哪边走。",
+        "analysis_article": "热火的字母时代开局并不好看。主场对森林狼，他们丢了131分，106比131输球；字母自己拿了35分，可比赛还是早早滑走。第二晚对手换成活塞，问题没变：这套新阵容的防守还没成型，而对面是一支已经打过一场、知道自己怎么赢球的队伍。\n\n我最想看的是热火怎么处理坎宁安。米切尔是热火外线最靠得住的防守人，可一个人盯不住整条进攻线。坎宁安持球叫掩护，杜伦顺下，弱侧还有罗宾逊拉开——热火只要第一下被过，补防就得从禁区往外跑，篮下立刻空出来。上一场他们就是这样被反复撕开的，活塞的球转移比森林狼更耐心，这种洞会被找得更准。\n\n内线是另一处拉扯。字母冲起来没人挡得住，但杜伦和柯林斯在篮板上的对抗会让热火很难受：字母一旦被顶出禁区，二次进攻的机会就归活塞。热火想赢，得靠字母把节奏提起来，让活塞的大个子跟着跑；可这也意味着热火自己的防守站位更散。\n\n所以我站活塞，让1.5分可以支持。不是因为他们更强一档，而是因为他们的攻防更完整：坎宁安能组织，杜伦能护框能抢板，罗宾逊和格林在首战下半场已经证明能接管一段得分。热火要靠字母一个人撑住四十八分钟，太难。\n\n总分我偏小，但没让分那么有把握。热火想快，活塞未必跟着快；如果坎宁安愿意把回合压下来，让杜伦在内线磨，得分环境就会收紧。反过来，只要字母拿下篮板就推、米切尔跟着冲，比赛很容易变成对攻。\n\n开球后先看一件事：热火能不能在坎宁安叫出第一个掩护时，把补位接住。接不住，这场就会重演上一晚。",
         "analysis_article_evidence_ids": [
           "1044a5be33286e8b1fe016ebb202b2b200adb1cef74045864a51fc67f2aad1a4",
           "638b37f84ba571a9e5de2b970aebd273fed8d1aaf099ca7b5df94dc88b0383f4",
           "6beceabdee967d1d29e253f0c4ba443a66e98071ede3eb89ebdd0e5c7a95f582",
+          "6eb1d00e5eac1d4f31e6a34b3a1d7cf82efc95c8247cd85f3e769d37a9bf76fe",
+          "72c70eac5a56538ce9159409bd2dd52d0af2c665e0ca64c1039100db2acee052",
           "7401c489774f4ec157538985b2d524d3ede2959d1e50f10ac5c3b06724daaee4",
           "a01b7262f6929acc3f99444ac4529172791a48b55dafcedae3cbb6ae3dfddbae",
           "a161fbd0d7c6eade1e9f6f1e4a27632b95552346de3cc07ec105c41e6f2504dc",
-          "e6d5e7b1f5bf4068cbcd147bf3b49512b750781b42f4b4280cb2266dfd8ea1db"
+          "final-availability-1b57d058dbd94729a77c",
+          "final-availability-a854e053129d2e769445",
+          "final-market-460042e821ac981bd8f5"
         ],
         "confidence": "medium",
-        "core_question": "热火新阵容的防守磨合能否在第二场止住上一场131分失分的崩盘，还是活塞更成熟的攻防体系会延续优势？",
+        "core_question": "热火新阵容的防守磨合能否在第二场止住上一战的失分，还是活塞更成熟的攻防体系会延续优势？",
         "final_prediction": {
           "evidence_ids": [
             "1044a5be33286e8b1fe016ebb202b2b200adb1cef74045864a51fc67f2aad1a4",
             "638b37f84ba571a9e5de2b970aebd273fed8d1aaf099ca7b5df94dc88b0383f4",
             "6beceabdee967d1d29e253f0c4ba443a66e98071ede3eb89ebdd0e5c7a95f582",
+            "6eb1d00e5eac1d4f31e6a34b3a1d7cf82efc95c8247cd85f3e769d37a9bf76fe",
+            "72c70eac5a56538ce9159409bd2dd52d0af2c665e0ca64c1039100db2acee052",
             "7401c489774f4ec157538985b2d524d3ede2959d1e50f10ac5c3b06724daaee4",
             "a01b7262f6929acc3f99444ac4529172791a48b55dafcedae3cbb6ae3dfddbae",
             "a161fbd0d7c6eade1e9f6f1e4a27632b95552346de3cc07ec105c41e6f2504dc",
-            "e6d5e7b1f5bf4068cbcd147bf3b49512b750781b42f4b4280cb2266dfd8ea1db"
+            "final-availability-1b57d058dbd94729a77c",
+            "final-availability-a854e053129d2e769445",
+            "final-market-460042e821ac981bd8f5"
           ],
           "expected_margin": 2.5,
-          "expected_total": 232.5,
-          "win_probability": 0.57,
+          "expected_total": 231.5,
+          "win_probability": 0.56,
           "winner_side": "away"
         },
         "game_script": "比赛预计呈较高节奏的对攻，双方都有强力内线得分点。活塞凭借更成熟的攻防体系与篮板优势在多数时段保持小幅领先，Cunningham 与 Duren 持续输出；热火依靠 Giannis 的个人冲击力咬住比分，但防守端难以持续限制活塞多点得分，最终活塞以个位数分差客场取胜。",
@@ -3001,16 +3201,17 @@
             "classification": "subjective_analysis",
             "evidence_ids": [
               "a161fbd0d7c6eade1e9f6f1e4a27632b95552346de3cc07ec105c41e6f2504dc",
-              "638b37f84ba571a9e5de2b970aebd273fed8d1aaf099ca7b5df94dc88b0383f4"
+              "6eb1d00e5eac1d4f31e6a34b3a1d7cf82efc95c8247cd85f3e769d37a9bf76fe"
             ],
-            "statement": "Giannis Antetokounmpo / Bam Adebayo 内线组合 vs Jalen Duren / John Collins 的篮板与护框：热火进攻高度依赖 Giannis 冲击内线，而活塞在上一季样本中篮板份额占优，内线对抗决定二次进攻与禁区得分。 活塞篮板优势可能限制热火二次进攻，但 Giannis 个人冲击力仍能制造得分，内线呈拉锯。"
+            "statement": "Giannis Antetokounmpo / Bam Adebayo 内线组合 vs Jalen Duren / John Collins 的篮板与护框：热火进攻高度依赖 Giannis 冲击内线，而活塞篮板率显著占优，内线对抗决定二次进攻与禁区得分。 活塞篮板优势可能限制热火二次进攻，但 Giannis 个人冲击力仍能制造得分，内线呈拉锯。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
+              "72c70eac5a56538ce9159409bd2dd52d0af2c665e0ca64c1039100db2acee052",
               "638b37f84ba571a9e5de2b970aebd273fed8d1aaf099ca7b5df94dc88b0383f4"
             ],
-            "statement": "Cade Cunningham 持球组织 vs 热火外线防守（Davion Mitchell 领防）：Cunningham 是活塞进攻发动机，揭幕战 22 分，能否被限制直接决定活塞进攻效率。 Davion Mitchell 是热火最好的外线防守者，但热火整体防守体系未成型，Cunningham 仍可能高效。"
+            "statement": "Cade Cunningham 持球组织 vs 热火外线防守（Davion Mitchell 领防）：Cunningham 是活塞进攻发动机，能否被限制直接决定活塞进攻效率。 Davion Mitchell 是热火最好的外线防守者，但热火整体防守体系未成型，Cunningham 仍可能高效。"
           }
         ],
         "model_risk": "如果热火防守体系在第二场明显改善，限制活塞进攻效率，则若热火防守回暖，胜负方向可能反转，倾向主队；如果Giannis 打出统治级表现并带动全队三分回暖，则若热火进攻全面爆发，可能覆盖防守短板，倾向主队",
@@ -3019,99 +3220,93 @@
             "classification": "subjective_analysis",
             "evidence_ids": [
               "638b37f84ba571a9e5de2b970aebd273fed8d1aaf099ca7b5df94dc88b0383f4",
-              "6beceabdee967d1d29e253f0c4ba443a66e98071ede3eb89ebdd0e5c7a95f582",
-              "6eb1d00e5eac1d4f31e6a34b3a1d7cf82efc95c8247cd85f3e769d37a9bf76fe"
+              "6eb1d00e5eac1d4f31e6a34b3a1d7cf82efc95c8247cd85f3e769d37a9bf76fe",
+              "final-roster-73c2451d34ae011637dd"
             ],
             "player_name": "Giannis Antetokounmpo",
-            "statement": "热火进攻最稳定的来源，上一场砍下35分。面对杜伦和柯林斯的内线，他能否在冲击之外带动队友，决定热火能不能咬住比分。"
+            "statement": "上一战35分证明冲击力还在，但热火需要他不只是得分，还要把节奏带起来。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "1044a5be33286e8b1fe016ebb202b2b200adb1cef74045864a51fc67f2aad1a4",
               "638b37f84ba571a9e5de2b970aebd273fed8d1aaf099ca7b5df94dc88b0383f4",
-              "6beceabdee967d1d29e253f0c4ba443a66e98071ede3eb89ebdd0e5c7a95f582"
+              "final-roster-73c2451d34ae011637dd"
             ],
             "player_name": "Bam Adebayo",
-            "statement": "热火内线另一根支柱，上一场得分上双。他要在篮板和护框上顶住杜伦，否则热火的防守漏洞会被放大。"
+            "statement": "热火内线另一根支柱，上一战得分上双；他能不能帮字母分担篮板对抗，直接影响禁区归属。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
               "638b37f84ba571a9e5de2b970aebd273fed8d1aaf099ca7b5df94dc88b0383f4",
-              "6beceabdee967d1d29e253f0c4ba443a66e98071ede3eb89ebdd0e5c7a95f582"
+              "final-roster-73c2451d34ae011637dd"
             ],
             "player_name": "Davion Mitchell",
-            "statement": "热火外线最好的防守人，上一场得分上双并送出两位数助攻。他要领防坎宁安，但一个人贴住不够，还得看全队轮转跟不跟得上。"
+            "statement": "热火外线最好的防守人，上一战得分助攻双双上双；他对坎宁安的领防是热火防守的第一道闸。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "6beceabdee967d1d29e253f0c4ba443a66e98071ede3eb89ebdd0e5c7a95f582",
-              "b23965e5e54c3040e00beeb1dbce5252549c46751f860d84bce26809213338e2"
+              "b23965e5e54c3040e00beeb1dbce5252549c46751f860d84bce26809213338e2",
+              "final-roster-73c2451d34ae011637dd"
             ],
             "player_name": "Klay Thompson",
-            "statement": "热火新援外线，上一场三分线外命中三球拿10分。他能不能拉开空间，直接影响字母哥冲击内线时面对的防守密度。"
+            "statement": "上一战拿下10分、投进三记三分，热火需要他的投射把字母突破后的空间撑开。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "1044a5be33286e8b1fe016ebb202b2b200adb1cef74045864a51fc67f2aad1a4",
               "638b37f84ba571a9e5de2b970aebd273fed8d1aaf099ca7b5df94dc88b0383f4",
-              "6beceabdee967d1d29e253f0c4ba443a66e98071ede3eb89ebdd0e5c7a95f582"
+              "final-roster-73c2451d34ae011637dd"
             ],
             "player_name": "Andrew Wiggins",
-            "statement": "热火侧翼得分点，上一场得分上双。他需要在字母哥被包夹时提供第二波进攻，否则热火进攻太单一。"
+            "statement": "首战11分，是热火除字母外少数能自己创造出手的侧翼。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
               "638b37f84ba571a9e5de2b970aebd273fed8d1aaf099ca7b5df94dc88b0383f4",
-              "6beceabdee967d1d29e253f0c4ba443a66e98071ede3eb89ebdd0e5c7a95f582",
-              "72c70eac5a56538ce9159409bd2dd52d0af2c665e0ca64c1039100db2acee052"
+              "final-roster-73c2451d34ae011637dd"
             ],
             "player_name": "Cade Cunningham",
-            "statement": "活塞进攻发动机，上一场22分。他能否在米切尔的领防下持续制造挡拆优势，决定活塞客场能不能掌控节奏。"
+            "statement": "活塞进攻发动机，上一战贡献22分并送出多次助攻；他能不能在米切尔面前把球送到该去的地方，决定活塞进攻效率。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
               "638b37f84ba571a9e5de2b970aebd273fed8d1aaf099ca7b5df94dc88b0383f4",
-              "6beceabdee967d1d29e253f0c4ba443a66e98071ede3eb89ebdd0e5c7a95f582",
-              "72c70eac5a56538ce9159409bd2dd52d0af2c665e0ca64c1039100db2acee052",
-              "b843ff444ee1d6d1979ccc177bb5adbbe7669688c521fff200d6384feb66d1f5"
+              "b843ff444ee1d6d1979ccc177bb5adbbe7669688c521fff200d6384feb66d1f5",
+              "final-roster-73c2451d34ae011637dd"
             ],
             "player_name": "Jalen Duren",
-            "statement": "活塞内线核心，上一场22分，刚签下续约。他在篮板和护框上对位阿德巴约，是活塞内线优势的关键。"
+            "statement": "上一战贡献22分并抢下多个篮板，刚签下续约；他在篮板和护框上的对抗是活塞压制热火内线的关键。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
               "638b37f84ba571a9e5de2b970aebd273fed8d1aaf099ca7b5df94dc88b0383f4",
-              "6beceabdee967d1d29e253f0c4ba443a66e98071ede3eb89ebdd0e5c7a95f582",
-              "ff40f9fe07cc9e96287ac2de83b7383848f10b08af6bcad4fe72335ae7189f4d"
+              "ff40f9fe07cc9e96287ac2de83b7383848f10b08af6bcad4fe72335ae7189f4d",
+              "final-roster-73c2451d34ae011637dd"
             ],
             "player_name": "Duncan Robinson",
-            "statement": "活塞外线火力点，上一场21分其中15分在第四节。他若能在比赛后段接上得分，活塞的领先才有机会维持。"
+            "statement": "首战21分，其中15分来自第四节；热火一旦收缩，他就是外线最直接的惩罚者。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "638b37f84ba571a9e5de2b970aebd273fed8d1aaf099ca7b5df94dc88b0383f4",
-              "6beceabdee967d1d29e253f0c4ba443a66e98071ede3eb89ebdd0e5c7a95f582",
-              "ff40f9fe07cc9e96287ac2de83b7383848f10b08af6bcad4fe72335ae7189f4d"
+              "final-roster-73c2451d34ae011637dd"
             ],
-            "player_name": "Javonte Green",
-            "statement": "活塞替补席上的得分点，上一场下半场手感火热，全部得分都集中在下半场。若他在轮换阶段延续这种冲击力，就能给热火防线制造额外压力。"
+            "player_name": "Ausar Thompson",
+            "statement": "活塞侧翼的防守与转换推进，负责给坎宁安分担持球压力。"
           },
           {
             "classification": "subjective_analysis",
             "evidence_ids": [
-              "6beceabdee967d1d29e253f0c4ba443a66e98071ede3eb89ebdd0e5c7a95f582",
-              "f28b2b29e6eda4e159fdb276a067ff307189602fb3e96c9bc0e6c387fc2d14d4"
+              "f28b2b29e6eda4e159fdb276a067ff307189602fb3e96c9bc0e6c387fc2d14d4",
+              "final-roster-73c2451d34ae011637dd"
             ],
             "player_name": "John Collins",
-            "statement": "活塞新援内线，与杜伦搭档守篮板和护框。他能否限制字母哥的二次进攻，是活塞内线对抗的重要一环。"
+            "statement": "活塞新援内线，和杜伦一起承担篮板与护框，是热火禁区对抗的直接对手。"
           }
         ],
         "pregame_story": {
@@ -3120,15 +3315,15 @@
             "1044a5be33286e8b1fe016ebb202b2b200adb1cef74045864a51fc67f2aad1a4",
             "638b37f84ba571a9e5de2b970aebd273fed8d1aaf099ca7b5df94dc88b0383f4",
             "6beceabdee967d1d29e253f0c4ba443a66e98071ede3eb89ebdd0e5c7a95f582",
-            "7401c489774f4ec157538985b2d524d3ede2959d1e50f10ac5c3b06724daaee4",
-            "a01b7262f6929acc3f99444ac4529172791a48b55dafcedae3cbb6ae3dfddbae",
-            "a161fbd0d7c6eade1e9f6f1e4a27632b95552346de3cc07ec105c41e6f2504dc"
+            "6eb1d00e5eac1d4f31e6a34b3a1d7cf82efc95c8247cd85f3e769d37a9bf76fe",
+            "72c70eac5a56538ce9159409bd2dd52d0af2c665e0ca64c1039100db2acee052",
+            "7401c489774f4ec157538985b2d524d3ede2959d1e50f10ac5c3b06724daaee4"
           ],
-          "statement": "热火刚在主场被森林狼打穿，字母哥的35分没能换来胜利；活塞则从凯尔特人手里抢下一场逆转。第二场就撞上，正好看看谁的问题更真。",
+          "statement": "热火的新阵容刚在主场被打穿，第二晚就要面对一支已经赢过球、体系更完整的活塞。",
           "title": "字母领军守主场\n活塞客场再叩关"
         },
         "roster_analysis": [],
-        "subjective_rationale": "热火刚在主场被森林狼打穿，字母哥的35分没能换来胜利；活塞则从凯尔特人手里抢下一场逆转。第二场就撞上，正好看看谁的问题更真。",
+        "subjective_rationale": "热火的新阵容刚在主场被打穿，第二晚就要面对一支已经赢过球、体系更完整的活塞。",
         "supporting_evidence": [],
         "uncertainty": [],
         "unresolved_uncertainty": [],
@@ -3139,12 +3334,12 @@
               "1044a5be33286e8b1fe016ebb202b2b200adb1cef74045864a51fc67f2aad1a4",
               "638b37f84ba571a9e5de2b970aebd273fed8d1aaf099ca7b5df94dc88b0383f4",
               "6beceabdee967d1d29e253f0c4ba443a66e98071ede3eb89ebdd0e5c7a95f582",
-              "7401c489774f4ec157538985b2d524d3ede2959d1e50f10ac5c3b06724daaee4",
-              "a01b7262f6929acc3f99444ac4529172791a48b55dafcedae3cbb6ae3dfddbae",
-              "a161fbd0d7c6eade1e9f6f1e4a27632b95552346de3cc07ec105c41e6f2504dc"
+              "6eb1d00e5eac1d4f31e6a34b3a1d7cf82efc95c8247cd85f3e769d37a9bf76fe",
+              "72c70eac5a56538ce9159409bd2dd52d0af2c665e0ca64c1039100db2acee052",
+              "7401c489774f4ec157538985b2d524d3ede2959d1e50f10ac5c3b06724daaee4"
             ],
-            "statement": "米切尔能贴住坎宁安，但挡拆之后的补位和轮转才是热火上一场真正崩掉的地方，这一环决定活塞进攻有没有第二条路。",
-            "title": "坎宁安的挡拆能不能反复逼出热火的犹豫"
+            "statement": "米切尔领防之后，热火的协防轮转是否还会像揭幕战那样被一步打穿。",
+            "title": "热火能否接住坎宁安的挡拆"
           },
           {
             "classification": "subjective_analysis",
@@ -3152,12 +3347,12 @@
               "1044a5be33286e8b1fe016ebb202b2b200adb1cef74045864a51fc67f2aad1a4",
               "638b37f84ba571a9e5de2b970aebd273fed8d1aaf099ca7b5df94dc88b0383f4",
               "6beceabdee967d1d29e253f0c4ba443a66e98071ede3eb89ebdd0e5c7a95f582",
-              "7401c489774f4ec157538985b2d524d3ede2959d1e50f10ac5c3b06724daaee4",
-              "a01b7262f6929acc3f99444ac4529172791a48b55dafcedae3cbb6ae3dfddbae",
-              "a161fbd0d7c6eade1e9f6f1e4a27632b95552346de3cc07ec105c41e6f2504dc"
+              "6eb1d00e5eac1d4f31e6a34b3a1d7cf82efc95c8247cd85f3e769d37a9bf76fe",
+              "72c70eac5a56538ce9159409bd2dd52d0af2c665e0ca64c1039100db2acee052",
+              "7401c489774f4ec157538985b2d524d3ede2959d1e50f10ac5c3b06724daaee4"
             ],
-            "statement": "杜伦和柯林斯守内线，热火的二次进攻和罚球之外机会有限，阿德巴约、威金斯、克莱能不能接上火力是关键。",
-            "title": "字母哥冲进去之后还有什么"
+            "statement": "杜伦和柯林斯能不能把字母顶出禁区，决定二次进攻和禁区得分的归属。",
+            "title": "篮板归谁"
           },
           {
             "classification": "subjective_analysis",
@@ -3165,27 +3360,40 @@
               "1044a5be33286e8b1fe016ebb202b2b200adb1cef74045864a51fc67f2aad1a4",
               "638b37f84ba571a9e5de2b970aebd273fed8d1aaf099ca7b5df94dc88b0383f4",
               "6beceabdee967d1d29e253f0c4ba443a66e98071ede3eb89ebdd0e5c7a95f582",
-              "7401c489774f4ec157538985b2d524d3ede2959d1e50f10ac5c3b06724daaee4",
-              "a01b7262f6929acc3f99444ac4529172791a48b55dafcedae3cbb6ae3dfddbae",
-              "a161fbd0d7c6eade1e9f6f1e4a27632b95552346de3cc07ec105c41e6f2504dc"
+              "6eb1d00e5eac1d4f31e6a34b3a1d7cf82efc95c8247cd85f3e769d37a9bf76fe",
+              "72c70eac5a56538ce9159409bd2dd52d0af2c665e0ca64c1039100db2acee052",
+              "7401c489774f4ec157538985b2d524d3ede2959d1e50f10ac5c3b06724daaee4"
             ],
-            "statement": "热火若压节奏打半场，回合数偏少；坎宁安推反击、罗宾逊和格林早跑，则可能把总分拉高。",
-            "title": "比赛会不会被拉快"
+            "statement": "热火需要他撑住大量回合，一旦他被拖进阵地战，进攻就会变窄。",
+            "title": "字母的负荷"
           }
         ],
         "winner_lean": "away"
       },
+      "lifecycle_audit": {
+        "availability_confirmed_at": null,
+        "early_context_hash": "a7baf91591b331f30a312c851385093338e76a33b89a88231873992699026a4c",
+        "early_generated_at": "2026-10-23T17:31:00.807588+00:00",
+        "early_prediction_version": "2d84f1be-22b4-4893-85b5-ddce69412bd8",
+        "final_delta_hash": "b092ec9c6509c89938b774a7352c44f511350245d56038eb1124e6eb04fc33a1",
+        "final_generated_at": "2026-10-23T23:49:30.020463+00:00",
+        "final_ready_at": "2026-10-23T23:45:25.051825+00:00",
+        "final_window_started_at": "2026-10-23T23:00:37.808527+00:00",
+        "final_window_target_at": "2026-10-23T23:40:00+00:00",
+        "lineup_confirmed_at": null,
+        "tipoff_time": "2026-10-24T00:00:00+00:00"
+      },
       "public_market_reference": {
         "away_moneyline": -125.0,
         "away_spread": -1.5,
-        "captured_at": "2026-10-23T17:30:23.671025+00:00",
+        "captured_at": "2026-10-23T23:45:06.735670+00:00",
         "eligible_prediction_input": false,
         "expected_home_margin": -1.5,
         "game_identity": {
           "away_team": "Detroit Pistons",
           "away_team_id": 1610612765,
           "game_id": "espn:401909847",
-          "game_type": "regular_season",
+          "game_type": null,
           "home_team": "Miami Heat",
           "home_team_id": 1610612748,
           "registered_game": true,
@@ -3193,7 +3401,7 @@
         },
         "home_moneyline": 105.0,
         "home_spread": 1.5,
-        "observed_at": "2026-10-23T17:30:23.671025+00:00",
+        "observed_at": "2026-10-23T23:45:06.735670+00:00",
         "published_at": null,
         "source_tier": 1,
         "source_title": "Draft Kings current odds",
@@ -3204,7 +3412,7 @@
         "total": 235.5,
         "usage": "qualified_market_for_ai_review"
       },
-      "published_at": "2026-10-23T17:31:05.346490+00:00",
+      "published_at": "2026-10-23T23:49:34.208573+00:00",
       "schedule_revision": 1,
       "sources": [
         {
@@ -3368,22 +3576,169 @@
           "sha256": "0adc3f160ea7748d081bab447297988ef41eed45cd5385067e8dec16037c9a1f",
           "source_type": "qualified_market_snapshot",
           "url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909847/competitions/401909847/odds"
+        },
+        {
+          "captured_at": "2026-10-23T23:45:07.736132+00:00",
+          "id": "final-lineup-0d64d15fa4f53c7f1a6a",
+          "source_type": "expected_game_lineup",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/14/roster"
+        },
+        {
+          "captured_at": "2026-10-23T23:45:07.880277+00:00",
+          "id": "final-lineup-ed93f0985bf0b89ed7d9",
+          "source_type": "expected_game_lineup",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/8/roster"
+        },
+        {
+          "captured_at": "2026-10-23T23:35:17.160027+00:00",
+          "id": "final-availability-1b57d058dbd94729a77c",
+          "source_type": "game_availability",
+          "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_30PM.pdf"
+        },
+        {
+          "captured_at": "2026-10-23T23:35:17.160027+00:00",
+          "id": "final-availability-cd6c65732537afe68392",
+          "source_type": "game_availability",
+          "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_30PM.pdf"
+        },
+        {
+          "captured_at": "2026-10-23T23:35:17.160027+00:00",
+          "id": "final-availability-666cc39d7cb1cc01d239",
+          "source_type": "game_availability",
+          "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_30PM.pdf"
+        },
+        {
+          "captured_at": "2026-10-23T23:35:17.160027+00:00",
+          "id": "final-availability-a854e053129d2e769445",
+          "source_type": "game_availability",
+          "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_30PM.pdf"
+        },
+        {
+          "captured_at": "2026-10-23T23:35:17.160027+00:00",
+          "id": "final-availability-226d564270eec3515e47",
+          "source_type": "game_availability",
+          "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_30PM.pdf"
+        },
+        {
+          "captured_at": "2026-10-23T23:35:17.160027+00:00",
+          "id": "final-availability-efdaffbafdee463042b5",
+          "source_type": "game_availability",
+          "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_30PM.pdf"
+        },
+        {
+          "captured_at": "2026-10-23T23:45:06.735670+00:00",
+          "id": "final-market-460042e821ac981bd8f5",
+          "source_type": "qualified_market_snapshot",
+          "url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909847/competitions/401909847/odds"
         }
       ],
-      "stage": "EARLY_PREVIEW",
-      "version_id": "2d84f1be-22b4-4893-85b5-ddce69412bd8",
-      "payload_sha256": "26953a91125bd61fdd708d0104ef5f79a39d4ac2759c7c17302ec841d20469ef",
+      "stage": "FINAL_PREGAME",
+      "version_id": "39f17647-74cd-42e9-ba99-24b3d33bbee5",
+      "payload_sha256": "b92ea353a09b0ae22e883b1cf69b15f164168b0d1012112eede899523cc73d3e",
       "analyst_context": {
         "objective_evidence": [
           {
-            "id": "81ce31cae7fff7f0492f10dfcc3c020787693f30455ea0aa34b65635bab1a303",
+            "id": "final-lineup-0d64d15fa4f53c7f1a6a",
             "section": "web_context",
             "value": {
-              "claim_type": "game_news",
-              "eligible_for_fact": true,
-              "source_role": "professional",
+              "claim_type": "projected_starters",
+              "eligible_for_fact": false,
+              "source_role": "primary",
+              "team_id": 1610612748,
+              "temporal_scope": "current_pregame",
+              "quote": "Andrew Wiggins / Bam Adebayo / Davion Mitchell / Giannis Antetokounmpo / Klay Thompson"
+            }
+          },
+          {
+            "id": "final-lineup-ed93f0985bf0b89ed7d9",
+            "section": "web_context",
+            "value": {
+              "claim_type": "projected_starters",
+              "eligible_for_fact": false,
+              "source_role": "primary",
               "team_id": 1610612765,
               "temporal_scope": "current_pregame",
+              "quote": "Ausar Thompson / Cade Cunningham / Duncan Robinson / Jalen Duren / John Collins"
+            }
+          },
+          {
+            "id": "final-availability-1b57d058dbd94729a77c",
+            "section": "web_context",
+            "value": {
+              "claim_type": "availability",
+              "eligible_for_fact": true,
+              "source_role": "primary",
+              "team_id": 1610612748,
+              "temporal_scope": "current_pregame",
+              "quote": "Dru Smith"
+            }
+          },
+          {
+            "id": "final-availability-cd6c65732537afe68392",
+            "section": "web_context",
+            "value": {
+              "claim_type": "availability",
+              "eligible_for_fact": true,
+              "source_role": "primary",
+              "team_id": 1610612748,
+              "temporal_scope": "current_pregame",
+              "quote": "Vladislav Goldin"
+            }
+          },
+          {
+            "id": "final-availability-666cc39d7cb1cc01d239",
+            "section": "web_context",
+            "value": {
+              "claim_type": "availability",
+              "eligible_for_fact": true,
+              "source_role": "primary",
+              "team_id": 1610612765,
+              "temporal_scope": "current_pregame",
+              "quote": "Taurean Prince"
+            }
+          },
+          {
+            "id": "final-availability-a854e053129d2e769445",
+            "section": "web_context",
+            "value": {
+              "claim_type": "availability",
+              "eligible_for_fact": true,
+              "source_role": "primary",
+              "team_id": 1610612765,
+              "temporal_scope": "current_pregame",
+              "quote": "Elijah Harkless"
+            }
+          },
+          {
+            "id": "final-availability-226d564270eec3515e47",
+            "section": "web_context",
+            "value": {
+              "claim_type": "availability",
+              "eligible_for_fact": true,
+              "source_role": "primary",
+              "team_id": 1610612765,
+              "temporal_scope": "current_pregame",
+              "quote": "Isaac Jones"
+            }
+          },
+          {
+            "id": "final-availability-efdaffbafdee463042b5",
+            "section": "web_context",
+            "value": {
+              "claim_type": "availability",
+              "eligible_for_fact": true,
+              "source_role": "primary",
+              "team_id": 1610612765,
+              "temporal_scope": "current_pregame",
+              "quote": "Ugonna Onyenso"
+            }
+          },
+          {
+            "id": "final-market-460042e821ac981bd8f5",
+            "section": "web_context",
+            "value": {
+              "claim_type": "market_reference",
+              "eligible_for_fact": true,
               "quote": ""
             }
           },
@@ -3407,18 +3762,6 @@
               "eligible_for_fact": true,
               "source_role": "professional",
               "team_id": 1610612748,
-              "temporal_scope": "current_pregame",
-              "quote": ""
-            }
-          },
-          {
-            "id": "86a190e3062fd589df80227f0e6c44d15709950505266f623d11efc2145fc09c",
-            "section": "web_context",
-            "value": {
-              "claim_type": "game_news",
-              "eligible_for_fact": true,
-              "source_role": "professional",
-              "team_id": 1610612765,
               "temporal_scope": "current_pregame",
               "quote": ""
             }
@@ -3484,18 +3827,6 @@
             }
           },
           {
-            "id": "32dd7fcd9f286d4376955f286adc339116ccbf6a27a1b4cd289bd6ae0d682716",
-            "section": "web_context",
-            "value": {
-              "claim_type": "season_background",
-              "eligible_for_fact": true,
-              "source_role": "professional",
-              "team_id": 1610612765,
-              "temporal_scope": "current_season_background",
-              "quote": ""
-            }
-          },
-          {
             "id": "b843ff444ee1d6d1979ccc177bb5adbbe7669688c521fff200d6384feb66d1f5",
             "section": "web_context",
             "value": {
@@ -3505,15 +3836,6 @@
               "team_id": 1610612765,
               "temporal_scope": "current_season_background",
               "quote": "Jalen Duren"
-            }
-          },
-          {
-            "id": "e6d5e7b1f5bf4068cbcd147bf3b49512b750781b42f4b4280cb2266dfd8ea1db",
-            "section": "web_context",
-            "value": {
-              "claim_type": "market_reference",
-              "eligible_for_fact": true,
-              "quote": ""
             }
           }
         ]
@@ -3562,10 +3884,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-23T17:31:16.055008+00:00",
-    "source_prediction_version_id": "2d84f1be-22b4-4893-85b5-ddce69412bd8",
-    "source_prediction_payload_sha256": "26953a91125bd61fdd708d0104ef5f79a39d4ac2759c7c17302ec841d20469ef",
+    "exported_at": "2026-10-23T23:49:50.339084+00:00",
+    "source_prediction_version_id": "39f17647-74cd-42e9-ba99-24b3d33bbee5",
+    "source_prediction_payload_sha256": "b92ea353a09b0ae22e883b1cf69b15f164168b0d1012112eede899523cc73d3e",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "ce4456e01a904a29beaba40a954e6e16597d49a8f7e2cb3fa5d7df63be456e71"
+  "public_sha256": "2e7a4fb5d9d77587d8455101602c67d4a4a1d829ac9ad992c8a69599e236bb03"
 }

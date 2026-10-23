@@ -371,8 +371,8 @@
       "game_id": "espn:401909847",
       "file": "games/espn_401909847.json",
       "tipoff": "2026-10-24T00:00:00+00:00",
-      "version_id": "2d84f1be-22b4-4893-85b5-ddce69412bd8",
-      "public_sha256": "ce4456e01a904a29beaba40a954e6e16597d49a8f7e2cb3fa5d7df63be456e71",
+      "version_id": "39f17647-74cd-42e9-ba99-24b3d33bbee5",
+      "public_sha256": "2e7a4fb5d9d77587d8455101602c67d4a4a1d829ac9ad992c8a69599e236bb03",
       "home_record": {
         "game": {
           "away": {
@@ -411,14 +411,14 @@
         "prediction": {
           "status": "current",
           "game_id": "espn:401909847",
-          "version_id": "2d84f1be-22b4-4893-85b5-ddce69412bd8",
-          "state_revision": 2,
+          "version_id": "39f17647-74cd-42e9-ba99-24b3d33bbee5",
+          "state_revision": 3,
           "locked_at": null,
           "lock_reason": null,
           "schedule_revision": 1,
           "version": {
             "analysis_contract_version": "two-stage-forecast-v1",
-            "base_input_hash": "5d372662b455db8946e5b3e9a2eb1f5d7a6127c93563251ec1844f66cd3d8afc",
+            "base_input_hash": "717b3e986196b3bd7deca4ec9e54457378f2ebbaae7d2210180872815b6548fc",
             "game_id": "espn:401909847",
             "game_identity": {
               "away_team_id": 1610612765,
@@ -426,13 +426,13 @@
               "home_team_id": 1610612748,
               "scheduled_tipoff": "2026-10-24T00:00:00+00:00"
             },
-            "generated_at": "2026-10-23T17:31:00.807588+00:00",
-            "input_cutoff_at": "2026-10-23T17:30:35.622262+00:00",
-            "published_at": "2026-10-23T17:31:05.346490+00:00",
+            "generated_at": "2026-10-23T23:49:30.020463+00:00",
+            "input_cutoff_at": "2026-10-23T23:48:49.980004+00:00",
+            "published_at": "2026-10-23T23:49:34.208573+00:00",
             "schedule_revision": 1,
-            "stage": "EARLY_PREVIEW",
-            "version_id": "2d84f1be-22b4-4893-85b5-ddce69412bd8",
-            "payload_sha256": "26953a91125bd61fdd708d0104ef5f79a39d4ac2759c7c17302ec841d20469ef",
+            "stage": "FINAL_PREGAME",
+            "version_id": "39f17647-74cd-42e9-ba99-24b3d33bbee5",
+            "payload_sha256": "b92ea353a09b0ae22e883b1cf69b15f164168b0d1012112eede899523cc73d3e",
             "input_snapshot": {
               "away": {
                 "abbreviation": "DET",
@@ -462,14 +462,18 @@
                   "1044a5be33286e8b1fe016ebb202b2b200adb1cef74045864a51fc67f2aad1a4",
                   "638b37f84ba571a9e5de2b970aebd273fed8d1aaf099ca7b5df94dc88b0383f4",
                   "6beceabdee967d1d29e253f0c4ba443a66e98071ede3eb89ebdd0e5c7a95f582",
+                  "6eb1d00e5eac1d4f31e6a34b3a1d7cf82efc95c8247cd85f3e769d37a9bf76fe",
+                  "72c70eac5a56538ce9159409bd2dd52d0af2c665e0ca64c1039100db2acee052",
                   "7401c489774f4ec157538985b2d524d3ede2959d1e50f10ac5c3b06724daaee4",
                   "a01b7262f6929acc3f99444ac4529172791a48b55dafcedae3cbb6ae3dfddbae",
                   "a161fbd0d7c6eade1e9f6f1e4a27632b95552346de3cc07ec105c41e6f2504dc",
-                  "e6d5e7b1f5bf4068cbcd147bf3b49512b750781b42f4b4280cb2266dfd8ea1db"
+                  "final-availability-1b57d058dbd94729a77c",
+                  "final-availability-a854e053129d2e769445",
+                  "final-market-460042e821ac981bd8f5"
                 ],
                 "expected_margin": 2.5,
-                "expected_total": 232.5,
-                "win_probability": 0.57,
+                "expected_total": 231.5,
+                "win_probability": 0.56,
                 "winner_side": "away"
               },
               "pregame_story": {
@@ -478,11 +482,11 @@
                   "1044a5be33286e8b1fe016ebb202b2b200adb1cef74045864a51fc67f2aad1a4",
                   "638b37f84ba571a9e5de2b970aebd273fed8d1aaf099ca7b5df94dc88b0383f4",
                   "6beceabdee967d1d29e253f0c4ba443a66e98071ede3eb89ebdd0e5c7a95f582",
-                  "7401c489774f4ec157538985b2d524d3ede2959d1e50f10ac5c3b06724daaee4",
-                  "a01b7262f6929acc3f99444ac4529172791a48b55dafcedae3cbb6ae3dfddbae",
-                  "a161fbd0d7c6eade1e9f6f1e4a27632b95552346de3cc07ec105c41e6f2504dc"
+                  "6eb1d00e5eac1d4f31e6a34b3a1d7cf82efc95c8247cd85f3e769d37a9bf76fe",
+                  "72c70eac5a56538ce9159409bd2dd52d0af2c665e0ca64c1039100db2acee052",
+                  "7401c489774f4ec157538985b2d524d3ede2959d1e50f10ac5c3b06724daaee4"
                 ],
-                "statement": "热火刚在主场被森林狼打穿，字母哥的35分没能换来胜利；活塞则从凯尔特人手里抢下一场逆转。第二场就撞上，正好看看谁的问题更真。",
+                "statement": "热火的新阵容刚在主场被打穿，第二晚就要面对一支已经赢过球、体系更完整的活塞。",
                 "title": "字母领军守主场\n活塞客场再叩关"
               }
             }
@@ -3024,5 +3028,5 @@
       }
     }
   ],
-  "published_at": "2026-10-23T23:31:40.796203+00:00"
+  "published_at": "2026-10-23T23:49:50.339084+00:00"
 }
