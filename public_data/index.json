@@ -368,6 +368,130 @@
       }
     },
     {
+      "game_id": "espn:401909096",
+      "file": "games/espn_401909096.json",
+      "tipoff": "2026-10-24T01:30:00+00:00",
+      "version_id": "cc3af382-1094-4828-aa02-39e5f383cb56",
+      "public_sha256": "081e0ff2388453986a649d1ee096b24388a246f5cdffe6c21c102eeaf9c48a6c",
+      "home_record": {
+        "game": {
+          "away": {
+            "abbreviation": "HOU",
+            "accent": "#CE1141",
+            "espn_team_id": "10",
+            "id": 1610612745,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/hou.png",
+            "name": "Houston Rockets",
+            "name_zh": "火箭",
+            "score": null
+          },
+          "game_type": "regular_season",
+          "home": {
+            "abbreviation": "SA",
+            "accent": "#C4CED4",
+            "espn_team_id": "24",
+            "id": 1610612759,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/sa.png",
+            "name": "San Antonio Spurs",
+            "name_zh": "马刺",
+            "score": null
+          },
+          "id": "espn:401909096",
+          "registered_game": true,
+          "schedule_revision": 1,
+          "season": 2027,
+          "status": "scheduled",
+          "tipoff": "2026-10-24T01:30:00+00:00",
+          "venue": "Moody Center",
+          "schedule_catalog_fact": true,
+          "postgame": null,
+          "homepage_visible": true,
+          "public_summary": true
+        },
+        "prediction": {
+          "status": "current",
+          "game_id": "espn:401909096",
+          "version_id": "cc3af382-1094-4828-aa02-39e5f383cb56",
+          "state_revision": 2,
+          "locked_at": null,
+          "lock_reason": null,
+          "schedule_revision": 1,
+          "version": {
+            "analysis_contract_version": "two-stage-forecast-v1",
+            "base_input_hash": "412828092493fe7b37159e848f3e249a7a2968cb1e943f2f0cfbc18b9169e37a",
+            "game_id": "espn:401909096",
+            "game_identity": {
+              "away_team_id": 1610612745,
+              "game_id": "espn:401909096",
+              "home_team_id": 1610612759,
+              "scheduled_tipoff": "2026-10-24T01:30:00+00:00"
+            },
+            "generated_at": "2026-10-23T23:55:58.267366+00:00",
+            "input_cutoff_at": "2026-10-23T23:55:38.451883+00:00",
+            "published_at": "2026-10-23T23:56:02.227308+00:00",
+            "schedule_revision": 1,
+            "stage": "EARLY_PREVIEW",
+            "version_id": "cc3af382-1094-4828-aa02-39e5f383cb56",
+            "payload_sha256": "99291919b2040f74b03fd2a9bcf13033faa6ec7bedf9821d39798e3d1f83520e",
+            "input_snapshot": {
+              "away": {
+                "abbreviation": "HOU",
+                "accent": "#CE1141",
+                "espn_team_id": "10",
+                "id": 1610612745,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/hou.png",
+                "name": "Houston Rockets",
+                "name_zh": "火箭"
+              },
+              "home": {
+                "abbreviation": "SA",
+                "accent": "#C4CED4",
+                "espn_team_id": "24",
+                "id": 1610612759,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/sa.png",
+                "name": "San Antonio Spurs",
+                "name_zh": "马刺"
+              },
+              "id": "espn:401909096",
+              "schedule_revision": 1,
+              "tipoff": "2026-10-24T01:30:00+00:00"
+            },
+            "judgment": {
+              "final_prediction": {
+                "evidence_ids": [
+                  "11300c1132ce3545807dc34653e1f2fe9f7c400b5addfdd7cf3792620f75f6d5",
+                  "177a7f767b4ea9781ccd43f1649e0aed85076a5d629234bf0c78ea9388114b4d",
+                  "2af1102eb56f43d4d6088b5c993fc1ede0e6736aa623a54e8f1cf38f61cd248b",
+                  "8d180556cdb5b372a2cf31f2067e55e7aef2dd8d0453bb61f57bab701058cdb5",
+                  "a0fbd9a5dc4956af1ff9d492c0296878b31dc3abe07a18072062f00faddb582f",
+                  "a931bd052a211979806d3978d7e4a239597be040820c7fe888415942a704d68c",
+                  "d1a0f03569a5d30d427f10e12328c68ef64c4c45e75fa5fd0b72b41d71a4dc47",
+                  "fc7600a654ebc4e1c194555cfa73b0eb7e68189fd3bbda468f7b683581cff27d"
+                ],
+                "expected_margin": 3.5,
+                "expected_total": 219.5,
+                "win_probability": 0.58,
+                "winner_side": "away"
+              },
+              "pregame_story": {
+                "classification": "subjective_analysis",
+                "evidence_ids": [
+                  "11300c1132ce3545807dc34653e1f2fe9f7c400b5addfdd7cf3792620f75f6d5",
+                  "177a7f767b4ea9781ccd43f1649e0aed85076a5d629234bf0c78ea9388114b4d",
+                  "2af1102eb56f43d4d6088b5c993fc1ede0e6736aa623a54e8f1cf38f61cd248b",
+                  "8d180556cdb5b372a2cf31f2067e55e7aef2dd8d0453bb61f57bab701058cdb5",
+                  "a0fbd9a5dc4956af1ff9d492c0296878b31dc3abe07a18072062f00faddb582f",
+                  "a931bd052a211979806d3978d7e4a239597be040820c7fe888415942a704d68c"
+                ],
+                "statement": "火箭带着一场大胜来到奥斯汀，杜兰特在这里读过一个赛季的大学；马刺刚在揭幕战输给雷霆，文班亚马13投1中，这场球就是看他能不能立刻翻身。",
+                "title": "杜兰特归乡战旧\n文班亚马欲雪耻"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
       "game_id": "espn:401909847",
       "file": "games/espn_401909847.json",
       "tipoff": "2026-10-24T00:00:00+00:00",
@@ -3028,5 +3152,5 @@
       }
     }
   ],
-  "published_at": "2026-10-23T23:49:50.339084+00:00"
+  "published_at": "2026-10-23T23:56:12.087384+00:00"
 }
