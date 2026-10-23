@@ -96,7 +96,7 @@ def status_report(database, *, config=None, at=None):
                 report["reason"] = "task_schema_unavailable"
                 return report
             report["tasks"] = {row[0]: row[1] for row in db.execute("SELECT status,count(*) FROM generation_tasks GROUP BY status")}
-            report["failed_tasks"] = [dict(row) for row in db.execute("SELECT task_id,game_id,stage,status,attempt_count,last_error FROM generation_tasks WHERE status IN ('failed','expired') ORDER BY finished_at DESC LIMIT 20")]
+            report["failed_tasks"] = [dict(row) for row in db.execute("SELECT task_id,game_id,stage,status,attempt_count,last_error FROM generation_tasks WHERE status IN ('failed','expired','missed') ORDER BY finished_at DESC LIMIT 20")]
             report["quarantined_tasks"] = [dict(row) for row in db.execute("SELECT task_id,game_id,stage,status,attempt_count,last_error FROM generation_tasks WHERE status='cancelled' AND (last_error LIKE 'runtime_recovery_requires_review%' OR last_error LIKE 'runtime_heartbeat%') ORDER BY finished_at DESC LIMIT 20")]
             for row in db.execute("SELECT task_id,game_id,stage,status,scheduled_for,deadline_at FROM generation_tasks WHERE stage='FINAL_PREGAME' AND status IN ('pending','failed','running') ORDER BY scheduled_for LIMIT 20"):
                 item = dict(row)
@@ -468,10 +468,15 @@ class PersistentScheduler:
                             'reasons':['readiness_error:'+type(error).__name__],'llm_calls':0}
                     del self.readiness_jobs[task['task_id']]
                 if readiness is not None and not readiness['ready']:
+                    failure=(readiness.get('snapshot')or{}).get('source_error')
+                    reason='final_collection_error:'+failure if failure else 'waiting_final_ready'
+                    if failure and task.get('last_error')!=reason:
+                        self._event('final_information_collection_failed',task,failure_stage='pre_execution_failure',
+                            detail={k:v for k,v in (readiness.get('snapshot')or{}).items()if k.startswith('source_error')})
                     if readiness.get('next_check_at'):
                         with self.tasks.transaction()as db:
-                            db.execute("UPDATE generation_tasks SET next_attempt_at=?,last_error='waiting_final_ready' WHERE task_id=? AND status IN ('pending','failed')",
-                                (readiness['next_check_at'],task['task_id']))
+                            db.execute("UPDATE generation_tasks SET next_attempt_at=?,last_error=? WHERE task_id=? AND status IN ('pending','failed')",
+                                (readiness['next_check_at'],reason,task['task_id']))
                     continue
                 receive, send = self.context.Pipe(duplex=False)
                 process = self.context.Process(target=self.worker_target, args=(str(self.service.store.path), task["task_id"],

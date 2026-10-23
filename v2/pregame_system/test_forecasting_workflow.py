@@ -103,6 +103,16 @@ def test_versioned_forecast_requires_a_structured_analysis_core():
     assert parsed.analysis_core.flip_conditions
 
 
+def test_internal_model_names_in_private_review_do_not_block_public_editorial():
+    from .forecasting_workflow import validate_market_revision_reason
+    from .editorial_contract import public_visibility_issues
+    value=versioned_output(review=True,decision='revise')
+    value['factors'][1]['summary']='Pure is the prior; the supplied basketball fact changes its weighting.'
+    review=VersionedMarketReviewForecast.model_validate(value)
+    validate_market_revision_reason(review,{'basketball.fact'},{'market.quote'})
+    assert 'Pure'in public_visibility_issues({'analysis_article':value['factors'][1]['summary']})
+
+
 def invalid_v2_thesis_output():
     value = versioned_output(4.5, 224.5, refs=["basketball.fact", "model.pure"])
     value["analysis_core"]["central_thesis"] = value["analysis_core"]["central_thesis"]["statement"]

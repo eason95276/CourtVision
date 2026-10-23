@@ -42,6 +42,7 @@ def important_players(early):
 def evaluate_readiness(game,early,snapshot,at,*,market_max_age=300,injury_max_age=3600):
     at=_instant(_utc(at)if isinstance(at,datetime)else at,'at');tip=_instant(game['tipoff'],'tipoff');reasons=[]
     identity=game_identity(game)
+    if snapshot.get('source_error'):reasons.append('source_collection_failed')
     if at>=tip or snapshot.get('game_state')in {'in','post','live','in_progress','final'}:reasons.append('game_started_or_cutoff_reached')
     if snapshot.get('game_identity')!=identity:reasons.append('snapshot_game_identity_mismatch')
     if snapshot.get('schedule_revision',1)!=game.get('schedule_revision',1):reasons.append('snapshot_schedule_revision_mismatch')
@@ -143,12 +144,35 @@ def read_http(url,timeout=4):
     if len(body)>4_000_000:raise ValueError('readiness_response_too_large')
     return json.loads(body),{'url':url,'captured_at':now(),'status':'success','sha256':hashlib.sha256(body).hexdigest()}
 
+def verified_provider_ids(game,data):
+    from .market import team_id
+    header=data.get('header')or{};competition=(header.get('competitions')or[{}])[0]
+    eid=game['id'].removeprefix('espn:')
+    if str(header.get('id'))!=eid or str(competition.get('id'))!=eid or _instant(competition.get('date'),'event_date')!=_instant(game['tipoff'],'tipoff'):
+        raise ValueError('readiness_event_identity_mismatch')
+    result={}
+    for row in competition.get('competitors')or[]:
+        side=row.get('homeAway')
+        if side not in ('home','away') or side in result:
+            raise ValueError('readiness_team_direction_mismatch')
+        if (row.get('team')or{}).get('abbreviation'):
+            if team_id(row)!=int(game[side]['id']):raise ValueError('readiness_team_direction_mismatch')
+        elif game[side].get('espn_team_id')is None:
+            raise ValueError('readiness_canonical_identity_unverified')
+        provider=str((row.get('team')or{}).get('id')or'')
+        if not provider.isdigit() or (game[side].get('espn_team_id')is not None and str(game[side]['espn_team_id'])!=provider):
+            raise ValueError('readiness_provider_identity_mismatch')
+        result[side]=provider
+    if set(result)!={'home','away'}:raise ValueError('readiness_team_direction_mismatch')
+    return result
+
+
 def snapshot_from_espn(game,data,receipt):
     """Only match-bound starter/status fields; athlete.active (league) is ignored."""
     eid=game['id'].removeprefix('espn:');header=data.get('header')or{};competition=(header.get('competitions')or[{}])[0]
     if str(header.get('id'))!=eid or str(competition.get('id'))!=eid or _instant(competition.get('date'),'event_date')!=_instant(game['tipoff'],'tipoff'):
         raise ValueError('readiness_event_identity_mismatch')
-    expected={str(game[s].get('espn_team_id')):s for s in ('home','away')}
+    expected={provider:side for side,provider in verified_provider_ids(game,data).items()}
     competitors=competition.get('competitors')or[]
     for row in competitors:
         side=expected.get(str(row.get('team',{}).get('id')))
@@ -208,9 +232,18 @@ class FinalReadinessStore:
             return last
         if self.collector is None:self.collector=collect_final_snapshot
         try:snapshot=self.collector(game,early,at,self.versions)
-        except Exception as error:snapshot={'game_identity':game_identity(game),'schedule_revision':game.get('schedule_revision',1),'captured_at':at,'game_state':'unknown','source_error':type(error).__name__}
+        except Exception as error:
+            import traceback,re
+            frames=traceback.extract_tb(error.__traceback__)
+            field=error.args[0]if isinstance(error,KeyError)and error.args else None
+            snapshot={'game_identity':game_identity(game),'schedule_revision':game.get('schedule_revision',1),
+                'captured_at':at,'game_state':'unknown','source_error':type(error).__name__,
+                'source_error_field':field if isinstance(field,str)and re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]{0,63}',field)else None,
+                'source_error_frames':[{'file':Path(f.filename).name,'function':f.name,'line':f.lineno}for f in frames[-6:]]}
         at=_utc(self.versions.clock())
         result=evaluate_readiness(game,early,snapshot,at);result['baseline_version_id']=early['version_id']
+        if snapshot.get('source_error'):
+            result['next_check_at']=_utc(min(_instant(game['tipoff'],'tipoff'),_instant(at,'at')+timedelta(seconds=30)))
         result['final_window_target_at']=_utc(_instant(game['tipoff'],'tipoff')-timedelta(minutes=20))
         result['final_window_started_at']=last.get('final_window_started_at',at)if last else at
         result['lineup_confirmed_at']=max(r.get('observed_at')or at for r in result['lineups'])if len(result['lineups'])==2 else None
@@ -229,19 +262,22 @@ def collect_final_snapshot(game,early,at,versions):
     odds_url=f'https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/{eid}/competitions/{eid}/odds'
     with ThreadPoolExecutor(max_workers=4)as pool:
         sf=pool.submit(read_http,summary_url);mf=pool.submit(read_http,odds_url)
-        rf={side:pool.submit(read_http,'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/'+str(game[side]['espn_team_id'])+'/roster')for side in ('home','away')}
         summary,sr=sf.result()
+        provider_ids=verified_provider_ids(game,summary)
+        rf={side:pool.submit(read_http,'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/'+provider_ids[side]+'/roster')for side in ('home','away')}
         try:market,mr=mf.result()
         except Exception:market,mr={},{}
         rosters={}
         for side,future in rf.items():
             try:
                 data,receipt=future.result()
-                if str((data.get('team')or{}).get('id'))!=str(game[side]['espn_team_id']):continue
+                if str((data.get('team')or{}).get('id'))!=provider_ids[side]:continue
                 players=[{'name':p['displayName'],'source_player_id':str(p['id']),'source_id_namespace':'ESPN'}for p in data.get('athletes',[])if p.get('id')and p.get('displayName')]
                 if players:rosters[side]={'status':'verified','players':players,'source_url':receipt['url'],'observed_at':receipt['captured_at'],'roster_basis':'current_team_roster_not_game_active_list'}
             except Exception:pass
     result=snapshot_from_espn(game,summary,sr)
+    if result['game_state']in {'in','post','live','in_progress','final'}:
+        return result
     for side,roster in rosters.items():result['rosters'][side]=roster
     from v2.frontend.player_display_names import catalog
     result['player_display_names']=catalog(versions,[p for r in result['rosters'].values()for p in r.get('players',[])])

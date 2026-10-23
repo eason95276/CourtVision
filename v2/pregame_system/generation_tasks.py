@@ -143,6 +143,12 @@ class GenerationTaskStore:
                 if any(key in game and previous.get(key) is not None and game[key] != previous[key] for key in ("venue", "neutral_site")):
                     raise VersionStoreError("schedule_changed")
                 normalized = {**previous, **normalized}
+                for side in ('home','away'):
+                    old_id=(previous.get(side)or{}).get('espn_team_id')
+                    new_id=(normalized.get(side)or{}).get('espn_team_id')
+                    if old_id is not None and new_id is not None and str(old_id)!=str(new_id):
+                        raise VersionStoreError('registered_provider_identity_changed:'+side)
+                    normalized[side]={**(previous.get(side)or{}),**normalized[side]}
                 prior_type = previous["game_type"]
                 if previous.get("generation_hold_reason"):
                     normalized["generation_hold_reason"] = previous["generation_hold_reason"]

@@ -629,6 +629,10 @@ class SavedGameAnalysisService:
         game = deepcopy(original_game)
         if replay:
             game = historical_game_context(game, cutoff)
+        if game.get('registered_game') and not replay:
+            from .current_season_context import attach_current_season
+            database=getattr(getattr(self.display_name_store,'versions',None),'path',None)
+            if database is not None:game=attach_current_season(game,cutoff,database)
         _scope_roster_inputs(game, cutoff)
         game.setdefault("background", {})["availability"] = _availability_as_of(game, cutoff)
         self._attach_player_knowledge(game, cutoff)

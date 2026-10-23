@@ -653,6 +653,8 @@ def test_registered_game_http_and_frontend_restore_one_published_version(setup, 
     scheduler.run_due_tasks(data)
     expected = service.selected(data["games"][0])["version"]
     # This game is absent from the static app file, present only in the registry.
+    # The homepage now lists today/tomorrow; restore the old saved preview inside that window.
+    clock.at = TIP - timedelta(hours=12)
     monkeypatch.setattr(server, "read_json", lambda path: {"games": []})
     monkeypatch.setattr(server, "_PREDICTION_VERSION_SERVICE", service)
     httpd = ThreadingHTTPServer(("127.0.0.1", 0), functools.partial(server.Handler, directory=str(STATIC_ROOT)))

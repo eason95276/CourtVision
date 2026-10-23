@@ -463,8 +463,6 @@ def validate_market_revision_reason(review: VersionedMarketReviewForecast,
         raise ValueError("market_revision_factor_index_invalid")
     if not any(set(factors[index].evidence_ids) & market_ids for index in market_indices):
         raise ValueError("market_signal_requires_market_evidence")
-    if any(_INTERNAL_MODEL_LABEL.search(factors[index].summary) for index in basketball_indices):
-        raise ValueError("market_reweighting_public_reason_contains_internal_model_label")
     if review.decision == "revise" and not any(
             set(factors[index].evidence_ids) & basketball_ids for index in basketball_indices):
         raise ValueError("market_revision_requires_basketball_evidence")

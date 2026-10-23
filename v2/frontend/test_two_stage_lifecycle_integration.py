@@ -87,3 +87,44 @@ def test_http_wait_then_incremental_publication_keeps_early(tmp_path,monkeypatch
     clock.value=tip+timedelta(seconds=1)
     selected=service.selected(game)
     assert selected['status']=='locked'and selected['version_id']==final['version_id']
+
+
+def test_missing_display_provider_ids_collect_then_publish_final(tmp_path,monkeypatch):
+    from v2.pregame_system import final_readiness,market_collector
+    from v2.frontend import official_injury_reports
+    clock,versions,tasks,game,early,source,task=setup(tmp_path)
+    tip=_instant(game['tipoff'],'tipoff');clock.value=tip-timedelta(minutes=20)
+    stamp=clock.value.isoformat();provider={'home':'18','away':'20'};abbr={'home':'NY','away':'PHI'}
+    for side in ('home','away'):game[side].pop('espn_team_id',None)
+    competitors=[{'homeAway':s,'team':{'id':provider[s],'abbreviation':abbr[s],'displayName':game[s]['name']}}for s in provider]
+    summary={'header':{'id':game['id'].split(':')[1],'competitions':[{'id':game['id'].split(':')[1],
+        'date':game['tipoff'],'status':{'type':{'state':'pre'}},'competitors':competitors}]},
+        'boxscore':{'players':[{'team':{'id':provider[s]},'statistics':[{'athletes':[
+            {'athlete':{'displayName':n},'starter':True,'gameStatus':'Available'}for n in source['lineups'][s]['players']]}]}for s in provider]}}
+    def http(url,*args,**kwargs):
+        receipt={'url':url,'captured_at':stamp,'status':'success'}
+        if '/summary?'in url:return summary,receipt
+        if '/roster'in url:
+            side=next(s for s in provider if '/teams/'+provider[s]+'/'in url)
+            return {'team':{'id':provider[side]},'athletes':[{'id':str(i),'displayName':n}for i,n in enumerate(source['lineups'][side]['players'],1)]},receipt
+        return {},receipt
+    quote=copy.deepcopy(source['market_collection']['public_market_reference']);quote['captured_at']=stamp
+    class Injury:
+        def __init__(self,*args,**kwargs):pass
+        def refresh(self,*args,**kwargs):pass
+        def read_as_of(self,*args,**kwargs):return {'status':'available','coverage':'complete','source_url':'https://example.org/injury','observed_at':stamp,'records':[]}
+    monkeypatch.setattr(final_readiness,'read_http',http)
+    monkeypatch.setattr(final_readiness,'now',lambda:stamp)
+    monkeypatch.setattr(market_collector,'normalize_book_market',lambda *args:quote)
+    monkeypatch.setattr(official_injury_reports,'OfficialInjuryReportStore',Injury)
+    monkeypatch.setattr('v2.pregame_system.final_delta.now',lambda:stamp)
+    def forbidden(*args,**kwargs):raise AssertionError('No full Research or model baseline rerun in FINAL')
+    service=PredictionVersionService(store=versions,task_store=tasks,
+        service_factory=lambda data,analyst:SavedGameAnalysisService(data,analyst=analyst),
+        analyst_factory=lambda r:EvidenceBoundAnalyst(root=tmp_path/r['request_id'],client=writer,forecast_client=forbidden,max_calls=4),
+        input_preparer=forbidden,pre_generation_preparer=forbidden,
+        final_readiness_collector=final_readiness.collect_final_snapshot,final_publish_guard=lambda g:None)
+    result=service.execute_task({'games':[game]},game['id'],task['task_id'])
+    assert result['update_status']=='published'and result['version']['stage']=='FINAL_PREGAME'
+    assert result['version']['baseline_version_id']==early['version_id']
+    assert tasks.get_task(task['task_id'])['attempt_count']==1

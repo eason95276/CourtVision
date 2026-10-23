@@ -140,6 +140,10 @@ def build_registered_baseline(game, cutoff):
     prepared = normalize_game(schedule_game, path, report, outputs=BASE / "outputs")
     prepared.update({key: game[key] for key in ("venue", "neutral_site", "schedule_revision", "schedule_revision_source", "season_event") if key in game})
     prepared.update(registered_game=True, game_type=game.get("game_type"), season_start=schedule_game["season_start"])
+    if game.get('season') is not None:prepared['season']=game['season']
+    for side in ('home','away'):
+        if game[side].get('espn_team_id') is not None:
+            prepared[side]['espn_team_id']=game[side]['espn_team_id']
     prepared["roster_context"] = report.get("roster_context")
     from v2.pregame_system.matchup_history import (
         build_matchup_history, build_season_form_context, season_phase_context,

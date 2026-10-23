@@ -373,6 +373,11 @@ def build_editorial_projection(context, locked_prediction, analyst_reasoning=Non
     form = c.get("season_form") or {}
     for side in ("home", "away"):
         team = (form.get("teams") or {}).get(side) or {}
+        if team.get('last_result'):
+            add('OBSERVATION',{'side':side,'current_season_games':team.get('current_season_games'),
+                'game_number':team.get('regular_season_game_number'),'competition_scope':form.get('competition_scope'),
+                'recent_games':team.get('recent_games')or[team['last_result']]},
+                refs('season_form'),f'/season_form/teams/{side}/recent_games',True)
         for key in ("previous_last10", "previous_playoffs", "current_last10"):
             row = team.get(key) or {}
             if row.get("status") == "available":
