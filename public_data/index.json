@@ -247,6 +247,130 @@
       }
     },
     {
+      "game_id": "espn:401909845",
+      "file": "games/espn_401909845.json",
+      "tipoff": "2026-10-23T23:00:00+00:00",
+      "version_id": "f11be2b7-e078-4290-b122-8d1715136195",
+      "public_sha256": "b93dbe9ce3ac14a2c80eae4b09606216f9d28cd01fad88f7781be52b90313fe3",
+      "home_record": {
+        "game": {
+          "away": {
+            "abbreviation": "MIN",
+            "accent": "#0C2340",
+            "espn_team_id": "16",
+            "id": 1610612750,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/min.png",
+            "name": "Minnesota Timberwolves",
+            "name_zh": "森林狼",
+            "score": null
+          },
+          "game_type": "regular_season",
+          "home": {
+            "abbreviation": "ORL",
+            "accent": "#0077C0",
+            "espn_team_id": "19",
+            "id": 1610612753,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/orl.png",
+            "name": "Orlando Magic",
+            "name_zh": "魔术",
+            "score": null
+          },
+          "id": "espn:401909845",
+          "registered_game": true,
+          "schedule_revision": 1,
+          "season": 2027,
+          "status": "scheduled",
+          "tipoff": "2026-10-23T23:00:00+00:00",
+          "venue": "Kia Center",
+          "schedule_catalog_fact": true,
+          "postgame": null,
+          "homepage_visible": true,
+          "public_summary": true
+        },
+        "prediction": {
+          "status": "current",
+          "game_id": "espn:401909845",
+          "version_id": "f11be2b7-e078-4290-b122-8d1715136195",
+          "state_revision": 2,
+          "locked_at": null,
+          "lock_reason": null,
+          "schedule_revision": 1,
+          "version": {
+            "analysis_contract_version": "two-stage-forecast-v1",
+            "base_input_hash": "b5b8c9e227063ea7bb74584908266d1e04bfd6c3d9493ef707b1a9993d1cc8f8",
+            "game_id": "espn:401909845",
+            "game_identity": {
+              "away_team_id": 1610612750,
+              "game_id": "espn:401909845",
+              "home_team_id": 1610612753,
+              "scheduled_tipoff": "2026-10-23T23:00:00+00:00"
+            },
+            "generated_at": "2026-10-23T17:20:30.912462+00:00",
+            "input_cutoff_at": "2026-10-23T17:20:12.732849+00:00",
+            "published_at": "2026-10-23T17:20:35.423270+00:00",
+            "schedule_revision": 1,
+            "stage": "EARLY_PREVIEW",
+            "version_id": "f11be2b7-e078-4290-b122-8d1715136195",
+            "payload_sha256": "aecda6632dc4411504b3cc7d0d144e84cd2b59a2cbb2a76b71aebb76542bc110",
+            "input_snapshot": {
+              "away": {
+                "abbreviation": "MIN",
+                "accent": "#0C2340",
+                "espn_team_id": "16",
+                "id": 1610612750,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/min.png",
+                "name": "Minnesota Timberwolves",
+                "name_zh": "森林狼"
+              },
+              "home": {
+                "abbreviation": "ORL",
+                "accent": "#0077C0",
+                "espn_team_id": "19",
+                "id": 1610612753,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/orl.png",
+                "name": "Orlando Magic",
+                "name_zh": "魔术"
+              },
+              "id": "espn:401909845",
+              "schedule_revision": 1,
+              "tipoff": "2026-10-23T23:00:00+00:00"
+            },
+            "judgment": {
+              "final_prediction": {
+                "evidence_ids": [
+                  "206572ca459790174a8d61c8bb51c316133a141926725784ec5d591070058508",
+                  "57b06a5523b498579abb50b3c3954894784baeb3889bcb8abbdcd9efe4653e0b",
+                  "6048d0bf8b7d2da7016f370a450eede8933da63eea2225acad10fc7937bdf15b",
+                  "8179eb29085bde7871bd9c85f00dceae41bf4751c695761723402c2478c93598",
+                  "8eba0889b25352f1d34317fa5c76296639774589cc4c29b4debb5d42af7acd63",
+                  "b0d4772804ac1c01f20ae67df3cea979cd860c0d8b8a2f08a56e045e4e844a0e",
+                  "bf2da53020cff9a48ea557be9101ebb73d63bcae68ece839a9a150fb59e9a1e8",
+                  "c687aa17996286ba08bc66cdf4c1e9638e1e2493212e56ed758f71cef7ead7c4"
+                ],
+                "expected_margin": 2.0,
+                "expected_total": 231.5,
+                "win_probability": 0.56,
+                "winner_side": "home"
+              },
+              "pregame_story": {
+                "classification": "subjective_analysis",
+                "evidence_ids": [
+                  "206572ca459790174a8d61c8bb51c316133a141926725784ec5d591070058508",
+                  "57b06a5523b498579abb50b3c3954894784baeb3889bcb8abbdcd9efe4653e0b",
+                  "6048d0bf8b7d2da7016f370a450eede8933da63eea2225acad10fc7937bdf15b",
+                  "8179eb29085bde7871bd9c85f00dceae41bf4751c695761723402c2478c93598",
+                  "8eba0889b25352f1d34317fa5c76296639774589cc4c29b4debb5d42af7acd63",
+                  "b0d4772804ac1c01f20ae67df3cea979cd860c0d8b8a2f08a56e045e4e844a0e"
+                ],
+                "statement": "森林狼带着爱德华兹揭幕战45分的手感做客奥兰多，魔术则刚在主场输给老鹰，这场要看的是明尼苏达的新双核能不能压过魔术更厚的前场。",
+                "title": "爱德华兹火焰高\n魔术主场迎狼群"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
       "game_id": "espn:401909848",
       "file": "games/espn_401909848.json",
       "tipoff": "2026-10-23T20:00:00+00:00",
@@ -2402,5 +2526,5 @@
       }
     }
   ],
-  "published_at": "2026-10-23T17:16:11.541048+00:00"
+  "published_at": "2026-10-23T17:20:44.136357+00:00"
 }
