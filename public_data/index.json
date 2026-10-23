@@ -2,6 +2,129 @@
   "contract_version": "courtvision-public-v1",
   "games": [
     {
+      "game_id": "espn:401909850",
+      "file": "games/espn_401909850.json",
+      "tipoff": "2026-10-24T02:00:00+00:00",
+      "version_id": "b7f3ad79-2590-48af-a2dd-0da585282af9",
+      "public_sha256": "d103d8ca2270d22d7985137cdf8df805447fcaa4e3640da78da8f41b64b0760a",
+      "home_record": {
+        "game": {
+          "away": {
+            "abbreviation": "MEM",
+            "accent": "#5D76A9",
+            "espn_team_id": "29",
+            "id": 1610612763,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/mem.png",
+            "name": "Memphis Grizzlies",
+            "name_zh": "灰熊",
+            "score": null
+          },
+          "game_type": "regular_season",
+          "home": {
+            "abbreviation": "GS",
+            "accent": "#1D428A",
+            "espn_team_id": "9",
+            "id": 1610612744,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/gs.png",
+            "name": "Golden State Warriors",
+            "name_zh": "勇士",
+            "score": null
+          },
+          "id": "espn:401909850",
+          "registered_game": true,
+          "schedule_revision": 1,
+          "season": 2027,
+          "status": "scheduled",
+          "tipoff": "2026-10-24T02:00:00+00:00",
+          "venue": "Chase Center",
+          "schedule_catalog_fact": true,
+          "postgame": null,
+          "homepage_visible": true,
+          "public_summary": true
+        },
+        "prediction": {
+          "status": "current",
+          "game_id": "espn:401909850",
+          "version_id": "b7f3ad79-2590-48af-a2dd-0da585282af9",
+          "state_revision": 2,
+          "locked_at": null,
+          "lock_reason": null,
+          "schedule_revision": 1,
+          "version": {
+            "analysis_contract_version": "two-stage-forecast-v1",
+            "base_input_hash": "1e40a829b4ef533b75131bf01cce6e92c762537d98754ca91b8c5e52275d6e09",
+            "game_id": "espn:401909850",
+            "game_identity": {
+              "away_team_id": 1610612763,
+              "game_id": "espn:401909850",
+              "home_team_id": 1610612744,
+              "scheduled_tipoff": "2026-10-24T02:00:00+00:00"
+            },
+            "generated_at": "2026-10-23T18:04:05.424245+00:00",
+            "input_cutoff_at": "2026-10-23T18:03:47.996700+00:00",
+            "published_at": "2026-10-23T18:04:09.119145+00:00",
+            "schedule_revision": 1,
+            "stage": "EARLY_PREVIEW",
+            "version_id": "b7f3ad79-2590-48af-a2dd-0da585282af9",
+            "payload_sha256": "89a71b23b4d16802b292b6168379f8a567506780ce382b136a0ab1b8336a44af",
+            "input_snapshot": {
+              "away": {
+                "abbreviation": "MEM",
+                "accent": "#5D76A9",
+                "espn_team_id": "29",
+                "id": 1610612763,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/mem.png",
+                "name": "Memphis Grizzlies",
+                "name_zh": "灰熊"
+              },
+              "home": {
+                "abbreviation": "GS",
+                "accent": "#1D428A",
+                "espn_team_id": "9",
+                "id": 1610612744,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/gs.png",
+                "name": "Golden State Warriors",
+                "name_zh": "勇士"
+              },
+              "id": "espn:401909850",
+              "schedule_revision": 1,
+              "tipoff": "2026-10-24T02:00:00+00:00"
+            },
+            "judgment": {
+              "final_prediction": {
+                "evidence_ids": [
+                  "090076ddbc0d6ab1a89ec10717ef4c499e1359acfa0cdec6dd608033f5ea3305",
+                  "21feacd5cebd70c6d4bf3c00699266ce1dd2ca3bde49822070c3ef37de1ff2a1",
+                  "35ec8987bb092ad5aaaa253c8fa6600a609e3f5223be5640afff34b57c4a74a0",
+                  "65eb65cb7e3c91872b6beac56b002f7c6bf23efb8e786889f6abc0655d532aa7",
+                  "9952a7cc545542b9c619aba2fab1fe62c186a66a09d5bb4336bcb3924eb70dd9",
+                  "bf99e8ffd49b94f3af4fbb29d6c5101a3ef0beb27dec4c16aa7a777c9536b75d",
+                  "cec52b44b3f9d35eb4e28d3a512d3d762d6aa7b9864a7f5e3479cc8230b53bf1"
+                ],
+                "expected_margin": 5.5,
+                "expected_total": 234.5,
+                "win_probability": 0.6,
+                "winner_side": "home"
+              },
+              "pregame_story": {
+                "classification": "subjective_analysis",
+                "evidence_ids": [
+                  "090076ddbc0d6ab1a89ec10717ef4c499e1359acfa0cdec6dd608033f5ea3305",
+                  "21feacd5cebd70c6d4bf3c00699266ce1dd2ca3bde49822070c3ef37de1ff2a1",
+                  "35ec8987bb092ad5aaaa253c8fa6600a609e3f5223be5640afff34b57c4a74a0",
+                  "65eb65cb7e3c91872b6beac56b002f7c6bf23efb8e786889f6abc0655d532aa7",
+                  "9952a7cc545542b9c619aba2fab1fe62c186a66a09d5bb4336bcb3924eb70dd9",
+                  "bf99e8ffd49b94f3af4fbb29d6c5101a3ef0beb27dec4c16aa7a777c9536b75d"
+                ],
+                "statement": "灰熊揭幕战靠杰罗姆45分赢球，转头就要去旧金山面对库里和勇士，这场能看出那场爆发有多少分量。",
+                "title": "灰熊新阵初登门\n库里主场待后生"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
       "game_id": "espn:401909847",
       "file": "games/espn_401909847.json",
       "tipoff": "2026-10-24T00:00:00+00:00",
@@ -2649,5 +2772,5 @@
       }
     }
   ],
-  "published_at": "2026-10-23T17:31:16.055008+00:00"
+  "published_at": "2026-10-23T18:04:17.634608+00:00"
 }

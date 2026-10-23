@@ -1,0 +1,3385 @@
+{
+  "contract_version": "courtvision-public-v1",
+  "game": {
+    "away": {
+      "abbreviation": "MEM",
+      "accent": "#5D76A9",
+      "espn_team_id": "29",
+      "id": 1610612763,
+      "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/mem.png",
+      "name": "Memphis Grizzlies",
+      "name_zh": "灰熊",
+      "score": null
+    },
+    "background": {
+      "availability": {
+        "message": "暂无可靠伤病与出战信息。",
+        "records": [],
+        "status": "unavailable",
+        "time_validation": {
+          "accepted_records": 0,
+          "cutoff": "2026-10-23T18:01:05.860972+00:00",
+          "rejected_records": 0
+        }
+      },
+      "market": null,
+      "recent_form": {
+        "away": {
+          "def_rating_15": 124.99774497569615,
+          "net_rating_15": -18.4310998840174,
+          "off_rating_15": 106.56664509167875,
+          "pace_15": 104.152,
+          "rebound_share_15": 0.40731927834836373,
+          "three_pct_15": 0.3404,
+          "turnover_rate_15": 0.13421852484822697,
+          "win_rate_15": 0.13333333333333333
+        },
+        "home": {
+          "def_rating_15": 118.55812745952737,
+          "net_rating_15": -6.452311850327039,
+          "off_rating_15": 112.10581560920032,
+          "pace_15": 99.32893081761007,
+          "rebound_share_15": 0.5079843442925961,
+          "three_pct_15": 0.3612,
+          "turnover_rate_15": 0.1707136279001275,
+          "win_rate_15": 0.3333333333333333
+        }
+      },
+      "schedule": {
+        "away": {
+          "back_to_back": null,
+          "basis": null,
+          "reason": "no_cutoff_eligible_schedule_evidence",
+          "source_refs": [],
+          "status": "unavailable"
+        },
+        "away_back_to_back": null,
+        "away_rest_days": null,
+        "home": {
+          "back_to_back": null,
+          "basis": null,
+          "reason": "no_cutoff_eligible_schedule_evidence",
+          "source_refs": [],
+          "status": "unavailable"
+        },
+        "home_back_to_back": null,
+        "home_rest_days": null
+      }
+    },
+    "game_type": "regular_season",
+    "home": {
+      "abbreviation": "GS",
+      "accent": "#1D428A",
+      "espn_team_id": "9",
+      "id": 1610612744,
+      "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/gs.png",
+      "name": "Golden State Warriors",
+      "name_zh": "勇士",
+      "score": null
+    },
+    "id": "espn:401909850",
+    "matchup_history": {
+      "away_team_id": 1610612763,
+      "context_hash": "fc7c7c920e126309d6622a7a7b754fd156a0ea10d53ae4fa367351b74b8c3308",
+      "cutoff": "2026-10-23T18:01:05.860972+00:00",
+      "game_id": "espn:401909850",
+      "home_team_id": 1610612744,
+      "matchup_relevance": "medium",
+      "meeting_count": 70,
+      "meetings": [
+        {
+          "away_score": 121,
+          "away_team_id": 1610612744,
+          "game_id": "0022300693",
+          "home_margin": -20,
+          "home_score": 101,
+          "home_team_id": 1610612763,
+          "is_playoffs": false,
+          "played_at": "2024-02-02T20:00:00",
+          "season_start": 2023,
+          "series_key": null,
+          "winner_team_id": 1610612744
+        },
+        {
+          "away_score": 116,
+          "away_team_id": 1610612763,
+          "game_id": "0022301001",
+          "home_margin": 21,
+          "home_score": 137,
+          "home_team_id": 1610612744,
+          "is_playoffs": false,
+          "played_at": "2024-03-20T22:00:00",
+          "season_start": 2023,
+          "series_key": null,
+          "winner_team_id": 1610612744
+        },
+        {
+          "away_score": 118,
+          "away_team_id": 1610612763,
+          "game_id": "0022400019",
+          "home_margin": 5,
+          "home_score": 123,
+          "home_team_id": 1610612744,
+          "is_playoffs": false,
+          "played_at": "2024-11-15T22:00:00",
+          "season_start": 2024,
+          "series_key": null,
+          "winner_team_id": 1610612744
+        },
+        {
+          "away_score": 93,
+          "away_team_id": 1610612744,
+          "game_id": "0022400366",
+          "home_margin": 51,
+          "home_score": 144,
+          "home_team_id": 1610612763,
+          "is_playoffs": false,
+          "played_at": "2024-12-19T20:00:00",
+          "season_start": 2024,
+          "series_key": null,
+          "winner_team_id": 1610612763
+        },
+        {
+          "away_score": 113,
+          "away_team_id": 1610612763,
+          "game_id": "0022400485",
+          "home_margin": 8,
+          "home_score": 121,
+          "home_team_id": 1610612744,
+          "is_playoffs": false,
+          "played_at": "2025-01-04T20:30:00",
+          "season_start": 2024,
+          "series_key": null,
+          "winner_team_id": 1610612744
+        },
+        {
+          "away_score": 134,
+          "away_team_id": 1610612744,
+          "game_id": "0022401100",
+          "home_margin": -9,
+          "home_score": 125,
+          "home_team_id": 1610612763,
+          "is_playoffs": false,
+          "played_at": "2025-04-01T20:00:00",
+          "season_start": 2024,
+          "series_key": null,
+          "winner_team_id": 1610612744
+        },
+        {
+          "away_score": 116,
+          "away_team_id": 1610612763,
+          "game_id": "0052400121",
+          "home_margin": 5,
+          "home_score": 121,
+          "home_team_id": 1610612744,
+          "is_playoffs": true,
+          "played_at": "2025-04-15T22:00:00",
+          "season_start": 2024,
+          "series_key": "2024:005240012",
+          "winner_team_id": 1610612744
+        },
+        {
+          "away_score": 118,
+          "away_team_id": 1610612763,
+          "game_id": "0022500121",
+          "home_margin": 13,
+          "home_score": 131,
+          "home_team_id": 1610612744,
+          "is_playoffs": false,
+          "played_at": "2025-10-27T22:00:00",
+          "season_start": 2025,
+          "series_key": null,
+          "winner_team_id": 1610612744
+        },
+        {
+          "away_score": 113,
+          "away_team_id": 1610612763,
+          "game_id": "0022500768",
+          "home_margin": 1,
+          "home_score": 114,
+          "home_team_id": 1610612744,
+          "is_playoffs": false,
+          "played_at": "2026-02-09T22:00:00",
+          "season_start": 2025,
+          "series_key": null,
+          "winner_team_id": 1610612744
+        },
+        {
+          "away_score": 133,
+          "away_team_id": 1610612744,
+          "game_id": "0022500844",
+          "home_margin": -21,
+          "home_score": 112,
+          "home_team_id": 1610612763,
+          "is_playoffs": false,
+          "played_at": "2026-02-25T19:30:00",
+          "season_start": 2025,
+          "series_key": null,
+          "winner_team_id": 1610612744
+        }
+      ],
+      "most_recent_meeting": {
+        "away_score": 133,
+        "away_team_id": 1610612744,
+        "game_id": "0022500844",
+        "home_margin": -21,
+        "home_score": 112,
+        "home_team_id": 1610612763,
+        "is_playoffs": false,
+        "played_at": "2026-02-25T19:30:00",
+        "season_start": 2025,
+        "series_key": null,
+        "winner_team_id": 1610612744
+      },
+      "numeric_model_usage": false,
+      "relevance_reasons": [
+        "multiple_recent_regular_season_meetings"
+      ],
+      "series_summary": null,
+      "source_semantics": "local historical games strictly before cutoff; team statistics when available",
+      "status": "available"
+    },
+    "missing": [
+      {
+        "reason": "no eligible local evidence",
+        "section": "availability"
+      },
+      {
+        "reason": "home: roster/minutes denominator unavailable",
+        "section": "roster_continuity"
+      },
+      {
+        "reason": "away: roster/minutes denominator unavailable",
+        "section": "roster_continuity"
+      },
+      {
+        "reason": "no legal future market data available",
+        "section": "market"
+      },
+      {
+        "reason": "longitudinal minutes/availability and roster roles not sufficiently verified; no player impact conclusion",
+        "section": "key_players"
+      },
+      {
+        "reason": "ValueError: residual_model_integrity:win_probability",
+        "section": "residual_model"
+      }
+    ],
+    "neutral_site": 0,
+    "player_display_names": [
+      {
+        "player_id": "name:gary payton ii",
+        "canonical_name_en": "Gary Payton II",
+        "name_key": "gary payton ii",
+        "display_name_zh": "加里·佩顿二世",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:56:38.034123+00:00"
+      },
+      {
+        "player_id": "name:yaxel lendeborg",
+        "canonical_name_en": "Yaxel Lendeborg",
+        "name_key": "yaxel lendeborg",
+        "display_name_zh": "亚克塞尔·伦德博格",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:56:38.029788+00:00"
+      },
+      {
+        "player_id": "name:brandin podziemski",
+        "canonical_name_en": "Brandin Podziemski",
+        "name_key": "brandin podziemski",
+        "display_name_zh": "布兰丁·波杰姆斯基",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:56:38.034860+00:00"
+      },
+      {
+        "player_id": "name:will richard",
+        "canonical_name_en": "Will Richard",
+        "name_key": "will richard",
+        "display_name_zh": "威尔·理查德",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:56:38.060170+00:00"
+      },
+      {
+        "player_id": "name:moses moody",
+        "canonical_name_en": "Moses Moody",
+        "name_key": "moses moody",
+        "display_name_zh": "摩西·穆迪",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:56:38.032620+00:00"
+      },
+      {
+        "player_id": "name:kristaps porzingis",
+        "canonical_name_en": "Kristaps Porzingis",
+        "name_key": "kristaps porzingis",
+        "display_name_zh": "克里斯塔普斯·波尔津吉斯",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:56:38.035574+00:00"
+      },
+      {
+        "player_id": "name:de anthony melton",
+        "canonical_name_en": "De'Anthony Melton",
+        "name_key": "de anthony melton",
+        "display_name_zh": "德安东尼·梅尔顿",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:56:38.031324+00:00"
+      },
+      {
+        "player_id": "name:jimmy butler iii",
+        "canonical_name_en": "Jimmy Butler III",
+        "name_key": "jimmy butler iii",
+        "display_name_zh": "吉米·巴特勒三世",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:56:37.996046+00:00"
+      },
+      {
+        "player_id": "name:brandon williams",
+        "canonical_name_en": "Brandon Williams",
+        "name_key": "brandon williams",
+        "display_name_zh": "布兰登·威廉姆斯",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:56:38.062698+00:00"
+      },
+      {
+        "player_id": "name:gui santos",
+        "canonical_name_en": "Gui Santos",
+        "name_key": "gui santos",
+        "display_name_zh": "吉·桑托斯",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:56:38.061026+00:00"
+      },
+      {
+        "player_id": "name:lj cryer",
+        "canonical_name_en": "LJ Cryer",
+        "name_key": "lj cryer",
+        "display_name_zh": "LJ·克莱尔",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:56:37.998240+00:00"
+      },
+      {
+        "player_id": "name:al horford",
+        "canonical_name_en": "Al Horford",
+        "name_key": "al horford",
+        "display_name_zh": "艾尔·霍福德",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:56:38.013630+00:00"
+      },
+      {
+        "player_id": "name:draymond green",
+        "canonical_name_en": "Draymond Green",
+        "name_key": "draymond green",
+        "display_name_zh": "德雷蒙德·格林",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:56:37.999933+00:00"
+      },
+      {
+        "player_id": "name:charles bassey",
+        "canonical_name_en": "Charles Bassey",
+        "name_key": "charles bassey",
+        "display_name_zh": "查尔斯·巴锡",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:56:37.995004+00:00"
+      },
+      {
+        "player_id": "name:stephen curry",
+        "canonical_name_en": "Stephen Curry",
+        "name_key": "stephen curry",
+        "display_name_zh": "斯蒂芬·库里",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:56:37.999066+00:00"
+      },
+      {
+        "player_id": "name:georges niang",
+        "canonical_name_en": "Georges Niang",
+        "name_key": "georges niang",
+        "display_name_zh": "乔治·尼昂",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:56:38.033400+00:00"
+      },
+      {
+        "player_id": "name:malevy leons",
+        "canonical_name_en": "Malevy Leons",
+        "name_key": "malevy leons",
+        "display_name_zh": "马莱维·莱昂斯",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:56:38.030554+00:00"
+      },
+      {
+        "player_id": "name:graham ike",
+        "canonical_name_en": "Graham Ike",
+        "name_key": "graham ike",
+        "display_name_zh": "格雷厄姆·艾克",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:56:38.029014+00:00"
+      },
+      {
+        "player_id": "name:cameron boozer",
+        "canonical_name_en": "Cameron Boozer",
+        "name_key": "cameron boozer",
+        "display_name_zh": "卡梅伦·布泽尔",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:45:01.056931+00:00"
+      },
+      {
+        "player_id": "name:carson cooper",
+        "canonical_name_en": "Carson Cooper",
+        "name_key": "carson cooper",
+        "display_name_zh": "卡森·库珀",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:45:01.057048+00:00"
+      },
+      {
+        "player_id": "name:cedric coward",
+        "canonical_name_en": "Cedric Coward",
+        "name_key": "cedric coward",
+        "display_name_zh": "塞德里克·考沃德",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:45:01.057122+00:00"
+      },
+      {
+        "player_id": "name:zach edey",
+        "canonical_name_en": "Zach Edey",
+        "name_key": "zach edey",
+        "display_name_zh": "扎克·伊迪",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:45:01.057342+00:00"
+      },
+      {
+        "player_id": "name:jerami grant",
+        "canonical_name_en": "Jerami Grant",
+        "name_key": "jerami grant",
+        "display_name_zh": "杰拉米·格兰特",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:45:01.057581+00:00"
+      },
+      {
+        "player_id": "name:taylor hendricks",
+        "canonical_name_en": "Taylor Hendricks",
+        "name_key": "taylor hendricks",
+        "display_name_zh": "泰勒·亨德里克斯",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:45:01.057657+00:00"
+      },
+      {
+        "player_id": "name:gg jackson",
+        "canonical_name_en": "GG Jackson",
+        "name_key": "gg jackson",
+        "display_name_zh": "GG·杰克逊",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:45:01.057730+00:00"
+      },
+      {
+        "player_id": "name:ty jerome",
+        "canonical_name_en": "Ty Jerome",
+        "name_key": "ty jerome",
+        "display_name_zh": "泰·杰罗姆",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:45:01.057808+00:00"
+      },
+      {
+        "player_id": "name:karim lopez",
+        "canonical_name_en": "Karim Lopez",
+        "name_key": "karim lopez",
+        "display_name_zh": "卡里姆·洛佩斯",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:45:01.057941+00:00"
+      },
+      {
+        "player_id": "name:jahmai mashack",
+        "canonical_name_en": "Jahmai Mashack",
+        "name_key": "jahmai mashack",
+        "display_name_zh": "贾迈·马沙克",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:45:01.058004+00:00"
+      },
+      {
+        "player_id": "name:kris murray",
+        "canonical_name_en": "Kris Murray",
+        "name_key": "kris murray",
+        "display_name_zh": "克里斯·穆雷",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:45:01.058085+00:00"
+      },
+      {
+        "player_id": "name:scotty pippen jr",
+        "canonical_name_en": "Scotty Pippen Jr.",
+        "name_key": "scotty pippen jr",
+        "display_name_zh": "斯科蒂·皮蓬二世",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:45:01.058140+00:00"
+      },
+      {
+        "player_id": "name:quinten post",
+        "canonical_name_en": "Quinten Post",
+        "name_key": "quinten post",
+        "display_name_zh": "昆滕·波斯特",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:45:01.058190+00:00"
+      },
+      {
+        "player_id": "name:olivier maxence prosper",
+        "canonical_name_en": "Olivier-Maxence Prosper",
+        "name_key": "olivier maxence prosper",
+        "display_name_zh": "奥利维耶-马克桑斯·普罗斯珀",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:45:01.058227+00:00"
+      },
+      {
+        "player_id": "name:javon small",
+        "canonical_name_en": "Javon Small",
+        "name_key": "javon small",
+        "display_name_zh": "贾文·斯莫尔",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:45:01.058262+00:00"
+      },
+      {
+        "player_id": "name:cam spencer",
+        "canonical_name_en": "Cam Spencer",
+        "name_key": "cam spencer",
+        "display_name_zh": "卡姆·斯宾塞",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:45:01.058297+00:00"
+      },
+      {
+        "player_id": "name:isaiah stewart",
+        "canonical_name_en": "Isaiah Stewart",
+        "name_key": "isaiah stewart",
+        "display_name_zh": "以赛亚·斯图尔特",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:45:01.058332+00:00"
+      },
+      {
+        "player_id": "name:jaylen wells",
+        "canonical_name_en": "Jaylen Wells",
+        "name_key": "jaylen wells",
+        "display_name_zh": "杰伦·威尔斯",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:45:01.058367+00:00"
+      }
+    ],
+    "prediction": {
+      "available": true,
+      "expected_away_score": 115.0793923504964,
+      "expected_home_margin": 9.209979375371638,
+      "expected_home_score": 124.28937172586804,
+      "expected_total": 239.36876407636444,
+      "winner_probability": 0.7832405974496082,
+      "winner_team_id": 1610612744
+    },
+    "public_market_reference": {
+      "away_moneyline": 145.0,
+      "away_spread": 4.5,
+      "captured_at": "2026-10-23T18:03:35.485037+00:00",
+      "eligible_prediction_input": false,
+      "expected_home_margin": 4.5,
+      "game_identity": {
+        "away_team": "Memphis Grizzlies",
+        "away_team_id": 1610612763,
+        "game_id": "espn:401909850",
+        "game_type": "regular_season",
+        "home_team": "Golden State Warriors",
+        "home_team_id": 1610612744,
+        "registered_game": true,
+        "scheduled_tipoff": "2026-10-24T02:00Z"
+      },
+      "home_moneyline": -175.0,
+      "home_spread": -4.5,
+      "observed_at": "2026-10-23T18:03:35.485037+00:00",
+      "published_at": null,
+      "source_tier": 1,
+      "source_title": "Draft Kings current odds",
+      "source_url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909850/competitions/401909850/odds",
+      "sportsbook": "Draft Kings",
+      "status": "available",
+      "time_semantics": "observed current sportsbook quote; publication time unknown",
+      "total": 237.5,
+      "usage": "qualified_market_for_ai_review"
+    },
+    "registered_game": true,
+    "roster_context": {
+      "teams": {
+        "away": {
+          "confirmed_starters": null,
+          "current_rotation": null,
+          "current_team_roster": {
+            "observed_at": "2026-10-23T18:01:05.671243+00:00",
+            "players": [
+              {
+                "name": "Cameron Boozer",
+                "player_id": null,
+                "team_id": 1610612763,
+                "display_name": "卡梅伦·布泽尔"
+              },
+              {
+                "name": "Carson Cooper",
+                "player_id": null,
+                "team_id": 1610612763,
+                "display_name": "卡森·库珀"
+              },
+              {
+                "name": "Cedric Coward",
+                "player_id": null,
+                "team_id": 1610612763,
+                "display_name": "塞德里克·考沃德"
+              },
+              {
+                "name": "Zach Edey",
+                "player_id": null,
+                "team_id": 1610612763,
+                "display_name": "扎克·伊迪"
+              },
+              {
+                "name": "Jerami Grant",
+                "player_id": null,
+                "team_id": 1610612763,
+                "display_name": "杰拉米·格兰特"
+              },
+              {
+                "name": "Taylor Hendricks",
+                "player_id": null,
+                "team_id": 1610612763,
+                "display_name": "泰勒·亨德里克斯"
+              },
+              {
+                "name": "GG Jackson",
+                "player_id": null,
+                "team_id": 1610612763,
+                "display_name": "GG·杰克逊"
+              },
+              {
+                "name": "Ty Jerome",
+                "player_id": null,
+                "team_id": 1610612763,
+                "display_name": "泰·杰罗姆"
+              },
+              {
+                "name": "Karim Lopez",
+                "player_id": null,
+                "team_id": 1610612763,
+                "display_name": "卡里姆·洛佩斯"
+              },
+              {
+                "name": "Jahmai Mashack",
+                "player_id": null,
+                "team_id": 1610612763,
+                "display_name": "贾迈·马沙克"
+              },
+              {
+                "name": "Kris Murray",
+                "player_id": null,
+                "team_id": 1610612763,
+                "display_name": "克里斯·穆雷"
+              },
+              {
+                "name": "Scotty Pippen Jr.",
+                "player_id": null,
+                "team_id": 1610612763,
+                "display_name": "斯科蒂·皮蓬二世"
+              },
+              {
+                "name": "Quinten Post",
+                "player_id": null,
+                "team_id": 1610612763,
+                "display_name": "昆滕·波斯特"
+              },
+              {
+                "name": "Olivier-Maxence Prosper",
+                "player_id": null,
+                "team_id": 1610612763,
+                "display_name": "奥利维耶-马克桑斯·普罗斯珀"
+              },
+              {
+                "name": "Javon Small",
+                "player_id": null,
+                "team_id": 1610612763,
+                "display_name": "贾文·斯莫尔"
+              },
+              {
+                "name": "Cam Spencer",
+                "player_id": null,
+                "team_id": 1610612763,
+                "display_name": "卡姆·斯宾塞"
+              },
+              {
+                "name": "Isaiah Stewart",
+                "player_id": null,
+                "team_id": 1610612763,
+                "display_name": "以赛亚·斯图尔特"
+              },
+              {
+                "name": "Jaylen Wells",
+                "player_id": null,
+                "team_id": 1610612763,
+                "display_name": "杰伦·威尔斯"
+              }
+            ],
+            "source": {
+              "captured_at": "2026-10-23T18:01:05.671243+00:00",
+              "http_status": 200,
+              "observed_at": "2026-10-23T18:01:05.671243+00:00",
+              "parser_version": "official-team-rendered-roster-v1",
+              "retry_count": 0,
+              "sha256": "ff460546c299145730de68edcc6f52c1945be864d082aebd61973766f78c968b",
+              "source_type": "espn_current_team_roster",
+              "status": "success",
+              "temporal_basis": "observed_at",
+              "url": "https://www.espn.com/nba/team/roster/_/name/mem/memphis-grizzlies"
+            },
+            "status": "available",
+            "team_id": 1610612763
+          },
+          "official_team_roster": null,
+          "projected_starters": null,
+          "team_id": 1610612763
+        },
+        "home": {
+          "confirmed_starters": null,
+          "current_rotation": null,
+          "current_team_roster": {
+            "observed_at": "2026-10-23T18:01:05.649278+00:00",
+            "players": [
+              {
+                "name": "Charles Bassey",
+                "player_id": null,
+                "team_id": 1610612744,
+                "display_name": "查尔斯·巴锡"
+              },
+              {
+                "name": "Jimmy Butler III",
+                "player_id": null,
+                "team_id": 1610612744,
+                "display_name": "吉米·巴特勒三世"
+              },
+              {
+                "name": "LJ Cryer",
+                "player_id": null,
+                "team_id": 1610612744,
+                "display_name": "LJ·克莱尔"
+              },
+              {
+                "name": "Stephen Curry",
+                "player_id": null,
+                "team_id": 1610612744,
+                "display_name": "斯蒂芬·库里"
+              },
+              {
+                "name": "Draymond Green",
+                "player_id": null,
+                "team_id": 1610612744,
+                "display_name": "德雷蒙德·格林"
+              },
+              {
+                "name": "Al Horford",
+                "player_id": null,
+                "team_id": 1610612744,
+                "display_name": "艾尔·霍福德"
+              },
+              {
+                "name": "Graham Ike",
+                "player_id": null,
+                "team_id": 1610612744,
+                "display_name": "格雷厄姆·艾克"
+              },
+              {
+                "name": "Yaxel Lendeborg",
+                "player_id": null,
+                "team_id": 1610612744,
+                "display_name": "亚克塞尔·伦德博格"
+              },
+              {
+                "name": "Malevy Leons",
+                "player_id": null,
+                "team_id": 1610612744,
+                "display_name": "马莱维·莱昂斯"
+              },
+              {
+                "name": "De'Anthony Melton",
+                "player_id": null,
+                "team_id": 1610612744,
+                "display_name": "德安东尼·梅尔顿"
+              },
+              {
+                "name": "Moses Moody",
+                "player_id": null,
+                "team_id": 1610612744,
+                "display_name": "摩西·穆迪"
+              },
+              {
+                "name": "Georges Niang",
+                "player_id": null,
+                "team_id": 1610612744,
+                "display_name": "乔治·尼昂"
+              },
+              {
+                "name": "Gary Payton II",
+                "player_id": null,
+                "team_id": 1610612744,
+                "display_name": "加里·佩顿二世"
+              },
+              {
+                "name": "Brandin Podziemski",
+                "player_id": null,
+                "team_id": 1610612744,
+                "display_name": "布兰丁·波杰姆斯基"
+              },
+              {
+                "name": "Kristaps Porzingis",
+                "player_id": null,
+                "team_id": 1610612744,
+                "display_name": "克里斯塔普斯·波尔津吉斯"
+              },
+              {
+                "name": "Will Richard",
+                "player_id": null,
+                "team_id": 1610612744,
+                "display_name": "威尔·理查德"
+              },
+              {
+                "name": "Gui Santos",
+                "player_id": null,
+                "team_id": 1610612744,
+                "display_name": "吉·桑托斯"
+              },
+              {
+                "name": "Brandon Williams",
+                "player_id": null,
+                "team_id": 1610612744,
+                "display_name": "布兰登·威廉姆斯"
+              }
+            ],
+            "source": {
+              "captured_at": "2026-10-23T18:01:05.649278+00:00",
+              "http_status": 200,
+              "observed_at": "2026-10-23T18:01:05.649278+00:00",
+              "parser_version": "official-team-rendered-roster-v1",
+              "retry_count": 0,
+              "sha256": "d68ef75036f91782daf06e1659edadbf37985d15939bee9b1ab91b77859783f7",
+              "source_type": "espn_current_team_roster",
+              "status": "success",
+              "temporal_basis": "observed_at",
+              "url": "https://www.espn.com/nba/team/roster/_/name/gs/golden-state-warriors"
+            },
+            "status": "available",
+            "team_id": 1610612744
+          },
+          "official_team_roster": null,
+          "projected_starters": null,
+          "team_id": 1610612744
+        }
+      }
+    },
+    "schedule_revision": 1,
+    "season": 2027,
+    "season_form": {
+      "status": "available",
+      "game_id": "espn:401909850",
+      "cutoff": "2026-10-23T18:03:47.996700+00:00",
+      "season_start": 2026,
+      "competition_scope": "all_game_types_in_current_season",
+      "source": "schedule_catalog_final_games",
+      "numeric_model_usage": false,
+      "teams": {
+        "away": {
+          "team_id": 1610612763,
+          "current_season_games": 5,
+          "current_season_game_ids": [
+            "espn:401909838",
+            "espn:401901822",
+            "espn:401908940",
+            "espn:401898391",
+            "espn:401898388"
+          ],
+          "current_season_record": {
+            "wins": 4,
+            "losses": 1
+          },
+          "current_last5": {
+            "status": "available",
+            "games": 5,
+            "wins": 4,
+            "losses": 1,
+            "win_rate": 0.8,
+            "game_ids": [
+              "espn:401909838",
+              "espn:401901822",
+              "espn:401908940",
+              "espn:401898391",
+              "espn:401898388"
+            ]
+          },
+          "last_result": {
+            "game_id": "espn:401909838",
+            "played_at": "2026-10-22T00:00:00+00:00",
+            "won": true,
+            "team_score": 123,
+            "opponent_score": 103,
+            "opponent_team_id": 1610612762,
+            "opponent_name_zh": "爵士"
+          },
+          "streak": {
+            "result": "win",
+            "games": 3
+          }
+        },
+        "home": {
+          "team_id": 1610612744,
+          "current_season_games": 7,
+          "current_season_game_ids": [
+            "espn:401909092",
+            "espn:401898409",
+            "espn:401898718",
+            "espn:401898399",
+            "espn:401914129",
+            "espn:401898390",
+            "espn:401918010"
+          ],
+          "current_season_record": {
+            "wins": 4,
+            "losses": 3
+          },
+          "current_last5": {
+            "status": "available",
+            "games": 5,
+            "wins": 3,
+            "losses": 2,
+            "win_rate": 0.6,
+            "game_ids": [
+              "espn:401909092",
+              "espn:401898409",
+              "espn:401898718",
+              "espn:401898399",
+              "espn:401914129"
+            ]
+          },
+          "last_result": {
+            "game_id": "espn:401909092",
+            "played_at": "2026-10-22T02:00:00+00:00",
+            "won": false,
+            "team_score": 105,
+            "opponent_score": 127,
+            "opponent_team_id": 1610612747,
+            "opponent_name_zh": "湖人"
+          },
+          "streak": {
+            "result": "loss",
+            "games": 1
+          }
+        }
+      },
+      "context_hash": "6b8299f45f778722b2e0d90b2403146d552d17bdb9a39bd0b5da4d0054f0ffbf"
+    },
+    "season_phase": {
+      "away_current_season_games": 1,
+      "display_label": "本赛季已核实比赛（缺失不等于尚未比赛）",
+      "game_type": "regular_season",
+      "global_opening_night_confirmed": false,
+      "home_current_season_games": 1,
+      "phase": "very_early",
+      "primary_evidence": "verified_current_season_results_then_historical_baseline"
+    },
+    "season_start": 2026,
+    "source": {
+      "schedule_captured_at": "2026-10-23T18:01:38.395209+00:00"
+    },
+    "status": "scheduled",
+    "technical": {
+      "cutoff": "2026-10-23T18:01:05.860972+00:00",
+      "fact_context_cutoff": "2026-10-23T18:01:05.860972+00:00",
+      "source_label": "开发期赛前预测快照"
+    },
+    "tipoff": "2026-10-24T02:00:00+00:00",
+    "venue": "Chase Center",
+    "schedule_catalog_fact": true,
+    "nba_game_id": null,
+    "previous_season_team_stats": {
+      "status": "available",
+      "season": "2025-26",
+      "teams": {
+        "home": {
+          "team_id": 1610612744,
+          "status": "available",
+          "metrics": {
+            "off_rating": 112.0,
+            "def_rating": 112.6,
+            "net_rating": -0.6,
+            "pace": 101.7,
+            "three_pct": 35.56399917602539
+          },
+          "sources": [
+            {
+              "team_id": 1610612744,
+              "espn_team_id": "9",
+              "season": "2025-26",
+              "team_name": "Golden State Warriors",
+              "metric": "def_rating",
+              "value": 112.6,
+              "unit": "per_100_possessions",
+              "source": "ESPN",
+              "source_url": "https://www.espn.com/nba/hollinger/teamstats/_/year/2026",
+              "captured_at": "2026-10-07T20:54:45.968865+00:00",
+              "response_sha256": "f5b2e802bc6b1659b430ca449ba669ca03ade6306b526c4f9816007a80c1f3f7",
+              "parser_version": "espn-team-season-stats-v1",
+              "calculation": null
+            },
+            {
+              "team_id": 1610612744,
+              "espn_team_id": "9",
+              "season": "2025-26",
+              "team_name": "Golden State Warriors",
+              "metric": "net_rating",
+              "value": -0.6,
+              "unit": "per_100_possessions",
+              "source": "ESPN",
+              "source_url": "https://www.espn.com/nba/hollinger/teamstats/_/year/2026",
+              "captured_at": "2026-10-07T20:54:45.968865+00:00",
+              "response_sha256": "f5b2e802bc6b1659b430ca449ba669ca03ade6306b526c4f9816007a80c1f3f7",
+              "parser_version": "espn-team-season-stats-v1",
+              "calculation": "round(off_rating - def_rating, 1)"
+            },
+            {
+              "team_id": 1610612744,
+              "espn_team_id": "9",
+              "season": "2025-26",
+              "team_name": "Golden State Warriors",
+              "metric": "off_rating",
+              "value": 112.0,
+              "unit": "per_100_possessions",
+              "source": "ESPN",
+              "source_url": "https://www.espn.com/nba/hollinger/teamstats/_/year/2026",
+              "captured_at": "2026-10-07T20:54:45.968865+00:00",
+              "response_sha256": "f5b2e802bc6b1659b430ca449ba669ca03ade6306b526c4f9816007a80c1f3f7",
+              "parser_version": "espn-team-season-stats-v1",
+              "calculation": null
+            },
+            {
+              "team_id": 1610612744,
+              "espn_team_id": "9",
+              "season": "2025-26",
+              "team_name": "Golden State Warriors",
+              "metric": "pace",
+              "value": 101.7,
+              "unit": "possessions_per_game",
+              "source": "ESPN",
+              "source_url": "https://www.espn.com/nba/hollinger/teamstats/_/year/2026",
+              "captured_at": "2026-10-07T20:54:45.968865+00:00",
+              "response_sha256": "f5b2e802bc6b1659b430ca449ba669ca03ade6306b526c4f9816007a80c1f3f7",
+              "parser_version": "espn-team-season-stats-v1",
+              "calculation": null
+            },
+            {
+              "team_id": 1610612744,
+              "espn_team_id": "9",
+              "season": "2025-26",
+              "team_name": "Golden State Warriors",
+              "metric": "three_pct",
+              "value": 35.56399917602539,
+              "unit": "percent",
+              "source": "ESPN",
+              "source_url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/9/statistics?season=2026&seasontype=2",
+              "captured_at": "2026-10-07T20:54:50.841699+00:00",
+              "response_sha256": "ffad0e864b66f6245c1726be11d1478df9e36173fcf215b4b4ca8ed626f50779",
+              "parser_version": "espn-team-season-stats-v1",
+              "calculation": null
+            }
+          ]
+        },
+        "away": {
+          "team_id": 1610612763,
+          "status": "available",
+          "metrics": {
+            "off_rating": 109.7,
+            "def_rating": 115.8,
+            "net_rating": -6.1,
+            "pace": 104.1,
+            "three_pct": 35.266998291015625
+          },
+          "sources": [
+            {
+              "team_id": 1610612763,
+              "espn_team_id": "29",
+              "season": "2025-26",
+              "team_name": "Memphis Grizzlies",
+              "metric": "def_rating",
+              "value": 115.8,
+              "unit": "per_100_possessions",
+              "source": "ESPN",
+              "source_url": "https://www.espn.com/nba/hollinger/teamstats/_/year/2026",
+              "captured_at": "2026-10-07T20:54:45.968865+00:00",
+              "response_sha256": "f5b2e802bc6b1659b430ca449ba669ca03ade6306b526c4f9816007a80c1f3f7",
+              "parser_version": "espn-team-season-stats-v1",
+              "calculation": null
+            },
+            {
+              "team_id": 1610612763,
+              "espn_team_id": "29",
+              "season": "2025-26",
+              "team_name": "Memphis Grizzlies",
+              "metric": "net_rating",
+              "value": -6.1,
+              "unit": "per_100_possessions",
+              "source": "ESPN",
+              "source_url": "https://www.espn.com/nba/hollinger/teamstats/_/year/2026",
+              "captured_at": "2026-10-07T20:54:45.968865+00:00",
+              "response_sha256": "f5b2e802bc6b1659b430ca449ba669ca03ade6306b526c4f9816007a80c1f3f7",
+              "parser_version": "espn-team-season-stats-v1",
+              "calculation": "round(off_rating - def_rating, 1)"
+            },
+            {
+              "team_id": 1610612763,
+              "espn_team_id": "29",
+              "season": "2025-26",
+              "team_name": "Memphis Grizzlies",
+              "metric": "off_rating",
+              "value": 109.7,
+              "unit": "per_100_possessions",
+              "source": "ESPN",
+              "source_url": "https://www.espn.com/nba/hollinger/teamstats/_/year/2026",
+              "captured_at": "2026-10-07T20:54:45.968865+00:00",
+              "response_sha256": "f5b2e802bc6b1659b430ca449ba669ca03ade6306b526c4f9816007a80c1f3f7",
+              "parser_version": "espn-team-season-stats-v1",
+              "calculation": null
+            },
+            {
+              "team_id": 1610612763,
+              "espn_team_id": "29",
+              "season": "2025-26",
+              "team_name": "Memphis Grizzlies",
+              "metric": "pace",
+              "value": 104.1,
+              "unit": "possessions_per_game",
+              "source": "ESPN",
+              "source_url": "https://www.espn.com/nba/hollinger/teamstats/_/year/2026",
+              "captured_at": "2026-10-07T20:54:45.968865+00:00",
+              "response_sha256": "f5b2e802bc6b1659b430ca449ba669ca03ade6306b526c4f9816007a80c1f3f7",
+              "parser_version": "espn-team-season-stats-v1",
+              "calculation": null
+            },
+            {
+              "team_id": 1610612763,
+              "espn_team_id": "29",
+              "season": "2025-26",
+              "team_name": "Memphis Grizzlies",
+              "metric": "three_pct",
+              "value": 35.266998291015625,
+              "unit": "percent",
+              "source": "ESPN",
+              "source_url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/29/statistics?season=2026&seasontype=2",
+              "captured_at": "2026-10-07T20:55:01.424521+00:00",
+              "response_sha256": "52ec0d3857f932ee552176ead1f7bb389384bdef9d7b482d45011434df818ba1",
+              "parser_version": "espn-team-season-stats-v1",
+              "calculation": null
+            }
+          ]
+        }
+      }
+    },
+    "official_injury_report": {
+      "game_id": "espn:401909850",
+      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_01_45PM.pdf",
+      "source_published_at": "2026-10-23T17:45:00+00:00",
+      "captured_at": "2026-10-23T17:56:03.132064+00:00",
+      "source_sha256": "d4a073e31c21f16c2c601972443ca9fb357885eadde778df5d4bf7d3bc8a0aa0",
+      "parser_version": "nba-official-injury-live-v3",
+      "status": "published",
+      "report_id": "ee1b5ec89d630a6a7bac5535b4bcdced63e13175122697c932191b170ca0fb1e",
+      "report_date": "2026-10-23",
+      "report_time": "13:45",
+      "coverage": "complete",
+      "records": [
+        {
+          "team_id": 1610612744,
+          "player_name": "Brandin Podziemski",
+          "status": "questionable",
+          "reason": "Injury/Illness - Bilateral Low Back Soreness",
+          "game_id": "espn:401909850",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_01_45PM.pdf",
+          "source_published_at": "2026-10-23T17:45:00+00:00",
+          "captured_at": "2026-10-23T17:56:03.132064+00:00",
+          "source_sha256": "d4a073e31c21f16c2c601972443ca9fb357885eadde778df5d4bf7d3bc8a0aa0",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612744,
+          "player_name": "Charles Bassey",
+          "status": "questionable",
+          "reason": "Injury/Illness - Right Patellar Tendinopathy",
+          "game_id": "espn:401909850",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_01_45PM.pdf",
+          "source_published_at": "2026-10-23T17:45:00+00:00",
+          "captured_at": "2026-10-23T17:56:03.132064+00:00",
+          "source_sha256": "d4a073e31c21f16c2c601972443ca9fb357885eadde778df5d4bf7d3bc8a0aa0",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612744,
+          "player_name": "Jimmy Butler III",
+          "status": "out",
+          "reason": "Injury/Illness - Right ACLRepair/ Surgery",
+          "game_id": "espn:401909850",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_01_45PM.pdf",
+          "source_published_at": "2026-10-23T17:45:00+00:00",
+          "captured_at": "2026-10-23T17:56:03.132064+00:00",
+          "source_sha256": "d4a073e31c21f16c2c601972443ca9fb357885eadde778df5d4bf7d3bc8a0aa0",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612744,
+          "player_name": "Kristaps Porzingis",
+          "status": "out",
+          "reason": "Not With Team",
+          "game_id": "espn:401909850",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_01_45PM.pdf",
+          "source_published_at": "2026-10-23T17:45:00+00:00",
+          "captured_at": "2026-10-23T17:56:03.132064+00:00",
+          "source_sha256": "d4a073e31c21f16c2c601972443ca9fb357885eadde778df5d4bf7d3bc8a0aa0",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612744,
+          "player_name": "Moses Moody",
+          "status": "out",
+          "reason": "Injury/Illness - Left Patellar Tendon Repair/Surgery",
+          "game_id": "espn:401909850",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_01_45PM.pdf",
+          "source_published_at": "2026-10-23T17:45:00+00:00",
+          "captured_at": "2026-10-23T17:56:03.132064+00:00",
+          "source_sha256": "d4a073e31c21f16c2c601972443ca9fb357885eadde778df5d4bf7d3bc8a0aa0",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612763,
+          "player_name": "Cedric Coward",
+          "status": "doubtful",
+          "reason": "Injury/Illness - Left Wrist Sprain",
+          "game_id": "espn:401909850",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_01_45PM.pdf",
+          "source_published_at": "2026-10-23T17:45:00+00:00",
+          "captured_at": "2026-10-23T17:56:03.132064+00:00",
+          "source_sha256": "d4a073e31c21f16c2c601972443ca9fb357885eadde778df5d4bf7d3bc8a0aa0",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612763,
+          "player_name": "Isaiah Stewart",
+          "status": "questionable",
+          "reason": "Injury/Illness - Left Ankle Sprain",
+          "game_id": "espn:401909850",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_01_45PM.pdf",
+          "source_published_at": "2026-10-23T17:45:00+00:00",
+          "captured_at": "2026-10-23T17:56:03.132064+00:00",
+          "source_sha256": "d4a073e31c21f16c2c601972443ca9fb357885eadde778df5d4bf7d3bc8a0aa0",
+          "parser_version": "nba-official-injury-live-v3"
+        }
+      ]
+    },
+    "postgame": null,
+    "homepage_visible": true
+  },
+  "prediction": {
+    "status": "current",
+    "game_id": "espn:401909850",
+    "version_id": "b7f3ad79-2590-48af-a2dd-0da585282af9",
+    "state_revision": 2,
+    "locked_at": null,
+    "lock_reason": null,
+    "schedule_revision": 1,
+    "fact_view": {
+      "schema_version": "pregame-fact-view-v1",
+      "game_id": "espn:401909850",
+      "version_id": "b7f3ad79-2590-48af-a2dd-0da585282af9",
+      "source_payload_sha256": "89a71b23b4d16802b292b6168379f8a567506780ce382b136a0ab1b8336a44af",
+      "origin": "new_frozen",
+      "context": {
+        "feature_cutoff": "2026-10-23T18:01:05.860972+00:00",
+        "game_id": "espn:401909850",
+        "schedule": {
+          "away": {
+            "back_to_back": null,
+            "basis": null,
+            "reason": "no_cutoff_eligible_schedule_evidence",
+            "source_refs": [],
+            "status": "unavailable"
+          },
+          "home": {
+            "back_to_back": null,
+            "basis": null,
+            "reason": "no_cutoff_eligible_schedule_evidence",
+            "source_refs": [],
+            "status": "unavailable"
+          }
+        },
+        "schema_version": "pregame-fact-context-v1",
+        "team_form": {
+          "away": {
+            "competition_counts": {
+              "regular_season": 15
+            },
+            "date_timezone": "America/New_York",
+            "first_game_date": "2026-03-18",
+            "game_ids": [
+              "0022500651",
+              "0022501019",
+              "0022501023",
+              "0022501037",
+              "0022501056",
+              "0022501069",
+              "0022501079",
+              "0022501093",
+              "0022501003",
+              "0022501125",
+              "0022501135",
+              "0022501145",
+              "0022501162",
+              "0022501181",
+              "0022501194"
+            ],
+            "last_game_date": "2026-04-12",
+            "metrics": {
+              "def_rating_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "points_allowed_per_100_possessions",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 124.99774497569615
+              },
+              "net_rating_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "points_per_100_possessions",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": -18.4310998840174
+              },
+              "off_rating_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "points_per_100_possessions",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 106.56664509167875
+              },
+              "pace_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "possessions_per_48_minutes",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 104.152
+              },
+              "rebound_share_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "fraction",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 0.40731927834836373
+              },
+              "three_pct_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "fraction",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 0.3404
+              },
+              "turnover_rate_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "turnovers_per_possession",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 0.13421852484822697
+              },
+              "win_rate_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "win_fraction",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 0.13333333333333333
+              }
+            },
+            "observed_games": 15,
+            "reason": null,
+            "requested_games": 15,
+            "season_counts": {
+              "2025": 15
+            },
+            "status": "complete"
+          },
+          "home": {
+            "competition_counts": {
+              "play_in": 2,
+              "regular_season": 13
+            },
+            "date_timezone": "America/New_York",
+            "first_game_date": "2026-03-20",
+            "game_ids": [
+              "0022501017",
+              "0022501026",
+              "0022501044",
+              "0022501060",
+              "0022501073",
+              "0022501090",
+              "0022501113",
+              "0022501117",
+              "0022501142",
+              "0022501154",
+              "0022501170",
+              "0022501184",
+              "0022501199",
+              "0052500131",
+              "0052500211"
+            ],
+            "last_game_date": "2026-04-17",
+            "metrics": {
+              "def_rating_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "points_allowed_per_100_possessions",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 118.55812745952737
+              },
+              "net_rating_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "points_per_100_possessions",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": -6.452311850327039
+              },
+              "off_rating_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "points_per_100_possessions",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 112.10581560920032
+              },
+              "pace_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "possessions_per_48_minutes",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 99.32893081761007
+              },
+              "rebound_share_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "fraction",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 0.5079843442925961
+              },
+              "three_pct_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "fraction",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 0.3612
+              },
+              "turnover_rate_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "turnovers_per_possession",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 0.1707136279001275
+              },
+              "win_rate_15": {
+                "aggregation": "mean_of_per_game_values",
+                "method": "v1_per_game_mean_shift_1_rolling_15",
+                "missing_games": 0,
+                "unit": "win_fraction",
+                "valid_games": 15,
+                "validation": "matched",
+                "value": 0.3333333333333333
+              }
+            },
+            "observed_games": 15,
+            "reason": null,
+            "requested_games": 15,
+            "season_counts": {
+              "2025": 15
+            },
+            "status": "complete"
+          }
+        }
+      }
+    },
+    "display_projection": {
+      "schema_version": "prediction-display-cutoffs-v1",
+      "version_id": "b7f3ad79-2590-48af-a2dd-0da585282af9",
+      "market_interpretation": {
+        "schema_version": "writer-market-interpretation-v1",
+        "spread": {
+          "status": "available",
+          "margin_perspective": "home_minus_away",
+          "model_home_margin": 5.5,
+          "market_implied_home_margin": 4.5,
+          "spread_edge": 1.0,
+          "ats_lean": "home",
+          "ats_lean_reference": {
+            "side": "home",
+            "team_id": 1610612744,
+            "team_name": "勇士",
+            "line": -4.5,
+            "display": "勇士 -4.5"
+          },
+          "market_quote_id": "cec52b44b3f9d35eb4e28d3a512d3d762d6aa7b9864a7f5e3479cc8230b53bf1"
+        },
+        "total": {
+          "status": "available",
+          "model_total": 234.5,
+          "market_total": 237.5,
+          "total_edge": -3.0,
+          "total_lean": "under",
+          "market_quote_id": "cec52b44b3f9d35eb4e28d3a512d3d762d6aa7b9864a7f5e3479cc8230b53bf1"
+        }
+      },
+      "cutoffs": {
+        "input_cutoff_at": "2026-10-23T18:03:47.996700+00:00",
+        "feature_cutoff_at": "2026-10-23T18:01:05.860972+00:00",
+        "roster_context_cutoff_at": "2026-10-23T18:01:05.860972+00:00"
+      }
+    },
+    "version": {
+      "analysis_contract_version": "two-stage-forecast-v1",
+      "base_input_hash": "1e40a829b4ef533b75131bf01cce6e92c762537d98754ca91b8c5e52275d6e09",
+      "editorial_material": [
+        {
+          "effect": "uncertainty",
+          "evidence_ids": [
+            "090076ddbc0d6ab1a89ec10717ef4c499e1359acfa0cdec6dd608033f5ea3305",
+            "11e98c6e3293399e655dfd7561a8e19e64ac2fbb92e88b8a5aabec24ec63f904",
+            "65eb65cb7e3c91872b6beac56b002f7c6bf23efb8e786889f6abc0655d532aa7",
+            "d86e251a4cfa58e01d741540ca0550b4274f0cb125e68dae351cedcc088b0d8f"
+          ],
+          "pregame_plan": {
+            "key_matchup": "Curry 与 Jerome 的后场火力对位",
+            "lineups": [
+              {
+                "basis": "source_expected",
+                "candidates": [
+                  "Jimmy Butler III",
+                  "Moses Moody",
+                  "Brandin Podziemski",
+                  "Kristaps Porzingis",
+                  "Al Horford"
+                ],
+                "evidence_ids": [
+                  "11e98c6e3293399e655dfd7561a8e19e64ac2fbb92e88b8a5aabec24ec63f904"
+                ],
+                "players": [
+                  "Stephen Curry",
+                  "De'Anthony Melton",
+                  "Draymond Green",
+                  "Gui Santos",
+                  "Yaxel Lendeborg"
+                ],
+                "rationale": "来源预计首发；Butler、Moody、Podziemski 为主要轮换候选，实际首发未确认。",
+                "side": "home"
+              },
+              {
+                "basis": "source_expected",
+                "candidates": [
+                  "Jerami Grant",
+                  "GG Jackson",
+                  "Isaiah Stewart",
+                  "Scotty Pippen Jr.",
+                  "Taylor Hendricks"
+                ],
+                "evidence_ids": [
+                  "d86e251a4cfa58e01d741540ca0550b4274f0cb125e68dae351cedcc088b0d8f"
+                ],
+                "players": [
+                  "Ty Jerome",
+                  "Cedric Coward",
+                  "Zach Edey",
+                  "Jaylen Wells",
+                  "Cameron Boozer"
+                ],
+                "rationale": "来源预计首发；Coward 有 doubtful 标注，若缺阵由 Grant/GG Jackson 顶上。",
+                "side": "away"
+              }
+            ],
+            "player_usage": [
+              {
+                "basis": "agent_estimate",
+                "evidence_ids": [
+                  "65eb65cb7e3c91872b6beac56b002f7c6bf23efb8e786889f6abc0655d532aa7"
+                ],
+                "minutes_max": 36,
+                "minutes_min": 28,
+                "player_name": "Stephen Curry",
+                "rationale": "首战仅 21 分钟，主场第二战预计回升至常规负荷，赛季初仍可能控制。",
+                "side": "home"
+              },
+              {
+                "basis": "agent_estimate",
+                "evidence_ids": [
+                  "090076ddbc0d6ab1a89ec10717ef4c499e1359acfa0cdec6dd608033f5ea3305"
+                ],
+                "minutes_max": 36,
+                "minutes_min": 30,
+                "player_name": "Ty Jerome",
+                "rationale": "揭幕战 32 分钟 45 分，作为主控预计维持高负荷。",
+                "side": "away"
+              }
+            ],
+            "uncertainty": [
+              "Curry 实际负荷",
+              "Coward 是否出战",
+              "灰熊年轻核心客场轮换深度"
+            ]
+          },
+          "summary": "本场预计首发与核心球员负荷"
+        }
+      ],
+      "evidence_index": {
+        "090076ddbc0d6ab1a89ec10717ef4c499e1359acfa0cdec6dd608033f5ea3305": {
+          "section": "web_context",
+          "source_type": "Fact"
+        },
+        "0ded5b765029e81d8fae9447ab98bdd4a96d34a6ce15090f39281ccdc9c86859": {
+          "section": "research_status",
+          "source_type": "Context"
+        },
+        "11e98c6e3293399e655dfd7561a8e19e64ac2fbb92e88b8a5aabec24ec63f904": {
+          "section": "web_context",
+          "source_type": "Fact"
+        },
+        "21feacd5cebd70c6d4bf3c00699266ce1dd2ca3bde49822070c3ef37de1ff2a1": {
+          "section": "web_context",
+          "source_type": "Fact"
+        },
+        "32ea20e7619fd76f91d8e5139766bc3628d3070824e457caa292b56198ad878e": {
+          "section": "fact_context",
+          "source_type": "Context"
+        },
+        "35ec8987bb092ad5aaaa253c8fa6600a609e3f5223be5640afff34b57c4a74a0": {
+          "section": "prediction",
+          "source_type": "ModelForecast"
+        },
+        "482a78a33a3f84a8061dc2ae101f16640bf3ca732b23ae0f6f1fb623e3d34cf6": {
+          "section": "model_facts",
+          "source_type": "Fact"
+        },
+        "65eb65cb7e3c91872b6beac56b002f7c6bf23efb8e786889f6abc0655d532aa7": {
+          "section": "season_form",
+          "source_type": "Fact"
+        },
+        "9952a7cc545542b9c619aba2fab1fe62c186a66a09d5bb4336bcb3924eb70dd9": {
+          "section": "matchup_history",
+          "source_type": "Fact"
+        },
+        "a9efc33bb8ecb2ec81f1b207d71fbac8dd3feb2255e33927920603fbf6f1b3b3": {
+          "section": "game_identity",
+          "source_type": "Fact"
+        },
+        "acbbb318ed14c6160aecc57b58292571d8210892d8ceb23c1f4a9617016528e9": {
+          "section": "roster_context",
+          "source_type": "Fact"
+        },
+        "be8d6d34639827a0bd00abaf90606ebc5e20303d470df3941994d307ba240534": {
+          "section": "season_phase",
+          "source_type": "Fact"
+        },
+        "bf99e8ffd49b94f3af4fbb29d6c5101a3ef0beb27dec4c16aa7a777c9536b75d": {
+          "section": "team_form",
+          "source_type": "Fact"
+        },
+        "cec52b44b3f9d35eb4e28d3a512d3d762d6aa7b9864a7f5e3479cc8230b53bf1": {
+          "section": "web_context",
+          "source_type": "MarketSnapshot"
+        },
+        "cfbb858dadc6f99d405fb14b4e6231c264e42231074598c49d01dc6e1ce11108": {
+          "section": "web_context",
+          "source_type": "Fact"
+        },
+        "d86e251a4cfa58e01d741540ca0550b4274f0cb125e68dae351cedcc088b0d8f": {
+          "section": "web_context",
+          "source_type": "Fact"
+        },
+        "e6c03b03366f7a33080c41e2edb11b669498ffeef2be3c4d64a1843e5859d79f": {
+          "section": "matchup",
+          "source_type": "Fact"
+        }
+      },
+      "game_id": "espn:401909850",
+      "game_identity": {
+        "away_team_id": 1610612763,
+        "game_id": "espn:401909850",
+        "home_team_id": 1610612744,
+        "scheduled_tipoff": "2026-10-24T02:00:00+00:00"
+      },
+      "generated_at": "2026-10-23T18:04:05.424245+00:00",
+      "input_cutoff_at": "2026-10-23T18:03:47.996700+00:00",
+      "input_snapshot": {
+        "away": {
+          "abbreviation": "MEM",
+          "accent": "#5D76A9",
+          "espn_team_id": "29",
+          "id": 1610612763,
+          "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/mem.png",
+          "name": "Memphis Grizzlies",
+          "name_zh": "灰熊"
+        },
+        "background": {
+          "availability": {
+            "message": "暂无可靠伤病与出战信息。",
+            "records": [],
+            "status": "unavailable",
+            "time_validation": {
+              "accepted_records": 0,
+              "cutoff": "2026-10-23T18:01:05.860972+00:00",
+              "rejected_records": 0
+            }
+          },
+          "market": null,
+          "recent_form": {
+            "away": {
+              "def_rating_15": 124.99774497569615,
+              "net_rating_15": -18.4310998840174,
+              "off_rating_15": 106.56664509167875,
+              "pace_15": 104.152,
+              "rebound_share_15": 0.40731927834836373,
+              "three_pct_15": 0.3404,
+              "turnover_rate_15": 0.13421852484822697,
+              "win_rate_15": 0.13333333333333333
+            },
+            "home": {
+              "def_rating_15": 118.55812745952737,
+              "net_rating_15": -6.452311850327039,
+              "off_rating_15": 112.10581560920032,
+              "pace_15": 99.32893081761007,
+              "rebound_share_15": 0.5079843442925961,
+              "three_pct_15": 0.3612,
+              "turnover_rate_15": 0.1707136279001275,
+              "win_rate_15": 0.3333333333333333
+            }
+          },
+          "schedule": {
+            "away": {
+              "back_to_back": null,
+              "basis": null,
+              "reason": "no_cutoff_eligible_schedule_evidence",
+              "source_refs": [],
+              "status": "unavailable"
+            },
+            "away_back_to_back": null,
+            "away_rest_days": null,
+            "home": {
+              "back_to_back": null,
+              "basis": null,
+              "reason": "no_cutoff_eligible_schedule_evidence",
+              "source_refs": [],
+              "status": "unavailable"
+            },
+            "home_back_to_back": null,
+            "home_rest_days": null
+          }
+        },
+        "game_type": "regular_season",
+        "home": {
+          "abbreviation": "GS",
+          "accent": "#1D428A",
+          "espn_team_id": "9",
+          "id": 1610612744,
+          "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/gs.png",
+          "name": "Golden State Warriors",
+          "name_zh": "勇士"
+        },
+        "id": "espn:401909850",
+        "matchup_history": {
+          "away_team_id": 1610612763,
+          "context_hash": "fc7c7c920e126309d6622a7a7b754fd156a0ea10d53ae4fa367351b74b8c3308",
+          "cutoff": "2026-10-23T18:01:05.860972+00:00",
+          "game_id": "espn:401909850",
+          "home_team_id": 1610612744,
+          "matchup_relevance": "medium",
+          "meeting_count": 70,
+          "meetings": [
+            {
+              "away_score": 121,
+              "away_team_id": 1610612744,
+              "game_id": "0022300693",
+              "home_margin": -20,
+              "home_score": 101,
+              "home_team_id": 1610612763,
+              "is_playoffs": false,
+              "played_at": "2024-02-02T20:00:00",
+              "season_start": 2023,
+              "series_key": null,
+              "winner_team_id": 1610612744
+            },
+            {
+              "away_score": 116,
+              "away_team_id": 1610612763,
+              "game_id": "0022301001",
+              "home_margin": 21,
+              "home_score": 137,
+              "home_team_id": 1610612744,
+              "is_playoffs": false,
+              "played_at": "2024-03-20T22:00:00",
+              "season_start": 2023,
+              "series_key": null,
+              "winner_team_id": 1610612744
+            },
+            {
+              "away_score": 118,
+              "away_team_id": 1610612763,
+              "game_id": "0022400019",
+              "home_margin": 5,
+              "home_score": 123,
+              "home_team_id": 1610612744,
+              "is_playoffs": false,
+              "played_at": "2024-11-15T22:00:00",
+              "season_start": 2024,
+              "series_key": null,
+              "winner_team_id": 1610612744
+            },
+            {
+              "away_score": 93,
+              "away_team_id": 1610612744,
+              "game_id": "0022400366",
+              "home_margin": 51,
+              "home_score": 144,
+              "home_team_id": 1610612763,
+              "is_playoffs": false,
+              "played_at": "2024-12-19T20:00:00",
+              "season_start": 2024,
+              "series_key": null,
+              "winner_team_id": 1610612763
+            },
+            {
+              "away_score": 113,
+              "away_team_id": 1610612763,
+              "game_id": "0022400485",
+              "home_margin": 8,
+              "home_score": 121,
+              "home_team_id": 1610612744,
+              "is_playoffs": false,
+              "played_at": "2025-01-04T20:30:00",
+              "season_start": 2024,
+              "series_key": null,
+              "winner_team_id": 1610612744
+            },
+            {
+              "away_score": 134,
+              "away_team_id": 1610612744,
+              "game_id": "0022401100",
+              "home_margin": -9,
+              "home_score": 125,
+              "home_team_id": 1610612763,
+              "is_playoffs": false,
+              "played_at": "2025-04-01T20:00:00",
+              "season_start": 2024,
+              "series_key": null,
+              "winner_team_id": 1610612744
+            },
+            {
+              "away_score": 116,
+              "away_team_id": 1610612763,
+              "game_id": "0052400121",
+              "home_margin": 5,
+              "home_score": 121,
+              "home_team_id": 1610612744,
+              "is_playoffs": true,
+              "played_at": "2025-04-15T22:00:00",
+              "season_start": 2024,
+              "series_key": "2024:005240012",
+              "winner_team_id": 1610612744
+            },
+            {
+              "away_score": 118,
+              "away_team_id": 1610612763,
+              "game_id": "0022500121",
+              "home_margin": 13,
+              "home_score": 131,
+              "home_team_id": 1610612744,
+              "is_playoffs": false,
+              "played_at": "2025-10-27T22:00:00",
+              "season_start": 2025,
+              "series_key": null,
+              "winner_team_id": 1610612744
+            },
+            {
+              "away_score": 113,
+              "away_team_id": 1610612763,
+              "game_id": "0022500768",
+              "home_margin": 1,
+              "home_score": 114,
+              "home_team_id": 1610612744,
+              "is_playoffs": false,
+              "played_at": "2026-02-09T22:00:00",
+              "season_start": 2025,
+              "series_key": null,
+              "winner_team_id": 1610612744
+            },
+            {
+              "away_score": 133,
+              "away_team_id": 1610612744,
+              "game_id": "0022500844",
+              "home_margin": -21,
+              "home_score": 112,
+              "home_team_id": 1610612763,
+              "is_playoffs": false,
+              "played_at": "2026-02-25T19:30:00",
+              "season_start": 2025,
+              "series_key": null,
+              "winner_team_id": 1610612744
+            }
+          ],
+          "most_recent_meeting": {
+            "away_score": 133,
+            "away_team_id": 1610612744,
+            "game_id": "0022500844",
+            "home_margin": -21,
+            "home_score": 112,
+            "home_team_id": 1610612763,
+            "is_playoffs": false,
+            "played_at": "2026-02-25T19:30:00",
+            "season_start": 2025,
+            "series_key": null,
+            "winner_team_id": 1610612744
+          },
+          "numeric_model_usage": false,
+          "relevance_reasons": [
+            "multiple_recent_regular_season_meetings"
+          ],
+          "series_summary": null,
+          "source_semantics": "local historical games strictly before cutoff; team statistics when available",
+          "status": "available"
+        },
+        "missing": [
+          {
+            "reason": "no eligible local evidence",
+            "section": "availability"
+          },
+          {
+            "reason": "home: roster/minutes denominator unavailable",
+            "section": "roster_continuity"
+          },
+          {
+            "reason": "away: roster/minutes denominator unavailable",
+            "section": "roster_continuity"
+          },
+          {
+            "reason": "no legal future market data available",
+            "section": "market"
+          },
+          {
+            "reason": "longitudinal minutes/availability and roster roles not sufficiently verified; no player impact conclusion",
+            "section": "key_players"
+          },
+          {
+            "reason": "ValueError: residual_model_integrity:win_probability",
+            "section": "residual_model"
+          }
+        ],
+        "neutral_site": false,
+        "player_display_names": [
+          {
+            "canonical_name_en": "Charles Bassey",
+            "created_at": "2026-10-21T14:56:37.995004+00:00",
+            "display_name_zh": "查尔斯·巴锡",
+            "name_key": "charles bassey",
+            "player_id": "name:charles bassey",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Jimmy Butler III",
+            "created_at": "2026-10-21T14:56:37.996046+00:00",
+            "display_name_zh": "吉米·巴特勒三世",
+            "name_key": "jimmy butler iii",
+            "player_id": "name:jimmy butler iii",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "LJ Cryer",
+            "created_at": "2026-10-21T14:56:37.998240+00:00",
+            "display_name_zh": "LJ·克莱尔",
+            "name_key": "lj cryer",
+            "player_id": "name:lj cryer",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Stephen Curry",
+            "created_at": "2026-10-21T14:56:37.999066+00:00",
+            "display_name_zh": "斯蒂芬·库里",
+            "name_key": "stephen curry",
+            "player_id": "name:stephen curry",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Draymond Green",
+            "created_at": "2026-10-21T14:56:37.999933+00:00",
+            "display_name_zh": "德雷蒙德·格林",
+            "name_key": "draymond green",
+            "player_id": "name:draymond green",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Al Horford",
+            "created_at": "2026-10-21T14:56:38.013630+00:00",
+            "display_name_zh": "艾尔·霍福德",
+            "name_key": "al horford",
+            "player_id": "name:al horford",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Graham Ike",
+            "created_at": "2026-10-21T14:56:38.029014+00:00",
+            "display_name_zh": "格雷厄姆·艾克",
+            "name_key": "graham ike",
+            "player_id": "name:graham ike",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Yaxel Lendeborg",
+            "created_at": "2026-10-21T14:56:38.029788+00:00",
+            "display_name_zh": "亚克塞尔·伦德博格",
+            "name_key": "yaxel lendeborg",
+            "player_id": "name:yaxel lendeborg",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Malevy Leons",
+            "created_at": "2026-10-21T14:56:38.030554+00:00",
+            "display_name_zh": "马莱维·莱昂斯",
+            "name_key": "malevy leons",
+            "player_id": "name:malevy leons",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "De'Anthony Melton",
+            "created_at": "2026-10-21T14:56:38.031324+00:00",
+            "display_name_zh": "德安东尼·梅尔顿",
+            "name_key": "de anthony melton",
+            "player_id": "name:de anthony melton",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Moses Moody",
+            "created_at": "2026-10-21T14:56:38.032620+00:00",
+            "display_name_zh": "摩西·穆迪",
+            "name_key": "moses moody",
+            "player_id": "name:moses moody",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Georges Niang",
+            "created_at": "2026-10-21T14:56:38.033400+00:00",
+            "display_name_zh": "乔治·尼昂",
+            "name_key": "georges niang",
+            "player_id": "name:georges niang",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Gary Payton II",
+            "created_at": "2026-10-21T14:56:38.034123+00:00",
+            "display_name_zh": "加里·佩顿二世",
+            "name_key": "gary payton ii",
+            "player_id": "name:gary payton ii",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Brandin Podziemski",
+            "created_at": "2026-10-21T14:56:38.034860+00:00",
+            "display_name_zh": "布兰丁·波杰姆斯基",
+            "name_key": "brandin podziemski",
+            "player_id": "name:brandin podziemski",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Kristaps Porzingis",
+            "created_at": "2026-10-21T14:56:38.035574+00:00",
+            "display_name_zh": "克里斯塔普斯·波尔津吉斯",
+            "name_key": "kristaps porzingis",
+            "player_id": "name:kristaps porzingis",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Will Richard",
+            "created_at": "2026-10-21T14:56:38.060170+00:00",
+            "display_name_zh": "威尔·理查德",
+            "name_key": "will richard",
+            "player_id": "name:will richard",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Gui Santos",
+            "created_at": "2026-10-21T14:56:38.061026+00:00",
+            "display_name_zh": "吉·桑托斯",
+            "name_key": "gui santos",
+            "player_id": "name:gui santos",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Brandon Williams",
+            "created_at": "2026-10-21T14:56:38.062698+00:00",
+            "display_name_zh": "布兰登·威廉姆斯",
+            "name_key": "brandon williams",
+            "player_id": "name:brandon williams",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Cameron Boozer",
+            "created_at": "2026-10-21T14:45:01.056931+00:00",
+            "display_name_zh": "卡梅伦·布泽尔",
+            "name_key": "cameron boozer",
+            "player_id": "name:cameron boozer",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Carson Cooper",
+            "created_at": "2026-10-21T14:45:01.057048+00:00",
+            "display_name_zh": "卡森·库珀",
+            "name_key": "carson cooper",
+            "player_id": "name:carson cooper",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Cedric Coward",
+            "created_at": "2026-10-21T14:45:01.057122+00:00",
+            "display_name_zh": "塞德里克·考沃德",
+            "name_key": "cedric coward",
+            "player_id": "name:cedric coward",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Zach Edey",
+            "created_at": "2026-10-21T14:45:01.057342+00:00",
+            "display_name_zh": "扎克·伊迪",
+            "name_key": "zach edey",
+            "player_id": "name:zach edey",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Jerami Grant",
+            "created_at": "2026-10-21T14:45:01.057581+00:00",
+            "display_name_zh": "杰拉米·格兰特",
+            "name_key": "jerami grant",
+            "player_id": "name:jerami grant",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Taylor Hendricks",
+            "created_at": "2026-10-21T14:45:01.057657+00:00",
+            "display_name_zh": "泰勒·亨德里克斯",
+            "name_key": "taylor hendricks",
+            "player_id": "name:taylor hendricks",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "GG Jackson",
+            "created_at": "2026-10-21T14:45:01.057730+00:00",
+            "display_name_zh": "GG·杰克逊",
+            "name_key": "gg jackson",
+            "player_id": "name:gg jackson",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Ty Jerome",
+            "created_at": "2026-10-21T14:45:01.057808+00:00",
+            "display_name_zh": "泰·杰罗姆",
+            "name_key": "ty jerome",
+            "player_id": "name:ty jerome",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Karim Lopez",
+            "created_at": "2026-10-21T14:45:01.057941+00:00",
+            "display_name_zh": "卡里姆·洛佩斯",
+            "name_key": "karim lopez",
+            "player_id": "name:karim lopez",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Jahmai Mashack",
+            "created_at": "2026-10-21T14:45:01.058004+00:00",
+            "display_name_zh": "贾迈·马沙克",
+            "name_key": "jahmai mashack",
+            "player_id": "name:jahmai mashack",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Kris Murray",
+            "created_at": "2026-10-21T14:45:01.058085+00:00",
+            "display_name_zh": "克里斯·穆雷",
+            "name_key": "kris murray",
+            "player_id": "name:kris murray",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Scotty Pippen Jr.",
+            "created_at": "2026-10-21T14:45:01.058140+00:00",
+            "display_name_zh": "斯科蒂·皮蓬二世",
+            "name_key": "scotty pippen jr",
+            "player_id": "name:scotty pippen jr",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Quinten Post",
+            "created_at": "2026-10-21T14:45:01.058190+00:00",
+            "display_name_zh": "昆滕·波斯特",
+            "name_key": "quinten post",
+            "player_id": "name:quinten post",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Olivier-Maxence Prosper",
+            "created_at": "2026-10-21T14:45:01.058227+00:00",
+            "display_name_zh": "奥利维耶-马克桑斯·普罗斯珀",
+            "name_key": "olivier maxence prosper",
+            "player_id": "name:olivier maxence prosper",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Javon Small",
+            "created_at": "2026-10-21T14:45:01.058262+00:00",
+            "display_name_zh": "贾文·斯莫尔",
+            "name_key": "javon small",
+            "player_id": "name:javon small",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Cam Spencer",
+            "created_at": "2026-10-21T14:45:01.058297+00:00",
+            "display_name_zh": "卡姆·斯宾塞",
+            "name_key": "cam spencer",
+            "player_id": "name:cam spencer",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Isaiah Stewart",
+            "created_at": "2026-10-21T14:45:01.058332+00:00",
+            "display_name_zh": "以赛亚·斯图尔特",
+            "name_key": "isaiah stewart",
+            "player_id": "name:isaiah stewart",
+            "translation_source": "llm_transliteration"
+          },
+          {
+            "canonical_name_en": "Jaylen Wells",
+            "created_at": "2026-10-21T14:45:01.058367+00:00",
+            "display_name_zh": "杰伦·威尔斯",
+            "name_key": "jaylen wells",
+            "player_id": "name:jaylen wells",
+            "translation_source": "llm_transliteration"
+          }
+        ],
+        "prediction": {
+          "available": true,
+          "expected_away_score": 115.0793923504964,
+          "expected_home_margin": 9.209979375371638,
+          "expected_home_score": 124.28937172586804,
+          "expected_total": 239.36876407636444,
+          "winner_probability": 0.7832405974496082,
+          "winner_team_id": 1610612744
+        },
+        "public_market_reference": {
+          "away_moneyline": 145.0,
+          "away_spread": 4.5,
+          "captured_at": "2026-10-23T18:03:35.485037+00:00",
+          "eligible_prediction_input": false,
+          "expected_home_margin": 4.5,
+          "game_identity": {
+            "away_team": "Memphis Grizzlies",
+            "away_team_id": 1610612763,
+            "game_id": "espn:401909850",
+            "game_type": "regular_season",
+            "home_team": "Golden State Warriors",
+            "home_team_id": 1610612744,
+            "registered_game": true,
+            "scheduled_tipoff": "2026-10-24T02:00Z"
+          },
+          "home_moneyline": -175.0,
+          "home_spread": -4.5,
+          "observed_at": "2026-10-23T18:03:35.485037+00:00",
+          "published_at": null,
+          "source_tier": 1,
+          "source_title": "Draft Kings current odds",
+          "source_url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909850/competitions/401909850/odds",
+          "sportsbook": "Draft Kings",
+          "status": "available",
+          "time_semantics": "observed current sportsbook quote; publication time unknown",
+          "total": 237.5,
+          "usage": "qualified_market_for_ai_review"
+        },
+        "registered_game": true,
+        "roster_context": {
+          "teams": {
+            "away": {
+              "confirmed_starters": null,
+              "current_rotation": null,
+              "current_team_roster": {
+                "observed_at": "2026-10-23T18:01:05.671243+00:00",
+                "players": [
+                  {
+                    "name": "Cameron Boozer",
+                    "player_id": null,
+                    "team_id": 1610612763
+                  },
+                  {
+                    "name": "Carson Cooper",
+                    "player_id": null,
+                    "team_id": 1610612763
+                  },
+                  {
+                    "name": "Cedric Coward",
+                    "player_id": null,
+                    "team_id": 1610612763
+                  },
+                  {
+                    "name": "Zach Edey",
+                    "player_id": null,
+                    "team_id": 1610612763
+                  },
+                  {
+                    "name": "Jerami Grant",
+                    "player_id": null,
+                    "team_id": 1610612763
+                  },
+                  {
+                    "name": "Taylor Hendricks",
+                    "player_id": null,
+                    "team_id": 1610612763
+                  },
+                  {
+                    "name": "GG Jackson",
+                    "player_id": null,
+                    "team_id": 1610612763
+                  },
+                  {
+                    "name": "Ty Jerome",
+                    "player_id": null,
+                    "team_id": 1610612763
+                  },
+                  {
+                    "name": "Karim Lopez",
+                    "player_id": null,
+                    "team_id": 1610612763
+                  },
+                  {
+                    "name": "Jahmai Mashack",
+                    "player_id": null,
+                    "team_id": 1610612763
+                  },
+                  {
+                    "name": "Kris Murray",
+                    "player_id": null,
+                    "team_id": 1610612763
+                  },
+                  {
+                    "name": "Scotty Pippen Jr.",
+                    "player_id": null,
+                    "team_id": 1610612763
+                  },
+                  {
+                    "name": "Quinten Post",
+                    "player_id": null,
+                    "team_id": 1610612763
+                  },
+                  {
+                    "name": "Olivier-Maxence Prosper",
+                    "player_id": null,
+                    "team_id": 1610612763
+                  },
+                  {
+                    "name": "Javon Small",
+                    "player_id": null,
+                    "team_id": 1610612763
+                  },
+                  {
+                    "name": "Cam Spencer",
+                    "player_id": null,
+                    "team_id": 1610612763
+                  },
+                  {
+                    "name": "Isaiah Stewart",
+                    "player_id": null,
+                    "team_id": 1610612763
+                  },
+                  {
+                    "name": "Jaylen Wells",
+                    "player_id": null,
+                    "team_id": 1610612763
+                  }
+                ],
+                "source": {
+                  "captured_at": "2026-10-23T18:01:05.671243+00:00",
+                  "http_status": 200,
+                  "observed_at": "2026-10-23T18:01:05.671243+00:00",
+                  "parser_version": "official-team-rendered-roster-v1",
+                  "retry_count": 0,
+                  "sha256": "ff460546c299145730de68edcc6f52c1945be864d082aebd61973766f78c968b",
+                  "source_type": "espn_current_team_roster",
+                  "status": "success",
+                  "temporal_basis": "observed_at",
+                  "url": "https://www.espn.com/nba/team/roster/_/name/mem/memphis-grizzlies"
+                },
+                "status": "available",
+                "team_id": 1610612763
+              },
+              "official_team_roster": null,
+              "projected_starters": null,
+              "team_id": 1610612763
+            },
+            "home": {
+              "confirmed_starters": null,
+              "current_rotation": null,
+              "current_team_roster": {
+                "observed_at": "2026-10-23T18:01:05.649278+00:00",
+                "players": [
+                  {
+                    "name": "Charles Bassey",
+                    "player_id": null,
+                    "team_id": 1610612744
+                  },
+                  {
+                    "name": "Jimmy Butler III",
+                    "player_id": null,
+                    "team_id": 1610612744
+                  },
+                  {
+                    "name": "LJ Cryer",
+                    "player_id": null,
+                    "team_id": 1610612744
+                  },
+                  {
+                    "name": "Stephen Curry",
+                    "player_id": null,
+                    "team_id": 1610612744
+                  },
+                  {
+                    "name": "Draymond Green",
+                    "player_id": null,
+                    "team_id": 1610612744
+                  },
+                  {
+                    "name": "Al Horford",
+                    "player_id": null,
+                    "team_id": 1610612744
+                  },
+                  {
+                    "name": "Graham Ike",
+                    "player_id": null,
+                    "team_id": 1610612744
+                  },
+                  {
+                    "name": "Yaxel Lendeborg",
+                    "player_id": null,
+                    "team_id": 1610612744
+                  },
+                  {
+                    "name": "Malevy Leons",
+                    "player_id": null,
+                    "team_id": 1610612744
+                  },
+                  {
+                    "name": "De'Anthony Melton",
+                    "player_id": null,
+                    "team_id": 1610612744
+                  },
+                  {
+                    "name": "Moses Moody",
+                    "player_id": null,
+                    "team_id": 1610612744
+                  },
+                  {
+                    "name": "Georges Niang",
+                    "player_id": null,
+                    "team_id": 1610612744
+                  },
+                  {
+                    "name": "Gary Payton II",
+                    "player_id": null,
+                    "team_id": 1610612744
+                  },
+                  {
+                    "name": "Brandin Podziemski",
+                    "player_id": null,
+                    "team_id": 1610612744
+                  },
+                  {
+                    "name": "Kristaps Porzingis",
+                    "player_id": null,
+                    "team_id": 1610612744
+                  },
+                  {
+                    "name": "Will Richard",
+                    "player_id": null,
+                    "team_id": 1610612744
+                  },
+                  {
+                    "name": "Gui Santos",
+                    "player_id": null,
+                    "team_id": 1610612744
+                  },
+                  {
+                    "name": "Brandon Williams",
+                    "player_id": null,
+                    "team_id": 1610612744
+                  }
+                ],
+                "source": {
+                  "captured_at": "2026-10-23T18:01:05.649278+00:00",
+                  "http_status": 200,
+                  "observed_at": "2026-10-23T18:01:05.649278+00:00",
+                  "parser_version": "official-team-rendered-roster-v1",
+                  "retry_count": 0,
+                  "sha256": "d68ef75036f91782daf06e1659edadbf37985d15939bee9b1ab91b77859783f7",
+                  "source_type": "espn_current_team_roster",
+                  "status": "success",
+                  "temporal_basis": "observed_at",
+                  "url": "https://www.espn.com/nba/team/roster/_/name/gs/golden-state-warriors"
+                },
+                "status": "available",
+                "team_id": 1610612744
+              },
+              "official_team_roster": null,
+              "projected_starters": null,
+              "team_id": 1610612744
+            }
+          }
+        },
+        "schedule_revision": 1,
+        "season": 2027,
+        "season_form": {
+          "competition_scope": "regular_season; previous-season windows retain their original labels",
+          "context_hash": "19e9796bc8c13c6e4383aa08737214433e460c64573518a190142f35a8f71a7e",
+          "cutoff": "2026-10-23T18:01:05.860972+00:00",
+          "game_id": "espn:401909850",
+          "numeric_model_usage": false,
+          "season_start": 2026,
+          "source": "captured_results_before_cutoff",
+          "status": "available",
+          "teams": {
+            "away": {
+              "current_count_semantics": "verified completed games before cutoff",
+              "current_last10": {
+                "game_ids": [
+                  "espn:401909838"
+                ],
+                "games": 1,
+                "points_against_per_game": 103.0,
+                "points_for_per_game": 123.0,
+                "status": "available",
+                "win_rate": 1.0
+              },
+              "current_last15": {
+                "game_ids": [
+                  "espn:401909838"
+                ],
+                "games": 1,
+                "points_against_per_game": 103.0,
+                "points_for_per_game": 123.0,
+                "status": "available",
+                "win_rate": 1.0
+              },
+              "current_last5": {
+                "game_ids": [
+                  "espn:401909838"
+                ],
+                "games": 1,
+                "points_against_per_game": 103.0,
+                "points_for_per_game": 123.0,
+                "status": "available",
+                "win_rate": 1.0
+              },
+              "current_season_game_ids": [
+                "espn:401909838"
+              ],
+              "current_season_games": 1,
+              "last_result": {
+                "away_team_name": "Utah Jazz",
+                "captured_at": "2026-10-22T02:44:39.597517+00:00",
+                "game_id": "espn:401909838",
+                "home_team_name": "Memphis Grizzlies",
+                "key_player_results": [
+                  {
+                    "assists": 6,
+                    "full_name": "Ty Jerome",
+                    "minutes": 32.0,
+                    "points": 45,
+                    "rebounds": 7,
+                    "team_id": 1610612763
+                  },
+                  {
+                    "assists": 3,
+                    "full_name": "Jerami Grant",
+                    "minutes": 24.0,
+                    "points": 15,
+                    "rebounds": 2,
+                    "team_id": 1610612763
+                  },
+                  {
+                    "assists": 0,
+                    "full_name": "Jaylen Wells",
+                    "minutes": 28.0,
+                    "points": 12,
+                    "rebounds": 5,
+                    "team_id": 1610612763
+                  },
+                  {
+                    "assists": 0,
+                    "full_name": "GG Jackson",
+                    "minutes": 19.0,
+                    "points": 12,
+                    "rebounds": 8,
+                    "team_id": 1610612763
+                  }
+                ],
+                "opponent_name": "Utah Jazz",
+                "opponent_score": 103,
+                "opponent_team_id": 1610612762,
+                "played_at": "2026-10-22T00:00:00+00:00",
+                "result_id": "fe8dca85b4c4b92872bdb65bb189a7a156ca11a0bbb3eb8beeefde262f9e25c5",
+                "source_payload_sha256": "f17610c4651d677b2beb486a0069589ca1bcd9cccc7cd99b600612c5a2994cc2",
+                "source_url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=401909838",
+                "team_score": 123,
+                "team_side": "home",
+                "won": true
+              },
+              "previous_last10": {
+                "first_game_date": "2026-03-27T20:00:00",
+                "game_ids": [
+                  "0022501069",
+                  "0022501079",
+                  "0022501093",
+                  "0022501003",
+                  "0022501125",
+                  "0022501135",
+                  "0022501145",
+                  "0022501162",
+                  "0022501181",
+                  "0022501194"
+                ],
+                "games": 10,
+                "last_game_date": "2026-04-12T20:30:00",
+                "point_margin_per_game": -20.4,
+                "points_against_per_game": 132.0,
+                "points_for_per_game": 111.6,
+                "rebounds_per_game": 35.8,
+                "status": "available",
+                "three_pct": 0.3462414578587699,
+                "turnovers_per_game": 14.5,
+                "win_rate": 0.1
+              },
+              "previous_playoffs": {
+                "championship_clinched": null,
+                "finals_wins": null,
+                "game_ids": [],
+                "last_observed_round": null,
+                "observed_games": 0,
+                "observed_losses": null,
+                "observed_wins": null,
+                "season_start": 2025,
+                "semantics": "observed pre-cutoff playoff games; title confirmed only by four recorded Finals wins",
+                "status": "no_local_games"
+              },
+              "previous_season_games": 82,
+              "recent_games": [
+                {
+                  "away_team_name": "Utah Jazz",
+                  "captured_at": "2026-10-22T02:44:39.597517+00:00",
+                  "game_id": "espn:401909838",
+                  "home_team_name": "Memphis Grizzlies",
+                  "key_player_results": [
+                    {
+                      "assists": 6,
+                      "full_name": "Ty Jerome",
+                      "minutes": 32.0,
+                      "points": 45,
+                      "rebounds": 7,
+                      "team_id": 1610612763
+                    },
+                    {
+                      "assists": 3,
+                      "full_name": "Jerami Grant",
+                      "minutes": 24.0,
+                      "points": 15,
+                      "rebounds": 2,
+                      "team_id": 1610612763
+                    },
+                    {
+                      "assists": 0,
+                      "full_name": "Jaylen Wells",
+                      "minutes": 28.0,
+                      "points": 12,
+                      "rebounds": 5,
+                      "team_id": 1610612763
+                    },
+                    {
+                      "assists": 0,
+                      "full_name": "GG Jackson",
+                      "minutes": 19.0,
+                      "points": 12,
+                      "rebounds": 8,
+                      "team_id": 1610612763
+                    }
+                  ],
+                  "opponent_name": "Utah Jazz",
+                  "opponent_score": 103,
+                  "opponent_team_id": 1610612762,
+                  "played_at": "2026-10-22T00:00:00+00:00",
+                  "result_id": "fe8dca85b4c4b92872bdb65bb189a7a156ca11a0bbb3eb8beeefde262f9e25c5",
+                  "source_payload_sha256": "f17610c4651d677b2beb486a0069589ca1bcd9cccc7cd99b600612c5a2994cc2",
+                  "source_url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=401909838",
+                  "team_score": 123,
+                  "team_side": "home",
+                  "won": true
+                }
+              ],
+              "regular_season_game_number": 2,
+              "team_id": 1610612763
+            },
+            "home": {
+              "current_count_semantics": "verified completed games before cutoff",
+              "current_last10": {
+                "game_ids": [
+                  "espn:401909092"
+                ],
+                "games": 1,
+                "points_against_per_game": 127.0,
+                "points_for_per_game": 105.0,
+                "status": "available",
+                "win_rate": 0.0
+              },
+              "current_last15": {
+                "game_ids": [
+                  "espn:401909092"
+                ],
+                "games": 1,
+                "points_against_per_game": 127.0,
+                "points_for_per_game": 105.0,
+                "status": "available",
+                "win_rate": 0.0
+              },
+              "current_last5": {
+                "game_ids": [
+                  "espn:401909092"
+                ],
+                "games": 1,
+                "points_against_per_game": 127.0,
+                "points_for_per_game": 105.0,
+                "status": "available",
+                "win_rate": 0.0
+              },
+              "current_season_game_ids": [
+                "espn:401909092"
+              ],
+              "current_season_games": 1,
+              "last_result": {
+                "away_team_name": "Golden State Warriors",
+                "captured_at": "2026-10-22T04:49:41.541794+00:00",
+                "game_id": "espn:401909092",
+                "home_team_name": "Los Angeles Lakers",
+                "key_player_results": [
+                  {
+                    "assists": 1,
+                    "full_name": "Stephen Curry",
+                    "minutes": 21.0,
+                    "points": 23,
+                    "rebounds": 2,
+                    "team_id": 1610612744
+                  },
+                  {
+                    "assists": 3,
+                    "full_name": "Brandon Williams",
+                    "minutes": 18.0,
+                    "points": 14,
+                    "rebounds": 4,
+                    "team_id": 1610612744
+                  },
+                  {
+                    "assists": 0,
+                    "full_name": "Gui Santos",
+                    "minutes": 25.0,
+                    "points": 12,
+                    "rebounds": 5,
+                    "team_id": 1610612744
+                  },
+                  {
+                    "assists": 2,
+                    "full_name": "Yaxel Lendeborg",
+                    "minutes": 29.0,
+                    "points": 12,
+                    "rebounds": 3,
+                    "team_id": 1610612744
+                  }
+                ],
+                "opponent_name": "Los Angeles Lakers",
+                "opponent_score": 127,
+                "opponent_team_id": 1610612747,
+                "played_at": "2026-10-22T02:00:00+00:00",
+                "result_id": "97c88c22659017e13bcad3d2222a5b8c11e09f52c69df892e90a14b174da21bf",
+                "source_payload_sha256": "aca410a0c2bebd2c209441a870d963e726529f9750e4a0f28136a5fb215fdd62",
+                "source_url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=401909092",
+                "team_score": 105,
+                "team_side": "away",
+                "won": false
+              },
+              "previous_last10": {
+                "first_game_date": "2026-03-29T22:00:00",
+                "game_ids": [
+                  "0022501090",
+                  "0022501113",
+                  "0022501117",
+                  "0022501142",
+                  "0022501154",
+                  "0022501170",
+                  "0022501184",
+                  "0022501199",
+                  "0052500131",
+                  "0052500211"
+                ],
+                "games": 10,
+                "last_game_date": "2026-04-17T22:00:00",
+                "point_margin_per_game": -7.7,
+                "points_against_per_game": 117.3,
+                "points_for_per_game": 109.6,
+                "rebounds_per_game": 39.2,
+                "status": "available",
+                "three_pct": 0.35714285714285715,
+                "turnovers_per_game": 14.9,
+                "win_rate": 0.2
+              },
+              "previous_playoffs": {
+                "championship_clinched": null,
+                "finals_wins": null,
+                "game_ids": [],
+                "last_observed_round": null,
+                "observed_games": 0,
+                "observed_losses": null,
+                "observed_wins": null,
+                "season_start": 2025,
+                "semantics": "observed pre-cutoff playoff games; title confirmed only by four recorded Finals wins",
+                "status": "no_local_games"
+              },
+              "previous_season_games": 84,
+              "recent_games": [
+                {
+                  "away_team_name": "Golden State Warriors",
+                  "captured_at": "2026-10-22T04:49:41.541794+00:00",
+                  "game_id": "espn:401909092",
+                  "home_team_name": "Los Angeles Lakers",
+                  "key_player_results": [
+                    {
+                      "assists": 1,
+                      "full_name": "Stephen Curry",
+                      "minutes": 21.0,
+                      "points": 23,
+                      "rebounds": 2,
+                      "team_id": 1610612744
+                    },
+                    {
+                      "assists": 3,
+                      "full_name": "Brandon Williams",
+                      "minutes": 18.0,
+                      "points": 14,
+                      "rebounds": 4,
+                      "team_id": 1610612744
+                    },
+                    {
+                      "assists": 0,
+                      "full_name": "Gui Santos",
+                      "minutes": 25.0,
+                      "points": 12,
+                      "rebounds": 5,
+                      "team_id": 1610612744
+                    },
+                    {
+                      "assists": 2,
+                      "full_name": "Yaxel Lendeborg",
+                      "minutes": 29.0,
+                      "points": 12,
+                      "rebounds": 3,
+                      "team_id": 1610612744
+                    }
+                  ],
+                  "opponent_name": "Los Angeles Lakers",
+                  "opponent_score": 127,
+                  "opponent_team_id": 1610612747,
+                  "played_at": "2026-10-22T02:00:00+00:00",
+                  "result_id": "97c88c22659017e13bcad3d2222a5b8c11e09f52c69df892e90a14b174da21bf",
+                  "source_payload_sha256": "aca410a0c2bebd2c209441a870d963e726529f9750e4a0f28136a5fb215fdd62",
+                  "source_url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=401909092",
+                  "team_score": 105,
+                  "team_side": "away",
+                  "won": false
+                }
+              ],
+              "regular_season_game_number": 2,
+              "team_id": 1610612744
+            }
+          }
+        },
+        "season_phase": {
+          "away_current_season_games": 1,
+          "display_label": "本赛季已核实比赛（缺失不等于尚未比赛）",
+          "game_type": "regular_season",
+          "global_opening_night_confirmed": false,
+          "home_current_season_games": 1,
+          "phase": "very_early",
+          "primary_evidence": "verified_current_season_results_then_historical_baseline"
+        },
+        "season_start": 2026,
+        "source": {
+          "schedule_captured_at": "2026-10-23T14:12:55.613290+00:00"
+        },
+        "status": "scheduled",
+        "technical": {
+          "cutoff": "2026-10-23T18:01:05.860972+00:00",
+          "fact_context_cutoff": "2026-10-23T18:01:05.860972+00:00",
+          "source_label": "开发期赛前预测快照"
+        },
+        "tipoff": "2026-10-24T02:00:00+00:00",
+        "venue": "Chase Center"
+      },
+      "judgment": {
+        "analysis_article": "灰熊这个赛季换了模样。莫兰特、杰克逊、贝恩都去了别处，球队把位置让给布泽尔、伊迪、考沃德、韦尔斯这批年轻人，后场交给杰罗姆掌舵。揭幕战他们在主场123比103赢了爵士，杰罗姆一个人砍下45分，25投17中。这个数字太扎眼，扎眼到让人想立刻知道：换个对手、换个球馆，还能不能这么打。\n\n勇士这边首战在洛杉矶输了，105比127不敌湖人，库里只打了21分钟拿了23分。赛季第二场回到主场，他的时间大概率会往上走，但具体多少没人说得准。这场球我最想看的就是后场这一组：库里和杰罗姆，两边进攻的起点都在这里。\n\n我选勇士赢，让4.5分也站主队。\n\n理由不在杰罗姆那45分是真是假，而在他要面对的东西变了。爵士那场，他持球往里走，防线给他的空间还算宽；到了勇士这边，格林领着的换防会不断把身体贴上来，逼他提前出球，逼灰熊的年轻人自己解决问题。伊迪在内线有体型，篮板和篮下终结是灰熊能咬住比分的地方，可勇士的应对也清楚：把节奏提起来，让伊迪在场上跑，用外线投射把他的护框价值摊薄。\n\n这就是我看好分差能拉开一点的原因。不是勇士某一次进攻多漂亮，而是他们能让灰熊的年轻核心每一回合都多花一点力气。杰罗姆被逼着分球，布泽尔和韦尔斯要在陌生强度下接住球、做对选择，这些回合累积起来，比分才会慢慢往一边倒。单场45分证明他有能力，但一场比赛证明不了他能连续在客场扛住这种针对。\n\n灰熊当然有还手的路。伊迪在篮下要到位置，杰罗姆借掩护找到中距离，年轻人冲抢前场篮板换二次进攻，只要这几样接上，勇士的小阵容就会被迫收缩，外线空位随之出现。这条路走顺了，4.5分并不保险。\n\n总分我偏小，但把握没有让分那么足。要打成小分，需要勇士把比赛拖进半场，让灰熊一回合一回合地磨；可只要杰罗姆拿球就推、勇士抢下篮板就往前甩，回合数一多，这个方向就站不住。\n\n开球后先看一件事：杰罗姆第一次被格林换防贴住时，是把球交出去继续跑，还是硬着头皮自己解决。他的选择，大概就能说明灰熊这趟客场会是什么样子。",
+        "analysis_article_evidence_ids": [
+          "090076ddbc0d6ab1a89ec10717ef4c499e1359acfa0cdec6dd608033f5ea3305",
+          "21feacd5cebd70c6d4bf3c00699266ce1dd2ca3bde49822070c3ef37de1ff2a1",
+          "35ec8987bb092ad5aaaa253c8fa6600a609e3f5223be5640afff34b57c4a74a0",
+          "65eb65cb7e3c91872b6beac56b002f7c6bf23efb8e786889f6abc0655d532aa7",
+          "9952a7cc545542b9c619aba2fab1fe62c186a66a09d5bb4336bcb3924eb70dd9",
+          "bf99e8ffd49b94f3af4fbb29d6c5101a3ef0beb27dec4c16aa7a777c9536b75d",
+          "cec52b44b3f9d35eb4e28d3a512d3d762d6aa7b9864a7f5e3479cc8230b53bf1"
+        ],
+        "confidence": "medium",
+        "core_question": "灰熊上一场的大爆发能否在客场延续，还是勇士的长期实力与主场优势重新主导？",
+        "final_prediction": {
+          "evidence_ids": [
+            "090076ddbc0d6ab1a89ec10717ef4c499e1359acfa0cdec6dd608033f5ea3305",
+            "21feacd5cebd70c6d4bf3c00699266ce1dd2ca3bde49822070c3ef37de1ff2a1",
+            "35ec8987bb092ad5aaaa253c8fa6600a609e3f5223be5640afff34b57c4a74a0",
+            "65eb65cb7e3c91872b6beac56b002f7c6bf23efb8e786889f6abc0655d532aa7",
+            "9952a7cc545542b9c619aba2fab1fe62c186a66a09d5bb4336bcb3924eb70dd9",
+            "bf99e8ffd49b94f3af4fbb29d6c5101a3ef0beb27dec4c16aa7a777c9536b75d",
+            "cec52b44b3f9d35eb4e28d3a512d3d762d6aa7b9864a7f5e3479cc8230b53bf1"
+          ],
+          "expected_margin": 5.5,
+          "expected_total": 234.5,
+          "win_probability": 0.6,
+          "winner_side": "home"
+        },
+        "game_script": "勇士主场凭 Curry 投射与主场节奏开局建立小幅领先，灰熊靠 Jerome 持球进攻和 Edey 内线体型咬住比分。比赛大概率在第四节仍有悬念，勇士凭更成熟的收官阵容小胜，双方后场火力与灰熊偏快节奏使总分偏高。",
+        "key_matchup_variables": [
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "65eb65cb7e3c91872b6beac56b002f7c6bf23efb8e786889f6abc0655d532aa7",
+              "090076ddbc0d6ab1a89ec10717ef4c499e1359acfa0cdec6dd608033f5ea3305"
+            ],
+            "statement": "Stephen Curry vs Ty Jerome 领衔的灰熊后场：两队进攻核心都在后场，Curry 负荷恢复程度与 Jerome 手感延续性直接决定走向。 Curry 恢复常规负荷则勇士后场火力与组织占优；Jerome 延续爆发则缩小差距。"
+          },
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "bf99e8ffd49b94f3af4fbb29d6c5101a3ef0beb27dec4c16aa7a777c9536b75d",
+              "d86e251a4cfa58e01d741540ca0550b4274f0cb125e68dae351cedcc088b0d8f"
+            ],
+            "statement": "Zach Edey 与灰熊内线 vs Draymond Green 领衔的勇士小阵容：灰熊内线体型对勇士小阵容的篮板与护框形成潜在优势，但勇士换防与空间可反制。 灰熊篮板可能占优，勇士以节奏与空间投射抵消内线劣势。"
+          }
+        ],
+        "model_risk": "如果Curry 本场负荷仍受限或状态低迷，则勇士进攻核心缺失，胜负可能转向灰熊或分差大幅缩小；如果Jerome 延续揭幕战级别爆发且灰熊年轻核心客场稳定，则灰熊可能爆冷，胜负方向反转",
+        "player_analysis": [
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "090076ddbc0d6ab1a89ec10717ef4c499e1359acfa0cdec6dd608033f5ea3305",
+              "11e98c6e3293399e655dfd7561a8e19e64ac2fbb92e88b8a5aabec24ec63f904",
+              "65eb65cb7e3c91872b6beac56b002f7c6bf23efb8e786889f6abc0655d532aa7",
+              "acbbb318ed14c6160aecc57b58292571d8210892d8ceb23c1f4a9617016528e9",
+              "d86e251a4cfa58e01d741540ca0550b4274f0cb125e68dae351cedcc088b0d8f"
+            ],
+            "player_name": "Stephen Curry",
+            "statement": "勇士进攻的起点，首战21分钟拿23分，本场负荷预计回升，他的投射和牵制决定灰熊防线要拉多开。"
+          },
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "11e98c6e3293399e655dfd7561a8e19e64ac2fbb92e88b8a5aabec24ec63f904",
+              "acbbb318ed14c6160aecc57b58292571d8210892d8ceb23c1f4a9617016528e9"
+            ],
+            "player_name": "Draymond Green",
+            "statement": "勇士换防和组织的核心，他被安排去贴杰罗姆，能不能逼对方提前出球是这场的关键一环。"
+          },
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "65eb65cb7e3c91872b6beac56b002f7c6bf23efb8e786889f6abc0655d532aa7",
+              "acbbb318ed14c6160aecc57b58292571d8210892d8ceb23c1f4a9617016528e9",
+              "cfbb858dadc6f99d405fb14b4e6231c264e42231074598c49d01dc6e1ce11108"
+            ],
+            "player_name": "Yaxel Lendeborg",
+            "statement": "新秀前锋首战打了29分钟拿12分，来源称他一开始就承担大量时间，勇士前场的轮换深度要靠他撑。"
+          },
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "11e98c6e3293399e655dfd7561a8e19e64ac2fbb92e88b8a5aabec24ec63f904",
+              "acbbb318ed14c6160aecc57b58292571d8210892d8ceb23c1f4a9617016528e9"
+            ],
+            "player_name": "De'Anthony Melton",
+            "statement": "预计首发后场，负责分担库里的持球压力，也在防守端对上灰熊的年轻后卫。"
+          },
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "090076ddbc0d6ab1a89ec10717ef4c499e1359acfa0cdec6dd608033f5ea3305",
+              "65eb65cb7e3c91872b6beac56b002f7c6bf23efb8e786889f6abc0655d532aa7",
+              "acbbb318ed14c6160aecc57b58292571d8210892d8ceb23c1f4a9617016528e9"
+            ],
+            "player_name": "Ty Jerome",
+            "statement": "灰熊的主控，上一场32分钟砍45分，本场要面对完全不同的防守强度，他的出球选择决定球队进攻能否延续。"
+          },
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "acbbb318ed14c6160aecc57b58292571d8210892d8ceb23c1f4a9617016528e9",
+              "d86e251a4cfa58e01d741540ca0550b4274f0cb125e68dae351cedcc088b0d8f"
+            ],
+            "player_name": "Zach Edey",
+            "statement": "灰熊内线的体型支点，篮板和篮下终结是球队咬住比分的方式，但要在场上跟上勇士的节奏。"
+          },
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "21feacd5cebd70c6d4bf3c00699266ce1dd2ca3bde49822070c3ef37de1ff2a1",
+              "acbbb318ed14c6160aecc57b58292571d8210892d8ceb23c1f4a9617016528e9",
+              "d86e251a4cfa58e01d741540ca0550b4274f0cb125e68dae351cedcc088b0d8f"
+            ],
+            "player_name": "Cameron Boozer",
+            "statement": "今年三号秀，预计首发前锋，年轻核心在客场高强度下的处理球能力是灰熊的不确定项。"
+          },
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "65eb65cb7e3c91872b6beac56b002f7c6bf23efb8e786889f6abc0655d532aa7",
+              "acbbb318ed14c6160aecc57b58292571d8210892d8ceb23c1f4a9617016528e9"
+            ],
+            "player_name": "Jaylen Wells",
+            "statement": "侧翼的投射和防守是灰熊拉开空间、限制勇士外线的重要一环，上一场他打了28分钟，拿到12分。"
+          }
+        ],
+        "pregame_story": {
+          "classification": "subjective_analysis",
+          "evidence_ids": [
+            "090076ddbc0d6ab1a89ec10717ef4c499e1359acfa0cdec6dd608033f5ea3305",
+            "21feacd5cebd70c6d4bf3c00699266ce1dd2ca3bde49822070c3ef37de1ff2a1",
+            "35ec8987bb092ad5aaaa253c8fa6600a609e3f5223be5640afff34b57c4a74a0",
+            "65eb65cb7e3c91872b6beac56b002f7c6bf23efb8e786889f6abc0655d532aa7",
+            "9952a7cc545542b9c619aba2fab1fe62c186a66a09d5bb4336bcb3924eb70dd9",
+            "bf99e8ffd49b94f3af4fbb29d6c5101a3ef0beb27dec4c16aa7a777c9536b75d"
+          ],
+          "statement": "灰熊揭幕战靠杰罗姆45分赢球，转头就要去旧金山面对库里和勇士，这场能看出那场爆发有多少分量。",
+          "title": "灰熊新阵初登门\n库里主场待后生"
+        },
+        "roster_analysis": [],
+        "subjective_rationale": "灰熊揭幕战靠杰罗姆45分赢球，转头就要去旧金山面对库里和勇士，这场能看出那场爆发有多少分量。",
+        "supporting_evidence": [],
+        "uncertainty": [],
+        "unresolved_uncertainty": [],
+        "watch_themes": [
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "090076ddbc0d6ab1a89ec10717ef4c499e1359acfa0cdec6dd608033f5ea3305",
+              "21feacd5cebd70c6d4bf3c00699266ce1dd2ca3bde49822070c3ef37de1ff2a1",
+              "35ec8987bb092ad5aaaa253c8fa6600a609e3f5223be5640afff34b57c4a74a0",
+              "65eb65cb7e3c91872b6beac56b002f7c6bf23efb8e786889f6abc0655d532aa7",
+              "9952a7cc545542b9c619aba2fab1fe62c186a66a09d5bb4336bcb3924eb70dd9",
+              "bf99e8ffd49b94f3af4fbb29d6c5101a3ef0beb27dec4c16aa7a777c9536b75d"
+            ],
+            "statement": "揭幕战45分之后，他第一次面对格林领衔的换防，出球和强攻的选择决定灰熊进攻能不能转起来。",
+            "title": "杰罗姆能不能扛住换防"
+          },
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "090076ddbc0d6ab1a89ec10717ef4c499e1359acfa0cdec6dd608033f5ea3305",
+              "21feacd5cebd70c6d4bf3c00699266ce1dd2ca3bde49822070c3ef37de1ff2a1",
+              "35ec8987bb092ad5aaaa253c8fa6600a609e3f5223be5640afff34b57c4a74a0",
+              "65eb65cb7e3c91872b6beac56b002f7c6bf23efb8e786889f6abc0655d532aa7",
+              "9952a7cc545542b9c619aba2fab1fe62c186a66a09d5bb4336bcb3924eb70dd9",
+              "bf99e8ffd49b94f3af4fbb29d6c5101a3ef0beb27dec4c16aa7a777c9536b75d"
+            ],
+            "statement": "灰熊内线篮板和篮下终结是咬住比分的抓手，勇士则要用节奏和外线把他的护框价值摊薄。",
+            "title": "伊迪的体型换不换得来分差"
+          },
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "090076ddbc0d6ab1a89ec10717ef4c499e1359acfa0cdec6dd608033f5ea3305",
+              "21feacd5cebd70c6d4bf3c00699266ce1dd2ca3bde49822070c3ef37de1ff2a1",
+              "35ec8987bb092ad5aaaa253c8fa6600a609e3f5223be5640afff34b57c4a74a0",
+              "65eb65cb7e3c91872b6beac56b002f7c6bf23efb8e786889f6abc0655d532aa7",
+              "9952a7cc545542b9c619aba2fab1fe62c186a66a09d5bb4336bcb3924eb70dd9",
+              "bf99e8ffd49b94f3af4fbb29d6c5101a3ef0beb27dec4c16aa7a777c9536b75d"
+            ],
+            "statement": "首战只打21分钟，主场第二战时间预计上升，他打多久直接决定勇士后场火力的上限。",
+            "title": "库里的负荷回到哪里"
+          }
+        ],
+        "winner_lean": "home"
+      },
+      "public_market_reference": {
+        "away_moneyline": 145.0,
+        "away_spread": 4.5,
+        "captured_at": "2026-10-23T18:03:35.485037+00:00",
+        "eligible_prediction_input": false,
+        "expected_home_margin": 4.5,
+        "game_identity": {
+          "away_team": "Memphis Grizzlies",
+          "away_team_id": 1610612763,
+          "game_id": "espn:401909850",
+          "game_type": "regular_season",
+          "home_team": "Golden State Warriors",
+          "home_team_id": 1610612744,
+          "registered_game": true,
+          "scheduled_tipoff": "2026-10-24T02:00Z"
+        },
+        "home_moneyline": -175.0,
+        "home_spread": -4.5,
+        "observed_at": "2026-10-23T18:03:35.485037+00:00",
+        "published_at": null,
+        "source_tier": 1,
+        "source_title": "Draft Kings current odds",
+        "source_url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909850/competitions/401909850/odds",
+        "sportsbook": "Draft Kings",
+        "status": "available",
+        "time_semantics": "observed current sportsbook quote; publication time unknown",
+        "total": 237.5,
+        "usage": "qualified_market_for_ai_review"
+      },
+      "published_at": "2026-10-23T18:04:09.119145+00:00",
+      "schedule_revision": 1,
+      "sources": [
+        {
+          "captured_at": "2026-10-23T18:02:23.704119+00:00",
+          "category": "lineup",
+          "claim_type": "projected_starters",
+          "discovered_via": "Memphis Grizzlies Golden State Warriors 2026-27 pregame 2026-10-23 projected confirmed starters rotation coach comments",
+          "id": "11e98c6e3293399e655dfd7561a8e19e64ac2fbb92e88b8a5aabec24ec63f904",
+          "publication_precision": "timestamp",
+          "published_at": "2026-10-23T16:00:04+00:00",
+          "source_id": "032624374b8afb7059243bbe9ed8857c9eca900a75e259a21f21c6a180fafaec",
+          "temporal_confidence": "precise_current",
+          "title": "Memphis Grizzlies-Golden State Warriors Preview: Injuries, Odds, How to Watch & Starters",
+          "url": "https://www.si.com/nba/grizzlies/onsi/memphis-grizzlies-golden-state-warriors-preview-injuries-odds-how-to-watch-starters-01m5k852pjvv",
+          "verified_by": "https://www.si.com/nba/grizzlies/onsi/memphis-grizzlies-golden-state-warriors-preview-injuries-odds-how-to-watch-starters-01m5k852pjvv"
+        },
+        {
+          "captured_at": "2026-10-23T18:02:23.704119+00:00",
+          "category": "lineup",
+          "claim_type": "projected_starters",
+          "discovered_via": "Memphis Grizzlies Golden State Warriors 2026-27 pregame 2026-10-23 projected confirmed starters rotation coach comments",
+          "id": "d86e251a4cfa58e01d741540ca0550b4274f0cb125e68dae351cedcc088b0d8f",
+          "publication_precision": "timestamp",
+          "published_at": "2026-10-23T16:00:04+00:00",
+          "source_id": "032624374b8afb7059243bbe9ed8857c9eca900a75e259a21f21c6a180fafaec",
+          "temporal_confidence": "precise_current",
+          "title": "Memphis Grizzlies-Golden State Warriors Preview: Injuries, Odds, How to Watch & Starters",
+          "url": "https://www.si.com/nba/grizzlies/onsi/memphis-grizzlies-golden-state-warriors-preview-injuries-odds-how-to-watch-starters-01m5k852pjvv",
+          "verified_by": "https://www.si.com/nba/grizzlies/onsi/memphis-grizzlies-golden-state-warriors-preview-injuries-odds-how-to-watch-starters-01m5k852pjvv"
+        },
+        {
+          "captured_at": "2026-10-23T18:02:23.704119+00:00",
+          "category": "game_story",
+          "claim_type": "season_background",
+          "discovered_via": "Memphis Grizzlies Golden State Warriors 2026-27 pregame 2026-10-23 projected confirmed starters rotation coach comments",
+          "id": "21feacd5cebd70c6d4bf3c00699266ce1dd2ca3bde49822070c3ef37de1ff2a1",
+          "publication_precision": "timestamp",
+          "published_at": "2026-10-23T16:00:04+00:00",
+          "source_id": "032624374b8afb7059243bbe9ed8857c9eca900a75e259a21f21c6a180fafaec",
+          "temporal_confidence": "sufficient_for_background",
+          "title": "Memphis Grizzlies-Golden State Warriors Preview: Injuries, Odds, How to Watch & Starters",
+          "url": "https://www.si.com/nba/grizzlies/onsi/memphis-grizzlies-golden-state-warriors-preview-injuries-odds-how-to-watch-starters-01m5k852pjvv",
+          "verified_by": "https://www.si.com/nba/grizzlies/onsi/memphis-grizzlies-golden-state-warriors-preview-injuries-odds-how-to-watch-starters-01m5k852pjvv"
+        },
+        {
+          "captured_at": "2026-10-23T18:02:23.704119+00:00",
+          "category": "game_story",
+          "claim_type": "game_news",
+          "discovered_via": "Memphis Grizzlies Golden State Warriors 2026-27 pregame 2026-10-23 projected confirmed starters rotation coach comments",
+          "id": "090076ddbc0d6ab1a89ec10717ef4c499e1359acfa0cdec6dd608033f5ea3305",
+          "publication_precision": "timestamp",
+          "published_at": "2026-10-23T16:00:04+00:00",
+          "source_id": "032624374b8afb7059243bbe9ed8857c9eca900a75e259a21f21c6a180fafaec",
+          "temporal_confidence": "precise_current",
+          "title": "Memphis Grizzlies-Golden State Warriors Preview: Injuries, Odds, How to Watch & Starters",
+          "url": "https://www.si.com/nba/grizzlies/onsi/memphis-grizzlies-golden-state-warriors-preview-injuries-odds-how-to-watch-starters-01m5k852pjvv",
+          "verified_by": "https://www.si.com/nba/grizzlies/onsi/memphis-grizzlies-golden-state-warriors-preview-injuries-odds-how-to-watch-starters-01m5k852pjvv"
+        },
+        {
+          "captured_at": "2026-10-23T18:02:23.704119+00:00",
+          "category": "game_story",
+          "claim_type": "role_background",
+          "discovered_via": "Memphis Grizzlies Golden State Warriors 2026-27 pregame 2026-10-23 projected confirmed starters rotation coach comments",
+          "id": "cfbb858dadc6f99d405fb14b4e6231c264e42231074598c49d01dc6e1ce11108",
+          "publication_precision": "timestamp",
+          "published_at": "2026-10-23T16:00:04+00:00",
+          "source_id": "032624374b8afb7059243bbe9ed8857c9eca900a75e259a21f21c6a180fafaec",
+          "temporal_confidence": "sufficient_for_background",
+          "title": "Memphis Grizzlies-Golden State Warriors Preview: Injuries, Odds, How to Watch & Starters",
+          "url": "https://www.si.com/nba/grizzlies/onsi/memphis-grizzlies-golden-state-warriors-preview-injuries-odds-how-to-watch-starters-01m5k852pjvv",
+          "verified_by": "https://www.si.com/nba/grizzlies/onsi/memphis-grizzlies-golden-state-warriors-preview-injuries-odds-how-to-watch-starters-01m5k852pjvv"
+        },
+        {
+          "captured_at": "2026-10-23T18:03:35.485037+00:00",
+          "id": "cec52b44b3f9d35eb4e28d3a512d3d762d6aa7b9864a7f5e3479cc8230b53bf1",
+          "published_at": null,
+          "sha256": "ce0831569c5541042b94ba11fa1bbad8def75d7c1c7934b2dca902b92e28caea",
+          "source_type": "qualified_market_snapshot",
+          "url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909850/competitions/401909850/odds"
+        }
+      ],
+      "stage": "EARLY_PREVIEW",
+      "version_id": "b7f3ad79-2590-48af-a2dd-0da585282af9",
+      "payload_sha256": "89a71b23b4d16802b292b6168379f8a567506780ce382b136a0ab1b8336a44af",
+      "analyst_context": {
+        "objective_evidence": [
+          {
+            "id": "11e98c6e3293399e655dfd7561a8e19e64ac2fbb92e88b8a5aabec24ec63f904",
+            "section": "web_context",
+            "value": {
+              "claim_type": "projected_starters",
+              "eligible_for_fact": true,
+              "source_role": "professional",
+              "team_id": 1610612744,
+              "temporal_scope": "current_pregame",
+              "quote": "De'Anthony Melton / Draymond Green / Gui Santos / Stephen Curry / Yaxel Lendeborg"
+            }
+          },
+          {
+            "id": "d86e251a4cfa58e01d741540ca0550b4274f0cb125e68dae351cedcc088b0d8f",
+            "section": "web_context",
+            "value": {
+              "claim_type": "projected_starters",
+              "eligible_for_fact": true,
+              "source_role": "professional",
+              "team_id": 1610612763,
+              "temporal_scope": "current_pregame",
+              "quote": "Cameron Boozer / Cedric Coward / Jaylen Wells / Ty Jerome / Zach Edey"
+            }
+          },
+          {
+            "id": "21feacd5cebd70c6d4bf3c00699266ce1dd2ca3bde49822070c3ef37de1ff2a1",
+            "section": "web_context",
+            "value": {
+              "claim_type": "season_background",
+              "eligible_for_fact": true,
+              "source_role": "professional",
+              "team_id": 1610612763,
+              "temporal_scope": "current_season_background",
+              "quote": "Cameron Boozer / Cedric Coward / Jaylen Wells / Ty Jerome / Zach Edey"
+            }
+          },
+          {
+            "id": "090076ddbc0d6ab1a89ec10717ef4c499e1359acfa0cdec6dd608033f5ea3305",
+            "section": "web_context",
+            "value": {
+              "claim_type": "game_news",
+              "eligible_for_fact": true,
+              "source_role": "professional",
+              "team_id": 1610612763,
+              "temporal_scope": "current_pregame",
+              "quote": "Ty Jerome"
+            }
+          },
+          {
+            "id": "cfbb858dadc6f99d405fb14b4e6231c264e42231074598c49d01dc6e1ce11108",
+            "section": "web_context",
+            "value": {
+              "claim_type": "role_background",
+              "eligible_for_fact": true,
+              "source_role": "professional",
+              "team_id": 1610612744,
+              "temporal_scope": "current_season_background",
+              "quote": "Yaxel Lendeborg"
+            }
+          },
+          {
+            "id": "cec52b44b3f9d35eb4e28d3a512d3d762d6aa7b9864a7f5e3479cc8230b53bf1",
+            "section": "web_context",
+            "value": {
+              "claim_type": "market_reference",
+              "eligible_for_fact": true,
+              "quote": ""
+            }
+          }
+        ]
+      }
+    },
+    "public_contract": "courtvision-public-v1"
+  },
+  "postgame": {
+    "status": "unavailable",
+    "postgame": null
+  },
+  "market": {
+    "status": "available",
+    "game_id": "espn:401909850",
+    "public_market_reference": {
+      "away_moneyline": 145.0,
+      "away_spread": 4.5,
+      "captured_at": "2026-10-23T18:03:35.485037+00:00",
+      "eligible_prediction_input": false,
+      "expected_home_margin": 4.5,
+      "game_identity": {
+        "away_team_id": 1610612763,
+        "game_id": "espn:401909850",
+        "home_team_id": 1610612744,
+        "scheduled_tipoff": "2026-10-24T02:00:00+00:00"
+      },
+      "home_moneyline": -175.0,
+      "home_spread": -4.5,
+      "observed_at": "2026-10-23T18:03:35.485037+00:00",
+      "published_at": null,
+      "recorded_at": "2026-10-23T18:03:35.869894+00:00",
+      "reference_kind": "current_reference",
+      "snapshot_id": "3d8719e5cd936bc225511118d0182f9edc627f0d1114749bb80dfa83baf756d3",
+      "source_tier": 1,
+      "source_title": "Draft Kings current odds",
+      "source_url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909850/competitions/401909850/odds",
+      "sportsbook": "Draft Kings",
+      "status": "available",
+      "time_semantics": "observed current sportsbook quote; publication time unknown",
+      "total": 237.5,
+      "usage": "display_only_market_reference"
+    },
+    "refreshing": false,
+    "lookup": {
+      "source": "independent_market_reference_cache"
+    }
+  },
+  "publication": {
+    "exported_at": "2026-10-23T18:04:17.634608+00:00",
+    "source_prediction_version_id": "b7f3ad79-2590-48af-a2dd-0da585282af9",
+    "source_prediction_payload_sha256": "89a71b23b4d16802b292b6168379f8a567506780ce382b136a0ab1b8336a44af",
+    "mode": "saved-read-only-projection"
+  },
+  "public_sha256": "d103d8ca2270d22d7985137cdf8df805447fcaa4e3640da78da8f41b64b0760a"
+}
