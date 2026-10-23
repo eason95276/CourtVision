@@ -2,6 +2,129 @@
   "contract_version": "courtvision-public-v1",
   "games": [
     {
+      "game_id": "espn:401909095",
+      "file": "games/espn_401909095.json",
+      "tipoff": "2026-10-23T23:00:00+00:00",
+      "version_id": "545ae163-2115-4253-a605-044a68ed83d9",
+      "public_sha256": "82f42886f626f44de95f13e5146670792cb8dca2cd43a32ad4453c0be8ad6a2f",
+      "home_record": {
+        "game": {
+          "away": {
+            "abbreviation": "NY",
+            "accent": "#F58426",
+            "espn_team_id": "18",
+            "id": 1610612752,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png",
+            "name": "New York Knicks",
+            "name_zh": "尼克斯",
+            "score": null
+          },
+          "game_type": "regular_season",
+          "home": {
+            "abbreviation": "BOS",
+            "accent": "#007A33",
+            "espn_team_id": "2",
+            "id": 1610612738,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/bos.png",
+            "name": "Boston Celtics",
+            "name_zh": "凯尔特人",
+            "score": null
+          },
+          "id": "espn:401909095",
+          "registered_game": true,
+          "schedule_revision": 1,
+          "season": 2027,
+          "status": "scheduled",
+          "tipoff": "2026-10-23T23:00:00+00:00",
+          "venue": "TD Garden",
+          "schedule_catalog_fact": true,
+          "postgame": null,
+          "homepage_visible": true,
+          "public_summary": true
+        },
+        "prediction": {
+          "status": "current",
+          "game_id": "espn:401909095",
+          "version_id": "545ae163-2115-4253-a605-044a68ed83d9",
+          "state_revision": 2,
+          "locked_at": null,
+          "lock_reason": null,
+          "schedule_revision": 1,
+          "version": {
+            "analysis_contract_version": "two-stage-forecast-v1",
+            "base_input_hash": "89301f280d77a3e8c16b90995c7168a10450dec8d4fd410552ffbe64468b3da7",
+            "game_id": "espn:401909095",
+            "game_identity": {
+              "away_team_id": 1610612752,
+              "game_id": "espn:401909095",
+              "home_team_id": 1610612738,
+              "scheduled_tipoff": "2026-10-23T23:00:00+00:00"
+            },
+            "generated_at": "2026-10-23T14:46:55.855858+00:00",
+            "input_cutoff_at": "2026-10-23T14:46:28.478933+00:00",
+            "published_at": "2026-10-23T14:47:00.331363+00:00",
+            "schedule_revision": 1,
+            "stage": "EARLY_PREVIEW",
+            "version_id": "545ae163-2115-4253-a605-044a68ed83d9",
+            "payload_sha256": "94bfcfd8c49d2986bdab95e3a68a09a6be69a4f1f11e1df026afecf423a1154a",
+            "input_snapshot": {
+              "away": {
+                "abbreviation": "NY",
+                "accent": "#F58426",
+                "espn_team_id": "18",
+                "id": 1610612752,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png",
+                "name": "New York Knicks",
+                "name_zh": "尼克斯"
+              },
+              "home": {
+                "abbreviation": "BOS",
+                "accent": "#007A33",
+                "espn_team_id": "2",
+                "id": 1610612738,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/bos.png",
+                "name": "Boston Celtics",
+                "name_zh": "凯尔特人"
+              },
+              "id": "espn:401909095",
+              "schedule_revision": 1,
+              "tipoff": "2026-10-23T23:00:00+00:00"
+            },
+            "judgment": {
+              "final_prediction": {
+                "evidence_ids": [
+                  "3eabfaa05a4fdfbdfc82ad871a674083712ff62f71b20cab3b7aec0b2439b6ed",
+                  "8c74bffd1d3ca0f38cb6fad9d7f8662581eb746d1d36de0a75022b4787f82dc8",
+                  "b60747aa58b3fb6b392bb6a1a56b4e4b94b2d9835e83ede2c0070bd344fe7cf3",
+                  "d55422523e980f217bc138209cb471d8418a965b749ff0d823b7b08e8e8b21c3",
+                  "e1a15102841fb3885ac426bea45b958ee709ce6883ddcdc82c4c0eeecbb9e70d",
+                  "ecb24ad11b76ef60610b5ec8bb572da120edd28e4f0aec7579d4b6ebf0bd9c2c",
+                  "f6b04560b7efee939b09d86d60385adacc935998d69034591737ac1cd928deea"
+                ],
+                "expected_margin": 2.5,
+                "expected_total": 220.5,
+                "win_probability": 0.56,
+                "winner_side": "away"
+              },
+              "pregame_story": {
+                "classification": "subjective_analysis",
+                "evidence_ids": [
+                  "3eabfaa05a4fdfbdfc82ad871a674083712ff62f71b20cab3b7aec0b2439b6ed",
+                  "8c74bffd1d3ca0f38cb6fad9d7f8662581eb746d1d36de0a75022b4787f82dc8",
+                  "b60747aa58b3fb6b392bb6a1a56b4e4b94b2d9835e83ede2c0070bd344fe7cf3",
+                  "d55422523e980f217bc138209cb471d8418a965b749ff0d823b7b08e8e8b21c3",
+                  "e1a15102841fb3885ac426bea45b958ee709ce6883ddcdc82c4c0eeecbb9e70d",
+                  "ecb24ad11b76ef60610b5ec8bb572da120edd28e4f0aec7579d4b6ebf0bd9c2c"
+                ],
+                "statement": "凯尔特人刚在底特律输掉重组后的首战，卫冕冠军尼克斯也刚在主场栽给76人，两支都还没赢球的球队在TD花园碰头，看点全在乔治和塔图姆这对新搭档能不能顶住纽约的侧翼铁闸。",
+                "title": "绿军新阵迎旧敌\n纽约冠军再登门"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
       "game_id": "espn:401909094",
       "file": "games/espn_401909094.json",
       "tipoff": "2026-10-23T01:30:00+00:00",
@@ -2039,5 +2162,5 @@
       }
     }
   ],
-  "published_at": "2026-10-23T14:42:07.933019+00:00"
+  "published_at": "2026-10-23T14:49:32.548298+00:00"
 }
