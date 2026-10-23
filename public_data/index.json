@@ -127,7 +127,7 @@
       "file": "games/espn_401909093.json",
       "tipoff": "2026-10-22T23:00:00+00:00",
       "version_id": "a63c8cdd-3b77-4ac3-a853-8cf3cc5e01e8",
-      "public_sha256": "965a8a3ac54b6954787640b20362ba37aa61860eb6e432650edd088f5f79dab3",
+      "public_sha256": "b230663f36dbbcab06fb3b760e25cdf673985b3d8a3d661c1049b5f8ce761ad0",
       "home_record": {
         "game": {
           "away": {
@@ -138,7 +138,7 @@
             "name": "Cleveland Cavaliers",
             "name_zh": "骑士",
             "espn_team_id": "5",
-            "score": null
+            "score": 106.0
           },
           "game_type": "regular_season",
           "home": {
@@ -149,27 +149,34 @@
             "name": "Philadelphia 76ers",
             "name_zh": "76人",
             "espn_team_id": "20",
-            "score": null
+            "score": 114.0
           },
           "id": "espn:401909093",
           "registered_game": true,
           "schedule_revision": 1,
-          "status": "scheduled",
+          "status": "final",
           "tipoff": "2026-10-22T23:00:00+00:00",
           "venue": "Xfinity Mobile Arena",
+          "postgame": {
+            "status": "editorial_unavailable",
+            "version_id": "e4ab8240-481e-4ff0-8ec2-80c4bdcffaf3",
+            "score_text": "骑士 106 — 114 76人",
+            "summary": "赛果数据已同步，完整复盘文章暂不可用。",
+            "prediction_summary": "赛前看好骑士 · 胜率55% · 预计赢2分；赛果76人赢8分",
+            "market_summary": "让分方向 骑士 +2.5 · 未命中；总分 小分 · 命中"
+          },
           "season": 2027,
           "schedule_catalog_fact": true,
-          "postgame": null,
           "homepage_visible": true,
           "public_summary": true
         },
         "prediction": {
-          "status": "current",
+          "status": "locked",
           "game_id": "espn:401909093",
           "version_id": "a63c8cdd-3b77-4ac3-a853-8cf3cc5e01e8",
-          "state_revision": 2,
-          "locked_at": null,
-          "lock_reason": null,
+          "state_revision": 4,
+          "locked_at": "2026-10-22T23:00:23.966004+00:00",
+          "lock_reason": "scheduled_tipoff_reached",
           "schedule_revision": 1,
           "version": {
             "analysis_contract_version": "two-stage-forecast-v1",
@@ -232,6 +239,29 @@
                 ],
                 "statement": "费城一口气换了大半套阵容，主场揭幕就撞上保留核心、又添了哈登的骑士，磨合和延续性谁先说话，这场就能看出点眉目。",
                 "title": "费城新阵迎旧敌\n骑士双塔试深浅"
+              }
+            }
+          },
+          "display_projection": {
+            "portfolio_editorial": {
+              "schema_version": "portfolio-editorial-v1",
+              "base_prediction_version_id": "a63c8cdd-3b77-4ac3-a853-8cf3cc5e01e8",
+              "base_prediction_payload_sha256": "12cc41f5313328a541bc816092ee4779977c3f3e0347e66e716941f296ef2764",
+              "editorial_sha256": "461998a1be25ba2a536a59238e498aa3c35b0e1ea42bd64369858386d0e8d115",
+              "generated_at": "2026-10-23T13:24:33.789465+00:00",
+              "editorial": {
+                "pregame_story": {
+                  "classification": "subjective_analysis",
+                  "evidence_ids": [
+                    "6645163ca1ba29da18eaebc412e4cfa6bd58e83bcd4b069e8698d770e4633e68",
+                    "90a7006897bbfacfd26441683ae713da0db99f62f64adb8e2408d6323582d1e6",
+                    "97803ebd514486dade04838c67ae48cf8a0e83a9948fdf10e0f85bc050423770",
+                    "fabdddfb410f2ecc3232a217de3650352e7c27a0504ff98257834b59ec04b89c"
+                  ],
+                  "statement": "76人上一场在尼克斯主场106比100击败卫冕冠军，今天迎上骑士双塔，上一场跑通的轮换还要面对新的防守选择。",
+                  "title": "费城客胜迎双塔\n骑士来访试新阵"
+                },
+                "analysis_article": "内容更正：原预览将本场误写成76人的揭幕战，遗漏此前客场106比100战胜尼克斯的结果。以下保留原赛前预测供复盘。\n\n费城这个休赛期动得太大，詹姆斯、布朗一起进来，等于把一支球队的进攻重心重新排了一遍。第二场常规赛迎上骑士——米切尔、莫布利、阿伦、泰森这套人还在，又添了哈登。费城的主要轮换已经在正式比赛里共同赢过球，骑士这次的篮下防守会提出新问题，这场球最有意思的地方就在这里。\n\n我最想看的是费城的球怎么分。马克西持球，詹姆斯和布朗都能接球再发起，恩比德在内线要位，纸面上谁都能打。可球只有一个，谁先拿、谁做第二传、谁在弱侧等，上一场胜利说明这套人已经能一起运转，面对骑士双塔的协防能否继续顺畅出球，还得看这场。骑士恰恰是那种不怕你单打的队，莫布利和阿伦守在篮下，逼你把球往外送。\n\n所以我更看好骑士，骑士受让2.5分也站客队这边。\n\n理由不在天赋，在连续性。米切尔和哈登两个持球点，一个能自己冲，一个能把球送到该到的位置，骑士有两名持球发起点，但新后场配合仍要经本场检验。费城这边，恩比德和詹姆斯的出场时间都还没有确认，即便打，负荷也未必拉满；一旦其中一人下场，费城的进攻组织就要重新分配，而骑士的双塔正好趁这个空档把篮板和禁区守住。\n\n费城当然有还手的路。恩比德在低位要到球，骑士就得决定包不包；一包，外线就空出机会，马克西和布朗都能冲进去。如果费城能把这个选择反复做出来，骑士的双塔也会被拉得难受。费城上一场证明了基本轮换可用；本场问题是这套组织面对双塔时能否找到同样的出口。\n\n总分我偏小，但把握没有让分那么足。骑士有哈登和米切尔，推起来能很快；费城若靠恩比德打半场，回合数就会被压下来。真正决定大小分的，是费城愿不愿意耐着性子往里打——如果他们急着用新援的个人能力解决问题，比赛反而可能被拉快。\n\n开球后先看一件事：费城的第一波进攻，球是从谁手里发起的。这个细节比任何赛前说法都更能说明他们磨合到了哪一步。"
               }
             }
           }
@@ -2002,5 +2032,5 @@
       }
     }
   ],
-  "published_at": "2026-10-22T18:48:19.543254+00:00"
+  "published_at": "2026-10-23T13:25:00.553190+00:00"
 }
