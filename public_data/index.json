@@ -616,8 +616,8 @@
       "game_id": "espn:401909845",
       "file": "games/espn_401909845.json",
       "tipoff": "2026-10-23T23:00:00+00:00",
-      "version_id": "f11be2b7-e078-4290-b122-8d1715136195",
-      "public_sha256": "b93dbe9ce3ac14a2c80eae4b09606216f9d28cd01fad88f7781be52b90313fe3",
+      "version_id": "baf189b7-589c-44ca-902b-655f006b1a8d",
+      "public_sha256": "5dc2aa82dc498d3661549693536e8055374fab6839172d09cb3cb70457a53076",
       "home_record": {
         "game": {
           "away": {
@@ -656,14 +656,14 @@
         "prediction": {
           "status": "current",
           "game_id": "espn:401909845",
-          "version_id": "f11be2b7-e078-4290-b122-8d1715136195",
-          "state_revision": 2,
+          "version_id": "baf189b7-589c-44ca-902b-655f006b1a8d",
+          "state_revision": 3,
           "locked_at": null,
           "lock_reason": null,
           "schedule_revision": 1,
           "version": {
             "analysis_contract_version": "two-stage-forecast-v1",
-            "base_input_hash": "b5b8c9e227063ea7bb74584908266d1e04bfd6c3d9493ef707b1a9993d1cc8f8",
+            "base_input_hash": "763f0edcd39e71464d8aba0d726f44d40bb82ef0468b52bd5e316662cd6036b7",
             "game_id": "espn:401909845",
             "game_identity": {
               "away_team_id": 1610612750,
@@ -671,13 +671,13 @@
               "home_team_id": 1610612753,
               "scheduled_tipoff": "2026-10-23T23:00:00+00:00"
             },
-            "generated_at": "2026-10-23T17:20:30.912462+00:00",
-            "input_cutoff_at": "2026-10-23T17:20:12.732849+00:00",
-            "published_at": "2026-10-23T17:20:35.423270+00:00",
+            "generated_at": "2026-10-23T22:41:23.662251+00:00",
+            "input_cutoff_at": "2026-10-23T22:40:41.826972+00:00",
+            "published_at": "2026-10-23T22:41:28.360716+00:00",
             "schedule_revision": 1,
-            "stage": "EARLY_PREVIEW",
-            "version_id": "f11be2b7-e078-4290-b122-8d1715136195",
-            "payload_sha256": "aecda6632dc4411504b3cc7d0d144e84cd2b59a2cbb2a76b71aebb76542bc110",
+            "stage": "FINAL_PREGAME",
+            "version_id": "baf189b7-589c-44ca-902b-655f006b1a8d",
+            "payload_sha256": "26af7f4be03a0c8e1a3d5d1104ecb9439f2bef41a590e6833c2ddffe10d36ba3",
             "input_snapshot": {
               "away": {
                 "abbreviation": "MIN",
@@ -706,16 +706,17 @@
                 "evidence_ids": [
                   "206572ca459790174a8d61c8bb51c316133a141926725784ec5d591070058508",
                   "57b06a5523b498579abb50b3c3954894784baeb3889bcb8abbdcd9efe4653e0b",
-                  "6048d0bf8b7d2da7016f370a450eede8933da63eea2225acad10fc7937bdf15b",
-                  "8179eb29085bde7871bd9c85f00dceae41bf4751c695761723402c2478c93598",
-                  "8eba0889b25352f1d34317fa5c76296639774589cc4c29b4debb5d42af7acd63",
                   "b0d4772804ac1c01f20ae67df3cea979cd860c0d8b8a2f08a56e045e4e844a0e",
-                  "bf2da53020cff9a48ea557be9101ebb73d63bcae68ece839a9a150fb59e9a1e8",
-                  "c687aa17996286ba08bc66cdf4c1e9638e1e2493212e56ed758f71cef7ead7c4"
+                  "final-availability-00b95d1c25a6f8a31e92",
+                  "final-availability-16cac34a349f78a00649",
+                  "final-availability-1a6678537d6ab67f56e0",
+                  "final-availability-4280ab8d24dba0bfec54",
+                  "final-availability-4e48b59dc2a26de0b71c",
+                  "final-lineup-ac64f84523a797614684"
                 ],
                 "expected_margin": 2.0,
                 "expected_total": 231.5,
-                "win_probability": 0.56,
+                "win_probability": 0.55,
                 "winner_side": "home"
               },
               "pregame_story": {
@@ -723,13 +724,13 @@
                 "evidence_ids": [
                   "206572ca459790174a8d61c8bb51c316133a141926725784ec5d591070058508",
                   "57b06a5523b498579abb50b3c3954894784baeb3889bcb8abbdcd9efe4653e0b",
-                  "6048d0bf8b7d2da7016f370a450eede8933da63eea2225acad10fc7937bdf15b",
-                  "8179eb29085bde7871bd9c85f00dceae41bf4751c695761723402c2478c93598",
-                  "8eba0889b25352f1d34317fa5c76296639774589cc4c29b4debb5d42af7acd63",
-                  "b0d4772804ac1c01f20ae67df3cea979cd860c0d8b8a2f08a56e045e4e844a0e"
+                  "b0d4772804ac1c01f20ae67df3cea979cd860c0d8b8a2f08a56e045e4e844a0e",
+                  "final-availability-00b95d1c25a6f8a31e92",
+                  "final-availability-16cac34a349f78a00649",
+                  "final-availability-1a6678537d6ab67f56e0"
                 ],
-                "statement": "森林狼带着爱德华兹揭幕战45分的手感做客奥兰多，魔术则刚在主场输给老鹰，这场要看的是明尼苏达的新双核能不能压过魔术更厚的前场。",
-                "title": "爱德华兹火焰高\n魔术主场迎狼群"
+                "statement": "魔术揭幕战主场输给老鹰，森林狼则靠爱德华兹45分客场拿下热火，两支首战一胜一负的球队在奥兰多碰头，看谁先补上自己的窟窿。",
+                "title": "魔术主场迎狼群\n爱德华兹再试锋"
               }
             }
           }
@@ -2897,5 +2898,5 @@
       }
     }
   ],
-  "published_at": "2026-10-23T19:41:01.092846+00:00"
+  "published_at": "2026-10-23T22:41:43.105713+00:00"
 }
