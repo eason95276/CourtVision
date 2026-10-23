@@ -125,6 +125,128 @@
       }
     },
     {
+      "game_id": "espn:401909843",
+      "file": "games/espn_401909843.json",
+      "tipoff": "2026-10-23T23:00:00+00:00",
+      "version_id": "cb8215eb-e6ee-4f7a-b24b-d41d6c6a4ea0",
+      "public_sha256": "9558abce0bc079b08bb6b918c6b7ed3190308519f8afe29b1c0e770339dfd713",
+      "home_record": {
+        "game": {
+          "away": {
+            "abbreviation": "ATL",
+            "accent": "#E03A3E",
+            "espn_team_id": "1",
+            "id": 1610612737,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/atl.png",
+            "name": "Atlanta Hawks",
+            "name_zh": "老鹰",
+            "score": null
+          },
+          "game_type": "regular_season",
+          "home": {
+            "abbreviation": "CHA",
+            "accent": "#1D1160",
+            "espn_team_id": "30",
+            "id": 1610612766,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/cha.png",
+            "name": "Charlotte Hornets",
+            "name_zh": "黄蜂",
+            "score": null
+          },
+          "id": "espn:401909843",
+          "registered_game": true,
+          "schedule_revision": 1,
+          "season": 2027,
+          "status": "scheduled",
+          "tipoff": "2026-10-23T23:00:00+00:00",
+          "venue": "Spectrum Center",
+          "schedule_catalog_fact": true,
+          "postgame": null,
+          "homepage_visible": true,
+          "public_summary": true
+        },
+        "prediction": {
+          "status": "current",
+          "game_id": "espn:401909843",
+          "version_id": "cb8215eb-e6ee-4f7a-b24b-d41d6c6a4ea0",
+          "state_revision": 2,
+          "locked_at": null,
+          "lock_reason": null,
+          "schedule_revision": 1,
+          "version": {
+            "analysis_contract_version": "two-stage-forecast-v1",
+            "base_input_hash": "20a4c9aaca3ef21fb5960a147be058831879c6c672af1684b9a56e93a11d903f",
+            "game_id": "espn:401909843",
+            "game_identity": {
+              "away_team_id": 1610612737,
+              "game_id": "espn:401909843",
+              "home_team_id": 1610612766,
+              "scheduled_tipoff": "2026-10-23T23:00:00+00:00"
+            },
+            "generated_at": "2026-10-23T17:12:30.540466+00:00",
+            "input_cutoff_at": "2026-10-23T17:12:09.377454+00:00",
+            "published_at": "2026-10-23T17:12:34.365718+00:00",
+            "schedule_revision": 1,
+            "stage": "EARLY_PREVIEW",
+            "version_id": "cb8215eb-e6ee-4f7a-b24b-d41d6c6a4ea0",
+            "payload_sha256": "0685469d8ff9195a8dc1b9ecd18975275bfb0c8dfec3dc87d3290f8559f946c1",
+            "input_snapshot": {
+              "away": {
+                "abbreviation": "ATL",
+                "accent": "#E03A3E",
+                "espn_team_id": "1",
+                "id": 1610612737,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/atl.png",
+                "name": "Atlanta Hawks",
+                "name_zh": "老鹰"
+              },
+              "home": {
+                "abbreviation": "CHA",
+                "accent": "#1D1160",
+                "espn_team_id": "30",
+                "id": 1610612766,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/cha.png",
+                "name": "Charlotte Hornets",
+                "name_zh": "黄蜂"
+              },
+              "id": "espn:401909843",
+              "schedule_revision": 1,
+              "tipoff": "2026-10-23T23:00:00+00:00"
+            },
+            "judgment": {
+              "final_prediction": {
+                "evidence_ids": [
+                  "0fd8dd59429a819a9bbbb33ace932e12c6e62804202fea682fec05fb3f5108c3",
+                  "3b5fae6c4b7f048dc562259e887d05b718f88668ae1522471fd8ee9c115233b2",
+                  "df2e7c5a9c3fe8b01b44514d5a9342685fd9189857b88629d5cfcb493416ef79",
+                  "e6fa2c487e236ef98184373f0c79c8689094bd6ab745ff38729ad827ae14ca83",
+                  "ea623e753b053e69ea2846787cae8c145754ed4b55bf3f8c6669a5693c7d9feb",
+                  "fb84a8b31ae2c9e5dd33574610a5c63cd658ea31cb46c5d1f2fd6ed479fb71be"
+                ],
+                "expected_margin": 2.0,
+                "expected_total": 228.5,
+                "win_probability": 0.56,
+                "winner_side": "away"
+              },
+              "pregame_story": {
+                "classification": "subjective_analysis",
+                "evidence_ids": [
+                  "0fd8dd59429a819a9bbbb33ace932e12c6e62804202fea682fec05fb3f5108c3",
+                  "3b5fae6c4b7f048dc562259e887d05b718f88668ae1522471fd8ee9c115233b2",
+                  "df2e7c5a9c3fe8b01b44514d5a9342685fd9189857b88629d5cfcb493416ef79",
+                  "e6fa2c487e236ef98184373f0c79c8689094bd6ab745ff38729ad827ae14ca83",
+                  "ea623e753b053e69ea2846787cae8c145754ed4b55bf3f8c6669a5693c7d9feb",
+                  "fb84a8b31ae2c9e5dd33574610a5c63cd658ea31cb46c5d1f2fd6ed479fb71be"
+                ],
+                "statement": "两队揭幕战都赢了，但老鹰赢球的方式更让人放心，黄蜂那场控球上的起伏则留了个问号。",
+                "title": "老鹰客场再展翅\n黄蜂主场试稳手"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
       "game_id": "espn:401909094",
       "file": "games/espn_401909094.json",
       "tipoff": "2026-10-23T01:30:00+00:00",
@@ -2162,5 +2284,5 @@
       }
     }
   ],
-  "published_at": "2026-10-23T14:49:32.548298+00:00"
+  "published_at": "2026-10-23T17:12:45.419350+00:00"
 }
