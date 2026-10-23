@@ -247,6 +247,124 @@
       }
     },
     {
+      "game_id": "espn:401909848",
+      "file": "games/espn_401909848.json",
+      "tipoff": "2026-10-23T20:00:00+00:00",
+      "version_id": "d6321aa1-22fb-476f-94e3-be14ecca11c7",
+      "public_sha256": "81c12c252275d0eafce7d0a5a1e1e7bcbec6e6e0707dfd5a2790b1e56eb328b0",
+      "home_record": {
+        "game": {
+          "away": {
+            "abbreviation": "CHI",
+            "accent": "#CE1141",
+            "espn_team_id": "4",
+            "id": 1610612741,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/chi.png",
+            "name": "Chicago Bulls",
+            "name_zh": "公牛",
+            "score": null
+          },
+          "game_type": "regular_season",
+          "home": {
+            "abbreviation": "MIL",
+            "accent": "#00471B",
+            "espn_team_id": "15",
+            "id": 1610612749,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/mil.png",
+            "name": "Milwaukee Bucks",
+            "name_zh": "雄鹿",
+            "score": null
+          },
+          "id": "espn:401909848",
+          "registered_game": true,
+          "schedule_revision": 1,
+          "season": 2027,
+          "status": "scheduled",
+          "tipoff": "2026-10-23T20:00:00+00:00",
+          "venue": "Fiserv Forum",
+          "schedule_catalog_fact": true,
+          "postgame": null,
+          "homepage_visible": true,
+          "public_summary": true
+        },
+        "prediction": {
+          "status": "current",
+          "game_id": "espn:401909848",
+          "version_id": "d6321aa1-22fb-476f-94e3-be14ecca11c7",
+          "state_revision": 2,
+          "locked_at": null,
+          "lock_reason": null,
+          "schedule_revision": 1,
+          "version": {
+            "analysis_contract_version": "two-stage-forecast-v1",
+            "base_input_hash": "c5b7ad320c08c375475584c833c8191cefd540958f8b6cf088a1bcc19a261489",
+            "game_id": "espn:401909848",
+            "game_identity": {
+              "away_team_id": 1610612741,
+              "game_id": "espn:401909848",
+              "home_team_id": 1610612749,
+              "scheduled_tipoff": "2026-10-23T20:00:00+00:00"
+            },
+            "generated_at": "2026-10-23T17:16:00.694149+00:00",
+            "input_cutoff_at": "2026-10-23T17:15:46.894443+00:00",
+            "published_at": "2026-10-23T17:16:03.761056+00:00",
+            "schedule_revision": 1,
+            "stage": "EARLY_PREVIEW",
+            "version_id": "d6321aa1-22fb-476f-94e3-be14ecca11c7",
+            "payload_sha256": "9722ec131fa5117760ada2ba6456304846eb2f43e10ef23866132aadf270cf93",
+            "input_snapshot": {
+              "away": {
+                "abbreviation": "CHI",
+                "accent": "#CE1141",
+                "espn_team_id": "4",
+                "id": 1610612741,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/chi.png",
+                "name": "Chicago Bulls",
+                "name_zh": "公牛"
+              },
+              "home": {
+                "abbreviation": "MIL",
+                "accent": "#00471B",
+                "espn_team_id": "15",
+                "id": 1610612749,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/mil.png",
+                "name": "Milwaukee Bucks",
+                "name_zh": "雄鹿"
+              },
+              "id": "espn:401909848",
+              "schedule_revision": 1,
+              "tipoff": "2026-10-23T20:00:00+00:00"
+            },
+            "judgment": {
+              "final_prediction": {
+                "evidence_ids": [
+                  "1a782667301145b0d9930c2e40dbebbedd8315f0a79136c1a7dce9f27d0abfd8",
+                  "46220bf9dbc2093c1c1930ccbeceb1cfa81073e590e1a892e339390a4b36501c",
+                  "88c8ee39572203e88b620a00ffa3b5027e283ccf26a4eeb6f0e581e47aa555f5",
+                  "940312866e3317c518607ce9d4d3cef886a70ba980af7998f044b67463045e11"
+                ],
+                "expected_margin": 3.5,
+                "expected_total": 236.5,
+                "win_probability": 0.56,
+                "winner_side": "home"
+              },
+              "pregame_story": {
+                "classification": "subjective_analysis",
+                "evidence_ids": [
+                  "1a782667301145b0d9930c2e40dbebbedd8315f0a79136c1a7dce9f27d0abfd8",
+                  "46220bf9dbc2093c1c1930ccbeceb1cfa81073e590e1a892e339390a4b36501c",
+                  "88c8ee39572203e88b620a00ffa3b5027e283ccf26a4eeb6f0e581e47aa555f5",
+                  "940312866e3317c518607ce9d4d3cef886a70ba980af7998f044b67463045e11"
+                ],
+                "statement": "两队揭幕战都输了，公牛输得更难看，雄鹿回到主场，看谁先把防守漏洞补上。",
+                "title": "雄鹿主场迎新阵\n公牛残阵待止血"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
       "game_id": "espn:401909094",
       "file": "games/espn_401909094.json",
       "tipoff": "2026-10-23T01:30:00+00:00",
@@ -2284,5 +2402,5 @@
       }
     }
   ],
-  "published_at": "2026-10-23T17:12:45.419350+00:00"
+  "published_at": "2026-10-23T17:16:11.541048+00:00"
 }
