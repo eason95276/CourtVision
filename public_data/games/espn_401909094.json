@@ -9,7 +9,7 @@
       "name": "Denver Nuggets",
       "name_zh": "掘金",
       "espn_team_id": "7",
-      "score": null
+      "score": 84.0
     },
     "background": {
       "availability": {
@@ -75,7 +75,7 @@
       "name": "Oklahoma City Thunder",
       "name_zh": "雷霆",
       "espn_team_id": "25",
-      "score": null
+      "score": 96.0
     },
     "id": "espn:401909094",
     "matchup_history": {
@@ -919,9 +919,9 @@
     },
     "season_start": 2026,
     "source": {
-      "schedule_captured_at": "2026-10-22T18:45:44.852552+00:00"
+      "schedule_captured_at": "2026-10-23T14:39:35.663222+00:00"
     },
-    "status": "scheduled",
+    "status": "final",
     "technical": {
       "cutoff": "2026-10-22T18:40:20.832473+00:00",
       "fact_context_cutoff": "2026-10-22T18:40:20.832473+00:00",
@@ -929,6 +929,14 @@
     },
     "tipoff": "2026-10-23T01:30:00+00:00",
     "venue": "Paycom Center",
+    "postgame": {
+      "status": "available",
+      "version_id": "708171c8-5471-42e9-b6e1-d29918952be9",
+      "score_text": "掘金 84 — 96 雷霆",
+      "summary": "雷霆靠防守执行力和下半场更坚决的攻框完成逆转，掘金双核同时失准，赛前看好雷霆赢球的方向成立。",
+      "prediction_summary": "赛前看好雷霆 · 胜率66% · 预计赢4.5分；赛果雷霆赢12分",
+      "market_summary": null
+    },
     "season": 2027,
     "schedule_catalog_fact": true,
     "nba_game_id": null,
@@ -1116,15 +1124,15 @@
     },
     "official_injury_report": {
       "game_id": "espn:401909094",
-      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_11_45PM.pdf",
-      "source_published_at": "2026-10-22T03:45:00+00:00",
-      "captured_at": "2026-10-22T03:50:49.806570+00:00",
-      "source_sha256": "83367920095e1744fb5e222941b3697c969613e90c8ff8214b9a5f81135c7425",
+      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-22_09_30PM.pdf",
+      "source_published_at": "2026-10-23T01:30:00+00:00",
+      "captured_at": "2026-10-23T01:36:02.569279+00:00",
+      "source_sha256": "2a9d5c842eb9e8613bb6a113d985852521375f3b7b2718a9395bad1f7a23f56a",
       "parser_version": "nba-official-injury-live-v3",
       "status": "published",
-      "report_id": "f92b28ea82f7441b2480dea0cac581dfa39da6c09472f80eb9e4cc49470c60c7",
-      "report_date": "2026-10-21",
-      "report_time": "23:45",
+      "report_id": "47b7e0835f93cd9c9735038e0416627e16820d96ce8066a18c6be2920ffbbbbe",
+      "report_date": "2026-10-22",
+      "report_time": "21:30",
       "coverage": "complete",
       "records": [
         {
@@ -1133,22 +1141,22 @@
           "status": "out",
           "reason": "Injury/Illness - Left Knee Sprain",
           "game_id": "espn:401909094",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_11_45PM.pdf",
-          "source_published_at": "2026-10-22T03:45:00+00:00",
-          "captured_at": "2026-10-22T03:50:49.806570+00:00",
-          "source_sha256": "83367920095e1744fb5e222941b3697c969613e90c8ff8214b9a5f81135c7425",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-22_09_30PM.pdf",
+          "source_published_at": "2026-10-23T01:30:00+00:00",
+          "captured_at": "2026-10-23T01:36:02.569279+00:00",
+          "source_sha256": "2a9d5c842eb9e8613bb6a113d985852521375f3b7b2718a9395bad1f7a23f56a",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
           "team_id": 1610612743,
           "player_name": "Spencer Jones",
-          "status": "questionable",
+          "status": "out",
           "reason": "Injury/Illness - Bilateral Hamstring Injury Management",
           "game_id": "espn:401909094",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_11_45PM.pdf",
-          "source_published_at": "2026-10-22T03:45:00+00:00",
-          "captured_at": "2026-10-22T03:50:49.806570+00:00",
-          "source_sha256": "83367920095e1744fb5e222941b3697c969613e90c8ff8214b9a5f81135c7425",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-22_09_30PM.pdf",
+          "source_published_at": "2026-10-23T01:30:00+00:00",
+          "captured_at": "2026-10-23T01:36:02.569279+00:00",
+          "source_sha256": "2a9d5c842eb9e8613bb6a113d985852521375f3b7b2718a9395bad1f7a23f56a",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1157,10 +1165,10 @@
           "status": "out",
           "reason": "Injury/Illness - Low Back Surgery",
           "game_id": "espn:401909094",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_11_45PM.pdf",
-          "source_published_at": "2026-10-22T03:45:00+00:00",
-          "captured_at": "2026-10-22T03:50:49.806570+00:00",
-          "source_sha256": "83367920095e1744fb5e222941b3697c969613e90c8ff8214b9a5f81135c7425",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-22_09_30PM.pdf",
+          "source_published_at": "2026-10-23T01:30:00+00:00",
+          "captured_at": "2026-10-23T01:36:02.569279+00:00",
+          "source_sha256": "2a9d5c842eb9e8613bb6a113d985852521375f3b7b2718a9395bad1f7a23f56a",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1169,10 +1177,10 @@
           "status": "out",
           "reason": "Injury/Illness - Right Achilles Tendon Repair/Surgery",
           "game_id": "espn:401909094",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_11_45PM.pdf",
-          "source_published_at": "2026-10-22T03:45:00+00:00",
-          "captured_at": "2026-10-22T03:50:49.806570+00:00",
-          "source_sha256": "83367920095e1744fb5e222941b3697c969613e90c8ff8214b9a5f81135c7425",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-22_09_30PM.pdf",
+          "source_published_at": "2026-10-23T01:30:00+00:00",
+          "captured_at": "2026-10-23T01:36:02.569279+00:00",
+          "source_sha256": "2a9d5c842eb9e8613bb6a113d985852521375f3b7b2718a9395bad1f7a23f56a",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1181,24 +1189,23 @@
           "status": "out",
           "reason": "Injury/Illness - Right Knee Surgery",
           "game_id": "espn:401909094",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_11_45PM.pdf",
-          "source_published_at": "2026-10-22T03:45:00+00:00",
-          "captured_at": "2026-10-22T03:50:49.806570+00:00",
-          "source_sha256": "83367920095e1744fb5e222941b3697c969613e90c8ff8214b9a5f81135c7425",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-22_09_30PM.pdf",
+          "source_published_at": "2026-10-23T01:30:00+00:00",
+          "captured_at": "2026-10-23T01:36:02.569279+00:00",
+          "source_sha256": "2a9d5c842eb9e8613bb6a113d985852521375f3b7b2718a9395bad1f7a23f56a",
           "parser_version": "nba-official-injury-live-v3"
         }
       ]
     },
-    "postgame": null,
     "homepage_visible": true
   },
   "prediction": {
-    "status": "current",
+    "status": "locked",
     "game_id": "espn:401909094",
     "version_id": "d48edadf-6a15-410e-9aeb-24b7893ff71b",
-    "state_revision": 2,
-    "locked_at": null,
-    "lock_reason": null,
+    "state_revision": 4,
+    "locked_at": "2026-10-23T01:30:42.957677+00:00",
+    "lock_reason": "scheduled_tipoff_reached",
     "schedule_revision": 1,
     "fact_view": {
       "schema_version": "pregame-fact-view-v1",
@@ -3065,8 +3072,76 @@
     "public_contract": "courtvision-public-v1"
   },
   "postgame": {
-    "status": "unavailable",
-    "postgame": null
+    "status": "available",
+    "postgame": {
+      "game_id": "espn:401909094",
+      "version_id": "708171c8-5471-42e9-b6e1-d29918952be9",
+      "title": "雷霆守城碎掘金\n双核失准难回天",
+      "short_review": "雷霆靠防守执行力和下半场更坚决的攻框完成逆转，掘金双核同时失准，赛前看好雷霆赢球的方向成立。",
+      "settlement_summary": "胜负看对。雷霆靠防守执行力和下半场更坚决的攻框完成逆转，掘金双核同时失准，赛前看好雷霆赢球的方向成立。",
+      "article": "雷霆主场96比84拿下掘金。上半场掘金还靠戈登的得分咬住，下半场进攻越打越滞，雷霆把主动权翻了过来。\n\n戈登是掘金最稳定的得分点，20分6篮板，三分4投3中，在约基奇和穆雷都打不开时撑住了产量。但末节他一次出手都没有，掘金最需要续分时，这个点反而安静了。\n\n约基奇13分7篮板5助攻，19投5中，三分7投1中。戴格诺特赛后说，对约基奇和穆雷的防守是赢球关键，让他们的每一次得分都来之不易。穆雷11投2中只得6分，还有6次失误，掘金第二持球点几乎没给出回应。\n\n雷霆这边，杰伦·威廉姆斯21分5篮板3助攻，首节10分为球队定下基调。霍姆格伦12分17篮板4盖帽，篮板和护框是雷霆下半场扭转局面的底子。SGA17分，19投6中效率同样不好，但末节10分把分差推到安全区。\n\n掘金全场22次失误，雷霆只有12次；掘金罚球22次中14，雷霆14次中13。这些差距和结果同时出现，说明掘金在细节上付出了代价。\n\n赛前我看好雷霆赢球，方向对了。当时判断掘金这套阵容还没跑顺，约基奇和穆雷会被雷霆的防守轮转反复考验，这场两人合计30投7中、穆雷6次失误，确实印证了这条风险。赛前我偏小分，但没有可靠市场参考，这里只记方向。",
+      "score": {
+        "home": {
+          "name": "雷霆",
+          "score": 96
+        },
+        "away": {
+          "name": "掘金",
+          "score": 84
+        },
+        "text": "掘金 84 — 96 雷霆"
+      },
+      "prediction": {
+        "winner_name": "雷霆",
+        "winner_probability": 0.66,
+        "expected_winner_margin": 4.5,
+        "expected_total": 229.5,
+        "actual_winner_name": "雷霆",
+        "actual_winner_margin": 12,
+        "actual_total": 180
+      },
+      "market_reference": {
+        "status": "unavailable"
+      },
+      "sources": [
+        {
+          "label": "比赛结果与球员数据",
+          "title": "ESPN 比赛数据",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=401909094",
+          "captured_at": "2026-10-23T04:59:49.412417+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "Nuggets Opening Night Rotation Prediction: Who's in, Who's Out",
+          "url": "https://www.si.com/nba/nuggets/onsi/nuggets-opening-night-rotation-prediction-who-in-who-out",
+          "captured_at": "2026-10-22T18:41:27.122808+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "2 Concerns for the Nuggets After the Thunder's Opening Night Win",
+          "url": "https://www.si.com/nba/nuggets/onsi/2-concerns-for-nuggets-after-thunder-opening-night-win",
+          "captured_at": "2026-10-22T18:42:01.260194+00:00"
+        },
+        {
+          "source_id": "coach-6280208f6f50c7444c",
+          "url": "https://bbs.hupu.com/643181181.html",
+          "title": "[流言板]戴格诺特采访全文：限制约基奇靠执行力，SGA主动下场显格局-NBA新闻-虎扑社区",
+          "published_at": "2026-10-23T06:13:05+00:00",
+          "captured_at": "2026-10-23T14:35:34.653915+00:00",
+          "classification": "source_attributed_coach_statement"
+        },
+        {
+          "source_id": "hupu-b3da52eb5f1bedf308",
+          "url": "https://bbs.hupu.com/643178197.html",
+          "title": "[赛后]掘金84-96雷霆，戈登20分6板2断，霍姆格伦12分17板4冒-NBA专区-虎扑社区",
+          "published_at": "2026-10-23T04:20:40+00:00",
+          "captured_at": "2026-10-23T14:35:34.653915+00:00",
+          "classification": "community_discussion",
+          "not_a_fact_source": true
+        }
+      ],
+      "generated_at": "2026-10-23T14:39:22.770440+00:00"
+    }
   },
   "market": {
     "status": "unavailable",
@@ -3077,10 +3152,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-22T18:46:11.371050+00:00",
+    "exported_at": "2026-10-23T14:42:07.933019+00:00",
     "source_prediction_version_id": "d48edadf-6a15-410e-9aeb-24b7893ff71b",
     "source_prediction_payload_sha256": "403ba78f08379883dd1e259a1d79b585a3667b3006a86fdb93e2d95412420777",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "262c605a4ee9aec0afd1aa44e74570422176308934248b4934b24fb04b68db33"
+  "public_sha256": "a0250aac5574ce59af3909989eb042a07658e6703c9978f8e814725fbd6b0006"
 }

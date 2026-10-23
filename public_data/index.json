@@ -6,7 +6,7 @@
       "file": "games/espn_401909094.json",
       "tipoff": "2026-10-23T01:30:00+00:00",
       "version_id": "d48edadf-6a15-410e-9aeb-24b7893ff71b",
-      "public_sha256": "262c605a4ee9aec0afd1aa44e74570422176308934248b4934b24fb04b68db33",
+      "public_sha256": "a0250aac5574ce59af3909989eb042a07658e6703c9978f8e814725fbd6b0006",
       "home_record": {
         "game": {
           "away": {
@@ -17,7 +17,7 @@
             "name": "Denver Nuggets",
             "name_zh": "掘金",
             "espn_team_id": "7",
-            "score": null
+            "score": 84.0
           },
           "game_type": "regular_season",
           "home": {
@@ -28,27 +28,34 @@
             "name": "Oklahoma City Thunder",
             "name_zh": "雷霆",
             "espn_team_id": "25",
-            "score": null
+            "score": 96.0
           },
           "id": "espn:401909094",
           "registered_game": true,
           "schedule_revision": 1,
-          "status": "scheduled",
+          "status": "final",
           "tipoff": "2026-10-23T01:30:00+00:00",
           "venue": "Paycom Center",
+          "postgame": {
+            "status": "available",
+            "version_id": "708171c8-5471-42e9-b6e1-d29918952be9",
+            "score_text": "掘金 84 — 96 雷霆",
+            "summary": "雷霆靠防守执行力和下半场更坚决的攻框完成逆转，掘金双核同时失准，赛前看好雷霆赢球的方向成立。",
+            "prediction_summary": "赛前看好雷霆 · 胜率66% · 预计赢4.5分；赛果雷霆赢12分",
+            "market_summary": null
+          },
           "season": 2027,
           "schedule_catalog_fact": true,
-          "postgame": null,
           "homepage_visible": true,
           "public_summary": true
         },
         "prediction": {
-          "status": "current",
+          "status": "locked",
           "game_id": "espn:401909094",
           "version_id": "d48edadf-6a15-410e-9aeb-24b7893ff71b",
-          "state_revision": 2,
-          "locked_at": null,
-          "lock_reason": null,
+          "state_revision": 4,
+          "locked_at": "2026-10-23T01:30:42.957677+00:00",
+          "lock_reason": "scheduled_tipoff_reached",
           "schedule_revision": 1,
           "version": {
             "analysis_contract_version": "two-stage-forecast-v1",
@@ -2032,5 +2039,5 @@
       }
     }
   ],
-  "published_at": "2026-10-23T14:37:58.726313+00:00"
+  "published_at": "2026-10-23T14:42:07.933019+00:00"
 }
