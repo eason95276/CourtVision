@@ -874,7 +874,7 @@
       "file": "games/espn_401909843.json",
       "tipoff": "2026-10-23T23:00:00+00:00",
       "version_id": "fe625126-45b1-45e0-a8fc-b0f21549d042",
-      "public_sha256": "9a013bb0de791f91bc826c34808349b80649e4ceecef2251a1e75166f268224d",
+      "public_sha256": "601565f147021438c543775f142686b3fb989e7561a7a1b658d4c80e8a52e806",
       "home_record": {
         "game": {
           "away": {
@@ -885,7 +885,7 @@
             "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/atl.png",
             "name": "Atlanta Hawks",
             "name_zh": "老鹰",
-            "score": null
+            "score": 128.0
           },
           "game_type": "regular_season",
           "home": {
@@ -896,27 +896,34 @@
             "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/cha.png",
             "name": "Charlotte Hornets",
             "name_zh": "黄蜂",
-            "score": null
+            "score": 81.0
           },
           "id": "espn:401909843",
           "registered_game": true,
           "schedule_revision": 1,
           "season": 2027,
-          "status": "scheduled",
+          "status": "final",
           "tipoff": "2026-10-23T23:00:00+00:00",
           "venue": "Spectrum Center",
+          "postgame": {
+            "status": "available",
+            "version_id": "7d875676-ea27-4ca4-b98a-c98961ce847b",
+            "score_text": "老鹰 128 — 81 黄蜂",
+            "summary": "老鹰用防守压迫和转换进攻把黄蜂的控球问题放大成一场47分惨案，赛前看老鹰让分方向正确，但大分判断被黄蜂的进攻崩盘彻底推翻。",
+            "prediction_summary": "赛前看好老鹰 · 胜率57% · 预计赢3分；赛果老鹰赢47分",
+            "market_summary": "让分方向 老鹰 -2.5 · 命中；总分 大分 · 未命中"
+          },
           "schedule_catalog_fact": true,
-          "postgame": null,
           "homepage_visible": true,
           "public_summary": true
         },
         "prediction": {
-          "status": "current",
+          "status": "locked",
           "game_id": "espn:401909843",
           "version_id": "fe625126-45b1-45e0-a8fc-b0f21549d042",
-          "state_revision": 3,
-          "locked_at": null,
-          "lock_reason": null,
+          "state_revision": 5,
+          "locked_at": "2026-10-23T23:00:21.257897+00:00",
+          "lock_reason": "scheduled_tipoff_reached",
           "schedule_revision": 1,
           "version": {
             "analysis_contract_version": "two-stage-forecast-v1",
@@ -3162,5 +3169,5 @@
       }
     }
   ],
-  "published_at": "2026-10-24T12:05:10.225735+00:00"
+  "published_at": "2026-10-24T12:07:37.611594+00:00"
 }
