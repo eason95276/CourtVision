@@ -375,7 +375,7 @@
       "file": "games/espn_401909096.json",
       "tipoff": "2026-10-24T01:30:00+00:00",
       "version_id": "cc3af382-1094-4828-aa02-39e5f383cb56",
-      "public_sha256": "081e0ff2388453986a649d1ee096b24388a246f5cdffe6c21c102eeaf9c48a6c",
+      "public_sha256": "2c2539a01c8d7a1e9afd478d7d27848e29d88fcc4bd499255b82a6ef03658f03",
       "home_record": {
         "game": {
           "away": {
@@ -386,7 +386,7 @@
             "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/hou.png",
             "name": "Houston Rockets",
             "name_zh": "火箭",
-            "score": null
+            "score": 114.0
           },
           "game_type": "regular_season",
           "home": {
@@ -397,27 +397,34 @@
             "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/sa.png",
             "name": "San Antonio Spurs",
             "name_zh": "马刺",
-            "score": null
+            "score": 110.0
           },
           "id": "espn:401909096",
           "registered_game": true,
           "schedule_revision": 1,
           "season": 2027,
-          "status": "scheduled",
+          "status": "final",
           "tipoff": "2026-10-24T01:30:00+00:00",
           "venue": "Moody Center",
+          "postgame": {
+            "status": "available",
+            "version_id": "76479900-933f-4f18-8f2a-c88bfb22596a",
+            "score_text": "火箭 114 — 110 马刺",
+            "summary": "申京末节14分接管比赛，文班亚马25分13篮板却错失最后一攻，火箭114比110客场取胜，赛前看好火箭赢球的方向命中。",
+            "prediction_summary": "赛前看好火箭 · 胜率58% · 预计赢3.5分；赛果火箭赢4分",
+            "market_summary": null
+          },
           "schedule_catalog_fact": true,
-          "postgame": null,
           "homepage_visible": true,
           "public_summary": true
         },
         "prediction": {
-          "status": "current",
+          "status": "locked",
           "game_id": "espn:401909096",
           "version_id": "cc3af382-1094-4828-aa02-39e5f383cb56",
-          "state_revision": 2,
-          "locked_at": null,
-          "lock_reason": null,
+          "state_revision": 4,
+          "locked_at": "2026-10-24T01:30:16.867741+00:00",
+          "lock_reason": "scheduled_tipoff_reached",
           "schedule_revision": 1,
           "version": {
             "analysis_contract_version": "two-stage-forecast-v1",
@@ -3190,5 +3197,5 @@
       }
     }
   ],
-  "published_at": "2026-10-24T12:12:54.497088+00:00"
+  "published_at": "2026-10-24T12:15:28.271498+00:00"
 }

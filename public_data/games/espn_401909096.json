@@ -9,7 +9,7 @@
       "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/hou.png",
       "name": "Houston Rockets",
       "name_zh": "火箭",
-      "score": null
+      "score": 114.0
     },
     "background": {
       "availability": {
@@ -75,7 +75,7 @@
       "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/sa.png",
       "name": "San Antonio Spurs",
       "name_zh": "马刺",
-      "score": null
+      "score": 110.0
     },
     "id": "espn:401909096",
     "matchup_history": {
@@ -918,9 +918,9 @@
     },
     "season_start": 2026,
     "source": {
-      "schedule_captured_at": "2026-10-23T23:51:24.319958+00:00"
+      "schedule_captured_at": "2026-10-24T12:12:30.846931+00:00"
     },
-    "status": "scheduled",
+    "status": "final",
     "technical": {
       "cutoff": "2026-10-23T23:52:43.317942+00:00",
       "fact_context_cutoff": "2026-10-23T23:52:43.317942+00:00",
@@ -928,6 +928,14 @@
     },
     "tipoff": "2026-10-24T01:30:00+00:00",
     "venue": "Moody Center",
+    "postgame": {
+      "status": "available",
+      "version_id": "76479900-933f-4f18-8f2a-c88bfb22596a",
+      "score_text": "火箭 114 — 110 马刺",
+      "summary": "申京末节14分接管比赛，文班亚马25分13篮板却错失最后一攻，火箭114比110客场取胜，赛前看好火箭赢球的方向命中。",
+      "prediction_summary": "赛前看好火箭 · 胜率58% · 预计赢3.5分；赛果火箭赢4分",
+      "market_summary": null
+    },
     "schedule_catalog_fact": true,
     "nba_game_id": null,
     "previous_season_team_stats": {
@@ -1114,39 +1122,39 @@
     },
     "official_injury_report": {
       "game_id": "espn:401909096",
-      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_45PM.pdf",
-      "source_published_at": "2026-10-23T23:45:00+00:00",
-      "captured_at": "2026-10-23T23:51:30.253369+00:00",
-      "source_sha256": "f31387de58df68b73a5059d12dbf6974d90e34ee59a0eef9d4da4f1a7a45155c",
+      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_09_30PM.pdf",
+      "source_published_at": "2026-10-24T01:30:00+00:00",
+      "captured_at": "2026-10-24T01:32:24.888792+00:00",
+      "source_sha256": "d6f9c334ea49b81d2f5de49f80095cf4f4f27ce9ecc53411bf1df20facdf2d26",
       "parser_version": "nba-official-injury-live-v3",
       "status": "published",
-      "report_id": "ee64cb8b3853566c8dee5b971b5426ccd2a10ab52422c3a9f5c27957c1faafe6",
+      "report_id": "9ad60ed4ac6f5d31d4130680a4d3921c8184716670e7798237fefd72185cb417",
       "report_date": "2026-10-23",
-      "report_time": "19:45",
+      "report_time": "21:30",
       "coverage": "complete",
       "records": [
         {
           "team_id": 1610612745,
           "player_name": "Reed Sheppard",
-          "status": "questionable",
+          "status": "out",
           "reason": "Injury/Illness - Left Knee Contusion/ Bone Bruise",
           "game_id": "espn:401909096",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_45PM.pdf",
-          "source_published_at": "2026-10-23T23:45:00+00:00",
-          "captured_at": "2026-10-23T23:51:30.253369+00:00",
-          "source_sha256": "f31387de58df68b73a5059d12dbf6974d90e34ee59a0eef9d4da4f1a7a45155c",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_09_30PM.pdf",
+          "source_published_at": "2026-10-24T01:30:00+00:00",
+          "captured_at": "2026-10-24T01:32:24.888792+00:00",
+          "source_sha256": "d6f9c334ea49b81d2f5de49f80095cf4f4f27ce9ecc53411bf1df20facdf2d26",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
           "team_id": 1610612745,
           "player_name": "Steven Adams",
-          "status": "questionable",
+          "status": "available",
           "reason": "Injury/Illness - Right Calf Tightness/ Soreness",
           "game_id": "espn:401909096",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_45PM.pdf",
-          "source_published_at": "2026-10-23T23:45:00+00:00",
-          "captured_at": "2026-10-23T23:51:30.253369+00:00",
-          "source_sha256": "f31387de58df68b73a5059d12dbf6974d90e34ee59a0eef9d4da4f1a7a45155c",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_09_30PM.pdf",
+          "source_published_at": "2026-10-24T01:30:00+00:00",
+          "captured_at": "2026-10-24T01:32:24.888792+00:00",
+          "source_sha256": "d6f9c334ea49b81d2f5de49f80095cf4f4f27ce9ecc53411bf1df20facdf2d26",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1155,10 +1163,10 @@
           "status": "available",
           "reason": "-",
           "game_id": "espn:401909096",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_45PM.pdf",
-          "source_published_at": "2026-10-23T23:45:00+00:00",
-          "captured_at": "2026-10-23T23:51:30.253369+00:00",
-          "source_sha256": "f31387de58df68b73a5059d12dbf6974d90e34ee59a0eef9d4da4f1a7a45155c",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_09_30PM.pdf",
+          "source_published_at": "2026-10-24T01:30:00+00:00",
+          "captured_at": "2026-10-24T01:32:24.888792+00:00",
+          "source_sha256": "d6f9c334ea49b81d2f5de49f80095cf4f4f27ce9ecc53411bf1df20facdf2d26",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1167,10 +1175,10 @@
           "status": "out",
           "reason": "Injury/Illness - Right Knee Surgery",
           "game_id": "espn:401909096",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_45PM.pdf",
-          "source_published_at": "2026-10-23T23:45:00+00:00",
-          "captured_at": "2026-10-23T23:51:30.253369+00:00",
-          "source_sha256": "f31387de58df68b73a5059d12dbf6974d90e34ee59a0eef9d4da4f1a7a45155c",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_09_30PM.pdf",
+          "source_published_at": "2026-10-24T01:30:00+00:00",
+          "captured_at": "2026-10-24T01:32:24.888792+00:00",
+          "source_sha256": "d6f9c334ea49b81d2f5de49f80095cf4f4f27ce9ecc53411bf1df20facdf2d26",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1179,10 +1187,10 @@
           "status": "available",
           "reason": "-",
           "game_id": "espn:401909096",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_45PM.pdf",
-          "source_published_at": "2026-10-23T23:45:00+00:00",
-          "captured_at": "2026-10-23T23:51:30.253369+00:00",
-          "source_sha256": "f31387de58df68b73a5059d12dbf6974d90e34ee59a0eef9d4da4f1a7a45155c",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_09_30PM.pdf",
+          "source_published_at": "2026-10-24T01:30:00+00:00",
+          "captured_at": "2026-10-24T01:32:24.888792+00:00",
+          "source_sha256": "d6f9c334ea49b81d2f5de49f80095cf4f4f27ce9ecc53411bf1df20facdf2d26",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1191,24 +1199,23 @@
           "status": "out",
           "reason": "Injury/Illness - Left Calf Strain",
           "game_id": "espn:401909096",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_45PM.pdf",
-          "source_published_at": "2026-10-23T23:45:00+00:00",
-          "captured_at": "2026-10-23T23:51:30.253369+00:00",
-          "source_sha256": "f31387de58df68b73a5059d12dbf6974d90e34ee59a0eef9d4da4f1a7a45155c",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_09_30PM.pdf",
+          "source_published_at": "2026-10-24T01:30:00+00:00",
+          "captured_at": "2026-10-24T01:32:24.888792+00:00",
+          "source_sha256": "d6f9c334ea49b81d2f5de49f80095cf4f4f27ce9ecc53411bf1df20facdf2d26",
           "parser_version": "nba-official-injury-live-v3"
         }
       ]
     },
-    "postgame": null,
     "homepage_visible": true
   },
   "prediction": {
-    "status": "current",
+    "status": "locked",
     "game_id": "espn:401909096",
     "version_id": "cc3af382-1094-4828-aa02-39e5f383cb56",
-    "state_revision": 2,
-    "locked_at": null,
-    "lock_reason": null,
+    "state_revision": 4,
+    "locked_at": "2026-10-24T01:30:16.867741+00:00",
+    "lock_reason": "scheduled_tipoff_reached",
     "schedule_revision": 1,
     "fact_view": {
       "schema_version": "pregame-fact-view-v1",
@@ -3408,8 +3415,88 @@
     "public_contract": "courtvision-public-v1"
   },
   "postgame": {
-    "status": "unavailable",
-    "postgame": null
+    "status": "available",
+    "postgame": {
+      "game_id": "espn:401909096",
+      "version_id": "76479900-933f-4f18-8f2a-c88bfb22596a",
+      "title": "申京末节定胜局\n文班空砍难回天",
+      "short_review": "申京末节14分接管比赛，文班亚马25分13篮板却错失最后一攻，火箭114比110客场取胜，赛前看好火箭赢球的方向命中。",
+      "settlement_summary": "胜负看对。",
+      "article": "火箭114比110从奥斯汀带走胜利，马刺开局两连败。比赛最后半分钟，文班亚马持球寻找机会，阿门·汤普森完成关键防守，马刺最后一攻没能转化成得分。这场球最鲜明的对比，是申京在末节扛住了产量，而文班亚马在决胜时刻没能把球送进篮筐。\n\n申京全场29分7篮板7助攻，真正决定比赛的是第四节：他单节6投4中拿14分，还送出2次助攻。4分58秒后双方战成101平，申京先是一记两分让火箭反超，2分42秒又接阿门助攻上篮得手，把分差拉到4分。马刺内线拿他没办法，米奇·约翰逊赛后也承认，申京多次突到底线，在篮下和篮板后侧的各种角度都能把球放进。\n\n文班亚马的数据并不难看，25分13篮板，21投9中。但末节他4投1中只拿2分，最后那记被阿门封住的出手，成了马刺追分失败的注脚。他首节8分、次节9分，上半场撑住了马刺的进攻；可到了需要他回应的第四节，火箭的防守让他很难在舒服的位置接球。\n\n火箭赢在得分点更稳。杜兰特20分7篮板6助攻，出手不多但效率在线，1分34秒那记三分把领先重新拉回4分。阿门20分10篮板，末节那次防守是他全场最有价值的一球。范弗利特14分5助攻0失误，把火箭的进攻梳理得有条理。马刺这边，哈珀20分、福克斯19分9助攻，福克斯最后给文班送出的传球质量不差，只是阿门防得更狠。\n\n罚球是两队拉开差距的地方：火箭31罚28中，马刺25罚18中。马刺运动战命中率其实更高，有效投篮命中率52.9%对55.1%落后不多，可少了10次罚球命中，正好是4分分差的来源之一。这不是战术因果，但能解释火箭为什么在投篮不占优时还能赢。\n\n赛前我选火箭赢、分差3.5分上下，方向对了，实际赢了4分。当时最担心的文班亚马反弹确实发生了，他拿了25分13篮板，比揭幕战好得多；但申京这个轴心在末节把比赛收走，火箭的持球点深度还是压过了马刺。总分赛前没有可靠市场参考，不做结算。马刺的问题不在文班能不能得分，而在决胜回合里，球到他手上之后还能不能有人替他分担。",
+      "score": {
+        "home": {
+          "name": "马刺",
+          "score": 110
+        },
+        "away": {
+          "name": "火箭",
+          "score": 114
+        },
+        "text": "火箭 114 — 110 马刺"
+      },
+      "prediction": {
+        "winner_name": "火箭",
+        "winner_probability": 0.58,
+        "expected_winner_margin": 3.5,
+        "expected_total": 219.5,
+        "actual_winner_name": "火箭",
+        "actual_winner_margin": 4,
+        "actual_total": 224
+      },
+      "market_reference": {
+        "status": "unavailable"
+      },
+      "sources": [
+        {
+          "label": "比赛结果与球员数据",
+          "title": "ESPN 比赛数据",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=401909096",
+          "captured_at": "2026-10-24T04:22:46.222848+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "Fox aims to go in Durant's return to Austin, Spurs-Rockets: Injuries, Odds & Preview",
+          "url": "https://www.si.com/nba/rockets/onsi/fox-aims-to-go-in-durant-s-return-to-austin-spurs-rockets-injuries-odds-preview-01m5ncjv1h24",
+          "captured_at": "2026-10-23T23:53:48.812603+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "Preview, How to Watch Spurs Face Rockets in Austin",
+          "url": "https://www.si.com/nba/spurs/onsi/old-rivalry-new-stakes-preview-how-to-watch-san-antonio-spurs-face-rockets-in-austin",
+          "captured_at": "2026-10-23T23:53:48.813742+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "Kevin Durant Talks Victor Wembanyama and Spurs Ahead of Matchup",
+          "url": "https://www.si.com/nba/rockets/onsi/kevin-durant-talks-victor-wembanyama-and-spurs-ahead-of-matchup-01m5n6v7qkgq",
+          "captured_at": "2026-10-23T23:54:08.382511+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "3 Questions: What Can Spurs Expect From Rockets?",
+          "url": "https://www.si.com/nba/spurs/onsi/3-questions-what-can-san-antonio-spurs-expect-from-houston-rockets-on-friday-night",
+          "captured_at": "2026-10-23T23:54:24.175197+00:00"
+        },
+        {
+          "source_id": "coach-38abf9a1d2d9f497f8",
+          "url": "https://bbs.hupu.com/643229640.html",
+          "title": "[流言板]米奇采访全文：赞阿门关键封盖，盼球迷陪马刺走完剩余80场-NBA新闻-虎扑社区",
+          "published_at": "2026-10-24T08:44:57+00:00",
+          "captured_at": "2026-10-24T12:07:35.079049+00:00",
+          "classification": "source_attributed_coach_statement"
+        },
+        {
+          "source_id": "hupu-20d952e4d5152e9e85",
+          "url": "https://bbs.hupu.com/643217452.html",
+          "title": "[赛后]火箭114-110马刺，申京29分7板7助，福克斯19分4板9助-NBA专区-虎扑社区",
+          "published_at": "2026-10-24T04:22:07+00:00",
+          "captured_at": "2026-10-24T12:07:35.079049+00:00",
+          "classification": "community_discussion",
+          "not_a_fact_source": true
+        }
+      ],
+      "generated_at": "2026-10-24T12:07:45.699595+00:00"
+    }
   },
   "market": {
     "status": "available",
@@ -3448,10 +3535,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-23T23:56:12.087384+00:00",
+    "exported_at": "2026-10-24T12:15:28.271498+00:00",
     "source_prediction_version_id": "cc3af382-1094-4828-aa02-39e5f383cb56",
     "source_prediction_payload_sha256": "99291919b2040f74b03fd2a9bcf13033faa6ec7bedf9821d39798e3d1f83520e",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "081e0ff2388453986a649d1ee096b24388a246f5cdffe6c21c102eeaf9c48a6c"
+  "public_sha256": "2c2539a01c8d7a1e9afd478d7d27848e29d88fcc4bd499255b82a6ef03658f03"
 }
