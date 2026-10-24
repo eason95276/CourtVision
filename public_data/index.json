@@ -999,7 +999,7 @@
       "file": "games/espn_401909848.json",
       "tipoff": "2026-10-23T20:00:00+00:00",
       "version_id": "165f80a6-ff8b-4a86-b162-69d82a419c65",
-      "public_sha256": "b8336ec6abe23826568173d0ae606648b606db257a50a3da0fddf65a1513195b",
+      "public_sha256": "060d7adc5ec770cb8ec98558543f74934acc276b5cbf4b29b17c74157d544853",
       "home_record": {
         "game": {
           "away": {
@@ -1010,7 +1010,7 @@
             "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/chi.png",
             "name": "Chicago Bulls",
             "name_zh": "公牛",
-            "score": null
+            "score": 132.0
           },
           "game_type": "regular_season",
           "home": {
@@ -1021,27 +1021,34 @@
             "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/mil.png",
             "name": "Milwaukee Bucks",
             "name_zh": "雄鹿",
-            "score": null
+            "score": 125.0
           },
           "id": "espn:401909848",
           "registered_game": true,
           "schedule_revision": 1,
           "season": 2027,
-          "status": "scheduled",
+          "status": "final",
           "tipoff": "2026-10-23T20:00:00+00:00",
           "venue": "Fiserv Forum",
+          "postgame": {
+            "status": "available",
+            "version_id": "bb239ce8-cd98-4068-811d-577fb62edc3c",
+            "score_text": "公牛 132 — 125 雄鹿",
+            "summary": "雄鹿首节32比17建立优势，但公牛替补在末节完成逆转，希罗34分难救主，赛前看好雄鹿让1.5分和小分均未命中。",
+            "prediction_summary": "赛前看好雄鹿 · 胜率55% · 预计赢3分；赛果公牛赢7分",
+            "market_summary": "让分方向 雄鹿 -1.5 · 未命中；总分 小分 · 未命中"
+          },
           "schedule_catalog_fact": true,
-          "postgame": null,
           "homepage_visible": true,
           "public_summary": true
         },
         "prediction": {
-          "status": "current",
+          "status": "locked",
           "game_id": "espn:401909848",
           "version_id": "165f80a6-ff8b-4a86-b162-69d82a419c65",
-          "state_revision": 3,
-          "locked_at": null,
-          "lock_reason": null,
+          "state_revision": 5,
+          "locked_at": "2026-10-23T20:00:38.425217+00:00",
+          "lock_reason": "scheduled_tipoff_reached",
           "schedule_revision": 1,
           "version": {
             "analysis_contract_version": "two-stage-forecast-v1",
@@ -3155,5 +3162,5 @@
       }
     }
   ],
-  "published_at": "2026-10-24T01:41:11.303469+00:00"
+  "published_at": "2026-10-24T12:05:10.225735+00:00"
 }
