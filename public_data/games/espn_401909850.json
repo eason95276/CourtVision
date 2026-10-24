@@ -9,7 +9,7 @@
       "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/mem.png",
       "name": "Memphis Grizzlies",
       "name_zh": "灰熊",
-      "score": null
+      "score": 111.0
     },
     "background": {
       "availability": {
@@ -75,7 +75,7 @@
       "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/gs.png",
       "name": "Golden State Warriors",
       "name_zh": "勇士",
-      "score": null
+      "score": 108.0
     },
     "id": "espn:401909850",
     "matchup_history": {
@@ -978,9 +978,9 @@
     },
     "season_start": 2026,
     "source": {
-      "schedule_captured_at": "2026-10-23T18:01:38.395209+00:00"
+      "schedule_captured_at": "2026-10-24T12:17:50.535472+00:00"
     },
-    "status": "scheduled",
+    "status": "final",
     "technical": {
       "cutoff": "2026-10-23T18:01:05.860972+00:00",
       "fact_context_cutoff": "2026-10-23T18:01:05.860972+00:00",
@@ -988,6 +988,14 @@
     },
     "tipoff": "2026-10-24T02:00:00+00:00",
     "venue": "Chase Center",
+    "postgame": {
+      "status": "available",
+      "version_id": "80284bee-9436-47b2-9002-6312e6617b6b",
+      "score_text": "灰熊 111 — 108 勇士",
+      "summary": "杰罗姆28分撑住灰熊进攻，布泽尔25分13篮板并在最后20.1秒投进反超球，勇士末节只得18分，让4.5分落空，小分方向命中。",
+      "prediction_summary": "赛前看好勇士 · 胜率60% · 预计赢5.5分；赛果灰熊赢3分",
+      "market_summary": "让分方向 勇士 -4.5 · 未命中；总分 小分 · 命中"
+    },
     "schedule_catalog_fact": true,
     "nba_game_id": null,
     "previous_season_team_stats": {
@@ -1174,39 +1182,39 @@
     },
     "official_injury_report": {
       "game_id": "espn:401909850",
-      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_01_45PM.pdf",
-      "source_published_at": "2026-10-23T17:45:00+00:00",
-      "captured_at": "2026-10-23T17:56:03.132064+00:00",
-      "source_sha256": "d4a073e31c21f16c2c601972443ca9fb357885eadde778df5d4bf7d3bc8a0aa0",
+      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_10_00PM.pdf",
+      "source_published_at": "2026-10-24T02:00:00+00:00",
+      "captured_at": "2026-10-24T02:04:13.775774+00:00",
+      "source_sha256": "09fe7a874db12c33477b597497fecacab86cdf0c1abb06216062403744afb60d",
       "parser_version": "nba-official-injury-live-v3",
       "status": "published",
-      "report_id": "ee1b5ec89d630a6a7bac5535b4bcdced63e13175122697c932191b170ca0fb1e",
+      "report_id": "04586a6a2d1f66873c8353a3119ac762970cf910d0569f4f0691cdedd033617e",
       "report_date": "2026-10-23",
-      "report_time": "13:45",
+      "report_time": "22:00",
       "coverage": "complete",
       "records": [
         {
           "team_id": 1610612744,
           "player_name": "Brandin Podziemski",
-          "status": "questionable",
+          "status": "available",
           "reason": "Injury/Illness - Bilateral Low Back Soreness",
           "game_id": "espn:401909850",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_01_45PM.pdf",
-          "source_published_at": "2026-10-23T17:45:00+00:00",
-          "captured_at": "2026-10-23T17:56:03.132064+00:00",
-          "source_sha256": "d4a073e31c21f16c2c601972443ca9fb357885eadde778df5d4bf7d3bc8a0aa0",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_10_00PM.pdf",
+          "source_published_at": "2026-10-24T02:00:00+00:00",
+          "captured_at": "2026-10-24T02:04:13.775774+00:00",
+          "source_sha256": "09fe7a874db12c33477b597497fecacab86cdf0c1abb06216062403744afb60d",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
           "team_id": 1610612744,
           "player_name": "Charles Bassey",
-          "status": "questionable",
+          "status": "out",
           "reason": "Injury/Illness - Right Patellar Tendinopathy",
           "game_id": "espn:401909850",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_01_45PM.pdf",
-          "source_published_at": "2026-10-23T17:45:00+00:00",
-          "captured_at": "2026-10-23T17:56:03.132064+00:00",
-          "source_sha256": "d4a073e31c21f16c2c601972443ca9fb357885eadde778df5d4bf7d3bc8a0aa0",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_10_00PM.pdf",
+          "source_published_at": "2026-10-24T02:00:00+00:00",
+          "captured_at": "2026-10-24T02:04:13.775774+00:00",
+          "source_sha256": "09fe7a874db12c33477b597497fecacab86cdf0c1abb06216062403744afb60d",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1215,10 +1223,10 @@
           "status": "out",
           "reason": "Injury/Illness - Right ACLRepair/ Surgery",
           "game_id": "espn:401909850",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_01_45PM.pdf",
-          "source_published_at": "2026-10-23T17:45:00+00:00",
-          "captured_at": "2026-10-23T17:56:03.132064+00:00",
-          "source_sha256": "d4a073e31c21f16c2c601972443ca9fb357885eadde778df5d4bf7d3bc8a0aa0",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_10_00PM.pdf",
+          "source_published_at": "2026-10-24T02:00:00+00:00",
+          "captured_at": "2026-10-24T02:04:13.775774+00:00",
+          "source_sha256": "09fe7a874db12c33477b597497fecacab86cdf0c1abb06216062403744afb60d",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1227,10 +1235,10 @@
           "status": "out",
           "reason": "Not With Team",
           "game_id": "espn:401909850",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_01_45PM.pdf",
-          "source_published_at": "2026-10-23T17:45:00+00:00",
-          "captured_at": "2026-10-23T17:56:03.132064+00:00",
-          "source_sha256": "d4a073e31c21f16c2c601972443ca9fb357885eadde778df5d4bf7d3bc8a0aa0",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_10_00PM.pdf",
+          "source_published_at": "2026-10-24T02:00:00+00:00",
+          "captured_at": "2026-10-24T02:04:13.775774+00:00",
+          "source_sha256": "09fe7a874db12c33477b597497fecacab86cdf0c1abb06216062403744afb60d",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1239,48 +1247,71 @@
           "status": "out",
           "reason": "Injury/Illness - Left Patellar Tendon Repair/Surgery",
           "game_id": "espn:401909850",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_01_45PM.pdf",
-          "source_published_at": "2026-10-23T17:45:00+00:00",
-          "captured_at": "2026-10-23T17:56:03.132064+00:00",
-          "source_sha256": "d4a073e31c21f16c2c601972443ca9fb357885eadde778df5d4bf7d3bc8a0aa0",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_10_00PM.pdf",
+          "source_published_at": "2026-10-24T02:00:00+00:00",
+          "captured_at": "2026-10-24T02:04:13.775774+00:00",
+          "source_sha256": "09fe7a874db12c33477b597497fecacab86cdf0c1abb06216062403744afb60d",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612763,
+          "player_name": "Carson Cooper",
+          "status": "out",
+          "reason": "G League - Two-Way",
+          "game_id": "espn:401909850",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_10_00PM.pdf",
+          "source_published_at": "2026-10-24T02:00:00+00:00",
+          "captured_at": "2026-10-24T02:04:13.775774+00:00",
+          "source_sha256": "09fe7a874db12c33477b597497fecacab86cdf0c1abb06216062403744afb60d",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
           "team_id": 1610612763,
           "player_name": "Cedric Coward",
-          "status": "doubtful",
+          "status": "out",
           "reason": "Injury/Illness - Left Wrist Sprain",
           "game_id": "espn:401909850",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_01_45PM.pdf",
-          "source_published_at": "2026-10-23T17:45:00+00:00",
-          "captured_at": "2026-10-23T17:56:03.132064+00:00",
-          "source_sha256": "d4a073e31c21f16c2c601972443ca9fb357885eadde778df5d4bf7d3bc8a0aa0",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_10_00PM.pdf",
+          "source_published_at": "2026-10-24T02:00:00+00:00",
+          "captured_at": "2026-10-24T02:04:13.775774+00:00",
+          "source_sha256": "09fe7a874db12c33477b597497fecacab86cdf0c1abb06216062403744afb60d",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
           "team_id": 1610612763,
           "player_name": "Isaiah Stewart",
-          "status": "questionable",
+          "status": "available",
           "reason": "Injury/Illness - Left Ankle Sprain",
           "game_id": "espn:401909850",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_01_45PM.pdf",
-          "source_published_at": "2026-10-23T17:45:00+00:00",
-          "captured_at": "2026-10-23T17:56:03.132064+00:00",
-          "source_sha256": "d4a073e31c21f16c2c601972443ca9fb357885eadde778df5d4bf7d3bc8a0aa0",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_10_00PM.pdf",
+          "source_published_at": "2026-10-24T02:00:00+00:00",
+          "captured_at": "2026-10-24T02:04:13.775774+00:00",
+          "source_sha256": "09fe7a874db12c33477b597497fecacab86cdf0c1abb06216062403744afb60d",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612763,
+          "player_name": "Javon Small",
+          "status": "out",
+          "reason": "G League - Two-Way",
+          "game_id": "espn:401909850",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_10_00PM.pdf",
+          "source_published_at": "2026-10-24T02:00:00+00:00",
+          "captured_at": "2026-10-24T02:04:13.775774+00:00",
+          "source_sha256": "09fe7a874db12c33477b597497fecacab86cdf0c1abb06216062403744afb60d",
           "parser_version": "nba-official-injury-live-v3"
         }
       ]
     },
-    "postgame": null,
     "homepage_visible": true
   },
   "prediction": {
-    "status": "current",
+    "status": "locked",
     "game_id": "espn:401909850",
     "version_id": "b7f3ad79-2590-48af-a2dd-0da585282af9",
-    "state_revision": 2,
-    "locked_at": null,
-    "lock_reason": null,
+    "state_revision": 4,
+    "locked_at": "2026-10-24T02:00:43.996980+00:00",
+    "lock_reason": "scheduled_tipoff_reached",
     "schedule_revision": 1,
     "fact_view": {
       "schema_version": "pregame-fact-view-v1",
@@ -3336,8 +3367,95 @@
     "public_contract": "courtvision-public-v1"
   },
   "postgame": {
-    "status": "unavailable",
-    "postgame": null
+    "status": "available",
+    "postgame": {
+      "game_id": "espn:401909850",
+      "version_id": "80284bee-9436-47b2-9002-6312e6617b6b",
+      "title": "末节八防定胜局\n勇士罚球难救主",
+      "short_review": "杰罗姆28分撑住灰熊进攻，布泽尔25分13篮板并在最后20.1秒投进反超球，勇士末节只得18分，让4.5分落空，小分方向命中。",
+      "settlement_summary": "胜负看错，让分看错，大小分看对。",
+      "article": "灰熊111比108从旧金山带走胜利，最后20.1秒布泽尔那记9英尺转身跳投，把勇士刚追回来的气又压了下去。\n\n杰罗姆是灰熊进攻的轴。他打了32分钟拿28分5助攻，第三节单节14分，把灰熊从半场落后5分的局面里拽了出来。末节1分24秒，他命中23英尺三分，把分差追到105比106；最后10.2秒又突破上篮得手，把领先扩大到111比106。\n\n布泽尔的数据更全面：25分13篮板6助攻，首节4投2中拿8分，开局手感就立住了。末节他4投1中只拿6分，可那唯一命中的一球偏偏是反超球。37分钟、6次失误，说明他在高强度下处理球仍有代价，但灰熊需要他扛的产量，他扛住了。\n\n勇士这边，库里24分4助攻，15投5中，三分10投3中。末节他6投1中只拿3分，最关键的那次三分出手还被伊迪封盖。勇士全队罚球29罚26中，靠罚球拿了26分，比灰熊多10分，可运动战命中率只有41%，罚球优势没能换成胜势。\n\n末节比分是灰熊27比18。伊萨洛说球队最后阶段连续完成八次防守成功，这个说法来自教练本人，能解释灰熊怎样把领先守住，但不能替我们还原每一个回合。\n\n赛前我看勇士让4.5分，错了。我原以为格林领防能逼杰罗姆提前出球，结果杰罗姆仍拿到28分，布泽尔和韦尔斯也接住了球。小分方向命中，赛前我担心勇士提节奏会让小分站不住，实际总分219，更多是双方投篮效率不高、罚球和失误把节奏切碎，而不是我预想的半场磨阵。方向对了，成因并不完全一样。",
+      "score": {
+        "home": {
+          "name": "勇士",
+          "score": 108
+        },
+        "away": {
+          "name": "灰熊",
+          "score": 111
+        },
+        "text": "灰熊 111 — 108 勇士"
+      },
+      "prediction": {
+        "winner_name": "勇士",
+        "winner_probability": 0.6,
+        "expected_winner_margin": 5.5,
+        "expected_total": 234.5,
+        "actual_winner_name": "灰熊",
+        "actual_winner_margin": 3,
+        "actual_total": 219
+      },
+      "market_reference": {
+        "status": "available",
+        "home_spread": -4.5,
+        "away_spread": 4.5,
+        "total": 237.5,
+        "home_team_name": "勇士",
+        "away_team_name": "灰熊",
+        "source_title": "Draft Kings current odds",
+        "sportsbook": "Draft Kings",
+        "captured_at": "2026-10-23T18:03:35.485037+00:00",
+        "source_url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909850/competitions/401909850/odds",
+        "spread_review": {
+          "lean_side": "home",
+          "lean_line": -4.5,
+          "settlement": "loss"
+        },
+        "total_review": {
+          "lean": "under",
+          "settlement": "win",
+          "market_total": 237.5
+        }
+      },
+      "sources": [
+        {
+          "label": "比赛结果与球员数据",
+          "title": "ESPN 比赛数据",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=401909850",
+          "captured_at": "2026-10-24T04:54:31.071560+00:00"
+        },
+        {
+          "label": "公开早盘参考",
+          "title": "Draft Kings current odds",
+          "url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909850/competitions/401909850/odds",
+          "captured_at": "2026-10-23T18:03:35.485037+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "Memphis Grizzlies-Golden State Warriors Preview: Injuries, Odds, How to Watch & Starters",
+          "url": "https://www.si.com/nba/grizzlies/onsi/memphis-grizzlies-golden-state-warriors-preview-injuries-odds-how-to-watch-starters-01m5k852pjvv",
+          "captured_at": "2026-10-23T18:02:23.704119+00:00"
+        },
+        {
+          "source_id": "coach-e581ac3d70021fc46f",
+          "url": "https://bbs.hupu.com/643230132.html",
+          "title": "[流言板]伊萨洛采访全文：向扎克-伊迪致敬，他最后抢到了每一个篮板-NBA新闻-虎扑社区",
+          "published_at": "2026-10-24T09:02:40+00:00",
+          "captured_at": "2026-10-24T12:08:41.462611+00:00",
+          "classification": "source_attributed_coach_statement"
+        },
+        {
+          "source_id": "hupu-2bca52059037fea457",
+          "url": "https://bbs.hupu.com/643223411.html",
+          "title": "[流言板]科尔：每次掩护犯规都伴随着对方假摔，像被车撞倒了一样-NBA新闻-虎扑社区",
+          "published_at": "2026-10-24T06:17:53+00:00",
+          "captured_at": "2026-10-24T12:08:41.462611+00:00",
+          "classification": "community_discussion",
+          "not_a_fact_source": true
+        }
+      ],
+      "generated_at": "2026-10-24T12:08:56.742344+00:00"
+    }
   },
   "market": {
     "status": "available",
@@ -3376,10 +3494,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-23T18:04:17.634608+00:00",
+    "exported_at": "2026-10-24T12:18:31.320021+00:00",
     "source_prediction_version_id": "b7f3ad79-2590-48af-a2dd-0da585282af9",
     "source_prediction_payload_sha256": "89a71b23b4d16802b292b6168379f8a567506780ce382b136a0ab1b8336a44af",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "d103d8ca2270d22d7985137cdf8df805447fcaa4e3640da78da8f41b64b0760a"
+  "public_sha256": "91f8fdf55cf57cb2731411807abce3a67c36d4ca0eb2a3e52a4f67a319b0a5f5"
 }
