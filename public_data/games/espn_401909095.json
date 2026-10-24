@@ -9,7 +9,7 @@
       "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png",
       "name": "New York Knicks",
       "name_zh": "尼克斯",
-      "score": null
+      "score": 103.0
     },
     "background": {
       "availability": {
@@ -75,7 +75,7 @@
       "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/bos.png",
       "name": "Boston Celtics",
       "name_zh": "凯尔特人",
-      "score": null
+      "score": 107.0
     },
     "id": "espn:401909095",
     "matchup_history": {
@@ -921,9 +921,9 @@
     },
     "season_start": 2026,
     "source": {
-      "schedule_captured_at": "2026-10-23T14:39:35.951361+00:00"
+      "schedule_captured_at": "2026-10-24T12:04:15.228560+00:00"
     },
-    "status": "scheduled",
+    "status": "final",
     "technical": {
       "cutoff": "2026-10-23T14:42:59.975414+00:00",
       "fact_context_cutoff": "2026-10-23T14:42:59.975414+00:00",
@@ -931,6 +931,14 @@
     },
     "tipoff": "2026-10-23T23:00:00+00:00",
     "venue": "TD Garden",
+    "postgame": {
+      "status": "available",
+      "version_id": "a2c96bc6-13c7-4c4f-b8a6-9d31b344bdb3",
+      "score_text": "尼克斯 103 — 107 凯尔特人",
+      "summary": "塔图姆第三节独得16分、末节再拿9分，用36分9篮板7助攻压过尼克斯三人的20+，凯尔特人主场107比103拿下赛季首胜。",
+      "prediction_summary": "赛前看好尼克斯 · 胜率56% · 预计赢2.5分；赛果凯尔特人赢4分",
+      "market_summary": null
+    },
     "schedule_catalog_fact": true,
     "nba_game_id": null,
     "previous_season_team_stats": {
@@ -1117,15 +1125,15 @@
     },
     "official_injury_report": {
       "game_id": "espn:401909095",
-      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_10_30AM.pdf",
-      "source_published_at": "2026-10-23T14:30:00+00:00",
-      "captured_at": "2026-10-23T14:34:21.564848+00:00",
-      "source_sha256": "606cf810a85ff2a89f6ff656a475a8d84160b1b43bb6183557adb7a53f3e7674",
+      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_00PM.pdf",
+      "source_published_at": "2026-10-23T23:00:00+00:00",
+      "captured_at": "2026-10-23T23:08:32.975939+00:00",
+      "source_sha256": "55a695c7077ae363c84edb698e928937310336b5673ba95ddf1ef7851b6784a5",
       "parser_version": "nba-official-injury-live-v3",
       "status": "published",
-      "report_id": "cdb115abca0b3b5e467e6fadadbdad34a0dc5a00eb99e999e87f6c1a3cbca3dd",
+      "report_id": "90f642c2c4c8de7beaceb7fade19fa210d94d7033b9c6063d7026d8aa0ed8a5e",
       "report_date": "2026-10-23",
-      "report_time": "10:30",
+      "report_time": "19:00",
       "coverage": "complete",
       "records": [
         {
@@ -1134,60 +1142,59 @@
           "status": "out",
           "reason": "Injury/Illness - Illness",
           "game_id": "espn:401909095",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_10_30AM.pdf",
-          "source_published_at": "2026-10-23T14:30:00+00:00",
-          "captured_at": "2026-10-23T14:34:21.564848+00:00",
-          "source_sha256": "606cf810a85ff2a89f6ff656a475a8d84160b1b43bb6183557adb7a53f3e7674",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_00PM.pdf",
+          "source_published_at": "2026-10-23T23:00:00+00:00",
+          "captured_at": "2026-10-23T23:08:32.975939+00:00",
+          "source_sha256": "55a695c7077ae363c84edb698e928937310336b5673ba95ddf1ef7851b6784a5",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
           "team_id": 1610612752,
           "player_name": "Jaden Akins",
-          "status": "questionable",
+          "status": "out",
           "reason": "G League - Two-Way",
           "game_id": "espn:401909095",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_10_30AM.pdf",
-          "source_published_at": "2026-10-23T14:30:00+00:00",
-          "captured_at": "2026-10-23T14:34:21.564848+00:00",
-          "source_sha256": "606cf810a85ff2a89f6ff656a475a8d84160b1b43bb6183557adb7a53f3e7674",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_00PM.pdf",
+          "source_published_at": "2026-10-23T23:00:00+00:00",
+          "captured_at": "2026-10-23T23:08:32.975939+00:00",
+          "source_sha256": "55a695c7077ae363c84edb698e928937310336b5673ba95ddf1ef7851b6784a5",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
           "team_id": 1610612752,
           "player_name": "Kevin Mc Cullar Jr.",
-          "status": "questionable",
+          "status": "out",
           "reason": "G League - Two-Way",
           "game_id": "espn:401909095",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_10_30AM.pdf",
-          "source_published_at": "2026-10-23T14:30:00+00:00",
-          "captured_at": "2026-10-23T14:34:21.564848+00:00",
-          "source_sha256": "606cf810a85ff2a89f6ff656a475a8d84160b1b43bb6183557adb7a53f3e7674",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_00PM.pdf",
+          "source_published_at": "2026-10-23T23:00:00+00:00",
+          "captured_at": "2026-10-23T23:08:32.975939+00:00",
+          "source_sha256": "55a695c7077ae363c84edb698e928937310336b5673ba95ddf1ef7851b6784a5",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
           "team_id": 1610612752,
           "player_name": "Tyler Nickel",
-          "status": "questionable",
+          "status": "out",
           "reason": "G League - Two-Way",
           "game_id": "espn:401909095",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_10_30AM.pdf",
-          "source_published_at": "2026-10-23T14:30:00+00:00",
-          "captured_at": "2026-10-23T14:34:21.564848+00:00",
-          "source_sha256": "606cf810a85ff2a89f6ff656a475a8d84160b1b43bb6183557adb7a53f3e7674",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_07_00PM.pdf",
+          "source_published_at": "2026-10-23T23:00:00+00:00",
+          "captured_at": "2026-10-23T23:08:32.975939+00:00",
+          "source_sha256": "55a695c7077ae363c84edb698e928937310336b5673ba95ddf1ef7851b6784a5",
           "parser_version": "nba-official-injury-live-v3"
         }
       ]
     },
-    "postgame": null,
     "homepage_visible": true
   },
   "prediction": {
-    "status": "current",
+    "status": "locked",
     "game_id": "espn:401909095",
     "version_id": "545ae163-2115-4253-a605-044a68ed83d9",
-    "state_revision": 2,
-    "locked_at": null,
-    "lock_reason": null,
+    "state_revision": 4,
+    "locked_at": "2026-10-23T23:00:21.221394+00:00",
+    "lock_reason": "scheduled_tipoff_reached",
     "schedule_revision": 1,
     "fact_view": {
       "schema_version": "pregame-fact-view-v1",
@@ -3256,8 +3263,68 @@
     "public_contract": "courtvision-public-v1"
   },
   "postgame": {
-    "status": "unavailable",
-    "postgame": null
+    "status": "available",
+    "postgame": {
+      "game_id": "espn:401909095",
+      "version_id": "a2c96bc6-13c7-4c4f-b8a6-9d31b344bdb3",
+      "title": "塔图姆末节连击\n尼克斯追分未果",
+      "short_review": "塔图姆第三节独得16分、末节再拿9分，用36分9篮板7助攻压过尼克斯三人的20+，凯尔特人主场107比103拿下赛季首胜。",
+      "settlement_summary": "胜负看错。塔图姆第三节独得16分、末节再拿9分，用36分9篮板7助攻压过尼克斯三人的20+，凯尔特人主场107比103拿下赛季首胜。",
+      "article": "凯尔特人107比103险胜尼克斯，拿到赛季首胜。分水岭在第三节：塔图姆单节8投5中砍下16分，把半场落后1分的绿军带到三节领先10分。\n\n塔图姆全场36分9篮板7助攻，26投14中，只有2次失误。首战他只得13分、更多在组织端串联，这一场他把得分和组织同时扛了起来。\n\n尼克斯这边，唐斯22分10篮板、阿奴诺比20分10篮板8助攻、麦克布赖德替补20分，三人得分都上了20，但布伦森17投7中只拿19分，效率不够。\n\n绿军配角也给了塔图姆支撑。克塔替补22分钟拿15分6篮板，加尔扎4分钟3投全中拿8分，怀特12分6助攻。乔治15投6中拿15分，效率一般。\n\n赛前我看好尼克斯赢球，这个方向错了。我当时的理由是尼克斯核心五人组更清楚自己怎么打，而乔治和塔图姆的球权分配还没理顺。结果塔图姆用36分9篮板7助攻证明，他和乔治的分工问题至少这一场没有拖累绿军。唐斯出场37分钟、远超赛前预计的24到32分钟，拿到22分10篮板，内线文章做出来了，但没能转化成胜利。德拉蒙德只打了7分钟，赛前预计他顶上中锋的设想没有兑现。总分方向赛前没有可靠市场参考，不做结算。",
+      "score": {
+        "home": {
+          "name": "凯尔特人",
+          "score": 107
+        },
+        "away": {
+          "name": "尼克斯",
+          "score": 103
+        },
+        "text": "尼克斯 103 — 107 凯尔特人"
+      },
+      "prediction": {
+        "winner_name": "尼克斯",
+        "winner_probability": 0.56,
+        "expected_winner_margin": 2.5,
+        "expected_total": 220.5,
+        "actual_winner_name": "凯尔特人",
+        "actual_winner_margin": 4,
+        "actual_total": 210
+      },
+      "market_reference": {
+        "status": "unavailable"
+      },
+      "sources": [
+        {
+          "label": "比赛结果与球员数据",
+          "title": "ESPN 比赛数据",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=401909095",
+          "captured_at": "2026-10-24T01:53:38.737490+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "Knicks vs. Celtics prediction, odds, time: 2026 NBA picks for Friday, Oct. 23",
+          "url": "https://www.cbssports.com/betting/news/knicks-celtics-prediction-odds-time-2026-nba-picks-for-friday-oct-23",
+          "captured_at": "2026-10-23T14:44:20.650906+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "2026-27 Season Preview: New York Knicks",
+          "url": "https://www.nba.com/news/2026-27-season-preview-nyk",
+          "captured_at": "2026-10-23T14:45:07.968044+00:00"
+        },
+        {
+          "source_id": "hupu-0995eed6ae71e3f9a6",
+          "url": "https://bbs.hupu.com/643209623.html",
+          "title": "[赛后]尼克斯103-107凯尔特人，阿奴诺比20分10板8助，塔图姆33分9板7助-NBA专区-虎扑社区",
+          "published_at": "2026-10-24T01:48:51+00:00",
+          "captured_at": "2026-10-24T12:06:04.831884+00:00",
+          "classification": "community_discussion",
+          "not_a_fact_source": true
+        }
+      ],
+      "generated_at": "2026-10-24T12:07:20.986505+00:00"
+    }
   },
   "market": {
     "status": "unavailable",
@@ -3268,10 +3335,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-23T14:49:32.548298+00:00",
+    "exported_at": "2026-10-24T12:12:28.290773+00:00",
     "source_prediction_version_id": "545ae163-2115-4253-a605-044a68ed83d9",
     "source_prediction_payload_sha256": "94bfcfd8c49d2986bdab95e3a68a09a6be69a4f1f11e1df026afecf423a1154a",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "82f42886f626f44de95f13e5146670792cb8dca2cd43a32ad4453c0be8ad6a2f"
+  "public_sha256": "7047bb8b5b6b406f594caa670a6b9e3015bfdd156793f154f1cc455ae4cdb2d9"
 }
