@@ -499,7 +499,7 @@
       "file": "games/espn_401909847.json",
       "tipoff": "2026-10-24T00:00:00+00:00",
       "version_id": "39f17647-74cd-42e9-ba99-24b3d33bbee5",
-      "public_sha256": "2e7a4fb5d9d77587d8455101602c67d4a4a1d829ac9ad992c8a69599e236bb03",
+      "public_sha256": "722d38570fce5755022bbe71b9fc8d8f2b7bea3624dab269176c97ae94c436a3",
       "home_record": {
         "game": {
           "away": {
@@ -510,7 +510,7 @@
             "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/det.png",
             "name": "Detroit Pistons",
             "name_zh": "活塞",
-            "score": null
+            "score": 128.0
           },
           "game_type": "regular_season",
           "home": {
@@ -521,27 +521,34 @@
             "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
             "name": "Miami Heat",
             "name_zh": "热火",
-            "score": null
+            "score": 111.0
           },
           "id": "espn:401909847",
           "registered_game": true,
           "schedule_revision": 1,
           "season": 2027,
-          "status": "scheduled",
+          "status": "final",
           "tipoff": "2026-10-24T00:00:00+00:00",
           "venue": "Kaseya Center",
+          "postgame": {
+            "status": "available",
+            "version_id": "35a29104-d398-4f6a-b6fe-9608802e1ce3",
+            "score_text": "活塞 128 — 111 热火",
+            "summary": "字母36分仍难掩热火攻防整体塌陷，活塞用六人上双的均衡火力证明赛前“体系更完整”的判断。",
+            "prediction_summary": "赛前看好活塞 · 胜率56% · 预计赢2.5分；赛果活塞赢17分",
+            "market_summary": "让分方向 活塞 -1.5 · 命中；总分 小分 · 未命中"
+          },
           "schedule_catalog_fact": true,
-          "postgame": null,
           "homepage_visible": true,
           "public_summary": true
         },
         "prediction": {
-          "status": "current",
+          "status": "locked",
           "game_id": "espn:401909847",
           "version_id": "39f17647-74cd-42e9-ba99-24b3d33bbee5",
-          "state_revision": 3,
-          "locked_at": null,
-          "lock_reason": null,
+          "state_revision": 5,
+          "locked_at": "2026-10-24T00:01:00.895276+00:00",
+          "lock_reason": "scheduled_tipoff_reached",
           "schedule_revision": 1,
           "version": {
             "analysis_contract_version": "two-stage-forecast-v1",
@@ -3183,5 +3190,5 @@
       }
     }
   ],
-  "published_at": "2026-10-24T12:12:28.290773+00:00"
+  "published_at": "2026-10-24T12:12:54.497088+00:00"
 }
