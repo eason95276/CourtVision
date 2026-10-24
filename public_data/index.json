@@ -2,132 +2,6 @@
   "contract_version": "courtvision-public-v1",
   "games": [
     {
-      "game_id": "espn:401909852",
-      "file": "games/espn_401909852.json",
-      "tipoff": "2026-10-24T02:00:00+00:00",
-      "version_id": "de61d57d-fd1f-4355-8694-fb0f1047b7be",
-      "public_sha256": "293b5d702627cdf4e5c628bc5b38284daf6665a77e027ae515c6f0fd79998ee4",
-      "home_record": {
-        "game": {
-          "away": {
-            "abbreviation": "POR",
-            "accent": "#E03A3E",
-            "espn_team_id": "22",
-            "id": 1610612757,
-            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/por.png",
-            "name": "Portland Trail Blazers",
-            "name_zh": "开拓者",
-            "score": null
-          },
-          "game_type": "regular_season",
-          "home": {
-            "abbreviation": "SAC",
-            "accent": "#5A2D81",
-            "espn_team_id": "23",
-            "id": 1610612758,
-            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/sac.png",
-            "name": "Sacramento Kings",
-            "name_zh": "国王",
-            "score": null
-          },
-          "id": "espn:401909852",
-          "registered_game": true,
-          "schedule_revision": 1,
-          "season": 2027,
-          "status": "scheduled",
-          "tipoff": "2026-10-24T02:00:00+00:00",
-          "venue": "Golden 1 Center",
-          "schedule_catalog_fact": true,
-          "postgame": null,
-          "homepage_visible": true,
-          "public_summary": true
-        },
-        "prediction": {
-          "status": "current",
-          "game_id": "espn:401909852",
-          "version_id": "de61d57d-fd1f-4355-8694-fb0f1047b7be",
-          "state_revision": 3,
-          "locked_at": null,
-          "lock_reason": null,
-          "schedule_revision": 1,
-          "version": {
-            "analysis_contract_version": "two-stage-forecast-v1",
-            "base_input_hash": "39721e5e00eaef61061efe3aa7889b5add27a1306095a7385306b32ebeccd219",
-            "game_id": "espn:401909852",
-            "game_identity": {
-              "away_team_id": 1610612757,
-              "game_id": "espn:401909852",
-              "home_team_id": 1610612758,
-              "scheduled_tipoff": "2026-10-24T02:00:00+00:00"
-            },
-            "generated_at": "2026-10-24T01:40:53.424252+00:00",
-            "input_cutoff_at": "2026-10-24T01:40:18.705325+00:00",
-            "published_at": "2026-10-24T01:40:58.060302+00:00",
-            "schedule_revision": 1,
-            "stage": "FINAL_PREGAME",
-            "version_id": "de61d57d-fd1f-4355-8694-fb0f1047b7be",
-            "payload_sha256": "5443d16aa78b7c88af305d407d97be0985a5bdd156e1c93620f6f3395ee62a1b",
-            "input_snapshot": {
-              "away": {
-                "abbreviation": "POR",
-                "accent": "#E03A3E",
-                "espn_team_id": "22",
-                "id": 1610612757,
-                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/por.png",
-                "name": "Portland Trail Blazers",
-                "name_zh": "开拓者"
-              },
-              "home": {
-                "abbreviation": "SAC",
-                "accent": "#5A2D81",
-                "espn_team_id": "23",
-                "id": 1610612758,
-                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/sac.png",
-                "name": "Sacramento Kings",
-                "name_zh": "国王"
-              },
-              "id": "espn:401909852",
-              "schedule_revision": 1,
-              "tipoff": "2026-10-24T02:00:00+00:00"
-            },
-            "judgment": {
-              "final_prediction": {
-                "evidence_ids": [
-                  "174100a1cf1c6111e4781a40a750ea663f2c1a2785a544957c8fc10b7ba83d62",
-                  "42b6ab7951d6c7c48e700a6947513155398507ff10e8457bbd680c7b7a6e7c39",
-                  "727059f739961a76cb6ae88b73ab3ac345f1b278c8d90f967ee8d1ccad08a151",
-                  "8fba184988340fb7194ee04de96fb7e6cd57c49b87c994710d973bdfb765cf89",
-                  "c80a637cb9e9b58eec17a703afab9aebac9d96fa8d9ba21f8ccb64cdb69a203f",
-                  "final-availability-1bd4f34752d26e773735",
-                  "final-availability-3752bcda3513bbe4418d",
-                  "final-availability-586aa9e9030937cdacca",
-                  "final-availability-7b96ff455de215929873",
-                  "final-availability-f95c0387437daad37259"
-                ],
-                "expected_margin": 6.5,
-                "expected_total": 231.5,
-                "win_probability": 0.62,
-                "winner_side": "away"
-              },
-              "pregame_story": {
-                "classification": "subjective_analysis",
-                "evidence_ids": [
-                  "174100a1cf1c6111e4781a40a750ea663f2c1a2785a544957c8fc10b7ba83d62",
-                  "42b6ab7951d6c7c48e700a6947513155398507ff10e8457bbd680c7b7a6e7c39",
-                  "727059f739961a76cb6ae88b73ab3ac345f1b278c8d90f967ee8d1ccad08a151",
-                  "8fba184988340fb7194ee04de96fb7e6cd57c49b87c994710d973bdfb765cf89",
-                  "c80a637cb9e9b58eec17a703afab9aebac9d96fa8d9ba21f8ccb64cdb69a203f",
-                  "final-availability-1bd4f34752d26e773735"
-                ],
-                "statement": "开拓者带着莫兰特和利拉德的新后场组合做客萨克拉门托，国王刚在揭幕战被打崩，蒙克又刚确认能打——这场球就看国王的后场能不能顶住。",
-                "title": "开拓者双枪闯城\n国王新阵待磨合"
-              }
-            }
-          }
-        }
-      }
-    },
-    {
       "game_id": "espn:401909851",
       "file": "games/espn_401909851.json",
       "tipoff": "2026-10-24T02:00:00+00:00",
@@ -378,6 +252,139 @@
                 ],
                 "statement": "灰熊揭幕战靠杰罗姆45分赢球，转头就要去旧金山面对库里和勇士，这场能看出那场爆发有多少分量。",
                 "title": "灰熊新阵初登门\n库里主场待后生"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": "espn:401909852",
+      "file": "games/espn_401909852.json",
+      "tipoff": "2026-10-24T02:00:00+00:00",
+      "version_id": "de61d57d-fd1f-4355-8694-fb0f1047b7be",
+      "public_sha256": "a1e0be19ed200c64c80c8933cbc12cc6d86a3b60de8919761a80f63e6d20f054",
+      "home_record": {
+        "game": {
+          "away": {
+            "abbreviation": "POR",
+            "accent": "#E03A3E",
+            "espn_team_id": "22",
+            "id": 1610612757,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/por.png",
+            "name": "Portland Trail Blazers",
+            "name_zh": "开拓者",
+            "score": 128.0
+          },
+          "game_type": "regular_season",
+          "home": {
+            "abbreviation": "SAC",
+            "accent": "#5A2D81",
+            "espn_team_id": "23",
+            "id": 1610612758,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/sac.png",
+            "name": "Sacramento Kings",
+            "name_zh": "国王",
+            "score": 120.0
+          },
+          "id": "espn:401909852",
+          "registered_game": true,
+          "schedule_revision": 1,
+          "season": 2027,
+          "status": "final",
+          "tipoff": "2026-10-24T02:00:00+00:00",
+          "venue": "Golden 1 Center",
+          "postgame": {
+            "status": "available",
+            "version_id": "35dd18e3-598f-46c1-9e7c-77f9da07df6e",
+            "score_text": "开拓者 128 — 120 国王",
+            "summary": "开拓者靠第三节44比26的攻势和更均衡的团队火力拿下比赛，国王虽有阿卡夫二世33分和萨博尼斯三双，但低效单打和防守崩盘让反扑落空。",
+            "prediction_summary": "赛前看好开拓者 · 胜率62% · 预计赢6.5分；赛果开拓者赢8分",
+            "market_summary": "让分方向 国王 9.5 · 命中；总分 走盘 · 走盘"
+          },
+          "schedule_catalog_fact": true,
+          "homepage_visible": true,
+          "public_summary": true
+        },
+        "prediction": {
+          "status": "locked",
+          "game_id": "espn:401909852",
+          "version_id": "de61d57d-fd1f-4355-8694-fb0f1047b7be",
+          "state_revision": 5,
+          "locked_at": "2026-10-24T02:00:44.029590+00:00",
+          "lock_reason": "scheduled_tipoff_reached",
+          "schedule_revision": 1,
+          "version": {
+            "analysis_contract_version": "two-stage-forecast-v1",
+            "base_input_hash": "39721e5e00eaef61061efe3aa7889b5add27a1306095a7385306b32ebeccd219",
+            "game_id": "espn:401909852",
+            "game_identity": {
+              "away_team_id": 1610612757,
+              "game_id": "espn:401909852",
+              "home_team_id": 1610612758,
+              "scheduled_tipoff": "2026-10-24T02:00:00+00:00"
+            },
+            "generated_at": "2026-10-24T01:40:53.424252+00:00",
+            "input_cutoff_at": "2026-10-24T01:40:18.705325+00:00",
+            "published_at": "2026-10-24T01:40:58.060302+00:00",
+            "schedule_revision": 1,
+            "stage": "FINAL_PREGAME",
+            "version_id": "de61d57d-fd1f-4355-8694-fb0f1047b7be",
+            "payload_sha256": "5443d16aa78b7c88af305d407d97be0985a5bdd156e1c93620f6f3395ee62a1b",
+            "input_snapshot": {
+              "away": {
+                "abbreviation": "POR",
+                "accent": "#E03A3E",
+                "espn_team_id": "22",
+                "id": 1610612757,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/por.png",
+                "name": "Portland Trail Blazers",
+                "name_zh": "开拓者"
+              },
+              "home": {
+                "abbreviation": "SAC",
+                "accent": "#5A2D81",
+                "espn_team_id": "23",
+                "id": 1610612758,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/sac.png",
+                "name": "Sacramento Kings",
+                "name_zh": "国王"
+              },
+              "id": "espn:401909852",
+              "schedule_revision": 1,
+              "tipoff": "2026-10-24T02:00:00+00:00"
+            },
+            "judgment": {
+              "final_prediction": {
+                "evidence_ids": [
+                  "174100a1cf1c6111e4781a40a750ea663f2c1a2785a544957c8fc10b7ba83d62",
+                  "42b6ab7951d6c7c48e700a6947513155398507ff10e8457bbd680c7b7a6e7c39",
+                  "727059f739961a76cb6ae88b73ab3ac345f1b278c8d90f967ee8d1ccad08a151",
+                  "8fba184988340fb7194ee04de96fb7e6cd57c49b87c994710d973bdfb765cf89",
+                  "c80a637cb9e9b58eec17a703afab9aebac9d96fa8d9ba21f8ccb64cdb69a203f",
+                  "final-availability-1bd4f34752d26e773735",
+                  "final-availability-3752bcda3513bbe4418d",
+                  "final-availability-586aa9e9030937cdacca",
+                  "final-availability-7b96ff455de215929873",
+                  "final-availability-f95c0387437daad37259"
+                ],
+                "expected_margin": 6.5,
+                "expected_total": 231.5,
+                "win_probability": 0.62,
+                "winner_side": "away"
+              },
+              "pregame_story": {
+                "classification": "subjective_analysis",
+                "evidence_ids": [
+                  "174100a1cf1c6111e4781a40a750ea663f2c1a2785a544957c8fc10b7ba83d62",
+                  "42b6ab7951d6c7c48e700a6947513155398507ff10e8457bbd680c7b7a6e7c39",
+                  "727059f739961a76cb6ae88b73ab3ac345f1b278c8d90f967ee8d1ccad08a151",
+                  "8fba184988340fb7194ee04de96fb7e6cd57c49b87c994710d973bdfb765cf89",
+                  "c80a637cb9e9b58eec17a703afab9aebac9d96fa8d9ba21f8ccb64cdb69a203f",
+                  "final-availability-1bd4f34752d26e773735"
+                ],
+                "statement": "开拓者带着莫兰特和利拉德的新后场组合做客萨克拉门托，国王刚在揭幕战被打崩，蒙克又刚确认能打——这场球就看国王的后场能不能顶住。",
+                "title": "开拓者双枪闯城\n国王新阵待磨合"
               }
             }
           }
@@ -3211,5 +3218,5 @@
       }
     }
   ],
-  "published_at": "2026-10-24T12:18:31.320021+00:00"
+  "published_at": "2026-10-24T12:20:49.177419+00:00"
 }
