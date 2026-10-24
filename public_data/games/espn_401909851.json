@@ -9,7 +9,7 @@
       "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/lac.png",
       "name": "LA Clippers",
       "name_zh": "快船",
-      "score": null
+      "score": 117.0
     },
     "background": {
       "availability": {
@@ -75,7 +75,7 @@
       "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/lal.png",
       "name": "Los Angeles Lakers",
       "name_zh": "湖人",
-      "score": null
+      "score": 125.0
     },
     "id": "espn:401909851",
     "matchup_history": {
@@ -975,9 +975,9 @@
     },
     "season_start": 2026,
     "source": {
-      "schedule_captured_at": "2026-10-23T18:17:41.444647+00:00"
+      "schedule_captured_at": "2026-10-24T12:17:50.535472+00:00"
     },
-    "status": "scheduled",
+    "status": "final",
     "technical": {
       "cutoff": "2026-10-23T18:17:42.108098+00:00",
       "fact_context_cutoff": "2026-10-23T18:17:42.108098+00:00",
@@ -985,6 +985,14 @@
     },
     "tipoff": "2026-10-24T02:00:00+00:00",
     "venue": "crypto.com Arena",
+    "postgame": {
+      "status": "available",
+      "version_id": "2b648f01-e8d5-413e-a838-664d0da000cb",
+      "score_text": "快船 117 — 125 湖人",
+      "summary": "里夫斯用28分9助攻的高效表现撑起湖人进攻，东契奇11次失误险些让快船翻盘，湖人靠第三节39分建立优势，最终125比117赢下德比。",
+      "prediction_summary": "赛前看好湖人 · 胜率60% · 预计赢5分；赛果湖人赢8分",
+      "market_summary": "让分方向 快船 +8.5 · 命中；总分 大分 · 命中"
+    },
     "schedule_catalog_fact": true,
     "nba_game_id": null,
     "previous_season_team_stats": {
@@ -1171,15 +1179,15 @@
     },
     "official_injury_report": {
       "game_id": "espn:401909851",
-      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_02_15PM.pdf",
-      "source_published_at": "2026-10-23T18:15:00+00:00",
-      "captured_at": "2026-10-23T18:17:47.310211+00:00",
-      "source_sha256": "e049955e5aaeebe834aa9fe7722681a4a65ed6f3cbffed56b3d1b41c6f9b6782",
+      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_10_00PM.pdf",
+      "source_published_at": "2026-10-24T02:00:00+00:00",
+      "captured_at": "2026-10-24T02:04:13.775774+00:00",
+      "source_sha256": "09fe7a874db12c33477b597497fecacab86cdf0c1abb06216062403744afb60d",
       "parser_version": "nba-official-injury-live-v3",
       "status": "published",
-      "report_id": "57c5aab26eb2cc5040dcbac21fdc10509d979cb6479062eb94a16933a1d63cb5",
+      "report_id": "04586a6a2d1f66873c8353a3119ac762970cf910d0569f4f0691cdedd033617e",
       "report_date": "2026-10-23",
-      "report_time": "14:15",
+      "report_time": "22:00",
       "coverage": "complete",
       "records": [
         {
@@ -1188,10 +1196,10 @@
           "status": "out",
           "reason": "Injury/Illness - Right Knee Injury Management",
           "game_id": "espn:401909851",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_02_15PM.pdf",
-          "source_published_at": "2026-10-23T18:15:00+00:00",
-          "captured_at": "2026-10-23T18:17:47.310211+00:00",
-          "source_sha256": "e049955e5aaeebe834aa9fe7722681a4a65ed6f3cbffed56b3d1b41c6f9b6782",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_10_00PM.pdf",
+          "source_published_at": "2026-10-24T02:00:00+00:00",
+          "captured_at": "2026-10-24T02:04:13.775774+00:00",
+          "source_sha256": "09fe7a874db12c33477b597497fecacab86cdf0c1abb06216062403744afb60d",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1200,10 +1208,10 @@
           "status": "out",
           "reason": "Injury/Illness - Right Heel Surgery",
           "game_id": "espn:401909851",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_02_15PM.pdf",
-          "source_published_at": "2026-10-23T18:15:00+00:00",
-          "captured_at": "2026-10-23T18:17:47.310211+00:00",
-          "source_sha256": "e049955e5aaeebe834aa9fe7722681a4a65ed6f3cbffed56b3d1b41c6f9b6782",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_10_00PM.pdf",
+          "source_published_at": "2026-10-24T02:00:00+00:00",
+          "captured_at": "2026-10-24T02:04:13.775774+00:00",
+          "source_sha256": "09fe7a874db12c33477b597497fecacab86cdf0c1abb06216062403744afb60d",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1212,10 +1220,10 @@
           "status": "out",
           "reason": "Injury/Illness - Left Rotator Cuff Surgery",
           "game_id": "espn:401909851",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_02_15PM.pdf",
-          "source_published_at": "2026-10-23T18:15:00+00:00",
-          "captured_at": "2026-10-23T18:17:47.310211+00:00",
-          "source_sha256": "e049955e5aaeebe834aa9fe7722681a4a65ed6f3cbffed56b3d1b41c6f9b6782",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_10_00PM.pdf",
+          "source_published_at": "2026-10-24T02:00:00+00:00",
+          "captured_at": "2026-10-24T02:04:13.775774+00:00",
+          "source_sha256": "09fe7a874db12c33477b597497fecacab86cdf0c1abb06216062403744afb60d",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1224,10 +1232,10 @@
           "status": "out",
           "reason": "Injury/Illness - Right Plantar Fascia",
           "game_id": "espn:401909851",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_02_15PM.pdf",
-          "source_published_at": "2026-10-23T18:15:00+00:00",
-          "captured_at": "2026-10-23T18:17:47.310211+00:00",
-          "source_sha256": "e049955e5aaeebe834aa9fe7722681a4a65ed6f3cbffed56b3d1b41c6f9b6782",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_10_00PM.pdf",
+          "source_published_at": "2026-10-24T02:00:00+00:00",
+          "captured_at": "2026-10-24T02:04:13.775774+00:00",
+          "source_sha256": "09fe7a874db12c33477b597497fecacab86cdf0c1abb06216062403744afb60d",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1236,10 +1244,10 @@
           "status": "out",
           "reason": "Injury/Illness - Right Lisfranc Surgery",
           "game_id": "espn:401909851",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_02_15PM.pdf",
-          "source_published_at": "2026-10-23T18:15:00+00:00",
-          "captured_at": "2026-10-23T18:17:47.310211+00:00",
-          "source_sha256": "e049955e5aaeebe834aa9fe7722681a4a65ed6f3cbffed56b3d1b41c6f9b6782",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_10_00PM.pdf",
+          "source_published_at": "2026-10-24T02:00:00+00:00",
+          "captured_at": "2026-10-24T02:04:13.775774+00:00",
+          "source_sha256": "09fe7a874db12c33477b597497fecacab86cdf0c1abb06216062403744afb60d",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1248,10 +1256,10 @@
           "status": "out",
           "reason": "Injury/Illness - Left Knee Effusion/ Swelling",
           "game_id": "espn:401909851",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_02_15PM.pdf",
-          "source_published_at": "2026-10-23T18:15:00+00:00",
-          "captured_at": "2026-10-23T18:17:47.310211+00:00",
-          "source_sha256": "e049955e5aaeebe834aa9fe7722681a4a65ed6f3cbffed56b3d1b41c6f9b6782",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_10_00PM.pdf",
+          "source_published_at": "2026-10-24T02:00:00+00:00",
+          "captured_at": "2026-10-24T02:04:13.775774+00:00",
+          "source_sha256": "09fe7a874db12c33477b597497fecacab86cdf0c1abb06216062403744afb60d",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1260,22 +1268,22 @@
           "status": "out",
           "reason": "Injury/Illness - Right Oblique Strain",
           "game_id": "espn:401909851",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_02_15PM.pdf",
-          "source_published_at": "2026-10-23T18:15:00+00:00",
-          "captured_at": "2026-10-23T18:17:47.310211+00:00",
-          "source_sha256": "e049955e5aaeebe834aa9fe7722681a4a65ed6f3cbffed56b3d1b41c6f9b6782",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_10_00PM.pdf",
+          "source_published_at": "2026-10-24T02:00:00+00:00",
+          "captured_at": "2026-10-24T02:04:13.775774+00:00",
+          "source_sha256": "09fe7a874db12c33477b597497fecacab86cdf0c1abb06216062403744afb60d",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
           "team_id": 1610612747,
           "player_name": "Jake La Ravia",
-          "status": "questionable",
+          "status": "out",
           "reason": "Injury/Illness - Right Ankle Sprain",
           "game_id": "espn:401909851",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_02_15PM.pdf",
-          "source_published_at": "2026-10-23T18:15:00+00:00",
-          "captured_at": "2026-10-23T18:17:47.310211+00:00",
-          "source_sha256": "e049955e5aaeebe834aa9fe7722681a4a65ed6f3cbffed56b3d1b41c6f9b6782",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_10_00PM.pdf",
+          "source_published_at": "2026-10-24T02:00:00+00:00",
+          "captured_at": "2026-10-24T02:04:13.775774+00:00",
+          "source_sha256": "09fe7a874db12c33477b597497fecacab86cdf0c1abb06216062403744afb60d",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1284,24 +1292,23 @@
           "status": "available",
           "reason": "Injury/Illness - Left Finger Splint",
           "game_id": "espn:401909851",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_02_15PM.pdf",
-          "source_published_at": "2026-10-23T18:15:00+00:00",
-          "captured_at": "2026-10-23T18:17:47.310211+00:00",
-          "source_sha256": "e049955e5aaeebe834aa9fe7722681a4a65ed6f3cbffed56b3d1b41c6f9b6782",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-23_10_00PM.pdf",
+          "source_published_at": "2026-10-24T02:00:00+00:00",
+          "captured_at": "2026-10-24T02:04:13.775774+00:00",
+          "source_sha256": "09fe7a874db12c33477b597497fecacab86cdf0c1abb06216062403744afb60d",
           "parser_version": "nba-official-injury-live-v3"
         }
       ]
     },
-    "postgame": null,
     "homepage_visible": true
   },
   "prediction": {
-    "status": "current",
+    "status": "locked",
     "game_id": "espn:401909851",
     "version_id": "52a29541-8194-4816-9b3a-ab8beb98cc48",
-    "state_revision": 2,
-    "locked_at": null,
-    "lock_reason": null,
+    "state_revision": 4,
+    "locked_at": "2026-10-24T02:00:44.060635+00:00",
+    "lock_reason": "scheduled_tipoff_reached",
     "schedule_revision": 1,
     "fact_view": {
       "schema_version": "pregame-fact-view-v1",
@@ -3388,8 +3395,95 @@
     "public_contract": "courtvision-public-v1"
   },
   "postgame": {
-    "status": "unavailable",
-    "postgame": null
+    "status": "available",
+    "postgame": {
+      "game_id": "espn:401909851",
+      "version_id": "2b648f01-e8d5-413e-a838-664d0da000cb",
+      "title": "里夫斯高效撑攻\n东契奇失误隐患",
+      "short_review": "里夫斯用28分9助攻的高效表现撑起湖人进攻，东契奇11次失误险些让快船翻盘，湖人靠第三节39分建立优势，最终125比117赢下德比。",
+      "settlement_summary": "胜负看对，让分看对，大小分看对。里夫斯用28分9助攻的高效表现撑起湖人进攻，东契奇11次失误险些让快船翻盘，湖人靠第三节39分建立优势，最终125比117赢下德比。",
+      "article": "湖人125比117赢下洛城德比，但这场球远没有比分看起来那么稳。里夫斯13投10中拿28分9助攻，是湖人进攻端最锋利也最稳的那把刀；东契奇23分7助攻却送出11次失误，末节只出手1次拿2分，差点让快船把悬念拖到最后。\n\n里夫斯的价值不只在得分。第三节他7投6中独得13分，湖人单节轰下39分，把半场4分优势拉开到两位数。快船包夹东契奇时，里夫斯就是那个接球后能立刻做出正确选择的人——自己攻、分球、或者把节奏压下来。全场9次助攻只有6次失误，在东契奇被重点照顾的夜晚，他扛住了湖人的组织产量。\n\n东契奇这场打得别扭。首节10投2中，全场21投8中，三分8投2中，11次失误创下尴尬纪录。快船的夹击和换防确实给他出了难题，但他自己的处理球也够呛——几次横传被断，几次突破分球直接送到对手手里。末节他几乎隐身，只出手1次，湖人能守住优势靠的是里夫斯和凯斯勒的稳定输出。\n\n凯斯勒延续了首战的火热，14投10中拿22分8篮板，还有6次盖帽。快船用洛佩斯和杰克逊轮流顶他，洛佩斯自己进攻端9投8中拿22分，但防守端拿凯斯勒的顺下没办法。泰伦·卢赛后说得很直接：挡拆后弱侧协防收缩太慢，让凯斯勒轻松完成顺下终结。这不是某一次回合的问题，是快船整场防守轮转的缩影。\n\n快船不是没机会。加兰26分6助攻，末节独得13分，一度把分差追到6分。洛佩斯22分，替补席贡献46分，比湖人替补多出21分。但快船全场25次失误，加兰一人9次，湖人利用失误拿了太多轻松分。卢指导说“26次失误赢不了球”，这话不假——快船投篮命中率其实不差，但球权送得太慷慨。\n\n赛前我选快船受让8.5分，方向对了，湖人赢8分刚好卡在线上。大分也命中，两队合计242分，比市场线高出不少。但赛前我担心的是快船双持球人能不能保持出手质量，实际看加兰和洛佩斯进攻端都够用，真正拖垮快船的是失误和第三节的防守崩盘。湖人赢球的方式和我预想的不同——不是靠东契奇接管，而是里夫斯和凯斯勒撑住了基本盘。",
+      "score": {
+        "home": {
+          "name": "湖人",
+          "score": 125
+        },
+        "away": {
+          "name": "快船",
+          "score": 117
+        },
+        "text": "快船 117 — 125 湖人"
+      },
+      "prediction": {
+        "winner_name": "湖人",
+        "winner_probability": 0.6,
+        "expected_winner_margin": 5.0,
+        "expected_total": 226.5,
+        "actual_winner_name": "湖人",
+        "actual_winner_margin": 8,
+        "actual_total": 242
+      },
+      "market_reference": {
+        "status": "available",
+        "home_spread": -8.5,
+        "away_spread": 8.5,
+        "total": 225.5,
+        "home_team_name": "湖人",
+        "away_team_name": "快船",
+        "source_title": "Draft Kings current odds",
+        "sportsbook": "Draft Kings",
+        "captured_at": "2026-10-23T18:19:35.467519+00:00",
+        "source_url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909851/competitions/401909851/odds",
+        "spread_review": {
+          "lean_side": "away",
+          "lean_line": 8.5,
+          "settlement": "win"
+        },
+        "total_review": {
+          "lean": "over",
+          "settlement": "win",
+          "market_total": 225.5
+        }
+      },
+      "sources": [
+        {
+          "label": "比赛结果与球员数据",
+          "title": "ESPN 比赛数据",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=401909851",
+          "captured_at": "2026-10-24T04:38:36.337559+00:00"
+        },
+        {
+          "label": "公开早盘参考",
+          "title": "Draft Kings current odds",
+          "url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909851/competitions/401909851/odds",
+          "captured_at": "2026-10-23T18:19:35.467519+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "Lakers Get Positive Injury Update on 2 Players Before Facing Clippers Share on Facebook Share on X Share on X Share on Facebook Share on X",
+          "url": "https://www.si.com/nba/lakers/onsi/lakers-get-positive-injury-update-on-2-players-before-facing-clippers",
+          "captured_at": "2026-10-23T18:18:45.220059+00:00"
+        },
+        {
+          "source_id": "coach-9dcfd825c1f1fc7ea3",
+          "url": "https://bbs.hupu.com/643227512.html",
+          "title": "[流言板]泰伦-卢采访全文：失误过多导致落败，防挡拆弱侧护筐不到位-NBA新闻-虎扑社区",
+          "published_at": "2026-10-24T07:41:44+00:00",
+          "captured_at": "2026-10-24T12:07:45.818551+00:00",
+          "classification": "source_attributed_coach_statement"
+        },
+        {
+          "source_id": "hupu-b66f66e9c6c5ab7a03",
+          "url": "https://bbs.hupu.com/643218400.html",
+          "title": "[赛后]快船117-125湖人，洛佩斯22分4板3冒，凯斯勒22分8板6冒-NBA专区-虎扑社区",
+          "published_at": "2026-10-24T04:36:11+00:00",
+          "captured_at": "2026-10-24T12:07:45.818551+00:00",
+          "classification": "community_discussion",
+          "not_a_fact_source": true
+        }
+      ],
+      "generated_at": "2026-10-24T12:07:57.588262+00:00"
+    }
   },
   "market": {
     "status": "available",
@@ -3428,10 +3522,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-23T18:20:19.966582+00:00",
+    "exported_at": "2026-10-24T12:18:08.701641+00:00",
     "source_prediction_version_id": "52a29541-8194-4816-9b3a-ab8beb98cc48",
     "source_prediction_payload_sha256": "1c7cb2a337c6f1d250a3274744d28f2cb4dc3fec5a34dc01842d6cf5b455611a",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "a7b7f84f08d9c709ea56541a2c0642b4d18b976cf6f6a09100883c0407034639"
+  "public_sha256": "6ee2a75a2bde8644945f92aa90975232b03195ba1310e75fc9253e8b04485e71"
 }
