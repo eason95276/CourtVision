@@ -2,6 +2,122 @@
   "contract_version": "courtvision-public-v1",
   "games": [
     {
+      "game_id": "espn:401909867",
+      "file": "games/espn_401909867.json",
+      "tipoff": "2026-10-26T01:00:00+00:00",
+      "version_id": "78ea3ce4-7180-4cb2-b7c8-a5891484d647",
+      "public_sha256": "78ea2eab7aed3e1e6e300350cadc9357f36614ad5ccd829de4ee9e74bf66e7d3",
+      "home_record": {
+        "game": {
+          "away": {
+            "abbreviation": "MEM",
+            "accent": "#5D76A9",
+            "espn_team_id": "29",
+            "id": 1610612763,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/mem.png",
+            "name": "Memphis Grizzlies",
+            "name_zh": "灰熊",
+            "score": null
+          },
+          "game_type": "regular_season",
+          "home": {
+            "abbreviation": "SAC",
+            "accent": "#5A2D81",
+            "espn_team_id": "23",
+            "id": 1610612758,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/sac.png",
+            "name": "Sacramento Kings",
+            "name_zh": "国王",
+            "score": null
+          },
+          "id": "espn:401909867",
+          "registered_game": true,
+          "schedule_revision": 1,
+          "season": 2027,
+          "status": "scheduled",
+          "tipoff": "2026-10-26T01:00:00+00:00",
+          "venue": "Golden 1 Center",
+          "schedule_catalog_fact": true,
+          "postgame": null,
+          "homepage_visible": true,
+          "public_summary": true
+        },
+        "prediction": {
+          "status": "current",
+          "game_id": "espn:401909867",
+          "version_id": "78ea3ce4-7180-4cb2-b7c8-a5891484d647",
+          "state_revision": 2,
+          "locked_at": null,
+          "lock_reason": null,
+          "schedule_revision": 1,
+          "version": {
+            "analysis_contract_version": "two-stage-forecast-v1",
+            "base_input_hash": "02f2a5fc897c7489796d319b8b0a864103a6ec63d771b77db7869818bf013d5e",
+            "game_id": "espn:401909867",
+            "game_identity": {
+              "away_team_id": 1610612763,
+              "game_id": "espn:401909867",
+              "home_team_id": 1610612758,
+              "scheduled_tipoff": "2026-10-26T01:00:00+00:00"
+            },
+            "generated_at": "2026-10-25T17:08:10.165267+00:00",
+            "input_cutoff_at": "2026-10-25T17:07:46.061371+00:00",
+            "published_at": "2026-10-25T17:08:14.172751+00:00",
+            "schedule_revision": 1,
+            "stage": "EARLY_PREVIEW",
+            "version_id": "78ea3ce4-7180-4cb2-b7c8-a5891484d647",
+            "payload_sha256": "cc20a851bde288073dd59f073e578e0437a06d0652f99b7bc469f908864ae4ff",
+            "input_snapshot": {
+              "away": {
+                "abbreviation": "MEM",
+                "accent": "#5D76A9",
+                "espn_team_id": "29",
+                "id": 1610612763,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/mem.png",
+                "name": "Memphis Grizzlies",
+                "name_zh": "灰熊"
+              },
+              "home": {
+                "abbreviation": "SAC",
+                "accent": "#5A2D81",
+                "espn_team_id": "23",
+                "id": 1610612758,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/sac.png",
+                "name": "Sacramento Kings",
+                "name_zh": "国王"
+              },
+              "id": "espn:401909867",
+              "schedule_revision": 1,
+              "tipoff": "2026-10-26T01:00:00+00:00"
+            },
+            "judgment": {
+              "final_prediction": {
+                "evidence_ids": [
+                  "21512ac8415c8bf8bb8cf1298a9b64e642b547efa17cb51d1486d721e1866dcd",
+                  "8847a2c66d433b009d75a7b29e66fde6407dbc041219a0813f70d84a9d97182c",
+                  "c60ff5b06479179ef25022ecef8bcecbfc109655e12d266647bcb777848485fb"
+                ],
+                "expected_margin": 4.0,
+                "expected_total": 233.5,
+                "win_probability": 0.6,
+                "winner_side": "away"
+              },
+              "pregame_story": {
+                "classification": "subjective_analysis",
+                "evidence_ids": [
+                  "21512ac8415c8bf8bb8cf1298a9b64e642b547efa17cb51d1486d721e1866dcd",
+                  "8847a2c66d433b009d75a7b29e66fde6407dbc041219a0813f70d84a9d97182c",
+                  "c60ff5b06479179ef25022ecef8bcecbfc109655e12d266647bcb777848485fb"
+                ],
+                "statement": "灰熊两战全胜、国王两战全败，萨博尼斯的内线产出能不能撑住国王的防守窟窿，是这场最实在的看点。",
+                "title": "灰熊连胜踏客场\n国王内线待止血"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
       "game_id": "espn:401909866",
       "file": "games/espn_401909866.json",
       "tipoff": "2026-10-25T23:30:00+00:00",
@@ -3460,5 +3576,5 @@
       }
     }
   ],
-  "published_at": "2026-10-25T16:58:35.669123+00:00"
+  "published_at": "2026-10-25T17:08:37.030133+00:00"
 }
