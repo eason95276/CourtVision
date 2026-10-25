@@ -1,324 +1,20 @@
 {
   "schema_version": "courtvision-public-schedule-v1",
   "timezone": "Asia/Shanghai",
-  "generated_at": "2026-10-25T11:24:52.382751+00:00",
+  "generated_at": "2026-10-25T16:15:38.786457+00:00",
   "coverage_dates": [
-    "2026-10-25",
     "2026-10-26",
-    "2026-10-27"
+    "2026-10-27",
+    "2026-10-28"
   ],
   "complete": true,
   "source_urls": [
-    "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261024",
     "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261025",
     "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261026",
-    "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261027"
+    "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261027",
+    "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261028"
   ],
   "games": [
-    {
-      "id": "espn:401909853",
-      "tipoff": "2026-10-24T22:00:00+00:00",
-      "status": "final",
-      "home": {
-        "id": 1610612766,
-        "name": "Charlotte Hornets",
-        "name_zh": "黄蜂",
-        "abbreviation": "CHA",
-        "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/cha.png",
-        "accent": "#1D1160",
-        "score": 115
-      },
-      "away": {
-        "id": 1610612748,
-        "name": "Miami Heat",
-        "name_zh": "热火",
-        "abbreviation": "MIA",
-        "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
-        "accent": "#98002E",
-        "score": 110
-      },
-      "venue": "Spectrum Center",
-      "neutral_site": false,
-      "game_type": "regular_season",
-      "season": 2027,
-      "schedule_catalog_fact": true,
-      "homepage_visible": true,
-      "registered_game": false,
-      "report_selected": false,
-      "report_generation_status": null,
-      "beijing_date": "2026-10-25",
-      "source": {
-        "schedule_captured_at": "2026-10-25T11:24:52.382751+00:00"
-      },
-      "missing": [],
-      "postgame": null
-    },
-    {
-      "id": "espn:401909854",
-      "tipoff": "2026-10-24T23:30:00+00:00",
-      "status": "final",
-      "home": {
-        "id": 1610612739,
-        "name": "Cleveland Cavaliers",
-        "name_zh": "骑士",
-        "abbreviation": "CLE",
-        "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/cle.png",
-        "accent": "#860038",
-        "score": 125
-      },
-      "away": {
-        "id": 1610612751,
-        "name": "Brooklyn Nets",
-        "name_zh": "篮网",
-        "abbreviation": "BKN",
-        "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/bkn.png",
-        "accent": "#A7A9AC",
-        "score": 121
-      },
-      "venue": "Rocket Arena",
-      "neutral_site": false,
-      "game_type": "regular_season",
-      "season": 2027,
-      "schedule_catalog_fact": true,
-      "homepage_visible": true,
-      "registered_game": false,
-      "report_selected": false,
-      "report_generation_status": null,
-      "beijing_date": "2026-10-25",
-      "source": {
-        "schedule_captured_at": "2026-10-25T11:24:52.382751+00:00"
-      },
-      "missing": [],
-      "postgame": null
-    },
-    {
-      "id": "espn:401909855",
-      "tipoff": "2026-10-24T23:30:00+00:00",
-      "status": "final",
-      "home": {
-        "id": 1610612755,
-        "name": "Philadelphia 76ers",
-        "name_zh": "76人",
-        "abbreviation": "PHI",
-        "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/phi.png",
-        "accent": "#006BB6",
-        "score": 127
-      },
-      "away": {
-        "id": 1610612749,
-        "name": "Milwaukee Bucks",
-        "name_zh": "雄鹿",
-        "abbreviation": "MIL",
-        "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/mil.png",
-        "accent": "#00471B",
-        "score": 116
-      },
-      "venue": "Xfinity Mobile Arena",
-      "neutral_site": false,
-      "game_type": "regular_season",
-      "season": 2027,
-      "schedule_catalog_fact": true,
-      "homepage_visible": true,
-      "registered_game": false,
-      "report_selected": false,
-      "report_generation_status": null,
-      "beijing_date": "2026-10-25",
-      "source": {
-        "schedule_captured_at": "2026-10-25T11:24:52.382751+00:00"
-      },
-      "missing": [],
-      "postgame": null
-    },
-    {
-      "id": "espn:401909857",
-      "tipoff": "2026-10-25T00:00:00+00:00",
-      "status": "final",
-      "home": {
-        "id": 1610612741,
-        "name": "Chicago Bulls",
-        "name_zh": "公牛",
-        "abbreviation": "CHI",
-        "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/chi.png",
-        "accent": "#CE1141",
-        "score": 120
-      },
-      "away": {
-        "id": 1610612764,
-        "name": "Washington Wizards",
-        "name_zh": "奇才",
-        "abbreviation": "WSH",
-        "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/wsh.png",
-        "accent": "#002B5C",
-        "score": 124
-      },
-      "venue": "United Center",
-      "neutral_site": false,
-      "game_type": "regular_season",
-      "season": 2027,
-      "schedule_catalog_fact": true,
-      "homepage_visible": true,
-      "registered_game": false,
-      "report_selected": false,
-      "report_generation_status": null,
-      "beijing_date": "2026-10-25",
-      "source": {
-        "schedule_captured_at": "2026-10-25T11:24:52.382751+00:00"
-      },
-      "missing": [],
-      "postgame": null
-    },
-    {
-      "id": "espn:401909858",
-      "tipoff": "2026-10-25T00:00:00+00:00",
-      "status": "final",
-      "home": {
-        "id": 1610612742,
-        "name": "Dallas Mavericks",
-        "name_zh": "独行侠",
-        "abbreviation": "DAL",
-        "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/dal.png",
-        "accent": "#00538C",
-        "score": 106
-      },
-      "away": {
-        "id": 1610612759,
-        "name": "San Antonio Spurs",
-        "name_zh": "马刺",
-        "abbreviation": "SA",
-        "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/sa.png",
-        "accent": "#C4CED4",
-        "score": 122
-      },
-      "venue": "American Airlines Center",
-      "neutral_site": false,
-      "game_type": "regular_season",
-      "season": 2027,
-      "schedule_catalog_fact": true,
-      "homepage_visible": true,
-      "registered_game": false,
-      "report_selected": false,
-      "report_generation_status": null,
-      "beijing_date": "2026-10-25",
-      "source": {
-        "schedule_captured_at": "2026-10-25T11:24:52.382751+00:00"
-      },
-      "missing": [],
-      "postgame": null
-    },
-    {
-      "id": "espn:401909856",
-      "tipoff": "2026-10-25T00:30:00+00:00",
-      "status": "final",
-      "home": {
-        "id": 1610612737,
-        "name": "Atlanta Hawks",
-        "name_zh": "老鹰",
-        "abbreviation": "ATL",
-        "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/atl.png",
-        "accent": "#E03A3E",
-        "score": 114
-      },
-      "away": {
-        "id": 1610612745,
-        "name": "Houston Rockets",
-        "name_zh": "火箭",
-        "abbreviation": "HOU",
-        "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/hou.png",
-        "accent": "#CE1141",
-        "score": 121
-      },
-      "venue": "State Farm Arena",
-      "neutral_site": false,
-      "game_type": "regular_season",
-      "season": 2027,
-      "schedule_catalog_fact": true,
-      "homepage_visible": true,
-      "registered_game": false,
-      "report_selected": false,
-      "report_generation_status": null,
-      "beijing_date": "2026-10-25",
-      "source": {
-        "schedule_captured_at": "2026-10-25T11:24:52.382751+00:00"
-      },
-      "missing": [],
-      "postgame": null
-    },
-    {
-      "id": "espn:401909859",
-      "tipoff": "2026-10-25T01:00:00+00:00",
-      "status": "final",
-      "home": {
-        "id": 1610612743,
-        "name": "Denver Nuggets",
-        "name_zh": "掘金",
-        "abbreviation": "DEN",
-        "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/den.png",
-        "accent": "#0E2240",
-        "score": 141
-      },
-      "away": {
-        "id": 1610612740,
-        "name": "New Orleans Pelicans",
-        "name_zh": "鹈鹕",
-        "abbreviation": "NO",
-        "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/no.png",
-        "accent": "#0C2340",
-        "score": 135
-      },
-      "venue": "Ball Arena",
-      "neutral_site": false,
-      "game_type": "regular_season",
-      "season": 2027,
-      "schedule_catalog_fact": true,
-      "homepage_visible": true,
-      "registered_game": false,
-      "report_selected": false,
-      "report_generation_status": null,
-      "beijing_date": "2026-10-25",
-      "source": {
-        "schedule_captured_at": "2026-10-25T11:24:52.382751+00:00"
-      },
-      "missing": [],
-      "postgame": null
-    },
-    {
-      "id": "espn:401909860",
-      "tipoff": "2026-10-25T02:00:00+00:00",
-      "status": "final",
-      "home": {
-        "id": 1610612756,
-        "name": "Phoenix Suns",
-        "name_zh": "太阳",
-        "abbreviation": "PHX",
-        "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/phx.png",
-        "accent": "#E56020",
-        "score": 131
-      },
-      "away": {
-        "id": 1610612744,
-        "name": "Golden State Warriors",
-        "name_zh": "勇士",
-        "abbreviation": "GS",
-        "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/gs.png",
-        "accent": "#1D428A",
-        "score": 122
-      },
-      "venue": "Mortgage Matchup Center",
-      "neutral_site": false,
-      "game_type": "regular_season",
-      "season": 2027,
-      "schedule_catalog_fact": true,
-      "homepage_visible": true,
-      "registered_game": false,
-      "report_selected": false,
-      "report_generation_status": null,
-      "beijing_date": "2026-10-25",
-      "source": {
-        "schedule_captured_at": "2026-10-25T11:24:52.382751+00:00"
-      },
-      "missing": [],
-      "postgame": null
-    },
     {
       "id": "espn:401909861",
       "tipoff": "2026-10-25T21:00:00+00:00",
@@ -350,7 +46,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-10-26",
       "source": {
-        "schedule_captured_at": "2026-10-25T11:24:52.382751+00:00"
+        "schedule_captured_at": "2026-10-25T16:15:38.786457+00:00"
       },
       "missing": [],
       "postgame": null
@@ -386,7 +82,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-10-26",
       "source": {
-        "schedule_captured_at": "2026-10-25T11:24:52.382751+00:00"
+        "schedule_captured_at": "2026-10-25T16:15:38.786457+00:00"
       },
       "missing": [],
       "postgame": null
@@ -422,7 +118,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-10-26",
       "source": {
-        "schedule_captured_at": "2026-10-25T11:24:52.382751+00:00"
+        "schedule_captured_at": "2026-10-25T16:15:38.786457+00:00"
       },
       "missing": [],
       "postgame": null
@@ -458,7 +154,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-10-26",
       "source": {
-        "schedule_captured_at": "2026-10-25T11:24:52.382751+00:00"
+        "schedule_captured_at": "2026-10-25T16:15:38.786457+00:00"
       },
       "missing": [],
       "postgame": null
@@ -494,7 +190,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-10-26",
       "source": {
-        "schedule_captured_at": "2026-10-25T11:24:52.382751+00:00"
+        "schedule_captured_at": "2026-10-25T16:15:38.786457+00:00"
       },
       "missing": [],
       "postgame": null
@@ -530,7 +226,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-10-26",
       "source": {
-        "schedule_captured_at": "2026-10-25T11:24:52.382751+00:00"
+        "schedule_captured_at": "2026-10-25T16:15:38.786457+00:00"
       },
       "missing": [],
       "postgame": null
@@ -566,7 +262,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-10-26",
       "source": {
-        "schedule_captured_at": "2026-10-25T11:24:52.382751+00:00"
+        "schedule_captured_at": "2026-10-25T16:15:38.786457+00:00"
       },
       "missing": [],
       "postgame": null
@@ -602,7 +298,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-10-27",
       "source": {
-        "schedule_captured_at": "2026-10-25T11:24:52.382751+00:00"
+        "schedule_captured_at": "2026-10-25T16:15:38.786457+00:00"
       },
       "missing": [],
       "postgame": null
@@ -638,7 +334,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-10-27",
       "source": {
-        "schedule_captured_at": "2026-10-25T11:24:52.382751+00:00"
+        "schedule_captured_at": "2026-10-25T16:15:38.786457+00:00"
       },
       "missing": [],
       "postgame": null
@@ -674,7 +370,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-10-27",
       "source": {
-        "schedule_captured_at": "2026-10-25T11:24:52.382751+00:00"
+        "schedule_captured_at": "2026-10-25T16:15:38.786457+00:00"
       },
       "missing": [],
       "postgame": null
@@ -710,7 +406,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-10-27",
       "source": {
-        "schedule_captured_at": "2026-10-25T11:24:52.382751+00:00"
+        "schedule_captured_at": "2026-10-25T16:15:38.786457+00:00"
       },
       "missing": [],
       "postgame": null
@@ -746,7 +442,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-10-27",
       "source": {
-        "schedule_captured_at": "2026-10-25T11:24:52.382751+00:00"
+        "schedule_captured_at": "2026-10-25T16:15:38.786457+00:00"
       },
       "missing": [],
       "postgame": null
@@ -782,7 +478,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-10-27",
       "source": {
-        "schedule_captured_at": "2026-10-25T11:24:52.382751+00:00"
+        "schedule_captured_at": "2026-10-25T16:15:38.786457+00:00"
       },
       "missing": [],
       "postgame": null
@@ -818,7 +514,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-10-27",
       "source": {
-        "schedule_captured_at": "2026-10-25T11:24:52.382751+00:00"
+        "schedule_captured_at": "2026-10-25T16:15:38.786457+00:00"
       },
       "missing": [],
       "postgame": null
@@ -854,7 +550,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-10-27",
       "source": {
-        "schedule_captured_at": "2026-10-25T11:24:52.382751+00:00"
+        "schedule_captured_at": "2026-10-25T16:15:38.786457+00:00"
       },
       "missing": [],
       "postgame": null
@@ -890,7 +586,151 @@
       "report_generation_status": null,
       "beijing_date": "2026-10-27",
       "source": {
-        "schedule_captured_at": "2026-10-25T11:24:52.382751+00:00"
+        "schedule_captured_at": "2026-10-25T16:15:38.786457+00:00"
+      },
+      "missing": [],
+      "postgame": null
+    },
+    {
+      "id": "espn:401909877",
+      "tipoff": "2026-10-27T23:30:00+00:00",
+      "status": "scheduled",
+      "home": {
+        "id": 1610612738,
+        "name": "Boston Celtics",
+        "name_zh": "凯尔特人",
+        "abbreviation": "BOS",
+        "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/bos.png",
+        "accent": "#007A33"
+      },
+      "away": {
+        "id": 1610612751,
+        "name": "Brooklyn Nets",
+        "name_zh": "篮网",
+        "abbreviation": "BKN",
+        "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/bkn.png",
+        "accent": "#A7A9AC"
+      },
+      "venue": "TD Garden",
+      "neutral_site": false,
+      "game_type": "regular_season",
+      "season": 2027,
+      "schedule_catalog_fact": true,
+      "homepage_visible": true,
+      "registered_game": false,
+      "report_selected": false,
+      "report_generation_status": null,
+      "beijing_date": "2026-10-28",
+      "source": {
+        "schedule_captured_at": "2026-10-25T16:15:38.786457+00:00"
+      },
+      "missing": [],
+      "postgame": null
+    },
+    {
+      "id": "espn:401909878",
+      "tipoff": "2026-10-28T00:00:00+00:00",
+      "status": "scheduled",
+      "home": {
+        "id": 1610612752,
+        "name": "New York Knicks",
+        "name_zh": "尼克斯",
+        "abbreviation": "NY",
+        "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png",
+        "accent": "#F58426"
+      },
+      "away": {
+        "id": 1610612765,
+        "name": "Detroit Pistons",
+        "name_zh": "活塞",
+        "abbreviation": "DET",
+        "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/det.png",
+        "accent": "#C8102E"
+      },
+      "venue": "Madison Square Garden",
+      "neutral_site": false,
+      "game_type": "regular_season",
+      "season": 2027,
+      "schedule_catalog_fact": true,
+      "homepage_visible": true,
+      "registered_game": false,
+      "report_selected": false,
+      "report_generation_status": null,
+      "beijing_date": "2026-10-28",
+      "source": {
+        "schedule_captured_at": "2026-10-25T16:15:38.786457+00:00"
+      },
+      "missing": [],
+      "postgame": null
+    },
+    {
+      "id": "espn:401909879",
+      "tipoff": "2026-10-28T00:00:00+00:00",
+      "status": "scheduled",
+      "home": {
+        "id": 1610612759,
+        "name": "San Antonio Spurs",
+        "name_zh": "马刺",
+        "abbreviation": "SA",
+        "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/sa.png",
+        "accent": "#C4CED4"
+      },
+      "away": {
+        "id": 1610612758,
+        "name": "Sacramento Kings",
+        "name_zh": "国王",
+        "abbreviation": "SAC",
+        "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/sac.png",
+        "accent": "#5A2D81"
+      },
+      "venue": "Frost Bank Center",
+      "neutral_site": false,
+      "game_type": "regular_season",
+      "season": 2027,
+      "schedule_catalog_fact": true,
+      "homepage_visible": true,
+      "registered_game": false,
+      "report_selected": false,
+      "report_generation_status": null,
+      "beijing_date": "2026-10-28",
+      "source": {
+        "schedule_captured_at": "2026-10-25T16:15:38.786457+00:00"
+      },
+      "missing": [],
+      "postgame": null
+    },
+    {
+      "id": "espn:401909880",
+      "tipoff": "2026-10-28T03:00:00+00:00",
+      "status": "scheduled",
+      "home": {
+        "id": 1610612747,
+        "name": "Los Angeles Lakers",
+        "name_zh": "湖人",
+        "abbreviation": "LAL",
+        "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/lal.png",
+        "accent": "#552583"
+      },
+      "away": {
+        "id": 1610612757,
+        "name": "Portland Trail Blazers",
+        "name_zh": "开拓者",
+        "abbreviation": "POR",
+        "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/por.png",
+        "accent": "#E03A3E"
+      },
+      "venue": "crypto.com Arena",
+      "neutral_site": false,
+      "game_type": "regular_season",
+      "season": 2027,
+      "schedule_catalog_fact": true,
+      "homepage_visible": true,
+      "registered_game": false,
+      "report_selected": false,
+      "report_generation_status": null,
+      "beijing_date": "2026-10-28",
+      "source": {
+        "schedule_captured_at": "2026-10-25T16:15:38.786457+00:00"
       },
       "missing": [],
       "postgame": null
