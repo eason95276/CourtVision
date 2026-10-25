@@ -360,6 +360,126 @@
       }
     },
     {
+      "game_id": "espn:401909864",
+      "file": "games/espn_401909864.json",
+      "tipoff": "2026-10-25T23:00:00+00:00",
+      "version_id": "9c80589b-c30b-4661-a04e-e185b491f09b",
+      "public_sha256": "2cfdbd23d630600817a1a905773ff457bdbffdf7de658ee397ce60b4a3b4073a",
+      "home_record": {
+        "game": {
+          "away": {
+            "abbreviation": "TOR",
+            "accent": "#CE1141",
+            "espn_team_id": "28",
+            "id": 1610612761,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/tor.png",
+            "name": "Toronto Raptors",
+            "name_zh": "猛龙",
+            "score": null
+          },
+          "game_type": "regular_season",
+          "home": {
+            "abbreviation": "MIN",
+            "accent": "#0C2340",
+            "espn_team_id": "16",
+            "id": 1610612750,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/min.png",
+            "name": "Minnesota Timberwolves",
+            "name_zh": "森林狼",
+            "score": null
+          },
+          "id": "espn:401909864",
+          "registered_game": true,
+          "schedule_revision": 1,
+          "season": 2027,
+          "status": "scheduled",
+          "tipoff": "2026-10-25T23:00:00+00:00",
+          "venue": "Target Center",
+          "schedule_catalog_fact": true,
+          "postgame": null,
+          "homepage_visible": true,
+          "public_summary": true
+        },
+        "prediction": {
+          "status": "current",
+          "game_id": "espn:401909864",
+          "version_id": "9c80589b-c30b-4661-a04e-e185b491f09b",
+          "state_revision": 2,
+          "locked_at": null,
+          "lock_reason": null,
+          "schedule_revision": 1,
+          "version": {
+            "analysis_contract_version": "two-stage-forecast-v1",
+            "base_input_hash": "18800e7fc8f993c9641db0d3bd8af0a9722d3d5ce20b5f2706a30714380e3bb7",
+            "game_id": "espn:401909864",
+            "game_identity": {
+              "away_team_id": 1610612761,
+              "game_id": "espn:401909864",
+              "home_team_id": 1610612750,
+              "scheduled_tipoff": "2026-10-25T23:00:00+00:00"
+            },
+            "generated_at": "2026-10-25T17:08:52.846607+00:00",
+            "input_cutoff_at": "2026-10-25T17:08:50.618219+00:00",
+            "published_at": "2026-10-25T17:08:55.388120+00:00",
+            "schedule_revision": 1,
+            "stage": "EARLY_PREVIEW",
+            "version_id": "9c80589b-c30b-4661-a04e-e185b491f09b",
+            "payload_sha256": "64bd9005950b1c70540f3561892cf54c5043d215f8b227e157f70ede90b8b718",
+            "input_snapshot": {
+              "away": {
+                "abbreviation": "TOR",
+                "accent": "#CE1141",
+                "espn_team_id": "28",
+                "id": 1610612761,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/tor.png",
+                "name": "Toronto Raptors",
+                "name_zh": "猛龙"
+              },
+              "home": {
+                "abbreviation": "MIN",
+                "accent": "#0C2340",
+                "espn_team_id": "16",
+                "id": 1610612750,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/min.png",
+                "name": "Minnesota Timberwolves",
+                "name_zh": "森林狼"
+              },
+              "id": "espn:401909864",
+              "schedule_revision": 1,
+              "tipoff": "2026-10-25T23:00:00+00:00"
+            },
+            "judgment": {
+              "final_prediction": {
+                "evidence_ids": [
+                  "16525eeae6cc2c3a2969bd53eb8e261071589da5a498573fb6ec3a6aa1ee368e",
+                  "7344775a06c4d7c669212ab5030f87e495d6abada4a35224b4d07e3fc77bfea9",
+                  "80d0aa4fbf11175f9b7f9c83f5897aa8626a1f226cecd819a6df415017a81686",
+                  "d2ebd30f95c496dedddb78c7aff8aedcdf227a1e66b958d711439eb97f21dec6",
+                  "feed1681a1b91b3b3ee213e75309dafde8de99e6d4a5583458afbba2c395749b"
+                ],
+                "expected_margin": 2.5,
+                "expected_total": 228.5,
+                "win_probability": 0.55,
+                "winner_side": "home"
+              },
+              "pregame_story": {
+                "classification": "subjective_analysis",
+                "evidence_ids": [
+                  "16525eeae6cc2c3a2969bd53eb8e261071589da5a498573fb6ec3a6aa1ee368e",
+                  "7344775a06c4d7c669212ab5030f87e495d6abada4a35224b4d07e3fc77bfea9",
+                  "80d0aa4fbf11175f9b7f9c83f5897aa8626a1f226cecd819a6df415017a81686",
+                  "d2ebd30f95c496dedddb78c7aff8aedcdf227a1e66b958d711439eb97f21dec6",
+                  "feed1681a1b91b3b3ee213e75309dafde8de99e6d4a5583458afbba2c395749b"
+                ],
+                "statement": "猛龙来到明尼阿波利斯，莱昂纳德的半场进攻将考验森林狼的防守选择。森林狼能否把自己的冲击速度打出来，是这场较量的看点。",
+                "title": "狼群主场迎旧敌\n莱昂纳德再北行"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
       "game_id": "espn:401909851",
       "file": "games/espn_401909851.json",
       "tipoff": "2026-10-24T02:00:00+00:00",
@@ -3576,5 +3696,5 @@
       }
     }
   ],
-  "published_at": "2026-10-25T17:08:37.030133+00:00"
+  "published_at": "2026-10-25T17:11:17.111718+00:00"
 }

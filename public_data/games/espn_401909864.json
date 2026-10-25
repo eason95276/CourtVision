@@ -1,0 +1,2645 @@
+{
+  "contract_version": "courtvision-public-v1",
+  "game": {
+    "away": {
+      "abbreviation": "TOR",
+      "accent": "#CE1141",
+      "espn_team_id": "28",
+      "id": 1610612761,
+      "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/tor.png",
+      "name": "Toronto Raptors",
+      "name_zh": "猛龙",
+      "score": null
+    },
+    "background": {
+      "availability": {
+        "message": "暂无可靠伤病信息",
+        "records": [],
+        "status": "unavailable"
+      },
+      "market": null,
+      "recent_form": {
+        "away": {},
+        "home": {}
+      },
+      "schedule": {}
+    },
+    "game_type": "regular_season",
+    "home": {
+      "abbreviation": "MIN",
+      "accent": "#0C2340",
+      "espn_team_id": "16",
+      "id": 1610612750,
+      "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/min.png",
+      "name": "Minnesota Timberwolves",
+      "name_zh": "森林狼",
+      "score": null
+    },
+    "id": "espn:401909864",
+    "matchup_history": {
+      "away_team_id": 1610612761,
+      "context_hash": "0d1fe5ed0f555069705af748e0b2804e098f927093a84a8dc357bebf2ba9f7dc",
+      "cutoff": "2026-10-25T16:58:35.391525+00:00",
+      "game_id": "espn:401909864",
+      "home_team_id": 1610612750,
+      "matchup_relevance": "medium",
+      "meeting_count": 31,
+      "meetings": [
+        {
+          "away_score": 103,
+          "away_team_id": 1610612761,
+          "game_id": "0022100880",
+          "home_margin": -12,
+          "home_score": 91,
+          "home_team_id": 1610612750,
+          "is_playoffs": false,
+          "played_at": "2022-02-16T20:00:00",
+          "season_start": 2021,
+          "series_key": null,
+          "winner_team_id": 1610612761
+        },
+        {
+          "away_score": 102,
+          "away_team_id": 1610612750,
+          "game_id": "0022101141",
+          "home_margin": 23,
+          "home_score": 125,
+          "home_team_id": 1610612761,
+          "is_playoffs": false,
+          "played_at": "2022-03-30T19:30:00",
+          "season_start": 2021,
+          "series_key": null,
+          "winner_team_id": 1610612761
+        },
+        {
+          "away_score": 126,
+          "away_team_id": 1610612761,
+          "game_id": "0022200680",
+          "home_margin": 2,
+          "home_score": 128,
+          "home_team_id": 1610612750,
+          "is_playoffs": false,
+          "played_at": "2023-01-19T20:00:00",
+          "season_start": 2022,
+          "series_key": null,
+          "winner_team_id": 1610612750
+        },
+        {
+          "away_score": 107,
+          "away_team_id": 1610612750,
+          "game_id": "0022201058",
+          "home_margin": 15,
+          "home_score": 122,
+          "home_team_id": 1610612761,
+          "is_playoffs": false,
+          "played_at": "2023-03-18T19:00:00",
+          "season_start": 2022,
+          "series_key": null,
+          "winner_team_id": 1610612761
+        },
+        {
+          "away_score": 94,
+          "away_team_id": 1610612750,
+          "game_id": "0022300069",
+          "home_margin": 3,
+          "home_score": 97,
+          "home_team_id": 1610612761,
+          "is_playoffs": false,
+          "played_at": "2023-10-25T19:30:00",
+          "season_start": 2023,
+          "series_key": null,
+          "winner_team_id": 1610612761
+        },
+        {
+          "away_score": 85,
+          "away_team_id": 1610612761,
+          "game_id": "0022301108",
+          "home_margin": 48,
+          "home_score": 133,
+          "home_team_id": 1610612750,
+          "is_playoffs": false,
+          "played_at": "2024-04-03T20:00:00",
+          "season_start": 2023,
+          "series_key": null,
+          "winner_team_id": 1610612750
+        },
+        {
+          "away_score": 101,
+          "away_team_id": 1610612761,
+          "game_id": "0022400093",
+          "home_margin": 11,
+          "home_score": 112,
+          "home_team_id": 1610612750,
+          "is_playoffs": false,
+          "played_at": "2024-10-26T20:00:00",
+          "season_start": 2024,
+          "series_key": null,
+          "winner_team_id": 1610612750
+        },
+        {
+          "away_score": 105,
+          "away_team_id": 1610612750,
+          "game_id": "0022400261",
+          "home_margin": 5,
+          "home_score": 110,
+          "home_team_id": 1610612761,
+          "is_playoffs": false,
+          "played_at": "2024-11-21T19:30:00",
+          "season_start": 2024,
+          "series_key": null,
+          "winner_team_id": 1610612761
+        },
+        {
+          "away_score": 128,
+          "away_team_id": 1610612750,
+          "game_id": "0022500727",
+          "home_margin": -2,
+          "home_score": 126,
+          "home_team_id": 1610612761,
+          "is_playoffs": false,
+          "played_at": "2026-02-04T19:30:00",
+          "season_start": 2025,
+          "series_key": null,
+          "winner_team_id": 1610612750
+        },
+        {
+          "away_score": 107,
+          "away_team_id": 1610612761,
+          "game_id": "0022500903",
+          "home_margin": 8,
+          "home_score": 115,
+          "home_team_id": 1610612750,
+          "is_playoffs": false,
+          "played_at": "2026-03-05T20:00:00",
+          "season_start": 2025,
+          "series_key": null,
+          "winner_team_id": 1610612750
+        }
+      ],
+      "most_recent_meeting": {
+        "away_score": 107,
+        "away_team_id": 1610612761,
+        "game_id": "0022500903",
+        "home_margin": 8,
+        "home_score": 115,
+        "home_team_id": 1610612750,
+        "is_playoffs": false,
+        "played_at": "2026-03-05T20:00:00",
+        "season_start": 2025,
+        "series_key": null,
+        "winner_team_id": 1610612750
+      },
+      "numeric_model_usage": false,
+      "relevance_reasons": [
+        "multiple_recent_regular_season_meetings"
+      ],
+      "series_summary": null,
+      "source_semantics": "local historical games strictly before cutoff; team statistics when available",
+      "status": "available"
+    },
+    "missing": [
+      {
+        "reason": "not_collected",
+        "section": "roster"
+      },
+      {
+        "reason": "not_collected",
+        "section": "availability"
+      },
+      {
+        "reason": "not_collected",
+        "section": "market"
+      }
+    ],
+    "neutral_site": 0,
+    "player_display_names": [
+      {
+        "player_id": "name:jamal shead",
+        "canonical_name_en": "Jamal Shead",
+        "name_key": "jamal shead",
+        "display_name_zh": "贾马尔·谢德",
+        "translation_source": "known_mapping",
+        "created_at": "2026-10-21T14:41:42.731405+00:00"
+      },
+      {
+        "player_id": "name:kawhi leonard",
+        "canonical_name_en": "Kawhi Leonard",
+        "name_key": "kawhi leonard",
+        "display_name_zh": "科怀·伦纳德",
+        "translation_source": "known_mapping",
+        "created_at": "2026-10-21T14:41:42.727524+00:00"
+      },
+      {
+        "player_id": "name:scottie barnes",
+        "canonical_name_en": "Scottie Barnes",
+        "name_key": "scottie barnes",
+        "display_name_zh": "斯科蒂·巴恩斯",
+        "translation_source": "known_mapping",
+        "created_at": "2026-10-21T14:41:42.721689+00:00"
+      },
+      {
+        "player_id": "name:immanuel quickley",
+        "canonical_name_en": "Immanuel Quickley",
+        "name_key": "immanuel quickley",
+        "display_name_zh": "伊曼纽尔·奎克利",
+        "translation_source": "known_mapping",
+        "created_at": "2026-10-21T14:41:42.730648+00:00"
+      },
+      {
+        "player_id": "name:rj barrett",
+        "canonical_name_en": "RJ Barrett",
+        "name_key": "rj barrett",
+        "display_name_zh": "RJ·巴雷特",
+        "translation_source": "known_mapping",
+        "created_at": "2026-10-21T14:41:42.722435+00:00"
+      },
+      {
+        "player_id": "name:ja kobe walter",
+        "canonical_name_en": "Ja'Kobe Walter",
+        "name_key": "ja kobe walter",
+        "display_name_zh": "贾科比·沃尔特",
+        "translation_source": "known_mapping",
+        "created_at": "2026-10-21T14:41:42.732946+00:00"
+      },
+      {
+        "player_id": "name:jakob poeltl",
+        "canonical_name_en": "Jakob Poeltl",
+        "name_key": "jakob poeltl",
+        "display_name_zh": "雅各布·珀尔特尔",
+        "translation_source": "known_mapping",
+        "created_at": "2026-10-21T14:41:42.729897+00:00"
+      },
+      {
+        "player_id": "name:nate bittle",
+        "canonical_name_en": "Nate Bittle",
+        "name_key": "nate bittle",
+        "display_name_zh": "内特·比特尔",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:41:42.723884+00:00"
+      },
+      {
+        "player_id": "name:jaden bradley",
+        "canonical_name_en": "Jaden Bradley",
+        "name_key": "jaden bradley",
+        "display_name_zh": "杰登·布拉德利",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:41:42.724809+00:00"
+      },
+      {
+        "player_id": "name:kyle anderson",
+        "canonical_name_en": "Kyle Anderson",
+        "name_key": "kyle anderson",
+        "display_name_zh": "凯尔·安德森",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:41:42.720864+00:00"
+      },
+      {
+        "player_id": "name:malachi smith",
+        "canonical_name_en": "Malachi Smith",
+        "name_key": "malachi smith",
+        "display_name_zh": "玛拉基·史密斯",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:41:42.732205+00:00"
+      },
+      {
+        "player_id": "name:allen graves",
+        "canonical_name_en": "Allen Graves",
+        "name_key": "allen graves",
+        "display_name_zh": "艾伦·格雷夫斯",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:41:42.725850+00:00"
+      },
+      {
+        "player_id": "name:collin murray boyles",
+        "canonical_name_en": "Collin Murray-Boyles",
+        "name_key": "collin murray boyles",
+        "display_name_zh": "科林·默里-博伊尔斯",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:41:42.729187+00:00"
+      },
+      {
+        "player_id": "name:trayce jackson davis",
+        "canonical_name_en": "Trayce Jackson-Davis",
+        "name_key": "trayce jackson davis",
+        "display_name_zh": "特雷斯·杰克逊-戴维斯",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:41:42.726601+00:00"
+      },
+      {
+        "player_id": "name:alijah martin",
+        "canonical_name_en": "Alijah Martin",
+        "name_key": "alijah martin",
+        "display_name_zh": "阿利贾·马丁",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:41:42.728463+00:00"
+      },
+      {
+        "player_id": "name:jamison battle",
+        "canonical_name_en": "Jamison Battle",
+        "name_key": "jamison battle",
+        "display_name_zh": "贾米森·巴特尔",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:41:42.723177+00:00"
+      },
+      {
+        "player_id": "name:lamelo ball",
+        "canonical_name_en": "LaMelo Ball",
+        "name_key": "lamelo ball",
+        "display_name_zh": "拉梅洛·鲍尔",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:25:13.710058+00:00"
+      },
+      {
+        "player_id": "name:joan beringer",
+        "canonical_name_en": "Joan Beringer",
+        "name_key": "joan beringer",
+        "display_name_zh": "琼·贝林格",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:25:13.710129+00:00"
+      },
+      {
+        "player_id": "name:jaylen clark",
+        "canonical_name_en": "Jaylen Clark",
+        "name_key": "jaylen clark",
+        "display_name_zh": "杰伦·克拉克",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:25:13.710166+00:00"
+      },
+      {
+        "player_id": "name:donte divincenzo",
+        "canonical_name_en": "Donte DiVincenzo",
+        "name_key": "donte divincenzo",
+        "display_name_zh": "丹特·迪文琴佐",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:25:13.710200+00:00"
+      },
+      {
+        "player_id": "name:ayo dosunmu",
+        "canonical_name_en": "Ayo Dosunmu",
+        "name_key": "ayo dosunmu",
+        "display_name_zh": "阿约·多孙穆",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:25:13.710230+00:00"
+      },
+      {
+        "player_id": "name:anthony edwards",
+        "canonical_name_en": "Anthony Edwards",
+        "name_key": "anthony edwards",
+        "display_name_zh": "安东尼·爱德华兹",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:25:13.710260+00:00"
+      },
+      {
+        "player_id": "name:isaiah evans",
+        "canonical_name_en": "Isaiah Evans",
+        "name_key": "isaiah evans",
+        "display_name_zh": "以赛亚·埃文斯",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:25:13.710290+00:00"
+      },
+      {
+        "player_id": "name:rudy gobert",
+        "canonical_name_en": "Rudy Gobert",
+        "name_key": "rudy gobert",
+        "display_name_zh": "鲁迪·戈贝尔",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:25:13.710456+00:00"
+      },
+      {
+        "player_id": "name:bones hyland",
+        "canonical_name_en": "Bones Hyland",
+        "name_key": "bones hyland",
+        "display_name_zh": "博恩斯·海兰德",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:25:13.710497+00:00"
+      },
+      {
+        "player_id": "name:jonathan kuminga",
+        "canonical_name_en": "Jonathan Kuminga",
+        "name_key": "jonathan kuminga",
+        "display_name_zh": "乔纳森·库明加",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:25:13.710530+00:00"
+      },
+      {
+        "player_id": "name:trey lyles",
+        "canonical_name_en": "Trey Lyles",
+        "name_key": "trey lyles",
+        "display_name_zh": "特雷·莱尔斯",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:25:13.710561+00:00"
+      },
+      {
+        "player_id": "name:jaden mcdaniels",
+        "canonical_name_en": "Jaden McDaniels",
+        "name_key": "jaden mcdaniels",
+        "display_name_zh": "杰登·麦克丹尼尔斯",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:25:13.710591+00:00"
+      },
+      {
+        "player_id": "name:zyon pullin",
+        "canonical_name_en": "Zyon Pullin",
+        "name_key": "zyon pullin",
+        "display_name_zh": "锡安·普林",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:25:13.710621+00:00"
+      },
+      {
+        "player_id": "name:terrence shannon jr",
+        "canonical_name_en": "Terrence Shannon Jr.",
+        "name_key": "terrence shannon jr",
+        "display_name_zh": "特伦斯·香农二世",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:25:13.710652+00:00"
+      },
+      {
+        "player_id": "name:cody williams",
+        "canonical_name_en": "Cody Williams",
+        "name_key": "cody williams",
+        "display_name_zh": "科迪·威廉姆斯",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:25:13.710681+00:00"
+      },
+      {
+        "player_id": "name:rocco zikarsky",
+        "canonical_name_en": "Rocco Zikarsky",
+        "name_key": "rocco zikarsky",
+        "display_name_zh": "罗科·齐卡尔斯基",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-21T14:25:13.710710+00:00"
+      }
+    ],
+    "prediction": null,
+    "registered_game": true,
+    "roster_context": {
+      "teams": {
+        "away": {
+          "confirmed_starters": null,
+          "current_rotation": null,
+          "current_team_roster": null,
+          "official_team_roster": {
+            "observed_at": "2026-10-25T16:58:35.122490+00:00",
+            "players": [
+              {
+                "name": "Nate Bittle",
+                "player_id": "1642927",
+                "display_name": "内特·比特尔"
+              },
+              {
+                "name": "Jamal Shead",
+                "player_id": "1642347",
+                "display_name": "贾马尔·谢德"
+              },
+              {
+                "name": "Kawhi Leonard",
+                "player_id": "202695",
+                "display_name": "科怀·伦纳德"
+              },
+              {
+                "name": "Scottie Barnes",
+                "player_id": "1630567",
+                "display_name": "斯科蒂·巴恩斯"
+              },
+              {
+                "name": "Immanuel Quickley",
+                "player_id": "1630193",
+                "display_name": "伊曼纽尔·奎克利"
+              },
+              {
+                "name": "Jaden Bradley",
+                "player_id": "1643558",
+                "display_name": "杰登·布拉德利"
+              },
+              {
+                "name": "RJ Barrett",
+                "player_id": "1629628",
+                "display_name": "RJ·巴雷特"
+              },
+              {
+                "name": "Kyle Anderson",
+                "player_id": "203937",
+                "display_name": "凯尔·安德森"
+              },
+              {
+                "name": "Ja'Kobe Walter",
+                "player_id": "1642266",
+                "display_name": "贾科比·沃尔特"
+              },
+              {
+                "name": "Malachi Smith",
+                "player_id": "1641869",
+                "display_name": "玛拉基·史密斯"
+              },
+              {
+                "name": "Jakob Poeltl",
+                "player_id": "1627751",
+                "display_name": "雅各布·珀尔特尔"
+              },
+              {
+                "name": "Allen Graves",
+                "player_id": "1643512",
+                "display_name": "艾伦·格雷夫斯"
+              },
+              {
+                "name": "Collin Murray-Boyles",
+                "player_id": "1642867",
+                "display_name": "科林·默里-博伊尔斯"
+              },
+              {
+                "name": "Trayce Jackson-Davis",
+                "player_id": "1631218",
+                "display_name": "特雷斯·杰克逊-戴维斯"
+              },
+              {
+                "name": "Alijah Martin",
+                "player_id": "1642918",
+                "display_name": "阿利贾·马丁"
+              },
+              {
+                "name": "Jamison Battle",
+                "player_id": "1642419",
+                "display_name": "贾米森·巴特尔"
+              }
+            ],
+            "source": {
+              "captured_at": "2026-10-25T16:58:35.122490+00:00",
+              "observed_at": "2026-10-25T16:58:35.122490+00:00",
+              "parser_version": "official-team-rendered-roster-v1",
+              "sha256": "fc932c52a1259df52833a5d78e8bc7b1adc0f82fb4bf584bc072d558e7774720",
+              "source_type": "official_team_roster_page",
+              "status": "success",
+              "url": "https://www.nba.com/raptors/roster"
+            },
+            "status": "available"
+          },
+          "team_id": 1610612761
+        },
+        "home": {
+          "confirmed_starters": null,
+          "current_rotation": null,
+          "current_team_roster": {
+            "observed_at": "2026-10-25T16:58:34.580299+00:00",
+            "players": [
+              {
+                "name": "LaMelo Ball",
+                "display_name": "拉梅洛·鲍尔"
+              },
+              {
+                "name": "Joan Beringer",
+                "display_name": "琼·贝林格"
+              },
+              {
+                "name": "Jaylen Clark",
+                "display_name": "杰伦·克拉克"
+              },
+              {
+                "name": "Donte DiVincenzo",
+                "display_name": "丹特·迪文琴佐"
+              },
+              {
+                "name": "Ayo Dosunmu",
+                "display_name": "阿约·多孙穆"
+              },
+              {
+                "name": "Anthony Edwards",
+                "display_name": "安东尼·爱德华兹"
+              },
+              {
+                "name": "Isaiah Evans",
+                "display_name": "以赛亚·埃文斯"
+              },
+              {
+                "name": "Rudy Gobert",
+                "display_name": "鲁迪·戈贝尔"
+              },
+              {
+                "name": "Bones Hyland",
+                "display_name": "博恩斯·海兰德"
+              },
+              {
+                "name": "Jonathan Kuminga",
+                "display_name": "乔纳森·库明加"
+              },
+              {
+                "name": "Trey Lyles",
+                "display_name": "特雷·莱尔斯"
+              },
+              {
+                "name": "Jaden McDaniels",
+                "display_name": "杰登·麦克丹尼尔斯"
+              },
+              {
+                "name": "Zyon Pullin",
+                "display_name": "锡安·普林"
+              },
+              {
+                "name": "Terrence Shannon Jr.",
+                "display_name": "特伦斯·香农二世"
+              },
+              {
+                "name": "Cody Williams",
+                "display_name": "科迪·威廉姆斯"
+              },
+              {
+                "name": "Rocco Zikarsky",
+                "display_name": "罗科·齐卡尔斯基"
+              }
+            ],
+            "source": {
+              "captured_at": "2026-10-25T16:58:34.580299+00:00",
+              "observed_at": "2026-10-25T16:58:34.580299+00:00",
+              "parser_version": "official-team-rendered-roster-v1",
+              "sha256": "222e3a9977904c9e149f53482b659f5d2270ee4201d168a15b3a5c1f0b5e8557",
+              "source_type": "espn_current_team_roster",
+              "status": "success",
+              "url": "https://www.espn.com/nba/team/roster/_/name/min/minnesota-timberwolves"
+            },
+            "status": "available"
+          },
+          "official_team_roster": null,
+          "team_id": 1610612750
+        }
+      }
+    },
+    "schedule_revision": 1,
+    "season": 2027,
+    "season_form": {
+      "status": "available",
+      "game_id": "espn:401909864",
+      "cutoff": "2026-10-25T17:08:50.618219+00:00",
+      "season_start": 2026,
+      "competition_scope": "all_game_types_in_current_season",
+      "source": "schedule_catalog_final_games",
+      "numeric_model_usage": false,
+      "teams": {
+        "away": {
+          "team_id": 1610612761,
+          "current_season_games": 7,
+          "current_season_game_ids": [
+            "espn:401909846",
+            "espn:401909837",
+            "espn:401908946",
+            "espn:401908945",
+            "espn:401908944",
+            "espn:401902645",
+            "espn:401902644"
+          ],
+          "current_season_record": {
+            "wins": 4,
+            "losses": 3
+          },
+          "current_last5": {
+            "status": "available",
+            "games": 5,
+            "wins": 3,
+            "losses": 2,
+            "win_rate": 0.6,
+            "game_ids": [
+              "espn:401909846",
+              "espn:401909837",
+              "espn:401908946",
+              "espn:401908945",
+              "espn:401908944"
+            ]
+          },
+          "last_result": {
+            "game_id": "espn:401909846",
+            "played_at": "2026-10-23T23:00:00+00:00",
+            "won": true,
+            "team_score": 112,
+            "opponent_score": 102,
+            "opponent_team_id": 1610612764,
+            "opponent_name_zh": "奇才"
+          },
+          "streak": {
+            "result": "win",
+            "games": 2
+          }
+        },
+        "home": {
+          "team_id": 1610612750,
+          "current_season_games": 8,
+          "current_season_game_ids": [
+            "espn:401909845",
+            "espn:401909091",
+            "espn:401908943",
+            "espn:401914125",
+            "espn:401914124",
+            "espn:401898397",
+            "espn:401914123",
+            "espn:401914102"
+          ],
+          "current_season_record": {
+            "wins": 5,
+            "losses": 3
+          },
+          "current_last5": {
+            "status": "available",
+            "games": 5,
+            "wins": 3,
+            "losses": 2,
+            "win_rate": 0.6,
+            "game_ids": [
+              "espn:401909845",
+              "espn:401909091",
+              "espn:401908943",
+              "espn:401914125",
+              "espn:401914124"
+            ]
+          },
+          "last_result": {
+            "game_id": "espn:401909845",
+            "played_at": "2026-10-23T23:00:00+00:00",
+            "won": true,
+            "team_score": 115,
+            "opponent_score": 93,
+            "opponent_team_id": 1610612753,
+            "opponent_name_zh": "魔术"
+          },
+          "streak": {
+            "result": "win",
+            "games": 2
+          }
+        }
+      },
+      "context_hash": "734cfa2f9363ecdc15130f304d8ce4e7574448e4bf4501e926610f62e473e7a9"
+    },
+    "season_phase": {
+      "away_current_season_games": 2,
+      "display_label": "本赛季已核实比赛（缺失不等于尚未比赛）",
+      "game_type": "regular_season",
+      "global_opening_night_confirmed": false,
+      "home_current_season_games": 2,
+      "phase": "very_early",
+      "primary_evidence": "verified_current_season_results_then_historical_baseline"
+    },
+    "season_start": 2026,
+    "source": {
+      "schedule_captured_at": "2026-10-25T17:08:55.449218+00:00"
+    },
+    "status": "scheduled",
+    "technical": {
+      "cutoff": "2026-10-25T17:01:05.774182+00:00"
+    },
+    "tipoff": "2026-10-25T23:00:00+00:00",
+    "venue": "Target Center",
+    "schedule_catalog_fact": true,
+    "nba_game_id": null,
+    "previous_season_team_stats": {
+      "status": "available",
+      "season": "2025-26",
+      "teams": {
+        "home": {
+          "team_id": 1610612750,
+          "status": "available",
+          "metrics": {
+            "off_rating": 114.1,
+            "def_rating": 110.1,
+            "net_rating": 4.0,
+            "pace": 102.5,
+            "three_pct": 36.99599838256836
+          },
+          "sources": [
+            {
+              "team_id": 1610612750,
+              "espn_team_id": "16",
+              "season": "2025-26",
+              "team_name": "Minnesota Timberwolves",
+              "metric": "def_rating",
+              "value": 110.1,
+              "unit": "per_100_possessions",
+              "source": "ESPN",
+              "source_url": "https://www.espn.com/nba/hollinger/teamstats/_/year/2026",
+              "captured_at": "2026-10-07T20:54:45.968865+00:00",
+              "response_sha256": "f5b2e802bc6b1659b430ca449ba669ca03ade6306b526c4f9816007a80c1f3f7",
+              "parser_version": "espn-team-season-stats-v1",
+              "calculation": null
+            },
+            {
+              "team_id": 1610612750,
+              "espn_team_id": "16",
+              "season": "2025-26",
+              "team_name": "Minnesota Timberwolves",
+              "metric": "net_rating",
+              "value": 4.0,
+              "unit": "per_100_possessions",
+              "source": "ESPN",
+              "source_url": "https://www.espn.com/nba/hollinger/teamstats/_/year/2026",
+              "captured_at": "2026-10-07T20:54:45.968865+00:00",
+              "response_sha256": "f5b2e802bc6b1659b430ca449ba669ca03ade6306b526c4f9816007a80c1f3f7",
+              "parser_version": "espn-team-season-stats-v1",
+              "calculation": "round(off_rating - def_rating, 1)"
+            },
+            {
+              "team_id": 1610612750,
+              "espn_team_id": "16",
+              "season": "2025-26",
+              "team_name": "Minnesota Timberwolves",
+              "metric": "off_rating",
+              "value": 114.1,
+              "unit": "per_100_possessions",
+              "source": "ESPN",
+              "source_url": "https://www.espn.com/nba/hollinger/teamstats/_/year/2026",
+              "captured_at": "2026-10-07T20:54:45.968865+00:00",
+              "response_sha256": "f5b2e802bc6b1659b430ca449ba669ca03ade6306b526c4f9816007a80c1f3f7",
+              "parser_version": "espn-team-season-stats-v1",
+              "calculation": null
+            },
+            {
+              "team_id": 1610612750,
+              "espn_team_id": "16",
+              "season": "2025-26",
+              "team_name": "Minnesota Timberwolves",
+              "metric": "pace",
+              "value": 102.5,
+              "unit": "possessions_per_game",
+              "source": "ESPN",
+              "source_url": "https://www.espn.com/nba/hollinger/teamstats/_/year/2026",
+              "captured_at": "2026-10-07T20:54:45.968865+00:00",
+              "response_sha256": "f5b2e802bc6b1659b430ca449ba669ca03ade6306b526c4f9816007a80c1f3f7",
+              "parser_version": "espn-team-season-stats-v1",
+              "calculation": null
+            },
+            {
+              "team_id": 1610612750,
+              "espn_team_id": "16",
+              "season": "2025-26",
+              "team_name": "Minnesota Timberwolves",
+              "metric": "three_pct",
+              "value": 36.99599838256836,
+              "unit": "percent",
+              "source": "ESPN",
+              "source_url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/16/statistics?season=2026&seasontype=2",
+              "captured_at": "2026-10-07T20:54:54.674060+00:00",
+              "response_sha256": "e5bb31f785a8e2fcc43595e3cc079838f31701613b560fb4a0a381ca0b26c533",
+              "parser_version": "espn-team-season-stats-v1",
+              "calculation": null
+            }
+          ]
+        },
+        "away": {
+          "team_id": 1610612761,
+          "status": "available",
+          "metrics": {
+            "off_rating": 113.0,
+            "def_rating": 110.0,
+            "net_rating": 3.0,
+            "pace": 101.0,
+            "three_pct": 35.39699935913086
+          },
+          "sources": [
+            {
+              "team_id": 1610612761,
+              "espn_team_id": "28",
+              "season": "2025-26",
+              "team_name": "Toronto Raptors",
+              "metric": "def_rating",
+              "value": 110.0,
+              "unit": "per_100_possessions",
+              "source": "ESPN",
+              "source_url": "https://www.espn.com/nba/hollinger/teamstats/_/year/2026",
+              "captured_at": "2026-10-07T20:54:45.968865+00:00",
+              "response_sha256": "f5b2e802bc6b1659b430ca449ba669ca03ade6306b526c4f9816007a80c1f3f7",
+              "parser_version": "espn-team-season-stats-v1",
+              "calculation": null
+            },
+            {
+              "team_id": 1610612761,
+              "espn_team_id": "28",
+              "season": "2025-26",
+              "team_name": "Toronto Raptors",
+              "metric": "net_rating",
+              "value": 3.0,
+              "unit": "per_100_possessions",
+              "source": "ESPN",
+              "source_url": "https://www.espn.com/nba/hollinger/teamstats/_/year/2026",
+              "captured_at": "2026-10-07T20:54:45.968865+00:00",
+              "response_sha256": "f5b2e802bc6b1659b430ca449ba669ca03ade6306b526c4f9816007a80c1f3f7",
+              "parser_version": "espn-team-season-stats-v1",
+              "calculation": "round(off_rating - def_rating, 1)"
+            },
+            {
+              "team_id": 1610612761,
+              "espn_team_id": "28",
+              "season": "2025-26",
+              "team_name": "Toronto Raptors",
+              "metric": "off_rating",
+              "value": 113.0,
+              "unit": "per_100_possessions",
+              "source": "ESPN",
+              "source_url": "https://www.espn.com/nba/hollinger/teamstats/_/year/2026",
+              "captured_at": "2026-10-07T20:54:45.968865+00:00",
+              "response_sha256": "f5b2e802bc6b1659b430ca449ba669ca03ade6306b526c4f9816007a80c1f3f7",
+              "parser_version": "espn-team-season-stats-v1",
+              "calculation": null
+            },
+            {
+              "team_id": 1610612761,
+              "espn_team_id": "28",
+              "season": "2025-26",
+              "team_name": "Toronto Raptors",
+              "metric": "pace",
+              "value": 101.0,
+              "unit": "possessions_per_game",
+              "source": "ESPN",
+              "source_url": "https://www.espn.com/nba/hollinger/teamstats/_/year/2026",
+              "captured_at": "2026-10-07T20:54:45.968865+00:00",
+              "response_sha256": "f5b2e802bc6b1659b430ca449ba669ca03ade6306b526c4f9816007a80c1f3f7",
+              "parser_version": "espn-team-season-stats-v1",
+              "calculation": null
+            },
+            {
+              "team_id": 1610612761,
+              "espn_team_id": "28",
+              "season": "2025-26",
+              "team_name": "Toronto Raptors",
+              "metric": "three_pct",
+              "value": 35.39699935913086,
+              "unit": "percent",
+              "source": "ESPN",
+              "source_url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/28/statistics?season=2026&seasontype=2",
+              "captured_at": "2026-10-07T20:55:00.423690+00:00",
+              "response_sha256": "243adad65bb62645df26017ed6886b122b03d61854ca1789d5c31eb2dfbd30b8",
+              "parser_version": "espn-team-season-stats-v1",
+              "calculation": null
+            }
+          ]
+        }
+      }
+    },
+    "official_injury_report": {
+      "game_id": "espn:401909864",
+      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-24_01_00PM.pdf",
+      "source_published_at": "2026-10-24T17:00:00+00:00",
+      "captured_at": "2026-10-24T17:05:21.477828+00:00",
+      "source_sha256": "6750277b66b655abf6d4bd06f53fb783d2bf0366d808f24363b128f8cd894494",
+      "parser_version": "nba-official-injury-live-v3",
+      "status": "published",
+      "report_id": "c535205e3d0a11b623c897241a9d801cd6b401d98ba17b73031ceb700cc34ff5",
+      "report_date": "2026-10-24",
+      "report_time": "13:00",
+      "coverage": "partial",
+      "records": []
+    },
+    "postgame": null,
+    "homepage_visible": true
+  },
+  "prediction": {
+    "status": "current",
+    "game_id": "espn:401909864",
+    "version_id": "9c80589b-c30b-4661-a04e-e185b491f09b",
+    "state_revision": 2,
+    "locked_at": null,
+    "lock_reason": null,
+    "schedule_revision": 1,
+    "fact_view": {
+      "schema_version": "pregame-fact-view-v1",
+      "game_id": "espn:401909864",
+      "version_id": "9c80589b-c30b-4661-a04e-e185b491f09b",
+      "source_payload_sha256": "64bd9005950b1c70540f3561892cf54c5043d215f8b227e157f70ede90b8b718",
+      "origin": "legacy_frozen",
+      "context": {
+        "schema_version": "pregame-fact-context-v1",
+        "game_id": "espn:401909864",
+        "feature_cutoff": "2026-10-25T17:01:05.774182+00:00",
+        "team_form": {
+          "home": {
+            "status": "unavailable",
+            "reason": "legacy_valid_n_competition_and_date_range_not_recorded",
+            "requested_games": null,
+            "observed_games": null,
+            "game_ids": [],
+            "season_counts": {
+              "2026": 0,
+              "2025": 15,
+              "older": 0
+            },
+            "competition_counts": null,
+            "first_game_date": null,
+            "last_game_date": null,
+            "date_timezone": "America/New_York",
+            "metrics": {
+              "off_rating_15": {
+                "value": null,
+                "valid_games": null,
+                "missing_games": null,
+                "unit": "points_per_100_possessions",
+                "aggregation": null,
+                "method": "not_recorded_in_legacy_version"
+              },
+              "def_rating_15": {
+                "value": null,
+                "valid_games": null,
+                "missing_games": null,
+                "unit": "points_allowed_per_100_possessions",
+                "aggregation": null,
+                "method": "not_recorded_in_legacy_version"
+              },
+              "net_rating_15": {
+                "value": null,
+                "valid_games": null,
+                "missing_games": null,
+                "unit": "points_per_100_possessions",
+                "aggregation": null,
+                "method": "not_recorded_in_legacy_version"
+              },
+              "pace_15": {
+                "value": null,
+                "valid_games": null,
+                "missing_games": null,
+                "unit": "possessions_per_48_minutes",
+                "aggregation": null,
+                "method": "not_recorded_in_legacy_version"
+              },
+              "win_rate_15": {
+                "value": null,
+                "valid_games": null,
+                "missing_games": null,
+                "unit": "win_fraction",
+                "aggregation": null,
+                "method": "not_recorded_in_legacy_version"
+              },
+              "three_pct_15": {
+                "value": null,
+                "valid_games": null,
+                "missing_games": null,
+                "unit": "fraction",
+                "aggregation": null,
+                "method": "not_recorded_in_legacy_version"
+              },
+              "rebound_share_15": {
+                "value": null,
+                "valid_games": null,
+                "missing_games": null,
+                "unit": "fraction",
+                "aggregation": null,
+                "method": "not_recorded_in_legacy_version"
+              },
+              "turnover_rate_15": {
+                "value": null,
+                "valid_games": null,
+                "missing_games": null,
+                "unit": "turnovers_per_possession",
+                "aggregation": null,
+                "method": "not_recorded_in_legacy_version"
+              }
+            }
+          },
+          "away": {
+            "status": "unavailable",
+            "reason": "legacy_valid_n_competition_and_date_range_not_recorded",
+            "requested_games": null,
+            "observed_games": null,
+            "game_ids": [],
+            "season_counts": {
+              "2026": 0,
+              "2025": 15,
+              "older": 0
+            },
+            "competition_counts": null,
+            "first_game_date": null,
+            "last_game_date": null,
+            "date_timezone": "America/New_York",
+            "metrics": {
+              "off_rating_15": {
+                "value": null,
+                "valid_games": null,
+                "missing_games": null,
+                "unit": "points_per_100_possessions",
+                "aggregation": null,
+                "method": "not_recorded_in_legacy_version"
+              },
+              "def_rating_15": {
+                "value": null,
+                "valid_games": null,
+                "missing_games": null,
+                "unit": "points_allowed_per_100_possessions",
+                "aggregation": null,
+                "method": "not_recorded_in_legacy_version"
+              },
+              "net_rating_15": {
+                "value": null,
+                "valid_games": null,
+                "missing_games": null,
+                "unit": "points_per_100_possessions",
+                "aggregation": null,
+                "method": "not_recorded_in_legacy_version"
+              },
+              "pace_15": {
+                "value": null,
+                "valid_games": null,
+                "missing_games": null,
+                "unit": "possessions_per_48_minutes",
+                "aggregation": null,
+                "method": "not_recorded_in_legacy_version"
+              },
+              "win_rate_15": {
+                "value": null,
+                "valid_games": null,
+                "missing_games": null,
+                "unit": "win_fraction",
+                "aggregation": null,
+                "method": "not_recorded_in_legacy_version"
+              },
+              "three_pct_15": {
+                "value": null,
+                "valid_games": null,
+                "missing_games": null,
+                "unit": "fraction",
+                "aggregation": null,
+                "method": "not_recorded_in_legacy_version"
+              },
+              "rebound_share_15": {
+                "value": null,
+                "valid_games": null,
+                "missing_games": null,
+                "unit": "fraction",
+                "aggregation": null,
+                "method": "not_recorded_in_legacy_version"
+              },
+              "turnover_rate_15": {
+                "value": null,
+                "valid_games": null,
+                "missing_games": null,
+                "unit": "turnovers_per_possession",
+                "aggregation": null,
+                "method": "not_recorded_in_legacy_version"
+              }
+            }
+          }
+        },
+        "schedule": {
+          "home": {
+            "status": "unavailable",
+            "reason": "legacy_version_has_no_verified_schedule_basis",
+            "basis": null,
+            "back_to_back": null,
+            "source_refs": []
+          },
+          "away": {
+            "status": "unavailable",
+            "reason": "legacy_version_has_no_verified_schedule_basis",
+            "basis": null,
+            "back_to_back": null,
+            "source_refs": []
+          }
+        }
+      }
+    },
+    "display_projection": {
+      "schema_version": "prediction-display-cutoffs-v1",
+      "version_id": "9c80589b-c30b-4661-a04e-e185b491f09b",
+      "market_interpretation": {
+        "schema_version": "writer-market-interpretation-v1",
+        "spread": {
+          "status": "available",
+          "margin_perspective": "home_minus_away",
+          "model_home_margin": 2.5,
+          "market_implied_home_margin": 1.5,
+          "spread_edge": 1.0,
+          "ats_lean": "home",
+          "ats_lean_reference": {
+            "side": "home",
+            "team_id": 1610612750,
+            "team_name": "森林狼",
+            "line": -1.5,
+            "display": "森林狼 -1.5"
+          },
+          "market_quote_id": "feed1681a1b91b3b3ee213e75309dafde8de99e6d4a5583458afbba2c395749b"
+        },
+        "total": {
+          "status": "available",
+          "model_total": 228.5,
+          "market_total": 229.5,
+          "total_edge": -1.0,
+          "total_lean": "under",
+          "market_quote_id": "feed1681a1b91b3b3ee213e75309dafde8de99e6d4a5583458afbba2c395749b"
+        }
+      },
+      "cutoffs": {
+        "input_cutoff_at": "2026-10-25T17:08:50.618219+00:00",
+        "feature_cutoff_at": null,
+        "roster_context_cutoff_at": null
+      }
+    },
+    "version": {
+      "analysis_contract_version": "two-stage-forecast-v1",
+      "base_input_hash": "18800e7fc8f993c9641db0d3bd8af0a9722d3d5ce20b5f2706a30714380e3bb7",
+      "editorial_material": [
+        {
+          "effect": "uncertainty",
+          "evidence_ids": [
+            "1f70b062d6b0c2d41b612d6b44d1ba9b5a7120445af5fa8c3956dcf12cde2b09",
+            "7344775a06c4d7c669212ab5030f87e495d6abada4a35224b4d07e3fc77bfea9"
+          ],
+          "pregame_plan": {
+            "key_matchup": "Edwards/Ball 后场 vs Leonard/Barnes 侧翼",
+            "lineups": [
+              {
+                "basis": "agent_expected",
+                "candidates": [
+                  "Donte DiVincenzo",
+                  "Bones Hyland",
+                  "Jonathan Kuminga",
+                  "Jaylen Clark"
+                ],
+                "evidence_ids": [
+                  "7344775a06c4d7c669212ab5030f87e495d6abada4a35224b4d07e3fc77bfea9"
+                ],
+                "players": [
+                  "Anthony Edwards",
+                  "LaMelo Ball",
+                  "Jaden McDaniels",
+                  "Rudy Gobert",
+                  "Ayo Dosunmu"
+                ],
+                "rationale": "基于前两场 key_player_results 推断：Edwards、Ball、McDaniels、Gobert、Dosunmu 是主要轮换，DiVincenzo 为第六人。",
+                "side": "home"
+              },
+              {
+                "basis": "agent_expected",
+                "candidates": [
+                  "Collin Murray-Boyles",
+                  "Jamal Shead",
+                  "Ja'Kobe Walter",
+                  "Kyle Anderson"
+                ],
+                "evidence_ids": [
+                  "7344775a06c4d7c669212ab5030f87e495d6abada4a35224b4d07e3fc77bfea9",
+                  "1f70b062d6b0c2d41b612d6b44d1ba9b5a7120445af5fa8c3956dcf12cde2b09"
+                ],
+                "players": [
+                  "Kawhi Leonard",
+                  "Scottie Barnes",
+                  "Immanuel Quickley",
+                  "RJ Barrett",
+                  "Jakob Poeltl"
+                ],
+                "rationale": "基于首场 key_player_results 与赛季预览：Leonard、Barnes、Quickley、Barrett 为核心，Poeltl 首发中锋，Murray-Boyles 为主要替补。",
+                "side": "away"
+              }
+            ],
+            "player_usage": [
+              {
+                "basis": "agent_estimate",
+                "evidence_ids": [
+                  "7344775a06c4d7c669212ab5030f87e495d6abada4a35224b4d07e3fc77bfea9"
+                ],
+                "minutes_max": 36,
+                "minutes_min": 32,
+                "player_name": "Anthony Edwards",
+                "rationale": "前两场分别打 33 分钟，作为核心持球点预计维持高负荷。",
+                "side": "home"
+              },
+              {
+                "basis": "agent_estimate",
+                "evidence_ids": [
+                  "7344775a06c4d7c669212ab5030f87e495d6abada4a35224b4d07e3fc77bfea9"
+                ],
+                "minutes_max": 32,
+                "minutes_min": 24,
+                "player_name": "Kawhi Leonard",
+                "rationale": "首场仅打 24 分钟，负荷管理可能限制其出场时间，但作为核心仍会承担关键时段。",
+                "side": "away"
+              }
+            ],
+            "uncertainty": [
+              "首发阵容未获官方确认，均为基于前两场表现的推断。",
+              "Kawhi Leonard 的分钟限制未确认，可能影响猛龙攻防强度。"
+            ]
+          },
+          "summary": "本场预计首发与核心球员负荷"
+        }
+      ],
+      "evidence_index": {
+        "01848743e532ecd6b6cb6d1b7573dab32fe733488ffaf282a2f48b9bab6d766d": {
+          "section": "roster_context",
+          "source_type": "Fact"
+        },
+        "16525eeae6cc2c3a2969bd53eb8e261071589da5a498573fb6ec3a6aa1ee368e": {
+          "section": "prediction",
+          "source_type": "ModelForecast"
+        },
+        "1f70b062d6b0c2d41b612d6b44d1ba9b5a7120445af5fa8c3956dcf12cde2b09": {
+          "section": "web_context",
+          "source_type": "Fact"
+        },
+        "20c3d570293f5f7ca7a232c5b0d7c57f80fc6584eff0a0cf4f374043ee2dfd15": {
+          "section": "web_context",
+          "source_type": "Fact"
+        },
+        "4405ff4a3b6aaa2a5f27cd1a0452477885c37b43bc5894a491da33b5d1d31700": {
+          "section": "model_facts",
+          "source_type": "Fact"
+        },
+        "50bfa66e41ed37031711d53cdf035c1b378b46c63272c45a225cb6a4c82fd0c7": {
+          "section": "web_context",
+          "source_type": "Fact"
+        },
+        "63e9416933ac9fefa9bbd8e576d2bfea97c41a96cda744016ae39b22d8ea90a4": {
+          "section": "season_phase",
+          "source_type": "Fact"
+        },
+        "6e2f514007f1df4bfd849a8b1e8f69c668e40a50b7059d9cc2a8589cfd8b67a0": {
+          "section": "web_context",
+          "source_type": "Fact"
+        },
+        "7077b2adcae46b2f25ef102c65497eaa396dfea1560158bbc098003a1b22293b": {
+          "section": "fact_context",
+          "source_type": "Context"
+        },
+        "7344775a06c4d7c669212ab5030f87e495d6abada4a35224b4d07e3fc77bfea9": {
+          "section": "season_form",
+          "source_type": "Fact"
+        },
+        "7c3a4395d70ab5a5d9c9c8d12ceec8217ba8769b0b36a4dbd4e821eb68647eea": {
+          "section": "web_context",
+          "source_type": "Fact"
+        },
+        "80d0aa4fbf11175f9b7f9c83f5897aa8626a1f226cecd819a6df415017a81686": {
+          "section": "web_context",
+          "source_type": "Fact"
+        },
+        "9412916b871c42de211e91dfc39befe65294bc0433da6e6b6ece57a67a97e88e": {
+          "section": "research_status",
+          "source_type": "Context"
+        },
+        "a11afa66604732e087dbaec6d436072f948fb54e845b21b48979235cfe934c08": {
+          "section": "matchup",
+          "source_type": "Fact"
+        },
+        "c7e233402fe3b9c12c2657b87eba0c616437b108e160bedec7b058d36aa31fe7": {
+          "section": "team_form",
+          "source_type": "Fact"
+        },
+        "d2ebd30f95c496dedddb78c7aff8aedcdf227a1e66b958d711439eb97f21dec6": {
+          "section": "matchup_history",
+          "source_type": "Fact"
+        },
+        "d9de6a4b4110e142233c092ca9585cffbdb1b681397b8de9daaa4fbbcbd5346c": {
+          "section": "game_identity",
+          "source_type": "Fact"
+        },
+        "feed1681a1b91b3b3ee213e75309dafde8de99e6d4a5583458afbba2c395749b": {
+          "section": "web_context",
+          "source_type": "MarketSnapshot"
+        }
+      },
+      "game_id": "espn:401909864",
+      "game_identity": {
+        "away_team_id": 1610612761,
+        "game_id": "espn:401909864",
+        "home_team_id": 1610612750,
+        "scheduled_tipoff": "2026-10-25T23:00:00+00:00"
+      },
+      "generated_at": "2026-10-25T17:08:52.846607+00:00",
+      "input_cutoff_at": "2026-10-25T17:08:50.618219+00:00",
+      "input_snapshot": {
+        "away": {
+          "abbreviation": "TOR",
+          "accent": "#CE1141",
+          "espn_team_id": "28",
+          "id": 1610612761,
+          "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/tor.png",
+          "name": "Toronto Raptors",
+          "name_zh": "猛龙"
+        },
+        "background": {
+          "availability": {
+            "message": "暂无可靠伤病信息",
+            "records": [],
+            "status": "unavailable"
+          },
+          "market": null,
+          "recent_form": {
+            "away": {},
+            "home": {}
+          },
+          "schedule": {}
+        },
+        "game_type": "regular_season",
+        "home": {
+          "abbreviation": "MIN",
+          "accent": "#0C2340",
+          "espn_team_id": "16",
+          "id": 1610612750,
+          "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/min.png",
+          "name": "Minnesota Timberwolves",
+          "name_zh": "森林狼"
+        },
+        "id": "espn:401909864",
+        "matchup_history": {
+          "away_team_id": 1610612761,
+          "context_hash": "0d1fe5ed0f555069705af748e0b2804e098f927093a84a8dc357bebf2ba9f7dc",
+          "cutoff": "2026-10-25T16:58:35.391525+00:00",
+          "game_id": "espn:401909864",
+          "home_team_id": 1610612750,
+          "matchup_relevance": "medium",
+          "meeting_count": 31,
+          "meetings": [
+            {
+              "away_score": 103,
+              "away_team_id": 1610612761,
+              "game_id": "0022100880",
+              "home_margin": -12,
+              "home_score": 91,
+              "home_team_id": 1610612750,
+              "is_playoffs": false,
+              "played_at": "2022-02-16T20:00:00",
+              "season_start": 2021,
+              "series_key": null,
+              "winner_team_id": 1610612761
+            },
+            {
+              "away_score": 102,
+              "away_team_id": 1610612750,
+              "game_id": "0022101141",
+              "home_margin": 23,
+              "home_score": 125,
+              "home_team_id": 1610612761,
+              "is_playoffs": false,
+              "played_at": "2022-03-30T19:30:00",
+              "season_start": 2021,
+              "series_key": null,
+              "winner_team_id": 1610612761
+            },
+            {
+              "away_score": 126,
+              "away_team_id": 1610612761,
+              "game_id": "0022200680",
+              "home_margin": 2,
+              "home_score": 128,
+              "home_team_id": 1610612750,
+              "is_playoffs": false,
+              "played_at": "2023-01-19T20:00:00",
+              "season_start": 2022,
+              "series_key": null,
+              "winner_team_id": 1610612750
+            },
+            {
+              "away_score": 107,
+              "away_team_id": 1610612750,
+              "game_id": "0022201058",
+              "home_margin": 15,
+              "home_score": 122,
+              "home_team_id": 1610612761,
+              "is_playoffs": false,
+              "played_at": "2023-03-18T19:00:00",
+              "season_start": 2022,
+              "series_key": null,
+              "winner_team_id": 1610612761
+            },
+            {
+              "away_score": 94,
+              "away_team_id": 1610612750,
+              "game_id": "0022300069",
+              "home_margin": 3,
+              "home_score": 97,
+              "home_team_id": 1610612761,
+              "is_playoffs": false,
+              "played_at": "2023-10-25T19:30:00",
+              "season_start": 2023,
+              "series_key": null,
+              "winner_team_id": 1610612761
+            },
+            {
+              "away_score": 85,
+              "away_team_id": 1610612761,
+              "game_id": "0022301108",
+              "home_margin": 48,
+              "home_score": 133,
+              "home_team_id": 1610612750,
+              "is_playoffs": false,
+              "played_at": "2024-04-03T20:00:00",
+              "season_start": 2023,
+              "series_key": null,
+              "winner_team_id": 1610612750
+            },
+            {
+              "away_score": 101,
+              "away_team_id": 1610612761,
+              "game_id": "0022400093",
+              "home_margin": 11,
+              "home_score": 112,
+              "home_team_id": 1610612750,
+              "is_playoffs": false,
+              "played_at": "2024-10-26T20:00:00",
+              "season_start": 2024,
+              "series_key": null,
+              "winner_team_id": 1610612750
+            },
+            {
+              "away_score": 105,
+              "away_team_id": 1610612750,
+              "game_id": "0022400261",
+              "home_margin": 5,
+              "home_score": 110,
+              "home_team_id": 1610612761,
+              "is_playoffs": false,
+              "played_at": "2024-11-21T19:30:00",
+              "season_start": 2024,
+              "series_key": null,
+              "winner_team_id": 1610612761
+            },
+            {
+              "away_score": 128,
+              "away_team_id": 1610612750,
+              "game_id": "0022500727",
+              "home_margin": -2,
+              "home_score": 126,
+              "home_team_id": 1610612761,
+              "is_playoffs": false,
+              "played_at": "2026-02-04T19:30:00",
+              "season_start": 2025,
+              "series_key": null,
+              "winner_team_id": 1610612750
+            },
+            {
+              "away_score": 107,
+              "away_team_id": 1610612761,
+              "game_id": "0022500903",
+              "home_margin": 8,
+              "home_score": 115,
+              "home_team_id": 1610612750,
+              "is_playoffs": false,
+              "played_at": "2026-03-05T20:00:00",
+              "season_start": 2025,
+              "series_key": null,
+              "winner_team_id": 1610612750
+            }
+          ],
+          "most_recent_meeting": {
+            "away_score": 107,
+            "away_team_id": 1610612761,
+            "game_id": "0022500903",
+            "home_margin": 8,
+            "home_score": 115,
+            "home_team_id": 1610612750,
+            "is_playoffs": false,
+            "played_at": "2026-03-05T20:00:00",
+            "season_start": 2025,
+            "series_key": null,
+            "winner_team_id": 1610612750
+          },
+          "numeric_model_usage": false,
+          "relevance_reasons": [
+            "multiple_recent_regular_season_meetings"
+          ],
+          "series_summary": null,
+          "source_semantics": "local historical games strictly before cutoff; team statistics when available",
+          "status": "available"
+        },
+        "missing": [
+          {
+            "reason": "not_collected",
+            "section": "roster"
+          },
+          {
+            "reason": "not_collected",
+            "section": "availability"
+          },
+          {
+            "reason": "not_collected",
+            "section": "market"
+          }
+        ],
+        "neutral_site": false,
+        "player_display_names": [],
+        "prediction": null,
+        "registered_game": true,
+        "roster_context": {
+          "teams": {
+            "away": {
+              "confirmed_starters": null,
+              "current_rotation": null,
+              "current_team_roster": null,
+              "official_team_roster": {
+                "observed_at": "2026-10-25T16:58:35.122490+00:00",
+                "players": [
+                  {
+                    "name": "Nate Bittle",
+                    "player_id": "1642927"
+                  },
+                  {
+                    "name": "Jamal Shead",
+                    "player_id": "1642347"
+                  },
+                  {
+                    "name": "Kawhi Leonard",
+                    "player_id": "202695"
+                  },
+                  {
+                    "name": "Scottie Barnes",
+                    "player_id": "1630567"
+                  },
+                  {
+                    "name": "Immanuel Quickley",
+                    "player_id": "1630193"
+                  },
+                  {
+                    "name": "Jaden Bradley",
+                    "player_id": "1643558"
+                  },
+                  {
+                    "name": "RJ Barrett",
+                    "player_id": "1629628"
+                  },
+                  {
+                    "name": "Kyle Anderson",
+                    "player_id": "203937"
+                  },
+                  {
+                    "name": "Ja'Kobe Walter",
+                    "player_id": "1642266"
+                  },
+                  {
+                    "name": "Malachi Smith",
+                    "player_id": "1641869"
+                  },
+                  {
+                    "name": "Jakob Poeltl",
+                    "player_id": "1627751"
+                  },
+                  {
+                    "name": "Allen Graves",
+                    "player_id": "1643512"
+                  },
+                  {
+                    "name": "Collin Murray-Boyles",
+                    "player_id": "1642867"
+                  },
+                  {
+                    "name": "Trayce Jackson-Davis",
+                    "player_id": "1631218"
+                  },
+                  {
+                    "name": "Alijah Martin",
+                    "player_id": "1642918"
+                  },
+                  {
+                    "name": "Jamison Battle",
+                    "player_id": "1642419"
+                  }
+                ],
+                "source": {
+                  "captured_at": "2026-10-25T16:58:35.122490+00:00",
+                  "observed_at": "2026-10-25T16:58:35.122490+00:00",
+                  "parser_version": "official-team-rendered-roster-v1",
+                  "sha256": "fc932c52a1259df52833a5d78e8bc7b1adc0f82fb4bf584bc072d558e7774720",
+                  "source_type": "official_team_roster_page",
+                  "status": "success",
+                  "url": "https://www.nba.com/raptors/roster"
+                },
+                "status": "available"
+              },
+              "team_id": 1610612761
+            },
+            "home": {
+              "confirmed_starters": null,
+              "current_rotation": null,
+              "current_team_roster": {
+                "observed_at": "2026-10-25T16:58:34.580299+00:00",
+                "players": [
+                  {
+                    "name": "LaMelo Ball"
+                  },
+                  {
+                    "name": "Joan Beringer"
+                  },
+                  {
+                    "name": "Jaylen Clark"
+                  },
+                  {
+                    "name": "Donte DiVincenzo"
+                  },
+                  {
+                    "name": "Ayo Dosunmu"
+                  },
+                  {
+                    "name": "Anthony Edwards"
+                  },
+                  {
+                    "name": "Isaiah Evans"
+                  },
+                  {
+                    "name": "Rudy Gobert"
+                  },
+                  {
+                    "name": "Bones Hyland"
+                  },
+                  {
+                    "name": "Jonathan Kuminga"
+                  },
+                  {
+                    "name": "Trey Lyles"
+                  },
+                  {
+                    "name": "Jaden McDaniels"
+                  },
+                  {
+                    "name": "Zyon Pullin"
+                  },
+                  {
+                    "name": "Terrence Shannon Jr."
+                  },
+                  {
+                    "name": "Cody Williams"
+                  },
+                  {
+                    "name": "Rocco Zikarsky"
+                  }
+                ],
+                "source": {
+                  "captured_at": "2026-10-25T16:58:34.580299+00:00",
+                  "observed_at": "2026-10-25T16:58:34.580299+00:00",
+                  "parser_version": "official-team-rendered-roster-v1",
+                  "sha256": "222e3a9977904c9e149f53482b659f5d2270ee4201d168a15b3a5c1f0b5e8557",
+                  "source_type": "espn_current_team_roster",
+                  "status": "success",
+                  "url": "https://www.espn.com/nba/team/roster/_/name/min/minnesota-timberwolves"
+                },
+                "status": "available"
+              },
+              "official_team_roster": null,
+              "team_id": 1610612750
+            }
+          }
+        },
+        "schedule_revision": 1,
+        "season": 2027,
+        "season_form": {
+          "competition_scope": "regular_season; previous-season windows retain their original labels",
+          "context_hash": "be4ad8cdc51bfaa878e626d31cd66984aa859112ed3847731bfce24fbae780bd",
+          "cutoff": "2026-10-25T16:58:35.391525+00:00",
+          "game_id": "espn:401909864",
+          "numeric_model_usage": false,
+          "season_start": 2026,
+          "source": "captured_results_before_cutoff",
+          "status": "available",
+          "teams": {
+            "away": {
+              "current_count_semantics": "verified completed games before cutoff",
+              "current_last10": {
+                "game_ids": [
+                  "espn:401909846",
+                  "espn:401909837"
+                ],
+                "games": 2,
+                "points_against_per_game": 97.0,
+                "points_for_per_game": 123.5,
+                "status": "available",
+                "win_rate": 1.0
+              },
+              "current_last15": {
+                "game_ids": [
+                  "espn:401909846",
+                  "espn:401909837"
+                ],
+                "games": 2,
+                "points_against_per_game": 97.0,
+                "points_for_per_game": 123.5,
+                "status": "available",
+                "win_rate": 1.0
+              },
+              "current_last5": {
+                "game_ids": [
+                  "espn:401909846",
+                  "espn:401909837"
+                ],
+                "games": 2,
+                "points_against_per_game": 97.0,
+                "points_for_per_game": 123.5,
+                "status": "available",
+                "win_rate": 1.0
+              },
+              "current_season_game_ids": [
+                "espn:401909837",
+                "espn:401909846"
+              ],
+              "current_season_games": 2,
+              "last_result": {
+                "away_team_name": "Toronto Raptors",
+                "captured_at": "2026-10-25T15:59:13.332937+00:00",
+                "game_id": "espn:401909846",
+                "home_team_name": "Washington Wizards",
+                "key_player_results": [],
+                "opponent_name": "Washington Wizards",
+                "opponent_score": 102.0,
+                "opponent_team_id": 1610612764,
+                "played_at": "2026-10-23T23:00:00+00:00",
+                "result_id": null,
+                "source_payload_sha256": null,
+                "source_url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261023",
+                "team_score": 112.0,
+                "team_side": "away",
+                "won": true
+              },
+              "previous_last10": {
+                "first_game_date": "2026-04-09T19:00:00",
+                "game_ids": [
+                  "0022501165",
+                  "0022501176",
+                  "0022501192",
+                  "0042500131",
+                  "0042500132",
+                  "0042500133",
+                  "0042500134",
+                  "0042500135",
+                  "0042500136",
+                  "0042500137"
+                ],
+                "games": 10,
+                "last_game_date": "2026-05-03T19:30:00",
+                "point_margin_per_game": 2.0,
+                "points_against_per_game": 111.0,
+                "points_for_per_game": 113.0,
+                "rebounds_per_game": 39.7,
+                "status": "available",
+                "three_pct": 0.3758620689655172,
+                "turnovers_per_game": 13.5,
+                "win_rate": 0.5
+              },
+              "previous_playoffs": {
+                "championship_clinched": null,
+                "finals_wins": null,
+                "game_ids": [
+                  "0042500131",
+                  "0042500132",
+                  "0042500133",
+                  "0042500134",
+                  "0042500135",
+                  "0042500136",
+                  "0042500137"
+                ],
+                "last_observed_round": 1,
+                "observed_games": 7,
+                "observed_losses": 4,
+                "observed_wins": 3,
+                "season_start": 2025,
+                "semantics": "observed pre-cutoff playoff games; title confirmed only by four recorded Finals wins",
+                "status": "available"
+              },
+              "previous_season_games": 89,
+              "recent_games": [
+                {
+                  "away_team_name": "Toronto Raptors",
+                  "captured_at": "2026-10-25T15:59:13.332937+00:00",
+                  "game_id": "espn:401909846",
+                  "home_team_name": "Washington Wizards",
+                  "key_player_results": [],
+                  "opponent_name": "Washington Wizards",
+                  "opponent_score": 102.0,
+                  "opponent_team_id": 1610612764,
+                  "played_at": "2026-10-23T23:00:00+00:00",
+                  "result_id": null,
+                  "source_payload_sha256": null,
+                  "source_url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261023",
+                  "team_score": 112.0,
+                  "team_side": "away",
+                  "won": true
+                },
+                {
+                  "away_team_name": "Chicago Bulls",
+                  "captured_at": "2026-10-22T02:28:32.110261+00:00",
+                  "game_id": "espn:401909837",
+                  "home_team_name": "Toronto Raptors",
+                  "key_player_results": [
+                    {
+                      "assists": 2,
+                      "full_name": "Kawhi Leonard",
+                      "minutes": 24.0,
+                      "points": 23,
+                      "rebounds": 6,
+                      "team_id": 1610612761
+                    },
+                    {
+                      "assists": 5,
+                      "full_name": "Scottie Barnes",
+                      "minutes": 26.0,
+                      "points": 23,
+                      "rebounds": 6,
+                      "team_id": 1610612761
+                    },
+                    {
+                      "assists": 7,
+                      "full_name": "Immanuel Quickley",
+                      "minutes": 28.0,
+                      "points": 23,
+                      "rebounds": 4,
+                      "team_id": 1610612761
+                    },
+                    {
+                      "assists": 3,
+                      "full_name": "RJ Barrett",
+                      "minutes": 26.0,
+                      "points": 20,
+                      "rebounds": 4,
+                      "team_id": 1610612761
+                    }
+                  ],
+                  "opponent_name": "Chicago Bulls",
+                  "opponent_score": 92,
+                  "opponent_team_id": 1610612741,
+                  "played_at": "2026-10-21T23:30:00+00:00",
+                  "result_id": "9f486463fdcc39ae26ec7b9f28087a41eed6ba5d794c976190805ba84acfd604",
+                  "source_payload_sha256": "275bfc53e1641ab3d35d523121c22bf9f7bc7e168f5c2803b30e5f1a30631639",
+                  "source_url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=401909837",
+                  "team_score": 135,
+                  "team_side": "home",
+                  "won": true
+                }
+              ],
+              "regular_season_game_number": 3,
+              "team_id": 1610612761
+            },
+            "home": {
+              "current_count_semantics": "verified completed games before cutoff",
+              "current_last10": {
+                "game_ids": [
+                  "espn:401909845",
+                  "espn:401909091"
+                ],
+                "games": 2,
+                "points_against_per_game": 99.5,
+                "points_for_per_game": 123.0,
+                "status": "available",
+                "win_rate": 1.0
+              },
+              "current_last15": {
+                "game_ids": [
+                  "espn:401909845",
+                  "espn:401909091"
+                ],
+                "games": 2,
+                "points_against_per_game": 99.5,
+                "points_for_per_game": 123.0,
+                "status": "available",
+                "win_rate": 1.0
+              },
+              "current_last5": {
+                "game_ids": [
+                  "espn:401909845",
+                  "espn:401909091"
+                ],
+                "games": 2,
+                "points_against_per_game": 99.5,
+                "points_for_per_game": 123.0,
+                "status": "available",
+                "win_rate": 1.0
+              },
+              "current_season_game_ids": [
+                "espn:401909091",
+                "espn:401909845"
+              ],
+              "current_season_games": 2,
+              "last_result": {
+                "away_team_name": "Minnesota Timberwolves",
+                "captured_at": "2026-10-24T01:37:46.365590+00:00",
+                "game_id": "espn:401909845",
+                "home_team_name": "Orlando Magic",
+                "key_player_results": [
+                  {
+                    "assists": 4,
+                    "full_name": "Jaden McDaniels",
+                    "minutes": 30.0,
+                    "points": 15,
+                    "rebounds": 6,
+                    "team_id": 1610612750
+                  },
+                  {
+                    "assists": 4,
+                    "full_name": "Anthony Edwards",
+                    "minutes": 33.0,
+                    "points": 15,
+                    "rebounds": 4,
+                    "team_id": 1610612750
+                  },
+                  {
+                    "assists": 1,
+                    "full_name": "Rudy Gobert",
+                    "minutes": 30.0,
+                    "points": 14,
+                    "rebounds": 9,
+                    "team_id": 1610612750
+                  },
+                  {
+                    "assists": 9,
+                    "full_name": "Ayo Dosunmu",
+                    "minutes": 27.0,
+                    "points": 14,
+                    "rebounds": 6,
+                    "team_id": 1610612750
+                  }
+                ],
+                "opponent_name": "Orlando Magic",
+                "opponent_score": 93,
+                "opponent_team_id": 1610612753,
+                "played_at": "2026-10-23T23:00:00+00:00",
+                "result_id": "97bbd4867e632c7bd87201af8aef6d30697a7d3a5ada6cdbd53bcee68316c189",
+                "source_payload_sha256": "2620cd1ef21a668b0702994f677d11348fe28f046e375979ff4c9164a1adb076",
+                "source_url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=401909845",
+                "team_score": 115,
+                "team_side": "away",
+                "won": true
+              },
+              "previous_last10": {
+                "first_game_date": "2026-04-23T21:30:00",
+                "game_ids": [
+                  "0042500163",
+                  "0042500164",
+                  "0042500165",
+                  "0042500166",
+                  "0042500231",
+                  "0042500232",
+                  "0042500233",
+                  "0042500234",
+                  "0042500235",
+                  "0042500236"
+                ],
+                "games": 10,
+                "last_game_date": "2026-05-15T21:30:00",
+                "point_margin_per_game": -6.4,
+                "points_against_per_game": 113.9,
+                "points_for_per_game": 107.5,
+                "rebounds_per_game": 45.4,
+                "status": "available",
+                "three_pct": 0.3300653594771242,
+                "turnovers_per_game": 13.3,
+                "win_rate": 0.5
+              },
+              "previous_playoffs": {
+                "championship_clinched": null,
+                "finals_wins": null,
+                "game_ids": [
+                  "0042500161",
+                  "0042500162",
+                  "0042500163",
+                  "0042500164",
+                  "0042500165",
+                  "0042500166",
+                  "0042500231",
+                  "0042500232",
+                  "0042500233",
+                  "0042500234",
+                  "0042500235",
+                  "0042500236"
+                ],
+                "last_observed_round": 2,
+                "observed_games": 12,
+                "observed_losses": 6,
+                "observed_wins": 6,
+                "season_start": 2025,
+                "semantics": "observed pre-cutoff playoff games; title confirmed only by four recorded Finals wins",
+                "status": "available"
+              },
+              "previous_season_games": 94,
+              "recent_games": [
+                {
+                  "away_team_name": "Minnesota Timberwolves",
+                  "captured_at": "2026-10-24T01:37:46.365590+00:00",
+                  "game_id": "espn:401909845",
+                  "home_team_name": "Orlando Magic",
+                  "key_player_results": [
+                    {
+                      "assists": 4,
+                      "full_name": "Jaden McDaniels",
+                      "minutes": 30.0,
+                      "points": 15,
+                      "rebounds": 6,
+                      "team_id": 1610612750
+                    },
+                    {
+                      "assists": 4,
+                      "full_name": "Anthony Edwards",
+                      "minutes": 33.0,
+                      "points": 15,
+                      "rebounds": 4,
+                      "team_id": 1610612750
+                    },
+                    {
+                      "assists": 1,
+                      "full_name": "Rudy Gobert",
+                      "minutes": 30.0,
+                      "points": 14,
+                      "rebounds": 9,
+                      "team_id": 1610612750
+                    },
+                    {
+                      "assists": 9,
+                      "full_name": "Ayo Dosunmu",
+                      "minutes": 27.0,
+                      "points": 14,
+                      "rebounds": 6,
+                      "team_id": 1610612750
+                    }
+                  ],
+                  "opponent_name": "Orlando Magic",
+                  "opponent_score": 93,
+                  "opponent_team_id": 1610612753,
+                  "played_at": "2026-10-23T23:00:00+00:00",
+                  "result_id": "97bbd4867e632c7bd87201af8aef6d30697a7d3a5ada6cdbd53bcee68316c189",
+                  "source_payload_sha256": "2620cd1ef21a668b0702994f677d11348fe28f046e375979ff4c9164a1adb076",
+                  "source_url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=401909845",
+                  "team_score": 115,
+                  "team_side": "away",
+                  "won": true
+                },
+                {
+                  "away_team_name": "Minnesota Timberwolves",
+                  "captured_at": "2026-10-22T02:28:31.803364+00:00",
+                  "game_id": "espn:401909091",
+                  "home_team_name": "Miami Heat",
+                  "key_player_results": [
+                    {
+                      "assists": 3,
+                      "full_name": "Anthony Edwards",
+                      "minutes": 33.0,
+                      "points": 45,
+                      "rebounds": 10,
+                      "team_id": 1610612750
+                    },
+                    {
+                      "assists": 6,
+                      "full_name": "LaMelo Ball",
+                      "minutes": 28.0,
+                      "points": 21,
+                      "rebounds": 2,
+                      "team_id": 1610612750
+                    },
+                    {
+                      "assists": 1,
+                      "full_name": "Jaden McDaniels",
+                      "minutes": 28.0,
+                      "points": 17,
+                      "rebounds": 8,
+                      "team_id": 1610612750
+                    },
+                    {
+                      "assists": 3,
+                      "full_name": "Ayo Dosunmu",
+                      "minutes": 29.0,
+                      "points": 16,
+                      "rebounds": 5,
+                      "team_id": 1610612750
+                    }
+                  ],
+                  "opponent_name": "Miami Heat",
+                  "opponent_score": 106,
+                  "opponent_team_id": 1610612748,
+                  "played_at": "2026-10-21T23:30:00+00:00",
+                  "result_id": "f664c3adb4f9f0a3ea8f4ffe138b46404df1031cb69a3270e1d90757e706afc0",
+                  "source_payload_sha256": "889c9aad78a6baed181a46a4bf0cd19500cb59881e8350166c4591795c2cf0ce",
+                  "source_url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=401909091",
+                  "team_score": 131,
+                  "team_side": "away",
+                  "won": true
+                }
+              ],
+              "regular_season_game_number": 3,
+              "team_id": 1610612750
+            }
+          }
+        },
+        "season_phase": {
+          "away_current_season_games": 2,
+          "display_label": "本赛季已核实比赛（缺失不等于尚未比赛）",
+          "game_type": "regular_season",
+          "global_opening_night_confirmed": false,
+          "home_current_season_games": 2,
+          "phase": "very_early",
+          "primary_evidence": "verified_current_season_results_then_historical_baseline"
+        },
+        "season_start": 2026,
+        "source": {
+          "schedule_captured_at": "2026-10-25T16:46:48.977131+00:00"
+        },
+        "status": "scheduled",
+        "technical": {
+          "cutoff": "2026-10-25T17:01:05.774182+00:00"
+        },
+        "tipoff": "2026-10-25T23:00:00+00:00",
+        "venue": "Target Center"
+      },
+      "judgment": {
+        "analysis_article": "森林狼和猛龙都是两场全胜开局，场均得分都停在123分上下，这场在标靶中心碰面，是两队本赛季第一次真正意义上的硬仗。更有意思的是莱昂纳德：他当年带猛龙拿过2019年的冠军，如今又回到多伦多，身边是巴恩斯、奎克利、巴雷特这套没怎么动过的班底。森林狼这边，爱德华兹前两场一场45分、一场15分，鲍尔和多苏穆分担持球，戈贝尔守着篮下。\n\n我最想看的是爱德华兹和莱昂纳德这一组。爱德华兹是森林狼进攻的起点，靠第一步和身体往里冲；莱昂纳德是联盟里最能贴住这种侧翼的人之一。如果莱昂纳德能把爱德华兹的第一波突破挡在三分线外，森林狼就得靠鲍尔提前出球、多苏穆从另一侧切进来接应，进攻会变得更绕。反过来，爱德华兹一旦过了第一道，猛龙内线就得让波尔特尔上提补位，戈贝尔在篮下等二次进攻。\n\n我站森林狼，让1.5分可以支持。\n\n理由不在谁的天赋更高，而在主场这一侧更容易把优势攒起来。森林狼前两场赢球的方式是防守先立住，再靠爱德华兹和鲍尔的转换把分差拉开；猛龙同样能跑，但莱昂纳德首场只打了24分钟，客场这种强度下他的出场时间还是个问号。只要他不在场的那些回合里，猛龙的侧翼防守会松一档，爱德华兹就有机会连续冲击。让分要覆盖，靠的不是一两个回合，而是这种错位被反复利用。\n\n猛龙当然有还手的路。巴恩斯能在莱昂纳德被包夹时自己持球推进，奎克利可以拉开空间投，巴雷特从弱侧切进来。如果森林狼的协防慢半拍，猛龙的多点进攻会让比赛一直咬着。穆雷-博伊尔斯如果被放到五号位打小球，把戈贝尔拉出禁区，森林狼的护框也会被稀释。\n\n总分我偏小，但没让分那么有把握。两队都能跑，可这场的关键在于森林狼愿不愿意把节奏压下来，让爱德华兹在半场里一次次找莱昂纳德。只要猛龙抢下篮板就推、奎克利先冲出去，比赛就会快起来，这条反例开球后就能看见。\n\n所以先看爱德华兹能不能在莱昂纳德的贴防下持续制造错位，再看莱昂纳德不在场的那几分钟，猛龙的侧翼顶不顶得住。",
+        "analysis_article_evidence_ids": [
+          "16525eeae6cc2c3a2969bd53eb8e261071589da5a498573fb6ec3a6aa1ee368e",
+          "7344775a06c4d7c669212ab5030f87e495d6abada4a35224b4d07e3fc77bfea9",
+          "80d0aa4fbf11175f9b7f9c83f5897aa8626a1f226cecd819a6df415017a81686",
+          "d2ebd30f95c496dedddb78c7aff8aedcdf227a1e66b958d711439eb97f21dec6",
+          "feed1681a1b91b3b3ee213e75309dafde8de99e6d4a5583458afbba2c395749b"
+        ],
+        "confidence": "low",
+        "core_question": "森林狼能否限制莱昂纳德的半场进攻，并打出自己的冲击节奏？",
+        "final_prediction": {
+          "evidence_ids": [
+            "16525eeae6cc2c3a2969bd53eb8e261071589da5a498573fb6ec3a6aa1ee368e",
+            "7344775a06c4d7c669212ab5030f87e495d6abada4a35224b4d07e3fc77bfea9",
+            "80d0aa4fbf11175f9b7f9c83f5897aa8626a1f226cecd819a6df415017a81686",
+            "d2ebd30f95c496dedddb78c7aff8aedcdf227a1e66b958d711439eb97f21dec6",
+            "feed1681a1b91b3b3ee213e75309dafde8de99e6d4a5583458afbba2c395749b"
+          ],
+          "expected_margin": 2.5,
+          "expected_total": 228.5,
+          "win_probability": 0.55,
+          "winner_side": "home"
+        },
+        "game_script": "两队开局都打出高得分，预计本场节奏偏快、总分偏高。森林狼依靠 Edwards 的冲击和 Gobert 的护框在主场建立小幅领先，但猛龙凭借 Leonard、Barnes、Quickley 的多点进攻持续咬住比分，比赛进入末节仍胶着，最终森林狼凭借主场优势和近期交锋的心理优势小胜。",
+        "key_matchup_variables": [
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "7344775a06c4d7c669212ab5030f87e495d6abada4a35224b4d07e3fc77bfea9",
+              "80d0aa4fbf11175f9b7f9c83f5897aa8626a1f226cecd819a6df415017a81686"
+            ],
+            "statement": "Anthony Edwards vs Kawhi Leonard 的侧翼防守：Edwards 是森林狼进攻核心，Leonard 是顶级侧翼防守者，此对位决定主队进攻效率。 Leonard 可能限制 Edwards 的爆发，但 Edwards 的年轻与冲击力仍能制造得分。"
+          },
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "7344775a06c4d7c669212ab5030f87e495d6abada4a35224b4d07e3fc77bfea9",
+              "7c3a4395d70ab5a5d9c9c8d12ceec8217ba8769b0b36a4dbd4e821eb68647eea"
+            ],
+            "statement": "Rudy Gobert vs 猛龙内线 Poeltl/Murray-Boyles：Gobert 的护框与篮板是森林狼防守支柱，猛龙内线深度决定其能否在内线得分。 Gobert 提供稳定护框，但猛龙的小球阵容（Murray-Boyles）可能拉开空间。"
+          }
+        ],
+        "model_risk": "如果Kawhi Leonard 出场时间超过 32 分钟且状态火热，则猛龙上限被充分释放，胜负方向可能转向客队。；如果Anthony Edwards 被 Leonard 有效限制，得分低于 20 分，则森林狼进攻核心被压制，主队优势大幅缩水。",
+        "player_analysis": [
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "01848743e532ecd6b6cb6d1b7573dab32fe733488ffaf282a2f48b9bab6d766d",
+              "7344775a06c4d7c669212ab5030f87e495d6abada4a35224b4d07e3fc77bfea9"
+            ],
+            "player_name": "Anthony Edwards",
+            "statement": "森林狼进攻的起点，靠第一步和身体冲击篮下；面对莱昂纳德的贴防，他能不能持续制造错位，是主队让分能否兑现的关键。"
+          },
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "01848743e532ecd6b6cb6d1b7573dab32fe733488ffaf282a2f48b9bab6d766d",
+              "7344775a06c4d7c669212ab5030f87e495d6abada4a35224b4d07e3fc77bfea9"
+            ],
+            "player_name": "Rudy Gobert",
+            "statement": "森林狼的护框和篮板支柱，猛龙若用小球阵容把他拉出禁区，他的防守价值会被削弱。"
+          },
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "01848743e532ecd6b6cb6d1b7573dab32fe733488ffaf282a2f48b9bab6d766d",
+              "7344775a06c4d7c669212ab5030f87e495d6abada4a35224b4d07e3fc77bfea9"
+            ],
+            "player_name": "LaMelo Ball",
+            "statement": "分担持球和组织的后场，爱德华兹被限制时，他提前出球和转换推进是森林狼的第二条进攻路。"
+          },
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "01848743e532ecd6b6cb6d1b7573dab32fe733488ffaf282a2f48b9bab6d766d",
+              "7344775a06c4d7c669212ab5030f87e495d6abada4a35224b4d07e3fc77bfea9"
+            ],
+            "player_name": "Ayo Dosunmu",
+            "statement": "前两场稳定贡献得分和助攻，是森林狼除爱德华兹外最可靠的持球点之一。"
+          },
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "01848743e532ecd6b6cb6d1b7573dab32fe733488ffaf282a2f48b9bab6d766d",
+              "7344775a06c4d7c669212ab5030f87e495d6abada4a35224b4d07e3fc77bfea9"
+            ],
+            "player_name": "Jaden McDaniels",
+            "statement": "森林狼侧翼防守的重要一环，可能被安排去对位莱昂纳德或巴恩斯。"
+          },
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "01848743e532ecd6b6cb6d1b7573dab32fe733488ffaf282a2f48b9bab6d766d",
+              "7344775a06c4d7c669212ab5030f87e495d6abada4a35224b4d07e3fc77bfea9",
+              "80d0aa4fbf11175f9b7f9c83f5897aa8626a1f226cecd819a6df415017a81686"
+            ],
+            "player_name": "Kawhi Leonard",
+            "statement": "重回猛龙后的核心，攻防两端都是上限所在；首场只打24分钟，客场强度下出场时间仍是变数。"
+          },
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "01848743e532ecd6b6cb6d1b7573dab32fe733488ffaf282a2f48b9bab6d766d",
+              "7344775a06c4d7c669212ab5030f87e495d6abada4a35224b4d07e3fc77bfea9"
+            ],
+            "player_name": "Scottie Barnes",
+            "statement": "莱昂纳德被包夹时的第二持球点，能自己推进也能冲击篮下，是猛龙咬住比分的关键。"
+          },
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "01848743e532ecd6b6cb6d1b7573dab32fe733488ffaf282a2f48b9bab6d766d",
+              "7344775a06c4d7c669212ab5030f87e495d6abada4a35224b4d07e3fc77bfea9"
+            ],
+            "player_name": "Immanuel Quickley",
+            "statement": "猛龙后场的投射和推进点，他先冲出去就能把比赛带快，是森林狼压节奏的最大阻力。"
+          },
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "01848743e532ecd6b6cb6d1b7573dab32fe733488ffaf282a2f48b9bab6d766d",
+              "7344775a06c4d7c669212ab5030f87e495d6abada4a35224b4d07e3fc77bfea9"
+            ],
+            "player_name": "RJ Barrett",
+            "statement": "从弱侧切入的得分点，森林狼协防慢半拍时，他是猛龙多点进攻的受益者。"
+          },
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "01848743e532ecd6b6cb6d1b7573dab32fe733488ffaf282a2f48b9bab6d766d",
+              "7c3a4395d70ab5a5d9c9c8d12ceec8217ba8769b0b36a4dbd4e821eb68647eea"
+            ],
+            "player_name": "Collin Murray-Boyles",
+            "statement": "若被推到五号位打小球，能把戈贝尔拉出禁区，是猛龙破解森林狼护框的潜在手段。"
+          }
+        ],
+        "pregame_story": {
+          "classification": "subjective_analysis",
+          "evidence_ids": [
+            "16525eeae6cc2c3a2969bd53eb8e261071589da5a498573fb6ec3a6aa1ee368e",
+            "7344775a06c4d7c669212ab5030f87e495d6abada4a35224b4d07e3fc77bfea9",
+            "80d0aa4fbf11175f9b7f9c83f5897aa8626a1f226cecd819a6df415017a81686",
+            "d2ebd30f95c496dedddb78c7aff8aedcdf227a1e66b958d711439eb97f21dec6",
+            "feed1681a1b91b3b3ee213e75309dafde8de99e6d4a5583458afbba2c395749b"
+          ],
+          "statement": "猛龙来到明尼阿波利斯，莱昂纳德的半场进攻将考验森林狼的防守选择。森林狼能否把自己的冲击速度打出来，是这场较量的看点。",
+          "title": "狼群主场迎旧敌\n莱昂纳德再北行"
+        },
+        "roster_analysis": [],
+        "subjective_rationale": "猛龙来到明尼阿波利斯，莱昂纳德的半场进攻将考验森林狼的防守选择。森林狼能否把自己的冲击速度打出来，是这场较量的看点。",
+        "supporting_evidence": [],
+        "uncertainty": [],
+        "unresolved_uncertainty": [],
+        "watch_themes": [
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "16525eeae6cc2c3a2969bd53eb8e261071589da5a498573fb6ec3a6aa1ee368e",
+              "7344775a06c4d7c669212ab5030f87e495d6abada4a35224b4d07e3fc77bfea9",
+              "80d0aa4fbf11175f9b7f9c83f5897aa8626a1f226cecd819a6df415017a81686",
+              "d2ebd30f95c496dedddb78c7aff8aedcdf227a1e66b958d711439eb97f21dec6",
+              "feed1681a1b91b3b3ee213e75309dafde8de99e6d4a5583458afbba2c395749b"
+            ],
+            "statement": "森林狼的进攻起点撞上猛龙最好的侧翼防守者，爱德华兹能不能过掉第一道，决定主队半场进攻顺不顺。",
+            "title": "爱德华兹对莱昂纳德"
+          },
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "16525eeae6cc2c3a2969bd53eb8e261071589da5a498573fb6ec3a6aa1ee368e",
+              "7344775a06c4d7c669212ab5030f87e495d6abada4a35224b4d07e3fc77bfea9",
+              "80d0aa4fbf11175f9b7f9c83f5897aa8626a1f226cecd819a6df415017a81686",
+              "d2ebd30f95c496dedddb78c7aff8aedcdf227a1e66b958d711439eb97f21dec6",
+              "feed1681a1b91b3b3ee213e75309dafde8de99e6d4a5583458afbba2c395749b"
+            ],
+            "statement": "他首场只打了24分钟，客场强度下能撑多久，直接决定猛龙侧翼防守的成色。",
+            "title": "莱昂纳德的出场时间"
+          },
+          {
+            "classification": "subjective_analysis",
+            "evidence_ids": [
+              "16525eeae6cc2c3a2969bd53eb8e261071589da5a498573fb6ec3a6aa1ee368e",
+              "7344775a06c4d7c669212ab5030f87e495d6abada4a35224b4d07e3fc77bfea9",
+              "80d0aa4fbf11175f9b7f9c83f5897aa8626a1f226cecd819a6df415017a81686",
+              "d2ebd30f95c496dedddb78c7aff8aedcdf227a1e66b958d711439eb97f21dec6",
+              "feed1681a1b91b3b3ee213e75309dafde8de99e6d4a5583458afbba2c395749b"
+            ],
+            "statement": "穆雷-博伊尔斯若被推到五号位拉开空间，森林狼的护框会不会被稀释，是客队翻盘的入口。",
+            "title": "戈贝尔与猛龙小球"
+          }
+        ],
+        "winner_lean": "home"
+      },
+      "public_market_reference": {
+        "away_moneyline": -105.0,
+        "away_spread": 1.5,
+        "captured_at": "2026-10-25T17:00:53.944411+00:00",
+        "eligible_prediction_input": false,
+        "expected_home_margin": 1.5,
+        "game_identity": {
+          "away_team": "Toronto Raptors",
+          "away_team_id": 1610612761,
+          "game_id": "espn:401909864",
+          "game_type": "regular_season",
+          "home_team": "Minnesota Timberwolves",
+          "home_team_id": 1610612750,
+          "registered_game": true,
+          "scheduled_tipoff": "2026-10-25T23:00Z"
+        },
+        "home_moneyline": -115.0,
+        "home_spread": -1.5,
+        "observed_at": "2026-10-25T17:00:53.944411+00:00",
+        "published_at": null,
+        "source_tier": 1,
+        "source_title": "Draft Kings current odds",
+        "source_url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909864/competitions/401909864/odds",
+        "sportsbook": "Draft Kings",
+        "status": "available",
+        "time_semantics": "observed current sportsbook quote; publication time unknown",
+        "total": 229.5,
+        "usage": "qualified_market_for_ai_review"
+      },
+      "published_at": "2026-10-25T17:08:55.388120+00:00",
+      "schedule_revision": 1,
+      "sources": [
+        {
+          "captured_at": "2026-10-25T16:59:34.723989+00:00",
+          "category": "roster_news",
+          "id": "80d0aa4fbf11175f9b7f9c83f5897aa8626a1f226cecd819a6df415017a81686",
+          "published_at": "2026-09-17T10:45:00+00:00",
+          "title": "Toronto Raptors offseason recap, early 2026-27 season preview - ESPN",
+          "url": "https://www.espn.com/nba/story/_/id/49951883/toronto-raptors-2026-27-season-preview-stats-roster-kawhi-leonard-scottie-barnes"
+        },
+        {
+          "captured_at": "2026-10-25T16:59:34.723989+00:00",
+          "category": "game_story",
+          "id": "1f70b062d6b0c2d41b612d6b44d1ba9b5a7120445af5fa8c3956dcf12cde2b09",
+          "published_at": "2026-09-17T10:45:00+00:00",
+          "title": "Toronto Raptors offseason recap, early 2026-27 season preview - ESPN",
+          "url": "https://www.espn.com/nba/story/_/id/49951883/toronto-raptors-2026-27-season-preview-stats-roster-kawhi-leonard-scottie-barnes"
+        },
+        {
+          "captured_at": "2026-10-25T16:59:34.723989+00:00",
+          "category": "game_story",
+          "id": "50bfa66e41ed37031711d53cdf035c1b378b46c63272c45a225cb6a4c82fd0c7",
+          "published_at": "2026-09-17T10:45:00+00:00",
+          "title": "Toronto Raptors offseason recap, early 2026-27 season preview - ESPN",
+          "url": "https://www.espn.com/nba/story/_/id/49951883/toronto-raptors-2026-27-season-preview-stats-roster-kawhi-leonard-scottie-barnes"
+        },
+        {
+          "captured_at": "2026-10-25T16:59:34.723989+00:00",
+          "category": "game_story",
+          "id": "7c3a4395d70ab5a5d9c9c8d12ceec8217ba8769b0b36a4dbd4e821eb68647eea",
+          "published_at": "2026-09-17T10:45:00+00:00",
+          "title": "Toronto Raptors offseason recap, early 2026-27 season preview - ESPN",
+          "url": "https://www.espn.com/nba/story/_/id/49951883/toronto-raptors-2026-27-season-preview-stats-roster-kawhi-leonard-scottie-barnes"
+        },
+        {
+          "captured_at": "2026-10-25T16:59:34.723989+00:00",
+          "category": "game_story",
+          "id": "20c3d570293f5f7ca7a232c5b0d7c57f80fc6584eff0a0cf4f374043ee2dfd15",
+          "published_at": "2026-09-17T10:45:00+00:00",
+          "title": "Toronto Raptors offseason recap, early 2026-27 season preview - ESPN",
+          "url": "https://www.espn.com/nba/story/_/id/49951883/toronto-raptors-2026-27-season-preview-stats-roster-kawhi-leonard-scottie-barnes"
+        },
+        {
+          "captured_at": "2026-10-25T16:59:34.723989+00:00",
+          "category": "game_story",
+          "id": "6e2f514007f1df4bfd849a8b1e8f69c668e40a50b7059d9cc2a8589cfd8b67a0",
+          "published_at": "2026-09-17T10:45:00+00:00",
+          "title": "Toronto Raptors offseason recap, early 2026-27 season preview - ESPN",
+          "url": "https://www.espn.com/nba/story/_/id/49951883/toronto-raptors-2026-27-season-preview-stats-roster-kawhi-leonard-scottie-barnes"
+        },
+        {
+          "captured_at": "2026-10-25T17:00:53.944411+00:00",
+          "category": "market",
+          "id": "feed1681a1b91b3b3ee213e75309dafde8de99e6d4a5583458afbba2c395749b",
+          "published_at": null,
+          "title": null,
+          "url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909864/competitions/401909864/odds"
+        }
+      ],
+      "stage": "EARLY_PREVIEW",
+      "version_id": "9c80589b-c30b-4661-a04e-e185b491f09b",
+      "payload_sha256": "64bd9005950b1c70540f3561892cf54c5043d215f8b227e157f70ede90b8b718",
+      "analyst_context": {
+        "objective_evidence": [
+          {
+            "id": "80d0aa4fbf11175f9b7f9c83f5897aa8626a1f226cecd819a6df415017a81686",
+            "section": "web_context",
+            "value": {
+              "claim_type": "personnel_change",
+              "eligible_for_fact": true,
+              "source_role": "professional",
+              "team_id": 1610612761,
+              "temporal_scope": "current_season_background",
+              "quote": "Kawhi Leonard"
+            }
+          },
+          {
+            "id": "1f70b062d6b0c2d41b612d6b44d1ba9b5a7120445af5fa8c3956dcf12cde2b09",
+            "section": "web_context",
+            "value": {
+              "claim_type": "role_background",
+              "eligible_for_fact": true,
+              "source_role": "professional",
+              "team_id": 1610612761,
+              "temporal_scope": "current_season_background",
+              "quote": "Collin Murray-Boyles / Scottie Barnes"
+            }
+          },
+          {
+            "id": "50bfa66e41ed37031711d53cdf035c1b378b46c63272c45a225cb6a4c82fd0c7",
+            "section": "web_context",
+            "value": {
+              "claim_type": "role_background",
+              "eligible_for_fact": true,
+              "source_role": "professional",
+              "team_id": 1610612761,
+              "temporal_scope": "current_season_background",
+              "quote": "Collin Murray-Boyles"
+            }
+          },
+          {
+            "id": "7c3a4395d70ab5a5d9c9c8d12ceec8217ba8769b0b36a4dbd4e821eb68647eea",
+            "section": "web_context",
+            "value": {
+              "claim_type": "role_background",
+              "eligible_for_fact": true,
+              "source_role": "professional",
+              "team_id": 1610612761,
+              "temporal_scope": "current_season_background",
+              "quote": "Jakob Poeltl"
+            }
+          },
+          {
+            "id": "20c3d570293f5f7ca7a232c5b0d7c57f80fc6584eff0a0cf4f374043ee2dfd15",
+            "section": "web_context",
+            "value": {
+              "claim_type": "season_background",
+              "eligible_for_fact": true,
+              "source_role": "professional",
+              "team_id": 1610612761,
+              "temporal_scope": "current_season_background",
+              "quote": ""
+            }
+          },
+          {
+            "id": "6e2f514007f1df4bfd849a8b1e8f69c668e40a50b7059d9cc2a8589cfd8b67a0",
+            "section": "web_context",
+            "value": {
+              "claim_type": "role_background",
+              "eligible_for_fact": true,
+              "source_role": "professional",
+              "team_id": 1610612761,
+              "temporal_scope": "current_season_background",
+              "quote": ""
+            }
+          },
+          {
+            "id": "feed1681a1b91b3b3ee213e75309dafde8de99e6d4a5583458afbba2c395749b",
+            "section": "web_context",
+            "value": {
+              "claim_type": "market_reference",
+              "eligible_for_fact": true,
+              "quote": ""
+            }
+          }
+        ]
+      }
+    },
+    "public_contract": "courtvision-public-v1"
+  },
+  "postgame": {
+    "status": "unavailable",
+    "postgame": null
+  },
+  "market": {
+    "status": "available",
+    "game_id": "espn:401909864",
+    "public_market_reference": {
+      "away_moneyline": -105.0,
+      "away_spread": 1.5,
+      "captured_at": "2026-10-25T17:00:53.944411+00:00",
+      "eligible_prediction_input": false,
+      "expected_home_margin": 1.5,
+      "game_identity": {
+        "away_team_id": 1610612761,
+        "game_id": "espn:401909864",
+        "home_team_id": 1610612750,
+        "scheduled_tipoff": "2026-10-25T23:00:00+00:00"
+      },
+      "home_moneyline": -115.0,
+      "home_spread": -1.5,
+      "observed_at": "2026-10-25T17:00:53.944411+00:00",
+      "published_at": null,
+      "recorded_at": "2026-10-25T17:00:54.451594+00:00",
+      "reference_kind": "current_reference",
+      "snapshot_id": "4b420cbfa925c7d40256dd721e3d24a9d8fe4dd65dd3e683bc062614647e3307",
+      "source_tier": 1,
+      "source_title": "Draft Kings current odds",
+      "source_url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909864/competitions/401909864/odds",
+      "sportsbook": "Draft Kings",
+      "status": "available",
+      "time_semantics": "observed current sportsbook quote; publication time unknown",
+      "total": 229.5,
+      "usage": "display_only_market_reference"
+    },
+    "refreshing": false,
+    "lookup": {
+      "source": "independent_market_reference_cache"
+    }
+  },
+  "publication": {
+    "exported_at": "2026-10-25T17:11:17.111718+00:00",
+    "source_prediction_version_id": "9c80589b-c30b-4661-a04e-e185b491f09b",
+    "source_prediction_payload_sha256": "64bd9005950b1c70540f3561892cf54c5043d215f8b227e157f70ede90b8b718",
+    "mode": "saved-read-only-projection"
+  },
+  "public_sha256": "2cfdbd23d630600817a1a905773ff457bdbffdf7de658ee397ce60b4a3b4073a"
+}
