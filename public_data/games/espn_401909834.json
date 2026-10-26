@@ -87,7 +87,7 @@
       "source_label": "开发期赛前预测快照"
     },
     "source": {
-      "schedule_captured_at": "2026-10-22T12:25:00.645313+00:00"
+      "schedule_captured_at": "2026-10-23T15:58:58.869510+00:00"
     },
     "roster_context": {
       "teams": {
@@ -285,7 +285,7 @@
               {
                 "player_id": "1642948",
                 "name": "Ryan Nembhard",
-                "display_name": "Ryan Nembhard",
+                "display_name": "瑞安·内姆哈德",
                 "team_id": 1610612737
               },
               {
@@ -359,6 +359,7 @@
     },
     "postgame": {
       "status": "available",
+      "review_level": "full",
       "version_id": "c1b06c03-f555-4f4f-b3cf-02c5bebac51b",
       "score_text": "老鹰 132 — 125 魔术",
       "summary": "班凯罗35分10助攻的高效之夜被老鹰的深度与亚历山大-沃克的31分淹没，魔术末节崩盘，赛前看好魔术让分与小分的判断双双落空。",
@@ -539,94 +540,50 @@
       "game_id": "espn:401909834",
       "cutoff": "2026-10-21T22:40:12.753764+00:00",
       "season_start": 2026,
-      "competition_scope": "all_game_types_in_current_season",
+      "competition_scope": "regular_season",
       "source": "schedule_catalog_final_games",
       "numeric_model_usage": false,
       "teams": {
         "away": {
           "team_id": 1610612737,
-          "current_season_games": 5,
-          "current_season_game_ids": [
-            "espn:401898408",
-            "espn:401898402",
-            "espn:401898396",
-            "espn:401898394",
-            "espn:401898388"
-          ],
+          "current_season_games": 0,
+          "current_season_game_ids": [],
           "current_season_record": {
-            "wins": 4,
-            "losses": 1
+            "wins": 0,
+            "losses": 0
           },
           "current_last5": {
-            "status": "available",
-            "games": 5,
-            "wins": 4,
-            "losses": 1,
-            "win_rate": 0.8,
-            "game_ids": [
-              "espn:401898408",
-              "espn:401898402",
-              "espn:401898396",
-              "espn:401898394",
-              "espn:401898388"
-            ]
+            "status": "no_games",
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": null,
+            "game_ids": []
           },
-          "last_result": {
-            "game_id": "espn:401898408",
-            "played_at": "2026-10-17T00:00:00+00:00",
-            "won": true,
-            "team_score": 135,
-            "opponent_score": 111,
-            "opponent_team_id": 1610612742,
-            "opponent_name_zh": "独行侠"
-          },
-          "streak": {
-            "result": "win",
-            "games": 4
-          }
+          "last_result": null,
+          "streak": null
         },
         "home": {
           "team_id": 1610612753,
-          "current_season_games": 4,
-          "current_season_game_ids": [
-            "espn:401898406",
-            "espn:401898403",
-            "espn:401898401",
-            "espn:401898391"
-          ],
+          "current_season_games": 0,
+          "current_season_game_ids": [],
           "current_season_record": {
-            "wins": 3,
-            "losses": 1
+            "wins": 0,
+            "losses": 0
           },
           "current_last5": {
-            "status": "available",
-            "games": 4,
-            "wins": 3,
-            "losses": 1,
-            "win_rate": 0.75,
-            "game_ids": [
-              "espn:401898406",
-              "espn:401898403",
-              "espn:401898401",
-              "espn:401898391"
-            ]
+            "status": "no_games",
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": null,
+            "game_ids": []
           },
-          "last_result": {
-            "game_id": "espn:401898406",
-            "played_at": "2026-10-16T23:00:00+00:00",
-            "won": true,
-            "team_score": 136,
-            "opponent_score": 115,
-            "opponent_team_id": 1610612748,
-            "opponent_name_zh": "热火"
-          },
-          "streak": {
-            "result": "win",
-            "games": 2
-          }
+          "last_result": null,
+          "streak": null
         }
       },
-      "context_hash": "6c308fdda89ca935aaf882be7d4e6c620dce33bb669512e1e5a7a9624c92f596"
+      "context_hash": "78e5b9704570784c96e424a26e4ad778f5e8cd4b178dd4031b01aae337582ae7"
     },
     "game_type": "regular_season",
     "schedule_revision": 1,
@@ -911,6 +868,14 @@
         "display_name_zh": "巴迪·希尔德",
         "translation_source": "llm_transliteration",
         "created_at": "2026-10-21T14:39:02.118406+00:00"
+      },
+      {
+        "player_id": "name:ryan nembhard",
+        "canonical_name_en": "Ryan Nembhard",
+        "name_key": "ryan nembhard",
+        "display_name_zh": "瑞安·内姆哈德",
+        "translation_source": "llm_transliteration",
+        "created_at": "2026-10-22T18:42:08.476826+00:00"
       }
     ],
     "season": 2027,
@@ -3585,6 +3550,7 @@
     "postgame": {
       "game_id": "espn:401909834",
       "version_id": "c1b06c03-f555-4f4f-b3cf-02c5bebac51b",
+      "review_level": "full",
       "title": "班凯罗空砍难救\n老鹰群翼破魔术",
       "short_review": "班凯罗35分10助攻的高效之夜被老鹰的深度与亚历山大-沃克的31分淹没，魔术末节崩盘，赛前看好魔术让分与小分的判断双双落空。",
       "settlement_summary": "胜负看错，让分看错，大小分看错。",
@@ -3742,10 +3708,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-22T12:40:19.459295+00:00",
+    "exported_at": "2026-10-26T16:52:00.919212+00:00",
     "source_prediction_version_id": "4256d35e-43f2-4fa3-89bd-ddeb49fb557d",
     "source_prediction_payload_sha256": "16a06cc39d3f1785d393d75b2b1cd9a64de5699e36c36441f72824b71f9159fa",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "3b85d0b00eeed2b79f11b444b8674c9c9867f8b46070dd6723d069daf034f05e"
+  "public_sha256": "ee26d0a64fae127666f54f737f1d7b2dfff93a20544e04dfb94c460b8a1e55f8"
 }
