@@ -9,7 +9,7 @@
       "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/tor.png",
       "name": "Toronto Raptors",
       "name_zh": "猛龙",
-      "score": null
+      "score": 94.0
     },
     "background": {
       "availability": {
@@ -33,7 +33,7 @@
       "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/min.png",
       "name": "Minnesota Timberwolves",
       "name_zh": "森林狼",
-      "score": null
+      "score": 117.0
     },
     "id": "espn:401909864",
     "matchup_history": {
@@ -669,38 +669,30 @@
       "game_id": "espn:401909864",
       "cutoff": "2026-10-25T17:08:50.618219+00:00",
       "season_start": 2026,
-      "competition_scope": "all_game_types_in_current_season",
+      "competition_scope": "regular_season",
       "source": "schedule_catalog_final_games",
       "numeric_model_usage": false,
       "teams": {
         "away": {
           "team_id": 1610612761,
-          "current_season_games": 7,
+          "current_season_games": 2,
           "current_season_game_ids": [
             "espn:401909846",
-            "espn:401909837",
-            "espn:401908946",
-            "espn:401908945",
-            "espn:401908944",
-            "espn:401902645",
-            "espn:401902644"
+            "espn:401909837"
           ],
           "current_season_record": {
-            "wins": 4,
-            "losses": 3
+            "wins": 2,
+            "losses": 0
           },
           "current_last5": {
             "status": "available",
-            "games": 5,
-            "wins": 3,
-            "losses": 2,
-            "win_rate": 0.6,
+            "games": 2,
+            "wins": 2,
+            "losses": 0,
+            "win_rate": 1.0,
             "game_ids": [
               "espn:401909846",
-              "espn:401909837",
-              "espn:401908946",
-              "espn:401908945",
-              "espn:401908944"
+              "espn:401909837"
             ]
           },
           "last_result": {
@@ -719,33 +711,24 @@
         },
         "home": {
           "team_id": 1610612750,
-          "current_season_games": 8,
+          "current_season_games": 2,
           "current_season_game_ids": [
             "espn:401909845",
-            "espn:401909091",
-            "espn:401908943",
-            "espn:401914125",
-            "espn:401914124",
-            "espn:401898397",
-            "espn:401914123",
-            "espn:401914102"
+            "espn:401909091"
           ],
           "current_season_record": {
-            "wins": 5,
-            "losses": 3
+            "wins": 2,
+            "losses": 0
           },
           "current_last5": {
             "status": "available",
-            "games": 5,
-            "wins": 3,
-            "losses": 2,
-            "win_rate": 0.6,
+            "games": 2,
+            "wins": 2,
+            "losses": 0,
+            "win_rate": 1.0,
             "game_ids": [
               "espn:401909845",
-              "espn:401909091",
-              "espn:401908943",
-              "espn:401914125",
-              "espn:401914124"
+              "espn:401909091"
             ]
           },
           "last_result": {
@@ -763,7 +746,7 @@
           }
         }
       },
-      "context_hash": "734cfa2f9363ecdc15130f304d8ce4e7574448e4bf4501e926610f62e473e7a9"
+      "context_hash": "272724f28cc2d854b9af2a72be94cb4da7d6a2f5a64d28063b4c8c9506e1d001"
     },
     "season_phase": {
       "away_current_season_games": 2,
@@ -776,14 +759,23 @@
     },
     "season_start": 2026,
     "source": {
-      "schedule_captured_at": "2026-10-25T17:08:55.449218+00:00"
+      "schedule_captured_at": "2026-10-26T16:56:36.266838+00:00"
     },
-    "status": "scheduled",
+    "status": "final",
     "technical": {
       "cutoff": "2026-10-25T17:01:05.774182+00:00"
     },
     "tipoff": "2026-10-25T23:00:00+00:00",
     "venue": "Target Center",
+    "postgame": {
+      "status": "available",
+      "review_level": "full",
+      "version_id": "b5967390-afc3-4143-96fc-66652920fb6f",
+      "score_text": "猛龙 94 — 117 森林狼",
+      "summary": "森林狼用一场高效进攻和第三节的爆发拉开分差，猛龙全场命中率仅38%，巴恩斯12投0中，比赛早早失去悬念。",
+      "prediction_summary": "赛前看好森林狼 · 胜率55% · 预计赢2.5分；赛果森林狼赢23分",
+      "market_summary": "让分方向 森林狼 -1.5 · 命中；总分 小分 · 命中"
+    },
     "schedule_catalog_fact": true,
     "nba_game_id": null,
     "previous_season_team_stats": {
@@ -970,28 +962,64 @@
     },
     "official_injury_report": {
       "game_id": "espn:401909864",
-      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-24_01_00PM.pdf",
-      "source_published_at": "2026-10-24T17:00:00+00:00",
-      "captured_at": "2026-10-24T17:05:21.477828+00:00",
-      "source_sha256": "6750277b66b655abf6d4bd06f53fb783d2bf0366d808f24363b128f8cd894494",
+      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+      "source_published_at": "2026-10-25T21:00:00+00:00",
+      "captured_at": "2026-10-25T21:04:29.663950+00:00",
+      "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
       "parser_version": "nba-official-injury-live-v3",
       "status": "published",
-      "report_id": "c535205e3d0a11b623c897241a9d801cd6b401d98ba17b73031ceb700cc34ff5",
-      "report_date": "2026-10-24",
-      "report_time": "13:00",
-      "coverage": "partial",
-      "records": []
+      "report_id": "3fa3e9ccf849ecfc03fdd8aa7e7dfd24ea25372c996b1796b6530dcaf91ba989",
+      "report_date": "2026-10-25",
+      "report_time": "17:00",
+      "coverage": "complete",
+      "records": [
+        {
+          "team_id": 1610612750,
+          "player_name": "Donte Di Vincenzo",
+          "status": "out",
+          "reason": "Injury/Illness - Right Achilles Tendon Repair/Surgery",
+          "game_id": "espn:401909864",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+          "source_published_at": "2026-10-25T21:00:00+00:00",
+          "captured_at": "2026-10-25T21:04:29.663950+00:00",
+          "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612761,
+          "player_name": "Malachi Smith",
+          "status": "out",
+          "reason": "G League - Two-Way",
+          "game_id": "espn:401909864",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+          "source_published_at": "2026-10-25T21:00:00+00:00",
+          "captured_at": "2026-10-25T21:04:29.663950+00:00",
+          "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612761,
+          "player_name": "Nate Bittle",
+          "status": "out",
+          "reason": "Injury/Illness - Right Foot Avulsion",
+          "game_id": "espn:401909864",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+          "source_published_at": "2026-10-25T21:00:00+00:00",
+          "captured_at": "2026-10-25T21:04:29.663950+00:00",
+          "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
+          "parser_version": "nba-official-injury-live-v3"
+        }
+      ]
     },
-    "postgame": null,
     "homepage_visible": true
   },
   "prediction": {
-    "status": "current",
+    "status": "locked",
     "game_id": "espn:401909864",
     "version_id": "9c80589b-c30b-4661-a04e-e185b491f09b",
-    "state_revision": 2,
-    "locked_at": null,
-    "lock_reason": null,
+    "state_revision": 4,
+    "locked_at": "2026-10-25T23:00:23.148474+00:00",
+    "lock_reason": "scheduled_tipoff_reached",
     "schedule_revision": 1,
     "fact_view": {
       "schema_version": "pregame-fact-view-v1",
@@ -2596,8 +2624,96 @@
     "public_contract": "courtvision-public-v1"
   },
   "postgame": {
-    "status": "unavailable",
-    "postgame": null
+    "status": "available",
+    "postgame": {
+      "game_id": "espn:401909864",
+      "version_id": "b5967390-afc3-4143-96fc-66652920fb6f",
+      "review_level": "full",
+      "title": "狼群主场破旧敌\n猛龙哑火难回天",
+      "short_review": "森林狼用一场高效进攻和第三节的爆发拉开分差，猛龙全场命中率仅38%，巴恩斯12投0中，比赛早早失去悬念。",
+      "settlement_summary": "胜负看对，让分看对，大小分看对。",
+      "article": "森林狼主场117比94大胜猛龙，比赛在第三节就失去了悬念。猛龙全场命中率只有38%，核心巴恩斯12投0中一分未得，进攻端的全面哑火让比赛早早倒向主队。\n\n爱德华兹只打了28分钟就拿下26分，18投10中，效率干净利落。首节他4投3中拿到7分，为森林狼定下进攻基调；次节再添9分，半场结束时主队已经领先8分。他的得分分布均匀，没有给猛龙任何反扑的窗口。鲍尔17分钟内送出8次助攻，三分球5投4中，把第二阵容的进攻梳理得井井有条。\n\n真正拉开差距的是第三节。森林狼单节轰下35分，而猛龙只得到15分，分差从半场的8分直接扩大到28分。这一节爱德华兹2投全中拿到5分，香农二世和麦克丹尼尔斯各添3分，森林狼的进攻多点开花。三节战罢，比赛已经进入垃圾时间。\n\n猛龙这边，沃尔特拿到全队最高的22分，三分球8投5中，是客队为数不多的亮点。巴雷特20分但21投仅9中，奎克利19分，三人撑起了大部分产量，却无法掩盖全队进攻的低效。巴恩斯12投0中，猛龙主帅拉贾科维奇赛后说“他只是没投进”，但0分的核心夜晚让猛龙的进攻始终缺少一个支点。\n\n赛前我支持森林狼让1.5分，方向命中。当时判断主场优势能让森林狼把防守和转换的优势攒起来，实际比赛里森林狼用65.6%的有效投篮命中率直接压垮了对手，让分赢得比预想轻松得多。小分方向也命中，赛前担心两队都能跑会推高总分，但猛龙38%的命中率把总分压到211分，小分的主要成因是客队投篮失准，而非节奏被压慢。赛前对莱昂纳德出战的担忧最终确认他未出场，猛龙的侧翼防守和持球深度都因此打了折扣，这一点赛前只是变量，赛后成了事实。",
+      "score": {
+        "home": {
+          "name": "森林狼",
+          "score": 117
+        },
+        "away": {
+          "name": "猛龙",
+          "score": 94
+        },
+        "text": "猛龙 94 — 117 森林狼"
+      },
+      "prediction": {
+        "winner_name": "森林狼",
+        "winner_probability": 0.55,
+        "expected_winner_margin": 2.5,
+        "expected_total": 228.5,
+        "actual_winner_name": "森林狼",
+        "actual_winner_margin": 23,
+        "actual_total": 211
+      },
+      "market_reference": {
+        "status": "available",
+        "home_spread": -1.5,
+        "away_spread": 1.5,
+        "total": 229.5,
+        "home_team_name": "森林狼",
+        "away_team_name": "猛龙",
+        "source_title": "Draft Kings current odds",
+        "sportsbook": "Draft Kings",
+        "captured_at": "2026-10-25T17:00:53.944411+00:00",
+        "source_url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909864/competitions/401909864/odds",
+        "spread_review": {
+          "lean_side": "home",
+          "lean_line": -1.5,
+          "settlement": "win"
+        },
+        "total_review": {
+          "lean": "under",
+          "settlement": "win",
+          "market_total": 229.5
+        }
+      },
+      "sources": [
+        {
+          "label": "比赛结果与球员数据",
+          "title": "ESPN 比赛数据",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=401909864",
+          "captured_at": "2026-10-26T01:39:00.745841+00:00"
+        },
+        {
+          "label": "公开早盘参考",
+          "title": "Draft Kings current odds",
+          "url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909864/competitions/401909864/odds",
+          "captured_at": "2026-10-25T17:00:53.944411+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "Toronto Raptors offseason recap, early 2026-27 season preview - ESPN",
+          "url": "https://www.espn.com/nba/story/_/id/49951883/toronto-raptors-2026-27-season-preview-stats-roster-kawhi-leonard-scottie-barnes",
+          "captured_at": "2026-10-25T16:59:34.723989+00:00"
+        },
+        {
+          "source_id": "coach-ce41c6a054dea2814b",
+          "url": "https://bbs.hupu.com/643298714.html",
+          "title": "[流言板]猛龙主帅谈巴恩斯：他只是没投进，对手防守没什么特别-NBA新闻-虎扑社区",
+          "published_at": "2026-10-26T02:19:31+00:00",
+          "captured_at": "2026-10-26T16:53:30.840608+00:00",
+          "classification": "source_attributed_coach_statement"
+        },
+        {
+          "source_id": "hupu-fe241d4e82f59a321d",
+          "url": "https://bbs.hupu.com/643310712.html",
+          "title": "[流言板]拉贾科维奇：当你全场投篮命中率只有38%，想要赢球太难了-NBA新闻-虎扑社区",
+          "published_at": "2026-10-26T08:20:00+00:00",
+          "captured_at": "2026-10-26T16:53:30.840608+00:00",
+          "classification": "community_discussion",
+          "not_a_fact_source": true
+        }
+      ],
+      "generated_at": "2026-10-26T16:54:08.922125+00:00"
+    }
   },
   "market": {
     "status": "available",
@@ -2636,10 +2752,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-25T17:11:17.111718+00:00",
+    "exported_at": "2026-10-26T17:01:31.889812+00:00",
     "source_prediction_version_id": "9c80589b-c30b-4661-a04e-e185b491f09b",
     "source_prediction_payload_sha256": "64bd9005950b1c70540f3561892cf54c5043d215f8b227e157f70ede90b8b718",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "2cfdbd23d630600817a1a905773ff457bdbffdf7de658ee397ce60b4a3b4073a"
+  "public_sha256": "293b26932602e00ecaade61e65dc5a84b9820deed055e9359928067e7196ff1b"
 }
