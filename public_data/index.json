@@ -130,7 +130,7 @@
       "file": "games/espn_401909866.json",
       "tipoff": "2026-10-25T23:30:00+00:00",
       "version_id": "84a8b51a-3250-431e-ad7a-138692d5264b",
-      "public_sha256": "9197c40dba41a7d03cfc5642b8193a36c1c71b23d4ac329e7331e2d292674ed7",
+      "public_sha256": "2084ee7965c306d6d7aba31c3629fe06350bbd76379649332590ef56186cf75c",
       "home_record": {
         "game": {
           "away": {
@@ -141,7 +141,7 @@
             "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/det.png",
             "name": "Detroit Pistons",
             "name_zh": "活塞",
-            "score": null
+            "score": 106.0
           },
           "game_type": "regular_season",
           "home": {
@@ -152,27 +152,35 @@
             "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/phi.png",
             "name": "Philadelphia 76ers",
             "name_zh": "76人",
-            "score": null
+            "score": 93.0
           },
           "id": "espn:401909866",
           "registered_game": true,
           "schedule_revision": 1,
           "season": 2027,
-          "status": "scheduled",
+          "status": "final",
           "tipoff": "2026-10-25T23:30:00+00:00",
           "venue": "Xfinity Mobile Arena",
+          "postgame": {
+            "status": "available",
+            "review_level": "full",
+            "version_id": "e131c0b0-4a13-4a6d-82bf-67a6760f1bf0",
+            "score_text": "活塞 106 — 93 76人",
+            "summary": "马克西末节18分仍难救主，活塞靠进攻篮板和坎宁安的全面表现客场取胜，76人让分方向落空，小分命中。",
+            "prediction_summary": "赛前看好76人 · 胜率55% · 预计赢2分；赛果活塞赢13分",
+            "market_summary": "让分方向 76人 1.5 · 未命中；总分 小分 · 命中"
+          },
           "schedule_catalog_fact": true,
-          "postgame": null,
           "homepage_visible": true,
           "public_summary": true
         },
         "prediction": {
-          "status": "current",
+          "status": "locked",
           "game_id": "espn:401909866",
           "version_id": "84a8b51a-3250-431e-ad7a-138692d5264b",
-          "state_revision": 2,
-          "locked_at": null,
-          "lock_reason": null,
+          "state_revision": 4,
+          "locked_at": "2026-10-25T23:30:15.036185+00:00",
+          "lock_reason": "scheduled_tipoff_reached",
           "schedule_revision": 1,
           "version": {
             "analysis_contract_version": "two-stage-forecast-v1",
@@ -3663,5 +3671,5 @@
       }
     }
   ],
-  "published_at": "2026-10-26T17:15:23.697641+00:00"
+  "published_at": "2026-10-26T17:18:15.091168+00:00"
 }

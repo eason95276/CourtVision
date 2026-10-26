@@ -9,7 +9,7 @@
       "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/det.png",
       "name": "Detroit Pistons",
       "name_zh": "活塞",
-      "score": null
+      "score": 106.0
     },
     "background": {
       "availability": {
@@ -75,7 +75,7 @@
       "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/phi.png",
       "name": "Philadelphia 76ers",
       "name_zh": "76人",
-      "score": null
+      "score": 93.0
     },
     "id": "espn:401909866",
     "matchup_history": {
@@ -860,37 +860,28 @@
       "game_id": "espn:401909866",
       "cutoff": "2026-10-25T16:57:51.262741+00:00",
       "season_start": 2026,
-      "competition_scope": "all_game_types_in_current_season",
+      "competition_scope": "regular_season",
       "source": "schedule_catalog_final_games",
       "numeric_model_usage": false,
       "teams": {
         "away": {
           "team_id": 1610612765,
-          "current_season_games": 6,
+          "current_season_games": 1,
           "current_season_game_ids": [
-            "espn:401909847",
-            "espn:401909088",
-            "espn:401908946",
-            "espn:401914125",
-            "espn:401906510",
-            "espn:401908947"
+            "espn:401909847"
           ],
           "current_season_record": {
-            "wins": 5,
-            "losses": 1
+            "wins": 1,
+            "losses": 0
           },
           "current_last5": {
             "status": "available",
-            "games": 5,
-            "wins": 4,
-            "losses": 1,
-            "win_rate": 0.8,
+            "games": 1,
+            "wins": 1,
+            "losses": 0,
+            "win_rate": 1.0,
             "game_ids": [
-              "espn:401909847",
-              "espn:401909088",
-              "espn:401908946",
-              "espn:401914125",
-              "espn:401906510"
+              "espn:401909847"
             ]
           },
           "last_result": {
@@ -904,36 +895,27 @@
           },
           "streak": {
             "result": "win",
-            "games": 4
+            "games": 1
           }
         },
         "home": {
           "team_id": 1610612755,
-          "current_season_games": 6,
+          "current_season_games": 1,
           "current_season_game_ids": [
-            "espn:401909093",
-            "espn:401909089",
-            "espn:401898407",
-            "espn:401898398",
-            "espn:401901823",
-            "espn:401914101"
+            "espn:401909093"
           ],
           "current_season_record": {
-            "wins": 3,
-            "losses": 3
+            "wins": 1,
+            "losses": 0
           },
           "current_last5": {
             "status": "available",
-            "games": 5,
-            "wins": 2,
-            "losses": 3,
-            "win_rate": 0.4,
+            "games": 1,
+            "wins": 1,
+            "losses": 0,
+            "win_rate": 1.0,
             "game_ids": [
-              "espn:401909093",
-              "espn:401909089",
-              "espn:401898407",
-              "espn:401898398",
-              "espn:401901823"
+              "espn:401909093"
             ]
           },
           "last_result": {
@@ -947,11 +929,11 @@
           },
           "streak": {
             "result": "win",
-            "games": 2
+            "games": 1
           }
         }
       },
-      "context_hash": "a27d9d3c2bc54a021943a95e4ef5bf08c71a0b99acf9c5eecb4b060ed3932e22"
+      "context_hash": "81806546bcf869b57836ef0c33a0290f85c494a52312f28f4719ec598e712130"
     },
     "season_phase": {
       "away_current_season_games": 2,
@@ -964,9 +946,9 @@
     },
     "season_start": 2026,
     "source": {
-      "schedule_captured_at": "2026-10-25T16:57:58.094865+00:00"
+      "schedule_captured_at": "2026-10-26T17:17:04.048220+00:00"
     },
-    "status": "scheduled",
+    "status": "final",
     "technical": {
       "cutoff": "2026-10-25T16:55:02.158635+00:00",
       "fact_context_cutoff": "2026-10-25T16:55:02.158635+00:00",
@@ -974,6 +956,15 @@
     },
     "tipoff": "2026-10-25T23:30:00+00:00",
     "venue": "Xfinity Mobile Arena",
+    "postgame": {
+      "status": "available",
+      "review_level": "full",
+      "version_id": "e131c0b0-4a13-4a6d-82bf-67a6760f1bf0",
+      "score_text": "活塞 106 — 93 76人",
+      "summary": "马克西末节18分仍难救主，活塞靠进攻篮板和坎宁安的全面表现客场取胜，76人让分方向落空，小分命中。",
+      "prediction_summary": "赛前看好76人 · 胜率55% · 预计赢2分；赛果活塞赢13分",
+      "market_summary": "让分方向 76人 1.5 · 未命中；总分 小分 · 命中"
+    },
     "schedule_catalog_fact": true,
     "nba_game_id": null,
     "previous_season_team_stats": {
@@ -1160,28 +1151,160 @@
     },
     "official_injury_report": {
       "game_id": "espn:401909866",
-      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-24_01_00PM.pdf",
-      "source_published_at": "2026-10-24T17:00:00+00:00",
-      "captured_at": "2026-10-24T17:05:21.477828+00:00",
-      "source_sha256": "6750277b66b655abf6d4bd06f53fb783d2bf0366d808f24363b128f8cd894494",
+      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+      "source_published_at": "2026-10-25T21:00:00+00:00",
+      "captured_at": "2026-10-25T21:04:29.663950+00:00",
+      "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
       "parser_version": "nba-official-injury-live-v3",
       "status": "published",
-      "report_id": "c535205e3d0a11b623c897241a9d801cd6b401d98ba17b73031ceb700cc34ff5",
-      "report_date": "2026-10-24",
-      "report_time": "13:00",
-      "coverage": "partial",
-      "records": []
+      "report_id": "3fa3e9ccf849ecfc03fdd8aa7e7dfd24ea25372c996b1796b6530dcaf91ba989",
+      "report_date": "2026-10-25",
+      "report_time": "17:00",
+      "coverage": "complete",
+      "records": [
+        {
+          "team_id": 1610612755,
+          "player_name": "Ariel Hukporti",
+          "status": "out",
+          "reason": "Injury/Illness - Right Achilles Tendon Rupture/Tear",
+          "game_id": "espn:401909866",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+          "source_published_at": "2026-10-25T21:00:00+00:00",
+          "captured_at": "2026-10-25T21:04:29.663950+00:00",
+          "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612755,
+          "player_name": "Dominick Barlow",
+          "status": "out",
+          "reason": "Injury/Illness - Low Back Stress Reaction",
+          "game_id": "espn:401909866",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+          "source_published_at": "2026-10-25T21:00:00+00:00",
+          "captured_at": "2026-10-25T21:04:29.663950+00:00",
+          "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612755,
+          "player_name": "Jabari Walker",
+          "status": "out",
+          "reason": "Injury/Illness - Left Knee Soreness",
+          "game_id": "espn:401909866",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+          "source_published_at": "2026-10-25T21:00:00+00:00",
+          "captured_at": "2026-10-25T21:04:29.663950+00:00",
+          "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612755,
+          "player_name": "Joel Embiid",
+          "status": "out",
+          "reason": "Injury/Illness - Right Plantarfasciitis injurymanagement",
+          "game_id": "espn:401909866",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+          "source_published_at": "2026-10-25T21:00:00+00:00",
+          "captured_at": "2026-10-25T21:04:29.663950+00:00",
+          "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612755,
+          "player_name": "Tacko Fall",
+          "status": "out",
+          "reason": "Injury/Illness - Left Quadriceps Strain",
+          "game_id": "espn:401909866",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+          "source_published_at": "2026-10-25T21:00:00+00:00",
+          "captured_at": "2026-10-25T21:04:29.663950+00:00",
+          "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612755,
+          "player_name": "VJ Edgecombe",
+          "status": "questionable",
+          "reason": "Injury/Illness - Abdominal Contusion",
+          "game_id": "espn:401909866",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+          "source_published_at": "2026-10-25T21:00:00+00:00",
+          "captured_at": "2026-10-25T21:04:29.663950+00:00",
+          "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612765,
+          "player_name": "Ausar Thompson",
+          "status": "questionable",
+          "reason": "Injury/Illness - Right Ankle Sprain",
+          "game_id": "espn:401909866",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+          "source_published_at": "2026-10-25T21:00:00+00:00",
+          "captured_at": "2026-10-25T21:04:29.663950+00:00",
+          "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612765,
+          "player_name": "Elijah Harkless",
+          "status": "questionable",
+          "reason": "G League - Two-Way",
+          "game_id": "espn:401909866",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+          "source_published_at": "2026-10-25T21:00:00+00:00",
+          "captured_at": "2026-10-25T21:04:29.663950+00:00",
+          "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612765,
+          "player_name": "Isaac Jones",
+          "status": "questionable",
+          "reason": "G League - Two-Way",
+          "game_id": "espn:401909866",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+          "source_published_at": "2026-10-25T21:00:00+00:00",
+          "captured_at": "2026-10-25T21:04:29.663950+00:00",
+          "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612765,
+          "player_name": "Jalen Duren",
+          "status": "out",
+          "reason": "Injury/Illness - Right Hamstring Strain",
+          "game_id": "espn:401909866",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+          "source_published_at": "2026-10-25T21:00:00+00:00",
+          "captured_at": "2026-10-25T21:04:29.663950+00:00",
+          "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612765,
+          "player_name": "Ugonna Onyenso",
+          "status": "out",
+          "reason": "G League - Two-Way",
+          "game_id": "espn:401909866",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+          "source_published_at": "2026-10-25T21:00:00+00:00",
+          "captured_at": "2026-10-25T21:04:29.663950+00:00",
+          "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
+          "parser_version": "nba-official-injury-live-v3"
+        }
+      ]
     },
-    "postgame": null,
     "homepage_visible": true
   },
   "prediction": {
-    "status": "current",
+    "status": "locked",
     "game_id": "espn:401909866",
     "version_id": "84a8b51a-3250-431e-ad7a-138692d5264b",
-    "state_revision": 2,
-    "locked_at": null,
-    "lock_reason": null,
+    "state_revision": 4,
+    "locked_at": "2026-10-25T23:30:15.036185+00:00",
+    "lock_reason": "scheduled_tipoff_reached",
     "schedule_revision": 1,
     "fact_view": {
       "schema_version": "pregame-fact-view-v1",
@@ -3311,8 +3434,79 @@
     "public_contract": "courtvision-public-v1"
   },
   "postgame": {
-    "status": "unavailable",
-    "postgame": null
+    "status": "available",
+    "postgame": {
+      "game_id": "espn:401909866",
+      "version_id": "e131c0b0-4a13-4a6d-82bf-67a6760f1bf0",
+      "review_level": "full",
+      "title": "马克西末节难支\n活塞前板定胜局",
+      "short_review": "马克西末节18分仍难救主，活塞靠进攻篮板和坎宁安的全面表现客场取胜，76人让分方向落空，小分命中。",
+      "settlement_summary": "胜负看错，让分看错，大小分看对。",
+      "article": "76人主场93比106不敌活塞，开季不败金身告破。马克西末节独得18分，几乎以一己之力把比赛悬念拖到最后，但活塞全场抢下15个前场篮板，二次进攻的持续压力让费城始终无法真正翻过身来。\n\n马克西全场29分5篮板4助攻，前三节14投4中只得11分，末节12投7中砍下18分，包括4分25秒接詹姆斯助攻突破上篮、1分58秒突破急停跳投，一度把分差追到8分。但前三节的低效让76人始终处于追分状态，末节爆发更像是补救而非掌控。\n\n坎宁安26分8篮板8助攻，首节12分帮活塞建立34比22的领先，末节虽然4投0中，但送出5次助攻，包括2分11秒助攻科林斯上篮、34.1秒助攻霍兰德二世锁定胜局。他的价值不在末节得分，而在于活塞被追分时仍能把球送到正确的位置。\n\n邓肯·罗宾逊21分，三分9投5中，末节9分，是坎宁安之外最稳定的外线回应。詹金斯18分8篮板6助攻，第三节29.9秒后撤步三分把分差拉回12分，末节1分03秒再中三分稳住局面。活塞三人得分上18，分担了坎宁安被重点照顾时的产量。\n\n76人的问题在别处。詹姆斯18分5助攻，效率不差，但全场只出手15次；杰伦·布朗16分但20投5中，末节6投0中，作为第二持球点没能扛住产量。全队三分27投7中，有效投篮命中率43.9%，活塞则是51.7%。外线投不开，马克西的突破空间被压缩，末节18分更像是个人能力的强行续命。\n\n赛前我支持76人受让1.5分，这个判断错了。我太信任马克西挡拆后的连续输出，却低估了活塞前场篮板带来的回合数优势——34.9%的进攻篮板率让活塞多出大量二次进攻机会。小分方向看对了，赛前担心比赛被推快，实际双方投篮效率都不高，总分199压在227.5的盘口之下。但小分的成因和我预想的并不完全一致：不是76人把比赛拖进半场磨阵地，而是两队都投不进。",
+      "score": {
+        "home": {
+          "name": "76人",
+          "score": 93
+        },
+        "away": {
+          "name": "活塞",
+          "score": 106
+        },
+        "text": "活塞 106 — 93 76人"
+      },
+      "prediction": {
+        "winner_name": "76人",
+        "winner_probability": 0.55,
+        "expected_winner_margin": 2.0,
+        "expected_total": 222.5,
+        "actual_winner_name": "活塞",
+        "actual_winner_margin": 13,
+        "actual_total": 199
+      },
+      "market_reference": {
+        "status": "available",
+        "home_spread": 1.5,
+        "away_spread": -1.5,
+        "total": 227.5,
+        "home_team_name": "76人",
+        "away_team_name": "活塞",
+        "source_title": "Draft Kings current odds",
+        "sportsbook": "Draft Kings",
+        "captured_at": "2026-10-25T16:57:29.735794+00:00",
+        "source_url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909866/competitions/401909866/odds",
+        "spread_review": {
+          "lean_side": "home",
+          "lean_line": 1.5,
+          "settlement": "loss"
+        },
+        "total_review": {
+          "lean": "under",
+          "settlement": "win",
+          "market_total": 227.5
+        }
+      },
+      "sources": [
+        {
+          "label": "比赛结果与球员数据",
+          "title": "ESPN 比赛数据",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=401909866",
+          "captured_at": "2026-10-26T02:16:44.332090+00:00"
+        },
+        {
+          "label": "公开早盘参考",
+          "title": "Draft Kings current odds",
+          "url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909866/competitions/401909866/odds",
+          "captured_at": "2026-10-25T16:57:29.735794+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "Pistons vs. 76ers (Oct 25, 2026) Live Score - ESPN NFL NCAAF MLB NBA Soccer WNBA NHL More Sports Watch Fantasy Search External Link",
+          "url": "https://www.espn.com/nba/game/_/gameId/401909866/pistons-76ers",
+          "captured_at": "2026-10-25T16:56:00.841573+00:00"
+        }
+      ],
+      "generated_at": "2026-10-26T16:56:24.539663+00:00"
+    }
   },
   "market": {
     "status": "available",
@@ -3351,10 +3545,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-25T16:58:35.669123+00:00",
+    "exported_at": "2026-10-26T17:18:15.091168+00:00",
     "source_prediction_version_id": "84a8b51a-3250-431e-ad7a-138692d5264b",
     "source_prediction_payload_sha256": "dd328b5f7e2900f7be23a7ee521c46fb70eff0041cae68043683411dc6879c81",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "9197c40dba41a7d03cfc5642b8193a36c1c71b23d4ac329e7331e2d292674ed7"
+  "public_sha256": "2084ee7965c306d6d7aba31c3629fe06350bbd76379649332590ef56186cf75c"
 }
