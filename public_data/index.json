@@ -2901,14 +2901,14 @@
     {
       "game_id": "espn:401909090",
       "file": "games/espn_401909090.json",
-      "tipoff": "2026-10-21T01:30:00+00:00",
-      "version_id": "a4477a54-3427-4d82-a2d2-27d8872a94a9",
-      "public_sha256": "cb868ced0ed0cc863b693de11188745334efbea3cc6d5ac1b694b9bdc4e38db1",
+      "tipoff": "2026-10-21T01:50:00+00:00",
+      "version_id": null,
+      "public_sha256": "65415ef867ba6f8099b9a98ff4d36596a1db64d1a9653d461b8deff30a3c2b18",
       "home_record": {
         "game": {
           "id": "espn:401909090",
-          "status": "scheduled",
-          "tipoff": "2026-10-21T01:30:00+00:00",
+          "status": "final",
+          "tipoff": "2026-10-21T01:50:00+00:00",
           "home": {
             "id": 1610612759,
             "name": "San Antonio Spurs",
@@ -2917,7 +2917,7 @@
             "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/sa.png",
             "accent": "#C4CED4",
             "espn_team_id": "24",
-            "score": null
+            "score": 104.0
           },
           "away": {
             "id": 1610612760,
@@ -2927,9 +2927,17 @@
             "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/okc.png",
             "accent": "#007AC1",
             "espn_team_id": "25",
-            "score": null
+            "score": 116.0
           },
-          "postgame": null,
+          "postgame": {
+            "status": "available",
+            "review_level": "basic",
+            "version_id": "86627333-e7c4-473a-bdb9-33d06ade9581",
+            "score_text": "雷霆 116 — 104 马刺",
+            "summary": "赛果与赛前判断已核对，完整复盘文章尚未生成。",
+            "prediction_summary": "赛前看好雷霆 · 胜率58% · 预计赢3.5分；赛果雷霆赢12分",
+            "market_summary": "让分方向 雷霆 -1.5 · 命中；总分 小分 · 命中"
+          },
           "game_type": "regular_season",
           "schedule_revision": 1,
           "registered_game": true,
@@ -2940,85 +2948,11 @@
           "public_summary": true
         },
         "prediction": {
-          "status": "current",
+          "status": "schedule_changed",
           "game_id": "espn:401909090",
-          "version_id": "a4477a54-3427-4d82-a2d2-27d8872a94a9",
-          "state_revision": 13,
-          "locked_at": null,
-          "lock_reason": null,
-          "schedule_revision": 1,
-          "version": {
-            "analysis_contract_version": "two-stage-forecast-v1",
-            "base_input_hash": "c30a07b7b0e848cf67fd74537236bb0a64f08d89377fbbcecc049c4d6d73204e",
-            "game_id": "espn:401909090",
-            "game_identity": {
-              "away_team_id": 1610612760,
-              "game_id": "espn:401909090",
-              "home_team_id": 1610612759,
-              "scheduled_tipoff": "2026-10-21T01:30:00+00:00"
-            },
-            "generated_at": "2026-10-21T01:10:32.798270+00:00",
-            "input_cutoff_at": "2026-10-21T01:10:13.049217+00:00",
-            "published_at": "2026-10-21T01:10:35.582926+00:00",
-            "schedule_revision": 1,
-            "stage": "FINAL_PREGAME",
-            "version_id": "a4477a54-3427-4d82-a2d2-27d8872a94a9",
-            "payload_sha256": "0ab50104e7bf5820b5918a20c02dd98e438b7e93d6e902fd4d0a0ae298e2dc0f",
-            "input_snapshot": {
-              "away": {
-                "abbreviation": "OKC",
-                "accent": "#007AC1",
-                "id": 1610612760,
-                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/okc.png",
-                "name": "Oklahoma City Thunder",
-                "name_zh": "雷霆"
-              },
-              "home": {
-                "abbreviation": "SA",
-                "accent": "#C4CED4",
-                "id": 1610612759,
-                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/sa.png",
-                "name": "San Antonio Spurs",
-                "name_zh": "马刺"
-              },
-              "id": "espn:401909090",
-              "schedule_revision": 1,
-              "tipoff": "2026-10-21T01:30:00+00:00"
-            },
-            "judgment": {
-              "final_prediction": {
-                "evidence_ids": [
-                  "330404be65a58a95ff7f9113c73489f92550f1d61ef1e6eef4c3049ecd297c2d",
-                  "610e1f3e74af043ef04787ae8120dab033caf6eb4ceea1ab799636209642d0e5",
-                  "a3c6ebc8c126084fef20b9bda9131ae3a250cbc45c62ee203f49c07dacd525bc",
-                  "e01d15b2e50596b8d77c43794ca4a140a4e98f9893acc35901fac168dfb7fe55",
-                  "final-availability-1d15fbb7de59a84e8c91",
-                  "final-availability-352b335aaad9f247aaed",
-                  "final-availability-44ed173530f15f11b745",
-                  "final-availability-6403d771100aa2d82b92",
-                  "final-availability-b7822593f64046b5b053",
-                  "final-market-9d665b667307abc06745"
-                ],
-                "expected_margin": 3.5,
-                "expected_total": 224.5,
-                "win_probability": 0.58,
-                "winner_side": "away"
-              },
-              "pregame_story": {
-                "classification": "subjective_analysis",
-                "evidence_ids": [
-                  "330404be65a58a95ff7f9113c73489f92550f1d61ef1e6eef4c3049ecd297c2d",
-                  "610e1f3e74af043ef04787ae8120dab033caf6eb4ceea1ab799636209642d0e5",
-                  "a3c6ebc8c126084fef20b9bda9131ae3a250cbc45c62ee203f49c07dacd525bc",
-                  "e01d15b2e50596b8d77c43794ca4a140a4e98f9893acc35901fac168dfb7fe55",
-                  "final-availability-1d15fbb7de59a84e8c91",
-                  "final-availability-352b335aaad9f247aaed"
-                ],
-                "statement": "揭幕夜马刺主场迎雷霆，文班的护框对上SGA的挡拆，这是两队新赛季第一场真正的硬仗。",
-                "title": "文班坐镇迎雷霆\n亚历山大叩圣城"
-              }
-            }
-          }
+          "version_id": null,
+          "state_revision": 15,
+          "version": null
         }
       }
     },
@@ -3729,5 +3663,5 @@
       }
     }
   ],
-  "published_at": "2026-10-26T17:04:01.916184+00:00"
+  "published_at": "2026-10-26T17:15:23.697641+00:00"
 }
