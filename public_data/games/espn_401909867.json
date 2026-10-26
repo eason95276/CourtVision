@@ -9,7 +9,7 @@
       "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/mem.png",
       "name": "Memphis Grizzlies",
       "name_zh": "灰熊",
-      "score": null
+      "score": 123.0
     },
     "background": {
       "availability": {
@@ -75,7 +75,7 @@
       "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/sac.png",
       "name": "Sacramento Kings",
       "name_zh": "国王",
-      "score": null
+      "score": 112.0
     },
     "id": "espn:401909867",
     "matchup_history": {
@@ -860,37 +860,30 @@
       "game_id": "espn:401909867",
       "cutoff": "2026-10-25T17:07:46.061371+00:00",
       "season_start": 2026,
-      "competition_scope": "all_game_types_in_current_season",
+      "competition_scope": "regular_season",
       "source": "schedule_catalog_final_games",
       "numeric_model_usage": false,
       "teams": {
         "away": {
           "team_id": 1610612763,
-          "current_season_games": 6,
+          "current_season_games": 2,
           "current_season_game_ids": [
             "espn:401909850",
-            "espn:401909838",
-            "espn:401901822",
-            "espn:401908940",
-            "espn:401898391",
-            "espn:401898388"
+            "espn:401909838"
           ],
           "current_season_record": {
-            "wins": 5,
-            "losses": 1
+            "wins": 2,
+            "losses": 0
           },
           "current_last5": {
             "status": "available",
-            "games": 5,
-            "wins": 4,
-            "losses": 1,
-            "win_rate": 0.8,
+            "games": 2,
+            "wins": 2,
+            "losses": 0,
+            "win_rate": 1.0,
             "game_ids": [
               "espn:401909850",
-              "espn:401909838",
-              "espn:401901822",
-              "espn:401908940",
-              "espn:401898391"
+              "espn:401909838"
             ]
           },
           "last_result": {
@@ -904,37 +897,29 @@
           },
           "streak": {
             "result": "win",
-            "games": 4
+            "games": 2
           }
         },
         "home": {
           "team_id": 1610612758,
-          "current_season_games": 7,
+          "current_season_games": 2,
           "current_season_game_ids": [
             "espn:401909852",
-            "espn:401909842",
-            "espn:401898843",
-            "espn:401901826",
-            "espn:401898399",
-            "espn:401898717",
-            "espn:401898716"
+            "espn:401909842"
           ],
           "current_season_record": {
             "wins": 0,
-            "losses": 7
+            "losses": 2
           },
           "current_last5": {
             "status": "available",
-            "games": 5,
+            "games": 2,
             "wins": 0,
-            "losses": 5,
+            "losses": 2,
             "win_rate": 0.0,
             "game_ids": [
               "espn:401909852",
-              "espn:401909842",
-              "espn:401898843",
-              "espn:401901826",
-              "espn:401898399"
+              "espn:401909842"
             ]
           },
           "last_result": {
@@ -948,11 +933,11 @@
           },
           "streak": {
             "result": "loss",
-            "games": 7
+            "games": 2
           }
         }
       },
-      "context_hash": "b275f80db7c2a8ab25c3062d7218f2f23aa04d8ca59f33ec190c6e48712f1c01"
+      "context_hash": "ebc1e7104699e0ae9da160026897ecf7c2725e36cb15998712a136f23cae93cc"
     },
     "season_phase": {
       "away_current_season_games": 2,
@@ -965,9 +950,9 @@
     },
     "season_start": 2026,
     "source": {
-      "schedule_captured_at": "2026-10-25T17:03:25.878280+00:00"
+      "schedule_captured_at": "2026-10-26T17:01:38.539529+00:00"
     },
-    "status": "scheduled",
+    "status": "final",
     "technical": {
       "cutoff": "2026-10-25T17:05:24.808076+00:00",
       "fact_context_cutoff": "2026-10-25T17:05:24.808076+00:00",
@@ -975,6 +960,15 @@
     },
     "tipoff": "2026-10-26T01:00:00+00:00",
     "venue": "Golden 1 Center",
+    "postgame": {
+      "status": "available",
+      "review_level": "full",
+      "version_id": "1f71af35-379f-4b90-8ba1-67cca2a28b7c",
+      "score_text": "灰熊 123 — 112 国王",
+      "summary": "灰熊靠杰罗姆的31分和篮板优势压住国王，拉文37分也填不上防守与罚球的坑；让分方向命中，小分未中。",
+      "prediction_summary": "赛前看好灰熊 · 胜率60% · 预计赢4分；赛果灰熊赢11分",
+      "market_summary": "让分方向 灰熊 -3.5 · 命中；总分 小分 · 未命中"
+    },
     "schedule_catalog_fact": true,
     "nba_game_id": null,
     "previous_season_team_stats": {
@@ -1161,28 +1155,124 @@
     },
     "official_injury_report": {
       "game_id": "espn:401909867",
-      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-24_01_00PM.pdf",
-      "source_published_at": "2026-10-24T17:00:00+00:00",
-      "captured_at": "2026-10-24T17:05:21.477828+00:00",
-      "source_sha256": "6750277b66b655abf6d4bd06f53fb783d2bf0366d808f24363b128f8cd894494",
+      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+      "source_published_at": "2026-10-25T21:00:00+00:00",
+      "captured_at": "2026-10-25T21:04:29.663950+00:00",
+      "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
       "parser_version": "nba-official-injury-live-v3",
       "status": "published",
-      "report_id": "c535205e3d0a11b623c897241a9d801cd6b401d98ba17b73031ceb700cc34ff5",
-      "report_date": "2026-10-24",
-      "report_time": "13:00",
-      "coverage": "partial",
-      "records": []
+      "report_id": "3fa3e9ccf849ecfc03fdd8aa7e7dfd24ea25372c996b1796b6530dcaf91ba989",
+      "report_date": "2026-10-25",
+      "report_time": "17:00",
+      "coverage": "complete",
+      "records": [
+        {
+          "team_id": 1610612758,
+          "player_name": "Ben Simmons",
+          "status": "out",
+          "reason": "Injury/Illness - Right Achilles Tendon Repair/Surgery",
+          "game_id": "espn:401909867",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+          "source_published_at": "2026-10-25T21:00:00+00:00",
+          "captured_at": "2026-10-25T21:04:29.663950+00:00",
+          "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612758,
+          "player_name": "Dylan Cardwell",
+          "status": "out",
+          "reason": "Injury/Illness - Left Calf Strain",
+          "game_id": "espn:401909867",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+          "source_published_at": "2026-10-25T21:00:00+00:00",
+          "captured_at": "2026-10-25T21:04:29.663950+00:00",
+          "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612758,
+          "player_name": "Keegan Murray",
+          "status": "doubtful",
+          "reason": "Injury/Illness - Left Anklecapsulitis",
+          "game_id": "espn:401909867",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+          "source_published_at": "2026-10-25T21:00:00+00:00",
+          "captured_at": "2026-10-25T21:04:29.663950+00:00",
+          "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612758,
+          "player_name": "Maxime Raynaud",
+          "status": "out",
+          "reason": "Injury/Illness - Right Patella Subluxation",
+          "game_id": "espn:401909867",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+          "source_published_at": "2026-10-25T21:00:00+00:00",
+          "captured_at": "2026-10-25T21:04:29.663950+00:00",
+          "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612758,
+          "player_name": "Sean Pedulla",
+          "status": "out",
+          "reason": "G League - Two-Way",
+          "game_id": "espn:401909867",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+          "source_published_at": "2026-10-25T21:00:00+00:00",
+          "captured_at": "2026-10-25T21:04:29.663950+00:00",
+          "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612763,
+          "player_name": "Cedric Coward",
+          "status": "questionable",
+          "reason": "Injury/Illness - Left Wrist Sprain",
+          "game_id": "espn:401909867",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+          "source_published_at": "2026-10-25T21:00:00+00:00",
+          "captured_at": "2026-10-25T21:04:29.663950+00:00",
+          "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612763,
+          "player_name": "Karim López",
+          "status": "questionable",
+          "reason": "Injury/Illness - Right Knee Contusion /Bone Bruise",
+          "game_id": "espn:401909867",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+          "source_published_at": "2026-10-25T21:00:00+00:00",
+          "captured_at": "2026-10-25T21:04:29.663950+00:00",
+          "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612763,
+          "player_name": "Zach Edey",
+          "status": "out",
+          "reason": "Injury/Illness - Left Ankle Injury Management",
+          "game_id": "espn:401909867",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+          "source_published_at": "2026-10-25T21:00:00+00:00",
+          "captured_at": "2026-10-25T21:04:29.663950+00:00",
+          "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
+          "parser_version": "nba-official-injury-live-v3"
+        }
+      ]
     },
-    "postgame": null,
     "homepage_visible": true
   },
   "prediction": {
-    "status": "current",
+    "status": "locked",
     "game_id": "espn:401909867",
     "version_id": "78ea3ce4-7180-4cb2-b7c8-a5891484d647",
-    "state_revision": 2,
-    "locked_at": null,
-    "lock_reason": null,
+    "state_revision": 4,
+    "locked_at": "2026-10-26T01:00:55.739697+00:00",
+    "lock_reason": "scheduled_tipoff_reached",
     "schedule_revision": 1,
     "fact_view": {
       "schema_version": "pregame-fact-view-v1",
@@ -3257,8 +3347,94 @@
     "public_contract": "courtvision-public-v1"
   },
   "postgame": {
-    "status": "unavailable",
-    "postgame": null
+    "status": "available",
+    "postgame": {
+      "game_id": "espn:401909867",
+      "version_id": "1f71af35-379f-4b90-8ba1-67cca2a28b7c",
+      "review_level": "full",
+      "title": "杰罗姆刀落萨城\n拉文空砍难救主",
+      "short_review": "灰熊靠杰罗姆的31分和篮板优势压住国王，拉文37分也填不上防守与罚球的坑；让分方向命中，小分未中。",
+      "settlement_summary": "胜负看对，让分看对，大小分看错。",
+      "article": "灰熊123比112带走国王，比赛真正的分水岭不在拉文砍下多少分，而在杰罗姆把灰熊的进攻梳理得有多稳。31分4篮板6助攻，全场只1次失误，末节4分28秒和3分57秒连续两记跳投把分差重新拉开，国王追到只差几分时，球始终在他手里找到出口。\n\n拉文打了40分钟，25投13中拿37分，第三节单节11分，末节又用突破和跳投把比分咬到110比117。但国王的进攻太依赖他单点续命，阿卡夫二世22分7助攻，23投9中的效率并不好看，末节10投仅2中，几次追分回合没能把球送进。萨博尼斯15分15篮板，可全场只出手8次，灰熊前场没让他舒服地反复接球。\n\n灰熊赢在篮板和罚球。全场54个篮板、18个前场篮板，二次进攻机会比国王多；罚球27罚24中，国王22罚14中，分差里有8分直接来自罚球线。威尔斯7投6中拿16分，考沃德15分11篮板，布泽尔虽然21投6中效率难看，但11个篮板和4次助攻让灰熊前场始终有人接应。国王这边阿丘瓦12分10篮板，亨特7分，配角火力对不上。\n\n赛前我选灰熊让3.5分，方向对了。杰罗姆持续持球施压、国王后场防不住错位，这条判断兑现；萨博尼斯被限制到8次出手，也说明灰熊前场没让他把国王进攻串起来。小分没中，赛前我担心国王压不住节奏，实际双方合计235分，罚球和二次进攻把总分推过了线。让分命中，小分失手，这场球没有完全照着赛前设想的低比分路径走。",
+      "score": {
+        "home": {
+          "name": "国王",
+          "score": 112
+        },
+        "away": {
+          "name": "灰熊",
+          "score": 123
+        },
+        "text": "灰熊 123 — 112 国王"
+      },
+      "prediction": {
+        "winner_name": "灰熊",
+        "winner_probability": 0.6,
+        "expected_winner_margin": 4.0,
+        "expected_total": 233.5,
+        "actual_winner_name": "灰熊",
+        "actual_winner_margin": 11,
+        "actual_total": 235
+      },
+      "market_reference": {
+        "status": "available",
+        "home_spread": 3.5,
+        "away_spread": -3.5,
+        "total": 234.5,
+        "home_team_name": "国王",
+        "away_team_name": "灰熊",
+        "source_title": "Draft Kings current odds",
+        "sportsbook": "Draft Kings",
+        "captured_at": "2026-10-25T17:07:34.033471+00:00",
+        "source_url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909867/competitions/401909867/odds",
+        "spread_review": {
+          "lean_side": "away",
+          "lean_line": -3.5,
+          "settlement": "win"
+        },
+        "total_review": {
+          "lean": "under",
+          "settlement": "loss",
+          "market_total": 234.5
+        }
+      },
+      "sources": [
+        {
+          "label": "比赛结果与球员数据",
+          "title": "ESPN 比赛数据",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=401909867",
+          "captured_at": "2026-10-26T03:37:05.758003+00:00"
+        },
+        {
+          "label": "公开早盘参考",
+          "title": "Draft Kings current odds",
+          "url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909867/competitions/401909867/odds",
+          "captured_at": "2026-10-25T17:07:34.033471+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "Sacramento Kings 2026-27 Regular Season NBA Schedule - ESPN NFL NCAAF MLB NBA Soccer WNBA NHL More Sports Watch Fantasy Search External Link",
+          "url": "https://www.espn.com/nba/team/schedule/_/name/sac",
+          "captured_at": "2026-10-25T17:06:41.214746+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "Grizzlies vs. Kings (Oct 25, 2026) Live Score - ESPN NFL NCAAF MLB NBA Soccer WNBA NHL More Sports Watch Fantasy Search External Link",
+          "url": "https://www.espn.com/nba/game/_/gameId/401909867/grizzlies-kings",
+          "captured_at": "2026-10-25T17:06:58.037578+00:00"
+        },
+        {
+          "source_id": "hupu-e41df84149bda61b70",
+          "url": "https://bbs.hupu.com/643301723.html",
+          "title": "[赛后]灰熊123-112国王，杰罗姆31分4板6助，拉文37分5助2断-NBA专区-虎扑社区",
+          "published_at": "2026-10-26T03:30:51+00:00",
+          "captured_at": "2026-10-26T16:56:24.704076+00:00",
+          "classification": "community_discussion",
+          "not_a_fact_source": true
+        }
+      ],
+      "generated_at": "2026-10-26T16:57:32.758854+00:00"
+    }
   },
   "market": {
     "status": "available",
@@ -3297,10 +3473,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-25T17:08:37.030133+00:00",
+    "exported_at": "2026-10-26T17:04:01.916184+00:00",
     "source_prediction_version_id": "78ea3ce4-7180-4cb2-b7c8-a5891484d647",
     "source_prediction_payload_sha256": "cc20a851bde288073dd59f073e578e0437a06d0652f99b7bc469f908864ae4ff",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "78ea2eab7aed3e1e6e300350cadc9357f36614ad5ccd829de4ee9e74bf66e7d3"
+  "public_sha256": "fa43b04c3e106e50fb385093d56e10e52c92e9d183473d51c6db8630c7776d9c"
 }

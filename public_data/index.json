@@ -6,7 +6,7 @@
       "file": "games/espn_401909867.json",
       "tipoff": "2026-10-26T01:00:00+00:00",
       "version_id": "78ea3ce4-7180-4cb2-b7c8-a5891484d647",
-      "public_sha256": "78ea2eab7aed3e1e6e300350cadc9357f36614ad5ccd829de4ee9e74bf66e7d3",
+      "public_sha256": "fa43b04c3e106e50fb385093d56e10e52c92e9d183473d51c6db8630c7776d9c",
       "home_record": {
         "game": {
           "away": {
@@ -17,7 +17,7 @@
             "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/mem.png",
             "name": "Memphis Grizzlies",
             "name_zh": "灰熊",
-            "score": null
+            "score": 123.0
           },
           "game_type": "regular_season",
           "home": {
@@ -28,27 +28,35 @@
             "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/sac.png",
             "name": "Sacramento Kings",
             "name_zh": "国王",
-            "score": null
+            "score": 112.0
           },
           "id": "espn:401909867",
           "registered_game": true,
           "schedule_revision": 1,
           "season": 2027,
-          "status": "scheduled",
+          "status": "final",
           "tipoff": "2026-10-26T01:00:00+00:00",
           "venue": "Golden 1 Center",
+          "postgame": {
+            "status": "available",
+            "review_level": "full",
+            "version_id": "1f71af35-379f-4b90-8ba1-67cca2a28b7c",
+            "score_text": "灰熊 123 — 112 国王",
+            "summary": "灰熊靠杰罗姆的31分和篮板优势压住国王，拉文37分也填不上防守与罚球的坑；让分方向命中，小分未中。",
+            "prediction_summary": "赛前看好灰熊 · 胜率60% · 预计赢4分；赛果灰熊赢11分",
+            "market_summary": "让分方向 灰熊 -3.5 · 命中；总分 小分 · 未命中"
+          },
           "schedule_catalog_fact": true,
-          "postgame": null,
           "homepage_visible": true,
           "public_summary": true
         },
         "prediction": {
-          "status": "current",
+          "status": "locked",
           "game_id": "espn:401909867",
           "version_id": "78ea3ce4-7180-4cb2-b7c8-a5891484d647",
-          "state_revision": 2,
-          "locked_at": null,
-          "lock_reason": null,
+          "state_revision": 4,
+          "locked_at": "2026-10-26T01:00:55.739697+00:00",
+          "lock_reason": "scheduled_tipoff_reached",
           "schedule_revision": 1,
           "version": {
             "analysis_contract_version": "two-stage-forecast-v1",
@@ -3721,5 +3729,5 @@
       }
     }
   ],
-  "published_at": "2026-10-26T17:01:31.889812+00:00"
+  "published_at": "2026-10-26T17:04:01.916184+00:00"
 }
