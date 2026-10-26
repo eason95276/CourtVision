@@ -1818,6 +1818,9 @@ function recentStatusLines(game, version, side) {
   if (!form || form.status !== "available" || !Number.isFinite(cutoff) || !Number.isFinite(tipoff) ||
       cutoff > tipoff || (Number.isFinite(versionCutoff) && cutoff > versionCutoff) ||
       (form.game_id && form.game_id !== game.id)) return ["赛前近期记录暂不可用"];
+  if (game.game_type === "regular_season" && form.competition_scope !== "regular_season") {
+    return ["常规赛近期记录暂不可用"];
+  }
 
   const team = form.teams?.[side];
   if (!team) return ["赛前近期记录暂不可用"];
@@ -1832,9 +1835,9 @@ function recentStatusLines(game, version, side) {
       wins: team.current_season_record?.wins, losses: team.current_season_record?.losses,
     });
     const lines = [seasonRecord
-      ? `本季已赛${seasonRecord.games}场：${seasonRecord.wins}胜${seasonRecord.losses}负`
+      ? `${form.competition_scope === "regular_season" ? "本季常规赛" : "本季"}已赛${seasonRecord.games}场：${seasonRecord.wins}胜${seasonRecord.losses}负`
       : currentRecord
-        ? `本季近${currentRecord.games}场：${currentRecord.wins}胜${currentRecord.losses}负`
+        ? `${form.competition_scope === "regular_season" ? "本季常规赛" : "本季"}近${currentRecord.games}场：${currentRecord.wins}胜${currentRecord.losses}负`
         : "本季近期战绩暂不可用"];
     const last = team.last_result;
     const lastTime = Date.parse(last?.played_at || "");
@@ -1849,7 +1852,7 @@ function recentStatusLines(game, version, side) {
     }
     return lines;
   }
-  return ["本季暂无比赛记录"];
+  return [form.competition_scope === "regular_season" ? "本季常规赛暂无比赛记录" : "本季暂无比赛记录"];
 }
 
 function renderRecentStatus(game, version, container) {
@@ -2102,7 +2105,10 @@ function renderDetail(game) {
   const phaseLabel = selectedVersion?.stage === "FINAL_PREGAME" ? " · 最终赛前分析"
     : selectedVersion?.stage === "EARLY_PREVIEW" ? " · 赛前预览"
       : selectedVersion?.stage === "UPDATED_PREVIEW" ? " · 重要更新" : "";
-  byId("detail-status").textContent = `${game.game_type === "preseason" ? "季前赛 · " : ""}${statusLabel(game)}${scoreStatus}${phaseLabel}`;
+  const scheduleChanged = state.predictionStates.get(game.id)?.status === "schedule_changed";
+  byId("detail-status").textContent = scheduleChanged
+    ? `${statusLabel(game)}${scoreStatus} · 赛程改期，暂无适用的新版预测`
+    : `${game.game_type === "preseason" ? "季前赛 · " : ""}${statusLabel(game)}${scoreStatus}${phaseLabel}`;
   byId("away-team").replaceChildren(stageTeam(game.away));
   byId("home-team").replaceChildren(stageTeam(game.home));
   renderPredictionDisplay(game);
@@ -2129,10 +2135,11 @@ function renderDetail(game) {
   if (oldPostgame && (oldPostgame.dataset.gameId !== game.id || oldPostgame.dataset.expectedVersionId !== game.postgame?.version_id)) oldPostgame.remove();
   const postButton = postgame.querySelector("button");
   const availablePostgame = game.postgame?.status === "available";
+  const basicPostgame = availablePostgame && game.postgame?.review_level === "basic";
   const pendingPostgame = game.postgame?.status === "pending";
   const unavailableEditorial = game.postgame?.status === "editorial_unavailable";
   postButton.disabled = !availablePostgame;
-  postButton.textContent = availablePostgame ? "查看赛后复盘"
+  postButton.textContent = availablePostgame ? (basicPostgame ? "查看赛后基础复核" : "查看赛后复盘")
     : pendingPostgame ? "赛后复盘准备中"
       : unavailableEditorial ? "复盘文章暂不可用"
         : ["post", "final", "completed", "finished"].includes(game.status) ? "暂无可用复盘" : "等待比赛结束";
@@ -2145,7 +2152,7 @@ function renderDetail(game) {
     ? [game.postgame?.prediction_summary, game.postgame?.market_summary].filter(Boolean).join("  ·  ")
     : "";
   byId("postgame-copy").textContent = availablePostgame
-    ? "回看赛前判断与真实赛果，再进入完整篮球复盘。"
+    ? (basicPostgame ? "已核对赛果与赛前判断；完整复盘文章尚未生成。" : "回看赛前判断与真实赛果，再进入完整篮球复盘。")
     : pendingPostgame
       ? "比赛已经结束，赛果正在同步。"
       : unavailableEditorial
@@ -2797,7 +2804,8 @@ function renderPostgameReader(postgame, game) {
 
   const rail = document.createElement("aside");
   rail.className = "postgame-reader-rail";
-  rail.append(text("p", "第25秒赛后复盘", "verdict-label"));
+  const basicReview = postgame.review_level === "basic";
+  rail.append(text("p", basicReview ? "赛后基础复核" : "第25秒赛后复盘", "verdict-label"));
   rail.append(text("h3", postgame.score?.text || postgame.title, "postgame-score-title"));
 
   const prediction = postgame.prediction || {};
@@ -2867,8 +2875,9 @@ function renderPostgameReader(postgame, game) {
 
   const article = document.createElement("article");
   article.className = "postgame-reader-article analysis-block";
-  article.append(text("p", "终场复盘", "postgame-article-kicker"));
+  article.append(text("p", basicReview ? "基础复核 · 暂无完整分析文章" : "终场复盘", "postgame-article-kicker"));
   article.append(text("h1", postgame.title || "这场比赛怎么打成这样"));
+  if (basicReview) article.append(text("p", "这里只核对赛果和赛前判断；球员表现与胜负原因等待正式复盘。"));
   String(postgame.article || "")
     .split(/\n\s*\n/)
     .map((paragraph) => paragraph.trim())
@@ -2898,7 +2907,7 @@ function renderPostgameReader(postgame, game) {
   content.append(rail, article, sources);
   content.setAttribute("aria-busy", "false");
   if (typeof readingHeader === "function") readingHeader(game, { mode: "postgame", prediction });
-  byId("sheet-title").textContent = "第25秒赛后复盘";
+  byId("sheet-title").textContent = basicReview ? "赛后基础复核" : "第25秒赛后复盘";
 }
 
 function showPostgameReaderState(title, message, loading = false) {
