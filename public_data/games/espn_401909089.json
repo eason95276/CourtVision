@@ -2,7 +2,7 @@
   "contract_version": "courtvision-public-v1",
   "game": {
     "id": "espn:401909089",
-    "status": "scheduled",
+    "status": "final",
     "tipoff": "2026-10-20T23:00:00+00:00",
     "home": {
       "id": 1610612752,
@@ -12,7 +12,7 @@
       "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png",
       "accent": "#F58426",
       "espn_team_id": "18",
-      "score": null
+      "score": 100.0
     },
     "away": {
       "id": 1610612755,
@@ -22,7 +22,7 @@
       "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/phi.png",
       "accent": "#006BB6",
       "espn_team_id": "20",
-      "score": null
+      "score": 106.0
     },
     "prediction": {
       "available": true,
@@ -95,7 +95,7 @@
       "source_label": "开发期赛前预测快照"
     },
     "source": {
-      "schedule_captured_at": "2026-10-20T22:40:49.638367+00:00"
+      "schedule_captured_at": "2026-10-26T16:49:32.631231+00:00"
     },
     "roster_context": {
       "teams": {
@@ -329,7 +329,15 @@
         }
       }
     },
-    "postgame": null,
+    "postgame": {
+      "status": "available",
+      "review_level": "basic",
+      "version_id": "995ef56c-2834-469a-a1b9-08f05078e474",
+      "score_text": "76人 106 — 100 尼克斯",
+      "summary": "赛果与赛前判断已核对，完整复盘文章尚未生成。",
+      "prediction_summary": "赛前看好尼克斯 · 胜率68% · 预计赢6.5分；赛果76人赢6分",
+      "market_summary": "让分方向 尼克斯 -4.5 · 未命中；总分 小分 · 命中"
+    },
     "matchup_history": {
       "status": "available",
       "game_id": "espn:401909089",
@@ -590,94 +598,50 @@
       "game_id": "espn:401909089",
       "cutoff": "2026-10-20T22:40:24.924829+00:00",
       "season_start": 2026,
-      "competition_scope": "all_game_types_in_current_season",
+      "competition_scope": "regular_season",
       "source": "schedule_catalog_final_games",
       "numeric_model_usage": false,
       "teams": {
         "away": {
           "team_id": 1610612755,
-          "current_season_games": 4,
-          "current_season_game_ids": [
-            "espn:401898407",
-            "espn:401898398",
-            "espn:401901823",
-            "espn:401914101"
-          ],
+          "current_season_games": 0,
+          "current_season_game_ids": [],
           "current_season_record": {
-            "wins": 1,
-            "losses": 3
+            "wins": 0,
+            "losses": 0
           },
           "current_last5": {
-            "status": "available",
-            "games": 4,
-            "wins": 1,
-            "losses": 3,
-            "win_rate": 0.25,
-            "game_ids": [
-              "espn:401898407",
-              "espn:401898398",
-              "espn:401901823",
-              "espn:401914101"
-            ]
+            "status": "no_games",
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": null,
+            "game_ids": []
           },
-          "last_result": {
-            "game_id": "espn:401898407",
-            "played_at": "2026-10-16T23:00:00+00:00",
-            "won": false,
-            "team_score": 120,
-            "opponent_score": 125,
-            "opponent_team_id": 1610612738,
-            "opponent_name_zh": "凯尔特人"
-          },
-          "streak": {
-            "result": "loss",
-            "games": 3
-          }
+          "last_result": null,
+          "streak": null
         },
         "home": {
           "team_id": 1610612752,
-          "current_season_games": 5,
-          "current_season_game_ids": [
-            "espn:401908945",
-            "espn:401908944",
-            "espn:401914124",
-            "espn:401906508",
-            "espn:401914101"
-          ],
+          "current_season_games": 0,
+          "current_season_game_ids": [],
           "current_season_record": {
-            "wins": 1,
-            "losses": 4
+            "wins": 0,
+            "losses": 0
           },
           "current_last5": {
-            "status": "available",
-            "games": 5,
-            "wins": 1,
-            "losses": 4,
-            "win_rate": 0.2,
-            "game_ids": [
-              "espn:401908945",
-              "espn:401908944",
-              "espn:401914124",
-              "espn:401906508",
-              "espn:401914101"
-            ]
+            "status": "no_games",
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": null,
+            "game_ids": []
           },
-          "last_result": {
-            "game_id": "espn:401908945",
-            "played_at": "2026-10-15T23:30:00+00:00",
-            "won": true,
-            "team_score": 122,
-            "opponent_score": 120,
-            "opponent_team_id": 1610612761,
-            "opponent_name_zh": "猛龙"
-          },
-          "streak": {
-            "result": "win",
-            "games": 1
-          }
+          "last_result": null,
+          "streak": null
         }
       },
-      "context_hash": "0eea0345f6092fbb508ab14c03aee3b37b9e7c7d13b4896d686f86ab2598a623"
+      "context_hash": "7c43d7a5528ba6c8d5c0790ba65e5146ff129ca244f992c7da6935d1ea2bc8c3"
     },
     "game_type": "regular_season",
     "schedule_revision": 1,
@@ -1121,15 +1085,15 @@
     },
     "official_injury_report": {
       "game_id": "espn:401909089",
-      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_06_30PM.pdf",
-      "source_published_at": "2026-10-20T22:30:00+00:00",
-      "captured_at": "2026-10-20T22:30:35.172594+00:00",
-      "source_sha256": "b40e9650b83679e352baeb381fcd1b7a63b5d1f462376bcfb16f5d877f563e03",
+      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_07_00PM.pdf",
+      "source_published_at": "2026-10-20T23:00:00+00:00",
+      "captured_at": "2026-10-20T23:06:35.156876+00:00",
+      "source_sha256": "5d024c13d920becfb83d634bffddb9459b4a413ae32b01665d98585d451a26a8",
       "parser_version": "nba-official-injury-live-v3",
       "status": "published",
-      "report_id": "6ec2d65a36b7fd19a4bb1ed0c1c00fdee885f360a337116529ae2bc7f1df1d5d",
+      "report_id": "b7a5c669f93b9095f5db042343e6ac87687c951dc0307fd16d11d9745d620d4f",
       "report_date": "2026-10-20",
-      "report_time": "18:30",
+      "report_time": "19:00",
       "coverage": "partial",
       "records": [
         {
@@ -1138,10 +1102,10 @@
           "status": "available",
           "reason": "-",
           "game_id": "espn:401909089",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_06_30PM.pdf",
-          "source_published_at": "2026-10-20T22:30:00+00:00",
-          "captured_at": "2026-10-20T22:30:35.172594+00:00",
-          "source_sha256": "b40e9650b83679e352baeb381fcd1b7a63b5d1f462376bcfb16f5d877f563e03",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_07_00PM.pdf",
+          "source_published_at": "2026-10-20T23:00:00+00:00",
+          "captured_at": "2026-10-20T23:06:35.156876+00:00",
+          "source_sha256": "5d024c13d920becfb83d634bffddb9459b4a413ae32b01665d98585d451a26a8",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1150,10 +1114,10 @@
           "status": "available",
           "reason": "-",
           "game_id": "espn:401909089",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_06_30PM.pdf",
-          "source_published_at": "2026-10-20T22:30:00+00:00",
-          "captured_at": "2026-10-20T22:30:35.172594+00:00",
-          "source_sha256": "b40e9650b83679e352baeb381fcd1b7a63b5d1f462376bcfb16f5d877f563e03",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_07_00PM.pdf",
+          "source_published_at": "2026-10-20T23:00:00+00:00",
+          "captured_at": "2026-10-20T23:06:35.156876+00:00",
+          "source_sha256": "5d024c13d920becfb83d634bffddb9459b4a413ae32b01665d98585d451a26a8",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1162,10 +1126,10 @@
           "status": "out",
           "reason": "Injury/Illness - Right Achilles Tendon Rupture/Tear",
           "game_id": "espn:401909089",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_06_30PM.pdf",
-          "source_published_at": "2026-10-20T22:30:00+00:00",
-          "captured_at": "2026-10-20T22:30:35.172594+00:00",
-          "source_sha256": "b40e9650b83679e352baeb381fcd1b7a63b5d1f462376bcfb16f5d877f563e03",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_07_00PM.pdf",
+          "source_published_at": "2026-10-20T23:00:00+00:00",
+          "captured_at": "2026-10-20T23:06:35.156876+00:00",
+          "source_sha256": "5d024c13d920becfb83d634bffddb9459b4a413ae32b01665d98585d451a26a8",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1174,10 +1138,10 @@
           "status": "out",
           "reason": "Injury/Illness - Left Ankle Sprain",
           "game_id": "espn:401909089",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_06_30PM.pdf",
-          "source_published_at": "2026-10-20T22:30:00+00:00",
-          "captured_at": "2026-10-20T22:30:35.172594+00:00",
-          "source_sha256": "b40e9650b83679e352baeb381fcd1b7a63b5d1f462376bcfb16f5d877f563e03",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_07_00PM.pdf",
+          "source_published_at": "2026-10-20T23:00:00+00:00",
+          "captured_at": "2026-10-20T23:06:35.156876+00:00",
+          "source_sha256": "5d024c13d920becfb83d634bffddb9459b4a413ae32b01665d98585d451a26a8",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1186,10 +1150,10 @@
           "status": "out",
           "reason": "Injury/Illness - Low Back Stress Reaction",
           "game_id": "espn:401909089",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_06_30PM.pdf",
-          "source_published_at": "2026-10-20T22:30:00+00:00",
-          "captured_at": "2026-10-20T22:30:35.172594+00:00",
-          "source_sha256": "b40e9650b83679e352baeb381fcd1b7a63b5d1f462376bcfb16f5d877f563e03",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_07_00PM.pdf",
+          "source_published_at": "2026-10-20T23:00:00+00:00",
+          "captured_at": "2026-10-20T23:06:35.156876+00:00",
+          "source_sha256": "5d024c13d920becfb83d634bffddb9459b4a413ae32b01665d98585d451a26a8",
           "parser_version": "nba-official-injury-live-v3"
         },
         {
@@ -1198,10 +1162,10 @@
           "status": "out",
           "reason": "Injury/Illness - Left Quadriceps Strain",
           "game_id": "espn:401909089",
-          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_06_30PM.pdf",
-          "source_published_at": "2026-10-20T22:30:00+00:00",
-          "captured_at": "2026-10-20T22:30:35.172594+00:00",
-          "source_sha256": "b40e9650b83679e352baeb381fcd1b7a63b5d1f462376bcfb16f5d877f563e03",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_07_00PM.pdf",
+          "source_published_at": "2026-10-20T23:00:00+00:00",
+          "captured_at": "2026-10-20T23:06:35.156876+00:00",
+          "source_sha256": "5d024c13d920becfb83d634bffddb9459b4a413ae32b01665d98585d451a26a8",
           "parser_version": "nba-official-injury-live-v3"
         }
       ]
@@ -1209,12 +1173,12 @@
     "homepage_visible": true
   },
   "prediction": {
-    "status": "current",
+    "status": "locked",
     "game_id": "espn:401909089",
     "version_id": "7a8b4c07-af46-4340-b58b-f54f0c6c1e1f",
-    "state_revision": 16,
-    "locked_at": null,
-    "lock_reason": null,
+    "state_revision": 18,
+    "locked_at": "2026-10-20T23:00:35.369418+00:00",
+    "lock_reason": "scheduled_tipoff_reached",
     "schedule_revision": 1,
     "fact_view": {
       "schema_version": "pregame-fact-view-v1",
@@ -3570,8 +3534,60 @@
     "public_contract": "courtvision-public-v1"
   },
   "postgame": {
-    "status": "unavailable",
-    "postgame": null
+    "status": "available",
+    "postgame": {
+      "game_id": "espn:401909089",
+      "version_id": "995ef56c-2834-469a-a1b9-08f05078e474",
+      "review_level": "basic",
+      "title": "赛后基础复核",
+      "short_review": "赛果与赛前判断已核对，完整复盘文章尚未生成。",
+      "settlement_summary": "胜负看错，让分看错，大小分看对。",
+      "article": "",
+      "score": {
+        "home": {
+          "name": "尼克斯",
+          "score": 100
+        },
+        "away": {
+          "name": "76人",
+          "score": 106
+        },
+        "text": "76人 106 — 100 尼克斯"
+      },
+      "prediction": {
+        "winner_name": "尼克斯",
+        "winner_probability": 0.68,
+        "expected_winner_margin": 6.5,
+        "expected_total": 228.5,
+        "actual_winner_name": "76人",
+        "actual_winner_margin": 6,
+        "actual_total": 206
+      },
+      "market_reference": {
+        "status": "available",
+        "home_spread": -4.5,
+        "away_spread": 4.5,
+        "total": 230.5,
+        "home_team_name": "尼克斯",
+        "away_team_name": "76人",
+        "source_title": "Draft Kings current odds",
+        "sportsbook": "Draft Kings",
+        "captured_at": "2026-10-20T22:40:05.157108+00:00",
+        "source_url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909089/competitions/401909089/odds",
+        "spread_review": {
+          "lean_side": "home",
+          "lean_line": -4.5,
+          "settlement": "loss"
+        },
+        "total_review": {
+          "lean": "under",
+          "settlement": "win",
+          "market_total": 230.5
+        }
+      },
+      "sources": [],
+      "generated_at": null
+    }
   },
   "market": {
     "status": "available",
@@ -3610,10 +3626,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-20T22:40:55.496670+00:00",
+    "exported_at": "2026-10-26T17:00:06.669972+00:00",
     "source_prediction_version_id": "7a8b4c07-af46-4340-b58b-f54f0c6c1e1f",
     "source_prediction_payload_sha256": "6d0aee3573ea4196f0430b5225a76a29221fc4bcb81cc70b840ea78838861955",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "a9b83618e3df6a5a04ffee59960fbf1d59ee226b32e96952b77addc825607995"
+  "public_sha256": "f662da7b68ab2b5737aedf37c921b48982f6e9bc2e4c1d144c141c33cc06722a"
 }
