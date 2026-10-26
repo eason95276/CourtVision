@@ -238,128 +238,6 @@
       }
     },
     {
-      "game_id": "espn:401909865",
-      "file": "games/espn_401909865.json",
-      "tipoff": "2026-10-25T23:00:00+00:00",
-      "version_id": "bf4f9dfe-3d1e-4137-ba4b-6d5befe06cff",
-      "public_sha256": "ce38d337bc893e39092295b0231a6d9a63bebc5554a7c99349a20b003638c34a",
-      "home_record": {
-        "game": {
-          "away": {
-            "abbreviation": "LAC",
-            "accent": "#C8102E",
-            "espn_team_id": "12",
-            "id": 1610612746,
-            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/lac.png",
-            "name": "LA Clippers",
-            "name_zh": "快船",
-            "score": null
-          },
-          "game_type": "regular_season",
-          "home": {
-            "abbreviation": "OKC",
-            "accent": "#007AC1",
-            "espn_team_id": "25",
-            "id": 1610612760,
-            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/okc.png",
-            "name": "Oklahoma City Thunder",
-            "name_zh": "雷霆",
-            "score": null
-          },
-          "id": "espn:401909865",
-          "registered_game": true,
-          "schedule_revision": 1,
-          "season": 2027,
-          "status": "scheduled",
-          "tipoff": "2026-10-25T23:00:00+00:00",
-          "venue": "Paycom Center",
-          "schedule_catalog_fact": true,
-          "postgame": null,
-          "homepage_visible": true,
-          "public_summary": true
-        },
-        "prediction": {
-          "status": "current",
-          "game_id": "espn:401909865",
-          "version_id": "bf4f9dfe-3d1e-4137-ba4b-6d5befe06cff",
-          "state_revision": 2,
-          "locked_at": null,
-          "lock_reason": null,
-          "schedule_revision": 1,
-          "version": {
-            "analysis_contract_version": "two-stage-forecast-v1",
-            "base_input_hash": "77d6c6554336710648ec8c87fce58f7ab54f2629f036da0819e732e7ff55645b",
-            "game_id": "espn:401909865",
-            "game_identity": {
-              "away_team_id": 1610612746,
-              "game_id": "espn:401909865",
-              "home_team_id": 1610612760,
-              "scheduled_tipoff": "2026-10-25T23:00:00+00:00"
-            },
-            "generated_at": "2026-10-25T16:51:20.377872+00:00",
-            "input_cutoff_at": "2026-10-25T16:50:59.818176+00:00",
-            "published_at": "2026-10-25T16:51:24.795886+00:00",
-            "schedule_revision": 1,
-            "stage": "EARLY_PREVIEW",
-            "version_id": "bf4f9dfe-3d1e-4137-ba4b-6d5befe06cff",
-            "payload_sha256": "136e7c7f4999fe6d95698837980c3501fb5e4edd254c5c4cb1cd9de1673fcacf",
-            "input_snapshot": {
-              "away": {
-                "abbreviation": "LAC",
-                "accent": "#C8102E",
-                "espn_team_id": "12",
-                "id": 1610612746,
-                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/lac.png",
-                "name": "LA Clippers",
-                "name_zh": "快船"
-              },
-              "home": {
-                "abbreviation": "OKC",
-                "accent": "#007AC1",
-                "espn_team_id": "25",
-                "id": 1610612760,
-                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/okc.png",
-                "name": "Oklahoma City Thunder",
-                "name_zh": "雷霆"
-              },
-              "id": "espn:401909865",
-              "schedule_revision": 1,
-              "tipoff": "2026-10-25T23:00:00+00:00"
-            },
-            "judgment": {
-              "final_prediction": {
-                "evidence_ids": [
-                  "04ee1a0bdc83e60dc99141f30386816fcb30f687b0b201b472c84629da427105",
-                  "45378fc219f1857a6315d2d319a781ea80cfda2080472d5158e1035b43e69e68",
-                  "56dde9d750c9f0d2de435c66a928f1fcebc5f141455d750a4999dfe01d06e227",
-                  "813c422a9dc7937c110c01f19ba8eb92786c46fa8b459d5c168ea643e12bec7d",
-                  "d89c6efbf038cc17505e2b7665f49d8d4bb6e2b2c58218fe0fd0e49895285c2d",
-                  "e635b022c6dc741f4d3049f2ac330e6c9099f8d779277f1b4e0298c2c2ce06a6"
-                ],
-                "expected_margin": 11.5,
-                "expected_total": 225.5,
-                "win_probability": 0.78,
-                "winner_side": "home"
-              },
-              "pregame_story": {
-                "classification": "subjective_analysis",
-                "evidence_ids": [
-                  "04ee1a0bdc83e60dc99141f30386816fcb30f687b0b201b472c84629da427105",
-                  "45378fc219f1857a6315d2d319a781ea80cfda2080472d5158e1035b43e69e68",
-                  "56dde9d750c9f0d2de435c66a928f1fcebc5f141455d750a4999dfe01d06e227",
-                  "813c422a9dc7937c110c01f19ba8eb92786c46fa8b459d5c168ea643e12bec7d",
-                  "d89c6efbf038cc17505e2b7665f49d8d4bb6e2b2c58218fe0fd0e49895285c2d",
-                  "e635b022c6dc741f4d3049f2ac330e6c9099f8d779277f1b4e0298c2c2ce06a6"
-                ],
-                "statement": "雷霆两战全胜、防守稳当，快船刚在洛杉矶输给湖人又连夜赶到俄城，一支磨合未定的新阵容要在最不友好的客场接受检验。",
-                "title": "雷霆主场迎旧敌\n快船新阵试锋芒"
-              }
-            }
-          }
-        }
-      }
-    },
-    {
       "game_id": "espn:401909864",
       "file": "games/espn_401909864.json",
       "tipoff": "2026-10-25T23:00:00+00:00",
@@ -473,6 +351,136 @@
                 ],
                 "statement": "猛龙来到明尼阿波利斯，莱昂纳德的半场进攻将考验森林狼的防守选择。森林狼能否把自己的冲击速度打出来，是这场较量的看点。",
                 "title": "狼群主场迎旧敌\n莱昂纳德再北行"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": "espn:401909865",
+      "file": "games/espn_401909865.json",
+      "tipoff": "2026-10-25T23:00:00+00:00",
+      "version_id": "bf4f9dfe-3d1e-4137-ba4b-6d5befe06cff",
+      "public_sha256": "1c05b5c2f68e446fc57f8f6fa3b01227920d3669d31eb4d7876792ea142fa7e2",
+      "home_record": {
+        "game": {
+          "away": {
+            "abbreviation": "LAC",
+            "accent": "#C8102E",
+            "espn_team_id": "12",
+            "id": 1610612746,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/lac.png",
+            "name": "LA Clippers",
+            "name_zh": "快船",
+            "score": 101.0
+          },
+          "game_type": "regular_season",
+          "home": {
+            "abbreviation": "OKC",
+            "accent": "#007AC1",
+            "espn_team_id": "25",
+            "id": 1610612760,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/okc.png",
+            "name": "Oklahoma City Thunder",
+            "name_zh": "雷霆",
+            "score": 108.0
+          },
+          "id": "espn:401909865",
+          "registered_game": true,
+          "schedule_revision": 1,
+          "season": 2027,
+          "status": "final",
+          "tipoff": "2026-10-25T23:00:00+00:00",
+          "venue": "Paycom Center",
+          "postgame": {
+            "status": "available",
+            "review_level": "full",
+            "version_id": "db0c0b43-ca23-48f9-a9d8-29563e05dc45",
+            "score_text": "快船 101 — 108 雷霆",
+            "summary": "亚历山大34分撑住雷霆，快船失误与篮板失守让追分差一口气；让分方向命中，大分落空。",
+            "prediction_summary": "赛前看好雷霆 · 胜率78% · 预计赢11.5分；赛果雷霆赢7分",
+            "market_summary": "让分方向 快船 +16.5 · 命中；总分 大分 · 未命中"
+          },
+          "schedule_catalog_fact": true,
+          "homepage_visible": true,
+          "public_summary": true
+        },
+        "prediction": {
+          "status": "locked",
+          "game_id": "espn:401909865",
+          "version_id": "bf4f9dfe-3d1e-4137-ba4b-6d5befe06cff",
+          "state_revision": 4,
+          "locked_at": "2026-10-25T23:00:23.158844+00:00",
+          "lock_reason": "scheduled_tipoff_reached",
+          "schedule_revision": 1,
+          "version": {
+            "analysis_contract_version": "two-stage-forecast-v1",
+            "base_input_hash": "77d6c6554336710648ec8c87fce58f7ab54f2629f036da0819e732e7ff55645b",
+            "game_id": "espn:401909865",
+            "game_identity": {
+              "away_team_id": 1610612746,
+              "game_id": "espn:401909865",
+              "home_team_id": 1610612760,
+              "scheduled_tipoff": "2026-10-25T23:00:00+00:00"
+            },
+            "generated_at": "2026-10-25T16:51:20.377872+00:00",
+            "input_cutoff_at": "2026-10-25T16:50:59.818176+00:00",
+            "published_at": "2026-10-25T16:51:24.795886+00:00",
+            "schedule_revision": 1,
+            "stage": "EARLY_PREVIEW",
+            "version_id": "bf4f9dfe-3d1e-4137-ba4b-6d5befe06cff",
+            "payload_sha256": "136e7c7f4999fe6d95698837980c3501fb5e4edd254c5c4cb1cd9de1673fcacf",
+            "input_snapshot": {
+              "away": {
+                "abbreviation": "LAC",
+                "accent": "#C8102E",
+                "espn_team_id": "12",
+                "id": 1610612746,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/lac.png",
+                "name": "LA Clippers",
+                "name_zh": "快船"
+              },
+              "home": {
+                "abbreviation": "OKC",
+                "accent": "#007AC1",
+                "espn_team_id": "25",
+                "id": 1610612760,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/okc.png",
+                "name": "Oklahoma City Thunder",
+                "name_zh": "雷霆"
+              },
+              "id": "espn:401909865",
+              "schedule_revision": 1,
+              "tipoff": "2026-10-25T23:00:00+00:00"
+            },
+            "judgment": {
+              "final_prediction": {
+                "evidence_ids": [
+                  "04ee1a0bdc83e60dc99141f30386816fcb30f687b0b201b472c84629da427105",
+                  "45378fc219f1857a6315d2d319a781ea80cfda2080472d5158e1035b43e69e68",
+                  "56dde9d750c9f0d2de435c66a928f1fcebc5f141455d750a4999dfe01d06e227",
+                  "813c422a9dc7937c110c01f19ba8eb92786c46fa8b459d5c168ea643e12bec7d",
+                  "d89c6efbf038cc17505e2b7665f49d8d4bb6e2b2c58218fe0fd0e49895285c2d",
+                  "e635b022c6dc741f4d3049f2ac330e6c9099f8d779277f1b4e0298c2c2ce06a6"
+                ],
+                "expected_margin": 11.5,
+                "expected_total": 225.5,
+                "win_probability": 0.78,
+                "winner_side": "home"
+              },
+              "pregame_story": {
+                "classification": "subjective_analysis",
+                "evidence_ids": [
+                  "04ee1a0bdc83e60dc99141f30386816fcb30f687b0b201b472c84629da427105",
+                  "45378fc219f1857a6315d2d319a781ea80cfda2080472d5158e1035b43e69e68",
+                  "56dde9d750c9f0d2de435c66a928f1fcebc5f141455d750a4999dfe01d06e227",
+                  "813c422a9dc7937c110c01f19ba8eb92786c46fa8b459d5c168ea643e12bec7d",
+                  "d89c6efbf038cc17505e2b7665f49d8d4bb6e2b2c58218fe0fd0e49895285c2d",
+                  "e635b022c6dc741f4d3049f2ac330e6c9099f8d779277f1b4e0298c2c2ce06a6"
+                ],
+                "statement": "雷霆两战全胜、防守稳当，快船刚在洛杉矶输给湖人又连夜赶到俄城，一支磨合未定的新阵容要在最不友好的客场接受检验。",
+                "title": "雷霆主场迎旧敌\n快船新阵试锋芒"
               }
             }
           }
@@ -3697,5 +3705,5 @@
       }
     }
   ],
-  "published_at": "2026-10-26T16:52:00.919212+00:00"
+  "published_at": "2026-10-26T16:55:21.191063+00:00"
 }

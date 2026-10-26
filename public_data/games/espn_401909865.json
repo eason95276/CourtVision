@@ -9,7 +9,7 @@
       "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/lac.png",
       "name": "LA Clippers",
       "name_zh": "快船",
-      "score": null
+      "score": 101.0
     },
     "background": {
       "availability": {
@@ -75,7 +75,7 @@
       "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/okc.png",
       "name": "Oklahoma City Thunder",
       "name_zh": "雷霆",
-      "score": null
+      "score": 108.0
     },
     "id": "espn:401909865",
     "matchup_history": {
@@ -874,36 +874,30 @@
       "game_id": "espn:401909865",
       "cutoff": "2026-10-25T16:50:59.818176+00:00",
       "season_start": 2026,
-      "competition_scope": "all_game_types_in_current_season",
+      "competition_scope": "regular_season",
       "source": "schedule_catalog_final_games",
       "numeric_model_usage": false,
       "teams": {
         "away": {
           "team_id": 1610612746,
-          "current_season_games": 5,
+          "current_season_games": 2,
           "current_season_game_ids": [
             "espn:401909851",
-            "espn:401909842",
-            "espn:401918011",
-            "espn:401902645",
-            "espn:401918010"
+            "espn:401909842"
           ],
           "current_season_record": {
-            "wins": 3,
-            "losses": 2
+            "wins": 1,
+            "losses": 1
           },
           "current_last5": {
             "status": "available",
-            "games": 5,
-            "wins": 3,
-            "losses": 2,
-            "win_rate": 0.6,
+            "games": 2,
+            "wins": 1,
+            "losses": 1,
+            "win_rate": 0.5,
             "game_ids": [
               "espn:401909851",
-              "espn:401909842",
-              "espn:401918011",
-              "espn:401902645",
-              "espn:401918010"
+              "espn:401909842"
             ]
           },
           "last_result": {
@@ -922,31 +916,22 @@
         },
         "home": {
           "team_id": 1610612760,
-          "current_season_games": 6,
+          "current_season_games": 1,
           "current_season_game_ids": [
-            "espn:401909094",
-            "espn:401908622",
-            "espn:401908621",
-            "espn:401898402",
-            "espn:401908620",
-            "espn:401898389"
+            "espn:401909094"
           ],
           "current_season_record": {
-            "wins": 2,
-            "losses": 4
+            "wins": 1,
+            "losses": 0
           },
           "current_last5": {
             "status": "available",
-            "games": 5,
-            "wins": 2,
-            "losses": 3,
-            "win_rate": 0.4,
+            "games": 1,
+            "wins": 1,
+            "losses": 0,
+            "win_rate": 1.0,
             "game_ids": [
-              "espn:401909094",
-              "espn:401908622",
-              "espn:401908621",
-              "espn:401898402",
-              "espn:401908620"
+              "espn:401909094"
             ]
           },
           "last_result": {
@@ -964,7 +949,7 @@
           }
         }
       },
-      "context_hash": "d65a65892c8808501d35b9c0d5e94de97e43ed87e174e4fe80a0a6e449d205a5"
+      "context_hash": "13f0db8910c55b6a889908dbffa256c38764e8e5a70174e71e3a7141d6edf7ca"
     },
     "season_phase": {
       "away_current_season_games": 2,
@@ -977,9 +962,9 @@
     },
     "season_start": 2026,
     "source": {
-      "schedule_captured_at": "2026-10-25T16:47:30.944227+00:00"
+      "schedule_captured_at": "2026-10-26T16:51:21.437291+00:00"
     },
-    "status": "scheduled",
+    "status": "final",
     "technical": {
       "cutoff": "2026-10-25T16:47:44.943375+00:00",
       "fact_context_cutoff": "2026-10-25T16:47:44.943375+00:00",
@@ -987,6 +972,15 @@
     },
     "tipoff": "2026-10-25T23:00:00+00:00",
     "venue": "Paycom Center",
+    "postgame": {
+      "status": "available",
+      "review_level": "full",
+      "version_id": "db0c0b43-ca23-48f9-a9d8-29563e05dc45",
+      "score_text": "快船 101 — 108 雷霆",
+      "summary": "亚历山大34分撑住雷霆，快船失误与篮板失守让追分差一口气；让分方向命中，大分落空。",
+      "prediction_summary": "赛前看好雷霆 · 胜率78% · 预计赢11.5分；赛果雷霆赢7分",
+      "market_summary": "让分方向 快船 +16.5 · 命中；总分 大分 · 未命中"
+    },
     "schedule_catalog_fact": true,
     "nba_game_id": null,
     "previous_season_team_stats": {
@@ -1173,28 +1167,112 @@
     },
     "official_injury_report": {
       "game_id": "espn:401909865",
-      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-24_01_00PM.pdf",
-      "source_published_at": "2026-10-24T17:00:00+00:00",
-      "captured_at": "2026-10-24T17:05:21.477828+00:00",
-      "source_sha256": "6750277b66b655abf6d4bd06f53fb783d2bf0366d808f24363b128f8cd894494",
+      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+      "source_published_at": "2026-10-25T21:00:00+00:00",
+      "captured_at": "2026-10-25T21:04:29.663950+00:00",
+      "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
       "parser_version": "nba-official-injury-live-v3",
       "status": "published",
-      "report_id": "c535205e3d0a11b623c897241a9d801cd6b401d98ba17b73031ceb700cc34ff5",
-      "report_date": "2026-10-24",
-      "report_time": "13:00",
-      "coverage": "partial",
-      "records": []
+      "report_id": "3fa3e9ccf849ecfc03fdd8aa7e7dfd24ea25372c996b1796b6530dcaf91ba989",
+      "report_date": "2026-10-25",
+      "report_time": "17:00",
+      "coverage": "complete",
+      "records": [
+        {
+          "team_id": 1610612746,
+          "player_name": "Bradley Beal",
+          "status": "out",
+          "reason": "Injury/Illness - Right Knee Injury Management",
+          "game_id": "espn:401909865",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+          "source_published_at": "2026-10-25T21:00:00+00:00",
+          "captured_at": "2026-10-25T21:04:29.663950+00:00",
+          "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612746,
+          "player_name": "Brandon Ingram",
+          "status": "out",
+          "reason": "Injury/Illness - Right Heel Surgery",
+          "game_id": "espn:401909865",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+          "source_published_at": "2026-10-25T21:00:00+00:00",
+          "captured_at": "2026-10-25T21:04:29.663950+00:00",
+          "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612746,
+          "player_name": "Jordan Miller",
+          "status": "out",
+          "reason": "Injury/Illness - Left Rotator Cuff Surgery",
+          "game_id": "espn:401909865",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+          "source_published_at": "2026-10-25T21:00:00+00:00",
+          "captured_at": "2026-10-25T21:04:29.663950+00:00",
+          "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612746,
+          "player_name": "Max Strus",
+          "status": "out",
+          "reason": "Injury/Illness - Right Plantar Fascia Tear",
+          "game_id": "espn:401909865",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+          "source_published_at": "2026-10-25T21:00:00+00:00",
+          "captured_at": "2026-10-25T21:04:29.663950+00:00",
+          "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612746,
+          "player_name": "Yanic Konan Niederhauser",
+          "status": "out",
+          "reason": "Injury/Illness - Right Lisfranc Surgery",
+          "game_id": "espn:401909865",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+          "source_published_at": "2026-10-25T21:00:00+00:00",
+          "captured_at": "2026-10-25T21:04:29.663950+00:00",
+          "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612760,
+          "player_name": "Nikola Topic",
+          "status": "out",
+          "reason": "Injury/Illness - Low Back Surgery",
+          "game_id": "espn:401909865",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+          "source_published_at": "2026-10-25T21:00:00+00:00",
+          "captured_at": "2026-10-25T21:04:29.663950+00:00",
+          "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
+          "parser_version": "nba-official-injury-live-v3"
+        },
+        {
+          "team_id": 1610612760,
+          "player_name": "Thomas Sorber",
+          "status": "out",
+          "reason": "Injury/Illness - Right Knee Surgery",
+          "game_id": "espn:401909865",
+          "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-25_05_00PM.pdf",
+          "source_published_at": "2026-10-25T21:00:00+00:00",
+          "captured_at": "2026-10-25T21:04:29.663950+00:00",
+          "source_sha256": "a0a6c9717b481839d2eaea10bc01e2f22ec5e87dcfe7cd1035ed5b062fb87f33",
+          "parser_version": "nba-official-injury-live-v3"
+        }
+      ]
     },
-    "postgame": null,
     "homepage_visible": true
   },
   "prediction": {
-    "status": "current",
+    "status": "locked",
     "game_id": "espn:401909865",
     "version_id": "bf4f9dfe-3d1e-4137-ba4b-6d5befe06cff",
-    "state_revision": 2,
-    "locked_at": null,
-    "lock_reason": null,
+    "state_revision": 4,
+    "locked_at": "2026-10-25T23:00:23.158844+00:00",
+    "lock_reason": "scheduled_tipoff_reached",
     "schedule_revision": 1,
     "fact_view": {
       "schema_version": "pregame-fact-view-v1",
@@ -3230,8 +3308,96 @@
     "public_contract": "courtvision-public-v1"
   },
   "postgame": {
-    "status": "unavailable",
-    "postgame": null
+    "status": "available",
+    "postgame": {
+      "game_id": "espn:401909865",
+      "version_id": "db0c0b43-ca23-48f9-a9d8-29563e05dc45",
+      "review_level": "full",
+      "title": "雷霆险胜伤情添\n快船追分功亏篑",
+      "short_review": "亚历山大34分撑住雷霆，快船失误与篮板失守让追分差一口气；让分方向命中，大分落空。",
+      "settlement_summary": "胜负看对，让分看对，大小分看错。",
+      "article": "雷霆108比101赢下快船，但这场球最刺眼的不是分差，而是杰伦·威廉姆斯在收官阶段的重伤。胜利被蒙上阴影，戴格诺特赛后说全队心情沉重，明天会重新集结。\n\n亚历山大仍是雷霆的支点。他打了36分钟，26投13中拿下34分6篮板5助攻，第三节独得16分，把雷霆从半场落后3分的局面里拉了出来。快船后场没人能真正限制他的持球压迫，他一次次把防线压扁，再决定自己终结还是分球。阿杰·米切尔从替补席贡献18分，卡鲁索12分7篮板6助攻，哈尔滕施泰因12分12篮板，雷霆的深度在亚历山大之外撑住了产量。\n\n快船不是没机会。加兰16分11助攻，邓恩15分6助攻，洛佩斯替补15分，全队有效投篮命中率54.9%还高于雷霆。问题出在另外两头：26次失误，进攻篮板率20.5%对雷霆的33.3%。末节追到只差1分后，卡鲁索补篮、杰伦·威廉姆斯扣篮、米切尔上篮，雷霆用二次进攻和转换把分差重新拉开。加兰最后46.6秒的上篮把比分追到101比106，但时间已经不够了。\n\n赛前我站雷霆赢球，但没跟16.5分的让分，选了快船受让。这个方向对了——雷霆赢了7分，没到两位数。赛前担心的“快船进攻不至于整场哑火”也基本兑现，他们投出了更高的命中率，只是失误和篮板把回合数送给了雷霆。\n\n大小分我选了224.5大分，没中。赛前理由是快船进攻点分散、回合质量未必低，但雷霆把节奏压下来，快船26次失误又不断打断自己的进攻，总分停在209。方向错了，原因倒是和赛前担心的“雷霆慢下来打半场”有关，只是我没把失误这一层算够。",
+      "score": {
+        "home": {
+          "name": "雷霆",
+          "score": 108
+        },
+        "away": {
+          "name": "快船",
+          "score": 101
+        },
+        "text": "快船 101 — 108 雷霆"
+      },
+      "prediction": {
+        "winner_name": "雷霆",
+        "winner_probability": 0.78,
+        "expected_winner_margin": 11.5,
+        "expected_total": 225.5,
+        "actual_winner_name": "雷霆",
+        "actual_winner_margin": 7,
+        "actual_total": 209
+      },
+      "market_reference": {
+        "status": "available",
+        "home_spread": -16.5,
+        "away_spread": 16.5,
+        "total": 224.5,
+        "home_team_name": "雷霆",
+        "away_team_name": "快船",
+        "source_title": "Draft Kings current odds",
+        "sportsbook": "Draft Kings",
+        "captured_at": "2026-10-25T16:50:47.865338+00:00",
+        "source_url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909865/competitions/401909865/odds",
+        "spread_review": {
+          "lean_side": "away",
+          "lean_line": 16.5,
+          "settlement": "win"
+        },
+        "total_review": {
+          "lean": "over",
+          "settlement": "loss",
+          "market_total": 224.5
+        }
+      },
+      "sources": [
+        {
+          "label": "比赛结果与球员数据",
+          "title": "ESPN 比赛数据",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=401909865",
+          "captured_at": "2026-10-26T01:28:16.984392+00:00"
+        },
+        {
+          "label": "公开早盘参考",
+          "title": "Draft Kings current odds",
+          "url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909865/competitions/401909865/odds",
+          "captured_at": "2026-10-25T16:50:47.865338+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "Clippers vs. Thunder (Oct 25, 2026) Live Score - ESPN NFL NCAAF MLB NBA Soccer WNBA NHL More Sports Watch Fantasy Search External Link",
+          "url": "https://www.espn.com/nba/game/_/gameId/401909865/clippers-thunder",
+          "captured_at": "2026-10-25T16:49:32.640466+00:00"
+        },
+        {
+          "source_id": "coach-6a973b4609961b0178",
+          "url": "https://bbs.hupu.com/643307222.html",
+          "title": "[流言板]戴格诺特采访全文：杰威重伤令人心碎，但我们会重新集结-NBA新闻-虎扑社区",
+          "published_at": "2026-10-26T05:47:33+00:00",
+          "captured_at": "2026-10-26T16:54:32.692910+00:00",
+          "classification": "source_attributed_coach_statement"
+        },
+        {
+          "source_id": "hupu-f74525a8346ac981d8",
+          "url": "https://bbs.hupu.com/643296309.html",
+          "title": "[赛后]快船101-108雷霆，邓恩15分6助5断，亚历山大34分6板5助-NBA专区-虎扑社区",
+          "published_at": "2026-10-26T01:29:16+00:00",
+          "captured_at": "2026-10-26T16:54:32.692910+00:00",
+          "classification": "community_discussion",
+          "not_a_fact_source": true
+        }
+      ],
+      "generated_at": "2026-10-26T16:54:43.214114+00:00"
+    }
   },
   "market": {
     "status": "available",
@@ -3270,10 +3436,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-25T16:51:52.766643+00:00",
+    "exported_at": "2026-10-26T16:55:21.191063+00:00",
     "source_prediction_version_id": "bf4f9dfe-3d1e-4137-ba4b-6d5befe06cff",
     "source_prediction_payload_sha256": "136e7c7f4999fe6d95698837980c3501fb5e4edd254c5c4cb1cd9de1673fcacf",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "ce38d337bc893e39092295b0231a6d9a63bebc5554a7c99349a20b003638c34a"
+  "public_sha256": "1c05b5c2f68e446fc57f8f6fa3b01227920d3669d31eb4d7876792ea142fa7e2"
 }
