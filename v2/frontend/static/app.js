@@ -272,7 +272,7 @@ function statusLabel(game) {
 }
 
 function hasVisibleScore(game) {
-  return ["in", "in_progress", "live", "post", "final", "completed", "finished"].includes(game.status) &&
+  return ["post", "final", "completed", "finished"].includes(game.status) &&
     game.home?.score !== null && game.home?.score !== undefined &&
     game.away?.score !== null && game.away?.score !== undefined &&
     Number.isFinite(Number(game.home.score)) && Number.isFinite(Number(game.away.score));
@@ -506,10 +506,9 @@ function gameCard(game, index) {
   const prediction = document.createElement("div");
   prediction.className = "card-prediction";
   if (hasVisibleScore(game)) {
-    const final = ["post", "final", "completed", "finished"].includes(game.status);
     prediction.classList.add("score-prediction");
     prediction.append(
-      text("p", final ? "最终比分" : "当前比分"),
+      text("p", "最终比分"),
       text("strong", `${scoreText(game.away.score)} — ${scoreText(game.home.score)}`, "card-score"),
     );
   } else if (active && predicted) {
@@ -1984,18 +1983,16 @@ function renderPredictionDisplay(game) {
     if (hasVisibleScore(game)) {
       const homeScore = Number(game.home.score);
       const awayScore = Number(game.away.score);
-      const final = ["post", "final", "completed", "finished"].includes(game.status);
-      const label = final ? "最终比分" : "当前比分";
-      if (focusTitle) focusTitle.textContent = label;
+      if (focusTitle) focusTitle.textContent = "最终比分";
       if (judgmentTitle) judgmentTitle.textContent = "比赛结果";
       byId("predicted-winner").textContent = `${game.away.name_zh} ${scoreText(awayScore)} : ${scoreText(homeScore)} ${game.home.name_zh}`;
       probabilityLens.hidden = true;
       if (probabilityLabel) probabilityLabel.hidden = true;
       byId("predicted-probability").textContent = "";
-      if (marginTitle) marginTitle.textContent = final ? "实际分差" : "当前分差";
-      if (totalTitle) totalTitle.textContent = final ? "实际总分" : "当前总分";
+      if (marginTitle) marginTitle.textContent = "实际分差";
+      if (totalTitle) totalTitle.textContent = "实际总分";
       const winner = homeScore >= awayScore ? game.home : game.away;
-      marginNode.textContent = `${winner.name_zh} ${final ? "赢" : "领先"} ${scoreText(Math.abs(homeScore - awayScore))} 分`;
+      marginNode.textContent = `${winner.name_zh} 赢 ${scoreText(Math.abs(homeScore - awayScore))} 分`;
       totalNode.textContent = scoreText(homeScore + awayScore);
       byId("prediction-updated").hidden = true;
       return;
@@ -2100,7 +2097,7 @@ function renderDetail(game) {
   document.body.dataset.gameTheme = "active";
   byId("detail-time").textContent = displayDate(game.tipoff);
   const scoreStatus = hasVisibleScore(game)
-    ? `${["post", "final", "completed", "finished"].includes(game.status) ? " · 终场" : " · 当前比分"} ${scoreText(game.away.score)}-${scoreText(game.home.score)}`
+    ? ` · 终场 ${scoreText(game.away.score)}-${scoreText(game.home.score)}`
     : "";
   const phaseLabel = selectedVersion?.stage === "FINAL_PREGAME" ? " · 最终赛前分析"
     : selectedVersion?.stage === "EARLY_PREVIEW" ? " · 赛前预览"

@@ -19,6 +19,11 @@ const call=async path=>(await context.window.fetch('https://example.test'+path))
   assert.equal(result.schedule_window.tomorrow_count,2);
   let detail=await call('/api/game?game_id=unselected');assert.equal(detail.status,'success');assert.equal(detail.prediction.version,null);assert.equal(detail.prediction.status,'unavailable');assert.equal(detail.game.technical.source_label,'尚无正式报告');assert.equal(detail.game.previous_season_team_stats.status,'unavailable');
   const appCode=fs.readFileSync(process.argv[3],'utf8');
+  const scoreCode=appCode.slice(appCode.indexOf('function hasVisibleScore('),appCode.indexOf('function scoreText('));
+  const scoreContext=vm.createContext({Number});
+  vm.runInContext(scoreCode,scoreContext);
+  assert.equal(scoreContext.hasVisibleScore({status:'in_progress',home:{score:88},away:{score:91}}),false);
+  assert.equal(scoreContext.hasVisibleScore({status:'final',home:{score:102},away:{score:99}}),true);
   const technicalCode=appCode.slice(appCode.indexOf('function renderTechnical('),appCode.indexOf('function renderPredictionDisplay('));
   let renderedRows=0;
   const technicalContext=vm.createContext({
