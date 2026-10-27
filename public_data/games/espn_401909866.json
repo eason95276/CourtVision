@@ -861,32 +861,41 @@
       "cutoff": "2026-10-25T16:57:51.262741+00:00",
       "season_start": 2026,
       "competition_scope": "regular_season",
+      "record_scope": "verified_games_at_cutoff",
       "source": "schedule_catalog_final_games",
       "numeric_model_usage": false,
       "teams": {
         "away": {
           "team_id": 1610612765,
-          "current_season_games": 1,
+          "record_scope": "verified_games_at_cutoff",
+          "record_completeness": "not_certified_complete",
+          "known_prior_final_candidates": 2,
+          "excluded_unverified_games": 0,
+          "current_season_games": 2,
           "current_season_game_ids": [
-            "espn:401909847"
+            "espn:401909847",
+            "espn:401909088"
           ],
           "current_season_record": {
-            "wins": 1,
+            "wins": 2,
             "losses": 0
           },
           "current_last5": {
             "status": "available",
-            "games": 1,
-            "wins": 1,
+            "games": 2,
+            "wins": 2,
             "losses": 0,
             "win_rate": 1.0,
             "game_ids": [
-              "espn:401909847"
+              "espn:401909847",
+              "espn:401909088"
             ]
           },
           "last_result": {
             "game_id": "espn:401909847",
             "played_at": "2026-10-24T00:00:00+00:00",
+            "fact_observed_at": "2026-10-24T02:52:16.789164+00:00",
+            "fact_observation_basis": "immutable_result_snapshot",
             "won": true,
             "team_score": 128,
             "opponent_score": 111,
@@ -895,32 +904,40 @@
           },
           "streak": {
             "result": "win",
-            "games": 1
+            "games": 2
           }
         },
         "home": {
           "team_id": 1610612755,
-          "current_season_games": 1,
+          "record_scope": "verified_games_at_cutoff",
+          "record_completeness": "not_certified_complete",
+          "known_prior_final_candidates": 3,
+          "excluded_unverified_games": 1,
+          "current_season_games": 2,
           "current_season_game_ids": [
-            "espn:401909093"
+            "espn:401909093",
+            "espn:401909089"
           ],
           "current_season_record": {
-            "wins": 1,
+            "wins": 2,
             "losses": 0
           },
           "current_last5": {
             "status": "available",
-            "games": 1,
-            "wins": 1,
+            "games": 2,
+            "wins": 2,
             "losses": 0,
             "win_rate": 1.0,
             "game_ids": [
-              "espn:401909093"
+              "espn:401909093",
+              "espn:401909089"
             ]
           },
           "last_result": {
             "game_id": "espn:401909093",
             "played_at": "2026-10-22T23:00:00+00:00",
+            "fact_observed_at": "2026-10-23T04:59:48.639656+00:00",
+            "fact_observation_basis": "immutable_result_snapshot",
             "won": true,
             "team_score": 114,
             "opponent_score": 106,
@@ -929,11 +946,11 @@
           },
           "streak": {
             "result": "win",
-            "games": 1
+            "games": 2
           }
         }
       },
-      "context_hash": "81806546bcf869b57836ef0c33a0290f85c494a52312f28f4719ec598e712130"
+      "context_hash": "68df0b82de7ad95fa54a144c9beed4eeda62cf35c3144f83068a0daaac3428d4"
     },
     "season_phase": {
       "away_current_season_games": 2,
@@ -946,7 +963,7 @@
     },
     "season_start": 2026,
     "source": {
-      "schedule_captured_at": "2026-10-26T17:17:04.048220+00:00"
+      "schedule_captured_at": "2026-10-27T15:55:06.133015+00:00"
     },
     "status": "final",
     "technical": {
@@ -3545,10 +3562,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-26T17:18:15.091168+00:00",
+    "exported_at": "2026-10-27T16:18:38.619457+00:00",
     "source_prediction_version_id": "84a8b51a-3250-431e-ad7a-138692d5264b",
     "source_prediction_payload_sha256": "dd328b5f7e2900f7be23a7ee521c46fb70eff0041cae68043683411dc6879c81",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "2084ee7965c306d6d7aba31c3629fe06350bbd76379649332590ef56186cf75c"
+  "public_sha256": "7e16c82b3ad9ee307a236702378bc44dc041c95f8ba2cb4ed407891628df16a9"
 }

@@ -1003,41 +1003,40 @@
       "game_id": "espn:401909847",
       "cutoff": "2026-10-23T23:48:49.980004+00:00",
       "season_start": 2026,
-      "competition_scope": "all_game_types_in_current_season",
+      "competition_scope": "regular_season",
+      "record_scope": "verified_games_at_cutoff",
       "source": "schedule_catalog_final_games",
       "numeric_model_usage": false,
       "teams": {
         "away": {
           "team_id": 1610612765,
-          "current_season_games": 5,
+          "record_scope": "verified_games_at_cutoff",
+          "record_completeness": "not_certified_complete",
+          "known_prior_final_candidates": 1,
+          "excluded_unverified_games": 0,
+          "current_season_games": 1,
           "current_season_game_ids": [
-            "espn:401909088",
-            "espn:401908946",
-            "espn:401914125",
-            "espn:401906510",
-            "espn:401908947"
+            "espn:401909088"
           ],
           "current_season_record": {
-            "wins": 4,
-            "losses": 1
+            "wins": 1,
+            "losses": 0
           },
           "current_last5": {
             "status": "available",
-            "games": 5,
-            "wins": 4,
-            "losses": 1,
-            "win_rate": 0.8,
+            "games": 1,
+            "wins": 1,
+            "losses": 0,
+            "win_rate": 1.0,
             "game_ids": [
-              "espn:401909088",
-              "espn:401908946",
-              "espn:401914125",
-              "espn:401906510",
-              "espn:401908947"
+              "espn:401909088"
             ]
           },
           "last_result": {
             "game_id": "espn:401909088",
             "played_at": "2026-10-20T19:00:00+00:00",
+            "fact_observed_at": "2026-10-20T21:39:50.516089+00:00",
+            "fact_observation_basis": "immutable_result_snapshot",
             "won": true,
             "team_score": 121,
             "opponent_score": 113,
@@ -1046,41 +1045,38 @@
           },
           "streak": {
             "result": "win",
-            "games": 3
+            "games": 1
           }
         },
         "home": {
           "team_id": 1610612748,
-          "current_season_games": 6,
+          "record_scope": "verified_games_at_cutoff",
+          "record_completeness": "not_certified_complete",
+          "known_prior_final_candidates": 1,
+          "excluded_unverified_games": 0,
+          "current_season_games": 1,
           "current_season_game_ids": [
-            "espn:401909091",
-            "espn:401898406",
-            "espn:401898404",
-            "espn:401898397",
-            "espn:401898393",
-            "espn:401902644"
+            "espn:401909091"
           ],
           "current_season_record": {
-            "wins": 3,
-            "losses": 3
+            "wins": 0,
+            "losses": 1
           },
           "current_last5": {
             "status": "available",
-            "games": 5,
-            "wins": 2,
-            "losses": 3,
-            "win_rate": 0.4,
+            "games": 1,
+            "wins": 0,
+            "losses": 1,
+            "win_rate": 0.0,
             "game_ids": [
-              "espn:401909091",
-              "espn:401898406",
-              "espn:401898404",
-              "espn:401898397",
-              "espn:401898393"
+              "espn:401909091"
             ]
           },
           "last_result": {
             "game_id": "espn:401909091",
             "played_at": "2026-10-21T23:30:00+00:00",
+            "fact_observed_at": "2026-10-22T02:28:31.803364+00:00",
+            "fact_observation_basis": "immutable_result_snapshot",
             "won": false,
             "team_score": 106,
             "opponent_score": 131,
@@ -1089,11 +1085,11 @@
           },
           "streak": {
             "result": "loss",
-            "games": 2
+            "games": 1
           }
         }
       },
-      "context_hash": "f7aea1cb38f900ce4f72c9b682f9186dbd3f8dbedab7e29da1739f6e1b3b8283"
+      "context_hash": "6d41bf13fe73014fdb41d53c3a23bab69485fb43bc378a4ae16055c85f483f3c"
     },
     "season_phase": {
       "away_current_season_games": 1,
@@ -1106,7 +1102,7 @@
     },
     "season_start": 2026,
     "source": {
-      "schedule_captured_at": "2026-10-24T12:12:30.846931+00:00"
+      "schedule_captured_at": "2026-10-25T15:59:13.332937+00:00"
     },
     "status": "final",
     "technical": {
@@ -1118,6 +1114,7 @@
     "venue": "Kaseya Center",
     "postgame": {
       "status": "available",
+      "review_level": "full",
       "version_id": "35a29104-d398-4f6a-b6fe-9608802e1ce3",
       "score_text": "活塞 128 — 111 热火",
       "summary": "字母36分仍难掩热火攻防整体塌陷，活塞用六人上双的均衡火力证明赛前“体系更完整”的判断。",
@@ -3855,6 +3852,7 @@
     "postgame": {
       "game_id": "espn:401909847",
       "version_id": "35a29104-d398-4f6a-b6fe-9608802e1ce3",
+      "review_level": "full",
       "title": "字母孤掌难撑残\n活塞群枪射穿热",
       "short_review": "字母36分仍难掩热火攻防整体塌陷，活塞用六人上双的均衡火力证明赛前“体系更完整”的判断。",
       "settlement_summary": "胜负看对，让分看对，大小分看错。字母36分仍难掩热火攻防整体塌陷，活塞用六人上双的均衡火力证明赛前“体系更完整”的判断。",
@@ -4008,10 +4006,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-24T12:12:54.497088+00:00",
+    "exported_at": "2026-10-27T16:18:15.689388+00:00",
     "source_prediction_version_id": "39f17647-74cd-42e9-ba99-24b3d33bbee5",
     "source_prediction_payload_sha256": "b92ea353a09b0ae22e883b1cf69b15f164168b0d1012112eede899523cc73d3e",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "722d38570fce5755022bbe71b9fc8d8f2b7bea3624dab269176c97ae94c436a3"
+  "public_sha256": "e85283c38a1d1a55e48e09e3e3f5f2685ab63a10abd82e5bc92fcf7571965f42"
 }

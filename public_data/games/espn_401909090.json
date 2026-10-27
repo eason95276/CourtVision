@@ -620,11 +620,16 @@
       "cutoff": "2026-09-17T12:51:06.300925+00:00",
       "season_start": 2026,
       "competition_scope": "regular_season",
+      "record_scope": "verified_games_at_cutoff",
       "source": "schedule_catalog_final_games",
       "numeric_model_usage": false,
       "teams": {
         "away": {
           "team_id": 1610612760,
+          "record_scope": "verified_games_at_cutoff",
+          "record_completeness": "not_certified_complete",
+          "known_prior_final_candidates": 0,
+          "excluded_unverified_games": 0,
           "current_season_games": 0,
           "current_season_game_ids": [],
           "current_season_record": {
@@ -644,6 +649,10 @@
         },
         "home": {
           "team_id": 1610612759,
+          "record_scope": "verified_games_at_cutoff",
+          "record_completeness": "not_certified_complete",
+          "known_prior_final_candidates": 0,
+          "excluded_unverified_games": 0,
           "current_season_games": 0,
           "current_season_game_ids": [],
           "current_season_record": {
@@ -662,7 +671,7 @@
           "streak": null
         }
       },
-      "context_hash": "4c29f200913ec54f3a00eabee6e447f1bac2266830b941d69c45c82382b207bb"
+      "context_hash": "a1eec9438b3392f1465b6a2512de8ceaa1a43defe04f88920771984cfc8bb8e5"
     },
     "game_type": "regular_season",
     "schedule_revision": 1,
@@ -1311,10 +1320,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-27T12:07:03.621960+00:00",
+    "exported_at": "2026-10-27T16:17:29.385573+00:00",
     "source_prediction_version_id": null,
     "source_prediction_payload_sha256": null,
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "5171861b0c5025eaa978bce800e7eb2a82b8cd922b33ff13b58729f6540ce62a"
+  "public_sha256": "567ad02af79010fd2a65b3ebf99cefe45bcf9e7aab0e6a0bcc8253d872f6f9b2"
 }

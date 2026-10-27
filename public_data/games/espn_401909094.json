@@ -817,96 +817,76 @@
       "game_id": "espn:401909094",
       "cutoff": "2026-10-22T18:43:29.312848+00:00",
       "season_start": 2026,
-      "competition_scope": "all_game_types_in_current_season",
+      "competition_scope": "regular_season",
+      "record_scope": "verified_games_at_cutoff",
       "source": "schedule_catalog_final_games",
       "numeric_model_usage": false,
       "teams": {
         "away": {
           "team_id": 1610612743,
-          "current_season_games": 5,
+          "record_scope": "verified_games_at_cutoff",
+          "record_completeness": "not_certified_complete",
+          "known_prior_final_candidates": 0,
+          "excluded_unverified_games": 0,
+          "current_season_games": 0,
+          "current_season_game_ids": [],
+          "current_season_record": {
+            "wins": 0,
+            "losses": 0
+          },
+          "current_last5": {
+            "status": "no_games",
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": null,
+            "game_ids": []
+          },
+          "last_result": null,
+          "streak": null
+        },
+        "home": {
+          "team_id": 1610612760,
+          "record_scope": "verified_games_at_cutoff",
+          "record_completeness": "not_certified_complete",
+          "known_prior_final_candidates": 1,
+          "excluded_unverified_games": 0,
+          "current_season_games": 1,
           "current_season_game_ids": [
-            "espn:401898719",
-            "espn:401918011",
-            "espn:401908941",
-            "espn:401914128",
-            "espn:401914127"
+            "espn:401909090"
           ],
           "current_season_record": {
-            "wins": 3,
-            "losses": 2
+            "wins": 1,
+            "losses": 0
           },
           "current_last5": {
             "status": "available",
-            "games": 5,
-            "wins": 3,
-            "losses": 2,
-            "win_rate": 0.6,
+            "games": 1,
+            "wins": 1,
+            "losses": 0,
+            "win_rate": 1.0,
             "game_ids": [
-              "espn:401898719",
-              "espn:401918011",
-              "espn:401908941",
-              "espn:401914128",
-              "espn:401914127"
+              "espn:401909090"
             ]
           },
           "last_result": {
-            "game_id": "espn:401898719",
-            "played_at": "2026-10-17T02:30:00+00:00",
+            "game_id": "espn:401909090",
+            "played_at": "2026-10-21T01:50:00+00:00",
+            "fact_observed_at": "2026-10-21T13:49:51+00:00",
+            "fact_observation_basis": "cutoff_research",
             "won": true,
-            "team_score": 121,
-            "opponent_score": 106,
-            "opponent_team_id": 1610612747,
-            "opponent_name_zh": "湖人"
+            "team_score": 116,
+            "opponent_score": 104,
+            "opponent_team_id": 1610612759,
+            "opponent_name_zh": "马刺"
           },
           "streak": {
             "result": "win",
             "games": 1
           }
-        },
-        "home": {
-          "team_id": 1610612760,
-          "current_season_games": 5,
-          "current_season_game_ids": [
-            "espn:401908622",
-            "espn:401908621",
-            "espn:401898402",
-            "espn:401908620",
-            "espn:401898389"
-          ],
-          "current_season_record": {
-            "wins": 1,
-            "losses": 4
-          },
-          "current_last5": {
-            "status": "available",
-            "games": 5,
-            "wins": 1,
-            "losses": 4,
-            "win_rate": 0.2,
-            "game_ids": [
-              "espn:401908622",
-              "espn:401908621",
-              "espn:401898402",
-              "espn:401908620",
-              "espn:401898389"
-            ]
-          },
-          "last_result": {
-            "game_id": "espn:401908622",
-            "played_at": "2026-10-16T00:30:00+00:00",
-            "won": false,
-            "team_score": 89,
-            "opponent_score": 116,
-            "opponent_team_id": 1610612745,
-            "opponent_name_zh": "火箭"
-          },
-          "streak": {
-            "result": "loss",
-            "games": 1
-          }
         }
       },
-      "context_hash": "b25895fcb437e3c33176111ab476a01d7abc370c1e08e9bac81a4417b35f43d6"
+      "context_hash": "2924a600c8d8c9ee3b082b66ae2f106d6457755e75ebbd677b333c2d27d74de1"
     },
     "season_phase": {
       "away_current_season_games": 0,
@@ -919,7 +899,7 @@
     },
     "season_start": 2026,
     "source": {
-      "schedule_captured_at": "2026-10-23T14:39:35.663222+00:00"
+      "schedule_captured_at": "2026-10-24T15:57:07.150671+00:00"
     },
     "status": "final",
     "technical": {
@@ -931,6 +911,7 @@
     "venue": "Paycom Center",
     "postgame": {
       "status": "available",
+      "review_level": "full",
       "version_id": "708171c8-5471-42e9-b6e1-d29918952be9",
       "score_text": "掘金 84 — 96 雷霆",
       "summary": "雷霆靠防守执行力和下半场更坚决的攻框完成逆转，掘金双核同时失准，赛前看好雷霆赢球的方向成立。",
@@ -3076,6 +3057,7 @@
     "postgame": {
       "game_id": "espn:401909094",
       "version_id": "708171c8-5471-42e9-b6e1-d29918952be9",
+      "review_level": "full",
       "title": "雷霆守城碎掘金\n双核失准难回天",
       "short_review": "雷霆靠防守执行力和下半场更坚决的攻框完成逆转，掘金双核同时失准，赛前看好雷霆赢球的方向成立。",
       "settlement_summary": "胜负看对。雷霆靠防守执行力和下半场更坚决的攻框完成逆转，掘金双核同时失准，赛前看好雷霆赢球的方向成立。",
@@ -3152,10 +3134,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-23T14:42:07.933019+00:00",
+    "exported_at": "2026-10-27T16:17:59.142981+00:00",
     "source_prediction_version_id": "d48edadf-6a15-410e-9aeb-24b7893ff71b",
     "source_prediction_payload_sha256": "403ba78f08379883dd1e259a1d79b585a3667b3006a86fdb93e2d95412420777",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "a0250aac5574ce59af3909989eb042a07658e6703c9978f8e814725fbd6b0006"
+  "public_sha256": "f4bea50623e67a7fb118ee07741de0da53eb7adf58116035ecf3d362862d0dba"
 }

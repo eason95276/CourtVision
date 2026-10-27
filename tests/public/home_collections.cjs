@@ -40,3 +40,10 @@ run("state.data.games.find(g=>g.id==='old').home.id=99; state.favoriteTeamId=99"
 assert.deepEqual(Array.from(run("state.data.games.filter(g=>gameInHomeCollection(g,'published')).sort((a,b)=>compareHomeGames(a,b,'published')).map(g=>g.id)")),
   ['other-opening','espn:401909090','espn:401909089','espn:401909088','old']);
 console.log('Daily collections: all schedule facts, published reports, visibility and rescheduling passed');
+run(`state.testRecentGame={id:'verified-sample',tipoff:'2026-10-26T01:00:00Z',game_type:'regular_season',
+  season_form:{status:'available',source:'schedule_catalog_final_games',competition_scope:'regular_season',cutoff:'2026-10-25T20:00:00Z',teams:{home:{
+    current_season_games:2,current_season_record:{wins:2,losses:0},current_last5:{status:'available',games:2,wins:2,losses:0},streak:{result:'win',games:2}}}}};`);
+const lines=Array.from(run("recentStatusLines(state.testRecentGame,{input_cutoff_at:'2026-10-25T20:00:00Z'},'home')"));
+assert.ok(lines[0].includes('赛前已核实2场常规赛'));
+assert.ok(!lines.join('').includes('当前连胜'));
+assert.equal(run("settlementLabel('no_edge')"),'未给方向');

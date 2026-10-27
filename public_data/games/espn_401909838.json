@@ -1094,92 +1094,59 @@
       "game_id": "espn:401909838",
       "cutoff": "2026-10-21T23:40:26.823575+00:00",
       "season_start": 2026,
-      "competition_scope": "all_game_types_in_current_season",
+      "competition_scope": "regular_season",
+      "record_scope": "verified_games_at_cutoff",
       "source": "schedule_catalog_final_games",
       "numeric_model_usage": false,
       "teams": {
         "away": {
           "team_id": 1610612762,
-          "current_season_games": 4,
-          "current_season_game_ids": [
-            "espn:401908948",
-            "espn:401898721",
-            "espn:401914128",
-            "espn:401914127"
-          ],
+          "record_scope": "verified_games_at_cutoff",
+          "record_completeness": "not_certified_complete",
+          "known_prior_final_candidates": 0,
+          "excluded_unverified_games": 0,
+          "current_season_games": 0,
+          "current_season_game_ids": [],
           "current_season_record": {
-            "wins": 3,
-            "losses": 1
+            "wins": 0,
+            "losses": 0
           },
           "current_last5": {
-            "status": "available",
-            "games": 4,
-            "wins": 3,
-            "losses": 1,
-            "win_rate": 0.75,
-            "game_ids": [
-              "espn:401908948",
-              "espn:401898721",
-              "espn:401914128",
-              "espn:401914127"
-            ]
+            "status": "no_games",
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": null,
+            "game_ids": []
           },
-          "last_result": {
-            "game_id": "espn:401908948",
-            "played_at": "2026-10-17T02:00:00+00:00",
-            "won": true,
-            "team_score": 119,
-            "opponent_score": 116,
-            "opponent_team_id": 1610612756,
-            "opponent_name_zh": "太阳"
-          },
-          "streak": {
-            "result": "win",
-            "games": 2
-          }
+          "last_result": null,
+          "streak": null
         },
         "home": {
           "team_id": 1610612763,
-          "current_season_games": 4,
-          "current_season_game_ids": [
-            "espn:401901822",
-            "espn:401908940",
-            "espn:401898391",
-            "espn:401898388"
-          ],
+          "record_scope": "verified_games_at_cutoff",
+          "record_completeness": "not_certified_complete",
+          "known_prior_final_candidates": 0,
+          "excluded_unverified_games": 0,
+          "current_season_games": 0,
+          "current_season_game_ids": [],
           "current_season_record": {
-            "wins": 3,
-            "losses": 1
+            "wins": 0,
+            "losses": 0
           },
           "current_last5": {
-            "status": "available",
-            "games": 4,
-            "wins": 3,
-            "losses": 1,
-            "win_rate": 0.75,
-            "game_ids": [
-              "espn:401901822",
-              "espn:401908940",
-              "espn:401898391",
-              "espn:401898388"
-            ]
+            "status": "no_games",
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": null,
+            "game_ids": []
           },
-          "last_result": {
-            "game_id": "espn:401901822",
-            "played_at": "2026-10-17T00:00:00+00:00",
-            "won": true,
-            "team_score": 117,
-            "opponent_score": 98,
-            "opponent_team_id": 1610612766,
-            "opponent_name_zh": "黄蜂"
-          },
-          "streak": {
-            "result": "win",
-            "games": 2
-          }
+          "last_result": null,
+          "streak": null
         }
       },
-      "context_hash": "a7be223df7e16185db325dd78e1e7e0102d9ea32ea2ef6e950e25958679b82ae"
+      "context_hash": "a9e78b407f10cf6f8caa9cfc9686ea1a3e78f95ac40efebf27def9b7228ffaad"
     },
     "season_phase": {
       "away_current_season_games": 0,
@@ -1192,7 +1159,7 @@
     },
     "season_start": 2026,
     "source": {
-      "schedule_captured_at": "2026-10-22T11:50:37.718926+00:00"
+      "schedule_captured_at": "2026-10-23T15:58:58.869510+00:00"
     },
     "status": "final",
     "technical": {
@@ -1204,6 +1171,7 @@
     "venue": "FedExForum",
     "postgame": {
       "status": "available",
+      "review_level": "full",
       "version_id": "4b5bcc89-4861-4b1d-ac9a-5fa75ec8d20d",
       "score_text": "爵士 103 — 123 灰熊",
       "summary": "泰·杰罗姆45分打穿爵士后卫线，灰熊靠进攻篮板和失误控制把比赛打成一边倒，赛前看好爵士让分的判断被彻底推翻。",
@@ -3643,6 +3611,7 @@
     "postgame": {
       "game_id": "espn:401909838",
       "version_id": "4b5bcc89-4861-4b1d-ac9a-5fa75ec8d20d",
+      "review_level": "full",
       "title": "杰罗姆破盐湖胜\n灰熊篮板定胜局",
       "short_review": "泰·杰罗姆45分打穿爵士后卫线，灰熊靠进攻篮板和失误控制把比赛打成一边倒，赛前看好爵士让分的判断被彻底推翻。",
       "settlement_summary": "胜负看错，让分看错，大小分看对。",
@@ -3793,10 +3762,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-22T12:11:13.579508+00:00",
+    "exported_at": "2026-10-27T16:17:42.472515+00:00",
     "source_prediction_version_id": "de41cb5f-9d75-4805-8a72-3032a3af513d",
     "source_prediction_payload_sha256": "4d3d727917c312f5d582d0602683a70938e84068d47a5a10fddc36b0a44a4c10",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "5109288d8e01480239ff36e7582c4d576b9e37423381ecf5965236a08ae6a606"
+  "public_sha256": "d5f33f15d8b9aeb986f0355fca97661c68de24a4d391d591fcffd8e537c6e76c"
 }

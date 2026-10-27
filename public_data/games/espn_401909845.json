@@ -1026,43 +1026,40 @@
       "game_id": "espn:401909845",
       "cutoff": "2026-10-23T22:40:41.826972+00:00",
       "season_start": 2026,
-      "competition_scope": "all_game_types_in_current_season",
+      "competition_scope": "regular_season",
+      "record_scope": "verified_games_at_cutoff",
       "source": "schedule_catalog_final_games",
       "numeric_model_usage": false,
       "teams": {
         "away": {
           "team_id": 1610612750,
-          "current_season_games": 7,
+          "record_scope": "verified_games_at_cutoff",
+          "record_completeness": "not_certified_complete",
+          "known_prior_final_candidates": 1,
+          "excluded_unverified_games": 0,
+          "current_season_games": 1,
           "current_season_game_ids": [
-            "espn:401909091",
-            "espn:401908943",
-            "espn:401914125",
-            "espn:401914124",
-            "espn:401898397",
-            "espn:401914123",
-            "espn:401914102"
+            "espn:401909091"
           ],
           "current_season_record": {
-            "wins": 4,
-            "losses": 3
+            "wins": 1,
+            "losses": 0
           },
           "current_last5": {
             "status": "available",
-            "games": 5,
-            "wins": 3,
-            "losses": 2,
-            "win_rate": 0.6,
+            "games": 1,
+            "wins": 1,
+            "losses": 0,
+            "win_rate": 1.0,
             "game_ids": [
-              "espn:401909091",
-              "espn:401908943",
-              "espn:401914125",
-              "espn:401914124",
-              "espn:401898397"
+              "espn:401909091"
             ]
           },
           "last_result": {
             "game_id": "espn:401909091",
             "played_at": "2026-10-21T23:30:00+00:00",
+            "fact_observed_at": "2026-10-22T02:28:31.803364+00:00",
+            "fact_observation_basis": "immutable_result_snapshot",
             "won": true,
             "team_score": 131,
             "opponent_score": 106,
@@ -1076,35 +1073,33 @@
         },
         "home": {
           "team_id": 1610612753,
-          "current_season_games": 5,
+          "record_scope": "verified_games_at_cutoff",
+          "record_completeness": "not_certified_complete",
+          "known_prior_final_candidates": 1,
+          "excluded_unverified_games": 0,
+          "current_season_games": 1,
           "current_season_game_ids": [
-            "espn:401909834",
-            "espn:401898406",
-            "espn:401898403",
-            "espn:401898401",
-            "espn:401898391"
+            "espn:401909834"
           ],
           "current_season_record": {
-            "wins": 3,
-            "losses": 2
+            "wins": 0,
+            "losses": 1
           },
           "current_last5": {
             "status": "available",
-            "games": 5,
-            "wins": 3,
-            "losses": 2,
-            "win_rate": 0.6,
+            "games": 1,
+            "wins": 0,
+            "losses": 1,
+            "win_rate": 0.0,
             "game_ids": [
-              "espn:401909834",
-              "espn:401898406",
-              "espn:401898403",
-              "espn:401898401",
-              "espn:401898391"
+              "espn:401909834"
             ]
           },
           "last_result": {
             "game_id": "espn:401909834",
             "played_at": "2026-10-21T23:00:00+00:00",
+            "fact_observed_at": "2026-10-22T01:57:08.927705+00:00",
+            "fact_observation_basis": "immutable_result_snapshot",
             "won": false,
             "team_score": 125,
             "opponent_score": 132,
@@ -1117,7 +1112,7 @@
           }
         }
       },
-      "context_hash": "4d5d2cd86c93759b12e9d94f6c98c7878b8705af2e5ae60191502f31d831ca28"
+      "context_hash": "529b447ea9bfec120f85c80ddb0a80cc477d960c61b25c6495703430c84a411a"
     },
     "season_phase": {
       "away_current_season_games": 1,
@@ -1130,7 +1125,7 @@
     },
     "season_start": 2026,
     "source": {
-      "schedule_captured_at": "2026-10-24T12:04:15.228560+00:00"
+      "schedule_captured_at": "2026-10-25T15:59:13.332937+00:00"
     },
     "status": "final",
     "technical": {
@@ -1142,6 +1137,7 @@
     "venue": "Kia Center",
     "postgame": {
       "status": "available",
+      "review_level": "full",
       "version_id": "77e63beb-59b4-439c-acb7-9c148d98daa9",
       "score_text": "森林狼 115 — 93 魔术",
       "summary": "爱德华兹手感冰凉，森林狼靠篮板和替补产量撑起大胜；魔术让分判断被推翻，小分方向兑现。",
@@ -3834,6 +3830,7 @@
     "postgame": {
       "game_id": "espn:401909845",
       "version_id": "77e63beb-59b4-439c-acb7-9c148d98daa9",
+      "review_level": "full",
       "title": "狼群篮板压禁区\n魔术双核难回天",
       "short_review": "爱德华兹手感冰凉，森林狼靠篮板和替补产量撑起大胜；魔术让分判断被推翻，小分方向兑现。",
       "settlement_summary": "胜负看错，让分看错，大小分看对。",
@@ -3981,10 +3978,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-24T12:11:40.922560+00:00",
+    "exported_at": "2026-10-27T16:18:12.359306+00:00",
     "source_prediction_version_id": "baf189b7-589c-44ca-902b-655f006b1a8d",
     "source_prediction_payload_sha256": "26af7f4be03a0c8e1a3d5d1104ecb9439f2bef41a590e6833c2ddffe10d36ba3",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "b9a70dc44957adf2faabd37edefe112dd328487dbe798540f8796c36a1be1b4c"
+  "public_sha256": "9e30d3f5c2ab057fc9c50b100827d2b7c4a24b5477b505126427e78a59784458"
 }

@@ -1823,6 +1823,7 @@ function recentStatusLines(game, version, side) {
 
   const team = form.teams?.[side];
   if (!team) return ["赛前近期记录暂不可用"];
+  const verifiedSample = form.record_scope === "verified_games_at_cutoff" || form.source === "schedule_catalog_final_games";
   const currentGames = Number(team.current_season_games || 0);
   const currentWindow = team.current_last5;
   const includesTarget = formWindowContainsTarget(currentWindow, game) ||
@@ -1834,7 +1835,8 @@ function recentStatusLines(game, version, side) {
       wins: team.current_season_record?.wins, losses: team.current_season_record?.losses,
     });
     const lines = [seasonRecord
-      ? `${form.competition_scope === "regular_season" ? "本季常规赛" : "本季"}已赛${seasonRecord.games}场：${seasonRecord.wins}胜${seasonRecord.losses}负`
+      ? (verifiedSample ? `赛前已核实${seasonRecord.games}场${form.competition_scope === "regular_season" ? "常规赛" : "比赛"}：${seasonRecord.wins}胜${seasonRecord.losses}负`
+        : `${form.competition_scope === "regular_season" ? "本季常规赛" : "本季"}已赛${seasonRecord.games}场：${seasonRecord.wins}胜${seasonRecord.losses}负`)
       : currentRecord
         ? `${form.competition_scope === "regular_season" ? "本季常规赛" : "本季"}近${currentRecord.games}场：${currentRecord.wins}胜${currentRecord.losses}负`
         : "本季近期战绩暂不可用"];
@@ -1843,15 +1845,15 @@ function recentStatusLines(game, version, side) {
     if (last && last.game_id !== game.id && Number.isFinite(lastTime) && lastTime < cutoff &&
         Number.isFinite(Number(last.team_score)) && Number.isFinite(Number(last.opponent_score)) &&
         last.opponent_name_zh) {
-      lines.push(`上一场：${number(last.team_score, 0)}–${number(last.opponent_score, 0)} ${last.opponent_name_zh}`);
+      lines.push(`${verifiedSample ? "最近已核实" : "上一场"}：${number(last.team_score, 0)}–${number(last.opponent_score, 0)} ${last.opponent_name_zh}`);
     }
     const streakGames = Number(team.streak?.games);
-    if (!includesTarget && Number.isInteger(streakGames) && streakGames >= 2 && ["win", "loss"].includes(team.streak?.result)) {
+    if (!verifiedSample && !includesTarget && Number.isInteger(streakGames) && streakGames >= 2 && ["win", "loss"].includes(team.streak?.result)) {
       lines.push(`当前${team.streak.result === "win" ? "连胜" : "连败"}${streakGames}场`);
     }
     return lines;
   }
-  return [form.competition_scope === "regular_season" ? "本季常规赛暂无比赛记录" : "本季暂无比赛记录"];
+  return [verifiedSample ? "赛前暂无已核实的比赛记录" : form.competition_scope === "regular_season" ? "本季常规赛暂无比赛记录" : "本季暂无比赛记录"];
 }
 
 function renderRecentStatus(game, version, container) {
@@ -2791,7 +2793,7 @@ function postgameNumber(value) {
 }
 
 function settlementLabel(value) {
-  return value === "win" ? "命中" : value === "push" ? "走盘" : value === "loss" ? "未命中" : "未结算";
+  return value === "no_edge" ? "未给方向" : value === "win" ? "命中" : value === "push" ? "走盘" : value === "loss" ? "未命中" : "未结算";
 }
 
 function renderPostgameReader(postgame, game) {
@@ -2856,10 +2858,11 @@ function renderPostgameReader(postgame, game) {
     }
     if (market.total_review) {
       const totalDirection = market.total_review.lean === "over" ? "大分"
-        : market.total_review.lean === "under" ? "小分" : "走盘";
+        : market.total_review.lean === "under" ? "小分" : "未给方向";
       marketBlock.append(text(
         "p",
-        "总分方向 " + totalDirection + " · " + settlementLabel(market.total_review.settlement),
+        totalDirection === "未给方向" ? "大小分未给方向 · 不计命中率"
+          : "总分方向 " + totalDirection + " · " + settlementLabel(market.total_review.settlement),
         "postgame-settlement",
       ));
     }

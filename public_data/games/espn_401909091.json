@@ -87,7 +87,7 @@
       "source_label": "开发期赛前预测快照"
     },
     "source": {
-      "schedule_captured_at": "2026-10-22T12:25:00.645313+00:00"
+      "schedule_captured_at": "2026-10-23T15:58:58.869510+00:00"
     },
     "roster_context": {
       "teams": {
@@ -359,6 +359,7 @@
     },
     "postgame": {
       "status": "available",
+      "review_level": "full",
       "version_id": "e2d9f1a1-8065-4ca5-b856-6903881a0e3e",
       "score_text": "森林狼 131 — 106 热火",
       "summary": "爱德华兹45分打穿热火防线，字母哥首秀35分难掩篮板与失误的全面劣势，赛前看好热火让分落空，小分方向命中。",
@@ -539,97 +540,59 @@
       "game_id": "espn:401909091",
       "cutoff": "2026-10-21T23:10:14.996530+00:00",
       "season_start": 2026,
-      "competition_scope": "all_game_types_in_current_season",
+      "competition_scope": "regular_season",
+      "record_scope": "verified_games_at_cutoff",
       "source": "schedule_catalog_final_games",
       "numeric_model_usage": false,
       "teams": {
         "away": {
           "team_id": 1610612750,
-          "current_season_games": 6,
-          "current_season_game_ids": [
-            "espn:401908943",
-            "espn:401914125",
-            "espn:401914124",
-            "espn:401898397",
-            "espn:401914123",
-            "espn:401914102"
-          ],
+          "record_scope": "verified_games_at_cutoff",
+          "record_completeness": "not_certified_complete",
+          "known_prior_final_candidates": 0,
+          "excluded_unverified_games": 0,
+          "current_season_games": 0,
+          "current_season_game_ids": [],
           "current_season_record": {
-            "wins": 3,
-            "losses": 3
+            "wins": 0,
+            "losses": 0
           },
           "current_last5": {
-            "status": "available",
-            "games": 5,
-            "wins": 2,
-            "losses": 3,
-            "win_rate": 0.4,
-            "game_ids": [
-              "espn:401908943",
-              "espn:401914125",
-              "espn:401914124",
-              "espn:401898397",
-              "espn:401914123"
-            ]
+            "status": "no_games",
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": null,
+            "game_ids": []
           },
-          "last_result": {
-            "game_id": "espn:401908943",
-            "played_at": "2026-10-17T00:00:00+00:00",
-            "won": false,
-            "team_score": 116,
-            "opponent_score": 133,
-            "opponent_team_id": 1610612741,
-            "opponent_name_zh": "公牛"
-          },
-          "streak": {
-            "result": "loss",
-            "games": 2
-          }
+          "last_result": null,
+          "streak": null
         },
         "home": {
           "team_id": 1610612748,
-          "current_season_games": 5,
-          "current_season_game_ids": [
-            "espn:401898406",
-            "espn:401898404",
-            "espn:401898397",
-            "espn:401898393",
-            "espn:401902644"
-          ],
+          "record_scope": "verified_games_at_cutoff",
+          "record_completeness": "not_certified_complete",
+          "known_prior_final_candidates": 0,
+          "excluded_unverified_games": 0,
+          "current_season_games": 0,
+          "current_season_game_ids": [],
           "current_season_record": {
-            "wins": 3,
-            "losses": 2
+            "wins": 0,
+            "losses": 0
           },
           "current_last5": {
-            "status": "available",
-            "games": 5,
-            "wins": 3,
-            "losses": 2,
-            "win_rate": 0.6,
-            "game_ids": [
-              "espn:401898406",
-              "espn:401898404",
-              "espn:401898397",
-              "espn:401898393",
-              "espn:401902644"
-            ]
+            "status": "no_games",
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": null,
+            "game_ids": []
           },
-          "last_result": {
-            "game_id": "espn:401898406",
-            "played_at": "2026-10-16T23:00:00+00:00",
-            "won": false,
-            "team_score": 115,
-            "opponent_score": 136,
-            "opponent_team_id": 1610612753,
-            "opponent_name_zh": "魔术"
-          },
-          "streak": {
-            "result": "loss",
-            "games": 1
-          }
+          "last_result": null,
+          "streak": null
         }
       },
-      "context_hash": "b84d07ac3a8aadd5b359c1e604c728e90230de0c222a8ade53ebad78534116bd"
+      "context_hash": "644ae93326640d265527038b73dd3d9bc3f07a6d966fb7343ee9941a365fc2b2"
     },
     "game_type": "regular_season",
     "schedule_revision": 1,
@@ -3251,6 +3214,7 @@
     "postgame": {
       "game_id": "espn:401909091",
       "version_id": "e2d9f1a1-8065-4ca5-b856-6903881a0e3e",
+      "review_level": "full",
       "title": "华子单骑破热火\n字母首秀空留憾",
       "short_review": "爱德华兹45分打穿热火防线，字母哥首秀35分难掩篮板与失误的全面劣势，赛前看好热火让分落空，小分方向命中。",
       "settlement_summary": "胜负看错，让分看错，大小分看对。",
@@ -3398,10 +3362,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-22T12:39:09.337457+00:00",
+    "exported_at": "2026-10-27T16:17:35.919280+00:00",
     "source_prediction_version_id": "ff077f81-86ad-4191-8cea-3ca538b399de",
     "source_prediction_payload_sha256": "6f58d066f0867ba77f8bda59b322799430d6a8410e963372fdaf5f00ecfeb863",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "25f43ffb57f6259c0dddc9dd06d457c2e73e377f9175bb236db9b2d537f80ce6"
+  "public_sha256": "adb83c9a8f8b329ac79eae3f3b27040869dfa94016d377a62eef5af9ea16f83c"
 }

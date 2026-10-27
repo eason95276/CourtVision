@@ -1076,92 +1076,59 @@
       "game_id": "espn:401909841",
       "cutoff": "2026-10-22T01:40:13.635255+00:00",
       "season_start": 2026,
-      "competition_scope": "all_game_types_in_current_season",
+      "competition_scope": "regular_season",
+      "record_scope": "verified_games_at_cutoff",
       "source": "schedule_catalog_final_games",
       "numeric_model_usage": false,
       "teams": {
         "away": {
           "team_id": 1610612756,
-          "current_season_games": 5,
-          "current_season_game_ids": [
-            "espn:401908948",
-            "espn:401898722",
-            "espn:401898720",
-            "espn:401908939",
-            "espn:401908947"
-          ],
+          "record_scope": "verified_games_at_cutoff",
+          "record_completeness": "not_certified_complete",
+          "known_prior_final_candidates": 0,
+          "excluded_unverified_games": 0,
+          "current_season_games": 0,
+          "current_season_game_ids": [],
           "current_season_record": {
-            "wins": 1,
-            "losses": 4
+            "wins": 0,
+            "losses": 0
           },
           "current_last5": {
-            "status": "available",
-            "games": 5,
-            "wins": 1,
-            "losses": 4,
-            "win_rate": 0.2,
-            "game_ids": [
-              "espn:401908948",
-              "espn:401898722",
-              "espn:401898720",
-              "espn:401908939",
-              "espn:401908947"
-            ]
+            "status": "no_games",
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": null,
+            "game_ids": []
           },
-          "last_result": {
-            "game_id": "espn:401908948",
-            "played_at": "2026-10-17T02:00:00+00:00",
-            "won": false,
-            "team_score": 116,
-            "opponent_score": 119,
-            "opponent_team_id": 1610612762,
-            "opponent_name_zh": "爵士"
-          },
-          "streak": {
-            "result": "loss",
-            "games": 2
-          }
+          "last_result": null,
+          "streak": null
         },
         "home": {
           "team_id": 1610612757,
-          "current_season_games": 3,
-          "current_season_game_ids": [
-            "espn:401898409",
-            "espn:401901826",
-            "espn:401914129"
-          ],
+          "record_scope": "verified_games_at_cutoff",
+          "record_completeness": "not_certified_complete",
+          "known_prior_final_candidates": 0,
+          "excluded_unverified_games": 0,
+          "current_season_games": 0,
+          "current_season_game_ids": [],
           "current_season_record": {
-            "wins": 2,
-            "losses": 1
+            "wins": 0,
+            "losses": 0
           },
           "current_last5": {
-            "status": "available",
-            "games": 3,
-            "wins": 2,
-            "losses": 1,
-            "win_rate": 0.6666666666666666,
-            "game_ids": [
-              "espn:401898409",
-              "espn:401901826",
-              "espn:401914129"
-            ]
+            "status": "no_games",
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": null,
+            "game_ids": []
           },
-          "last_result": {
-            "game_id": "espn:401898409",
-            "played_at": "2026-10-17T02:00:00+00:00",
-            "won": false,
-            "team_score": 118,
-            "opponent_score": 128,
-            "opponent_team_id": 1610612744,
-            "opponent_name_zh": "勇士"
-          },
-          "streak": {
-            "result": "loss",
-            "games": 1
-          }
+          "last_result": null,
+          "streak": null
         }
       },
-      "context_hash": "6f58aa68812da6fe69d181fe3d99de0832ffa953f78911941b3c69f383718a09"
+      "context_hash": "fc1a94707d6702e64e095c2e0d41449f25f2e170d4a148d44bf6e9df5709eebe"
     },
     "season_phase": {
       "away_current_season_games": 0,
@@ -1174,7 +1141,7 @@
     },
     "season_start": 2026,
     "source": {
-      "schedule_captured_at": "2026-10-22T11:50:37.718926+00:00"
+      "schedule_captured_at": "2026-10-23T15:58:58.869510+00:00"
     },
     "status": "final",
     "technical": {
@@ -1186,6 +1153,7 @@
     "venue": "Moda Center",
     "postgame": {
       "status": "available",
+      "review_level": "full",
       "version_id": "a7e896ed-4fbf-450e-a367-8cccabcb58e1",
       "score_text": "太阳 83 — 124 开拓者",
       "summary": "利拉德用25分和6记三分把比赛早早拉开，太阳全队命中率崩盘，让分方向看错，小分方向看对。",
@@ -3697,6 +3665,7 @@
     "postgame": {
       "game_id": "espn:401909841",
       "version_id": "a7e896ed-4fbf-450e-a367-8cccabcb58e1",
+      "review_level": "full",
       "title": "利拉德三分定调\n太阳残阵失准了",
       "short_review": "利拉德用25分和6记三分把比赛早早拉开，太阳全队命中率崩盘，让分方向看错，小分方向看对。",
       "settlement_summary": "胜负看对，让分看错，大小分看对。",
@@ -3844,10 +3813,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-22T12:12:43.624163+00:00",
+    "exported_at": "2026-10-27T16:17:52.297082+00:00",
     "source_prediction_version_id": "09733441-95e7-44c6-94b1-29e45828f35d",
     "source_prediction_payload_sha256": "7bef412279507c85397c96b22fdf77a3bbe91bbef1c70cc79cf5a7de5dc742dd",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "0e997c074296d434492560fea9fa8f757d23f2012c65378b1030a1e475bf375f"
+  "public_sha256": "7d5da69e4079d681221133aafad117d18d8ddb760ea69b8f7b2123baac34a1ae"
 }

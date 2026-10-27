@@ -818,42 +818,40 @@
       "game_id": "espn:401909095",
       "cutoff": "2026-10-23T14:46:28.478933+00:00",
       "season_start": 2026,
-      "competition_scope": "all_game_types_in_current_season",
+      "competition_scope": "regular_season",
+      "record_scope": "verified_games_at_cutoff",
       "source": "schedule_catalog_final_games",
       "numeric_model_usage": false,
       "teams": {
         "away": {
           "team_id": 1610612752,
-          "current_season_games": 6,
+          "record_scope": "verified_games_at_cutoff",
+          "record_completeness": "not_certified_complete",
+          "known_prior_final_candidates": 1,
+          "excluded_unverified_games": 0,
+          "current_season_games": 1,
           "current_season_game_ids": [
-            "espn:401909089",
-            "espn:401908945",
-            "espn:401908944",
-            "espn:401914124",
-            "espn:401906508",
-            "espn:401914101"
+            "espn:401909089"
           ],
           "current_season_record": {
-            "wins": 1,
-            "losses": 5
+            "wins": 0,
+            "losses": 1
           },
           "current_last5": {
             "status": "available",
-            "games": 5,
-            "wins": 1,
-            "losses": 4,
-            "win_rate": 0.2,
+            "games": 1,
+            "wins": 0,
+            "losses": 1,
+            "win_rate": 0.0,
             "game_ids": [
-              "espn:401909089",
-              "espn:401908945",
-              "espn:401908944",
-              "espn:401914124",
-              "espn:401906508"
+              "espn:401909089"
             ]
           },
           "last_result": {
             "game_id": "espn:401909089",
             "played_at": "2026-10-20T23:00:00+00:00",
+            "fact_observed_at": "2026-10-21T02:02:50.205073+00:00",
+            "fact_observation_basis": "immutable_result_snapshot",
             "won": false,
             "team_score": 100,
             "opponent_score": 106,
@@ -867,35 +865,33 @@
         },
         "home": {
           "team_id": 1610612738,
-          "current_season_games": 5,
+          "record_scope": "verified_games_at_cutoff",
+          "record_completeness": "not_certified_complete",
+          "known_prior_final_candidates": 1,
+          "excluded_unverified_games": 0,
+          "current_season_games": 1,
           "current_season_game_ids": [
-            "espn:401909088",
-            "espn:401898407",
-            "espn:401898405",
-            "espn:401898398",
-            "espn:401898392"
+            "espn:401909088"
           ],
           "current_season_record": {
-            "wins": 4,
+            "wins": 0,
             "losses": 1
           },
           "current_last5": {
             "status": "available",
-            "games": 5,
-            "wins": 4,
+            "games": 1,
+            "wins": 0,
             "losses": 1,
-            "win_rate": 0.8,
+            "win_rate": 0.0,
             "game_ids": [
-              "espn:401909088",
-              "espn:401898407",
-              "espn:401898405",
-              "espn:401898398",
-              "espn:401898392"
+              "espn:401909088"
             ]
           },
           "last_result": {
             "game_id": "espn:401909088",
             "played_at": "2026-10-20T19:00:00+00:00",
+            "fact_observed_at": "2026-10-20T21:39:50.516089+00:00",
+            "fact_observation_basis": "immutable_result_snapshot",
             "won": false,
             "team_score": 113,
             "opponent_score": 121,
@@ -908,7 +904,7 @@
           }
         }
       },
-      "context_hash": "50364e15afdb066b17233c82c041b7fcfa5140b2988c6c4ff82692fe332601bd"
+      "context_hash": "d42bfd756ec40f6f0c1e7a81e36551f8c82cb51b1725b9b44bfe02b608bc2c62"
     },
     "season_phase": {
       "away_current_season_games": 1,
@@ -921,7 +917,7 @@
     },
     "season_start": 2026,
     "source": {
-      "schedule_captured_at": "2026-10-24T12:04:15.228560+00:00"
+      "schedule_captured_at": "2026-10-25T15:59:13.332937+00:00"
     },
     "status": "final",
     "technical": {
@@ -933,6 +929,7 @@
     "venue": "TD Garden",
     "postgame": {
       "status": "available",
+      "review_level": "full",
       "version_id": "a2c96bc6-13c7-4c4f-b8a6-9d31b344bdb3",
       "score_text": "尼克斯 103 — 107 凯尔特人",
       "summary": "塔图姆第三节独得16分、末节再拿9分，用36分9篮板7助攻压过尼克斯三人的20+，凯尔特人主场107比103拿下赛季首胜。",
@@ -3267,6 +3264,7 @@
     "postgame": {
       "game_id": "espn:401909095",
       "version_id": "a2c96bc6-13c7-4c4f-b8a6-9d31b344bdb3",
+      "review_level": "full",
       "title": "塔图姆末节连击\n尼克斯追分未果",
       "short_review": "塔图姆第三节独得16分、末节再拿9分，用36分9篮板7助攻压过尼克斯三人的20+，凯尔特人主场107比103拿下赛季首胜。",
       "settlement_summary": "胜负看错。塔图姆第三节独得16分、末节再拿9分，用36分9篮板7助攻压过尼克斯三人的20+，凯尔特人主场107比103拿下赛季首胜。",
@@ -3335,10 +3333,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-24T12:12:28.290773+00:00",
+    "exported_at": "2026-10-27T16:18:05.734927+00:00",
     "source_prediction_version_id": "545ae163-2115-4253-a605-044a68ed83d9",
     "source_prediction_payload_sha256": "94bfcfd8c49d2986bdab95e3a68a09a6be69a4f1f11e1df026afecf423a1154a",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "7047bb8b5b6b406f594caa670a6b9e3015bfdd156793f154f1cc455ae4cdb2d9"
+  "public_sha256": "03bc7f991bfe4e35ab8ef48e3d0c6df1f3ca17a84e81382e631f02ba646ed085"
 }

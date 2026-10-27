@@ -87,7 +87,7 @@
       "source_label": "开发期赛前预测快照"
     },
     "source": {
-      "schedule_captured_at": "2026-10-22T12:41:04.376808+00:00"
+      "schedule_captured_at": "2026-10-23T15:58:58.869510+00:00"
     },
     "roster_context": {
       "teams": {
@@ -347,6 +347,7 @@
     },
     "postgame": {
       "status": "available",
+      "review_level": "full",
       "version_id": "0f8d707a-96fa-4c09-94ed-72770d647260",
       "score_text": "公牛 92 — 135 猛龙",
       "summary": "猛龙用首节43分和全场压迫防守把比赛早早打花，公牛进攻效率与失误双重崩盘，赛前让分方向看错，小分方向命中但成因与预想不同。",
@@ -527,96 +528,59 @@
       "game_id": "espn:401909837",
       "cutoff": "2026-10-21T23:10:33.523646+00:00",
       "season_start": 2026,
-      "competition_scope": "all_game_types_in_current_season",
+      "competition_scope": "regular_season",
+      "record_scope": "verified_games_at_cutoff",
       "source": "schedule_catalog_final_games",
       "numeric_model_usage": false,
       "teams": {
         "away": {
           "team_id": 1610612741,
-          "current_season_games": 5,
-          "current_season_game_ids": [
-            "espn:401908943",
-            "espn:401908942",
-            "espn:401908941",
-            "espn:401908940",
-            "espn:401908939"
-          ],
+          "record_scope": "verified_games_at_cutoff",
+          "record_completeness": "not_certified_complete",
+          "known_prior_final_candidates": 0,
+          "excluded_unverified_games": 0,
+          "current_season_games": 0,
+          "current_season_game_ids": [],
           "current_season_record": {
-            "wins": 3,
-            "losses": 2
+            "wins": 0,
+            "losses": 0
           },
           "current_last5": {
-            "status": "available",
-            "games": 5,
-            "wins": 3,
-            "losses": 2,
-            "win_rate": 0.6,
-            "game_ids": [
-              "espn:401908943",
-              "espn:401908942",
-              "espn:401908941",
-              "espn:401908940",
-              "espn:401908939"
-            ]
+            "status": "no_games",
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": null,
+            "game_ids": []
           },
-          "last_result": {
-            "game_id": "espn:401908943",
-            "played_at": "2026-10-17T00:00:00+00:00",
-            "won": true,
-            "team_score": 133,
-            "opponent_score": 116,
-            "opponent_team_id": 1610612750,
-            "opponent_name_zh": "森林狼"
-          },
-          "streak": {
-            "result": "win",
-            "games": 2
-          }
+          "last_result": null,
+          "streak": null
         },
         "home": {
           "team_id": 1610612761,
-          "current_season_games": 5,
-          "current_season_game_ids": [
-            "espn:401908946",
-            "espn:401908945",
-            "espn:401908944",
-            "espn:401902645",
-            "espn:401902644"
-          ],
+          "record_scope": "verified_games_at_cutoff",
+          "record_completeness": "not_certified_complete",
+          "known_prior_final_candidates": 0,
+          "excluded_unverified_games": 0,
+          "current_season_games": 0,
+          "current_season_game_ids": [],
           "current_season_record": {
-            "wins": 2,
-            "losses": 3
+            "wins": 0,
+            "losses": 0
           },
           "current_last5": {
-            "status": "available",
-            "games": 5,
-            "wins": 2,
-            "losses": 3,
-            "win_rate": 0.4,
-            "game_ids": [
-              "espn:401908946",
-              "espn:401908945",
-              "espn:401908944",
-              "espn:401902645",
-              "espn:401902644"
-            ]
+            "status": "no_games",
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": null,
+            "game_ids": []
           },
-          "last_result": {
-            "game_id": "espn:401908946",
-            "played_at": "2026-10-16T23:00:00+00:00",
-            "won": false,
-            "team_score": 125,
-            "opponent_score": 129,
-            "opponent_team_id": 1610612765,
-            "opponent_name_zh": "活塞"
-          },
-          "streak": {
-            "result": "loss",
-            "games": 2
-          }
+          "last_result": null,
+          "streak": null
         }
       },
-      "context_hash": "ffd58d5d150cbca6865c28a4ad42b33b01eb4eb65959726f9ff846312d72fda6"
+      "context_hash": "31e82099cb0be071b083359cdcb8a16a58c74478bad8a502f7e10cca910d5513"
     },
     "game_type": "regular_season",
     "schedule_revision": 1,
@@ -3269,6 +3233,7 @@
     "postgame": {
       "game_id": "espn:401909837",
       "version_id": "0f8d707a-96fa-4c09-94ed-72770d647260",
+      "review_level": "full",
       "title": "猛龙揭幕大胜牛\n伦纳德首秀定调",
       "short_review": "猛龙用首节43分和全场压迫防守把比赛早早打花，公牛进攻效率与失误双重崩盘，赛前让分方向看错，小分方向命中但成因与预想不同。",
       "settlement_summary": "胜负看对，让分看错，大小分看对。",
@@ -3404,10 +3369,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-22T12:53:50.298062+00:00",
+    "exported_at": "2026-10-27T16:17:39.101273+00:00",
     "source_prediction_version_id": "8eb885a3-d32f-436f-84af-4ab2bdde0e4f",
     "source_prediction_payload_sha256": "477b9e6a24d7ed35d2f4602b673d967332188e230ed8dec7d53259a29012fc79",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "9f465f80168f771d251d9076dd7b00e84a23af7501e3c4f0db1f619beb3a07a8"
+  "public_sha256": "5bc640318ab498fe27b3377401342bc2887ea2d5740a86e1462418551a421033"
 }

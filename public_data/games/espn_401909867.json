@@ -861,11 +861,16 @@
       "cutoff": "2026-10-25T17:07:46.061371+00:00",
       "season_start": 2026,
       "competition_scope": "regular_season",
+      "record_scope": "verified_games_at_cutoff",
       "source": "schedule_catalog_final_games",
       "numeric_model_usage": false,
       "teams": {
         "away": {
           "team_id": 1610612763,
+          "record_scope": "verified_games_at_cutoff",
+          "record_completeness": "not_certified_complete",
+          "known_prior_final_candidates": 2,
+          "excluded_unverified_games": 0,
           "current_season_games": 2,
           "current_season_game_ids": [
             "espn:401909850",
@@ -889,6 +894,8 @@
           "last_result": {
             "game_id": "espn:401909850",
             "played_at": "2026-10-24T02:00:00+00:00",
+            "fact_observed_at": "2026-10-24T04:54:31.071560+00:00",
+            "fact_observation_basis": "immutable_result_snapshot",
             "won": true,
             "team_score": 111,
             "opponent_score": 108,
@@ -902,6 +909,10 @@
         },
         "home": {
           "team_id": 1610612758,
+          "record_scope": "verified_games_at_cutoff",
+          "record_completeness": "not_certified_complete",
+          "known_prior_final_candidates": 2,
+          "excluded_unverified_games": 0,
           "current_season_games": 2,
           "current_season_game_ids": [
             "espn:401909852",
@@ -925,6 +936,8 @@
           "last_result": {
             "game_id": "espn:401909852",
             "played_at": "2026-10-24T02:00:00+00:00",
+            "fact_observed_at": "2026-10-24T04:43:54.383036+00:00",
+            "fact_observation_basis": "immutable_result_snapshot",
             "won": false,
             "team_score": 120,
             "opponent_score": 128,
@@ -937,7 +950,7 @@
           }
         }
       },
-      "context_hash": "ebc1e7104699e0ae9da160026897ecf7c2725e36cb15998712a136f23cae93cc"
+      "context_hash": "7a4edfed9ddb574d04e8fd520a076725f3391bc4a6adfc18f36038bc08667a81"
     },
     "season_phase": {
       "away_current_season_games": 2,
@@ -950,7 +963,7 @@
     },
     "season_start": 2026,
     "source": {
-      "schedule_captured_at": "2026-10-26T17:01:38.539529+00:00"
+      "schedule_captured_at": "2026-10-27T15:55:06.133015+00:00"
     },
     "status": "final",
     "technical": {
@@ -3473,10 +3486,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-26T17:04:01.916184+00:00",
+    "exported_at": "2026-10-27T16:18:41.956290+00:00",
     "source_prediction_version_id": "78ea3ce4-7180-4cb2-b7c8-a5891484d647",
     "source_prediction_payload_sha256": "cc20a851bde288073dd59f073e578e0437a06d0652f99b7bc469f908864ae4ff",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "fa43b04c3e106e50fb385093d56e10e52c92e9d183473d51c6db8630c7776d9c"
+  "public_sha256": "f1490e66dce0df8b51adc0d9019150600cb9dbb28b6432b690d4006db8d0b1c3"
 }
