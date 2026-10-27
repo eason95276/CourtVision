@@ -331,10 +331,10 @@
     },
     "postgame": {
       "status": "available",
-      "review_level": "basic",
+      "review_level": "full",
       "version_id": "995ef56c-2834-469a-a1b9-08f05078e474",
       "score_text": "76人 106 — 100 尼克斯",
-      "summary": "赛果与赛前判断已核对，完整复盘文章尚未生成。",
+      "summary": "马克西28分撑起费城，布伦森19投6中让尼克斯让分落空；小分方向命中。",
       "prediction_summary": "赛前看好尼克斯 · 胜率68% · 预计赢6.5分；赛果76人赢6分",
       "market_summary": "让分方向 尼克斯 -4.5 · 未命中；总分 小分 · 命中"
     },
@@ -3538,11 +3538,11 @@
     "postgame": {
       "game_id": "espn:401909089",
       "version_id": "995ef56c-2834-469a-a1b9-08f05078e474",
-      "review_level": "basic",
-      "title": "赛后基础复核",
-      "short_review": "赛果与赛前判断已核对，完整复盘文章尚未生成。",
+      "review_level": "full",
+      "title": "费城新阵破旧局\n纽约主场失守夜",
+      "short_review": "马克西28分撑起费城，布伦森19投6中让尼克斯让分落空；小分方向命中。",
       "settlement_summary": "胜负看错，让分看错，大小分看对。",
-      "article": "",
+      "article": "106比100，76人在麦迪逊广场花园抢走尼克斯的揭幕夜。赛前被看好让4.5分的纽约，倒在了自己最信任的持球核心手里。\n\n马克西打了40分钟，19投9中拿下28分5助攻，只有2次失误。他不需要每个回合都持球，但每次拿球都能让尼克斯防线后退一步。费城第三节打出29比18，把半场落后4分翻了过来。\n\n布伦森21分5篮板3助攻，单看不算难看，可19投6中、三分3中1的效率太扎眼。尼克斯最需要有人把球打进时，他没能站出来。唐斯9投6中拿19分12篮板，末节两记三分都来自布伦森传球——这恰恰说明问题：布伦森能传出好球，却没法自己扛起产量。\n\n恩比德手感冰凉，15投4中只得13分，但11个篮板和6次助攻说明他在用别的方式影响比赛。第四节3分31秒他那记25英尺三分，把分差从1分拉到4分。詹姆斯14分9篮板7助攻只有1次失误，数据不抢眼，却把费城的球权串了起来。\n\n尼克斯抢下14个进攻篮板，比费城多8个，可多出来的回合没能转化成足够得分。43.1%的有效命中率，让这些额外机会打了折扣。\n\n赛前我支持尼克斯让4.5分，这个判断错了。我太相信布伦森和唐斯的半场配合能压住费城的新阵，却低估了马克西的提速能力。小分方向看对，但不能仅凭206分的结果，就认定赛前关于节奏的解释也完全成立。",
       "score": {
         "home": {
           "name": "尼克斯",
@@ -3585,7 +3585,50 @@
           "market_total": 230.5
         }
       },
-      "sources": [],
+      "sources": [
+        {
+          "label": "比赛结果与球员数据",
+          "title": "ESPN 比赛数据",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=401909089",
+          "captured_at": "2026-10-21T02:02:50.205073+00:00"
+        },
+        {
+          "label": "公开早盘参考",
+          "title": "Draft Kings current odds",
+          "url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909089/competitions/401909089/odds",
+          "captured_at": "2026-10-20T22:40:05.157108+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "Ring Night Preview: Knicks vs. 76ers, October 20, 2026 - Yahoo Sports",
+          "url": "https://sports.yahoo.com/articles/ring-night-preview-knicks-vs-040000337.html",
+          "captured_at": "2026-10-20T14:34:17.259266+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "NBA Opening Day Schedule, Odds and Matchups for 2026-27",
+          "url": "https://www.fanduel.com/research/nba-opening-day-schedule-odds-and-matchups-for-2026-27",
+          "captured_at": "2026-09-18T16:21:13.259918+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "赛前来源",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/18/roster",
+          "captured_at": "2026-10-20T22:40:04.691333+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "赛前来源",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/20/roster",
+          "captured_at": "2026-10-20T22:40:04.723046+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "赛前来源",
+          "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_06_30PM.pdf",
+          "captured_at": "2026-10-20T22:30:35.172594+00:00"
+        }
+      ],
       "generated_at": null
     }
   },
@@ -3626,10 +3669,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-26T17:00:06.669972+00:00",
+    "exported_at": "2026-10-27T16:09:03.768586+00:00",
     "source_prediction_version_id": "7a8b4c07-af46-4340-b58b-f54f0c6c1e1f",
     "source_prediction_payload_sha256": "6d0aee3573ea4196f0430b5225a76a29221fc4bcb81cc70b840ea78838861955",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "f662da7b68ab2b5737aedf37c921b48982f6e9bc2e4c1d144c141c33cc06722a"
+  "public_sha256": "889c48ca7e1d840a6eb84eb9403579b599c02aa79141b8d02b8faaf937e0fab2"
 }
