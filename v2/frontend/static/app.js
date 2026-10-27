@@ -396,6 +396,7 @@ function gameInHomeCollection(game, collection) {
   }
   if (collection === "published") {
     // Only accepted published versions; no static prediction fallback or future day-two promotion.
+    if (game.game_type === "preseason") return false;
     const published = Boolean(state.currentAnalyses.get(game.id)?.version_id || game.postgame?.version_id);
     return published && (!HOME_OPENING_PREVIEW.enabled || date < HOME_OPENING_PREVIEW.date);
   }
@@ -539,23 +540,22 @@ function gameCard(game, index) {
   return card;
 }
 
+function compareHomeGames(a, b, collection = state.selectedDate) {
+  if (collection === "published") {
+    return Date.parse(b.tipoff) - Date.parse(a.tipoff) || String(a.id).localeCompare(String(b.id));
+  }
+  const aFavorite = state.favoriteTeamId && [a.home.id, a.away.id].includes(state.favoriteTeamId);
+  const bFavorite = state.favoriteTeamId && [b.home.id, b.away.id].includes(state.favoriteTeamId);
+  return Number(bFavorite) - Number(aFavorite) ||
+    Date.parse(a.tipoff) - Date.parse(b.tipoff) || String(a.id).localeCompare(String(b.id));
+}
+
 function renderGames() {
   const grid = byId("games-grid");
   grid.replaceChildren();
   const games = state.data.games
     .filter((game) => gameInHomeCollection(game, state.selectedDate))
-    .sort((a, b) => {
-      const aFavorite =
-        state.favoriteTeamId &&
-        [a.home.id, a.away.id].includes(state.favoriteTeamId);
-      const bFavorite =
-        state.favoriteTeamId &&
-        [b.home.id, b.away.id].includes(state.favoriteTeamId);
-      return (
-        Number(bFavorite) - Number(aFavorite) ||
-        new Date(a.tipoff) - new Date(b.tipoff)
-      );
-    });
+    .sort((a, b) => compareHomeGames(a, b));
   games.forEach((game, index) => grid.append(gameCard(game, index)));
   byId("games-empty").hidden = games.length > 0;
 }

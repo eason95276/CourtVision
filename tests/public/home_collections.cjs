@@ -14,7 +14,8 @@ vm.runInContext(`
     sample('old','2026-10-14T02:00:00Z'),
     sample('day-two','2026-10-22T01:00:00Z'),
     sample('unpublished','2026-10-14T03:00:00Z'),
-    sample('other-opening','2026-10-21T03:00:00Z')
+    sample('other-opening','2026-10-21T03:00:00Z'),
+    {...sample('preseason-report','2026-10-04T03:00:00Z'),game_type:'preseason'}
   ]};
   for (const game of state.data.games.filter(g=>!['unpublished','day-two'].includes(g.id)))
     state.currentAnalyses.set(game.id, {version_id:'version-'+game.id});
@@ -32,4 +33,10 @@ assert.equal(run("gameInHomeCollection(state.data.games[0],state.tomorrowDate)")
 run("state.data.games[0].tipoff='2026-10-20T19:00:00Z'; state.data.games[0].homepage_visible=false");
 assert.equal(run("gameInHomeCollection(state.data.games[0],state.todayDate)"), false);
 assert.equal(run("gameInHomeCollection(state.data.games.find(g=>g.id==='unpublished'),'published')"), false);
+assert.equal(run("gameInHomeCollection(state.data.games.find(g=>g.id==='preseason-report'),'published')"), false);
+assert.deepEqual(Array.from(run("state.data.games.filter(g=>gameInHomeCollection(g,'published')).sort((a,b)=>compareHomeGames(a,b,'published')).map(g=>g.id)")),
+  ['other-opening','espn:401909090','espn:401909089','espn:401909088','old']);
+run("state.data.games.find(g=>g.id==='old').home.id=99; state.favoriteTeamId=99");
+assert.deepEqual(Array.from(run("state.data.games.filter(g=>gameInHomeCollection(g,'published')).sort((a,b)=>compareHomeGames(a,b,'published')).map(g=>g.id)")),
+  ['other-opening','espn:401909090','espn:401909089','espn:401909088','old']);
 console.log('Daily collections: all schedule facts, published reports, visibility and rescheduling passed');
