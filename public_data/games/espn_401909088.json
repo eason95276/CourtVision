@@ -95,7 +95,7 @@
       "source_label": "开发期赛前预测快照"
     },
     "source": {
-      "schedule_captured_at": "2026-10-20T22:04:36.117597+00:00"
+      "schedule_captured_at": "2026-10-26T16:49:32.631231+00:00"
     },
     "roster_context": {
       "teams": {
@@ -397,6 +397,7 @@
     },
     "postgame": {
       "status": "available",
+      "review_level": "full",
       "version_id": "4a1761d1-bed9-41c7-84df-7fa455776321",
       "score_text": "凯尔特人 113 — 121 活塞",
       "summary": "凯尔特人让分判断失误，大分方向命中，但总分数值仍低估；活塞在罚球线上多拿的分，吃掉了客队运动战的优势。",
@@ -577,92 +578,50 @@
       "game_id": "espn:401909088",
       "cutoff": "2026-10-20T13:18:10.717764+00:00",
       "season_start": 2026,
-      "competition_scope": "all_game_types_in_current_season",
+      "competition_scope": "regular_season",
       "source": "schedule_catalog_final_games",
       "numeric_model_usage": false,
       "teams": {
         "away": {
           "team_id": 1610612738,
-          "current_season_games": 4,
-          "current_season_game_ids": [
-            "espn:401898407",
-            "espn:401898405",
-            "espn:401898398",
-            "espn:401898392"
-          ],
+          "current_season_games": 0,
+          "current_season_game_ids": [],
           "current_season_record": {
-            "wins": 4,
+            "wins": 0,
             "losses": 0
           },
           "current_last5": {
-            "status": "available",
-            "games": 4,
-            "wins": 4,
+            "status": "no_games",
+            "games": 0,
+            "wins": 0,
             "losses": 0,
-            "win_rate": 1.0,
-            "game_ids": [
-              "espn:401898407",
-              "espn:401898405",
-              "espn:401898398",
-              "espn:401898392"
-            ]
+            "win_rate": null,
+            "game_ids": []
           },
-          "last_result": {
-            "game_id": "espn:401898407",
-            "played_at": "2026-10-16T23:00:00+00:00",
-            "won": true,
-            "team_score": 125,
-            "opponent_score": 120,
-            "opponent_team_id": 1610612755,
-            "opponent_name_zh": "76人"
-          },
-          "streak": {
-            "result": "win",
-            "games": 4
-          }
+          "last_result": null,
+          "streak": null
         },
         "home": {
           "team_id": 1610612765,
-          "current_season_games": 4,
-          "current_season_game_ids": [
-            "espn:401908946",
-            "espn:401914125",
-            "espn:401906510",
-            "espn:401908947"
-          ],
+          "current_season_games": 0,
+          "current_season_game_ids": [],
           "current_season_record": {
-            "wins": 3,
-            "losses": 1
+            "wins": 0,
+            "losses": 0
           },
           "current_last5": {
-            "status": "available",
-            "games": 4,
-            "wins": 3,
-            "losses": 1,
-            "win_rate": 0.75,
-            "game_ids": [
-              "espn:401908946",
-              "espn:401914125",
-              "espn:401906510",
-              "espn:401908947"
-            ]
+            "status": "no_games",
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": null,
+            "game_ids": []
           },
-          "last_result": {
-            "game_id": "espn:401908946",
-            "played_at": "2026-10-16T23:00:00+00:00",
-            "won": true,
-            "team_score": 129,
-            "opponent_score": 125,
-            "opponent_team_id": 1610612761,
-            "opponent_name_zh": "猛龙"
-          },
-          "streak": {
-            "result": "win",
-            "games": 2
-          }
+          "last_result": null,
+          "streak": null
         }
       },
-      "context_hash": "1a6d69c2677bd9a98aa8629bab9203ec2b95289bcece7b25ef76a1e054fb383c"
+      "context_hash": "6570e4ad250aa283ecc17050bf886768392457113bb394f5ca0030755327950c"
     },
     "game_type": "regular_season",
     "schedule_revision": 1,
@@ -3109,6 +3068,7 @@
     "postgame": {
       "game_id": "espn:401909088",
       "version_id": "4a1761d1-bed9-41c7-84df-7fa455776321",
+      "review_level": "full",
       "title": "绿军半场占先机\n活塞逆风夺胜局",
       "short_review": "凯尔特人让分判断失误，大分方向命中，但总分数值仍低估；活塞在罚球线上多拿的分，吃掉了客队运动战的优势。",
       "settlement_summary": "胜负看错，让分看错，大小分看对。",
@@ -3239,10 +3199,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-20T22:04:43.986464+00:00",
+    "exported_at": "2026-10-27T03:47:21.946622+00:00",
     "source_prediction_version_id": "3ddb18b9-0e77-48de-ab7f-5d5dad938fc5",
     "source_prediction_payload_sha256": "74165228f88febe42b647686fac22086f781ddff177a067a322e1c5193c62e59",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "65202363d2a6bd33e6b865f14dc575eefe397ec03688f752ac53258c9501248c"
+  "public_sha256": "f7b2a69e43a98135760621cc275430f94ed7aeb6dbf5fb9ed807f9f021570b3e"
 }
