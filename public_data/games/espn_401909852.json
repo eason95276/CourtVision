@@ -1066,11 +1066,16 @@
       "cutoff": "2026-10-24T01:40:18.705325+00:00",
       "season_start": 2026,
       "competition_scope": "regular_season",
+      "record_scope": "verified_games_at_cutoff",
       "source": "schedule_catalog_final_games",
       "numeric_model_usage": false,
       "teams": {
         "away": {
           "team_id": 1610612757,
+          "record_scope": "verified_games_at_cutoff",
+          "record_completeness": "not_certified_complete",
+          "known_prior_final_candidates": 1,
+          "excluded_unverified_games": 0,
           "current_season_games": 1,
           "current_season_game_ids": [
             "espn:401909841"
@@ -1092,6 +1097,8 @@
           "last_result": {
             "game_id": "espn:401909841",
             "played_at": "2026-10-22T02:00:00+00:00",
+            "fact_observed_at": "2026-10-22T04:39:09.352228+00:00",
+            "fact_observation_basis": "immutable_result_snapshot",
             "won": true,
             "team_score": 124,
             "opponent_score": 83,
@@ -1105,6 +1112,10 @@
         },
         "home": {
           "team_id": 1610612758,
+          "record_scope": "verified_games_at_cutoff",
+          "record_completeness": "not_certified_complete",
+          "known_prior_final_candidates": 1,
+          "excluded_unverified_games": 0,
           "current_season_games": 1,
           "current_season_game_ids": [
             "espn:401909842"
@@ -1126,6 +1137,8 @@
           "last_result": {
             "game_id": "espn:401909842",
             "played_at": "2026-10-22T02:30:00+00:00",
+            "fact_observed_at": "2026-10-23T15:58:58.869510+00:00",
+            "fact_observation_basis": "current_schedule_receipt",
             "won": false,
             "team_score": 96,
             "opponent_score": 121,
@@ -1138,7 +1151,7 @@
           }
         }
       },
-      "context_hash": "0bb663da9cc969fafddeb3ed56ab4451020144dae49388b2abf746b3a5fb6f1a"
+      "context_hash": "1c43ba57544fb08df621f7d46092dd2be5b8c4db2a64dac79246efb8e7b13cc6"
     },
     "season_phase": {
       "away_current_season_games": 1,
@@ -1168,7 +1181,7 @@
       "score_text": "开拓者 128 — 120 国王",
       "summary": "开拓者靠第三节44比26的攻势和更均衡的团队火力拿下比赛，国王虽有阿卡夫二世33分和萨博尼斯三双，但低效单打和防守崩盘让反扑落空。",
       "prediction_summary": "赛前看好开拓者 · 胜率62% · 预计赢6.5分；赛果开拓者赢8分",
-      "market_summary": "让分方向 国王 9.5 · 命中；总分 走盘 · 走盘"
+      "market_summary": "让分方向 国王 9.5 · 命中；大小分未给方向 · 不计命中率"
     },
     "schedule_catalog_fact": true,
     "nba_game_id": null,
@@ -3704,7 +3717,7 @@
       "review_level": "full",
       "title": "双枪压阵客扬威\n国王反扑功亏篑",
       "short_review": "开拓者靠第三节44比26的攻势和更均衡的团队火力拿下比赛，国王虽有阿卡夫二世33分和萨博尼斯三双，但低效单打和防守崩盘让反扑落空。",
-      "settlement_summary": "胜负看对，让分看对，大小分走盘。开拓者靠第三节44比26的攻势和更均衡的团队火力拿下比赛，国王虽有阿卡夫二世33分和萨博尼斯三双，但低效单打和防守崩盘让反扑落空。",
+      "settlement_summary": "胜负看对，让分看对，大小分未给方向。开拓者靠第三节44比26的攻势和更均衡的团队火力拿下比赛，国王虽有阿卡夫二世33分和萨博尼斯三双，但低效单打和防守崩盘让反扑落空。",
       "article": "开拓者128比120从萨克拉门托带走胜利，但这场球最值得记住的冲突，是国王新核阿卡夫二世砍下33分却没能换来一场赢球。他26投10中、三分10中2，罚球12中11，产量撑起来了，效率却始终拖后腿。\n\n国王上半场还领先5分，萨博尼斯半场就接近两双，拉文和穆雷也各有贡献。但第三节开拓者单节轰出44比26，直接把主动权抢走。诺里赛后说，中场休息时全队统一了思想，下半场开局那波15比0奠定了基调。这一节阿夫迪亚独得11分并送出3次助攻，卡马拉也贡献10分，开拓者的锋线群在攻防两端同时发力。\n\n阿夫迪亚全场26分6篮板6助攻，是开拓者最稳定的持球点。他第三节的连续得分和分球，让国王的防守顾此失彼。卡马拉19分，三分10中5，诺里赛后特别提到“甚至没为他单独设计过任何战术”，他的无球跑动和底角回应成了开拓者拉开空间的关键。利拉德19分5篮板，虽然18投7中效率一般，但他在场上的牵制力为队友创造了机会。替补席上西索科15分7篮板、威廉姆斯13分6篮板且6投全中，开拓者的板凳得分44比22完胜国王。\n\n国王不是没有反扑。末节阿卡夫二世独得11分，一度把分差追到个位数，但萨博尼斯下半场只得到10分，拉文末节5投1中仅得4分，蒙克更是6投0中一分未得。国王全场三分30投8中，命中率26.7%，而开拓者三分49投14中，虽然也不算准，但产量和关键回应足够。萨博尼斯27分19篮板10助攻的三双很漂亮，可5次失误和下半场进攻权重的下降，让国王的轴心在追分阶段没能持续输出。\n\n赛前我选开拓者赢，胜负方向看对；让分我站国王受让9.5分，也命中了。但过程和我预想的不同：我以为国王能靠主场和蒙克回归把分差收在个位数，实际是开拓者第三节一波流拉开，国王末节追分却始终差一口气。蒙克赛前确认可出战，但12分钟6投0中，负荷和状态都没能帮上忙。大小分赛前没有给出方向，不计入命中率；这场实际打到248分。",
       "score": {
         "home": {
@@ -3743,8 +3756,8 @@
           "settlement": "win"
         },
         "total_review": {
-          "lean": "push",
-          "settlement": "push",
+          "lean": "no_edge",
+          "settlement": "no_edge",
           "market_total": 231.5
         }
       },
@@ -3832,10 +3845,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-27T16:13:36.594018+00:00",
+    "exported_at": "2026-10-27T16:17:13.794803+00:00",
     "source_prediction_version_id": "de61d57d-fd1f-4355-8694-fb0f1047b7be",
     "source_prediction_payload_sha256": "5443d16aa78b7c88af305d407d97be0985a5bdd156e1c93620f6f3395ee62a1b",
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "9d2b40b1867013cfae5801943269ca89f6b288d340e19d36a8ff3d226876f43e"
+  "public_sha256": "814f98c4e8f9eea2dac90e733be3286da1bfc2880d7c9369815b0ccf58f40a10"
 }
