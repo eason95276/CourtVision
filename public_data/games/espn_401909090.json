@@ -350,10 +350,10 @@
     },
     "postgame": {
       "status": "available",
-      "review_level": "basic",
+      "review_level": "full",
       "version_id": "86627333-e7c4-473a-bdb9-33d06ade9581",
       "score_text": "雷霆 116 — 104 马刺",
-      "summary": "赛果与赛前判断已核对，完整复盘文章尚未生成。",
+      "summary": "文班亚马13投1中让马刺进攻支点塌陷，SGA稳定输出加麦凯恩替补火力，雷霆客场116比104取胜，赛前雷霆让分与小分均命中。",
       "prediction_summary": "赛前看好雷霆 · 胜率58% · 预计赢3.5分；赛果雷霆赢12分",
       "market_summary": "让分方向 雷霆 -1.5 · 命中；总分 小分 · 命中"
     },
@@ -1154,11 +1154,11 @@
     "postgame": {
       "game_id": "espn:401909090",
       "version_id": "86627333-e7c4-473a-bdb9-33d06ade9581",
-      "review_level": "basic",
-      "title": "赛后基础复核",
-      "short_review": "赛果与赛前判断已核对，完整复盘文章尚未生成。",
+      "review_level": "full",
+      "title": "雷霆客场结清账\n文班失准马刺败",
+      "short_review": "文班亚马13投1中让马刺进攻支点塌陷，SGA稳定输出加麦凯恩替补火力，雷霆客场116比104取胜，赛前雷霆让分与小分均命中。",
       "settlement_summary": "胜负看对，让分看对，大小分看对。",
-      "article": "",
+      "article": "揭幕战再碰面，雷霆没给马刺留旧账重算的机会。116比104，雷霆客场赢12分，把上赛季季后赛抢七输球的账当场结清。最刺眼的反差在文班亚马：34分钟，13投1中，12分13篮板，马刺的进攻支点整晚没找到篮筐。\n\n亚历山大打了36分钟，27投13中拿32分6篮板4助攻，只有2次失误。雷霆每次需要有人把分差重新拉开，球都在他手里。他不是靠一波爆发打花比赛，而是用中距离和突破持续给马刺防线出题。\n\n马刺不是没追过。第三节他们单节36分，把半场16分的坑往回填，卡斯尔全场24分7篮板，是马刺外线最敢出手也最敢进的人。哈珀18分7篮板5助攻，福克斯14分7助攻，后场三个人都在想办法。但文班这一点打不开，马刺的进攻就少了一层最稳定的产量，追分始终差一口气。\n\n雷霆的赢球方式比SGA一个人更完整。麦凯恩替补22分钟拿20分，三分8投6中，第四节那记25英尺三分把分差重新推到10分。霍姆格伦14分7篮板，防守端对文班的限制被戴格诺特赛后点名表扬。雷霆全场有效投篮命中率52.6%，马刺44.1%，这个差距比12分的分差更能说明问题。\n\n赛前我选雷霆让1.5分，方向对了，但理由要修正。我当时更信任雷霆进攻的第二条路，实际这场雷霆赢在防守和文班的失准，SGA的32分是压舱石，麦凯恩的替补火力是意外之喜。小分也命中，赛前我说揭幕战节奏偏谨慎、文班护框会压住对攻，实际总分220，马刺全场93投36中、三分37投10中，低效确实把分压了下来，但雷霆自己拿了116分，小分成立更多靠马刺这一端的投篮失准，不是我预想的双方都慢。\n\n文班13投1中这种夜晚不会常有，但雷霆证明了一件事：就算马刺后场三个人都能打，只要文班被按住，马刺的进攻就撑不到最后。",
       "score": {
         "home": {
           "name": "马刺",
@@ -1201,8 +1201,77 @@
           "market_total": 229.5
         }
       },
-      "sources": [],
-      "generated_at": null
+      "sources": [
+        {
+          "label": "比赛结果与球员数据",
+          "title": "ESPN 比赛数据",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=401909090",
+          "captured_at": "2026-10-26T16:50:15.047952+00:00"
+        },
+        {
+          "label": "公开早盘参考",
+          "title": "Draft Kings current odds",
+          "url": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/401909090/competitions/401909090/odds",
+          "captured_at": "2026-10-21T01:10:04.086961+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "Spurs Announce Bad Injury News On Key Player For Season Opener Vs Thunder - Yahoo Sports",
+          "url": "https://sports.yahoo.com/articles/spurs-announce-bad-injury-news-234345658.html",
+          "captured_at": "2026-10-20T13:03:45.088093+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "Spurs vs. Thunder: How to watch the game, who's starting, who's out - Yahoo Sports",
+          "url": "https://sports.yahoo.com/articles/spurs-vs-thunder-watch-game-171851412.html",
+          "captured_at": "2026-10-20T13:03:44.933758+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "Spurs make bold starting lineup decision ahead of highly anticipated Thunder showdown - Yahoo Sports",
+          "url": "https://sports.yahoo.com/articles/spurs-bold-starting-lineup-decision-181443336.html",
+          "captured_at": "2026-10-20T13:03:45.335392+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "San Antonio Spurs 2026-27 Preseason Preview - Yahoo Sports",
+          "url": "https://sports.yahoo.com/articles/san-antonio-spurs-2026-27-220724331.html",
+          "captured_at": "2026-10-20T13:03:47.182427+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "NBA Opening Day Schedule, Odds and Matchups for 2026-27",
+          "url": "https://www.fanduel.com/research/nba-opening-day-schedule-odds-and-matchups-for-2026-27",
+          "captured_at": "2026-09-18T16:21:13.259918+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "赛前来源",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/24/roster",
+          "captured_at": "2026-10-21T01:10:03.596057+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "赛前来源",
+          "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/25/roster",
+          "captured_at": "2026-10-21T01:10:04.513487+00:00"
+        },
+        {
+          "label": "赛前信息来源",
+          "title": "赛前来源",
+          "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-20_09_00PM.pdf",
+          "captured_at": "2026-10-21T01:05:05.898351+00:00"
+        },
+        {
+          "source_id": "coach-dc1b4bef36bc0204c1",
+          "url": "https://bbs.hupu.com/643126641.html",
+          "title": "[流言板]戴格诺特采访全文：防守赢下比赛，切特总会迎接任何挑战-NBA新闻-虎扑社区",
+          "published_at": "2026-10-21T07:31:10+00:00",
+          "captured_at": "2026-10-27T12:05:24.870592+00:00",
+          "classification": "source_attributed_coach_statement"
+        }
+      ],
+      "generated_at": "2026-10-27T12:06:44.690428+00:00"
     }
   },
   "market": {
@@ -1242,10 +1311,10 @@
     }
   },
   "publication": {
-    "exported_at": "2026-10-26T17:15:23.697641+00:00",
+    "exported_at": "2026-10-27T12:07:03.621960+00:00",
     "source_prediction_version_id": null,
     "source_prediction_payload_sha256": null,
     "mode": "saved-read-only-projection"
   },
-  "public_sha256": "65415ef867ba6f8099b9a98ff4d36596a1db64d1a9653d461b8deff30a3c2b18"
+  "public_sha256": "5171861b0c5025eaa978bce800e7eb2a82b8cd922b33ff13b58729f6540ce62a"
 }
