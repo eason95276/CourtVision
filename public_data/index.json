@@ -2,6 +2,130 @@
   "contract_version": "courtvision-public-v1",
   "games": [
     {
+      "game_id": "espn:401909884",
+      "file": "games/espn_401909884.json",
+      "tipoff": "2026-10-28T23:00:00+00:00",
+      "version_id": "21965d2a-6ee3-46b5-86ad-2e92f1c7105e",
+      "public_sha256": "19aa0b08faf87d046aee5fcdf8147328bc7394e836927c710244a0f02daceffa",
+      "home_record": {
+        "game": {
+          "away": {
+            "abbreviation": "PHI",
+            "accent": "#006BB6",
+            "espn_team_id": "20",
+            "id": 1610612755,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/phi.png",
+            "name": "Philadelphia 76ers",
+            "name_zh": "76人",
+            "score": null
+          },
+          "game_type": "regular_season",
+          "home": {
+            "abbreviation": "IND",
+            "accent": "#FDBB30",
+            "espn_team_id": "11",
+            "id": 1610612754,
+            "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/ind.png",
+            "name": "Indiana Pacers",
+            "name_zh": "步行者",
+            "score": null
+          },
+          "id": "espn:401909884",
+          "registered_game": true,
+          "schedule_revision": 1,
+          "season": 2027,
+          "status": "scheduled",
+          "tipoff": "2026-10-28T23:00:00+00:00",
+          "venue": "Gainbridge Fieldhouse",
+          "schedule_catalog_fact": true,
+          "postgame": null,
+          "homepage_visible": true,
+          "public_summary": true
+        },
+        "prediction": {
+          "status": "current",
+          "game_id": "espn:401909884",
+          "version_id": "21965d2a-6ee3-46b5-86ad-2e92f1c7105e",
+          "state_revision": 2,
+          "locked_at": null,
+          "lock_reason": null,
+          "schedule_revision": 1,
+          "version": {
+            "analysis_contract_version": "two-stage-forecast-v1",
+            "base_input_hash": "3407705f61536d71c0765f739ab667ace6146ac02ea7d024b848a6237c9adc87",
+            "game_id": "espn:401909884",
+            "game_identity": {
+              "away_team_id": 1610612755,
+              "game_id": "espn:401909884",
+              "home_team_id": 1610612754,
+              "scheduled_tipoff": "2026-10-28T23:00:00+00:00"
+            },
+            "generated_at": "2026-10-28T12:26:50.576838+00:00",
+            "input_cutoff_at": "2026-10-28T12:26:25.967852+00:00",
+            "published_at": "2026-10-28T12:26:58.844794+00:00",
+            "schedule_revision": 1,
+            "stage": "EARLY_PREVIEW",
+            "version_id": "21965d2a-6ee3-46b5-86ad-2e92f1c7105e",
+            "payload_sha256": "26127bd44da135dc47055e3ccd84b70701106720c75986b4bd776220ab14288f",
+            "input_snapshot": {
+              "away": {
+                "abbreviation": "PHI",
+                "accent": "#006BB6",
+                "espn_team_id": "20",
+                "id": 1610612755,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/phi.png",
+                "name": "Philadelphia 76ers",
+                "name_zh": "76人"
+              },
+              "home": {
+                "abbreviation": "IND",
+                "accent": "#FDBB30",
+                "espn_team_id": "11",
+                "id": 1610612754,
+                "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/ind.png",
+                "name": "Indiana Pacers",
+                "name_zh": "步行者"
+              },
+              "id": "espn:401909884",
+              "schedule_revision": 1,
+              "tipoff": "2026-10-28T23:00:00+00:00"
+            },
+            "judgment": {
+              "final_prediction": {
+                "evidence_ids": [
+                  "0cb344ebaa17ee533b3bb2865bab9711caefdcd3fd3d23a56f38f624556324af",
+                  "0f6c137b0818000b6722ecf6525a599fae05823c67f3d7494148466e8a4a6ca4",
+                  "37358a63a0693305d68cb713fe0ce188abf2a2cc7337a14319226b656487afe6",
+                  "410b8ac9592fe94d894e04512b9f0dda1f6d2e5ffecf4a2b87e75be6b67d90d0",
+                  "4be2d968c749ed31133b44baf888f616ee9cc8fc6c1280054043b6422269bada",
+                  "63305ba5186062538bafd5c693df6ee9848c9c997db5bcbf9456eb0f4988ae2b",
+                  "99f2d85e7409febf1cefa179c79a5640ad4716fbca458a4b12ac5b127e67d467",
+                  "cccde8da094f29c3667f97dea83b4eaefedfeaac6336511fe29d609aec3ebca9"
+                ],
+                "expected_margin": 5.5,
+                "expected_total": 231.5,
+                "win_probability": 0.63,
+                "winner_side": "away"
+              },
+              "pregame_story": {
+                "classification": "subjective_analysis",
+                "evidence_ids": [
+                  "0cb344ebaa17ee533b3bb2865bab9711caefdcd3fd3d23a56f38f624556324af",
+                  "0f6c137b0818000b6722ecf6525a599fae05823c67f3d7494148466e8a4a6ca4",
+                  "37358a63a0693305d68cb713fe0ce188abf2a2cc7337a14319226b656487afe6",
+                  "410b8ac9592fe94d894e04512b9f0dda1f6d2e5ffecf4a2b87e75be6b67d90d0",
+                  "4be2d968c749ed31133b44baf888f616ee9cc8fc6c1280054043b6422269bada",
+                  "63305ba5186062538bafd5c693df6ee9848c9c997db5bcbf9456eb0f4988ae2b"
+                ],
+                "statement": "步行者伤兵满营，恩比德又要回来了，费城这套新阵容第一次在印城亮相，看的就是内线这道口子谁先撑不住。",
+                "title": "费城新阵叩印城\n恩比德归位试锋"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
       "game_id": "espn:401909867",
       "file": "games/espn_401909867.json",
       "tipoff": "2026-10-26T01:00:00+00:00",
@@ -3689,5 +3813,5 @@
       }
     }
   ],
-  "published_at": "2026-10-27T16:18:41.956290+00:00"
+  "published_at": "2026-10-28T12:49:02.303851+00:00"
 }
