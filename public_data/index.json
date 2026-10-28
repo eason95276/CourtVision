@@ -5,8 +5,8 @@
       "game_id": "espn:401909884",
       "file": "games/espn_401909884.json",
       "tipoff": "2026-10-28T23:00:00+00:00",
-      "version_id": "21965d2a-6ee3-46b5-86ad-2e92f1c7105e",
-      "public_sha256": "19aa0b08faf87d046aee5fcdf8147328bc7394e836927c710244a0f02daceffa",
+      "version_id": "a351a446-3320-44fe-8a37-60afbe7e7ab0",
+      "public_sha256": "4c8e3ffacabbff534fb7b27bd7f251e268b5d416c578ab3a21d02887c8bad1c1",
       "home_record": {
         "game": {
           "away": {
@@ -45,14 +45,14 @@
         "prediction": {
           "status": "current",
           "game_id": "espn:401909884",
-          "version_id": "21965d2a-6ee3-46b5-86ad-2e92f1c7105e",
-          "state_revision": 2,
+          "version_id": "a351a446-3320-44fe-8a37-60afbe7e7ab0",
+          "state_revision": 3,
           "locked_at": null,
           "lock_reason": null,
           "schedule_revision": 1,
           "version": {
             "analysis_contract_version": "two-stage-forecast-v1",
-            "base_input_hash": "3407705f61536d71c0765f739ab667ace6146ac02ea7d024b848a6237c9adc87",
+            "base_input_hash": "6442aa3ee366210a1ad2fb2aa28bbd7fe842fdd8730a60475c857a6fa480b340",
             "game_id": "espn:401909884",
             "game_identity": {
               "away_team_id": 1610612755,
@@ -60,13 +60,13 @@
               "home_team_id": 1610612754,
               "scheduled_tipoff": "2026-10-28T23:00:00+00:00"
             },
-            "generated_at": "2026-10-28T12:26:50.576838+00:00",
-            "input_cutoff_at": "2026-10-28T12:26:25.967852+00:00",
-            "published_at": "2026-10-28T12:26:58.844794+00:00",
+            "generated_at": "2026-10-28T22:41:26.667052+00:00",
+            "input_cutoff_at": "2026-10-28T22:40:42.116848+00:00",
+            "published_at": "2026-10-28T22:41:31.936651+00:00",
             "schedule_revision": 1,
-            "stage": "EARLY_PREVIEW",
-            "version_id": "21965d2a-6ee3-46b5-86ad-2e92f1c7105e",
-            "payload_sha256": "26127bd44da135dc47055e3ccd84b70701106720c75986b4bd776220ab14288f",
+            "stage": "FINAL_PREGAME",
+            "version_id": "a351a446-3320-44fe-8a37-60afbe7e7ab0",
+            "payload_sha256": "128045ce945aa21b65b5269231dce2894512e37a6a835f1c4a7a415d3aaa2130",
             "input_snapshot": {
               "away": {
                 "abbreviation": "PHI",
@@ -94,31 +94,32 @@
               "final_prediction": {
                 "evidence_ids": [
                   "0cb344ebaa17ee533b3bb2865bab9711caefdcd3fd3d23a56f38f624556324af",
-                  "0f6c137b0818000b6722ecf6525a599fae05823c67f3d7494148466e8a4a6ca4",
                   "37358a63a0693305d68cb713fe0ce188abf2a2cc7337a14319226b656487afe6",
                   "410b8ac9592fe94d894e04512b9f0dda1f6d2e5ffecf4a2b87e75be6b67d90d0",
                   "4be2d968c749ed31133b44baf888f616ee9cc8fc6c1280054043b6422269bada",
-                  "63305ba5186062538bafd5c693df6ee9848c9c997db5bcbf9456eb0f4988ae2b",
-                  "99f2d85e7409febf1cefa179c79a5640ad4716fbca458a4b12ac5b127e67d467",
-                  "cccde8da094f29c3667f97dea83b4eaefedfeaac6336511fe29d609aec3ebca9"
+                  "final-availability-7802524543bbebc6b770",
+                  "final-availability-a81d60912994561722da",
+                  "final-availability-d7be7d4b3d153445c647",
+                  "final-availability-e3e8e503a7c8a4e88077",
+                  "final-lineup-fc0db5ede4877cee27e9"
                 ],
-                "expected_margin": 5.5,
-                "expected_total": 231.5,
-                "win_probability": 0.63,
+                "expected_margin": 6.5,
+                "expected_total": 228.5,
+                "win_probability": 0.66,
                 "winner_side": "away"
               },
               "pregame_story": {
                 "classification": "subjective_analysis",
                 "evidence_ids": [
                   "0cb344ebaa17ee533b3bb2865bab9711caefdcd3fd3d23a56f38f624556324af",
-                  "0f6c137b0818000b6722ecf6525a599fae05823c67f3d7494148466e8a4a6ca4",
                   "37358a63a0693305d68cb713fe0ce188abf2a2cc7337a14319226b656487afe6",
                   "410b8ac9592fe94d894e04512b9f0dda1f6d2e5ffecf4a2b87e75be6b67d90d0",
                   "4be2d968c749ed31133b44baf888f616ee9cc8fc6c1280054043b6422269bada",
-                  "63305ba5186062538bafd5c693df6ee9848c9c997db5bcbf9456eb0f4988ae2b"
+                  "final-availability-7802524543bbebc6b770",
+                  "final-availability-a81d60912994561722da"
                 ],
-                "statement": "步行者伤兵满营，恩比德又要回来了，费城这套新阵容第一次在印城亮相，看的就是内线这道口子谁先撑不住。",
-                "title": "费城新阵叩印城\n恩比德归位试锋"
+                "statement": "步行者一夜之间失去哈利伯顿和祖巴茨，偏偏赶上恩比德复出的76人上门，这场球看的是印城还能拿什么撑住内线。",
+                "title": "印城缺将守主场\n费城恩比德叩关"
               }
             }
           }
@@ -3813,5 +3814,5 @@
       }
     }
   ],
-  "published_at": "2026-10-28T12:49:02.303851+00:00"
+  "published_at": "2026-10-28T22:41:49.395333+00:00"
 }
