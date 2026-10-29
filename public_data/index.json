@@ -6,7 +6,7 @@
       "file": "games/espn_401909884.json",
       "tipoff": "2026-10-28T23:00:00+00:00",
       "version_id": "a351a446-3320-44fe-8a37-60afbe7e7ab0",
-      "public_sha256": "4c8e3ffacabbff534fb7b27bd7f251e268b5d416c578ab3a21d02887c8bad1c1",
+      "public_sha256": "7ec46c40e0b2da8f68ec55271d2f2a8ba88dd237b1f2d896bd03eebddd542410",
       "home_record": {
         "game": {
           "away": {
@@ -17,7 +17,7 @@
             "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/phi.png",
             "name": "Philadelphia 76ers",
             "name_zh": "76人",
-            "score": null
+            "score": 114.0
           },
           "game_type": "regular_season",
           "home": {
@@ -28,27 +28,35 @@
             "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/ind.png",
             "name": "Indiana Pacers",
             "name_zh": "步行者",
-            "score": null
+            "score": 109.0
           },
           "id": "espn:401909884",
           "registered_game": true,
           "schedule_revision": 1,
           "season": 2027,
-          "status": "scheduled",
+          "status": "final",
           "tipoff": "2026-10-28T23:00:00+00:00",
           "venue": "Gainbridge Fieldhouse",
+          "postgame": {
+            "status": "available",
+            "review_level": "full",
+            "version_id": "52d7f372-3f57-4517-9a3e-77e16ffe92b7",
+            "score_text": "76人 114 — 109 步行者",
+            "summary": "马克西前三节挣扎、末节独取17分收下比赛，恩比德第三节哑火后末节补上关键球，76人靠收官阶段的球星硬解从印第安纳带走胜利。",
+            "prediction_summary": "赛前看好76人 · 胜率66% · 预计赢6.5分；赛果76人赢5分",
+            "market_summary": "让分方向 步行者 7.5 · 命中；总分 小分 · 命中"
+          },
           "schedule_catalog_fact": true,
-          "postgame": null,
           "homepage_visible": true,
           "public_summary": true
         },
         "prediction": {
-          "status": "current",
+          "status": "locked",
           "game_id": "espn:401909884",
           "version_id": "a351a446-3320-44fe-8a37-60afbe7e7ab0",
-          "state_revision": 3,
-          "locked_at": null,
-          "lock_reason": null,
+          "state_revision": 5,
+          "locked_at": "2026-10-28T23:00:02.067080+00:00",
+          "lock_reason": "scheduled_tipoff_reached",
           "schedule_revision": 1,
           "version": {
             "analysis_contract_version": "two-stage-forecast-v1",
@@ -3814,5 +3822,5 @@
       }
     }
   ],
-  "published_at": "2026-10-28T22:41:49.395333+00:00"
+  "published_at": "2026-10-29T13:16:01.933083+00:00"
 }
