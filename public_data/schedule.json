@@ -1,7 +1,7 @@
 {
   "schema_version": "courtvision-public-schedule-v1",
   "timezone": "Asia/Shanghai",
-  "generated_at": "2026-11-10T23:18:04.093906+00:00",
+  "generated_at": "2026-11-11T06:13:14.308494+00:00",
   "coverage_dates": [
     "2026-11-11",
     "2026-11-12",
@@ -18,14 +18,15 @@
     {
       "id": "espn:401909960",
       "tipoff": "2026-11-11T00:30:00+00:00",
-      "status": "scheduled",
+      "status": "final",
       "home": {
         "id": 1610612752,
         "name": "New York Knicks",
         "name_zh": "尼克斯",
         "abbreviation": "NY",
         "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png",
-        "accent": "#F58426"
+        "accent": "#F58426",
+        "score": 117
       },
       "away": {
         "id": 1610612749,
@@ -33,7 +34,8 @@
         "name_zh": "雄鹿",
         "abbreviation": "MIL",
         "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/mil.png",
-        "accent": "#00471B"
+        "accent": "#00471B",
+        "score": 85
       },
       "venue": "Madison Square Garden",
       "neutral_site": false,
@@ -46,7 +48,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-11-11",
       "source": {
-        "schedule_captured_at": "2026-11-10T23:18:04.093906+00:00"
+        "schedule_captured_at": "2026-11-11T06:13:14.308494+00:00"
       },
       "missing": [],
       "postgame": null
@@ -54,14 +56,15 @@
     {
       "id": "espn:401909961",
       "tipoff": "2026-11-11T01:00:00+00:00",
-      "status": "scheduled",
+      "status": "final",
       "home": {
         "id": 1610612755,
         "name": "Philadelphia 76ers",
         "name_zh": "76人",
         "abbreviation": "PHI",
         "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/phi.png",
-        "accent": "#006BB6"
+        "accent": "#006BB6",
+        "score": 101
       },
       "away": {
         "id": 1610612738,
@@ -69,7 +72,8 @@
         "name_zh": "凯尔特人",
         "abbreviation": "BOS",
         "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/bos.png",
-        "accent": "#007A33"
+        "accent": "#007A33",
+        "score": 123
       },
       "venue": "Xfinity Mobile Arena",
       "neutral_site": false,
@@ -82,7 +86,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-11-11",
       "source": {
-        "schedule_captured_at": "2026-11-10T23:18:04.093906+00:00"
+        "schedule_captured_at": "2026-11-11T06:13:14.308494+00:00"
       },
       "missing": [],
       "postgame": null
@@ -90,14 +94,15 @@
     {
       "id": "espn:401909962",
       "tipoff": "2026-11-11T02:00:00+00:00",
-      "status": "scheduled",
+      "status": "final",
       "home": {
         "id": 1610612756,
         "name": "Phoenix Suns",
         "name_zh": "太阳",
         "abbreviation": "PHX",
         "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/phx.png",
-        "accent": "#E56020"
+        "accent": "#E56020",
+        "score": 133
       },
       "away": {
         "id": 1610612746,
@@ -105,7 +110,8 @@
         "name_zh": "快船",
         "abbreviation": "LAC",
         "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/lac.png",
-        "accent": "#C8102E"
+        "accent": "#C8102E",
+        "score": 110
       },
       "venue": "Mortgage Matchup Center",
       "neutral_site": false,
@@ -118,7 +124,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-11-11",
       "source": {
-        "schedule_captured_at": "2026-11-10T23:18:04.093906+00:00"
+        "schedule_captured_at": "2026-11-11T06:13:14.308494+00:00"
       },
       "missing": [],
       "postgame": null
@@ -126,14 +132,15 @@
     {
       "id": "espn:401909963",
       "tipoff": "2026-11-11T02:00:00+00:00",
-      "status": "scheduled",
+      "status": "final",
       "home": {
         "id": 1610612762,
         "name": "Utah Jazz",
         "name_zh": "爵士",
         "abbreviation": "UTAH",
         "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/utah.png",
-        "accent": "#F9A01B"
+        "accent": "#F9A01B",
+        "score": 109
       },
       "away": {
         "id": 1610612748,
@@ -141,7 +148,8 @@
         "name_zh": "热火",
         "abbreviation": "MIA",
         "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
-        "accent": "#98002E"
+        "accent": "#98002E",
+        "score": 115
       },
       "venue": "Delta Center",
       "neutral_site": false,
@@ -154,7 +162,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-11-11",
       "source": {
-        "schedule_captured_at": "2026-11-10T23:18:04.093906+00:00"
+        "schedule_captured_at": "2026-11-11T06:13:14.308494+00:00"
       },
       "missing": [],
       "postgame": null
@@ -162,14 +170,15 @@
     {
       "id": "espn:401909964",
       "tipoff": "2026-11-11T03:00:00+00:00",
-      "status": "scheduled",
+      "status": "final",
       "home": {
         "id": 1610612758,
         "name": "Sacramento Kings",
         "name_zh": "国王",
         "abbreviation": "SAC",
         "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/sac.png",
-        "accent": "#5A2D81"
+        "accent": "#5A2D81",
+        "score": 100
       },
       "away": {
         "id": 1610612753,
@@ -177,7 +186,8 @@
         "name_zh": "魔术",
         "abbreviation": "ORL",
         "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/orl.png",
-        "accent": "#0077C0"
+        "accent": "#0077C0",
+        "score": 107
       },
       "venue": "Golden 1 Center",
       "neutral_site": false,
@@ -190,7 +200,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-11-11",
       "source": {
-        "schedule_captured_at": "2026-11-10T23:18:04.093906+00:00"
+        "schedule_captured_at": "2026-11-11T06:13:14.308494+00:00"
       },
       "missing": [],
       "postgame": null
@@ -198,14 +208,15 @@
     {
       "id": "espn:401909965",
       "tipoff": "2026-11-11T04:00:00+00:00",
-      "status": "scheduled",
+      "status": "in_progress",
       "home": {
         "id": 1610612757,
         "name": "Portland Trail Blazers",
         "name_zh": "开拓者",
         "abbreviation": "POR",
         "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/por.png",
-        "accent": "#E03A3E"
+        "accent": "#E03A3E",
+        "score": 99
       },
       "away": {
         "id": 1610612760,
@@ -213,7 +224,8 @@
         "name_zh": "雷霆",
         "abbreviation": "OKC",
         "logo_url": "https://a.espncdn.com/i/teamlogos/nba/500/okc.png",
-        "accent": "#007AC1"
+        "accent": "#007AC1",
+        "score": 84
       },
       "venue": "Moda Center",
       "neutral_site": false,
@@ -226,7 +238,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-11-11",
       "source": {
-        "schedule_captured_at": "2026-11-10T23:18:04.093906+00:00"
+        "schedule_captured_at": "2026-11-11T06:13:14.308494+00:00"
       },
       "missing": [],
       "postgame": null
@@ -262,7 +274,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-11-12",
       "source": {
-        "schedule_captured_at": "2026-11-10T23:18:04.093906+00:00"
+        "schedule_captured_at": "2026-11-11T06:13:14.308494+00:00"
       },
       "missing": [],
       "postgame": null
@@ -298,7 +310,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-11-12",
       "source": {
-        "schedule_captured_at": "2026-11-10T23:18:04.093906+00:00"
+        "schedule_captured_at": "2026-11-11T06:13:14.308494+00:00"
       },
       "missing": [],
       "postgame": null
@@ -334,7 +346,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-11-12",
       "source": {
-        "schedule_captured_at": "2026-11-10T23:18:04.093906+00:00"
+        "schedule_captured_at": "2026-11-11T06:13:14.308494+00:00"
       },
       "missing": [],
       "postgame": null
@@ -370,7 +382,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-11-12",
       "source": {
-        "schedule_captured_at": "2026-11-10T23:18:04.093906+00:00"
+        "schedule_captured_at": "2026-11-11T06:13:14.308494+00:00"
       },
       "missing": [],
       "postgame": null
@@ -406,7 +418,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-11-12",
       "source": {
-        "schedule_captured_at": "2026-11-10T23:18:04.093906+00:00"
+        "schedule_captured_at": "2026-11-11T06:13:14.308494+00:00"
       },
       "missing": [],
       "postgame": null
@@ -442,7 +454,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-11-12",
       "source": {
-        "schedule_captured_at": "2026-11-10T23:18:04.093906+00:00"
+        "schedule_captured_at": "2026-11-11T06:13:14.308494+00:00"
       },
       "missing": [],
       "postgame": null
@@ -478,7 +490,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-11-12",
       "source": {
-        "schedule_captured_at": "2026-11-10T23:18:04.093906+00:00"
+        "schedule_captured_at": "2026-11-11T06:13:14.308494+00:00"
       },
       "missing": [],
       "postgame": null
@@ -514,7 +526,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-11-12",
       "source": {
-        "schedule_captured_at": "2026-11-10T23:18:04.093906+00:00"
+        "schedule_captured_at": "2026-11-11T06:13:14.308494+00:00"
       },
       "missing": [],
       "postgame": null
@@ -550,7 +562,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-11-12",
       "source": {
-        "schedule_captured_at": "2026-11-10T23:18:04.093906+00:00"
+        "schedule_captured_at": "2026-11-11T06:13:14.308494+00:00"
       },
       "missing": [],
       "postgame": null
@@ -586,7 +598,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-11-12",
       "source": {
-        "schedule_captured_at": "2026-11-10T23:18:04.093906+00:00"
+        "schedule_captured_at": "2026-11-11T06:13:14.308494+00:00"
       },
       "missing": [],
       "postgame": null
@@ -622,7 +634,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-11-13",
       "source": {
-        "schedule_captured_at": "2026-11-10T23:18:04.093906+00:00"
+        "schedule_captured_at": "2026-11-11T06:13:14.308494+00:00"
       },
       "missing": [],
       "postgame": null
@@ -658,7 +670,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-11-13",
       "source": {
-        "schedule_captured_at": "2026-11-10T23:18:04.093906+00:00"
+        "schedule_captured_at": "2026-11-11T06:13:14.308494+00:00"
       },
       "missing": [],
       "postgame": null
@@ -694,7 +706,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-11-13",
       "source": {
-        "schedule_captured_at": "2026-11-10T23:18:04.093906+00:00"
+        "schedule_captured_at": "2026-11-11T06:13:14.308494+00:00"
       },
       "missing": [],
       "postgame": null
@@ -730,7 +742,7 @@
       "report_generation_status": null,
       "beijing_date": "2026-11-13",
       "source": {
-        "schedule_captured_at": "2026-11-10T23:18:04.093906+00:00"
+        "schedule_captured_at": "2026-11-11T06:13:14.308494+00:00"
       },
       "missing": [],
       "postgame": null
